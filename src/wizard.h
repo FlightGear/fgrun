@@ -7,6 +7,7 @@
 #include <iostream>
 #include <FL/Fl_Preferences.H>
 #include <FL/Fl_Pixmap.H>
+#include <pthread.h>
 class LogWindow;
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Wizard.H>

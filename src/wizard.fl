@@ -14,13 +14,15 @@ decl {\#include <FL/Fl_Preferences.H>} {public
 decl {\#include <FL/Fl_Pixmap.H>} {public
 } 
 
+decl {\#include <pthread.h>} {selected public
+} 
+
 decl {\#include "folder_open.xpm"} {} 
 
 decl {class LogWindow;} {public
 } 
 
-class Wizard {open
-} {
+class Wizard {} {
   Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm)} {open
   } {
     Fl_Window win {
@@ -453,7 +455,7 @@ class Wizard {open
           private xywh {15 90 425 25} labelfont 1
         }
         Fl_Box {} {
-          label {and return to this launcher} selected
+          label {and return to this launcher}
           private xywh {15 115 425 25} labelfont 1
         }
       }
