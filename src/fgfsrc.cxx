@@ -178,12 +178,19 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--speed=" << iVal;
     if (prefs.get( "in_air", iVal, 0 ) && iVal)
 	os << pfx << "--in-air";
-    if (prefs.get( "wind_speed", dVal, 0.0 ) && dVal > 0.0)
+
+    // Weather
+    if (prefs.get( "random_wind", iVal, 0 ) && iVal)
+    {
+	os << pfx << "--random-wind";
+    }
+    else if (prefs.get( "wind_speed", dVal, 0.0 ) && dVal > 0.0)
     {
 	double dVal2;
 	prefs.get( "wind_heading", dVal2, 0.0 );
 	os << pfx << "--wind=" << dVal2 << "@" << dVal;
     }
+
     if (prefs.get( "turbulence", dVal, 0. ) && dVal > 0.)
 	os << pfx << "--turbulence=" << dVal;
     if (prefs.get( "ceiling", buf, "", buflen-1 ) && buf[0] != 0)
@@ -311,7 +318,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("io-item-%d", i),
 		   buf, "", buflen-1 );
-	os << pfx << "" << buf;
+	os << pfx << buf;
     }
 
     // Properties
@@ -321,7 +328,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("property-item-%d", i),
 		   buf, "", buflen-1 );
-	//os << pfx << "--prop:" << prop_list->text(i);
+	os << pfx << "--prop:" << buf;
     }
 
     // Debugging
