@@ -100,9 +100,9 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 
     if (prefs.get( "control", buf, "", buflen-1 ))
 	os << pfx << "--control=" << buf;
-    if (prefs.get( "lang", buf, "", buflen-1 ))
+    if (prefs.get( "lang", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--lang=" << buf;
-    if (prefs.get( "browser", buf, "", buflen-1 ))
+    if (prefs.get( "browser", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--browser-app=" << buf;
   
     int iVal;
@@ -311,7 +311,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 
     // Debugging
     prefs.get( "log-level", buf, "", buflen-1 );
-    if (buf[0] != 0 && strcmp( "warn", buf ) != 0)
+    if (buf[0] != 0 && strcmp( "alert", buf ) != 0)
 	os << pfx << "--log-level=" << buf;
 
     prefs.get( "trace-read-count", iVal, 0 );
