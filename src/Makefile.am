@@ -12,6 +12,7 @@ fgrun_SOURCES = \
 	init.cxx \
 	fgfsrc.cxx \
 	airport.cxx \
+	aircraft.cxx \
 	io.cxx \
 	util.cxx \
 	$(platform_srcs) \
