@@ -26,6 +26,27 @@
 
 using std::string;
 
+static
+int encase_arg( string & line, string arg ) {
+  int iret = 0;
+  string ar = "--"; // start option argument
+  string are = " --"; // to next, if any
+  ar += arg; // add the current argument/option
+  ar += "="; // add EQUALS
+  size_t pos1 = line.find(ar); // find, like '--fg-root='
+  if( pos1 != string::npos ) { // if FOUND
+     size_t sz = pos1 + ar.size(); // get the arg size
+     size_t pos2 = line.find( are, sz ); // find next arg beginning
+     if( pos2 == string::npos ) { // if NOT FOUND
+        pos2 = line.size();
+     }
+     line.insert( pos2, "\"" ); // pop in the quotes, at the end first
+     line.insert( sz, "\"" ); // then at the front of the 'path'
+     iret = 1; // advise done
+  }
+  return iret;
+}
+
 void
 Wizard::run_fgfs(const string &args)
 {
@@ -37,23 +58,8 @@ Wizard::run_fgfs(const string &args)
     fl_filename_absolute( exe, buf );
 
     string line = args;
-    string::size_type pos_fg_root = args.find( "--fg-root=" ),
-                      end_fg_root = string::npos;
-    if ( pos_fg_root != string::npos )
-    {
-        end_fg_root = args.find( " --", pos_fg_root + 10 );
-        line.insert( end_fg_root, "\"" );
-        line.insert( pos_fg_root + 10, "\"" );
-    }
-
-    string::size_type pos_fg_scenery = args.find( "--fg-scenery=" ),
-                      end_fg_scenery = string::npos;
-    if ( pos_fg_scenery != string::npos )
-    {
-        end_fg_scenery = args.find( " --", pos_fg_scenery + 13 );
-        line.insert( end_fg_scenery, "\"" );
-        line.insert( pos_fg_scenery + 13, "\"" );
-    }
+    encase_arg( line, "fg-root" );
+    encase_arg( line, "fg-scenery" );
 
     char* cmd = new char[ strlen(exe) +
                           line.size() + 2 ];
