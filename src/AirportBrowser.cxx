@@ -1,3 +1,25 @@
+// AirportBrowser.cxx -- Fl_Table based airport browser.
+//
+// Written by Bernie Bright, started Aug 2003.
+//
+// Copyright (c) 2003  Bernie Bright - bbright@bigpond.net.au
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//
+// $Id$
+
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -7,6 +29,7 @@
 
 #include "AirportBrowser.h"
 #include "airportdb.h"
+#include "UserInterface.h"
 
 using std::string;
 
@@ -42,8 +65,8 @@ AirportBrowser::AirportBrowser( int x, int y, int w, int h, const char *l )
     : Fl_Table_Row(x,y,w,h,l)
     , sort_reverse_(false)
     , sort_lastcol_(0)
+    , selected_(-1)
 {
-    callback( event_callback, this );
 }
 
 AirportBrowser::~AirportBrowser()
@@ -158,38 +181,58 @@ AirportBrowser::draw_cell( TableContext context,
 }
 
 void
-AirportBrowser::event_callback( Fl_Widget* w, void* data )
+AirportBrowser::col_header_cb( int C )
 {
-    static_cast< AirportBrowser* >(data)->event_callback();
+    if (sort_lastcol_ == C)
+	sort_reverse_ = !sort_reverse_;
+    else
+	sort_reverse_ = false;
+
+    sort_column( C, sort_reverse_ );
+    sort_lastcol_ = C;
 }
 
 void
-AirportBrowser::event_callback()
+UserInterface::apt_browser_cb()
 {
-    int C = callback_col();
-    TableContext context = callback_context();
-    switch( context )
+    switch( apt_browser->callback_context() )
     {
-    case CONTEXT_COL_HEADER:
+    case Fl_Table::CONTEXT_COL_HEADER:
 	if (Fl::event() == FL_RELEASE && Fl::event_button() == 1)
 	{
-	    if (sort_lastcol_ == C)
-		sort_reverse_ = !sort_reverse_;
-	    else
-		sort_reverse_ = false;
-
-	    sort_column( C, sort_reverse_ );
-	    sort_lastcol_ = C;
+	    apt_browser->col_header_cb( apt_browser->callback_col() );
 	}
 	break;
+
+    case Fl_Table::CONTEXT_CELL:
+	if (Fl::event() == FL_RELEASE && Fl::event_button() == 1)
+	{
+	    apt_browser->cell_cb();
+	    set_choice( airport, apt_browser->get_selected_id().c_str() );
+	}
+	break;
+
     default:
 	return;
     }
 }
 
 void
+AirportBrowser::cell_cb()
+{
+    selected_ = callback_row();
+}
+
+void
 AirportBrowser::select_id( const char* id )
 {
+    // Ensure we use the correct sort order.
+    if (sort_lastcol_ != 0)
+    {
+	sort_column( 0, sort_reverse_ );
+	sort_lastcol_ = 0;
+    }
+
     apt_dat_t key;
     key.id_ = string(id);
 
@@ -199,22 +242,62 @@ AirportBrowser::select_id( const char* id )
 			   &key, SortColumn( 0, sort_reverse_ ) );
     if (i != rowdata_.end())
     {
-	int row = std::distance( rowdata_.begin(), i );
-	if (sort_reverse_ && row > 0)
-	    --row;
-	top_row( row );
-	select_row( row, 1 );
+	selected_ = std::distance( rowdata_.begin(), i );
+	if (sort_reverse_ && selected_ > 0)
+	    --selected_;
+	top_row( selected_ );
+	select_row( selected_, 1 );
     }
 }
+
+class NoCaseCompare
+{
+private:
+    static bool nocase_compare( char c1, char c2 )
+    {
+	return toupper(c1) < toupper(c2);
+    }
+
+public:
+
+    NoCaseCompare() {}
+
+    bool operator()( const apt_dat_t* a, const apt_dat_t* b ) const
+    {
+	return std::lexicographical_compare( a->name_.begin(), a->name_.end(),
+					     b->name_.begin(), b->name_.end(),
+					     nocase_compare );
+    }
+};
 
 void
 AirportBrowser::select_name( const char* name )
 {
+    if (sort_lastcol_ != 1)
+    {
+	sort_column( 1, sort_reverse_ );
+	sort_lastcol_ = 1;
+    }
+
     apt_dat_t key;
     key.name_ = string(name);
 
     select_all_rows( 0 ); // de-select all rows
 
     iterator i = std::lower_bound( rowdata_.begin(), rowdata_.end(),
-			   &key, SortColumn( 1, sort_reverse_ ) );
+				   &key, NoCaseCompare() );
+    if (i != rowdata_.end())
+    {
+	selected_ = std::distance( rowdata_.begin(), i );
+	if (sort_reverse_ && selected_ > 0)
+	    --selected_;
+	top_row( selected_ );
+	select_row( selected_, 1 );
+    }
+}
+
+string
+AirportBrowser::get_selected_id() const
+{
+    return selected_ >= 0 ? rowdata_[selected_]->id_ : string("");
 }

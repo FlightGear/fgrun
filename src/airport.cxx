@@ -268,11 +268,6 @@ UserInterface::load_airport_browser()
 }
 
 void
-UserInterface::apt_browser_cb()
-{
-}
-
-void
 UserInterface::apt_id_cb()
 {
     // Convert to uppercase.
@@ -287,17 +282,18 @@ UserInterface::apt_id_cb()
     }
 
     apt_browser->select_id( s );
+    string id = apt_browser->get_selected_id();
+    if (!id.empty())
+    {
+	set_choice( airport, id.c_str() );
+	update_runways();
+    }
 }
 
 void
 UserInterface::apt_name_cb()
 {
     apt_browser->select_name( apt_name->value() );
-}
-
-void
-UserInterface::apt_select_cb()
-{
 }
 
 void
