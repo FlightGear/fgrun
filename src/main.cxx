@@ -26,17 +26,13 @@
 
 #include <string>
 #include <iostream>
-#include <FL/Fl.h>
+#include <FL/Fl.H>
 
-#if defined(WIN32)
-#  include "FGRun_Win32.h"
-#else
-#  include "FGRun_Posix.h"
-#endif
+#include "wizard.h"
 
-static std::string def_fg_exe = "";
-static std::string def_fg_root = "";
-static std::string def_fg_scenery = "";
+std::string def_fg_exe = "";
+std::string def_fg_root = "";
+std::string def_fg_scenery = "";
 
 /**
  * --fg-exe=<PATH>
@@ -44,7 +40,7 @@ static std::string def_fg_scenery = "";
  * --fg-scenery=<DIR>
  */
 static int
-parse_arg( int, char** argv, int& i )
+parse_args( int, char** argv, int& i )
 {
     if (strncmp( argv[i], "--fg-exe=", 9 ) == 0)
     {
@@ -70,13 +66,6 @@ parse_arg( int, char** argv, int& i )
 	return 1;
     }
 
-//     if (strcmp( argv[i], "--advanced" ) == 0)
-//     {
-//     }
-//     if (strcmp( argv[i], "--wizard" ) == 0)
-//     {
-//     }
-
     return 0;
 }
 
@@ -84,23 +73,15 @@ int
 main( int argc, char* argv[] )
 {
     int i = 0;
-    if (Fl::args( argc, argv, i, parse_arg ) < argc)
+    if (Fl::args( argc, argv, i, parse_args ) < argc)
     {
 	Fl::fatal("Options are:\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n%s", Fl::help );
     }
 
-//     std::cout << "def_fg_exe='" << def_fg_exe << "'\n";
-//     std::cout << "def_fg_root='" << def_fg_root << "'\n";
-//     std::cout << "def_fg_scenery='" << def_fg_scenery << "'\n";
-
-    UserInterface* ui;
-
-#if defined(WIN32)
-    ui = new FGRun_Win32;
-#else
-    ui = new FGRun_Posix;
-#endif
-
+    Wizard* ui = new Wizard;
+    ui->init();
     ui->show();
+
     return Fl::run();
+    delete ui;
 }

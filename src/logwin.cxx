@@ -25,17 +25,17 @@
 #include <FL/Fl_Menu_Bar.h>
 #include <FL/Fl_File_Chooser.h>
 
-#include "output.h"
+#include "logwin.h"
 
-Fl_Menu_Item FGOutputWindow::menu_[] = {
+Fl_Menu_Item LogWindow::menu_[] = {
     { "&File", 0, 0, 0,  64, 0, 0, 12, 56 },
-    { "&Save",  FL_CTRL+'s', FGOutputWindow::save_cb, 0, 128, 0, 0, 12, 56 },
-    { "&Close", FL_CTRL+'w', FGOutputWindow::close_cb, 0, 0, 0, 0, 12, 56 },
+    { "&Save",  FL_CTRL+'s', LogWindow::save_cb, 0, 128, 0, 0, 12, 56 },
+    { "&Close", FL_CTRL+'w', LogWindow::close_cb, 0, 0, 0, 0, 12, 56 },
     {0},
     {0}
 };
 
-FGOutputWindow::FGOutputWindow( int w, int h, const char* l )
+LogWindow::LogWindow( int w, int h, const char* l )
 {
     win = new Fl_Window( w, h, l );
     {
@@ -55,25 +55,25 @@ FGOutputWindow::FGOutputWindow( int w, int h, const char* l )
     }
 }
 
-FGOutputWindow::~FGOutputWindow()
+LogWindow::~LogWindow()
 {
     delete win;
 }
 
 void
-FGOutputWindow::show()
+LogWindow::show()
 {
     win->show();
 }
 
 void
-FGOutputWindow::hide()
+LogWindow::hide()
 {
     win->hide();
 }
 
 void
-FGOutputWindow::append( const char* line )
+LogWindow::append( const char* line )
 {
     text->insert_position( text->buffer()->length() );
     text->insert( line );
@@ -81,19 +81,19 @@ FGOutputWindow::append( const char* line )
 }
 
 void
-FGOutputWindow::clear()
+LogWindow::clear()
 {
     text->buffer()->remove( 0, text->buffer()->length() );
 }
 
 void
-FGOutputWindow::save_cb( Fl_Widget* o, void* v )
+LogWindow::save_cb( Fl_Widget* o, void* v )
 {
-    ((FGOutputWindow*)(o->parent()->user_data()))->save_cb();
+    ((LogWindow*)(o->parent()->user_data()))->save_cb();
 }
 
 void
-FGOutputWindow::save_cb()
+LogWindow::save_cb()
 {
     char* fname = fl_file_chooser( "Save file as?", "*.txt", 0, 0 );
     if (fname != 0)
@@ -103,13 +103,13 @@ FGOutputWindow::save_cb()
 }
 
 void
-FGOutputWindow::close_cb( Fl_Widget* o, void* v )
+LogWindow::close_cb( Fl_Widget* o, void* v )
 {
-    ((FGOutputWindow*)(o->parent()->user_data()))->close_cb();
+    ((LogWindow*)(o->parent()->user_data()))->close_cb();
 }
 
 void
-FGOutputWindow::close_cb()
+LogWindow::close_cb()
 {
     win->hide();
 }

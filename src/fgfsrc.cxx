@@ -26,272 +26,324 @@
 
 #include <cstdio>
 #include <fstream>
-#include <FL/filename.h>
-#include <FL/fl_ask.h>
+
+#include <FL/filename.H>
+#include <FL/fl_ask.H>
+#include <FL/Fl_Preferences.H>
 
 #if defined(HAVE_STRING_H)
 #include <string.h>	// strcmp
 #endif
 
-#include "UserInterface.h"
+#include "wizard.h"
 
 using std::ofstream;
 
-
-void
-UserInterface::run_fgfs()
-{
-    if (write_fgfsrc())
-	run_fgfs_impl();
-}
-
 int
-UserInterface::write_fgfsrc()
+Wizard::write_fgfsrc()
 {
-    char fname[ FL_PATH_MAX ];
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+
 #if defined(WIN32)
-    strcpy( fname, fg_root->value() );
-    strcat( fname, "/system.fgfsrc" );
-    fl_filename_absolute( fname, fname );
+    prefs.get( "fg_root", buf, "", buflen-1 );
+    strcat( buf, "/system.fgfsrc" );
+    fl_filename_absolute( buf, buf );
 #else
-    fl_filename_expand( fname, "~/.fgfsrc" );
+    fl_filename_expand( buf, "~/.fgfsrc" );
 #endif
 
-    FILE* fp = fopen( fname, "r" );
+    FILE* fp = fopen( buf, "r" );
     if (fp != 0)
     {
 	fclose( fp );
 	int r = fl_ask( "About to overwrite %s.\nDo you want to continue?",
-			fname );
+			buf );
 	if (!r)
 	    return 0;
     }
 
-    ofstream ofs( fname );
-    if (ofs) {
-	char root[ FL_PATH_MAX ];
-	char scenery[ FL_PATH_MAX ];
-	fl_filename_absolute( root, fg_root->value() );
-	fl_filename_absolute( scenery, fg_scenery->value() );
-
-	ofs << "--fg-root=" << root
-	    << "\n--fg-scenery=" << scenery;
-
-	// Only write non-default options.
-
-	// General options.
-	if (airport->text() && strcmp(airport->text(), "KSFO") != 0)
-	    ofs << "\n--airport-id=" << airport->text();
-	if (runway->value() > 1)
-	    ofs << "\n--runway=" << runway->text();
-	if (aircraft->text() && strcmp(aircraft->text(), "c172") != 0)
-	    ofs << "\n--aircraft=" << aircraft->text();
-	if (strcmp(control->text(), "joystick") != 0)
-	    ofs << "\n--control=" << control->text();
-	if (lang->size() > 0)
-	    ofs << "\n--lang=" << lang->value();
-	if (browser->size() > 0)
-	    ofs << "\n--browser-app=" << browser->value();
-  
-	// Features
-	if (game_mode->value())
-	    ofs << "\n--enable-game-mode";
-	if (!splash_screen->value())
-	    ofs << "\n--disable-splash-screen";
-	if (!intro_music->value())
-	    ofs << "\n--disable-intro-music";
-	// ?mouse_pointer?
-	if (random_objects->value())
-	    ofs << "\n--enable-random-objects";
-	else
-	    ofs << "\n--disable-random-objects";
-	if (!panel->value())
-	    ofs << "\n--disable-panel";
-	if (!sound->value())
-	    ofs << "\n--disable-sound";
-	if (hud->value()) {
-	    ofs << "\n--enable-hud";
-	    if (antialias_hud->value())
-		ofs << "\n--enable-anti-alias-hud";
-	    else
-		ofs << "\n--disable-anti-alias-hud";
-	}
-	if (!hud_3d->value())
-	    ofs << "\n--disable-hud-3d";
-	if (auto_coordination->value())
-	    ofs << "\n--enable-auto-coordination";
-	if (horizon_effect->value())
-	    ofs << "\n--enable-horizon-effect";
-	if (enhanced_lighting->value())
-	    ofs << "\n--enable-enhanced-lighting";
-	if (distance_attenuation->value())
-	    ofs << "\n--enable-distance-attenuation";
-	if (!specular_highlight->value())
-	    ofs << "\n--disable-specular-highlight";
-
-	if (failure->value())
-	{
-	    if (failure_pitot->value())
-		ofs << "\n--failure=pitot";
-	    if (failure_static->value())
-		ofs << "\n--failure=static";
-	    if (failure_system->value())
-		ofs << "\n--failure=system";
-	    if (failure_vacuum->value())
-		ofs << "\n--failure=vacuum";
-	}
-
-	// Flight model
-	if (strcmp(fdm->text(), "jsb" ) != 0)
-	    ofs << "\n--fdm=" << fdm->text();
-	else if (notrim->value())
-	    ofs << "\n--notrim";
-	if (model_hz->value() != 120.0)
-	    ofs << "\n--model_hz=" << model_hz->value();
-	if (speed->value() != 1)
-	    ofs << "\n--speed=" << speed->value();
-	if (in_air->value())
-	    ofs << "\n--in-air";
-	if (wind->size() > 0)
-	    ofs << "\n--wind=" << wind->value();
-	if (turbulence->value() > 0)
-	    ofs << "\n--turbulence=" << turbulence->value();
-	if (ceiling->size() > 0)
-	    ofs << "\n--ceiling=" << ceiling->value();
-
-	// Freeze
-	if (freeze->value())
-	    ofs << "\n--enable-freeze";
-	if (fuel_freeze->value())
-	    ofs << "\n--enable-fuel-freeze";
-	if (clock_freeze->value())
-	    ofs << "\n--enable-clock-freeze";
-	
-	// Initial position and orientation.
-	if (lon->size() > 0)
-	    ofs << "\n--lon=" << lon->value();
-	if (lat->size() > 0)
-	    ofs << "\n--lat=" << lat->value();
-	if (altitude->size() > 0)
-	    ofs << "\n--altitude=" << altitude->value();
-	if (heading->value() != 0.0)
-	    ofs << "\n--heading=" << heading->value();
-	if (roll->value() != 0.0)
-	    ofs << "\n--roll=" << roll->value();
-	if (pitch->value() != 0.0)
-	    ofs << "\n--pitch=" << pitch->value();
-	if (vc->size() > 0)
-	    ofs << "\n--vc=" << vc->value();
-	if (uBody->size() > 0)
-	    ofs << "\n--uBody=" << uBody->value();
-	if (vBody->size() > 0)
-	    ofs << "\n--vBody=" << vBody->value();
-	if (wBody->size() > 0)
-	    ofs << "\n--wBody=" << wBody->value();
-
-	// Rendering.
-	if (!clouds->value())
-	    ofs << "\n--disable-clouds";
-	if (clouds3d->value())
-	    ofs << "\n--enable-clouds3d";
-	if (fullscreen->value())
-	    ofs << "\n--enable-fullscreen";
-	if (!skyblend->value())
-	    ofs << "\n--disable-skyblend";
-	if (!textures->value())
-	    ofs << "\n--disable-textures";
-	if (wireframe->value())
-	    ofs << "\n--enable-wireframe";
-	if (shading_flat->value())
-	    ofs << "\n--shading-flat";
-	if (fog_disabled->value())
-	    ofs << "\n--fog-disable";
-	else if (fog_fastest->value())
-	    ofs << "\n--fog-fastest";
-	if (geometry->size() > 0)
-	    ofs << "\n--geometry=" << geometry->value();
-	if (visibility->size() > 0)
-	{
-	    if (vis_meters->value())
-		ofs << "\n--visibility=" << visibility->value();
-	    else
-		ofs << "\n--visibility-miles=" << visibility->value();
-	}
-
-	// ?view-offset?
-	if (strcmp(bpp->text(), "16") != 0)
-	    ofs << "\n--bpp=" << bpp->text();
-	if (fov->value() != 60.0)
-	    ofs << "\n--fov=" << fov->value();
-
-	// Time
-	if (time_match_real->value() && time_offset_value->size() > 0)
-	    ofs << "\n--time-offset=" << time_offset_value->value();
-	else if (time_match_local->value())
-	    ofs << "\n--time-match-local";
-	else if (start_date_sys->value() && start_date_sys_value->size() > 0)
-	    ofs << "\n--start-date-sys=" << start_date_sys_value->value();
-	else if (start_date_gmt->value() && start_date_gmt_value->size() > 0)
-	    ofs << "\n--start-date-gmt=" << start_date_gmt_value->value();
-	else if (start_date_lat->value() && start_date_lat_value->size() > 0)
-	    ofs << "\n--start-date-lat=" << start_date_lat_value->value();
-	else if (time_of_day->value())
-	    ofs << "\n--timeofday=" << time_of_day_value->text();
-
-	// Network.
-	if (httpd->value())
-	    ofs << "\n--httpd=" << int(httpd_port->value());
-	if (props->value())
-	    ofs << "\n--props=" << int(props_port->value());
-	if (jpg_httpd->value())
-	    ofs << "\n--jpg_httpd=" << int(jpg_httpd_port->value());
-
-	int i;
-
-	// I/O options.
-	for (i = 1; i <= io_list->size(); ++i)
-	{
-	    ofs << "\n" << io_list->text(i);
-	}
-
-	// Properties
-	for (i = 1; i <= prop_list->size(); ++i)
-	{
-	    ofs << "\n--prop:" << prop_list->text(i);
-	}
-
-	// Debugging
-	ofs << "\n--log-level=" << log_level->text();
-	for (i = 1; i <= trace_read_list->size(); ++i)
-	{
-	    ofs << "\n--trace-read=" << trace_read_list->text(i);
-	}
-	for (i = 1; i <= trace_write_list->size(); ++i)
-	{
-	    ofs << "\n--trace-write=" << trace_write_list->text(i);
-	}
-
-	// Avionics
-	if (nav1->size() > 1)
-	    ofs << "\n--nav1=" << nav1->value();
-	if (nav2->size() > 1)
-	    ofs << "\n--nav2=" << nav2->value();
-	if (adf->size() > 1)
-	    ofs << "\n--adf=" << adf->value();
-	if (dme->value())
-	{
-	    if (dme_nav1->value())
-		ofs << "\n--dme=nav1";
-	    else if (dme_nav2->value())
-		ofs << "\n--dme=nav2";
-	    else if (dme_int->value())
-		ofs << "\n--dme=" << dme_int_freq->value();
-	}
-
+    ofstream ofs( buf );
+    if (ofs)
+    {
+	int rc = write_fgfsrc( ofs );
 	ofs << "\n";
 	ofs.close();
-	return 1;
+	return rc;
     }
 
     return 0;
+}
+
+int
+Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
+{
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+
+    prefs.get( "fg_root", buf, "", buflen-1 );
+    os << "--fg-root=" << buf;
+
+    prefs.get( "fg_scenery", buf, "", buflen-1 );
+    os << pfx << "--fg-scenery=" << buf;
+
+    // General options.
+    if (prefs.get( "airport", buf, "", buflen-1 ))
+	os << pfx << "--airport-id=" << buf;
+
+    if (prefs.get( "runway", buf, "", buflen-1 ) &&
+	strcmp( "<default>", buf ) != 0)
+	os << pfx << "--runway=" << buf;
+
+    if (prefs.get( "aircraft", buf, "", buflen-1 ))
+	os << pfx << "--aircraft=" << buf;
+
+    if (prefs.get( "control", buf, "", buflen-1 ))
+	os << pfx << "--control=" << buf;
+    if (prefs.get( "lang", buf, "", buflen-1 ))
+	os << pfx << "--lang=" << buf;
+    if (prefs.get( "browser", buf, "", buflen-1 ))
+	os << pfx << "--browser-app=" << buf;
+  
+    int iVal;
+    double dVal;
+
+    // Features - only set non-default values.
+    if (prefs.get( "game_mode", iVal, 0 ) && iVal)
+	os << pfx << "--enable-game-mode";
+    if (prefs.get( "splash_screen", iVal, 1 ) && !iVal)
+	os << pfx << "--disable-splash-screen";
+    if (prefs.get( "intro_music", iVal, 1 ) && !iVal)
+	os << pfx << "--disable-intro-music";
+// 	if (prefs.get( "mouse_pointer", iVal, 0 ) && iVal)
+// 	    os << pfx << "--enable-mouse-pointer";
+    if (prefs.get( "random_objects", iVal, 0 ) && iVal)
+	os << pfx << "--enable-random-objects";
+    else
+	os << pfx << "--disable-random-objects";
+
+    if (prefs.get( "panel", iVal, 1 ) && !iVal)
+	os << pfx << "--disable-panel";
+    if (prefs.get( "sound", iVal, 1 ) && !iVal)
+	os << pfx << "--disable-sound";
+    if (prefs.get( "hud", iVal, 0 ) && iVal)
+    {
+	os << pfx << "--enable-hud";
+	if (prefs.get( "antialias_hud", iVal, 0 ) && iVal)
+	    os << pfx << "--enable-anti-alias-hud";
+	else
+	    os << pfx << "--disable-anti-alias-hud";
+    }
+
+    if (prefs.get( "hud_3d", iVal, 1 ) && !iVal)
+	os << pfx << "--disable-hud-3d";
+    if (prefs.get( "auto_coordination", iVal, 0 ) && iVal)
+	os << pfx << "--enable-auto-coordination";
+    if (prefs.get( "horizon_effect", iVal, 0 ) && iVal)
+	os << pfx << "--enable-horizon-effect";
+    if (prefs.get( "enhanced_lighting", iVal, 0 ) && iVal)
+	os << pfx << "--enable-enhanced-lighting";
+    if (prefs.get( "distance_attenuation", iVal, 0 ) && iVal)
+	os << pfx << "--enable-distance-attenuation";
+    if (prefs.get( "specular_highlight", iVal, 1 ) && !iVal)
+	os << pfx << "--disable-specular-highlight";
+
+    if (prefs.get( "failure", iVal, 0 ) && iVal)
+    {
+	if (prefs.get( "failure_pitot", iVal, 0 ) && iVal)
+	    os << pfx << "--failure=pitot";
+	if (prefs.get( "failure_static", iVal, 0 ) && iVal)
+	    os << pfx << "--failure=static";
+	if (prefs.get( "failure_system", iVal, 0 ) && iVal)
+	    os << pfx << "--failure=system";
+	if (prefs.get( "failure_vacuum", iVal, 0 ) && iVal)
+	    os << pfx << "--failure=vacuum";
+    }
+
+    // Flight model
+    prefs.get( "fdm", buf, "", buflen-1 );
+    if (buf[0] != 0)
+    {
+	if (strcmp( "jsb", buf ) != 0)
+	    os << pfx << "--fdm=" << buf;
+	else if (prefs.get( "no_trim", iVal, 0 ) && iVal)
+	    os << pfx << "--notrim"; // Only "jsb" understands --notrim
+    }
+
+    if (prefs.get( "model_hz", iVal, 0 ) && iVal != 120)
+	os << pfx << "--model_hz=" << iVal;
+// 	if (speed->value() != 1)
+// 	    os << pfx << "--speed=" << speed->value();
+    if (prefs.get( "in_air", iVal, 0 ) && iVal)
+	os << pfx << "--in-air";
+    if (prefs.get( "wind", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--wind=" << buf;
+    if (prefs.get( "turbulence", dVal, 0. ) && dVal > 0.)
+	os << pfx << "--turbulence=" << dVal;
+    if (prefs.get( "ceiling", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--ceiling=" << buf;
+
+    // Freeze
+    if (prefs.get( "freeze", iVal, 0 ) && iVal)
+	os << pfx << "--enable-freeze";
+    if (prefs.get( "fuel_freeze", iVal, 0 ) && iVal)
+	os << pfx << "--enable-fuel-freeze";
+    if (prefs.get( "clockfreeze", iVal, 0 ) && iVal)
+	os << pfx << "--enable-clock-freeze";
+	
+    // Initial position and orientation.
+    if (prefs.get( "lon", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--lon=" << buf;
+    if (prefs.get( "lat", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--lat=" << buf;
+    if (prefs.get( "lat", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--altitude=" << buf;
+    if (prefs.get( "heading", dVal, 0. ) && dVal != 0.)
+	os << pfx << "--heading=" << dVal;
+    if (prefs.get( "roll", dVal, 0. ) && dVal != 0.)
+	os << pfx << "--roll=" << dVal;
+    if (prefs.get( "pitch", dVal, 0. ) && dVal != 0.)
+	os << pfx << "--pitch=" << dVal;
+    if (prefs.get( "vc", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--vc=" << buf;
+    if (prefs.get( "uBody", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--uBody=" << buf;
+    if (prefs.get( "vBody", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--vBody=" << buf;
+    if (prefs.get( "wBody", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--wBody=" << buf;
+
+    // Rendering.
+    if (prefs.get( "clouds", iVal, 1 ) && !iVal)
+	os << pfx << "--disable-clouds";
+    if (prefs.get( "clouds3d", iVal, 0 ) && iVal)
+	os << pfx << "--enable-clouds3d";
+    if (prefs.get( "fullsceen", iVal, 0 ) && iVal)
+	os << pfx << "--enable-fullscreen";
+    if (prefs.get( "skyblend", iVal, 1 ) && !iVal)
+	os << pfx << "--disable-skyblend";
+    if (prefs.get( "textures", iVal, 1 ) && !iVal)
+	os << pfx << "--disable-textures";
+    if (prefs.get( "wireframe", iVal, 0 ) && iVal)
+	os << pfx << "--enable-wireframe";
+    if (prefs.get( "shading", buf, "", buflen-1 ) &&
+	strcmp( "flat", buf ) == 0)
+	os << pfx << "--shading-flat";
+
+    if (prefs.get( "fog", buf, "", buflen-1 ))
+    {
+	if (strcmp( "disabled", buf ) == 0)
+	    os << pfx << "--fog-disable";
+	else if (strcmp( "fastest", buf ) == 0)
+	    os << pfx << "--fog-fastest";
+    }
+
+    if (prefs.get( "geometry", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--geometry=" << buf;
+
+    if (prefs.get( "visibility", buf, "", buflen-1 ) && buf[0] != 0)
+    {
+	char buf2[ buflen ];
+	prefs.get( "visibility-units", buf2, "", buflen-1 );
+	if (strcmp( "meters", buf2 ) == 0)
+	    os << pfx << "--visibility=" << buf;
+	else if (strcmp( "miles", buf2 ) == 0)
+	    os << pfx << "--visibility-miles=" << buf;
+    }
+
+    // ?view-offset?
+    if (prefs.get( "bpp", iVal, 16) && iVal != 16)
+	os << pfx << "--bpp=" << iVal;
+    if (prefs.get( "fov", dVal, 60.0 ) && dVal != 60.)
+	os << pfx << "--fov=" << dVal;
+
+    // Time
+    if (prefs.get( "time-match-real", iVal, 1 ) && iVal &&
+	prefs.get( "time-offset", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--time-offset=" << buf;
+    else if (prefs.get( "time-match-local", iVal, 0 ) && iVal)
+	os << pfx << "--time-match-local";
+    else if (prefs.get( "start-date-sys", iVal, 0 ) && iVal &&
+	     prefs.get( "start-date-sys-value", buf, "", buflen-1 ) &&
+	     buf[0] != 0)
+	os << pfx << "--start-date-sys=" << buf;
+    else if (prefs.get( "start-date-gmt", iVal, 0 ) && iVal &&
+	     prefs.get( "start-date-gmt-value", buf, "", buflen-1 ) &&
+	     buf[0] != 0)
+	os << pfx << "--start-date-gmt=" << buf;
+    else if (prefs.get( "start-date-lat", iVal, 0 ) && iVal &&
+	     prefs.get( "start-date-lat-value", buf, "", buflen-1 ) &&
+	     buf[0] != 0)
+	os << pfx << "--start-date-lat=" << buf;
+    else if (prefs.get( "time_of_day", iVal, 0 ) && iVal &&
+	     prefs.get( "time_of_day_value", buf, "", buflen-1 ) &&
+	     buf[0] != 0)
+	os << pfx << "--timeofday=" << buf;
+
+    // Network.
+    if (prefs.get( "httpd", iVal, 0 ) && iVal)
+	os << pfx << "--httpd=" << iVal;
+    if (prefs.get( "props", iVal, 0 ) && iVal)
+	os << pfx << "--props=" << iVal;
+    if (prefs.get( "jpg-httpd", iVal, 0 ) && iVal)
+	os << pfx << "--jpg_httpd=" << iVal;
+
+    // I/O options.
+    prefs.get( "io-count", iVal, 0 );
+    int i;
+    for (i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("io-item-%d", i),
+		   buf, "", buflen-1 );
+	os << pfx << "" << buf;
+    }
+
+    // Properties
+// 	for (i = 1; i <= prop_list->size(); ++i)
+// 	{
+// 	    os << pfx << "--prop:" << prop_list->text(i);
+// 	}
+
+    // Debugging
+    prefs.get( "log-level", buf, "", buflen-1 );
+    if (buf[0] != 0 && strcmp( "warn", buf ) != 0)
+	os << pfx << "--log-level=" << buf;
+
+    prefs.get( "trace-read-count", iVal, 0 );
+    for (i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("trace-read-%d", i),
+		   buf, "", buflen-1 );
+	os << pfx << "--trace-read=" << buf;
+    }
+
+    prefs.get( "trace-write-count", iVal, 0 );
+    for (i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("trace-write-%d", i),
+		   buf, "", buflen-1 );
+	os << pfx << "--trace-write=" << buf;
+    }
+
+    // Avionics
+// 	if (nav1->size() > 1)
+// 	    os << pfx << "--nav1=" << nav1->value();
+// 	if (nav2->size() > 1)
+// 	    os << pfx << "--nav2=" << nav2->value();
+// 	if (adf->size() > 1)
+// 	    os << pfx << "--adf=" << adf->value();
+// 	if (dme->value())
+// 	{
+// 	    if (dme_nav1->value())
+// 		os << pfx << "--dme=nav1";
+// 	    else if (dme_nav2->value())
+// 		os << pfx << "--dme=nav2";
+// 	    else if (dme_int->value())
+// 		os << pfx << "--dme=" << dme_int_freq->value();
+// 	}
+
+    return 1;
 }

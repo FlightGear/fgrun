@@ -27,14 +27,14 @@
 #include <FL/Fl_File_Chooser.h>
 #include <FL/filename.h>
 
-#include "UserInterface.h"
+#include "advanced.h"
 #include "util.h"
 
 using std::string;
 using std::vector;
 
 void
-UserInterface::io_list_select_cb( Fl_Browser* o )
+Advanced::io_list_select_cb( Fl_Browser* o )
 {
     int n = o->value();
     if (n > 0)
@@ -105,7 +105,7 @@ UserInterface::io_list_select_cb( Fl_Browser* o )
 }
 
 void
-UserInterface::io_list_new_cb()
+Advanced::io_list_new_cb()
 {
     io_list->add("");
     io_list->value( io_list->size() );
@@ -118,7 +118,7 @@ UserInterface::io_list_new_cb()
 }
 
 void
-UserInterface::io_list_update_cb()
+Advanced::io_list_update_cb()
 {
     std::ostringstream oss;
 
@@ -166,7 +166,7 @@ UserInterface::io_list_update_cb()
 }
 
 void
-UserInterface::io_medium_update_cb( Fl_Choice* o )
+Advanced::io_medium_update_cb( Fl_Choice* o )
 {
     if (strcmp(o->text(), "file") == 0)
     {
@@ -200,7 +200,7 @@ UserInterface::io_medium_update_cb( Fl_Choice* o )
 }
 
 void
-UserInterface::io_protocol_update_cb()
+Advanced::io_protocol_update_cb()
 {
     io_list_update_cb();
 
@@ -231,15 +231,15 @@ UserInterface::io_protocol_update_cb()
 }
 
 void
-UserInterface::io_file_cb()
+Advanced::io_file_cb()
 {
 }
 
 void
-UserInterface::io_generic_file_cb()
+Advanced::io_generic_file_cb()
 {
     //static Fl_File_Chooser* fc = 0;
-    string dir = fg_root->value();
+    string dir = fg_root_->value();
     dir += "/Protocol";
     const char* pat = "*.xml";
     const char* message = "Select protocol file";

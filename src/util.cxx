@@ -24,23 +24,8 @@
 #  include "config.h"
 #endif
 
-#include <FL/fl_ask.h>
-
-#include "UserInterface.h"
-
-UserInterface::~UserInterface()
-{
-}
-
-void
-UserInterface::show_page( unsigned int n )
-{
-    for (unsigned int i = 0; i < sizeof(page)/sizeof(page[0]); ++i)
-	if (i == n)
-	    page[i]->show();
-	else
-	    page[i]->hide();
-}
+#include <FL/Fl_Choice.H>
+#include <cstring>
 
 int
 set_choice( Fl_Choice* c, const char* s )
@@ -68,70 +53,4 @@ set_choice( Fl_Choice* c, const char* s )
 	}
     }
     return 0;
-}
-
-void
-UserInterface::list_new_cb( Fl_Browser* browser,
-			    Fl_Input* input,
-			    Fl_Button* del )
-{
-    browser->add( "" );
-    browser->value( browser->size() );
-    del->activate();
-    input->activate();
-    input->take_focus();
-    input->value( "" );
-}
-
-void
-UserInterface::list_delete_cb( Fl_Browser* browser,
-			       Fl_Input* input,
-			       Fl_Button* del )
-{
-    int n = browser->value();
-    if (n > 0)
-    {
-	browser->remove( n );
-	input->value( "" );
-	input->take_focus();
-    }
-
-    if (browser->size() == 0)
-	del->deactivate();
-}
-
-void
-UserInterface::list_select_cb( Fl_Browser* browser,
-			       Fl_Input* input,
-			       Fl_Button* del )
-{
-    int n = browser->value();
-    if (n > 0)
-    {
-	input->activate();
-	input->value( browser->text( n ) );
-	input->take_focus();
-	del->activate();
-    }
-}
-
-void
-UserInterface::list_update_cb( Fl_Browser* browser,
-			       Fl_Input* input )
-{
-    int n = browser->value();
-    if (n > 0)
-    {
-	browser->text( n, input->value() );
-    }
-}
-
-void
-UserInterface::help_about_cb()
-{
-    fl_message( "FlightGear Launch Control\n"
-		"Version " PACKAGE_VERSION "\n"
-		"Copyright 2003 Bernie Bright\n"
-		"This program is free software distributed under the terms\n"
-		"of the GNU General Public License, Version 2 June 1991" );
 }

@@ -1,0 +1,144 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0104 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include <string>} {public
+} 
+
+decl {\#include <iostream>} {} 
+
+decl {\#include <FL/Fl_Preferences.H>} {public
+} 
+
+decl {class LogWindow;} {public
+} 
+
+class Wizard {open
+} {
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0)} {selected
+  } {
+    Fl_Window win {
+      label {FlightGear Wizard} open
+      private xywh {180 418 640 480} type Double resizable visible
+    } {
+      Fl_Button next {
+        label Next
+        callback {next_cb();}
+        private xywh {565 450 70 25} labelsize 12
+      }
+      Fl_Button prev {
+        label Prev
+        callback {prev_cb();}
+        private xywh {490 450 70 25} labelsize 12
+      }
+      Fl_Wizard wiz {open
+        private xywh {0 0 640 440}
+      } {
+        Fl_Group {page[0]} {
+          label {Select Paths}
+          xywh {0 0 640 440} labelfont 1 align 21 hide
+        } {
+          Fl_Input fg_exe_ {
+            label {Executable:}
+            callback {fg_exe_update_cb();}
+            private tooltip {Full pathname to FlightGear executable} xywh {130 30 335 25} labelsize 12 when 8 textsize 12
+          }
+          Fl_Button {} {
+            label {...}
+            callback {fg_exe_select_cb();}
+            private tooltip {Full pathname to FlightGear executable} xywh {470 30 25 25} labelsize 12
+          }
+          Fl_Input fg_root_ {
+            label {FG_ROOT:}
+            callback {fg_root_update_cb();}
+            private tooltip {root data path} xywh {130 60 335 25} labelsize 12 when 8 textsize 12
+          }
+          Fl_Button {} {
+            label {...}
+            callback {fg_root_select_cb();}
+            private xywh {470 60 25 25} labelsize 12
+          }
+          Fl_Input fg_scenery_ {
+            label {FG_SCENERY:}
+            callback {fg_scenery_update_cb();}
+            private tooltip {base scenery path} xywh {130 90 335 25} labelsize 12 when 8 textsize 12
+          }
+          Fl_Button {} {
+            label {...}
+            callback {fg_scenery_select_cb();}
+            private xywh {470 90 25 25} labelsize 12
+          }
+        }
+        Fl_Group {page[1]} {
+          label {Select an aircraft} open
+          private xywh {0 0 640 440} labelfont 1 align 21
+        } {
+          Fl_Browser aircraft {
+            callback {preview_aircraft();}
+            private xywh {5 20 200 410} type Hold labelsize 12 align 1 textsize 12
+          }
+          Fl_Box preview {
+            label Preview
+            private xywh {210 20 425 410} box THIN_DOWN_BOX labelsize 12
+            code0 {\#include "Fl_Plib.h"}
+            class Fl_Plib
+          }
+        }
+        Fl_Group {page[2]} {
+          label {Select a location}
+          private xywh {0 0 640 440} labelfont 1 align 21 hide
+        } {
+          Fl_Box airports_ {
+            private xywh {5 25 630 410}
+            code0 {\#include "AirportBrowser.h"}
+            class AirportBrowser
+          }
+        }
+        Fl_Group {page[3]} {open
+          private xywh {0 0 640 440} hide
+        } {
+          Fl_Output text {
+            private xywh {0 0 640 350} type Multiline box THIN_DOWN_BOX
+          }
+          Fl_Button {} {
+            label {Advanced...}
+            callback {advanced_cb();}
+            xywh {545 380 90 25}
+          }
+        }
+        Fl_Group {page[4]} {open
+          xywh {0 0 640 440} hide deactivate
+        } {}
+      }
+    }
+  }
+  decl {~Wizard();} {public
+  }
+  decl {void show();} {public
+  }
+  decl {void show( int argc, char* argv[] );} {public
+  }
+  decl {void init();} {public
+  }
+  decl {void update_preview();} {public
+  }
+  decl {void preview_aircraft();} {}
+  decl {void aircraft_update();} {}
+  decl {void next_cb();} {}
+  decl {void prev_cb();} {}
+  decl {void advanced_options_cb();} {}
+  decl {void fg_exe_update_cb();} {}
+  decl {void fg_exe_select_cb();} {}
+  decl {void fg_root_update_cb();} {}
+  decl {void fg_root_select_cb();} {}
+  decl {void fg_scenery_update_cb();} {}
+  decl {void fg_scenery_select_cb();} {}
+  decl {void advanced_cb();} {}
+  decl {int write_fgfsrc();} {}
+  decl {int write_fgfsrc( std::ostream&, const char* pfx = "\\n");} {}
+  decl {void run_fgfs();} {}
+  decl {static void stdout_cb( int, void* );} {}
+  decl {void stdout_cb( int );} {}
+  decl {Fl_Preferences prefs;} {}
+  decl {LogWindow* logwin;} {}
+} 

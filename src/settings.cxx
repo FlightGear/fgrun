@@ -20,45 +20,30 @@
 //
 // $Id$
 
+#include <string>
+#include <iostream>
+
 #include <FL/filename.h>
-#include "UserInterface.h"
+
+#include "advanced.h"
 #include "util.h"
 
+using std::string;
+
 void
-UserInterface::save_settings_cb()
+Advanced::save_settings( Fl_Preferences& prefs )
 {
-    Fl_Preferences prefs(Fl_Preferences::USER, "flightgear.org", "fgrun");
-    char pathname[ FL_PATH_MAX ];
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
 
-    if (fg_exe->value() != 0)
-    {
-	fl_filename_absolute( pathname, fg_exe->value() );
-	prefs.set( "fg_exe", pathname );
-    }
-
-    if (fg_root->value() != 0)
-    {
-	fl_filename_absolute( pathname, fg_root->value() );
-	prefs.set( "fg_root", pathname );
-    }
-
-    if (fg_scenery->value() != 0)
-    {
-	fl_filename_absolute( pathname, fg_scenery->value() );
-	prefs.set( "fg_scenery", pathname );
-    }
-
-    if (aircraft->text() != 0)
-	prefs.set( "aircraft", aircraft->text() );
-    if (runway->value() != 0)
-	prefs.set( "runway", runway->text() );
-    if (airport->text() != 0)
-	prefs.set( "airport", airport->text() );
-    if (browser->value() != 0)
+    if (browser->size() > 0)
 	prefs.set( "browser", browser->value() );
+
     prefs.set( "control", control->text() );
-    if (lang->value() != 0)
+
+    if (lang->size() > 0)
 	prefs.set("lang", lang->value());
+
     prefs.set("game_mode", game_mode->value());
     prefs.set("splash_screen", splash_screen->value());
     prefs.set("intro_music", intro_music->value());
@@ -189,63 +174,49 @@ UserInterface::save_settings_cb()
 }
 
 void
-UserInterface::load_settings_cb()
+Advanced::load_settings( Fl_Preferences& prefs )
 {
-    Fl_Preferences prefs(Fl_Preferences::USER, "flightgear.org", "fgrun");
-    const int buflen = 1024;
+    const int buflen = FL_PATH_MAX;
     char buf[ buflen ];
+    const char* not_set = "NOT SET";
 
-    prefs.get( "fg_exe", buf, "", buflen-1);
-    fg_exe->value(buf);
+    prefs.get( "fg_exe", buf, not_set, buflen-1);
+    fg_exe_->value(buf);
 
-    // If executable doesn't exist disable "Run" button.
-    run->deactivate();
+    prefs.get( "fg_root", buf, not_set, buflen-1);
+    fg_root_->value( buf );
+
+    prefs.get( "fg_scenery", buf, not_set, buflen-1 );
+    fg_scenery_->value( buf );
+
+    prefs.get( "aircraft", buf, not_set, buflen-1 );
+    aircraft_->value( buf );
+
+    prefs.get( "airport", buf, "", buflen-1 );
+    string s( buf );
+    prefs.get( "airport-name", buf, "", buflen-1);
     if (buf[0] != 0)
     {
-	FILE* fp = fopen( buf, "rb" );
-	if (fp != 0)
-	{
-	    run->activate();
-	    fclose(fp);
-	}
+	s.append( " - " );
+	s.append( buf );
     }
+    airport_->value( s.c_str() );
 
-#if defined(WIN32)
-    prefs.get( "fg_root", buf, "\\\\FlightGear", buflen-1);
-#else
-    prefs.get( "fg_root", buf, "/usr/local/lib/FlightGear", buflen-1);
-#endif
-    if (fl_filename_isdir(buf))
-	fg_root->value(buf);
+    prefs.get( "runway", buf, not_set, buflen-1 );
+    runway_->value( buf );
 
-#if defined(WIN32)
-    prefs.get( "fg_scenery", buf,
-	       "\\\\FlightGear\\\\Scenery", buflen-1);
-#else
-    prefs.get( "fg_scenery", buf,
-	       "/usr/local/lib/FlightGear/Scenery", buflen-1);
-#endif
-    if (fl_filename_isdir(buf)) {
-	fg_scenery->value(buf);
-	airport_update->activate();
-	aircraft_update->activate();
-    }
+    prefs.get( "lang", buf, "", buflen-1 );
+    lang->value( buf );
 
-    prefs.get("aircraft", buf, "c172-3d", buflen-1);
-    default_aircraft = buf;
-    prefs.get("airport", buf, "KSFO", buflen-1);
-    default_airport = buf;
-    prefs.get("lang", buf, "", buflen-1);
-    lang->value(buf);
-    prefs.get("control", buf, "joystick", buflen-1);
+    prefs.get( "control", buf, "joystick", buflen-1 );
     set_choice( control, buf );
 
-#if defined(WIN32)
-    prefs.get("browser", buf, "webrun.bat", buflen-1);
-#else
-    prefs.get("browser", buf, "netscape", buflen-1);
-#endif
-    browser->value(buf);
+// #if defined(WIN32)
+//     prefs.get("browser", buf, "webrun.bat", buflen-1);
+// #else
+//     prefs.get("browser", buf, "netscape", buflen-1);
+// #endif
+//     browser->value(buf);
 
     int iVal;
     double dVal;
@@ -404,6 +375,27 @@ UserInterface::load_settings_cb()
     prefs.get( "time_of_day_value", buf, "dawn", buflen-1 );
     set_choice( time_of_day_value, buf );
 
+    prefs.get( "httpd", iVal, 0 );
+    if (iVal)
+    {
+	httpd->set();
+	httpd_port->value( double(iVal) );
+    }
+
+    prefs.get( "props", iVal, 0 );
+    if (iVal)
+    {
+	props->set();
+	props_port->value( double(iVal) );
+    }
+
+    prefs.get( "jpg-httpd", iVal, 0 );
+    if (iVal)
+    {
+	jpg_httpd->set();
+	jpg_httpd_port->value( double(iVal) );
+    }
+
     prefs.get( "io-count", iVal, 0 );
     int i;
     for (i = 1; i <= iVal; ++i)
@@ -472,9 +464,4 @@ UserInterface::load_settings_cb()
 	    dme_int_freq->value( buf );
 	}
     }
-}
-
-void
-UserInterface::default_settings_cb()
-{
 }

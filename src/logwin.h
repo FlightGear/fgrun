@@ -1,4 +1,4 @@
-// output.h -- FlightGear ouput display window.
+// logwin.h -- FlightGear ouput display window.
 //
 // Written by Bernie Bright, started Sep 2003.
 //
@@ -20,9 +20,8 @@
 //
 // $Id$
 
-#ifndef FG_OUTPUT_WINDOW_H
-#define FG_OUTPUT_WINDOW_H
-
+#ifndef logwin_h_included
+#define logwin_h_included
 
 class Fl_Window;
 class Fl_Text_Display;
@@ -31,11 +30,11 @@ class Fl_Menu_Item;
 /**
  * 
  */
-class FGOutputWindow
+class LogWindow
 {
 public:
-    FGOutputWindow( int w, int h, const char* l );
-    ~FGOutputWindow();
+    LogWindow( int w, int h, const char* l );
+    ~LogWindow();
 
     void show();
     void hide();
@@ -57,4 +56,4 @@ private:
     static Fl_Menu_Item menu_[];
 };
 
-#endif // FG_OUTPUT_WINDOW_H
+#endif // logwin_h_included

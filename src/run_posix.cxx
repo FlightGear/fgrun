@@ -42,27 +42,17 @@
 
 #include <iostream>
 #include <string>
+#include <FL/filename.H>
 
-#include "FGRun_Posix.h"
+#include "wizard.h"
 #include "fgrun_pty.h"
-#include "output.h"
+#include "logwin.h"
 
 using std::string;
 using std::cout;
 
-FGRun_Posix::FGRun_Posix()
-    : win(new FGOutputWindow( 640, 480, "FlightGear Log" ))
-{
-}
-
-FGRun_Posix::~FGRun_Posix()
-{
-    win->hide();
-    delete win;
-}
-
 void
-FGRun_Posix::run_fgfs_impl()
+Wizard::run_fgfs()
 {
     pid_t pid;
     int master = -1;
@@ -91,8 +81,8 @@ FGRun_Posix::run_fgfs_impl()
 	if (master < 0)
 	    return;
 
-	win->clear();
-	win->show();
+	logwin->clear();
+	logwin->show();
 
 	Fl::add_fd( master, stdout_cb, this );
 
@@ -105,7 +95,11 @@ FGRun_Posix::run_fgfs_impl()
 	if (master >= 0)
 	    close( master );
 
-	string path = fg_exe->value();
+	const int buflen = FL_PATH_MAX;
+	char buf[ buflen ];
+	prefs.get( "fg_exe", buf, "", buflen-1);
+
+	string path = buf;
 	string arg0;
 	string::size_type idx = path.find_last_of( "/\\" );
 	if (idx != string::npos)
@@ -117,33 +111,37 @@ FGRun_Posix::run_fgfs_impl()
 	    arg0 = path;
 	}
 
-	// Append any new vars to environ array.
-	int n = env_list->size();
-	for (int i = 1; i <= n; ++i )
+	// "export" any environment variables.
+	int iVal;
+	prefs.get( "env-count", iVal, 0 );
+	for (int i = 1; i <= iVal; ++i)
 	{
-	    // Need to keep this string value around.
-	    char* s = strdup( env_list->text( i ) );
+	    buf[0] = 0;
+	    prefs.get( Fl_Preferences::Name("env-var-%d", i),
+		       buf, "", buflen-1 );
+	    char* s = strdup( buf );
 	    putenv( s );
 	}
+
 	execl( path.c_str(), arg0.c_str(), NULL );
     }
 }
 
 void
-FGRun_Posix::stdout_cb( int fd, void* p )
+Wizard::stdout_cb( int fd, void* p )
 {
-    static_cast<FGRun_Posix*>(p)->stdout_cb( fd );
+    static_cast<Wizard*>(p)->stdout_cb( fd );
 }
 
 void
-FGRun_Posix::stdout_cb( int fd )
+Wizard::stdout_cb( int fd )
 {
     char buf[256];
     ssize_t n = read( fd, buf, sizeof( buf ) - 1 );
     if (n > 0)
     {
 	buf[n] = 0;
-	win->append( buf );
+ 	logwin->append( buf );
     }
     else
     {
@@ -155,8 +153,8 @@ FGRun_Posix::stdout_cb( int fd )
     }
 }
 
-void
-FGRun_Posix::show_log_window()
-{
-    win->show();
-}
+// void
+// Wizard::show_log_window()
+// {
+//     win->show();
+// }
