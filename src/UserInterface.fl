@@ -26,7 +26,7 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {467 212 640 480} labelsize 12
+      private xywh {472 232 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {

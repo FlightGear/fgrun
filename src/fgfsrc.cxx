@@ -178,7 +178,14 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--fog-fastest";
 	if (geometry->size() > 0)
 	    ofs << "\n--geometry=" << geometry->value();
-	// ?visibility?
+	if (visibility->value())
+	{
+	    if (vis_meters->value())
+		ofs << "\n--visibility=" << visibility->value();
+	    else
+		ofs << "\n--visibility-miles=" << visibility->value();
+	}
+
 	// ?view-offset?
 	if (strcmp(bpp->text(), "16") != 0)
 	    ofs << "\n--bpp=" << bpp->text();
