@@ -310,7 +310,7 @@ void
 UserInterface::load_airportdb()
 {
     string s( fg_root->value() );
-    s.append( "/Airports/runways.dat.gz" );
+    s.append( "/Airports/apt.dat.gz" );
 
     try
     {

@@ -584,9 +584,8 @@ Wizard::aircraft_update()
 	{
 	    readProperties( s.c_str(), &props );
 	}
-	catch (const sg_exception& e)
+	catch (const sg_exception&)
 	{
-	    //cout << e.getformattedMessage() << "\n";
 	    continue;
 	}
 
@@ -770,7 +769,7 @@ Wizard::refresh_airports()
     }
 
     SGPath path( fg_root_->value() );
-    path.append( "/Airports/runways.dat.gz" );
+    path.append( "/Airports/apt.dat.gz" );
     airports_->load_runways( path.str(), airports_cb, this );
 
     string cache( cache_file_->value() );

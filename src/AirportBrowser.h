@@ -41,7 +41,7 @@ class AirportTable;
 
 /**
  * An airport and runway browser.
- * Runway data is read from FlightGear's runways.dat.gz file.
+ * Runway data is read from FlightGear's apt.dat.gz file.
  * Airports are located by searching the scenery directory.
  */
 class AirportBrowser : public Fl_Group

@@ -172,33 +172,47 @@ AirportBrowser::runways_idle_proc( void* v )
 void
 AirportBrowser::runways_idle_proc( )
 {
+    static const char space[] = " \t\n\r";
+    static const char junk[] = "?\n\r";
     int count = 200;
     char line[128];
+    char *token;
+
     while (count-- > 0 && gzgets( gzf_, line, sizeof line ) != 0)
     {
 	// Read 'count' airports, or until EOF or error.
-        if (line[0] == 'A' || line[0] == 'H' || line[0] == 'S')
-        {
-            string id( line+2, 4 );
-            if (id[3] == ' ')
-                id.erase(3);
+        token = strtok(line, space);       
 
-            string name( line+17 );
-            if (name[name.size()-1] == '\n')
-                name.erase( name.size()-1 );
-
-            apt_dat_t apt;
-            apt.id_ = id;
-            apt.name_ = name;
-            airports_.push_back( apt );
+        if(token == NULL) {
+            continue;
+        } else if(!strcmp(token, "99")) {
+            break;
         }
-        else if (line[0] == 'R')
-        {
-            string rwy( line+7, 3 );
-            if (rwy[2] == ' ')
-                rwy.erase(2);
 
-	    airports_.back().runways_.push_back( rwy );
+        int type_num = atoi(token);
+        if ((type_num == 1)  || (type_num == 17))  // Its an airport
+        {
+            token = strtok(NULL, space);
+            token = strtok(NULL, space);
+            token = strtok(NULL, space);
+            token = strtok(NULL, space);
+
+            // We've found the airport
+            apt_dat_t apt;
+            apt.id_ = token;
+            apt.name_ = strtok(NULL, junk);
+            airports_.push_back( apt );
+
+        }
+        else if (type_num == 10)	// Now read in the runways and taxiways
+        {
+            strtok(NULL, space);
+            strtok(NULL, space);
+            string rwy( strtok(NULL, space) );
+            if (rwy != "xxx")
+            {
+  	        airports_.back().runways_.push_back( rwy );
+            }
         }
     }
 
