@@ -52,7 +52,7 @@ Wizard::run_fgfs()
 
     //SECURITY_ATTRIBUTES procAttrs;
     //SECURITY_ATTRIBUTES threadAttrs;
-    BOOL inheritHandles = FALSE;
+    BOOL inheritHandles = TRUE;
     DWORD creationFlags = 0;
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
@@ -64,7 +64,7 @@ Wizard::run_fgfs()
         cmd, // lpCommandLine
         NULL, // lpProcessAttributes
         NULL, // lpThreadAttributes
-        TRUE,
+        inheritHandles,
         creationFlags,
         NULL, // lpEnvironment
         NULL, // lpCurrentDirectory
