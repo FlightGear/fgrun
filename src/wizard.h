@@ -54,8 +54,9 @@ private:
 public:
   Fl_Group *page[5];
 private:
-  inline void cb_Cancel_i(Fl_Button*, void*);
-  static void cb_Cancel(Fl_Button*, void*);
+  Fl_Button *cancel;
+  inline void cb_cancel_i(Fl_Button*, void*);
+  static void cb_cancel(Fl_Button*, void*);
 public:
   ~Wizard();
   void show();

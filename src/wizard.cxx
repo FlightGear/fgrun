@@ -72,11 +72,11 @@ void Wizard::cb_Advanced(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_Advanced_i(o,v);
 }
 
-inline void Wizard::cb_Cancel_i(Fl_Button*, void*) {
+inline void Wizard::cb_cancel_i(Fl_Button*, void*) {
   cancel_cb();
 }
-void Wizard::cb_Cancel(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->user_data()))->cb_Cancel_i(o,v);
+void Wizard::cb_cancel(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->user_data()))->cb_cancel_i(o,v);
 }
 
 Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0) {
@@ -191,9 +191,9 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       }
       o->end();
     }
-    { Fl_Button* o = new Fl_Button(565, 450, 70, 25, "Cancel");
+    { Fl_Button* o = cancel = new Fl_Button(565, 450, 70, 25, "Cancel");
       o->labelsize(12);
-      o->callback((Fl_Callback*)cb_Cancel);
+      o->callback((Fl_Callback*)cb_cancel);
     }
     o->end();
     o->resizable(o);

@@ -16,7 +16,7 @@ class Wizard {open
   Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0)} {} {
     Fl_Window win {
       label {FlightGear Wizard} open
-      private xywh {199 274 640 480} type Double resizable visible
+      private xywh {112 262 640 480} type Double resizable visible
     } {
       Fl_Button next {
         label Next
@@ -107,9 +107,9 @@ class Wizard {open
           xywh {0 0 640 440} hide deactivate
         } {}
       }
-      Fl_Button {} {
+      Fl_Button cancel {
         label Cancel
-        callback {cancel_cb();}
+        callback {cancel_cb();} selected
         private xywh {565 450 70 25} labelsize 12
       }
     }
