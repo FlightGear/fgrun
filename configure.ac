@@ -64,7 +64,9 @@ dnl Checks for header files.
 dnl
 
 AC_HEADER_STDC
-AC_CHECK_HEADERS(signal.h unistd.h string.h)
+AC_HEADER_TIME
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS(fcntl.h)
 
 dnl
 dnl Checks for typedefs, structures, and compiler characteristics.
@@ -72,8 +74,7 @@ dnl
 
 AC_C_CONST
 AC_TYPE_SIZE_T
-AC_HEADER_TIME
-AC_STRUCT_TM
+AC_TYPE_PID_T
 
 dnl
 dnl Checks for library functions.
@@ -86,8 +87,7 @@ AC_CHECK_FUNCS(socket strdup strcasecmp atexit)
 
 dnl Check for fltk
 
-AC_ARG_WITH(fltk, dnl
-            [  --with-fltk=DIR      Path to FLTK v1.1],
+AC_ARG_WITH(fltk, [  --with-fltk=DIR         Path to FLTK v1.1],
             FLTK="$withval",)
 
 CPPFLAGS="$CPPFLAGS -I$FLTK/include"
