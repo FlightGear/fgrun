@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <FL/Fl_Preferences.H>
+#include <FL/Fl_Pixmap.H>
 class LogWindow;
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Button.H>
@@ -95,8 +96,6 @@ private:
   void run_fgfs();
   static void stdout_cb( int, void* );
   void stdout_cb( int );
-  Fl_Preferences prefs;
-  LogWindow* logwin;
   void cancel_cb();
   void delete_cache_file_cb();
   static void airports_cb( Fl_Widget*, void* );
@@ -109,5 +108,9 @@ private:
 public:
   void refresh_airports();
   static void refresh_airports( Fl_Widget*, void* );
+private:
+  Fl_Preferences prefs;
+  LogWindow* logwin;
+  Fl_Pixmap folder_open_pixmap;
 };
 #endif

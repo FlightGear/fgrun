@@ -3,9 +3,9 @@ MOSTLYCLEANFILES =
 CLEANFILES =
 
 if WIN32
-platform_srcs = run_win32.cxx
+platform_srcs = os_win32.h run_win32.cxx
 else
-platform_srcs = run_posix.cxx fgrun_pty.cxx fgrun_pty.h
+platform_srcs = os_posix.h run_posix.cxx fgrun_pty.cxx fgrun_pty.h
 endif
 
 BUILT_SOURCES = wizard.cxx wizard.h advanced.cxx advanced.h
@@ -29,15 +29,8 @@ fgrun_SOURCES = \
 	util.cxx util.h \
 	$(platform_srcs)
 
-#if WIN32
-#win32_libs = -lglu32 -lopengl32 -lcomctl32 -luuid -lwsock32 -lole32 -lwinmm -lgdi32
-#else
-#win32_libs =
-#endif
-
 simgear_libs = -lsgprops -lsgxml -lsgmisc -lsgstructure -lsgdebug
 plib_libs = -lplibssg -lplibsg -lplibul
-fltk_libs = -lfltk_gl -lfltk
 
 fgrun_LDADD = $(simgear_libs) $(plib_libs)
 
@@ -51,4 +44,5 @@ advanced.cxx advanced.h: advanced.fl
 
 EXTRA_DIST += \
 	wizard.fl \
-	advanced.fl
+	advanced.fl \
+	folder_open.xpm

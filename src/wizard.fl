@@ -11,16 +11,21 @@ decl {\#include <iostream>} {public
 decl {\#include <FL/Fl_Preferences.H>} {public
 } 
 
+decl {\#include <FL/Fl_Pixmap.H>} {public
+} 
+
+decl {\#include "folder_open.xpm"} {} 
+
 decl {class LogWindow;} {public
 } 
 
 class Wizard {open
 } {
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0)} {open
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm)} {open selected
   } {
     Fl_Window win {
-      label {FlightGear Wizard}
-      private xywh {500 133 640 480} type Double visible
+      label {FlightGear Wizard} open
+      private xywh {621 93 640 480} type Double visible
     } {
       Fl_Button next {
         label Next
@@ -38,7 +43,7 @@ class Wizard {open
       } {
         Fl_Group {page[0]} {
           label {Select Paths}
-          xywh {0 0 640 440} labelfont 1 align 21 hide
+          xywh {0 0 640 440} labelfont 1 align 21
         } {
           Fl_Help_View about_ {
             private xywh {5 25 630 115} labeltype NO_LABEL
@@ -49,9 +54,9 @@ class Wizard {open
             private tooltip {Full pathname to FlightGear executable} xywh {130 175 335 25} labelsize 12 when 8 textsize 12
           }
           Fl_Button {} {
-            label {...}
             callback {fg_exe_select_cb();}
             private tooltip {Full pathname to FlightGear executable} xywh {470 175 25 25} labelsize 12
+            code0 {o->image(folder_open_pixmap);}
           }
           Fl_Input fg_root_ {
             label {FG_ROOT:}
@@ -59,9 +64,9 @@ class Wizard {open
             private tooltip {root data path} xywh {130 205 335 25} labelsize 12 when 8 textsize 12
           }
           Fl_Button {} {
-            label {...}
             callback {fg_root_select_cb();}
             private xywh {470 205 25 25} labelsize 12
+            code0 {o->image(folder_open_pixmap);}
           }
           Fl_Browser scenery_dir_list_ {
             label {FG_SCENERY:}
@@ -136,11 +141,11 @@ class Wizard {open
           }
         }
         Fl_Group {page[4]} {open
-          xywh {0 0 640 440} deactivate
+          xywh {0 0 640 440} hide deactivate
         } {}
       }
       Fl_Button cancel {
-        label Cancel
+        label Quit
         callback {cancel_cb();}
         private xywh {565 450 70 25} labelsize 12
       }
@@ -152,7 +157,7 @@ class Wizard {open
   }
   decl {void show( int argc, char* argv[] );} {public
   }
-  decl {void init( bool fullscreen );} {selected public
+  decl {void init( bool fullscreen );} {public
   }
   decl {void update_preview();} {public
   }
@@ -172,8 +177,6 @@ class Wizard {open
   decl {void run_fgfs();} {}
   decl {static void stdout_cb( int, void* );} {}
   decl {void stdout_cb( int );} {}
-  decl {Fl_Preferences prefs;} {}
-  decl {LogWindow* logwin;} {}
   decl {void cancel_cb();} {}
   decl {void delete_cache_file_cb();} {}
   decl {static void airports_cb( Fl_Widget*, void* )} {}
@@ -187,4 +190,7 @@ class Wizard {open
   }
   decl {static void refresh_airports( Fl_Widget*, void* );} {public
   }
+  decl {Fl_Preferences prefs;} {}
+  decl {LogWindow* logwin;} {}
+  decl {Fl_Pixmap folder_open_pixmap} {}
 } 
