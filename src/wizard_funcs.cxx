@@ -1252,7 +1252,7 @@ Wizard::update_basic_options()
     prefs.get("multiplay2", buf, "", buflen-1 );
     string multiplay2(buf);
 
-    if ( callsign.size() && multiplay1.size() && multiplay2.size() );
+    if ( callsign.size() && multiplay1.size() && multiplay2.size() )
     {
 	if ( multiplay1.size() >= 3 && multiplay2.size() >= 3 )
 	{
@@ -1323,13 +1323,19 @@ Wizard::startFlightGear_cb()
     {
 	run_fgfs(ostr.str());
 	launch_result = 0;
-	launch_window->hide();
     }
 }
 
 void
 Wizard::exec_launch_window()
 {
+    int X = win->x(),
+        Y = win->y(),
+        W = win->w(),
+        H = win->h(),
+        w = launch_window->w(),
+        h = launch_window->h();
+    launch_window->position( X + ( W - w ) / 2, Y + ( H - h ) / 2 );
     launch_result = -1;
     launch_window->set_modal();
     launch_window->show();
@@ -1338,4 +1344,5 @@ Wizard::exec_launch_window()
 	Fl::wait();
     }
     launch_window->set_non_modal();
+    launch_window->hide();
 }

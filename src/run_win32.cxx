@@ -100,8 +100,18 @@ Wizard::run_fgfs(const string &args)
         // Free the buffer.
         LocalFree( lpMsgBuf );
     }
+    else
+    {
+        WaitForSingleObject( pi.hProcess, INFINITE );
+
+        DWORD exitCode;
+        GetExitCodeProcess( pi.hProcess, &exitCode );
+
+        // Close process and thread handles. 
+        CloseHandle( pi.hProcess );
+        CloseHandle( pi.hThread );
+    }
 
     delete[] cmd;
 }
-
 
