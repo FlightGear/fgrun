@@ -1,3 +1,25 @@
+// FGRunUI.cxx -- FlightGear Run User Interface
+//
+// Written by Bernie Bright, started Oct 2002.
+//
+// Copyright (C) 2002  Bernie Bright - bbright@bigpond.net.au
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//
+// $Id$
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -89,13 +111,22 @@ FGRunUI::load_settings()
     // 
     prefs.get( "fg_exe", buf, "", buflen-1 );
     fg_exe->value( buf );
+#if defined(WIN32)
+    prefs.get( "fg_root", buf, "\\FlightGear", buflen-1 );
+#else
     prefs.get( "fg_root", buf, "/usr/local/lib/FlightGear", buflen-1 );
+#endif
     if (fl_filename_isdir( buf ))
     {
 	fg_root->value( buf );
     }
+
+#if defined(WIN32)
+    prefs.get( "fg_scenery", buf, "\\FlightGear\\Scenery", buflen-1 );
+#else
     prefs.get( "fg_scenery", buf, "/usr/local/lib/FlightGear/Scenery",
 	       buflen-1 );
+#endif
     if (fl_filename_isdir( buf ))
     {
 	fg_scenery->value( buf );
@@ -195,6 +226,21 @@ FGRunUI::load_settings()
     prefs.get( "in_air", bVal, 0 );
     in_air->value( bVal );
 
+    prefs.get( "lon", buf, "", buflen-1 );
+    lon->value( buf );
+    prefs.get( "lat", buf, "", buflen-1 );
+    lat->value( buf );
+    prefs.get( "altitude", buf, "", buflen-1 );
+    altitude->value( buf );
+    prefs.get( "heading", buf, "", buflen-1 );
+    heading->value( buf );
+    prefs.get( "roll", buf, "", buflen-1 );
+    roll->value( buf );
+    prefs.get( "pitch", buf, "", buflen-1 );
+    pitch->value( buf );
+    prefs.get( "vc", buf, "", buflen-1 );
+    vc->value( buf );
+
     // Time tab.
     prefs.get( "time-offset", bVal, 0 );
     time_offset->value( bVal );
@@ -228,7 +274,6 @@ FGRunUI::load_settings()
 
     // I/O tab.
     // Network tab.
-    // Initial Position and Orientation tab.
 }
 
 void
@@ -291,7 +336,14 @@ FGRunUI::save_settings()
     prefs.set( "notrim", notrim->value() );
     prefs.set( "on_ground", on_ground->value() );
     prefs.set( "in_air", in_air->value() );
-
+    prefs.set( "lon", lon->value() );
+    prefs.set( "lat", lat->value() );
+    prefs.set( "altitude", altitude->value() );
+    prefs.set( "heading", heading->value() );
+    prefs.set( "roll", roll->value() );
+    prefs.set( "pitch", pitch->value() );
+    prefs.set( "vc", vc->value() );
+ 
     // Time tab.
     prefs.set( "time-offset", time_offset->value());
     prefs.set( "time-offset-value", time_offset_text->value());
@@ -305,8 +357,14 @@ FGRunUI::save_settings()
     prefs.set( "start-date-gmt-value", start_date_gmt_text->value());
 
     // I/O tab.
+    prefs.set( "io_options_count", io_options_list->size() );
+    int i;
+    for (i = 1; i < io_options_list->size(); ++i)
+    {
+	prefs.set( Fl_Preferences::Name("io%d", i), io_options_list->text(i));
+    }
+
     // Network tab.
-    // Initial Position and Orientation tab.
 
     modflag = false;
 }
@@ -419,16 +477,6 @@ FGRunUI::update_airports()
     std::sort( apts.begin(), apts.end() );
     std::for_each( apts.begin(), apts.end(), AddAirportHelper( airport ) );
     set_choice( airport, default_airport.c_str() );
-//     vector<string>::iterator i = find( apts.begin(), apts.end(),
-// 				       default_airport );
-//     int index = 0;
-//     if (i != apts.end())
-//     {
-// 	//index = std::distance( apts.begin(), i );
-// 	index = i - apts.begin();
-//     }
-
-//     airport->value(index);
 }
 
 /**
@@ -442,6 +490,8 @@ FGRunUI::run_fgfs()
     ofstream ofs( fname );
     if (ofs)
     {
+	int i;
+
 	ofs << "--fg-root=" << fg_root->value()
 	    << "\n--fg-scenery=" << fg_scenery->value()
 	    << "\n--airport-id=" << airport->text()
@@ -528,6 +578,38 @@ FGRunUI::run_fgfs()
 
 	if (strcmp( control->text(), "joystick" ) != 0)
 	    ofs << "\n--control=" << control->text();
+
+	if (lon->value()[0] != 0)
+	    ofs << "\n--lon=" << lon->value();
+	if (lat->value()[0] != 0)
+	    ofs << "\n--lat=" << lat->value();
+	if (altitude->value()[0] != 0)
+	    ofs << "\n--altitude=" << altitude->value();
+	if (heading->value()[0] != 0)
+	    ofs << "\n--heading=" << heading->value();
+	if (roll->value()[0] != 0)
+	    ofs << "\n--roll=" << roll->value();
+	if (pitch->value()[0] != 0)
+	    ofs << "\n--pitch=" << pitch->value();
+	if (vc->value()[0] != 0)
+	    ofs << "\n--vc=" << vc->value();
+
+	if (httpd->value())
+	    ofs << "\n--httpd=" << httpd_port->value();
+	if (props->value())
+	    ofs << "\n--props=" << props_port->value();
+	if (jpg_httpd->value())
+	    ofs << "\n--jpg-httpd=" << jpg_httpd_port->value();
+
+	for (i = 1; i <= io_options_list->size(); ++i)
+	{
+	    ofs << "\n" << io_options_list->text(i);
+	}
+
+	for (i = 1; i <= props_list->size(); ++i)
+	{
+	    ofs << "\n" << props_list->text(i);
+	}
 
 	ofs << "\n";
 
@@ -853,6 +935,8 @@ FGRunUI::io_medium_cb( Fl_Choice* o, void* )
  */
 void FGRunUI::reset()
 {
+    fg_root->value( "" );
+    fg_scenery->value( "" );
     default_aircraft = "c172";
     default_airport = "KSFO";
     enable_game_mode->value( 0 );
@@ -864,7 +948,7 @@ void FGRunUI::reset()
     fuel_freeze->value( 0 );
     clock_freeze->value( 0 );
     auto_coordination->value( 0 );
-    units_feet->value( 1 );
+//     units_feet->value( 1 );
 #if defined(WIN32)
     browser->value( "webrun.bat" );
 #else
@@ -898,4 +982,3 @@ void FGRunUI::reset()
     time_match_real->setonly();
     time_match_real->do_callback();
 }
-
