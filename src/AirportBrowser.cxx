@@ -40,22 +40,6 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
     , gzf_(0)
     , airports_loaded(false)
 {
-    {
-// 	Fl_Group* g = new Fl_Group( X, Y, W, 25, "Show:" );
-// 	g->align( FL_ALIGN_LEFT | FL_ALIGN_INSIDE );
-// 	//g->box( FL_ENGRAVED_BOX );
-// 	Fl_Round_Button* o;
-//  	o = new Fl_Round_Button( 60, Y, 80, 25, "All" );
-// 	o->type( FL_RADIO_BUTTON );
-// 	o->callback( show_all_cb, this );
-
-//  	o = new Fl_Round_Button( X+140, Y, 80, 25, "Installed" );
-//  	o->type( FL_RADIO_BUTTON );
-// 	o->callback( show_installed_cb, this );
-// 	o->setonly();
-// 	g->end();
-    }
-
     Y += 5;
     int tw = W - 120 - 5;
     int th = H - 35 - 5;
@@ -250,6 +234,11 @@ AirportBrowser::scan_installed_airports( const string& dir )
     do
     {
 	string cwd( dirs.front() );
+
+	// mingw requires a trailing slash on directory names.
+	if (cwd[ cwd.length() - 1 ] != '/')
+	    cwd.append( "/" );
+
 	dirent** files;
 	int n = fl_filename_list( cwd.c_str(), &files, fl_numericsort );
 	if (n > 0)
@@ -261,8 +250,7 @@ AirportBrowser::scan_installed_airports( const string& dir )
 		{
 		    // Found a scenery dub-directory.
 		    string d(cwd);
-		    d += "/";
-		    d += files[i]->d_name;
+		    d.append( files[i]->d_name );
 		    if (fl_filename_isdir( d.c_str() ) )
 		    {
 			dirs.push_back( d );
