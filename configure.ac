@@ -42,6 +42,7 @@ dnl
 dnl Checks for compiler features
 dnl
 
+LIBM=
 case "${target_os}" in
 mingw32)
   CPPFLAGS="-DWIN32 $CPPFLAGS"
@@ -49,7 +50,12 @@ mingw32)
   LDFLAGS="-mwindows $LDFLAGS"
   LIBS="-lglu32 -lopengl32 -lcomctl32 -luuid -lwsock32 -lole32 -lwinmm -lgdi32 $LIBS"
   ;;
+*)
+  AC_CHECK_LIB(m, cos, LIBM="-lm")
+  ;;
 esac
+
+LIBS="$LIBS $LIBM"
 
 AC_C_CONST
 
