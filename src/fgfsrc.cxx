@@ -115,8 +115,8 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--disable-splash-screen";
     if (prefs.get( "intro_music", iVal, 1 ) && !iVal)
 	os << pfx << "--disable-intro-music";
-// 	if (prefs.get( "mouse_pointer", iVal, 0 ) && iVal)
-// 	    os << pfx << "--enable-mouse-pointer";
+    if (prefs.get( "mouse_pointer", iVal, 0 ) && iVal)
+	os << pfx << "--enable-mouse-pointer";
     if (prefs.get( "random_objects", iVal, 0 ) && iVal)
 	os << pfx << "--enable-random-objects";
     else
@@ -172,8 +172,8 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 
     if (prefs.get( "model_hz", iVal, 0 ) && iVal != 120)
 	os << pfx << "--model_hz=" << iVal;
-// 	if (speed->value() != 1)
-// 	    os << pfx << "--speed=" << speed->value();
+    if (prefs.get( "speed", iVal, 0 ) && iVal > 1)
+	os << pfx << "--speed=" << iVal;
     if (prefs.get( "in_air", iVal, 0 ) && iVal)
 	os << pfx << "--in-air";
     if (prefs.get( "wind_speed", dVal, 0.0 ) && dVal > 0.0)
@@ -255,7 +255,8 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	    os << pfx << "--visibility-miles=" << buf;
     }
 
-    // ?view-offset?
+    if (prefs.get( "view-offset", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--view-offset=" << buf;
     if (prefs.get( "bpp", iVal, 16) && iVal != 16)
 	os << pfx << "--bpp=" << iVal;
     if (prefs.get( "fov", dVal, 60.0 ) && dVal != 60.)
@@ -291,6 +292,8 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--props=" << iVal;
     if (prefs.get( "jpg-httpd", iVal, 0 ) && iVal)
 	os << pfx << "--jpg_httpd=" << iVal;
+
+    // Multiplayer options.
     if (prefs.get( "callsign", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--callsign=" << buf;
     if (prefs.get( "multiplay1", buf, "", buflen-1 ) && buf[0] != 0)
@@ -310,10 +313,14 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     }
 
     // Properties
-// 	for (i = 1; i <= prop_list->size(); ++i)
-// 	{
-// 	    os << pfx << "--prop:" << prop_list->text(i);
-// 	}
+    prefs.get( "property-count", iVal, 0 );
+    for (i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("property-item-%d", i),
+		   buf, "", buflen-1 );
+	//os << pfx << "--prop:" << prop_list->text(i);
+    }
 
     // Debugging
     prefs.get( "log-level", buf, "", buflen-1 );
