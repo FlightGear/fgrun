@@ -33,7 +33,6 @@
 #include <iomanip>
 #include <iterator>
 #include <utility>
-#include <iostream>
 
 #include <FL/Fl.h>
 #include <FL/filename.h>
@@ -125,28 +124,24 @@ search_for_airports_cb( void* v )
 	{
 	    std::sort( airports.begin(), airports.end() );
 
-	    vsi_t first = airports.begin();
-	    vsi_t last = airports.end();
 	    int index = 0;
+	    vs_t::size_type size = airports.size();
+	    for (vs_t::size_type i = 0; i < size; i += 25)
+	    {
+		vs_t::size_type last =
+		    ((i+25) > size) ? (size-1) : i+25-1;
+		std::ostringstream oss;
+		oss << std::setw(4) << airports[i]
+		    << " - "
+		    << std::setw(4) << std::left << airports[last]
+		    << "/";
 
-	    if (airports.size() > (26+10))
-	    {
-		for (; first != last; ++first)
+		for (vs_t::size_type j = i; j <= last; ++j)
 		{
-		    string s = first->substr( 0, 1 );
-		    s.append( "/" );
-		    s.append( *first );
+		    string s( oss.str() );
+		    s.append( airports[j] );
 		    index = ui->airport->add( s.c_str() );
-		    if (ui->default_airport == *first)
-			ui->airport->value(index);
-		}
-	    }
-	    else
-	    {
-		for (; first != last; ++first)
-		{
-		    index = ui->airport->add( first->c_str() );
-		    if (ui->default_airport == *first)
+		    if (ui->default_airport == airports[j])
 			ui->airport->value(index);
 		}
 	    }
@@ -298,6 +293,11 @@ void
 UserInterface::apt_name_cb()
 {
     apt_browser->select_name( apt_name->value() );
+}
+
+void
+UserInterface::apt_select_cb()
+{
 }
 
 void
