@@ -79,13 +79,18 @@ dnl
 AC_HEADER_STDC
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS(fcntl.h windows.h pty.h termios.h)
+AC_CHECK_HEADERS(fcntl.h libutil.h pty.h termios.h utmp.h util.h windows.h)
 
 if test "x$ac_cv_header_windows_h" = "xyes"; then
   AC_DEFINE([WIN32], 1, [Define if building on a Win32 platform])
 fi
 
 AM_CONDITIONAL(WIN32, test "x$ac_cv_header_windows_h" = "xyes")
+
+AC_CHECK_HEADER(zlib.h,
+  AC_CHECK_LIB(z, gzopen,
+    AC_DEFINE([HAVE_LIBZ], 1, [Define if you have the <zlib.h> header file.])
+    LIBS="$LIBS -lz"))
 
 dnl
 dnl Checks for typedefs, structures, and compiler characteristics.
@@ -99,10 +104,47 @@ dnl
 dnl Checks for library functions.
 dnl
 
-#AC_FUNC_STRFTIME
 AC_FUNC_FORK
-AC_CHECK_FUNCS(socket strdup strcasecmp atexit)
-AC_CHECK_FUNCS(openpty,, AC_CHECK_LIB(util,openpty, [AC_DEFINE(HAVE_OPENPTY) LIBS="$LIBS -lutil"]))
+AC_CHECK_FUNCS(waitpid)
+
+AC_CHECK_FUNCS(openpty,
+  AC_DEFINE([HAVE_OPENPTY],1,[Define to 1 if you have the `openpty' function.]),
+  AC_CHECK_LIB(util, openpty,
+    [
+      AC_DEFINE([HAVE_OPENPTY],1,[Define to 1 if you have the `openpty' function.])
+      LIBS="$LIBS -lutil"
+    ])
+)
+
+AC_CHECK_FUNCS(forkpty login_tty)
+AC_CHECK_FUNCS(_getpty grantpt unlockpt)
+
+dnl And workaround for a Autoconf 2.4 bug:
+if test x$ac_cv_func_grantpt = xyes; then
+    :
+else
+    AC_CHECK_LIB(pt, grantpt)
+fi
+
+
+AC_MSG_CHECKING([for /dev/ptmx])
+if test -e /dev/ptmx
+then
+  AC_MSG_RESULT(yes)
+  AC_DEFINE(HAVE_DEV_PTMX, 1, [Define if we have /dev/ptmx])
+else
+  AC_MSG_RESULT(no)
+fi
+
+AC_MSG_CHECKING([for /dev/ptc])
+if test -e /dev/ptc
+then
+  AC_MSG_RESULT(yes)
+  AC_DEFINE(HAVE_DEV_PTC, 1, [Define if we have /dev/ptc])
+else
+  AC_MSG_RESULT(no)
+fi
+
 
 dnl Check for fltk
 FLUID="fluid"
