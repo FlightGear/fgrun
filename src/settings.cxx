@@ -28,13 +28,26 @@ void
 UserInterface::save_settings_cb()
 {
     Fl_Preferences prefs(Fl_Preferences::USER, "flightgear.org", "fgrun");
+    char pathname[ FL_PATH_MAX ];
 
     if (fg_exe->value() != 0)
-	prefs.set( "fg_exe", fg_exe->value() );
+    {
+	fl_filename_absolute( pathname, fg_exe->value() );
+	prefs.set( "fg_exe", pathname );
+    }
+
     if (fg_root->value() != 0)
-	prefs.set( "fg_root", fg_root->value() );
+    {
+	fl_filename_absolute( pathname, fg_root->value() );
+	prefs.set( "fg_root", pathname );
+    }
+
     if (fg_scenery->value() != 0)
-	prefs.set( "fg_scenery", fg_scenery->value() );
+    {
+	fl_filename_absolute( pathname, fg_scenery->value() );
+	prefs.set( "fg_scenery", pathname );
+    }
+
     if (aircraft->text() != 0)
 	prefs.set( "aircraft", aircraft->text() );
     if (runway->value() != 0)
