@@ -32,7 +32,7 @@ class UserInterface {open
       callback {if (Fl::event_key() == FL_Escape)
   return; // ignore Escape
 exit(0);} open
-      private xywh {622 228 640 480} type Double labelsize 12
+      private xywh {627 248 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {open
@@ -49,7 +49,7 @@ exit(0);} open
           }
           menuitem {} {
             label {&Quit}
-            callback {main_window->hide();}
+            callback {exit(0);} selected
             private xywh {0 0 100 20} shortcut 0x40071 labelsize 12
           }
         }
@@ -59,7 +59,7 @@ exit(0);} open
         } {
           menuitem log_window {
             label {&Log Window}
-            callback {show_log_window();} selected
+            callback {show_log_window();}
             private tooltip {Display FlightGear output window.} xywh {0 0 100 20} shortcut 0x5006c value 1 labelsize 12
           }
         }

@@ -25,7 +25,7 @@ void UserInterface::cb_Save(Fl_Menu_* o, void* v) {
 }
 
 inline void UserInterface::cb_Quit_i(Fl_Menu_*, void*) {
-  main_window->hide();
+  exit(0);
 }
 void UserInterface::cb_Quit(Fl_Menu_* o, void* v) {
   ((UserInterface*)(o->parent()->user_data()))->cb_Quit_i(o,v);
