@@ -25,13 +25,14 @@ class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
-  Function {UserInterface()} {} {
+  Function {UserInterface()} {open
+  } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {598 144 640 480} labelsize 12
+      private xywh {570 97 640 480} labelsize 12
       code0 {init();} visible
     } {
-      Fl_Menu_Bar {} {
+      Fl_Menu_Bar {} {open
         private xywh {0 0 640 25} labelsize 12 textsize 12
       } {
         submenu {} {
@@ -55,7 +56,11 @@ class UserInterface {open
         } {
           menuitem output_to_window {
             label {Output To Window}
-            private xywh {0 0 100 20} type Toggle labelsize 12
+            private tooltip {Redirect FlightGear output to a window.} xywh {0 0 100 20} type Toggle value 1 labelsize 12
+          }
+          menuitem load_airports_ {
+            label {Load Airports}
+            private tooltip {Load airport and runway database at startup.} xywh {0 0 100 20} type Toggle value 1 labelsize 12
           }
         }
         submenu {} {
@@ -971,34 +976,36 @@ else
         }
       }
       Fl_Group {page[13]} {
-        label {Airport Browser} open selected
+        label {Airport Browser} open
         private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser apt_browser {
           callback {apt_browser_cb();}
-          private xywh {155 80 480 170} type Hold labeltype NO_LABEL labelsize 12 textsize 12
+          private xywh {155 80 480 275} type Hold labeltype NO_LABEL labelsize 12 textsize 12
         }
         Fl_Input apt_id {
           callback {apt_id_cb();}
-          private xywh {155 260 45 25} labelsize 12 when 1 textsize 12 deactivate
+          private xywh {155 360 45 25} labelsize 12 when 1 textsize 12
         }
         Fl_Input apt_name {
           label {input:}
           callback {apt_name_cb();}
-          private xywh {215 260 420 25} labeltype NO_LABEL when 1 textsize 12 deactivate
+          private xywh {215 360 420 25} labeltype NO_LABEL when 1 textsize 12 deactivate
         }
         Fl_Round_Button apt_show_all {
           label All
-          private xywh {155 55 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+          callback {load_airport_browser();} selected
+          private xywh {155 55 60 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
         }
         Fl_Round_Button apt_show_installed {
           label Installed
-          private xywh {240 55 85 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
+          callback {load_airport_browser();} selected
+          private xywh {215 55 70 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
         }
-      }
-      Fl_Button apt_select {
-        label Select
-        private xywh {585 295 50 25} labelsize 12 deactivate
+        Fl_Button apt_select {
+          label Select
+          private xywh {585 395 50 25} labelsize 12 deactivate
+        }
       }
     }
   }
