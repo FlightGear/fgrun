@@ -2,7 +2,7 @@ dnl (Process this file with autoconf to produce a configure script.)
 AC_REVISION($Revision$)dnl
 AC_PREREQ(2.54)
 
-AC_INIT([fgrun], [0.3.2], [bbright@users.sourceforge.net])
+AC_INIT([fgrun], [0.3.3], [bbright@users.sourceforge.net])
 AC_CONFIG_HEADER(src/config.h)
 AC_CONFIG_SRCDIR(src/main.cxx)
 
@@ -10,7 +10,7 @@ AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
-AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
+AM_INIT_AUTOMAKE([dist-bzip2])
 #AM_MAINTAINER_MODE
 
 PACKAGE=$PACKAGE_NAME
