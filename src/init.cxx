@@ -1,11 +1,14 @@
 #include <FL/filename.h>
 #include "UserInterface.h"
+#include "airportdb.h"
 
 void load_airportdb_cb( void* );
 
 void
 UserInterface::init()
 {
+    airportdb_ = new AirportDB;
+
     page_list->add("General");
     page_list->add("Features");
     page_list->add("Flight Model");
@@ -29,7 +32,6 @@ UserInterface::init()
 	&& fl_filename_isdir(fg_root->value()))
     {
 	Fl::add_idle(update_aircraft_cb, this);
-	Fl::add_idle(load_airportdb_cb, this);
     }
 
     update_airports_cb();
