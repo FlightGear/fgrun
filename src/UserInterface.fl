@@ -25,7 +25,7 @@ class UserInterface {open
   Function {UserInterface()} {} {
     Fl_Window main_window {
       label {FlightGear Launch Control}
-      private xywh {592 114 640 480} labelsize 12
+      private xywh {581 324 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -136,7 +136,8 @@ if (p != 0) {
           private xywh {610 110 25 25} labelsize 12
         }
         Fl_Choice airport {
-          label {Airports:} open
+          label {Airports:}
+          callback {update_runways();} open selected
           private tooltip {Available airports} xywh {250 140 150 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
           code0 {int i = airport->add( "KSFO", 0, 0, 0, 0);}
           code1 {airport->value(i);}
@@ -197,6 +198,10 @@ if (p != 0)
           label {...}
           xywh {610 305 25 25} labelsize 12 deactivate
         }
+        Fl_Choice runway {
+          label {Runway:} open
+          private xywh {545 140 60 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
+        } {}
       }
       Fl_Group {page[1]} {
         label Features
@@ -839,12 +844,12 @@ prop_delete->activate();}
     code {main_window->show();} {}
   }
   decl {void update_aircraft();} {}
-  Function {run_fgfs()} {open selected return_type void
+  Function {run_fgfs()} {return_type void
   } {
     code {write_fgfsrc();
 run_fgfs_impl();} {}
   }
-  Function {run_fgfs_impl()} {open return_type {virtual void}
+  Function {run_fgfs_impl()} {return_type {virtual void}
   } {}
   decl {void load_settings_cb();} {}
   decl {void save_settings_cb();} {}
@@ -859,6 +864,7 @@ run_fgfs_impl();} {}
   decl {void io_list_medium_update_cb( Fl_Choice* );} {}
   decl {int set_choice( Fl_Choice* c, const char* s );} {}
   decl {void show_page( int n );} {}
+  decl {void update_runways();} {}
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void

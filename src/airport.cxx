@@ -22,15 +22,19 @@
 
 #ifdef _MSC_VER
 # pragma warning(disable: 4786)
+# define snprintf _snprintf
 #endif
 
 #include <deque>
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <cctype>
 
 #include <FL/Fl.h>
 #include <FL/filename.h>
+
+#include <mk4.h>
 
 #include "UserInterface.h"
 
@@ -90,10 +94,12 @@ search_for_airports_cb( void* v )
     if (apt_dirs.empty())
     {
 	Fl::remove_idle( search_for_airports_cb, v );
+	UserInterface* ui = (UserInterface*)v;
+	ui->airport->clear();
+	//ui->airport->add( "<default>" );
+
 	if (!airports.empty())
 	{
-	    UserInterface* ui = (UserInterface*)v;
-	    ui->airport->clear();
 	    std::sort( airports.begin(), airports.end() );
 	    typedef vector<string> StringVec;
 	    StringVec::iterator i = airports.begin();
@@ -106,6 +112,7 @@ search_for_airports_cb( void* v )
 		    ui->airport->value(index);
 	    }
 	    ui->airport->activate();
+	    ui->update_runways();
 	}
     }
 }
@@ -125,4 +132,83 @@ UserInterface::update_airports_cb()
 	apt_dirs.push_back( dir );
 	Fl::add_idle( search_for_airports_cb, this );
     }
+}
+
+/**
+ * 
+ */
+static string
+reverse_runway( const string& rwy )
+{
+    if (!isdigit( rwy[0] ))
+	return string("");
+
+    int heading = atoi( rwy.c_str() );
+    heading += 18;
+    if (heading > 36)
+	heading -= 36;
+    char c = rwy[ rwy.length() - 1 ];
+    if (c == 'L')
+	c = 'R';
+    else if (c == 'R')
+	c = 'L';
+    else if (c != 'C')
+	c = 0;
+
+    char buf[8];
+    snprintf( buf, sizeof(buf)-1, "%0d%c", heading, c );
+    return string(buf);
+}
+
+void
+UserInterface::update_runways()
+{
+    vector< string > rwys;
+
+    string s = fg_root->value();
+    s += "/Airports/runways.mk4";
+    c4_Storage storage( s.c_str(), false );
+    
+    c4_View view;
+    view = storage.GetAs( "runway[ID:S,Rwy:S,Longitude:F,Latitude:F,Heading:F,Length:F,Width:F,SurfaceFlags:S,End1Flags:S,End2Flags:S]" );
+
+    runway->clear();
+    runway->add( "<default>" );
+
+    c4_StringProp pID( "ID" );
+    c4_StringProp pRwy( "Rwy" );
+    string apt_id = airport->text();
+    int i = view.Find( pID[ apt_id.c_str() ] );
+    if (i == -1)
+    {
+	return;
+    }
+
+    c4_RowRef row = view.GetAt( i );
+    string id = (const char*) pID(row);
+    string rwy = (const char*) pRwy(row);
+    while (id == apt_id)
+    {
+	rwys.push_back( rwy );
+	string rrwy = reverse_runway( rwy );
+	if (!rrwy.empty())
+	    rwys.push_back( rrwy );
+
+	++i;
+	row = view.GetAt( i );
+	id = (const char*) pID( row );
+	rwy = (const char*) pRwy(row);
+    }
+    
+    typedef vector<string> vs_type;
+    vs_type::iterator first = rwys.begin();
+    vs_type::iterator last = rwys.end();
+    while (first != last)
+    {
+	runway->add( first->c_str() );
+	++first;
+    }
+
+    runway->activate();
+    runway->value(0);
 }
