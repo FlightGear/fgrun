@@ -1315,7 +1315,6 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
@@ -1367,6 +1366,7 @@ Advanced::Advanced() {
         o->deactivate();
       }
       { Fl_Group* o = file_group = new Fl_Group(150, 305, 225, 25);
+        o->hide();
         { Fl_Input* o = io_file_name = new Fl_Input(220, 305, 125, 25, "File:");
           o->labelsize(12);
           o->textsize(12);
@@ -1430,7 +1430,7 @@ Advanced::Advanced() {
       }
       { Fl_Group* o = generic_group = new Fl_Group(150, 365, 225, 25);
         o->hide();
-        { Fl_Input* o = io_generic_file = new Fl_Input(220, 365, 125, 25, "File:");
+        { Fl_Input* o = io_generic_file = new Fl_Input(220, 365, 125, 25, "Generic:");
           o->labelsize(12);
           o->textsize(12);
           o->callback((Fl_Callback*)cb_io_generic_file);
@@ -1619,6 +1619,7 @@ Advanced::Advanced() {
     { Fl_Group* o = page[13] = new Fl_Group(150, 0, 490, 430, "Weather");
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Value_Input* o = wind_speed = new Fl_Value_Input(240, 240, 80, 25, "Speed (kts):");
         o->tooltip("Wind speed (kts)");
         o->labelsize(12);

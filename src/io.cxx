@@ -36,70 +36,77 @@ void
 Advanced::io_list_select_cb( Fl_Browser* o )
 {
     int n = o->value();
-    if (n > 0)
+    if (n <= 0)
+	return;
+
+    io_delete->activate();
+    io_protocol->activate();
+    io_medium->activate();
+    io_dir->activate();
+    io_hz->activate();
+
+    // --PROTOCOL=MEDIUM,DIR,HZ,...
+    // Split i/o option into tokens.
+    string buf = o->text(n);
+    vector< string > tokens;
+    const string delims = "=,";
+    string::size_type op = 0;
+    string::size_type np;
+
+    while ((np = buf.find_first_of( delims, op )) != buf.npos)
     {
-	io_delete->activate();
-	io_protocol->activate();
-	io_medium->activate();
-	io_dir->activate();
-	io_hz->activate();
+	tokens.push_back( buf.substr( op, np-op ) );
+	op = np + 1;
+// 	if ((op = buf.find_first_not_of( delims, np )) == buf.npos)
+// 	    break;
+    }
+    tokens.push_back( buf.substr( op, buf.npos ) );
 
-	// Split output string into tokens.
-	string buf = o->text(n);
-	vector< string > tokens;
-	const string delims = "=,";
-	string::size_type op = 0;
-	string::size_type np;
+    // Populate dialog controls.
 
-	while ((np = buf.find_first_of( delims, op )) != buf.npos)
-	{
-	    tokens.push_back( buf.substr( op, np-op ) );
-	    op = np + 1;
-	    // 	if ((op = buf.find_first_not_of( delims, np )) == buf.npos)
-	    // 	    break;
-	}
-	tokens.push_back( buf.substr( op, buf.npos ) );
+    // Skip leading "--" of protocol token.
+    set_choice( io_protocol, tokens[0].c_str() + 2 );
+    set_choice( io_medium, tokens[1].c_str() );
+    io_medium->do_callback();
+    set_choice( io_dir, tokens[2].c_str() );
+    io_hz->value( strtod( tokens[3].c_str(), 0 ) );
 
-	// Skip leading "--" of protocol token.
-	set_choice( io_protocol, tokens[0].c_str() + 2 );
-	set_choice( io_medium, tokens[1].c_str() );
-	io_medium->do_callback();
-	set_choice( io_dir, tokens[2].c_str() );
-	io_hz->value( strtod( tokens[3].c_str(), 0 ) );
+    generic_group->hide();
+    Fl_Group* g = 0;
+    n = -1;
 
-	if (tokens[1] == "file")
-	{
-	    io_file_name->value( tokens[4].c_str() );
-	    generic_group->hide();
-	}
-	else if (tokens[1] == "serial")
-	{
-	    serial_port->value( tokens[4].c_str() );
-	    serial_baud_rate->value( tokens[5].c_str() );
-	    generic_group->hide();
-	}
-	else if (tokens[1] == "socket")
-	{
-	    socket_host->value( tokens[4].c_str() );
-	    socket_port->value( atoi( tokens[5].c_str() ) );
-	    if (tokens[6] == "tcp")
-		socket_tcp->setonly();
-	    else
-		socket_udp->setonly();
+    if (tokens[1] == "file")
+    {
+	io_file_name->value( tokens[4].c_str() );
+	g = file_group;
+	n = 5;
+    }
+    else if (tokens[1] == "serial")
+    {
+	serial_port->value( tokens[4].c_str() );
+	serial_baud_rate->value( tokens[5].c_str() );
+	g = serial_group;
+	n = 6;
+    }
+    else if (tokens[1] == "socket")
+    {
+	socket_host->value( tokens[4].c_str() );
+	socket_port->value( atoi( tokens[5].c_str() ) );
+	if (tokens[6] == "tcp")
+	    socket_tcp->setonly();
+	else
+	    socket_udp->setonly();
 
-	    if (tokens[0] == "--generic")
-	    {
-		io_generic_file->value( tokens[7].c_str() );
+	g = socket_group;
+	n = 7;
+    }
 
-		generic_group->position( socket_group->x(),
-			     socket_group->y() + socket_group->h() );
-		generic_group->show();
-	    }
-	    else
-	    {
-		generic_group->hide();
-	    }
-	}
+    if (tokens[0] == "--generic" && g != 0)
+    {
+	io_generic_file->value( tokens[n].c_str() );
+
+	generic_group->position( g->x(), g->y() + g->h() );
+	generic_group->show();
     }
 }
 
@@ -121,9 +128,9 @@ Advanced::io_list_update_cb()
 {
     std::ostringstream oss;
 
-    // --PROTOCOL=file,DIR,HZ,FILENAME
-    // --PROTOCOL=serial,DIR,HZ,DEVICE,BAUD
-    // --PROTOCOL=socket,DIR,HZ,HOST,PORT,(tcp|udp)[,FILENAME]
+    // --PROTOCOL=file,DIR,HZ,FILENAME[,GENERIC]
+    // --PROTOCOL=serial,DIR,HZ,DEVICE,BAUD[,GENERIC]
+    // --PROTOCOL=socket,DIR,HZ,HOST,PORT,(tcp|udp)[,GENERIC]
 
     if (strcmp(io_medium->text(), "file") == 0)
     {
@@ -148,13 +155,13 @@ Advanced::io_list_update_cb()
 	    << "," << socket_host->value()
 	    << "," <<  int(socket_port->value())
 	    << (socket_tcp->value() ? ",tcp" : ",udp");
+    }
 
-	if (strcmp( io_protocol->text(), "generic" ) == 0)
-	{
-	    oss << ",";
-	    if (io_generic_file->size() > 0)
-		oss << io_generic_file->value();
-	}
+    if (strcmp( io_protocol->text(), "generic" ) == 0)
+    {
+	oss << ",";
+	if (io_generic_file->size() > 0)
+	    oss << io_generic_file->value();
     }
 
     int n = io_list->value();
@@ -167,31 +174,34 @@ Advanced::io_list_update_cb()
 void
 Advanced::io_medium_update_cb( Fl_Choice* o )
 {
+    file_group->hide();
+    serial_group->hide();
+    socket_group->hide();
+    generic_group->hide();
+    Fl_Group* g = 0;
+
     if (strcmp(o->text(), "file") == 0)
     {
 	file_group->show();
+	g = file_group;
 	menu_io_dir[2].deactivate();
-	serial_group->hide();
-	socket_group->hide();
-        generic_group->hide();
     }
     else if (strcmp(o->text(), "serial") == 0)
     {
-	file_group->hide();
 	serial_group->show();
-	socket_group->hide();
+	g = serial_group;
 	menu_io_dir[2].activate();
-        generic_group->hide();
     }
     else if (strcmp(o->text(), "socket") == 0)
     {
-	file_group->hide();
-	serial_group->hide();
 	socket_group->show();
+	g = socket_group;
 	menu_io_dir[2].activate();
+    }
 
-	generic_group->position( socket_group->x(),
-				 socket_group->y() + socket_group->h() );
+    if (strcmp( io_protocol->text(), "generic" ) == 0)
+    {
+	generic_group->position( g->x(), g->y() + g->h() );
 	generic_group->show();
     }
 
@@ -203,30 +213,33 @@ Advanced::io_protocol_update_cb()
 {
     io_list_update_cb();
 
-    if (strcmp( io_protocol->text(), "generic" ) == 0 &&
-	strcmp( io_medium->text(), "socket" ) == 0)
-    {
-        Fl_Group* group;
+    string protocol( io_protocol->text() );
 
-//         if (file_group->visible())
-//             group = file_group;
-//         else if (serial_group->visible())
-//             group = serial_group;
-//         else if (socket_group->visible())
-            group = socket_group;
-//         else
-//         {
-//             return;
-//         }
-
-	generic_group->position( socket_group->x(),
-				 socket_group->y() + socket_group->h() );
-	generic_group->show();
-    }
-    else
+    if (protocol != "generic")
     {
-        generic_group->hide();
+	generic_group->hide();
+	return;
     }
+
+    Fl_Group* g = 0;
+    string medium( io_medium->text() );
+
+    // Position the "generic" file selection below the last control.
+    if (medium == "file")
+    {
+	g = file_group;
+    }
+    else if (medium == "serial")
+    {
+	g = serial_group;
+    }
+    else if (medium == "socket")
+    {
+	g = socket_group;
+    }
+
+    generic_group->position( g->x(), g->y() + g->h() );
+    generic_group->show();
 }
 
 void

@@ -2,7 +2,7 @@
 version 1.0104 
 header_name {.h} 
 code_name {.cxx}
-decl {\#include <FL/Fl_Preferences.H>} {selected public
+decl {\#include <FL/Fl_Preferences.H>} {public
 } 
 
 decl {\#include <string>} {public
@@ -17,7 +17,7 @@ class Advanced {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {531 458 640 480} type Double labelsize 12
+      private xywh {574 47 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -643,8 +643,8 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output}
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label {Input/Output} open
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -769,8 +769,8 @@ else
           callback {io_list_update_cb();}
           private xywh {220 275 125 25} labelsize 12 minimum 1 maximum 1000 value 5 textsize 12 deactivate
         }
-        Fl_Group file_group {
-          private xywh {150 305 225 25}
+        Fl_Group file_group {open
+          private xywh {150 305 225 25} hide
         } {
           Fl_Input io_file_name {
             label {File:}
@@ -783,7 +783,7 @@ else
             private xywh {350 305 25 25} labelsize 12
           }
         }
-        Fl_Group serial_group {open
+        Fl_Group serial_group {
           private xywh {150 305 225 55} hide
         } {
           Fl_Input serial_port {
@@ -821,11 +821,11 @@ else
             private xywh {290 365 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
         }
-        Fl_Group generic_group {open
+        Fl_Group generic_group {selected
           private xywh {150 365 225 25} hide
         } {
           Fl_Input io_generic_file {
-            label {File:}
+            label {Generic:}
             callback {io_list_update_cb();}
             private xywh {220 365 125 25} labelsize 12 textsize 12
           }
@@ -1050,7 +1050,7 @@ else
       }
       Fl_Group {page[13]} {
         label Weather
-        private xywh {150 0 490 430} labelfont 1 align 21
+        private xywh {150 0 490 430} labelfont 1 align 21 hide
       } {
         Fl_Value_Input wind_speed {
           label {Speed (kts):}
