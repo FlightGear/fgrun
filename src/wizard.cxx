@@ -87,6 +87,163 @@ void Wizard::cb_Advanced(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Advanced_i(o,v);
 }
 
+inline void Wizard::cb_resolution_i(Fl_Choice*, void*) {
+  resolution_cb();
+}
+void Wizard::cb_resolution(Fl_Choice* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_resolution_i(o,v);
+}
+
+Fl_Menu_Item Wizard::menu_resolution[] = {
+ {"640x480", 0,  0, 0, 0, 0, 0, 14, 56},
+ {"800x600", 0,  0, 0, 0, 0, 0, 14, 56},
+ {"1024x768", 0,  0, 0, 0, 0, 0, 14, 56},
+ {"1280x1024", 0,  0, 0, 0, 0, 0, 14, 56},
+ {"1600x1200", 0,  0, 0, 0, 0, 0, 14, 56},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+inline void Wizard::cb_game_mode_i(Fl_Check_Button*, void*) {
+  game_mode_cb();
+}
+void Wizard::cb_game_mode(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_game_mode_i(o,v);
+}
+
+inline void Wizard::cb_horizon_effect_i(Fl_Check_Button*, void*) {
+  horizon_effect_cb();
+}
+void Wizard::cb_horizon_effect(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_horizon_effect_i(o,v);
+}
+
+inline void Wizard::cb_enhanced_lighting_i(Fl_Check_Button*, void*) {
+  enhanced_lighting_cb();
+}
+void Wizard::cb_enhanced_lighting(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_enhanced_lighting_i(o,v);
+}
+
+inline void Wizard::cb_specular_highlight_i(Fl_Check_Button*, void*) {
+  specular_highlight_cb();
+}
+void Wizard::cb_specular_highlight(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_specular_highlight_i(o,v);
+}
+
+inline void Wizard::cb_clouds_3d_i(Fl_Check_Button*, void*) {
+  clouds_3d_cb();
+}
+void Wizard::cb_clouds_3d(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_clouds_3d_i(o,v);
+}
+
+inline void Wizard::cb_random_objects_i(Fl_Check_Button*, void*) {
+  random_objects_cb();
+}
+void Wizard::cb_random_objects(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_random_objects_i(o,v);
+}
+
+inline void Wizard::cb_ai_models_i(Fl_Check_Button*, void*) {
+  ai_models_cb();
+}
+void Wizard::cb_ai_models(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_ai_models_i(o,v);
+}
+
+inline void Wizard::cb_time_of_day_i(Fl_Check_Button*, void*) {
+  time_of_day_cb();
+}
+void Wizard::cb_time_of_day(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_time_of_day_i(o,v);
+}
+
+inline void Wizard::cb_time_of_day_value_i(Fl_Choice*, void*) {
+  time_of_day_value_cb();
+}
+void Wizard::cb_time_of_day_value(Fl_Choice* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_time_of_day_value_i(o,v);
+}
+
+Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
+ {"noon", 0,  0, 0, 0, 0, 0, 14, 56},
+ {"dusk", 0,  0, 0, 0, 0, 0, 14, 56},
+ {"midnight", 0,  0, 0, 0, 0, 0, 14, 56},
+ {"dawn", 0,  0, 0, 0, 0, 0, 14, 56},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+inline void Wizard::cb_real_weather_fetch_i(Fl_Check_Button*, void*) {
+  real_weather_fetch_cb();
+}
+void Wizard::cb_real_weather_fetch(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_real_weather_fetch_i(o,v);
+}
+
+inline void Wizard::cb_auto_coordination_i(Fl_Check_Button*, void*) {
+  auto_coordination_cb();
+}
+void Wizard::cb_auto_coordination(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_auto_coordination_i(o,v);
+}
+
+inline void Wizard::cb_atlas_i(Fl_Check_Button*, void*) {
+  atlas_cb();
+}
+void Wizard::cb_atlas(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_atlas_i(o,v);
+}
+
+inline void Wizard::cb_atlas_host_i(Fl_Input*, void*) {
+  atlas_host_cb();
+}
+void Wizard::cb_atlas_host(Fl_Input* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_atlas_host_i(o,v);
+}
+
+inline void Wizard::cb_atlas_port_i(Fl_Value_Input*, void*) {
+  atlas_port_cb();
+}
+void Wizard::cb_atlas_port(Fl_Value_Input* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_atlas_port_i(o,v);
+}
+
+inline void Wizard::cb_multiplay_i(Fl_Check_Button*, void*) {
+  multiplay_cb();
+}
+void Wizard::cb_multiplay(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_i(o,v);
+}
+
+inline void Wizard::cb_multiplay_callsign_i(Fl_Input*, void*) {
+  multiplay_callsign_cb();
+}
+void Wizard::cb_multiplay_callsign(Fl_Input* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_callsign_i(o,v);
+}
+
+inline void Wizard::cb_multiplay_host_i(Fl_Input*, void*) {
+  multiplay_host_cb();
+}
+void Wizard::cb_multiplay_host(Fl_Input* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_host_i(o,v);
+}
+
+inline void Wizard::cb_multiplay_in_i(Fl_Value_Input*, void*) {
+  multiplay_in_cb();
+}
+void Wizard::cb_multiplay_in(Fl_Value_Input* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_in_i(o,v);
+}
+
+inline void Wizard::cb_multiplay_out_i(Fl_Value_Input*, void*) {
+  multiplay_out_cb();
+}
+void Wizard::cb_multiplay_out(Fl_Value_Input* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_out_i(o,v);
+}
+
 inline void Wizard::cb_next_i(Fl_Button*, void*) {
   next_cb();
 }
@@ -146,7 +303,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->callback((Fl_Callback*)cb_1);
           o->image(folder_open_pixmap);
         }
-        { Fl_Browser* o = scenery_dir_list_ = new Fl_Browser(130, 275, 335, 55, "FG_SCENERY:");
+        { Fl_Browser* o = scenery_dir_list_ = new Fl_Browser(130, 275, 335, 65, "FG_SCENERY:");
           o->tooltip("Scenery directories");
           o->type(2);
           o->labelsize(12);
@@ -155,16 +312,22 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->align(FL_ALIGN_LEFT);
           Fl_Group::current()->resizable(o);
         }
-        { Fl_Group* o = new Fl_Group(470, 275, 25, 60);
-          { Fl_Button* o = scenery_dir_up_ = new Fl_Button(470, 275, 25, 25, "@8>");
+        { Fl_Group* o = new Fl_Group(470, 275, 25, 30);
+          { Fl_Button* o = scenery_dir_up_ = new Fl_Button(470, 280, 25, 25, "@8>");
             o->callback((Fl_Callback*)cb_scenery_dir_up_);
             o->deactivate();
           }
-          { Fl_Button* o = scenery_dir_down_ = new Fl_Button(470, 305, 25, 25, "@2>");
+          { Fl_Box* o = new Fl_Box(470, 275, 25, 5);
+            Fl_Group::current()->resizable(o);
+          }
+          o->end();
+        }
+        { Fl_Group* o = new Fl_Group(470, 305, 25, 35);
+          { Fl_Button* o = scenery_dir_down_ = new Fl_Button(470, 310, 25, 25, "@2>");
             o->callback((Fl_Callback*)cb_scenery_dir_down_);
             o->deactivate();
           }
-          { Fl_Box* o = new Fl_Box(470, 330, 25, 5);
+          { Fl_Box* o = new Fl_Box(470, 335, 25, 5);
             Fl_Group::current()->resizable(o);
           }
           o->end();
@@ -248,8 +411,13 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->end();
       }
       { Fl_Group* o = page[3] = new Fl_Group(0, 0, 640, 440);
-        { Fl_Group* o = new Fl_Group(0, 380, 640, 25);
-          { Fl_Button* o = new Fl_Button(545, 380, 90, 25, "Advanced...");
+        { Fl_Output* o = text2 = new Fl_Output(0, 0, 640, 350);
+          o->type(12);
+          o->box(FL_THIN_DOWN_BOX);
+          o->hide();
+        }
+        { Fl_Group* o = new Fl_Group(0, 380, 640, 50);
+          { Fl_Button* o = new Fl_Button(545, 405, 90, 25, "Advanced...");
             o->callback((Fl_Callback*)cb_Advanced);
           }
           { Fl_Box* o = new Fl_Box(0, 380, 545, 25);
@@ -257,14 +425,132 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           }
           o->end();
         }
-        { Fl_Scroll* o = new Fl_Scroll(0, 0, 640, 350);
-          { Fl_Output* o = text = new Fl_Output(0, 0, 640, 350);
-            o->type(12);
-            o->box(FL_THIN_DOWN_BOX);
+        { Fl_Text_Display* o = text = new Fl_Text_Display(5, 250, 630, 145);
+          o->box(FL_THIN_DOWN_BOX);
+          o->align(FL_ALIGN_LEFT);
+          Fl_Group::current()->resizable(o);
+        }
+        { Fl_Group* o = new Fl_Group(5, 5, 630, 85, "Display");
+          o->box(FL_ENGRAVED_FRAME);
+          o->labelfont(1);
+          o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+          { Fl_Choice* o = resolution = new Fl_Choice(100, 30, 125, 25, "Resolution :");
+            o->down_box(FL_BORDER_BOX);
+            o->callback((Fl_Callback*)cb_resolution);
+            o->menu(menu_resolution);
+          }
+          { Fl_Check_Button* o = game_mode = new Fl_Check_Button(25, 60, 210, 20, "Game mode ( Fullscreen )");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_game_mode);
+          }
+          { Fl_Check_Button* o = horizon_effect = new Fl_Check_Button(250, 10, 170, 20, "Horizon effect");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_horizon_effect);
+          }
+          { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(250, 35, 170, 20, "Enhanced lighting");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_enhanced_lighting);
+          }
+          { Fl_Check_Button* o = specular_highlight = new Fl_Check_Button(250, 60, 170, 20, "Specular highlight");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_specular_highlight);
+          }
+          { Fl_Box* o = new Fl_Box(610, 80, 25, 10);
+            Fl_Group::current()->resizable(o);
+          }
+          { Fl_Check_Button* o = clouds_3d = new Fl_Check_Button(425, 10, 205, 20, "3D clouds (experimental)");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_clouds_3d);
+          }
+          o->end();
+        }
+        { Fl_Group* o = new Fl_Group(5, 95, 630, 85, "Features");
+          o->box(FL_ENGRAVED_FRAME);
+          o->labelfont(1);
+          o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+          { Fl_Check_Button* o = random_objects = new Fl_Check_Button(25, 125, 180, 25, "Random objects");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_random_objects);
+          }
+          { Fl_Check_Button* o = ai_models = new Fl_Check_Button(25, 150, 180, 25, "AI models");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_ai_models);
+          }
+          { Fl_Check_Button* o = time_of_day = new Fl_Check_Button(250, 100, 120, 25, "Time of day :");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_time_of_day);
+          }
+          { Fl_Choice* o = time_of_day_value = new Fl_Choice(375, 100, 115, 25);
+            o->down_box(FL_BORDER_BOX);
+            o->callback((Fl_Callback*)cb_time_of_day_value);
+            o->menu(menu_time_of_day_value);
+          }
+          { Fl_Check_Button* o = real_weather_fetch = new Fl_Check_Button(250, 125, 180, 25, "Real weather fetch");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_real_weather_fetch);
+          }
+          { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(250, 150, 180, 25, "Auto-coordination");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_auto_coordination);
+          }
+          { Fl_Box* o = new Fl_Box(605, 170, 30, 10);
             Fl_Group::current()->resizable(o);
           }
           o->end();
-          Fl_Group::current()->resizable(o);
+        }
+        { Fl_Group* o = new Fl_Group(5, 185, 630, 60);
+          { Fl_Group* o = atlas_group = new Fl_Group(5, 185, 245, 60);
+            o->box(FL_ENGRAVED_FRAME);
+            o->labeltype(FL_SHADOW_LABEL);
+            o->labelfont(1);
+            o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+            { Fl_Check_Button* o = atlas = new Fl_Check_Button(10, 190, 70, 25, "Atlas");
+              o->down_box(FL_DOWN_BOX);
+              o->labelfont(1);
+              o->callback((Fl_Callback*)cb_atlas);
+            }
+            { Fl_Input* o = atlas_host = new Fl_Input(95, 215, 85, 25, "Hostname :");
+              o->tooltip("Hostname");
+              o->callback((Fl_Callback*)cb_atlas_host);
+              o->when(FL_WHEN_CHANGED);
+              Fl_Group::current()->resizable(o);
+            }
+            { Fl_Value_Input* o = atlas_port = new Fl_Value_Input(190, 215, 50, 25, ":");
+              o->callback((Fl_Callback*)cb_atlas_port);
+            }
+            o->end();
+          }
+          { Fl_Group* o = multiplay_group = new Fl_Group(255, 185, 380, 60);
+            o->box(FL_ENGRAVED_FRAME);
+            { Fl_Check_Button* o = multiplay = new Fl_Check_Button(260, 190, 110, 25, "Multiplayer");
+              o->down_box(FL_DOWN_BOX);
+              o->labelfont(1);
+              o->callback((Fl_Callback*)cb_multiplay);
+            }
+            { Fl_Input* o = multiplay_callsign = new Fl_Input(480, 190, 145, 25, "Callsign :");
+              o->callback((Fl_Callback*)cb_multiplay_callsign);
+              o->when(FL_WHEN_CHANGED);
+            }
+            { Fl_Input* o = multiplay_host = new Fl_Input(345, 215, 95, 25, "Hostname :");
+              o->tooltip("Peer hostname");
+              o->callback((Fl_Callback*)cb_multiplay_host);
+              o->when(FL_WHEN_CHANGED);
+            }
+            { Fl_Value_Input* o = multiplay_in = new Fl_Value_Input(480, 215, 50, 25, "in :");
+              o->tooltip("Input port number");
+              o->callback((Fl_Callback*)cb_multiplay_in);
+            }
+            { Fl_Value_Input* o = multiplay_out = new Fl_Value_Input(575, 215, 50, 25, "out :");
+              o->tooltip("Output port number");
+              o->callback((Fl_Callback*)cb_multiplay_out);
+            }
+            { Fl_Box* o = new Fl_Box(625, 190, 10, 50);
+              Fl_Group::current()->resizable(o);
+            }
+            o->end();
+            Fl_Group::current()->resizable(o);
+          }
+          o->end();
         }
         o->end();
       }

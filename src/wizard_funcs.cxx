@@ -146,6 +146,7 @@ Wizard::init( bool fullscreen )
     }
 
     win->size_range( 640, 480 );
+    text->buffer( new Fl_Text_Buffer );
 
     logwin = new LogWindow( 640, 480, "Log Window" );
 
@@ -353,6 +354,8 @@ Wizard::next_cb()
 	if (rwy.empty())
 	    rwy = "<default>";
 	prefs.set( "runway", rwy.c_str() );
+
+	update_basic_options();
     }
     else if (wiz->value() == page[3])
     {
@@ -388,7 +391,7 @@ Wizard::next_cb()
 	std::ostringstream ostr;
 	ostr << fg_exe_->value() << "\n  ";
 	write_fgfsrc( ostr, "\n  " );
-	text->value( ostr.str().c_str() );
+	text->buffer()->text( ostr.str().c_str() );
 	next->label( "Run" );
     }
 }
@@ -491,11 +494,13 @@ Wizard::advanced_cb()
     {
     }
 
+    update_basic_options();
+
     // Update command text.
     std::ostringstream ostr;
     ostr << fg_exe_->value() << "\n  ";
     write_fgfsrc( ostr, "\n  " );
-    text->value( ostr.str().c_str() );
+    text->buffer()->text( ostr.str().c_str() );
 }
 
 void
@@ -777,4 +782,528 @@ Wizard::refresh_airports()
 
     string cache( cache_file_->value() );
     airports_->load_airports( v, cache, airports_cb, this );
+}
+
+void
+Wizard::update_options()
+{
+    // Update command text.
+    std::ostringstream ostr;
+    ostr << fg_exe_->value() << "\n  ";
+    write_fgfsrc( ostr, "\n  " );
+    text->buffer()->text( ostr.str().c_str() );
+}
+
+void
+Wizard::resolution_cb()
+{
+    prefs.set("geometry", resolution->text());
+    update_options();
+}
+
+void
+Wizard::game_mode_cb()
+{
+    prefs.set("game_mode", game_mode->value());
+    update_options();
+}
+
+void
+Wizard::horizon_effect_cb()
+{
+    prefs.set("horizon_effect", horizon_effect->value());
+    update_options();
+}
+
+void
+Wizard::enhanced_lighting_cb()
+{
+    prefs.set("enhanced_lighting", enhanced_lighting->value());
+    update_options();
+}
+
+void
+Wizard::specular_highlight_cb()
+{
+    prefs.set("specular_highlight", specular_highlight->value());
+    update_options();
+}
+
+void
+Wizard::clouds_3d_cb()
+{
+    prefs.set("clouds3d", clouds_3d->value());
+    update_options();
+}
+
+void
+Wizard::random_objects_cb()
+{
+    prefs.set("random_objects", random_objects->value());
+    update_options();
+}
+
+void
+Wizard::ai_models_cb()
+{
+    prefs.set("ai_models", ai_models->value());
+    update_options();
+}
+
+void
+Wizard::time_of_day_cb()
+{
+    int v = time_of_day->value();
+    if ( v == 0 )
+    {
+	time_of_day_value->deactivate();
+	prefs.set("time-match-real", 1);
+    }
+    else
+    {
+	time_of_day_value->activate();
+	prefs.set("time-match-real", 0);
+	prefs.set("time-match-local", 0);
+	prefs.set("start-date-sys", 0);
+	prefs.set("start-date-gmt", 0);
+	prefs.set("start-date-lat", 0);
+    }
+    prefs.set("time_of_day", v);
+    update_options();
+}
+
+void
+Wizard::time_of_day_value_cb()
+{
+    prefs.set("time_of_day_value", time_of_day_value->text());
+    update_options();
+}
+
+void
+Wizard::real_weather_fetch_cb()
+{
+    prefs.set("fetch_real_weather", real_weather_fetch->value());
+    update_options();
+}
+
+void
+Wizard::auto_coordination_cb()
+{
+    prefs.set("auto_coordination", auto_coordination->value());
+    update_options();
+}
+
+void
+Wizard::atlas_cb()
+{
+    int v = atlas->value();
+    if ( v == 0 )
+    {
+	atlas_host->deactivate();
+	atlas_port->deactivate();
+	std::vector<string> io_list;
+	int i, iVal;
+	prefs.get("io-count", iVal, 0);
+	for ( i = 1; i <= iVal; ++i )
+	{
+	    char buf[256];
+	    prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+	    string item( buf );
+	    if ( item.length() < 8 || item.substr( 0, 8 ) != "--atlas=" )
+	    {
+		io_list.push_back(buf);
+	    }
+	}
+	prefs.set("io-count",(int)io_list.size());
+	for ( i = 0; i < io_list.size(); ++i )
+	{
+	    prefs.set( Fl_Preferences::Name( "io-item-%d", i+1 ), io_list[i].c_str());
+	}
+    }
+    else
+    {
+	atlas_host->activate();
+	atlas_port->activate();
+	int i, iVal, loc = 0;
+	prefs.get("io-count", iVal, 0);
+	for ( i = 1; i <= iVal; ++i )
+	{
+	    char buf[256];
+	    prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+	    string item( buf );
+	    if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
+	    {
+		loc = i;
+		break;
+	    }
+	}
+	string host = atlas_host->value();
+	if ( host.empty() )
+	    host = "localhost";
+	int port = (int)atlas_port->value();
+	if ( port == 0 )
+	    port = 5500;
+	atlas_port->value(port);
+	std::ostringstream opt;
+	opt << "--atlas=socket,out,5," << host << "," << port << ",udp";
+	if ( loc == 0 )
+	{
+	    loc = iVal + 1;
+	    prefs.set("io-count",loc);
+	}
+	prefs.set( Fl_Preferences::Name( "io-item-%d", loc ), opt.str().c_str() );
+    }
+    update_options();
+}
+
+void
+Wizard::atlas_host_cb()
+{
+    int i, iVal, loc = 0;
+    prefs.get("io-count", iVal, 0);
+    for ( i = 1; i <= iVal; ++i )
+    {
+	char buf[256];
+	prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+	string item( buf );
+	if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
+	{
+	    loc = i;
+	    break;
+	}
+    }
+    string host = atlas_host->value();
+    if ( host.empty() )
+	host = "localhost";
+    int port = (int)atlas_port->value();
+    if ( port == 0 )
+	port = 5500;
+    atlas_port->value(port);
+    std::ostringstream opt;
+    opt << "--atlas=socket,out,5," << host << "," << port << ",udp";
+    if ( loc == 0 )
+    {
+	loc = iVal + 1;
+	prefs.set("io-count",loc);
+    }
+    prefs.set( Fl_Preferences::Name( "io-item-%d", loc ), opt.str().c_str() );
+    update_options();
+}
+
+void
+Wizard::atlas_port_cb()
+{
+    int i, iVal, loc = 0;
+    prefs.get("io-count", iVal, 0);
+    for ( i = 1; i <= iVal; ++i )
+    {
+	char buf[256];
+	prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+	string item( buf );
+	if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
+	{
+	    loc = i;
+	    break;
+	}
+    }
+    string host = atlas_host->value();
+    if ( host.empty() )
+	host = "localhost";
+    int port = (int)atlas_port->value();
+    if ( port == 0 )
+	port = 5500;
+    std::ostringstream opt;
+    opt << "--atlas=socket,out,5," << host << "," << port << ",udp";
+    if ( loc == 0 )
+    {
+	loc = iVal + 1;
+	prefs.set("io-count",loc);
+    }
+    prefs.set( Fl_Preferences::Name( "io-item-%d", loc ), opt.str().c_str() );
+    update_options();
+}
+
+void
+Wizard::multiplay_cb()
+{
+    int v = multiplay->value();
+    if ( v == 0 )
+    {
+	multiplay_callsign->deactivate();
+	multiplay_host->deactivate();
+	multiplay_in->deactivate();
+	multiplay_out->deactivate();
+	prefs.set("callsign","");
+	prefs.set("multiplay1","");
+	prefs.set("multiplay2","");
+    }
+    else
+    {
+	multiplay_callsign->activate();
+	multiplay_host->activate();
+	multiplay_in->activate();
+	multiplay_out->activate();
+
+	string callsign = multiplay_callsign->value();
+	string host = multiplay_host->value();
+	int in = (int)multiplay_in->value();
+	int out = (int)multiplay_out->value();
+
+	prefs.set("callsign",callsign.c_str());
+	std::ostringstream str;
+	str << "out,10," << host << "," << out;
+	prefs.set("multiplay1",str.str().c_str());
+	str.str("");
+	str << "in,10,localhost," << in;
+	prefs.set("multiplay2",str.str().c_str());
+    }
+    update_options();
+}
+
+void
+Wizard::multiplay_callsign_cb()
+{
+    string callsign = multiplay_callsign->value();
+    string host = multiplay_host->value();
+    int in = (int)multiplay_in->value();
+    int out = (int)multiplay_out->value();
+
+    prefs.set("callsign",callsign.c_str());
+    std::ostringstream str;
+    str << "out,10," << host << "," << out;
+    prefs.set("multiplay1",str.str().c_str());
+    str.str("");
+    str << "in,10,localhost," << in;
+    prefs.set("multiplay2",str.str().c_str());
+    update_options();
+}
+
+void
+Wizard::multiplay_host_cb()
+{
+    string callsign = multiplay_callsign->value();
+    string host = multiplay_host->value();
+    int in = (int)multiplay_in->value();
+    int out = (int)multiplay_out->value();
+
+    prefs.set("callsign",callsign.c_str());
+    std::ostringstream str;
+    str << "out,10," << host << "," << out;
+    prefs.set("multiplay1",str.str().c_str());
+    str.str("");
+    str << "in,10,localhost," << in;
+    prefs.set("multiplay2",str.str().c_str());
+    update_options();
+}
+
+void
+Wizard::multiplay_in_cb()
+{
+    string callsign = multiplay_callsign->value();
+    string host = multiplay_host->value();
+    int in = (int)multiplay_in->value();
+    int out = (int)multiplay_out->value();
+
+    prefs.set("callsign",callsign.c_str());
+    std::ostringstream str;
+    str << "out,10," << host << "," << out;
+    prefs.set("multiplay1",str.str().c_str());
+    str.str("");
+    str << "in,10,localhost," << in;
+    prefs.set("multiplay2",str.str().c_str());
+    update_options();
+}
+
+void
+Wizard::multiplay_out_cb()
+{
+    string callsign = multiplay_callsign->value();
+    string host = multiplay_host->value();
+    int in = (int)multiplay_in->value();
+    int out = (int)multiplay_out->value();
+
+    prefs.set("callsign",callsign.c_str());
+    std::ostringstream str;
+    str << "out,10," << host << "," << out;
+    prefs.set("multiplay1",str.str().c_str());
+    str.str("");
+    str << "in,10,localhost," << in;
+    prefs.set("multiplay2",str.str().c_str());
+    update_options();
+}
+
+void
+Wizard::update_basic_options()
+{
+    const int buflen = 256;
+    char buf[ buflen ];
+
+    prefs.get("geometry", buf, "", buflen-1);
+    int i;
+    for ( i = 0; menu_resolution[i].text != 0; i++ )
+    {
+	if ( strcmp( buf, menu_resolution[i].text ) == 0 )
+	{
+	    resolution->value(i);
+	    break;
+	}
+    }
+    if ( menu_resolution[i].text == 0 )
+    {
+	const char *t = resolution->text(i);
+	if ( t == 0 )
+	    resolution->add( buf );
+	else if ( strcmp( t, buf ) != 0 )
+	{
+	    resolution->remove(i);
+	    resolution->add( buf );
+	}
+	resolution->value(i);
+    }
+
+    int iVal;
+    prefs.get("game_mode", iVal, 0);
+    game_mode->value(iVal);
+    prefs.get("horizon_effect", iVal, 0);
+    horizon_effect->value(iVal);
+    prefs.get("enhanced_lighting", iVal, 0);
+    enhanced_lighting->value(iVal);
+    prefs.get("specular_highlight", iVal, 0);
+    specular_highlight->value(iVal);
+    prefs.get("clouds3d", iVal, 0);
+    clouds_3d->value(iVal);
+    prefs.get("random_objects", iVal, 0);
+    random_objects->value(iVal);
+    prefs.get("ai_models", iVal, 0);
+    ai_models->value(iVal);
+    prefs.get("time_of_day", iVal, 0);
+    time_of_day->value(iVal);
+    prefs.get("time_of_day_value", buf, "noon", buflen-1);
+    time_of_day_value->value(0);
+    for ( i = 0; menu_time_of_day_value[i].text != 0; i++ )
+    {
+	if ( strcmp( buf, menu_time_of_day_value[i].text ) == 0 )
+	{
+	    time_of_day_value->value(i);
+	    break;
+	}
+    }
+    prefs.get("fetch_real_weather", iVal, 0);
+    real_weather_fetch->value(iVal);
+    prefs.get("auto_coordination", iVal, 0);
+    auto_coordination->value(iVal);
+
+    atlas->value(0);
+    atlas_host->value("");
+    atlas_host->deactivate();
+    atlas_port->value(0);
+    atlas_port->deactivate();
+    prefs.get("io-count", iVal, 0);
+    for ( i = 1; i <= iVal; ++i )
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("io-item-%d", i), buf, "", buflen-1 );
+	string item( buf );
+	if ( item.length() > 19 && item.substr( 0, 19 ) == "--atlas=socket,out," )
+	{
+	    item.erase( 0, 19 );
+	    string::size_type p = item.find( ',' );
+	    if ( p != string::npos )
+	    {
+		item.erase( 0, p+1 );
+		p = item.find( ',' );
+		if ( p != string::npos )
+		{
+		    string host = item.substr(0, p);
+		    item.erase( 0, p+1 );
+		    p = item.find( ',' );
+		    if ( p != string::npos )
+		    {
+			string port = item.substr(0, p);
+			item.erase(0, p+1);
+			if ( item == "udp" )
+			{
+			    atlas->value(1);
+			    atlas_host->value( host.c_str() );
+			    atlas_port->value( atoi( port.c_str() ) );
+			    atlas_host->activate();
+			    atlas_port->activate();
+			}
+		    }
+		}
+	    }
+	}
+    }
+
+    multiplay->value(0);
+    multiplay_callsign->value("");
+    multiplay_host->value("");
+    multiplay_in->value(0);
+    multiplay_out->value(0);
+    multiplay_callsign->deactivate();
+    multiplay_host->deactivate();
+    multiplay_in->deactivate();
+    multiplay_out->deactivate();
+
+    prefs.get("callsign", buf, "", buflen-1 );
+    string callsign(buf);
+    prefs.get("multiplay1", buf, "", buflen-1 );
+    string multiplay1(buf);
+    prefs.get("multiplay2", buf, "", buflen-1 );
+    string multiplay2(buf);
+
+    if ( callsign.size() && multiplay1.size() && multiplay2.size() );
+    {
+	if ( multiplay1.size() >= 3 && multiplay2.size() >= 3 )
+	{
+	    if ( multiplay1.substr(0,3) != "out" || multiplay2.substr(0,3) != "in," )
+	    {
+		string tmp = multiplay1;
+		multiplay1 = multiplay2;
+		multiplay2 = tmp;
+	    }
+	    if ( multiplay1.substr(0,3) == "out" && multiplay2.substr(0,3) == "in," )
+	    {
+		if ( multiplay1.size() >= 4 )
+		{
+		    multiplay1.erase(0, 4);
+		    multiplay2.erase(0, 3);
+
+		    string::size_type p = multiplay1.find(',');
+		    if ( p != string::npos )
+		    {
+			multiplay1.erase(0, p+1);
+			p = multiplay2.find(',');
+			if ( p != string::npos )
+			{
+			    multiplay2.erase(0, p+1);
+			    p = multiplay1.find(',');
+			    if ( p != string::npos )
+			    {
+				string host = multiplay1.substr(0, p);
+				multiplay1.erase(0, p+1);
+				p = multiplay2.find(',');
+				if ( p != string::npos )
+				{
+				    multiplay2.erase(0, p+1);
+				    int out = atoi(multiplay1.c_str());
+				    int in = atoi(multiplay2.c_str());
+
+				    multiplay->value(1);
+				    multiplay_callsign->value(callsign.c_str());
+				    multiplay_callsign->activate();
+				    multiplay_host->value(host.c_str());
+				    multiplay_host->activate();
+				    multiplay_in->value(in);
+				    multiplay_in->activate();
+				    multiplay_out->value(out);
+				    multiplay_out->activate();
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
+    }
 }

@@ -20,7 +20,10 @@ class LogWindow;
 #include <FL/Fl_Tile.H>
 #include "Fl_Plib.h"
 #include "AirportBrowser.h"
-#include <FL/Fl_Scroll.H>
+#include <FL/Fl_Text_Display.H>
+#include <FL/Fl_Choice.H>
+#include <FL/Fl_Check_Button.H>
+#include <FL/Fl_Value_Input.H>
 
 class Wizard {
 public:
@@ -62,9 +65,74 @@ private:
   static void cb_aircraft(Fl_Browser*, void*);
   Fl_Plib *preview;
   AirportBrowser *airports_;
+  Fl_Output *text2;
   inline void cb_Advanced_i(Fl_Button*, void*);
   static void cb_Advanced(Fl_Button*, void*);
-  Fl_Output *text;
+  Fl_Text_Display *text;
+  Fl_Choice *resolution;
+  inline void cb_resolution_i(Fl_Choice*, void*);
+  static void cb_resolution(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_resolution[];
+  Fl_Check_Button *game_mode;
+  inline void cb_game_mode_i(Fl_Check_Button*, void*);
+  static void cb_game_mode(Fl_Check_Button*, void*);
+  Fl_Check_Button *horizon_effect;
+  inline void cb_horizon_effect_i(Fl_Check_Button*, void*);
+  static void cb_horizon_effect(Fl_Check_Button*, void*);
+  Fl_Check_Button *enhanced_lighting;
+  inline void cb_enhanced_lighting_i(Fl_Check_Button*, void*);
+  static void cb_enhanced_lighting(Fl_Check_Button*, void*);
+  Fl_Check_Button *specular_highlight;
+  inline void cb_specular_highlight_i(Fl_Check_Button*, void*);
+  static void cb_specular_highlight(Fl_Check_Button*, void*);
+  Fl_Check_Button *clouds_3d;
+  inline void cb_clouds_3d_i(Fl_Check_Button*, void*);
+  static void cb_clouds_3d(Fl_Check_Button*, void*);
+  Fl_Check_Button *random_objects;
+  inline void cb_random_objects_i(Fl_Check_Button*, void*);
+  static void cb_random_objects(Fl_Check_Button*, void*);
+  Fl_Check_Button *ai_models;
+  inline void cb_ai_models_i(Fl_Check_Button*, void*);
+  static void cb_ai_models(Fl_Check_Button*, void*);
+  Fl_Check_Button *time_of_day;
+  inline void cb_time_of_day_i(Fl_Check_Button*, void*);
+  static void cb_time_of_day(Fl_Check_Button*, void*);
+  Fl_Choice *time_of_day_value;
+  inline void cb_time_of_day_value_i(Fl_Choice*, void*);
+  static void cb_time_of_day_value(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_time_of_day_value[];
+  Fl_Check_Button *real_weather_fetch;
+  inline void cb_real_weather_fetch_i(Fl_Check_Button*, void*);
+  static void cb_real_weather_fetch(Fl_Check_Button*, void*);
+  Fl_Check_Button *auto_coordination;
+  inline void cb_auto_coordination_i(Fl_Check_Button*, void*);
+  static void cb_auto_coordination(Fl_Check_Button*, void*);
+  Fl_Group *atlas_group;
+  Fl_Check_Button *atlas;
+  inline void cb_atlas_i(Fl_Check_Button*, void*);
+  static void cb_atlas(Fl_Check_Button*, void*);
+  Fl_Input *atlas_host;
+  inline void cb_atlas_host_i(Fl_Input*, void*);
+  static void cb_atlas_host(Fl_Input*, void*);
+  Fl_Value_Input *atlas_port;
+  inline void cb_atlas_port_i(Fl_Value_Input*, void*);
+  static void cb_atlas_port(Fl_Value_Input*, void*);
+  Fl_Group *multiplay_group;
+  Fl_Check_Button *multiplay;
+  inline void cb_multiplay_i(Fl_Check_Button*, void*);
+  static void cb_multiplay(Fl_Check_Button*, void*);
+  Fl_Input *multiplay_callsign;
+  inline void cb_multiplay_callsign_i(Fl_Input*, void*);
+  static void cb_multiplay_callsign(Fl_Input*, void*);
+  Fl_Input *multiplay_host;
+  inline void cb_multiplay_host_i(Fl_Input*, void*);
+  static void cb_multiplay_host(Fl_Input*, void*);
+  Fl_Value_Input *multiplay_in;
+  inline void cb_multiplay_in_i(Fl_Value_Input*, void*);
+  static void cb_multiplay_in(Fl_Value_Input*, void*);
+  Fl_Value_Input *multiplay_out;
+  inline void cb_multiplay_out_i(Fl_Value_Input*, void*);
+  static void cb_multiplay_out(Fl_Value_Input*, void*);
 public:
   Fl_Group *page[5];
 private:
@@ -115,5 +183,27 @@ private:
   Fl_Preferences prefs;
   LogWindow* logwin;
   Fl_Pixmap folder_open_pixmap;
+  void update_options();
+  void resolution_cb();
+  void game_mode_cb();
+  void horizon_effect_cb();
+  void enhanced_lighting_cb();
+  void specular_highlight_cb();
+  void clouds_3d_cb();
+  void random_objects_cb();
+  void ai_models_cb();
+  void time_of_day_cb();
+  void time_of_day_value_cb();
+  void real_weather_fetch_cb();
+  void auto_coordination_cb();
+  void atlas_cb();
+  void atlas_host_cb();
+  void atlas_port_cb();
+  void multiplay_cb();
+  void multiplay_callsign_cb();
+  void multiplay_host_cb();
+  void multiplay_in_cb();
+  void multiplay_out_cb();
+  void update_basic_options();
 };
 #endif

@@ -32,7 +32,7 @@ class Wizard {open
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths}
+          label {Select Paths} open
           xywh {0 0 640 440} labelfont 1 align 21 hide
         } {
           Fl_Help_View about_ {
@@ -61,23 +61,30 @@ class Wizard {open
           Fl_Browser scenery_dir_list_ {
             label {FG_SCENERY:}
             callback {scenery_dir_select_cb();}
-            private tooltip {Scenery directories} xywh {130 275 335 55} type Hold labelsize 12 align 4 textsize 12 resizable
+            private tooltip {Scenery directories} xywh {130 275 335 65} type Hold labelsize 12 align 4 textsize 12 resizable
           }
-          Fl_Group {} {
-            xywh {470 275 25 60}
+          Fl_Group {} {open
+            xywh {470 275 25 30}
           } {
             Fl_Button scenery_dir_up_ {
               label {@8>}
               callback {scenery_dir_up_cb();}
-              private xywh {470 275 25 25} deactivate
+              private xywh {470 280 25 25} deactivate
             }
+            Fl_Box {} {
+              xywh {470 275 25 5} resizable
+            }
+          }
+          Fl_Group {} {open
+            xywh {470 305 25 35}
+          } {
             Fl_Button scenery_dir_down_ {
               label {@2>}
               callback {scenery_dir_down_cb();}
-              private xywh {470 305 25 25} deactivate
+              private xywh {470 310 25 25} deactivate
             }
             Fl_Box {} {
-              xywh {470 330 25 5} resizable
+              xywh {470 335 25 5} resizable
             }
           }
           Fl_Button cache_delete_ {
@@ -108,8 +115,8 @@ class Wizard {open
           }
         }
         Fl_Group {page[1]} {
-          label {Select an aircraft} open
-          private xywh {0 0 640 440} labelfont 1 align 21
+          label {Select an aircraft}
+          private xywh {0 0 640 440} labelfont 1 align 21 hide
         } {
           Fl_Tile {} {open
             xywh {0 20 635 415} resizable
@@ -124,7 +131,7 @@ class Wizard {open
               code0 {\#include "Fl_Plib.h"}
               class Fl_Plib
             }
-            Fl_Box {} {selected
+            Fl_Box {} {
               xywh {80 190 265 65} hide resizable
             }
           }
@@ -139,22 +146,193 @@ class Wizard {open
             class AirportBrowser
           }
         }
-        Fl_Group {page[3]} {open
-          private xywh {0 0 640 440} hide
+        Fl_Group {page[3]} {open selected
+          private xywh {0 0 640 440}
         } {
-          Fl_Output text {
-            private xywh {0 0 640 350} type Multiline box THIN_DOWN_BOX resizable
+          Fl_Output text2 {
+            private xywh {0 0 640 350} type Multiline box THIN_DOWN_BOX hide
           }
           Fl_Group {} {open
-            xywh {0 380 640 25}
+            private xywh {0 380 640 50}
           } {
             Fl_Button {} {
               label {Advanced...}
               callback {advanced_cb();}
-              xywh {545 380 90 25}
+              private xywh {545 405 90 25}
             }
             Fl_Box {} {
-              xywh {0 380 545 25} resizable
+              private xywh {0 380 545 25} resizable
+            }
+          }
+          Fl_Text_Display text {
+            private xywh {5 250 630 145} box THIN_DOWN_BOX align 4 resizable
+          }
+          Fl_Group {} {
+            label Display open
+            private xywh {5 5 630 85} box ENGRAVED_FRAME labelfont 1 align 21
+          } {
+            Fl_Choice resolution {
+              label {Resolution :}
+              callback {resolution_cb();} open
+              private xywh {100 30 125 25} down_box BORDER_BOX
+            } {
+              menuitem {} {
+                label 640x480
+                private xywh {0 0 100 20}
+              }
+              menuitem {} {
+                label 800x600
+                private xywh {0 0 100 20}
+              }
+              menuitem {} {
+                label 1024x768
+                private xywh {0 0 100 20}
+              }
+              menuitem {} {
+                label 1280x1024
+                private xywh {0 0 100 20}
+              }
+              menuitem {} {
+                label 1600x1200
+                private xywh {0 0 100 20}
+              }
+            }
+            Fl_Check_Button game_mode {
+              label {Game mode ( Fullscreen )}
+              callback {game_mode_cb();}
+              private xywh {25 60 210 20} down_box DOWN_BOX
+            }
+            Fl_Check_Button horizon_effect {
+              label {Horizon effect}
+              callback {horizon_effect_cb();}
+              private xywh {250 10 170 20} down_box DOWN_BOX
+            }
+            Fl_Check_Button enhanced_lighting {
+              label {Enhanced lighting}
+              callback {enhanced_lighting_cb();}
+              private xywh {250 35 170 20} down_box DOWN_BOX
+            }
+            Fl_Check_Button specular_highlight {
+              label {Specular highlight}
+              callback {specular_highlight_cb();}
+              private xywh {250 60 170 20} down_box DOWN_BOX
+            }
+            Fl_Box {} {
+              private xywh {610 80 25 10} resizable
+            }
+            Fl_Check_Button clouds_3d {
+              label {3D clouds (experimental)}
+              callback {clouds_3d_cb();}
+              private xywh {425 10 205 20} down_box DOWN_BOX
+            }
+          }
+          Fl_Group {} {
+            label Features open
+            private xywh {5 95 630 85} box ENGRAVED_FRAME labelfont 1 align 21
+          } {
+            Fl_Check_Button random_objects {
+              label {Random objects}
+              callback {random_objects_cb();}
+              private xywh {25 125 180 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button ai_models {
+              label {AI models}
+              callback {ai_models_cb();}
+              private xywh {25 150 180 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button time_of_day {
+              label {Time of day :}
+              callback {time_of_day_cb();}
+              private xywh {250 100 120 25} down_box DOWN_BOX
+            }
+            Fl_Choice time_of_day_value {
+              callback {time_of_day_value_cb();}
+              private xywh {375 100 115 25} down_box BORDER_BOX
+            } {
+              menuitem {} {
+                label noon
+                xywh {0 0 100 20}
+              }
+              menuitem {} {
+                label dusk
+                xywh {0 0 100 20}
+              }
+              menuitem {} {
+                label midnight
+                xywh {0 0 100 20}
+              }
+              menuitem {} {
+                label dawn
+                xywh {0 0 100 20}
+              }
+            }
+            Fl_Check_Button real_weather_fetch {
+              label {Real weather fetch}
+              callback {real_weather_fetch_cb();}
+              private xywh {250 125 180 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button auto_coordination {
+              label {Auto-coordination}
+              callback {auto_coordination_cb();}
+              private xywh {250 150 180 25} down_box DOWN_BOX
+            }
+            Fl_Box {} {
+              private xywh {605 170 30 10} resizable
+            }
+          }
+          Fl_Group {} {open
+            private xywh {5 185 630 60}
+          } {
+            Fl_Group atlas_group {open
+              private xywh {5 185 245 60} box ENGRAVED_FRAME labeltype SHADOW_LABEL labelfont 1 align 21
+            } {
+              Fl_Check_Button atlas {
+                label Atlas
+                callback {atlas_cb();}
+                private xywh {10 190 70 25} down_box DOWN_BOX labelfont 1
+              }
+              Fl_Input atlas_host {
+                label {Hostname :}
+                callback {atlas_host_cb();}
+                private tooltip Hostname xywh {95 215 85 25} when 1 resizable
+              }
+              Fl_Value_Input atlas_port {
+                label {:}
+                callback {atlas_port_cb();}
+                private xywh {190 215 50 25}
+              }
+            }
+            Fl_Group multiplay_group {open
+              private xywh {255 185 380 60} box ENGRAVED_FRAME resizable
+            } {
+              Fl_Check_Button multiplay {
+                label Multiplayer
+                callback {multiplay_cb();}
+                private xywh {260 190 110 25} down_box DOWN_BOX labelfont 1
+              }
+              Fl_Input multiplay_callsign {
+                label {Callsign :}
+                callback {multiplay_callsign_cb();}
+                private xywh {480 190 145 25} when 1
+              }
+              Fl_Input multiplay_host {
+                label {Hostname :}
+                callback {multiplay_host_cb();}
+                private tooltip {Peer hostname} xywh {345 215 95 25} when 1
+              }
+              Fl_Value_Input multiplay_in {
+                label {in :}
+                callback {multiplay_in_cb();}
+                private tooltip {Input port number} xywh {480 215 50 25}
+              }
+              Fl_Value_Input multiplay_out {
+                label {out :}
+                callback {multiplay_out_cb();}
+                private tooltip {Output port number} xywh {575 215 50 25}
+              }
+              Fl_Box {} {
+                private xywh {625 190 10 50} resizable
+              }
             }
           }
         }
@@ -162,7 +340,7 @@ class Wizard {open
           xywh {0 0 640 440} hide deactivate
         } {}
       }
-      Fl_Group {} {open
+      Fl_Group {} {
         xywh {0 450 640 25}
       } {
         Fl_Button next {
@@ -228,4 +406,26 @@ class Wizard {open
   decl {Fl_Preferences prefs;} {}
   decl {LogWindow* logwin;} {}
   decl {Fl_Pixmap folder_open_pixmap} {}
+  decl {void update_options();} {}
+  decl {void resolution_cb();} {}
+  decl {void game_mode_cb();} {}
+  decl {void horizon_effect_cb();} {}
+  decl {void enhanced_lighting_cb();} {}
+  decl {void specular_highlight_cb();} {}
+  decl {void clouds_3d_cb();} {}
+  decl {void random_objects_cb();} {}
+  decl {void ai_models_cb();} {}
+  decl {void time_of_day_cb();} {}
+  decl {void time_of_day_value_cb();} {}
+  decl {void real_weather_fetch_cb();} {}
+  decl {void auto_coordination_cb();} {}
+  decl {void atlas_cb();} {}
+  decl {void atlas_host_cb();} {}
+  decl {void atlas_port_cb();} {}
+  decl {void multiplay_cb();} {}
+  decl {void multiplay_callsign_cb();} {}
+  decl {void multiplay_host_cb();} {}
+  decl {void multiplay_in_cb();} {}
+  decl {void multiplay_out_cb();} {}
+  decl {void update_basic_options();} {}
 } 
