@@ -34,8 +34,14 @@ FGRun_Win32::~FGRun_Win32()
 void
 FGRun_Win32::run_fgfs_impl()
 {
-    char* cmd = new char[ strlen(fg_exe->value()) + 1 ];
+    char* cmd = new char[ strlen(fg_exe->value()) +
+                          strlen(fg_root->value()) +
+                          strlen(aircraft->text()) + 24 ];
     strcpy( cmd, fg_exe->value() );
+    strcat( cmd, " --fg-root=" );
+    strcat( cmd, fg_root->value() );
+    strcat( cmd, " --aircraft=" );
+    strcat( cmd, aircraft->text() );
 
     //SECURITY_ATTRIBUTES procAttrs;
     //SECURITY_ATTRIBUTES threadAttrs;

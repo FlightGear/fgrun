@@ -52,7 +52,9 @@ public:
 private:
   inline void cb__i(Fl_Button*, void*);
   static void cb_(Fl_Button*, void*);
+public:
   Fl_Input *fg_root;
+private:
   inline void cb_1_i(Fl_Button*, void*);
   static void cb_1(Fl_Button*, void*);
   Fl_Input *fg_scenery;
@@ -64,7 +66,9 @@ private:
   Fl_Button *airport_update;
   inline void cb_airport_update_i(Fl_Button*, void*);
   static void cb_airport_update(Fl_Button*, void*);
+public:
   Fl_Choice *aircraft;
+private:
   Fl_Button *aircraft_update;
   inline void cb_aircraft_update_i(Fl_Button*, void*);
   static void cb_aircraft_update(Fl_Button*, void*);
