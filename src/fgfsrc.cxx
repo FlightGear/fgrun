@@ -293,7 +293,9 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--jpg_httpd=" << iVal;
     if (prefs.get( "callsign", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--callsign=" << buf;
-    if (prefs.get( "multiplay", buf, "", buflen-1 ) && buf[0] != 0)
+    if (prefs.get( "multiplay1", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--multiplay=" << buf;
+    if (prefs.get( "multiplay2", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--multiplay=" << buf;
 
     // I/O options.

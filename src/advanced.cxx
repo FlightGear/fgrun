@@ -1171,7 +1171,6 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Check_Button* o = httpd = new Fl_Check_Button(175, 35, 100, 25, "httpd");
         o->tooltip("Enable HTTP server");
         o->down_box(FL_DOWN_BOX);
@@ -1221,18 +1220,16 @@ Advanced::Advanced() {
         o->textsize(12);
         o->deactivate();
       }
-      { Fl_Group* o = new Fl_Group(150, 150, 490, 60, "Multiplayer Options");
-        o->labelfont(1);
-        o->labelsize(12);
-        o->align(FL_ALIGN_TOP_LEFT);
-        { Fl_Input* o = callsign = new Fl_Input(225, 165, 100, 25, "Callsign:");
-          o->labelsize(12);
-          o->textsize(12);
-        }
-        o->end();
-      }
-      { Fl_Input* o = multiplay = new Fl_Input(225, 195, 230, 25, "Multiplay:");
+      { Fl_Input* o = multiplay1 = new Fl_Input(240, 195, 230, 25, "Multiplay 1:");
         o->tooltip("in|out,hz,address,port");
+        o->labelsize(12);
+        o->textsize(12);
+      }
+      { Fl_Input* o = multiplay2 = new Fl_Input(240, 225, 230, 25, "Multiplay 2:");
+        o->labelsize(12);
+        o->textsize(12);
+      }
+      { Fl_Input* o = callsign = new Fl_Input(240, 165, 100, 25, "Callsign:");
         o->labelsize(12);
         o->textsize(12);
       }
@@ -1546,6 +1543,7 @@ Advanced::Advanced() {
     { Fl_Group* o = page[13] = new Fl_Group(150, 0, 490, 430, "Weather");
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Value_Input* o = wind_speed = new Fl_Value_Input(240, 240, 80, 25, "Speed (kts):");
         o->tooltip("Wind speed (kts)");
         o->labelsize(12);

@@ -137,7 +137,8 @@ Advanced::save_settings( Fl_Preferences& prefs )
 	prefs.set("jpg-httpd", int(jpg_httpd_port->value()));
     // Multiplayer options
     prefs.set( "callsign", callsign->value() );
-    prefs.set( "multiplay", multiplay->value() );
+    prefs.set( "multiplay1", multiplay1->value() );
+    prefs.set( "multiplay2", multiplay2->value() );
 
     prefs.set("io-count", io_list->size());
     int i;
@@ -405,8 +406,10 @@ Advanced::load_settings( Fl_Preferences& prefs )
 
     prefs.get( "callsign", buf, "", buflen-1 );
     callsign->value( buf );
-    prefs.get( "multiplay", buf, "", buflen-1 );
-    multiplay->value( buf );
+    prefs.get( "multiplay1", buf, "", buflen-1 );
+    multiplay1->value( buf );
+    prefs.get( "multiplay2", buf, "", buflen-1 );
+    multiplay2->value( buf );
 
     prefs.get( "io-count", iVal, 0 );
     int i;

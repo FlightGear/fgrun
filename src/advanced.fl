@@ -14,7 +14,7 @@ class Advanced {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {361 148 640 480} type Double labelsize 12
+      private xywh {606 154 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -583,8 +583,8 @@ else
         }
       }
       Fl_Group {page[7]} {
-        label Network
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label Network open
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Check_Button httpd {
           label httpd
@@ -625,18 +625,17 @@ else
         Fl_Value_Input jpg_httpd_port {
           private tooltip {Screen shot HTTP server port} xywh {275 95 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5502 textsize 12 deactivate
         }
-        Fl_Group {} {
-          label {Multiplayer Options} open
-          private xywh {150 150 490 60} labelfont 1 labelsize 12 align 5
-        } {
-          Fl_Input callsign {
-            label {Callsign:}
-            private xywh {225 165 100 25} labelsize 12 textsize 12
-          }
+        Fl_Input multiplay1 {
+          label {Multiplay 1:}
+          private tooltip {in|out,hz,address,port} xywh {240 195 230 25} labelsize 12 textsize 12
         }
-        Fl_Input multiplay {
-          label {Multiplay:}
-          private tooltip {in|out,hz,address,port} xywh {225 195 230 25} labelsize 12 textsize 12
+        Fl_Input multiplay2 {
+          label {Multiplay 2:} selected
+          private xywh {240 225 230 25} labelsize 12 textsize 12
+        }
+        Fl_Input callsign {
+          label {Callsign:}
+          private xywh {240 165 100 25} labelsize 12 textsize 12
         }
       }
       Fl_Group {page[8]} {
@@ -1047,7 +1046,7 @@ else
       }
       Fl_Group {page[13]} {
         label Weather open
-        private xywh {150 0 490 430} labelfont 1 align 21
+        private xywh {150 0 490 430} labelfont 1 align 21 hide
       } {
         Fl_Value_Input wind_speed {
           label {Speed (kts):}
@@ -1069,7 +1068,7 @@ else
           private tooltip {Direction wind is coming from.} xywh {240 185 80 25} labelsize 12 maximum 360 step 0.1 textsize 12
         }
         Fl_Input ceiling {
-          label {Ceiling:} selected
+          label {Ceiling:}
           tooltip {FT_ASL[:THICKNESS_FT]} xywh {240 335 80 25} labelsize 12 textsize 12
         }
       }
