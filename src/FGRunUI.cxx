@@ -83,7 +83,7 @@ FGRunUI::load_settings()
     const int buflen = 1024;
     char buf[ buflen ];
     Fl_Preferences app( Fl_Preferences::USER,
-			"flightgear.org", "launcher/preferences" );
+			"flightgear.org", "fgrun/preferences" );
     Fl_Preferences prefs( app, "Settings" );
 
     // 
@@ -131,11 +131,11 @@ FGRunUI::load_settings()
     prefs.get( "auto_coordination", bVal, 0 );
     auto_coordination->value( bVal );
 
-    prefs.get( "units", buf, "feet", buflen-1 );
-    if (strcmp( buf, "feet" ) == 0)
-	units_feet->setonly();
-    else
-	units_meters->setonly();
+//     prefs.get( "units", buf, "feet", buflen-1 );
+//     if (strcmp( buf, "feet" ) == 0)
+// 	units_feet->setonly();
+//     else
+// 	units_meters->setonly();
 
 #if defined(WIN32)
     prefs.get( "browser", buf, "webrun.bat", buflen-1 );
@@ -147,7 +147,7 @@ FGRunUI::load_settings()
     set_choice( control, buf );
 
     // Features tab.
-    prefs.get( "hud", bVal, 1 );
+    prefs.get( "hud", bVal, 0 );
     enable_hud->value( bVal );
     prefs.get( "antialias_hud", bVal, 0 );
     enable_antialias_hud->value( bVal );
@@ -171,13 +171,8 @@ FGRunUI::load_settings()
     prefs.get( "fullscreen", bVal, 0 );
     enable_fullscreen->value( bVal );
 
-    prefs.get( "fog", buf, "nicest", buflen-1 );
-    if (strcmp( buf, "disabled" ) == 0)
-	fog_disabled->setonly();
-    else if (strcmp( buf, "fastest" ) == 0)
-	fog_fastest->setonly();
-    else
-	fog_nicest->setonly();
+    prefs.get( "fog", buf, "nice", buflen-1 );
+    set_choice( fog, buf );
 
     prefs.get( "shading-flat", bVal, 0 );
     shading_flat->value( bVal );
@@ -240,15 +235,18 @@ void
 FGRunUI::save_settings()
 {
     Fl_Preferences app( Fl_Preferences::USER,
-			"flightgear.org", "launcher/preferences" );
+			"flightgear.org", "fgrun/preferences" );
     Fl_Preferences prefs( app, "Settings" );
 
-    // General tab.
     prefs.set( "fg_exe", fg_exe->value() );
     prefs.set( "fg_root", fg_root->value() );
     prefs.set( "fg_scenery", fg_scenery->value() );
     prefs.set( "aircraft", aircraft->text() );
     prefs.set( "airport", airport->text() );
+    prefs.set( "browser", browser->value() );
+
+    // General tab.
+
     prefs.set( "game_mode", int(enable_game_mode->value()) );
     prefs.set( "splash_screen", int(enable_splash_screen->value()) );
     prefs.set( "intro_music", int(enable_intro_music->value()) );
@@ -260,12 +258,11 @@ FGRunUI::save_settings()
     prefs.set( "clock_freeze", int(clock_freeze->value()) );
     prefs.set( "auto_coordination", int(auto_coordination->value()) );
 
-    if (units_feet->value())
-	prefs.set( "units", "feet" );
-    else
-	prefs.set( "units", "meters" );
+//     if (units_feet->value())
+// 	prefs.set( "units", "feet" );
+//     else
+// 	prefs.set( "units", "meters" );
 
-    prefs.set( "browser", browser->value() );
     prefs.set( "control", control->text() );
 
     // Features tab.
@@ -281,13 +278,7 @@ FGRunUI::save_settings()
     prefs.set( "wireframe", int(enable_wireframe->value()) );
     prefs.set( "fullscreen", int(enable_fullscreen->value()) );
     prefs.set( "sound", int(enable_sound->value()) );
-
-    if (fog_disabled->value())
-	prefs.set( "fog", "disabled" );
-    else if (fog_fastest->value())
-	prefs.set( "fog", "fastest" );
-    else
-	prefs.set( "fog", "nicest" );
+    prefs.set( "fog", fog->text() );
 
     prefs.set( "shading-flat", shading_flat->value() );
 
@@ -458,8 +449,8 @@ FGRunUI::run_fgfs()
 
 	// Only write non-default options.
 
-	if (units_meters->value())
-	    ofs << "\n--unit-meters";
+// 	if (units_meters->value())
+// 	    ofs << "\n--unit-meters";
 
 	if (enable_game_mode->value())
 	    ofs << "\n--enable-game-mode";
@@ -491,9 +482,9 @@ FGRunUI::run_fgfs()
 	if (!enable_sound->value())
 	    ofs << "\n--disable-sound";
 
-	if (fog_disabled->value())
+	if (strcmp( fog->text(), "disabled" ) == 0)
 	    ofs << "\n--fog-disable";
-	else if (fog_fastest->value())
+	else if (strcmp( fog->text(), "fast" ) == 0)
 	    ofs << "\n--fog-fastest";
 
 	if (shading_flat->value())
@@ -534,6 +525,9 @@ FGRunUI::run_fgfs()
 	    ofs << "\n--start-date-lat=" << start_date_lat_text->value();
 	else if (start_date_gmt->value())
 	    ofs << "\n--start-date-gmt=" << start_date_gmt_text->value();
+
+	if (strcmp( control->text(), "joystick" ) != 0)
+	    ofs << "\n--control=" << control->text();
 
 	ofs << "\n";
 
@@ -888,7 +882,7 @@ void FGRunUI::reset()
     enable_textures->value( 1 );
     enable_wireframe->value( 0 );
     enable_fullscreen->value( 0 );
-    fog_nicest->setonly();
+    set_choice( fog, "nice" );
     shading_flat->value( 0 );
     fov->value( 60.0 );
     set_choice( fdm, "jsb" );

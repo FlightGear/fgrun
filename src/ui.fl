@@ -8,24 +8,9 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launcher} open
-      private xywh {549 102 640 480}
+      private xywh {547 52 640 480} box ENGRAVED_BOX
       code0 {\#include <string.h>} visible
     } {
-      Fl_Button quit {
-        label Quit
-        callback {main_window->hide();}
-        private xywh {580 450 55 25}
-      }
-      Fl_Button save {
-        label Save
-        callback {save_settings();}
-        private xywh {520 450 55 25}
-      }
-      Fl_Button run {
-        label Run
-        callback {run_fgfs();}
-        private xywh {460 450 55 25}
-      }
       Fl_Input fg_exe {
         label {Executable:}
         xywh {105 30 500 25}
@@ -39,14 +24,14 @@ class UserInterface {open
         label {FG_ROOT:}
         xywh {105 60 500 25}
       }
-      Fl_Input fg_scenery {
-        label {FG_SCENERY:}
-        xywh {105 90 500 25}
-      }
       Fl_Button {} {
         label {...}
         callback {select_fg_root();}
         xywh {610 60 25 25}
+      }
+      Fl_Input fg_scenery {
+        label {FG_SCENERY:}
+        xywh {105 90 500 25}
       }
       Fl_Button {} {
         label {...}
@@ -55,12 +40,31 @@ class UserInterface {open
       }
       Fl_Choice airport {
         label Airport open
-        xywh {105 120 240 25} down_box BORDER_BOX
+        xywh {105 120 200 25} down_box BORDER_BOX
       } {}
+      Fl_Button {} {
+        label Update
+        callback {update_airports();}
+        xywh {310 120 55 25}
+      }
       Fl_Choice aircraft {
         label {Aircraft:} open
-        xywh {105 150 240 25} down_box BORDER_BOX
+        xywh {105 150 200 25} down_box BORDER_BOX
       } {}
+      Fl_Button {} {
+        label Update
+        callback {update_aircraft();}
+        xywh {310 150 55 25}
+      }
+      Fl_Input browser {
+        label {Browser:}
+        tooltip {Path to your web browser} xywh {445 120 160 25}
+      }
+      Fl_Button {} {
+        label {...}
+        callback {select_browser();}
+        private xywh {610 120 25 25}
+      }
       Fl_Tabs tabs {open
         xywh {0 190 640 255} labeltype NO_LABEL
       } {
@@ -88,21 +92,74 @@ class UserInterface {open
             label {Random Objects}
             tooltip {Enable random scenery objects} xywh {30 345 140 25} down_box DOWN_BOX
           }
+          Fl_Check_Button enable_clouds {
+            label Clouds
+            tooltip {Enable 2D (flat) clouds} xywh {30 375 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_clouds3d {
+            label {Clouds 3D}
+            tooltip {Enable 3D (volumetric) clouds} xywh {30 405 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_fullscreen {
+            label {Full Screen}
+            tooltip {Enable fullscreen mode} xywh {170 315 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_skyblend {
+            label {Sky Blend}
+            tooltip {Enable sky blending} xywh {170 225 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_textures {
+            label Textures
+            tooltip {Enable textures} xywh {170 255 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_wireframe {
+            label Wireframe
+            tooltip {Enable wireframe drawing mode} xywh {170 285 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_panel {
+            label Panel
+            tooltip {Enable instrument panel} xywh {170 345 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_sound {
+            label Sound
+            tooltip {Enable sound effects} xywh {170 375 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button shading_flat {
+            label {Flat Shading}
+            tooltip {Enable flat shading} xywh {170 405 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_hud {
+            label HUD
+            callback {if (o->value()) {
+  enable_antialias_hud->activate();
+} else {
+  enable_antialias_hud->deactivate();
+}}
+            tooltip {Enable Heads Up Display (HUD)} xywh {310 225 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_antialias_hud {
+            label {Anti-alias HUD}
+            tooltip {Enable anti-aliased HUD} xywh {325 255 125 25} down_box DOWN_BOX deactivate
+          }
           Fl_Check_Button freeze {
             label Freeze
-            xywh {200 225 140 25} down_box DOWN_BOX
+            xywh {310 285 140 25} down_box DOWN_BOX
           }
           Fl_Check_Button fuel_freeze {
             label {Fuel Freeze}
-            xywh {200 255 140 25} down_box DOWN_BOX
+            xywh {310 315 140 25} down_box DOWN_BOX
           }
           Fl_Check_Button clock_freeze {
             label {Clock Freeze}
-            xywh {200 285 140 25} down_box DOWN_BOX
+            xywh {310 345 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button auto_coordination {
+            label {Auto-coordination}
+            tooltip {Enable auto-coordination} xywh {310 375 140 25} down_box DOWN_BOX
           }
           Fl_Choice control {
             label {Control:}
-            tooltip {Primary control device} xywh {370 390 140 25} down_box BORDER_BOX
+            tooltip {Primary control device} xywh {520 225 95 25} down_box BORDER_BOX
           } {
             menuitem {} {
               label joystick
@@ -117,110 +174,44 @@ class UserInterface {open
               xywh {0 0 100 20}
             }
           }
-          Fl_Check_Button auto_coordination {
-            label {Auto-coordination}
-            tooltip {Enable auto-coordination} xywh {200 315 140 25} down_box DOWN_BOX
-          }
-          Fl_Input browser {
-            label {Browser:}
-            tooltip {Path to your web browser} xywh {125 390 140 25}
-          }
-          Fl_Button {} {
-            label {...}
-            callback {select_browser();}
-            private xywh {270 390 25 25}
-          }
-          Fl_Group {} {open selected
-            xywh {370 225 140 55}
+          Fl_Choice fog {
+            label {Fog:} open selected
+            xywh {520 255 95 25} down_box BORDER_BOX
           } {
-            Fl_Round_Button units_feet {
-              label feet
-              xywh {370 225 140 25} type Radio down_box ROUND_DOWN_BOX value 1
+            menuitem {} {
+              label disabled
+              xywh {5 5 100 20}
             }
-            Fl_Round_Button units_meters {
-              label meters
-              xywh {370 255 140 25} type Radio down_box ROUND_DOWN_BOX
+            menuitem {} {
+              label fast
+              xywh {5 5 100 20}
             }
-          }
-        }
-        Fl_Group {} {
-          label Features
-          private xywh {0 215 640 230} hide
-        } {
-          Fl_Check_Button enable_hud {
-            label HUD
-            callback {if (o->value()) {
-  enable_antialias_hud->activate();
-} else {
-  enable_antialias_hud->deactivate();
-}}
-            tooltip {Enable Heads Up Display (HUD)} xywh {30 225 140 25} down_box DOWN_BOX
-          }
-          Fl_Check_Button enable_panel {
-            label Panel
-            tooltip {Enable instrument panel} xywh {30 285 140 25} down_box DOWN_BOX value 1
-          }
-          Fl_Check_Button enable_sound {
-            label Sound
-            tooltip {Enable sound effects} xywh {30 315 140 25} down_box DOWN_BOX value 1
-          }
-          Fl_Check_Button enable_antialias_hud {
-            label {Anti-alias HUD}
-            tooltip {Enable anti-aliased HUD} xywh {45 255 140 25} down_box DOWN_BOX deactivate
-          }
-        }
-        Fl_Group {} {
-          label Rendering
-          private tooltip {Enable 2D (flat) clouds} xywh {0 215 640 230} hide
-        } {
-          Fl_Group {} {
-            label Fog open
-            xywh {170 250 140 90} align 5
-          } {
-            Fl_Round_Button fog_disabled {
-              label Disabled
-              tooltip {Disable fog} xywh {170 255 120 25} type Radio down_box ROUND_DOWN_BOX
+            menuitem {} {
+              label nice
+              xywh {5 5 100 20} value 1
             }
-            Fl_Round_Button fog_fastest {
-              label Fast
-              tooltip {Enable fastest fog/haze} xywh {170 285 120 25} type Radio down_box ROUND_DOWN_BOX
-            }
-            Fl_Round_Button fog_nicest {
-              label Nice
-              tooltip {Enable nicest fog/haze} xywh {170 315 120 25} type Radio down_box ROUND_DOWN_BOX value 1
-            }
-          }
-          Fl_Check_Button enable_clouds {
-            label Clouds
-            tooltip {Enable 2D (flat) clouds} xywh {30 225 140 25} down_box DOWN_BOX value 1
-          }
-          Fl_Check_Button enable_clouds3d {
-            label {Clouds 3D}
-            tooltip {Enable 3D (volumetric) clouds} xywh {30 255 140 25} down_box DOWN_BOX
-          }
-          Fl_Check_Button enable_fullscreen {
-            label {Full Screen}
-            tooltip {Enable fullscreen mode} xywh {30 375 140 25} down_box DOWN_BOX
-          }
-          Fl_Check_Button enable_skyblend {
-            label {Sky Blend}
-            tooltip {Enable sky blending} xywh {30 285 140 25} down_box DOWN_BOX value 1
-          }
-          Fl_Check_Button enable_textures {
-            label Textures
-            tooltip {Enable textures} xywh {30 315 140 25} down_box DOWN_BOX value 1
-          }
-          Fl_Check_Button enable_wireframe {
-            label Wireframe
-            tooltip {Enable wireframe drawing mode} xywh {30 345 140 25} down_box DOWN_BOX
           }
           Fl_Value_Input fov {
             label {FOV:}
-            tooltip {Field of view (0.1 to 179.9 degrees)} xywh {205 345 45 25} minimum 0.1 maximum 179.9 step 0.1 value 60
+            tooltip {Field of view (0.1 to 179.9 degrees)} xywh {520 285 45 25} minimum 0.1 maximum 179.9 step 0.1 value 60
           }
-          Fl_Check_Button shading_flat {
-            label {Flat Shading}
-            tooltip {Enable flat shading} xywh {170 375 140 25} down_box DOWN_BOX
+        }
+        Fl_Group {} {
+          label Rendering open
+          private tooltip {Enable 2D (flat) clouds} xywh {0 215 640 230} hide
+        } {
+          Fl_Group {} {
+            label Units open
+            xywh {380 255 140 55} box ENGRAVED_BOX align 5
+          } {
+            Fl_Round_Button units_feet {
+              label feet
+              xywh {385 255 120 25} type Radio down_box ROUND_DOWN_BOX value 1
+            }
+            Fl_Round_Button units_meters {
+              label meters
+              xywh {385 285 120 25} type Radio down_box ROUND_DOWN_BOX
+            }
           }
         }
         Fl_Group {} {
@@ -492,25 +483,34 @@ class UserInterface {open
         callback {reset();}
         tooltip {Reset all values to their defaults} xywh {400 450 55 25}
       }
-      Fl_Button {} {
-        label Update
-        callback {update_airports();}
-        xywh {350 120 55 25}
+      Fl_Button run {
+        label Run
+        callback {run_fgfs();}
+        private xywh {460 450 55 25}
       }
-      Fl_Button {} {
-        label Update
-        callback {update_aircraft();}
-        xywh {350 150 55 25}
+      Fl_Button save {
+        label Save
+        callback {save_settings();}
+        private xywh {520 450 55 25}
+      }
+      Fl_Button quit {
+        label Quit
+        callback {main_window->hide();}
+        private xywh {580 450 55 25}
       }
     }
     Fl_Window addOptionDlg {
       label {I/O Options}
-      xywh {653 797 496 189} modal visible
+      xywh {547 587 496 189} modal visible
     } {
       Fl_Choice io_protocol {
-        label {Protocol:}
+        label {Protocol:} open
         xywh {70 10 115 25} down_box BORDER_BOX
       } {
+        menuitem {} {
+          label atlas
+          xywh {0 0 100 20}
+        }
         menuitem {} {
           label garmin
           xywh {0 0 100 20}
@@ -670,8 +670,8 @@ class UserInterface {open
       }
     }
     Fl_Window output_window {
-      label Output open
-      xywh {166 879 640 480} resizable visible
+      label Output
+      xywh {166 543 640 480} resizable visible
     } {
       Fl_Text_Display output_text {
         xywh {0 25 640 455}
