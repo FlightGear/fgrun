@@ -211,7 +211,9 @@ AirportBrowser::runways_idle_proc( )
             string rwy( strtok(NULL, space) );
             if (rwy != "xxx")
             {
-  	        airports_.back().runways_.push_back( rwy );
+                if ( rwy.length() > 1 && rwy[ rwy.length() - 1 ] == 'x' )
+                    rwy.erase( rwy.length() - 1 );
+                airports_.back().runways_.push_back( rwy );
             }
         }
     }
