@@ -209,6 +209,14 @@ Wizard::init( bool fullscreen )
 	next->activate();
         page[1]->show();
     }
+
+    int iVal;
+    prefs.get("show_cmd_line", iVal, 0);
+    show_cmd_line->value(iVal);
+    if ( iVal )
+	text->show();
+    else
+	text->hide();
 }
 
 void
@@ -1306,6 +1314,16 @@ Wizard::update_basic_options()
 	    }
 	}
     }
+}
+
+void
+Wizard::show_cmd_line_cb()
+{
+    if ( show_cmd_line->value() )
+	text->show();
+    else
+	text->hide();
+    prefs.set("show_cmd_line", show_cmd_line->value());
 }
 
 void *

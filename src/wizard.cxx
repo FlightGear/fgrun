@@ -87,6 +87,13 @@ void Wizard::cb_Advanced(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Advanced_i(o,v);
 }
 
+inline void Wizard::cb_show_cmd_line_i(Fl_Check_Button*, void*) {
+  show_cmd_line_cb();
+}
+void Wizard::cb_show_cmd_line(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_show_cmd_line_i(o,v);
+}
+
 inline void Wizard::cb_resolution_i(Fl_Choice*, void*) {
   resolution_cb();
 }
@@ -270,7 +277,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
   { Fl_Double_Window* o = win = new Fl_Double_Window(640, 480, "FlightGear Wizard");
     w = o;
     o->user_data((void*)(this));
-    { Fl_Wizard* o = wiz = new Fl_Wizard(0, 0, 640, 440);
+    { Fl_Wizard* o = wiz = new Fl_Wizard(0, 0, 645, 440);
       { Fl_Group* o = page[0] = new Fl_Group(0, 0, 640, 440, "Select Paths");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
@@ -410,25 +417,24 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         }
         o->end();
       }
-      { Fl_Group* o = page[3] = new Fl_Group(0, 0, 640, 440);
-        { Fl_Output* o = text2 = new Fl_Output(0, 0, 640, 350);
-          o->type(12);
-          o->box(FL_THIN_DOWN_BOX);
-          o->hide();
-        }
-        { Fl_Group* o = new Fl_Group(0, 380, 640, 50);
+      { Fl_Group* o = page[3] = new Fl_Group(0, 0, 645, 440);
+        { Fl_Group* o = new Fl_Group(0, 405, 640, 25);
           { Fl_Button* o = new Fl_Button(545, 405, 90, 25, "Advanced...");
             o->callback((Fl_Callback*)cb_Advanced);
           }
-          { Fl_Box* o = new Fl_Box(0, 380, 545, 25);
+          { Fl_Box* o = new Fl_Box(190, 405, 355, 25);
             Fl_Group::current()->resizable(o);
+          }
+          { Fl_Check_Button* o = show_cmd_line = new Fl_Check_Button(10, 405, 180, 25, "Show command line");
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_show_cmd_line);
           }
           o->end();
         }
         { Fl_Text_Display* o = text = new Fl_Text_Display(5, 250, 630, 145);
           o->box(FL_THIN_DOWN_BOX);
           o->align(FL_ALIGN_LEFT);
-          Fl_Group::current()->resizable(o);
+          o->hide();
         }
         { Fl_Group* o = new Fl_Group(5, 5, 630, 85, "Display");
           o->box(FL_ENGRAVED_FRAME);
@@ -551,6 +557,9 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             Fl_Group::current()->resizable(o);
           }
           o->end();
+        }
+        { Fl_Box* o = new Fl_Box(245, 250, 280, 145);
+          Fl_Group::current()->resizable(o);
         }
         o->end();
       }

@@ -21,9 +21,9 @@ class LogWindow;
 #include <FL/Fl_Tile.H>
 #include "Fl_Plib.h"
 #include "AirportBrowser.h"
+#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Value_Input.H>
 
 class Wizard {
@@ -66,9 +66,11 @@ private:
   static void cb_aircraft(Fl_Browser*, void*);
   Fl_Plib *preview;
   AirportBrowser *airports_;
-  Fl_Output *text2;
   inline void cb_Advanced_i(Fl_Button*, void*);
   static void cb_Advanced(Fl_Button*, void*);
+  Fl_Check_Button *show_cmd_line;
+  inline void cb_show_cmd_line_i(Fl_Check_Button*, void*);
+  static void cb_show_cmd_line(Fl_Check_Button*, void*);
   Fl_Text_Display *text;
   Fl_Choice *resolution;
   inline void cb_resolution_i(Fl_Choice*, void*);
@@ -206,6 +208,7 @@ private:
   void multiplay_in_cb();
   void multiplay_out_cb();
   void update_basic_options();
+  void show_cmd_line_cb();
   pthread_t th;
   static void *startFlightGear_cb( void *d );
   void startFlightGear_cb();

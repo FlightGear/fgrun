@@ -14,7 +14,7 @@ decl {\#include <FL/Fl_Preferences.H>} {public
 decl {\#include <FL/Fl_Pixmap.H>} {public
 } 
 
-decl {\#include <pthread.h>} {selected public
+decl {\#include <pthread.h>} {public
 } 
 
 decl {\#include "folder_open.xpm"} {} 
@@ -22,15 +22,16 @@ decl {\#include "folder_open.xpm"} {}
 decl {class LogWindow;} {public
 } 
 
-class Wizard {} {
+class Wizard {open
+} {
   Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm)} {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
       private xywh {619 204 640 480} type Double visible
     } {
-      Fl_Wizard wiz {
-        private xywh {0 0 640 440}
+      Fl_Wizard wiz {open
+        private xywh {0 0 645 440}
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
@@ -149,13 +150,10 @@ class Wizard {} {
           }
         }
         Fl_Group {page[3]} {open
-          private xywh {0 0 640 440}
+          private xywh {0 0 645 440}
         } {
-          Fl_Output text2 {
-            private xywh {0 0 640 350} type Multiline box THIN_DOWN_BOX hide
-          }
           Fl_Group {} {open
-            private xywh {0 380 640 50}
+            private xywh {0 405 640 25}
           } {
             Fl_Button {} {
               label {Advanced...}
@@ -163,14 +161,19 @@ class Wizard {} {
               private xywh {545 405 90 25}
             }
             Fl_Box {} {
-              private xywh {0 380 545 25} resizable
+              private xywh {190 405 355 25} resizable
+            }
+            Fl_Check_Button show_cmd_line {
+              label {Show command line}
+              callback {show_cmd_line_cb();}
+              private xywh {10 405 180 25} down_box DOWN_BOX
             }
           }
-          Fl_Text_Display text {
-            private xywh {5 250 630 145} box THIN_DOWN_BOX align 4 resizable
+          Fl_Text_Display text {selected
+            private xywh {5 250 630 145} box THIN_DOWN_BOX align 4 hide
           }
           Fl_Group {} {
-            label Display open
+            label Display
             private xywh {5 5 630 85} box ENGRAVED_FRAME labelfont 1 align 21
           } {
             Fl_Choice resolution {
@@ -229,7 +232,7 @@ class Wizard {} {
             }
           }
           Fl_Group {} {
-            label Features open
+            label Features
             private xywh {5 95 630 85} box ENGRAVED_FRAME labelfont 1 align 21
           } {
             Fl_Check_Button random_objects {
@@ -282,7 +285,7 @@ class Wizard {} {
               private xywh {605 170 30 10} resizable
             }
           }
-          Fl_Group {} {open
+          Fl_Group {} {
             private xywh {5 185 630 60}
           } {
             Fl_Group atlas_group {open
@@ -337,12 +340,15 @@ class Wizard {} {
               }
             }
           }
+          Fl_Box {} {
+            private xywh {245 250 280 145} resizable
+          }
         }
         Fl_Group {page[4]} {open
           xywh {0 0 640 440} hide deactivate
         } {}
       }
-      Fl_Group {} {
+      Fl_Group {} {open
         xywh {0 450 640 25}
       } {
         Fl_Button next {
@@ -430,6 +436,7 @@ class Wizard {} {
   decl {void multiplay_in_cb();} {}
   decl {void multiplay_out_cb();} {}
   decl {void update_basic_options();} {}
+  decl {void show_cmd_line_cb();} {}
   decl {pthread_t th;} {}
   decl {static void *startFlightGear_cb( void *d );} {}
   decl {void startFlightGear_cb();} {}
