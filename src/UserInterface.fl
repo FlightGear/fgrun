@@ -18,15 +18,17 @@ decl {\#include <FL/Fl_Preferences.h>} {public
 decl {\#include <string>} {public
 } 
 
+decl {class AirportDB;} {public
+} 
+
 class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
-  Function {UserInterface()} {open
-  } {
+  Function {UserInterface()} {} {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {472 232 640 480} labelsize 12
+      private xywh {598 144 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -137,7 +139,7 @@ if (p != 0) {
           private xywh {610 110 25 25} labelsize 12
         }
         Fl_Choice airport {
-          label {Airports:}
+          label {Airport:}
           callback {update_runways();} open
           private tooltip {Available airports} xywh {250 140 150 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
           code0 {int i = airport->add( "KSFO", 0, 0, 0, 0);}
@@ -354,6 +356,10 @@ else
         Fl_Value_Input turbulence {
           label {Turbulence:}
           private tooltip {Specify turbulence from 0.0 (calm) to 1.0 (severe)} xywh {220 270 105 25} labelsize 12 textsize 12
+        }
+        Fl_Input ceiling {
+          label {Ceiling:}
+          private tooltip {Create an overcast ceiling, optionally with a specific thickness} xywh {220 300 105 25} labelsize 12 textsize 12
         }
       }
       Fl_Group {page[3]} {
@@ -837,8 +843,8 @@ else
         }
       }
       Fl_Group {page[9]} {
-        label Avionics open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        label Avionics
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Input nav1 {
           label {Nav1:}
@@ -870,7 +876,7 @@ else
           Fl_Round_Button dme_int {
             label Internal
             callback {if (o->value())
-  dme_int_freq->activate();} selected
+  dme_int_freq->activate();}
             private xywh {215 235 70 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
           Fl_Input dme_int_freq {
@@ -964,6 +970,36 @@ else
           private xywh {220 200 295 25} labelsize 12 when 1 textsize 12 deactivate
         }
       }
+      Fl_Group {page[13]} {
+        label {Airport Browser} open selected
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+      } {
+        Fl_Browser apt_browser {
+          callback {apt_browser_cb();}
+          private xywh {155 80 480 170} type Hold labeltype NO_LABEL labelsize 12 textsize 12
+        }
+        Fl_Input apt_id {
+          callback {apt_id_cb();}
+          private xywh {155 260 45 25} labelsize 12 when 1 textsize 12 deactivate
+        }
+        Fl_Input apt_name {
+          label {input:}
+          callback {apt_name_cb();}
+          private xywh {215 260 420 25} labeltype NO_LABEL when 1 textsize 12 deactivate
+        }
+        Fl_Round_Button apt_show_all {
+          label All
+          private xywh {155 55 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+        }
+        Fl_Round_Button apt_show_installed {
+          label Installed
+          private xywh {240 55 85 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
+        }
+      }
+      Fl_Button apt_select {
+        label Select
+        private xywh {585 295 50 25} labelsize 12 deactivate
+      }
     }
   }
   decl {void init();} {}
@@ -997,6 +1033,13 @@ else
   decl {void prop_list_select_cb( Fl_Browser* o );} {}
   decl {void prop_list_update_cb();} {}
   decl {void run_fgfs();} {}
+  decl {void load_airport_browser();} {}
+  decl {void apt_browser_cb();} {}
+  decl {void apt_id_cb();} {}
+  decl {void apt_name_cb();} {}
+  decl {AirportDB* airportdb_;} {}
+  decl {void load_airportdb();} {public
+  }
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void

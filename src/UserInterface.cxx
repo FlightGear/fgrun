@@ -533,6 +533,27 @@ void UserInterface::cb_env_var(Fl_Input* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_env_var_i(o,v);
 }
 
+inline void UserInterface::cb_apt_browser_i(Fl_Browser*, void*) {
+  apt_browser_cb();
+}
+void UserInterface::cb_apt_browser(Fl_Browser* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_apt_browser_i(o,v);
+}
+
+inline void UserInterface::cb_apt_id_i(Fl_Input*, void*) {
+  apt_id_cb();
+}
+void UserInterface::cb_apt_id(Fl_Input* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_apt_id_i(o,v);
+}
+
+inline void UserInterface::cb_apt_name_i(Fl_Input*, void*) {
+  apt_name_cb();
+}
+void UserInterface::cb_apt_name(Fl_Input* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_apt_name_i(o,v);
+}
+
 UserInterface::UserInterface() {
   Fl_Window* w;
   { Fl_Window* o = main_window = new Fl_Window(640, 480, "FlightGear Launch Control");
@@ -594,7 +615,7 @@ UserInterface::UserInterface() {
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_2);
       }
-      { Fl_Choice* o = airport = new Fl_Choice(250, 140, 150, 25, "Airports:");
+      { Fl_Choice* o = airport = new Fl_Choice(250, 140, 150, 25, "Airport:");
         o->tooltip("Available airports");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
@@ -802,6 +823,11 @@ UserInterface::UserInterface() {
       }
       { Fl_Value_Input* o = turbulence = new Fl_Value_Input(220, 270, 105, 25, "Turbulence:");
         o->tooltip("Specify turbulence from 0.0 (calm) to 1.0 (severe)");
+        o->labelsize(12);
+        o->textsize(12);
+      }
+      { Fl_Input* o = ceiling = new Fl_Input(220, 300, 105, 25, "Ceiling:");
+        o->tooltip("Create an overcast ceiling, optionally with a specific thickness");
         o->labelsize(12);
         o->textsize(12);
       }
@@ -1312,6 +1338,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Input* o = nav1 = new Fl_Input(205, 55, 150, 25, "Nav1:");
         o->tooltip("Set the NAV1 radio frequency, optionally preceded by a radial");
         o->labelsize(12);
@@ -1431,6 +1458,42 @@ UserInterface::UserInterface() {
         o->callback((Fl_Callback*)cb_env_var);
         o->when(FL_WHEN_CHANGED);
         o->deactivate();
+      }
+      o->end();
+    }
+    { Fl_Group* o = page[13] = new Fl_Group(150, 25, 490, 420, "Airport Browser");
+      o->labelfont(1);
+      o->labelsize(16);
+      o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      { Fl_Browser* o = apt_browser = new Fl_Browser(155, 80, 480, 170);
+        o->type(2);
+        o->labeltype(FL_NO_LABEL);
+        o->labelsize(12);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_apt_browser);
+      }
+      { Fl_Input* o = apt_id = new Fl_Input(155, 260, 45, 25);
+        o->labelsize(12);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_apt_id);
+        o->when(FL_WHEN_CHANGED);
+      }
+      { Fl_Input* o = apt_name = new Fl_Input(215, 260, 420, 25, "input:");
+        o->labeltype(FL_NO_LABEL);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_apt_name);
+        o->when(FL_WHEN_CHANGED);
+      }
+      { Fl_Round_Button* o = apt_show_all = new Fl_Round_Button(155, 55, 85, 25, "All");
+        o->type(102);
+        o->down_box(FL_ROUND_DOWN_BOX);
+        o->labelsize(12);
+      }
+      { Fl_Round_Button* o = apt_show_installed = new Fl_Round_Button(240, 55, 85, 25, "Installed");
+        o->type(102);
+        o->down_box(FL_ROUND_DOWN_BOX);
+        o->value(1);
+        o->labelsize(12);
       }
       o->end();
     }

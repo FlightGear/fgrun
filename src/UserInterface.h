@@ -5,6 +5,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Preferences.h>
 #include <string>
+class AirportDB;
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Menu_Bar.H>
 #include <FL/Fl_Browser.H>
@@ -95,6 +96,7 @@ private:
   Fl_Round_Button *in_air;
   Fl_Input *wind;
   Fl_Value_Input *turbulence;
+  Fl_Input *ceiling;
   Fl_Check_Button *freeze;
   Fl_Check_Button *fuel_freeze;
   Fl_Check_Button *clock_freeze;
@@ -260,7 +262,6 @@ private:
   static void cb_New(Fl_Button*, void*);
   Fl_Choice *log_level;
   static Fl_Menu_Item menu_log_level[];
-  Fl_Group *page[13];
 public:
   Fl_Browser *env_list;
 private:
@@ -274,6 +275,18 @@ private:
   Fl_Input *env_var;
   inline void cb_env_var_i(Fl_Input*, void*);
   static void cb_env_var(Fl_Input*, void*);
+  Fl_Group *page[14];
+  Fl_Browser *apt_browser;
+  inline void cb_apt_browser_i(Fl_Browser*, void*);
+  static void cb_apt_browser(Fl_Browser*, void*);
+  Fl_Input *apt_id;
+  inline void cb_apt_id_i(Fl_Input*, void*);
+  static void cb_apt_id(Fl_Input*, void*);
+  Fl_Input *apt_name;
+  inline void cb_apt_name_i(Fl_Input*, void*);
+  static void cb_apt_name(Fl_Input*, void*);
+  Fl_Round_Button *apt_show_all;
+  Fl_Round_Button *apt_show_installed;
   void init();
 public:
   void show();
@@ -305,6 +318,13 @@ private:
   void prop_list_select_cb( Fl_Browser* o );
   void prop_list_update_cb();
   void run_fgfs();
+  void load_airport_browser();
+  void apt_browser_cb();
+  void apt_id_cb();
+  void apt_name_cb();
+  AirportDB* airportdb_;
+public:
+  void load_airportdb();
 };
 void update_aircraft_cb(void* v);
 #endif
