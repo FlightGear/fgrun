@@ -25,6 +25,7 @@
 # define snprintf _snprintf
 #endif
 
+#include <iostream>
 #include <deque>
 #include <vector>
 #include <string>
@@ -33,10 +34,10 @@
 
 #include <FL/Fl.h>
 #include <FL/filename.h>
-
-#include <mk4.h>
+#include <FL/fl_ask.h>
 
 #include "UserInterface.h"
+#include "airportdb.h"
 
 using std::deque;
 using std::string;
@@ -48,7 +49,7 @@ using std::vector;
 static deque< string > apt_dirs;
 
 /**
- * Array of (sorted) airport names.
+ * Array of (sorted) airport ICAO identifiers.
  */
 static vector< string > airports;
 
@@ -113,6 +114,7 @@ search_for_airports_cb( void* v )
 	    }
 	    ui->airport->activate();
 	    ui->update_runways();
+	    ui->load_airport_browser();
 	}
     }
 }
@@ -163,53 +165,93 @@ reverse_runway( const string& rwy )
 void
 UserInterface::update_runways()
 {
-    vector< string > rwys;
-
-    string s = fg_root->value();
-    s += "/Airports/runways.mk4";
-    c4_Storage storage( s.c_str(), false );
-    
-    c4_View view;
-    view = storage.GetAs( "runway[ID:S,Rwy:S,Longitude:F,Latitude:F,Heading:F,Length:F,Width:F,SurfaceFlags:S,End1Flags:S,End2Flags:S]" );
-
     runway->clear();
     runway->add( "<default>" );
+    runway->activate();
+    runway->value(0);
 
-    c4_StringProp pID( "ID" );
-    c4_StringProp pRwy( "Rwy" );
-    string apt_id = airport->text();
-    int i = view.Find( pID[ apt_id.c_str() ] );
-    if (i == -1)
+    const apt_dat_t* apt = airportdb_->find( airport->text() );
+    if (apt == 0)
     {
 	return;
     }
 
-    c4_RowRef row = view.GetAt( i );
-    string id = (const char*) pID(row);
-    string rwy = (const char*) pRwy(row);
-    while (id == apt_id)
+    typedef vector< string > vs_t;
+    vs_t::const_iterator first( apt->runways_.begin() );
+    vs_t::const_iterator last( apt->runways_.end() );
+    for (; first != last; ++first)
     {
-	rwys.push_back( rwy );
-	string rrwy = reverse_runway( rwy );
+	runway->add( first->c_str() );
+	string rrwy = reverse_runway( *first );
 	if (!rrwy.empty())
-	    rwys.push_back( rrwy );
-
-	++i;
-	row = view.GetAt( i );
-	id = (const char*) pID( row );
-	rwy = (const char*) pRwy(row);
+	    runway->add( rrwy.c_str() );
     }
-    
-    typedef vector<string> vs_type;
-    vs_type::iterator first = rwys.begin();
-    vs_type::iterator last = rwys.end();
-    int index = 0;
-    while (first != last)
+}
+
+void
+UserInterface::load_airport_browser()
+{
+    apt_browser->clear();
+
+    if (apt_show_installed->value())
     {
-	index = runway->add( first->c_str() );
-	++first;
+	int count = airport->size() - 1;
+	for (int i = 0; i < count; ++i)
+	{
+	    const apt_dat_t* apt = airportdb_->find( airport->text(i) );
+	    if (apt != 0)
+	    {
+		char buf[ 80 ];
+		snprintf( buf, sizeof buf, "@f%-4.4s\t%-s",
+			  apt->id_.c_str(), apt->name_.c_str() );
+		apt_browser->add( buf );
+	    }
+	}
     }
+    else
+    {
+	// TODO
+    }
+}
 
-    runway->activate();
-    runway->value(0);
+void
+UserInterface::apt_browser_cb()
+{
+}
+
+void
+UserInterface::apt_id_cb()
+{
+}
+
+void
+UserInterface::apt_name_cb()
+{
+}
+
+void
+load_airportdb_cb( void* v )
+{
+    ((UserInterface*)v)->load_airportdb();
+    Fl::remove_idle( load_airportdb_cb, v );
+}
+
+void
+UserInterface::load_airportdb()
+{
+    airportdb_ = new AirportDB;
+
+    char buf[FL_PATH_MAX];
+    snprintf( buf, sizeof(buf), "%s/Airports/runways.dat.gz",
+	      fg_root->value() );
+
+    try
+    {
+	airportdb_->load( buf );
+    }
+    catch (const char* msg)
+    {
+	fl_alert( "Error loading airport database: %s", msg );
+	//delete airportdb_;
+    }
 }
