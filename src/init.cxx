@@ -20,7 +20,9 @@
 //
 // $Id$
 
-#include <sstream>
+#include <fstream>
+#include <string>
+
 #include <FL/filename.h>
 #include <FL/Fl_File_Chooser.h>
 
@@ -78,19 +80,11 @@ UserInterface::fg_root_cb()
 {
     char* p = fl_dir_chooser( "Select FG_ROOT directory",
 			      fg_root->value(), 0);
-    if (p != 0)
-    {
-	fg_root->value( p );
-	std::ostringstream oss;
-	oss << p << "/Scenery";
+    if (p == 0)
+	return;
 
-	if (fl_filename_isdir( oss.str().c_str() ))
-	{
-	    fg_scenery->value( oss.str().c_str() );
-	    airport_update->activate();
-	    aircraft_update->activate();
-	}
-    }
+    fg_root->value( p );
+    fg_root_update_cb();
 }
 
 void
@@ -112,4 +106,61 @@ UserInterface::fg_browser_cb()
     char* p = fl_file_chooser("Select browser", 0, browser->value(), 0);
     if (p != 0)
 	browser->value( p );
+}
+
+using std::string;
+
+#if defined(WIN32) || defined(__EMX__) && !defined(__CYGWIN__)
+static inline bool isdirsep(char c) {return c=='/' || c=='\\';}
+#else
+static inline bool isdirsep(char c) { return c =='/'; }
+#endif
+
+static bool
+is_valid_fg_root( const string& dir )
+{
+    if (!fl_filename_isdir( dir.c_str() ))
+	return false;
+
+    string fname( dir );
+    fname.append( "/version" );
+    std::ifstream file( fname.c_str() );
+    return file.is_open();
+}
+
+void
+UserInterface::fg_root_update_cb()
+{ 
+    airport_update->deactivate();
+    aircraft_update->deactivate();
+
+    if (fg_root->size() == 0)
+	return;
+
+    string dir( fg_root->value() );
+
+    // Remove trailing separator.
+    if (isdirsep( dir[ dir.length() - 1 ] ))
+    {
+	dir.erase( dir.length() - 1 );
+    }
+
+    if (!is_valid_fg_root( dir ))
+    {
+	dir.append( "/data" );
+	if (!is_valid_fg_root( dir ))
+	    return;
+    }
+
+    fg_root->value( dir.c_str() );
+    dir.append( "/Scenery" );
+    fg_scenery->value( dir.c_str() );
+
+    airport_update->activate();
+    aircraft_update->activate();
+}
+
+void
+UserInterface::fg_scenery_update_cb()
+{
 }
