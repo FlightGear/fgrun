@@ -27,4 +27,6 @@ UserInterface::init()
     {
 	Fl::add_idle(update_aircraft_cb, this);
     }
+
+    update_airports_cb();
 }
