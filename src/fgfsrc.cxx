@@ -126,6 +126,8 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--wind=" << wind->value();
 	if (turbulence->value() > 0)
 	    ofs << "\n--turbulence=" << turbulence->value();
+	if (ceiling->size() > 0)
+	    ofs << "\n--ceiling=" << ceiling->value();
 
 	// Freeze
 	if (freeze->value())

@@ -69,6 +69,7 @@ UserInterface::save_settings_cb()
     prefs.set("in_air", in_air->value());
     prefs.set("wind", wind->value());
     prefs.set("turbulence", turbulence->value());
+    prefs.set("ceiling", ceiling->value());
 
     prefs.set("freeze", freeze->value());
     prefs.set("fuel_freeze", fuel_freeze->value());
@@ -278,6 +279,8 @@ UserInterface::load_settings_cb()
     wind->value(buf);
     prefs.get("turbulence", dVal, 0.0 );
     turbulence->value(dVal);
+    prefs.get("ceiling", buf, "", buflen-1);
+    ceiling->value(buf);
 
     prefs.get("freeze", iVal, 0);
     freeze->value(iVal);
