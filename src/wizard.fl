@@ -27,7 +27,7 @@ class Wizard {open
       label {FlightGear Wizard} open
       private xywh {619 204 640 480} type Double visible
     } {
-      Fl_Wizard wiz {open
+      Fl_Wizard wiz {
         private xywh {0 0 640 440}
         code0 {win->resizable( wiz );}
       } {
@@ -146,7 +146,7 @@ class Wizard {open
             class AirportBrowser
           }
         }
-        Fl_Group {page[3]} {open selected
+        Fl_Group {page[3]} {open
           private xywh {0 0 640 440}
         } {
           Fl_Output text2 {
@@ -428,4 +428,37 @@ class Wizard {open
   decl {void multiplay_in_cb();} {}
   decl {void multiplay_out_cb();} {}
   decl {void update_basic_options();} {}
+  decl {pthread_t th;} {}
+  decl {static void *startFlightGear_cb( void *d );} {}
+  decl {void startFlightGear_cb();} {}
+  Function {make_launch_window()} {open private
+  } {
+    Fl_Window launch_window {
+      label {FlightGear running...} open
+      private xywh {580 456 455 155} type Double visible
+    } {
+      Fl_Group {} {open
+        private xywh {15 25 425 115}
+      } {
+        Fl_Box {} {
+          label {FlightGear is now started}
+          private xywh {15 25 425 25} labelfont 1 labelsize 18 align 128
+        }
+        Fl_Box {} {
+          label {Please wait...}
+          private xywh {15 50 425 25} labelfont 1
+        }
+        Fl_Box {} {
+          label {To change aircraft, exit FlightGear}
+          private xywh {15 90 425 25} labelfont 1
+        }
+        Fl_Box {} {
+          label {and return to this launcher} selected
+          private xywh {15 115 425 25} labelfont 1
+        }
+      }
+    }
+  }
+  decl {int launch_result;} {}
+  decl {void exec_launch_window();} {}
 } 

@@ -583,3 +583,30 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
     o->end();
   }
 }
+
+Fl_Double_Window* Wizard::make_launch_window() {
+  Fl_Double_Window* w;
+  { Fl_Double_Window* o = launch_window = new Fl_Double_Window(455, 155, "FlightGear running...");
+    w = o;
+    o->user_data((void*)(this));
+    { Fl_Group* o = new Fl_Group(15, 25, 425, 115);
+      { Fl_Box* o = new Fl_Box(15, 25, 425, 25, "FlightGear is now started");
+        o->labelfont(1);
+        o->labelsize(18);
+        o->align(FL_ALIGN_WRAP);
+      }
+      { Fl_Box* o = new Fl_Box(15, 50, 425, 25, "Please wait...");
+        o->labelfont(1);
+      }
+      { Fl_Box* o = new Fl_Box(15, 90, 425, 25, "To change aircraft, exit FlightGear");
+        o->labelfont(1);
+      }
+      { Fl_Box* o = new Fl_Box(15, 115, 425, 25, "and return to this launcher");
+        o->labelfont(1);
+      }
+      o->end();
+    }
+    o->end();
+  }
+  return w;
+}

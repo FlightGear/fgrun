@@ -205,5 +205,12 @@ private:
   void multiplay_in_cb();
   void multiplay_out_cb();
   void update_basic_options();
+  pthread_t th;
+  static void *startFlightGear_cb( void *d );
+  void startFlightGear_cb();
+  Fl_Double_Window* make_launch_window();
+  Fl_Double_Window *launch_window;
+  int launch_result;
+  void exec_launch_window();
 };
 #endif

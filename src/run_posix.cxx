@@ -79,10 +79,15 @@ Wizard::run_fgfs( const std::string &args )
 	if (master < 0)
 	    return;
 
+	Fl::lock();
 	logwin->clear();
 	logwin->show();
 
 	Fl::add_fd( master, stdout_cb, this );
+	Fl::unlock();
+
+	int status;
+	waitpid( pid, &status, 0 );
 
 	return;
     }

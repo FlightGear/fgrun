@@ -127,6 +127,8 @@ Wizard::init( bool fullscreen )
 {
     static const int npages = 5;
 
+    make_launch_window();
+
     for (int i = 0; i < npages; ++i)
         page[i]->hide();
 
@@ -361,11 +363,9 @@ Wizard::next_cb()
     {
 	prefs.flush();
 
-	std::ostringstream ostr;
-	if (write_fgfsrc( ostr, " " ))
-	{
-	    run_fgfs(ostr.str());
-	}
+	int err = pthread_create( &th, 0, &Wizard::startFlightGear_cb, (void *)this );
+
+	exec_launch_window();
 	return;
     }
 
@@ -1306,4 +1306,36 @@ Wizard::update_basic_options()
 	    }
 	}
     }
+}
+
+void *
+Wizard::startFlightGear_cb( void *d )
+{
+    static_cast<Wizard *>( d )->startFlightGear_cb();
+    return 0;
+}
+
+void
+Wizard::startFlightGear_cb()
+{
+    std::ostringstream ostr;
+    if (write_fgfsrc( ostr, " " ))
+    {
+	run_fgfs(ostr.str());
+	launch_result = 0;
+	launch_window->hide();
+    }
+}
+
+void
+Wizard::exec_launch_window()
+{
+    launch_result = -1;
+    launch_window->set_modal();
+    launch_window->show();
+    while ( launch_result == -1 )
+    {
+	Fl::wait();
+    }
+    launch_window->set_non_modal();
 }

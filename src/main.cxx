@@ -84,6 +84,8 @@ parse_args( int, char** argv, int& i )
 int
 main( int argc, char* argv[] )
 {
+    Fl::lock(); // initialize multithreading
+
     int i = 0;
     if (Fl::args( argc, argv, i, parse_args ) < argc)
     {
