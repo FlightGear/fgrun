@@ -3,20 +3,6 @@
 #include "wizard.h"
 #include "folder_open.xpm"
 
-inline void Wizard::cb_next_i(Fl_Button*, void*) {
-  next_cb();
-}
-void Wizard::cb_next(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->user_data()))->cb_next_i(o,v);
-}
-
-inline void Wizard::cb_prev_i(Fl_Button*, void*) {
-  prev_cb();
-}
-void Wizard::cb_prev(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->user_data()))->cb_prev_i(o,v);
-}
-
 inline void Wizard::cb_fg_exe__i(Fl_Input*, void*) {
   fg_exe_update_cb();
 }
@@ -56,28 +42,14 @@ inline void Wizard::cb_scenery_dir_up__i(Fl_Button*, void*) {
   scenery_dir_up_cb();
 }
 void Wizard::cb_scenery_dir_up_(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_scenery_dir_up__i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_up__i(o,v);
 }
 
 inline void Wizard::cb_scenery_dir_down__i(Fl_Button*, void*) {
   scenery_dir_down_cb();
 }
 void Wizard::cb_scenery_dir_down_(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_scenery_dir_down__i(o,v);
-}
-
-inline void Wizard::cb_scenery_dir_delete__i(Fl_Button*, void*) {
-  scenery_dir_delete_cb();
-}
-void Wizard::cb_scenery_dir_delete_(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_scenery_dir_delete__i(o,v);
-}
-
-inline void Wizard::cb_Add_i(Fl_Button*, void*) {
-  scenery_dir_add_cb();
-}
-void Wizard::cb_Add(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_Add_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_down__i(o,v);
 }
 
 inline void Wizard::cb_cache_delete__i(Fl_Button*, void*) {
@@ -85,6 +57,20 @@ inline void Wizard::cb_cache_delete__i(Fl_Button*, void*) {
 }
 void Wizard::cb_cache_delete_(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_cache_delete__i(o,v);
+}
+
+inline void Wizard::cb_Add_i(Fl_Button*, void*) {
+  scenery_dir_add_cb();
+}
+void Wizard::cb_Add(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Add_i(o,v);
+}
+
+inline void Wizard::cb_scenery_dir_delete__i(Fl_Button*, void*) {
+  scenery_dir_delete_cb();
+}
+void Wizard::cb_scenery_dir_delete_(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_delete__i(o,v);
 }
 
 inline void Wizard::cb_aircraft_i(Fl_Browser*, void*) {
@@ -98,14 +84,28 @@ inline void Wizard::cb_Advanced_i(Fl_Button*, void*) {
   advanced_cb();
 }
 void Wizard::cb_Advanced(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_Advanced_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Advanced_i(o,v);
+}
+
+inline void Wizard::cb_next_i(Fl_Button*, void*) {
+  next_cb();
+}
+void Wizard::cb_next(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->user_data()))->cb_next_i(o,v);
+}
+
+inline void Wizard::cb_prev_i(Fl_Button*, void*) {
+  prev_cb();
+}
+void Wizard::cb_prev(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->user_data()))->cb_prev_i(o,v);
 }
 
 inline void Wizard::cb_cancel_i(Fl_Button*, void*) {
   cancel_cb();
 }
 void Wizard::cb_cancel(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->user_data()))->cb_cancel_i(o,v);
+  ((Wizard*)(o->parent()->parent()->user_data()))->cb_cancel_i(o,v);
 }
 
 Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm) {
@@ -113,18 +113,11 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
   { Fl_Double_Window* o = win = new Fl_Double_Window(640, 480, "FlightGear Wizard");
     w = o;
     o->user_data((void*)(this));
-    { Fl_Button* o = next = new Fl_Button(490, 450, 70, 25, "Next");
-      o->labelsize(12);
-      o->callback((Fl_Callback*)cb_next);
-    }
-    { Fl_Button* o = prev = new Fl_Button(415, 450, 70, 25, "Prev");
-      o->labelsize(12);
-      o->callback((Fl_Callback*)cb_prev);
-    }
     { Fl_Wizard* o = wiz = new Fl_Wizard(0, 0, 640, 440);
       { Fl_Group* o = page[0] = new Fl_Group(0, 0, 640, 440, "Select Paths");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        o->hide();
         { Fl_Help_View* o = about_ = new Fl_Help_View(5, 25, 630, 115);
           o->labeltype(FL_NO_LABEL);
         }
@@ -160,25 +153,21 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->textsize(12);
           o->callback((Fl_Callback*)cb_scenery_dir_list_);
           o->align(FL_ALIGN_LEFT);
+          Fl_Group::current()->resizable(o);
         }
-        { Fl_Button* o = scenery_dir_up_ = new Fl_Button(470, 275, 25, 25, "@8>");
-          o->callback((Fl_Callback*)cb_scenery_dir_up_);
-          o->deactivate();
-        }
-        { Fl_Button* o = scenery_dir_down_ = new Fl_Button(470, 305, 25, 25, "@2>");
-          o->callback((Fl_Callback*)cb_scenery_dir_down_);
-          o->deactivate();
-        }
-        { Fl_Button* o = scenery_dir_delete_ = new Fl_Button(195, 245, 60, 25, "Delete");
-          o->tooltip("Delete a scenery directory");
-          o->labelsize(12);
-          o->callback((Fl_Callback*)cb_scenery_dir_delete_);
-          o->deactivate();
-        }
-        { Fl_Button* o = new Fl_Button(130, 245, 60, 25, "Add...");
-          o->tooltip("Add a scenery directory");
-          o->labelsize(12);
-          o->callback((Fl_Callback*)cb_Add);
+        { Fl_Group* o = new Fl_Group(470, 275, 25, 60);
+          { Fl_Button* o = scenery_dir_up_ = new Fl_Button(470, 275, 25, 25, "@8>");
+            o->callback((Fl_Callback*)cb_scenery_dir_up_);
+            o->deactivate();
+          }
+          { Fl_Button* o = scenery_dir_down_ = new Fl_Button(470, 305, 25, 25, "@2>");
+            o->callback((Fl_Callback*)cb_scenery_dir_down_);
+            o->deactivate();
+          }
+          { Fl_Box* o = new Fl_Box(470, 330, 25, 5);
+            Fl_Group::current()->resizable(o);
+          }
+          o->end();
         }
         { Fl_Button* o = cache_delete_ = new Fl_Button(470, 370, 60, 25, "Delete");
           o->labelsize(12);
@@ -189,12 +178,28 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->labelsize(12);
           o->textsize(12);
         }
+        { Fl_Group* o = new Fl_Group(130, 245, 335, 25);
+          { Fl_Button* o = new Fl_Button(130, 245, 60, 25, "Add...");
+            o->tooltip("Add a scenery directory");
+            o->labelsize(12);
+            o->callback((Fl_Callback*)cb_Add);
+          }
+          { Fl_Button* o = scenery_dir_delete_ = new Fl_Button(195, 245, 60, 25, "Delete");
+            o->tooltip("Delete a scenery directory");
+            o->labelsize(12);
+            o->callback((Fl_Callback*)cb_scenery_dir_delete_);
+            o->deactivate();
+          }
+          { Fl_Box* o = new Fl_Box(260, 245, 205, 25);
+            Fl_Group::current()->resizable(o);
+          }
+          o->end();
+        }
         o->end();
       }
       { Fl_Group* o = page[1] = new Fl_Group(0, 0, 640, 440, "Select an aircraft");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        o->hide();
         { Fl_Browser* o = aircraft = new Fl_Browser(5, 20, 200, 415);
           o->type(2);
           o->labelsize(12);
@@ -212,6 +217,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->labelcolor(FL_BLACK);
           o->align(FL_ALIGN_CENTER);
           o->when(FL_WHEN_RELEASE);
+          Fl_Group::current()->resizable(o);
         }
         o->end();
       }
@@ -229,6 +235,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->labelcolor(FL_BLACK);
           o->align(FL_ALIGN_CENTER);
           o->when(FL_WHEN_RELEASE);
+          Fl_Group::current()->resizable(o);
         }
         o->end();
       }
@@ -237,9 +244,16 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         { Fl_Output* o = text = new Fl_Output(0, 0, 640, 350);
           o->type(12);
           o->box(FL_THIN_DOWN_BOX);
+          Fl_Group::current()->resizable(o);
         }
-        { Fl_Button* o = new Fl_Button(545, 380, 90, 25, "Advanced...");
-          o->callback((Fl_Callback*)cb_Advanced);
+        { Fl_Group* o = new Fl_Group(0, 380, 640, 25);
+          { Fl_Button* o = new Fl_Button(545, 380, 90, 25, "Advanced...");
+            o->callback((Fl_Callback*)cb_Advanced);
+          }
+          { Fl_Box* o = new Fl_Box(0, 380, 545, 25);
+            Fl_Group::current()->resizable(o);
+          }
+          o->end();
         }
         o->end();
       }
@@ -251,9 +265,23 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       win->resizable( wiz );
       o->end();
     }
-    { Fl_Button* o = cancel = new Fl_Button(565, 450, 70, 25, "Quit");
-      o->labelsize(12);
-      o->callback((Fl_Callback*)cb_cancel);
+    { Fl_Group* o = new Fl_Group(0, 450, 640, 25);
+      { Fl_Button* o = next = new Fl_Button(490, 450, 70, 25, "Next");
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_next);
+      }
+      { Fl_Button* o = prev = new Fl_Button(415, 450, 70, 25, "Prev");
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_prev);
+      }
+      { Fl_Button* o = cancel = new Fl_Button(565, 450, 70, 25, "Quit");
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_cancel);
+      }
+      { Fl_Box* o = new Fl_Box(0, 450, 415, 25);
+        Fl_Group::current()->resizable(o);
+      }
+      o->end();
     }
     o->end();
   }

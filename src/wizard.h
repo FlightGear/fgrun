@@ -9,12 +9,13 @@
 #include <FL/Fl_Pixmap.H>
 class LogWindow;
 #include <FL/Fl_Double_Window.H>
-#include <FL/Fl_Button.H>
 #include <FL/Fl_Wizard.H>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Help_View.H>
 #include <FL/Fl_Input.H>
+#include <FL/Fl_Button.H>
 #include <FL/Fl_Browser.H>
+#include <FL/Fl_Box.H>
 #include <FL/Fl_Output.H>
 #include "Fl_Plib.h"
 #include "AirportBrowser.h"
@@ -24,12 +25,6 @@ public:
   Wizard() ;
 private:
   Fl_Double_Window *win;
-  Fl_Button *next;
-  inline void cb_next_i(Fl_Button*, void*);
-  static void cb_next(Fl_Button*, void*);
-  Fl_Button *prev;
-  inline void cb_prev_i(Fl_Button*, void*);
-  static void cb_prev(Fl_Button*, void*);
   Fl_Wizard *wiz;
   Fl_Help_View *about_;
   Fl_Input *fg_exe_;
@@ -51,15 +46,15 @@ private:
   Fl_Button *scenery_dir_down_;
   inline void cb_scenery_dir_down__i(Fl_Button*, void*);
   static void cb_scenery_dir_down_(Fl_Button*, void*);
-  Fl_Button *scenery_dir_delete_;
-  inline void cb_scenery_dir_delete__i(Fl_Button*, void*);
-  static void cb_scenery_dir_delete_(Fl_Button*, void*);
-  inline void cb_Add_i(Fl_Button*, void*);
-  static void cb_Add(Fl_Button*, void*);
   Fl_Button *cache_delete_;
   inline void cb_cache_delete__i(Fl_Button*, void*);
   static void cb_cache_delete_(Fl_Button*, void*);
   Fl_Output *cache_file_;
+  inline void cb_Add_i(Fl_Button*, void*);
+  static void cb_Add(Fl_Button*, void*);
+  Fl_Button *scenery_dir_delete_;
+  inline void cb_scenery_dir_delete__i(Fl_Button*, void*);
+  static void cb_scenery_dir_delete_(Fl_Button*, void*);
   Fl_Browser *aircraft;
   inline void cb_aircraft_i(Fl_Browser*, void*);
   static void cb_aircraft(Fl_Browser*, void*);
@@ -71,6 +66,12 @@ private:
 public:
   Fl_Group *page[5];
 private:
+  Fl_Button *next;
+  inline void cb_next_i(Fl_Button*, void*);
+  static void cb_next(Fl_Button*, void*);
+  Fl_Button *prev;
+  inline void cb_prev_i(Fl_Button*, void*);
+  static void cb_prev(Fl_Button*, void*);
   Fl_Button *cancel;
   inline void cb_cancel_i(Fl_Button*, void*);
   static void cb_cancel(Fl_Button*, void*);

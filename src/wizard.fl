@@ -25,25 +25,15 @@ class Wizard {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
-      private xywh {560 29 640 480} type Double visible
+      private xywh {619 204 640 480} type Double visible
     } {
-      Fl_Button next {
-        label Next
-        callback {next_cb();}
-        private xywh {490 450 70 25} labelsize 12
-      }
-      Fl_Button prev {
-        label Prev
-        callback {prev_cb();}
-        private xywh {415 450 70 25} labelsize 12
-      }
       Fl_Wizard wiz {open
         private xywh {0 0 640 440}
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
           label {Select Paths}
-          xywh {0 0 640 440} labelfont 1 align 21
+          xywh {0 0 640 440} labelfont 1 align 21 hide
         } {
           Fl_Help_View about_ {
             private xywh {5 25 630 115} labeltype NO_LABEL
@@ -71,27 +61,24 @@ class Wizard {open
           Fl_Browser scenery_dir_list_ {
             label {FG_SCENERY:}
             callback {scenery_dir_select_cb();}
-            private tooltip {Scenery directories} xywh {130 275 335 55} type Hold labelsize 12 align 4 textsize 12
+            private tooltip {Scenery directories} xywh {130 275 335 55} type Hold labelsize 12 align 4 textsize 12 resizable
           }
-          Fl_Button scenery_dir_up_ {
-            label {@8>}
-            callback {scenery_dir_up_cb();}
-            private xywh {470 275 25 25} deactivate
-          }
-          Fl_Button scenery_dir_down_ {
-            label {@2>}
-            callback {scenery_dir_down_cb();}
-            private xywh {470 305 25 25} deactivate
-          }
-          Fl_Button scenery_dir_delete_ {
-            label Delete
-            callback {scenery_dir_delete_cb();}
-            private tooltip {Delete a scenery directory} xywh {195 245 60 25} labelsize 12 deactivate
-          }
-          Fl_Button {} {
-            label {Add...}
-            callback {scenery_dir_add_cb();}
-            private tooltip {Add a scenery directory} xywh {130 245 60 25} labelsize 12
+          Fl_Group {} {
+            xywh {470 275 25 60}
+          } {
+            Fl_Button scenery_dir_up_ {
+              label {@8>}
+              callback {scenery_dir_up_cb();}
+              private xywh {470 275 25 25} deactivate
+            }
+            Fl_Button scenery_dir_down_ {
+              label {@2>}
+              callback {scenery_dir_down_cb();}
+              private xywh {470 305 25 25} deactivate
+            }
+            Fl_Box {} {
+              xywh {470 330 25 5} resizable
+            }
           }
           Fl_Button cache_delete_ {
             label Delete
@@ -102,18 +89,35 @@ class Wizard {open
             label {Airports Cache:}
             private xywh {130 370 335 25} labelsize 12 textsize 12
           }
+          Fl_Group {} {
+            xywh {130 245 335 25}
+          } {
+            Fl_Button {} {
+              label {Add...}
+              callback {scenery_dir_add_cb();}
+              private tooltip {Add a scenery directory} xywh {130 245 60 25} labelsize 12
+            }
+            Fl_Button scenery_dir_delete_ {
+              label Delete
+              callback {scenery_dir_delete_cb();}
+              private tooltip {Delete a scenery directory} xywh {195 245 60 25} labelsize 12 deactivate
+            }
+            Fl_Box {} {
+              xywh {260 245 205 25} resizable
+            }
+          }
         }
         Fl_Group {page[1]} {
           label {Select an aircraft}
-          private xywh {0 0 640 440} labelfont 1 align 21 hide
+          private xywh {0 0 640 440} labelfont 1 align 21
         } {
           Fl_Browser aircraft {
             callback {preview_aircraft();}
             private xywh {5 20 200 415} type Hold labelsize 12 align 1 textsize 12
           }
           Fl_Box preview {
-            label Preview
-            private xywh {210 20 425 415} box THIN_DOWN_BOX labelsize 12
+            label Preview selected
+            private xywh {210 20 425 415} box THIN_DOWN_BOX labelsize 12 resizable
             code0 {\#include "Fl_Plib.h"}
             class Fl_Plib
           }
@@ -123,7 +127,7 @@ class Wizard {open
           private xywh {0 0 640 440} labelfont 1 align 21 hide
         } {
           Fl_Box airports_ {
-            private xywh {5 25 630 410}
+            private xywh {5 25 630 410} resizable
             code0 {\#include "AirportBrowser.h"}
             class AirportBrowser
           }
@@ -132,22 +136,46 @@ class Wizard {open
           private xywh {0 0 640 440} hide
         } {
           Fl_Output text {
-            private xywh {0 0 640 350} type Multiline box THIN_DOWN_BOX
+            private xywh {0 0 640 350} type Multiline box THIN_DOWN_BOX resizable
           }
-          Fl_Button {} {
-            label {Advanced...}
-            callback {advanced_cb();}
-            xywh {545 380 90 25}
+          Fl_Group {} {open
+            xywh {0 380 640 25}
+          } {
+            Fl_Button {} {
+              label {Advanced...}
+              callback {advanced_cb();}
+              xywh {545 380 90 25}
+            }
+            Fl_Box {} {
+              xywh {0 380 545 25} resizable
+            }
           }
         }
         Fl_Group {page[4]} {open
           xywh {0 0 640 440} hide deactivate
         } {}
       }
-      Fl_Button cancel {
-        label Quit
-        callback {cancel_cb();}
-        private xywh {565 450 70 25} labelsize 12
+      Fl_Group {} {open
+        xywh {0 450 640 25}
+      } {
+        Fl_Button next {
+          label Next
+          callback {next_cb();}
+          private xywh {490 450 70 25} labelsize 12
+        }
+        Fl_Button prev {
+          label Prev
+          callback {prev_cb();}
+          private xywh {415 450 70 25} labelsize 12
+        }
+        Fl_Button cancel {
+          label Quit
+          callback {cancel_cb();}
+          private xywh {565 450 70 25} labelsize 12
+        }
+        Fl_Box {} {
+          xywh {0 450 415 25} resizable
+        }
       }
     }
   }
@@ -174,8 +202,7 @@ class Wizard {open
   decl {void advanced_cb();} {}
   decl {int write_fgfsrc();} {}
   decl {int write_fgfsrc( std::ostream&, const char* pfx = "\\n");} {}
-  decl {void run_fgfs( const std::string & );} {selected
-  }
+  decl {void run_fgfs( const std::string & );} {}
   decl {static void stdout_cb( int, void* );} {}
   decl {void stdout_cb( int );} {}
   decl {void cancel_cb();} {}
