@@ -229,6 +229,7 @@ AC_LANG_POP
 
 AC_CONFIG_FILES([
 Makefile
+fgrun.vcproj
 src/Makefile
 ])
 
