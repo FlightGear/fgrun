@@ -145,6 +145,8 @@ Wizard::init( bool fullscreen )
 	    win->resize( X, Y, W, H );
     }
 
+    win->size_range( 640, 480 );
+
     logwin = new LogWindow( 640, 480, "Log Window" );
 
     const int buflen = FL_PATH_MAX;
