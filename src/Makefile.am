@@ -3,6 +3,7 @@ bin_PROGRAMS = fgrun
 fgrun_SOURCES = \
 	main.cxx \
 	FGRunUI.cxx FGRunUI.h \
+	settings.cxx \
 	ui.cxx ui.h
 
 ##fgrun_LDADD = 

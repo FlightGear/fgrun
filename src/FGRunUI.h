@@ -30,6 +30,9 @@ public:
     void reset();
 
 private:
+    int set_choice( Fl_Choice* w, const char* s );
+    void write_dot_fgfsrc();
+
     void stdout_cb_i( int fd );
     static void stdout_cb( int fd, void* );
     void stderr_cb_i( int fd );
