@@ -22,7 +22,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.3.1\&quot;"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;D:\fltk-1.1.4&quot;"
+				AdditionalIncludeDirectories="i:\fltk-1.1.4"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -39,11 +39,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib ssg_d.lib sg_d.lib ul_d.lib opengl32.lib simgear_d.lib winmm.lib"
 				OutputFile=".\Debug/fgrun.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="d:\fltk-1.1.4\lib"
+				AdditionalLibraryDirectories="i:\fltk-1.1.4\lib"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\Debug/fgrun.pdb"
 				SubSystem="2"/>
@@ -81,7 +81,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.3.1\&quot;"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="d:\fltk-1.1.4"
+				AdditionalIncludeDirectories="i:\fltk-1.1.4"
 				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
@@ -98,11 +98,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltk.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib"
+				AdditionalDependencies="fltk.lib fltkgl.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib ssg.lib sg.lib ul.lib opengl32.lib simgear.lib winmm.lib"
 				OutputFile=".\Release/fgrun.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="d:\fltk-1.1.4\lib"
+				AdditionalLibraryDirectories="i:\fltk-1.1.4\lib"
 				ProgramDatabaseFile=".\Release/fgrun.pdb"
 				SubSystem="2"/>
 			<Tool
@@ -136,7 +136,13 @@
 				RelativePath="src\AirportBrowser.cxx">
 			</File>
 			<File
-				RelativePath=".\src\FGRun_Win32.cxx">
+				RelativePath="src\AirportTable.cxx">
+			</File>
+			<File
+				RelativePath="src\Fl_Heading_Dial.cxx">
+			</File>
+			<File
+				RelativePath="src\Fl_Plib.cxx">
 			</File>
 			<File
 				RelativePath="src\Fl_Table.cxx">
@@ -145,31 +151,25 @@
 				RelativePath="src\Fl_Table_Row.cxx">
 			</File>
 			<File
-				RelativePath=".\src\UserInterface.cxx">
+				RelativePath="src\advanced.cxx">
 			</File>
 			<File
-				RelativePath="src\aircraft.cxx">
-			</File>
-			<File
-				RelativePath=".\src\airport.cxx">
-			</File>
-			<File
-				RelativePath="src\airportdb.cxx">
+				RelativePath="src\advanced_funcs.cxx">
 			</File>
 			<File
 				RelativePath=".\src\fgfsrc.cxx">
 			</File>
 			<File
-				RelativePath=".\src\init.cxx">
+				RelativePath=".\src\io.cxx">
 			</File>
 			<File
-				RelativePath=".\src\io.cxx">
+				RelativePath="src\logwin.cxx">
 			</File>
 			<File
 				RelativePath=".\src\main.cxx">
 			</File>
 			<File
-				RelativePath="src\output.cxx">
+				RelativePath="src\run_win32.cxx">
 			</File>
 			<File
 				RelativePath=".\src\settings.cxx">
@@ -177,36 +177,33 @@
 			<File
 				RelativePath=".\src\util.cxx">
 			</File>
+			<File
+				RelativePath="src\wizard.cxx">
+			</File>
+			<File
+				RelativePath="src\wizard_funcs.cxx">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl">
 			<File
-				RelativePath="src\AirportBrowser.h">
+				RelativePath="src\AirportTable.h">
 			</File>
 			<File
-				RelativePath=".\src\FGRun_Win32.h">
+				RelativePath="src\Fl_Heading_Dial.H">
 			</File>
 			<File
-				RelativePath="src\Fl_Table.H">
+				RelativePath="src\Fl_Plib.h">
 			</File>
 			<File
-				RelativePath="src\Fl_Table_Row.H">
+				RelativePath="src\advanced.h">
 			</File>
 			<File
-				RelativePath=".\src\UserInterface.h">
+				RelativePath="src\logwin.h">
 			</File>
 			<File
-				RelativePath="src\airportdb.h">
-			</File>
-			<File
-				RelativePath="src\fgrun_pty.h">
-			</File>
-			<File
-				RelativePath="src\output.h">
-			</File>
-			<File
-				RelativePath="src\util.h">
+				RelativePath="src\wizard.h">
 			</File>
 		</Filter>
 		<Filter
@@ -217,4 +214,3 @@
 	<Globals>
 	</Globals>
 </VisualStudioProject>
-
