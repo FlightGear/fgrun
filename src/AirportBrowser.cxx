@@ -1,6 +1,6 @@
-// AirportBrowser.cxx -- Fl_Table based airport browser.
+// AirportBrowser.cxx -- Airport and runway browser widget.
 //
-// Written by Bernie Bright, started Aug 2003.
+// Written by Bernie Bright, started Oct 2003.
 //
 // Copyright (c) 2003  Bernie Bright - bbright@users.sourceforge.net
 //
@@ -22,46 +22,69 @@
 
 #include <iostream>
 #include <algorithm>
-#include <string>
-#include <cctype>
+#include <deque>
+#include <iterator>
 
-#include <FL/fl_draw.h>
+#include <FL/filename.H>
+#include <FL/Fl_Round_Button.H>
 
 #include "AirportBrowser.h"
-#include "airportdb.h"
-#include "UserInterface.h"
-#include "util.h"
+#include "AirportTable.h"
 
 using std::string;
+using std::vector;
+using std::deque;
+using std::cout;
 
-/**
- * 
- */
-class SortColumn
+AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
+				const char* l )
+    : Fl_Group( X, Y, W, H, l )
+    , gzf_(0)
+    , airports_loaded(false)
 {
-private:
-    int col_;
-    bool reverse_;
-
-public:
-    SortColumn( int col, bool reverse )
-	: col_(col), reverse_(reverse) {}
-
-    bool operator()( const apt_dat_t* a, const apt_dat_t* b ) const
     {
-	if (col_ == 0)
-	    return reverse_ ? (b->id_ < a->id_) : (a->id_ < b->id_);
-	else
-	    return reverse_ ? (b->name_ < a->name_) : (a->name_ < b->name_);
-    }
-};
+// 	Fl_Group* g = new Fl_Group( X, Y, W, 25, "Show:" );
+// 	g->align( FL_ALIGN_LEFT | FL_ALIGN_INSIDE );
+// 	//g->box( FL_ENGRAVED_BOX );
+// 	Fl_Round_Button* o;
+//  	o = new Fl_Round_Button( 60, Y, 80, 25, "All" );
+// 	o->type( FL_RADIO_BUTTON );
+// 	o->callback( show_all_cb, this );
 
-AirportBrowser::AirportBrowser( int x, int y, int w, int h, const char *l )
-    : Fl_Table_Row(x,y,w,h,l)
-    , sort_reverse_(false)
-    , sort_lastcol_(0)
-    , selected_(-1)
-{
+//  	o = new Fl_Round_Button( X+140, Y, 80, 25, "Installed" );
+//  	o->type( FL_RADIO_BUTTON );
+// 	o->callback( show_installed_cb, this );
+// 	o->setonly();
+// 	g->end();
+    }
+
+    Y += 5;
+    int tw = W - 120 - 5;
+    int th = H - 35 - 5;
+
+    table_ = new AirportTable( X, Y, tw, th );
+    table_->color( FL_LIGHT3 );
+    table_->selection_color( (Fl_Color)3 );
+    table_->labeltype( FL_NO_LABEL );
+    table_->labelfont(0);
+    table_->labelsize(14);
+    table_->labelcolor( FL_BLACK );
+    table_->callback( browser_cb, this );
+    table_->when( FL_WHEN_RELEASE );
+    table_->end();
+
+    id_ = new Fl_Input( X, Y+th+5, 75, 25 );
+    id_->textsize( 12 );
+    id_->callback( id_cb, this );
+    id_->when( FL_WHEN_CHANGED );
+
+    name_ = new Fl_Input( X+75+5, Y+th+5, tw-75-20, 25 );
+    name_->textsize( 12 );
+    name_->callback( name_cb, this );
+    name_->when( FL_WHEN_CHANGED );
+
+    runways_ = new Fl_Hold_Browser( X+tw+5, Y, 120, th, "Runways" );
+    runways_->align( FL_ALIGN_TOP );
 }
 
 AirportBrowser::~AirportBrowser()
@@ -69,230 +92,341 @@ AirportBrowser::~AirportBrowser()
 }
 
 void
-AirportBrowser::set_airports( const airports_t& apts )
+AirportBrowser::draw()
 {
-    clear();
-    fl_cursor( FL_CURSOR_WAIT );
-    Fl::check();
+    Fl_Group::draw();
+}
 
-    rowdata_ = apts;
-    rows( int(apts.size()) );
-    cols(2);
-    col_header(1);
-    //col_resize(1);
-    col_width( 1, tiw-col_width(0) );
-    row_height_all( 16 );
-    fl_cursor( FL_CURSOR_DEFAULT );
+int
+AirportBrowser::handle( int e )
+{
+    return Fl_Group::handle( e );
 }
 
 void
-AirportBrowser::sort_column( int col, bool reverse )
+AirportBrowser::col_header_cb( Fl_Widget* o, void* v )
 {
-    std::sort( rowdata_.begin(), rowdata_.end(),
-	       SortColumn( col, reverse ) );
-    redraw();
+    AirportTable* table = ((AirportTable*)v);
+    table->col_header_cb( table->callback_col() );
 }
 
 void
-AirportBrowser::draw_cell( TableContext context,
-			   int R, int C, int X, int Y, int W, int H )
+AirportBrowser::id_cb( Fl_Widget* o, void* v )
 {
-    switch (context)
+    ((AirportBrowser*)v)->id_cb();
+}
+
+void
+AirportBrowser::id_cb()
+{
+    // Convert to uppercase.
+    const char* s = id_->value();
+    for (int i = 0; s[i] != 0; ++i)
     {
-    case CONTEXT_STARTPAGE:
-// 	fl_font( FL_COURIER, 14 );
-	return;
-
-    case CONTEXT_ROW_HEADER:
-	fl_color( FL_RED );
-	fl_rectf( X, Y, W, H );
-	return;
-
-    case CONTEXT_COL_HEADER:
-	fl_font( FL_HELVETICA /*| FL_BOLD*/, 12 );
-	fl_push_clip( X, Y, W, H );
+	if (islower( s[i] ))
 	{
-	    static char* headers[2] = { "ICAO Id", "Name" };
-	    fl_draw_box( FL_THIN_UP_BOX, X, Y, W, H, col_header_color() );
-	    fl_color(FL_BLACK);
-	    fl_draw( headers[C], X+2, Y, W, H, FL_ALIGN_LEFT, 0, 0);
+	    char c = toupper( s[i] );
+	    id_->replace( i, i+1, &c, 1 );
+	}
+    }
 
-	    if (C == sort_lastcol_)
+    const apt_dat_t* apt = table_->select_id( s );
+    show_runways( apt );
+}
+
+void
+AirportBrowser::name_cb( Fl_Widget* o, void* v )
+{
+    ((AirportBrowser*)v)->name_cb();
+}
+
+void
+AirportBrowser::name_cb()
+{
+    table_->select_name( name_->value() );
+}
+
+void
+AirportBrowser::show_all_cb( Fl_Widget* o, void* v )
+{
+    ((AirportBrowser*)v)->show_all();
+}
+
+void
+AirportBrowser::show_installed_cb( Fl_Widget* o, void* v )
+{
+    ((AirportBrowser*)v)->show_installed();
+}
+
+Fl_Color
+AirportBrowser::col_header_color() const
+{
+    return table_->col_header_color();
+}
+
+void
+AirportBrowser::col_header_color( Fl_Color c )
+{
+    table_->col_header_color( c );
+}
+
+static bool
+apt_id_comp( const apt_dat_t& a, const apt_dat_t& b )
+{
+    return a.id_ < b.id_;
+}
+
+/**
+ * 
+ */
+void
+AirportBrowser::idle_proc( void* v )
+{
+    ((AirportBrowser*)v)->idle_proc();
+}
+
+void
+AirportBrowser::idle_proc( )
+{
+    int count = 200;
+    char line[128];
+    while (count-- > 0 && gzgets( gzf_, line, sizeof line ) != 0)
+    {
+	// Read 'count' airports, or until EOF or error.
+        if (line[0] == 'A' || line[0] == 'H' || line[0] == 'S')
+        {
+            string id( line+2, 4 );
+            if (id[3] == ' ')
+                id.erase(3);
+
+            string name( line+17 );
+            if (name[name.size()-1] == '\n')
+                name.erase( name.size()-1 );
+
+            apt_dat_t apt;
+            apt.id_ = id;
+            apt.name_ = name;
+            airports_.push_back( apt );
+        }
+        else if (line[0] == 'R')
+        {
+            string rwy( line+7, 3 );
+            if (rwy[2] == ' ')
+                rwy.erase(2);
+
+	    airports_.back().runways_.push_back( rwy );
+        }
+    }
+
+    if (gzeof( gzf_ ))
+    {
+	std::cout << "loaded " << airports_.size() << " airports\n";
+	gzclose( gzf_ );
+	Fl::remove_idle( idle_proc, this );
+	std::sort( airports_.begin(), airports_.end(), apt_id_comp );
+	show_installed();
+    }
+}
+
+const apt_dat_t*
+AirportBrowser::find( const string& id ) const
+{
+    apt_dat_t key;
+    key.id_ = id;
+    vector< apt_dat_t >::const_iterator
+	i( std::lower_bound( airports_.begin(), airports_.end(),
+			     key, apt_id_comp ) );
+    return i == airports_.end() ? 0 : &*i;
+}
+
+void
+AirportBrowser::scan_installed_airports( const string& dir )
+{
+    if (!fl_filename_isdir( dir.c_str() ))
+	return;
+
+    deque< string > dirs;
+    dirs.push_back( dir );
+
+    installed_airports_.clear();
+
+    do
+    {
+	string cwd( dirs.front() );
+	dirent** files;
+	int n = fl_filename_list( cwd.c_str(), &files, fl_numericsort );
+	if (n > 0)
+	{
+	    for (int i = 0; i < n; ++i)
 	    {
-		int xlft = X+(W-6)-8,
-		    xctr = X+(W-6)-4,
-		    xrit = X+(W-6)-0,
-		    ytop = Y+(H/2)-4,
-		    ybot = Y+(H/2)+4;
+		if (fl_filename_match( files[i]->d_name,
+			       "[ew][0-9][0-9][0-9][ns][0-9][0-9]*"))
+		{
+		    // Found a scenery dub-directory.
+		    string d(cwd);
+		    d += "/";
+		    d += files[i]->d_name;
+		    if (fl_filename_isdir( d.c_str() ) )
+		    {
+			dirs.push_back( d );
+		    }
+		}
+		else if (fl_filename_match( files[i]->d_name,
+					    "???.btg.gz" ) ||
+			 fl_filename_match( files[i]->d_name,
+					    "????.btg.gz" ))
+		{
+		    char* p = strstr( files[i]->d_name, ".btg" );
+		    if (p != 0)
+			*p = 0;
+		    installed_airports_.push_back(
+					  string( files[i]->d_name ) );
+		}
 
-		if ( sort_reverse_ )
-		{
-		    // ENGRAVED UP ARROW
-		    fl_color(FL_WHITE);
-		    fl_line(xrit, ybot, xctr, ytop);
-		    fl_line(xrit, ybot, xlft, ybot);
-		    fl_color(41);       // dark gray
-		    fl_line(xlft, ybot, xctr, ytop);
-		}
-		else
-		{
-		    // ENGRAVED DOWN ARROW
-		    fl_color(FL_WHITE);
-		    fl_line(xrit, ytop, xctr, ybot);
-		    fl_color(41);       // dark gray
-		    fl_line(xlft, ytop, xrit, ytop);
-		    fl_line(xlft, ytop, xctr, ybot);
-		}
+		free( files[i] );
 	    }
- 
-	}
-	fl_pop_clip();
-	return;
 
-    case CONTEXT_CELL:
-	fl_font( FL_HELVETICA, 12 );
-	fl_push_clip( X, Y, W, H );
+	    free( files );
+	}
+
+	dirs.pop_front();
+    }
+    while (!dirs.empty());
+
+    std::sort( installed_airports_.begin(), installed_airports_.end() );
+    // Remove duplicate airports.
+    installed_airports_.erase( std::unique( installed_airports_.begin(),
+					    installed_airports_.end() ),
+			       installed_airports_.end() );
+}
+
+void
+AirportBrowser::show_all()
+{
+}
+
+void
+AirportBrowser::show_installed()
+{
+    static vector<const apt_dat_t*> apts;
+    typedef vector<string>::size_type size_type;
+
+    if (apts.empty())
+    {
+	size_type count = installed_airports_.size();
+	apts.reserve( count );
+	for (size_type i = 0; i < count; ++i)
 	{
-	    fl_color( row_selected(R) ? selection_color() : FL_WHITE);
-	    fl_rectf(X, Y, W, H);
-
-	    const string& s = (C == 0 ? rowdata_[R]->id_ : rowdata_[R]->name_);
-	    fl_color(FL_BLACK);
-	    fl_draw(s.c_str(), X+2, Y, W, H, FL_ALIGN_LEFT);
-
-	    // BORDER
-	    fl_color(FL_LIGHT2); 
-	    fl_rect(X, Y, W, H);
+	    const apt_dat_t* apt = find( installed_airports_[i] );
+	    if (apt != 0)
+		apts.push_back( apt );
 	}
-	fl_pop_clip();
+    }
+
+    table_->set_airports( apts );
+}
+
+void
+AirportBrowser::init( const string& fg_root, const string& fg_scenery )
+{
+    string fname( fg_root );
+    fname += "/Airports/runways.dat.gz";
+    airports_.clear();
+    airports_.reserve( 27000 );
+
+    gzf_ = gzopen( fname.c_str(), "rb" );
+    if (gzf_ == 0)
+    {
+	std::cout << "Error opening '" << fname << "'\n";
+        throw "gzopen error";
+    }
+
+    // Skip first line.
+    char c;
+    while ((c = gzgetc(gzf_)) != -1 && c != '\n')
+        ;
+
+    // Load the file in the background.
+    Fl::add_idle( idle_proc, this );
+
+    scan_installed_airports( fg_scenery );
+}
+
+/**
+ * 
+ */
+static string
+reverse_runway( const string& rwy )
+{
+    if (!isdigit( rwy[0] ))
+        return string("");
+
+    int heading = atoi( rwy.c_str() );
+    heading += 18;
+    if (heading > 36)
+        heading -= 36;
+    char c = rwy[ rwy.length() - 1 ];
+    if (c == 'L')
+        c = 'R';
+    else if (c == 'R')
+        c = 'L';
+    else if (c != 'C')
+        c = 0;
+
+    char buf[10];
+    sprintf( buf, "%02d%c", heading, c );
+    return string(buf);
+}
+
+void
+AirportBrowser::show_runways( const apt_dat_t* apt )
+{
+    if (apt == 0)
 	return;
 
-    case CONTEXT_ENDPAGE:
-    case CONTEXT_RC_RESIZE:
-    case CONTEXT_NONE:
-    case CONTEXT_TABLE:
-	return;
+    runways_->clear();
+    runways_->add( "<default>" );
+    for (unsigned int i = 0; i < apt->runways_.size(); ++i)
+    {
+	string rwy( apt->runways_[i] );
+	runways_->add( rwy.c_str() );
+	string rev = reverse_runway( rwy );
+	if (!rev.empty())
+	    runways_->add( rev.c_str() );
     }
+    runways_->select( 1 );
 }
 
 void
-AirportBrowser::col_header_cb( int C )
+AirportBrowser::browser_cb( Fl_Widget* o, void* v )
 {
-    if (sort_lastcol_ == C)
-	sort_reverse_ = !sort_reverse_;
-    else
-	sort_reverse_ = false;
-
-    sort_column( C, sort_reverse_ );
-    sort_lastcol_ = C;
+    ((AirportBrowser*)v)->browser_cb();
 }
 
 void
-UserInterface::apt_browser_cb()
+AirportBrowser::browser_cb()
 {
-    switch( apt_browser->callback_context() )
-    {
-    case Fl_Table::CONTEXT_COL_HEADER:
-	if (Fl::event() == FL_RELEASE && Fl::event_button() == 1)
-	{
-	    apt_browser->col_header_cb( apt_browser->callback_col() );
-	}
-	break;
-
-    case Fl_Table::CONTEXT_CELL:
-	if (Fl::event() == FL_RELEASE && Fl::event_button() == 1)
-	{
-	    apt_browser->cell_cb();
-	    set_choice( airport, apt_browser->get_selected_id().c_str() );
-	}
-	break;
-
-    default:
-	return;
-    }
-}
-
-void
-AirportBrowser::cell_cb()
-{
-    selected_ = callback_row();
-}
-
-void
-AirportBrowser::select_id( const char* id )
-{
-    // Ensure we use the correct sort order.
-    if (sort_lastcol_ != 0)
-    {
-	sort_column( 0, sort_reverse_ );
-	sort_lastcol_ = 0;
-    }
-
-    apt_dat_t key;
-    key.id_ = string(id);
-
-    select_all_rows( 0 ); // de-select all rows
-
-    iterator i = std::lower_bound( rowdata_.begin(), rowdata_.end(),
-			   &key, SortColumn( 0, sort_reverse_ ) );
-    if (i != rowdata_.end())
-    {
-	selected_ = std::distance( rowdata_.begin(), i );
-	if (sort_reverse_ && selected_ > 0)
-	    --selected_;
-	top_row( selected_ );
-	select_row( selected_, 1 );
-    }
-}
-
-class NoCaseCompare
-{
-private:
-    static bool nocase_compare( char c1, char c2 )
-    {
-	return toupper(c1) < toupper(c2);
-    }
-
-public:
-
-    NoCaseCompare() {}
-
-    bool operator()( const apt_dat_t* a, const apt_dat_t* b ) const
-    {
-	return std::lexicographical_compare( a->name_.begin(), a->name_.end(),
-					     b->name_.begin(), b->name_.end(),
-					     nocase_compare );
-    }
-};
-
-void
-AirportBrowser::select_name( const char* name )
-{
-    if (sort_lastcol_ != 1)
-    {
-	sort_column( 1, sort_reverse_ );
-	sort_lastcol_ = 1;
-    }
-
-    apt_dat_t key;
-    key.name_ = string(name);
-
-    select_all_rows( 0 ); // de-select all rows
-
-    iterator i = std::lower_bound( rowdata_.begin(), rowdata_.end(),
-				   &key, NoCaseCompare() );
-    if (i != rowdata_.end())
-    {
-	selected_ = std::distance( rowdata_.begin(), i );
-	if (sort_reverse_ && selected_ > 0)
-	    --selected_;
-	top_row( selected_ );
-	select_row( selected_, 1 );
-    }
+    table_->browser_cb();
+    show_runways( table_->get_selected() );
 }
 
 string
 AirportBrowser::get_selected_id() const
 {
-    return selected_ >= 0 ? rowdata_[selected_]->id_ : string("");
+    const apt_dat_t* apt = table_->get_selected();
+    return apt == 0 ? string("") : apt->id_;
+}
+
+string
+AirportBrowser::get_selected_name() const
+{
+    const apt_dat_t* apt = table_->get_selected();
+    return apt == 0 ? string("") : apt->name_;
+}
+
+string
+AirportBrowser::get_selected_runway() const
+{
+    int n = runways_->value();
+    return n > 1 ? string( runways_->text(n) ) : string("");
 }
