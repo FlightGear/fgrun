@@ -629,7 +629,6 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 120, 25, "Game Mode");
         o->tooltip("Enable full screen game mode");
         o->down_box(FL_DOWN_BOX);
@@ -683,6 +682,21 @@ UserInterface::UserInterface() {
       }
       { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(295, 170, 120, 25, "Auto-coordination");
         o->tooltip("Enable auto-coordinated turns.");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+      }
+      { Fl_Check_Button* o = horizon_effect = new Fl_Check_Button(175, 200, 120, 25, "Horizon effect");
+        o->tooltip("Enable celestial body growth illusion near the horizon");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+      }
+      { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(175, 225, 120, 25, "Enhanced lighting");
+        o->tooltip("Enable enhanced runway lighting");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+      }
+      { Fl_Check_Button* o = distance_attenuation = new Fl_Check_Button(175, 255, 120, 25, "Distance attenuation");
+        o->tooltip("Enable runway light distance attenuation");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
@@ -1139,6 +1153,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 55, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);

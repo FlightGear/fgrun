@@ -25,8 +25,8 @@ class UserInterface {open
   Function {UserInterface()} {open
   } {
     Fl_Window main_window {
-      label {FlightGear Launch Control}
-      private xywh {576 122 640 480} labelsize 12
+      label {FlightGear Launch Control} open
+      private xywh {586 162 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -206,7 +206,7 @@ if (p != 0)
       }
       Fl_Group {page[1]} {
         label Features
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Check_Button game_mode {
           label {Game Mode}
@@ -251,6 +251,18 @@ else
         Fl_Check_Button auto_coordination {
           label {Auto-coordination}
           private tooltip {Enable auto-coordinated turns.} xywh {295 170 120 25} down_box DOWN_BOX labelsize 12
+        }
+        Fl_Check_Button horizon_effect {
+          label {Horizon effect} selected
+          private tooltip {Enable celestial body growth illusion near the horizon} xywh {175 200 120 25} down_box DOWN_BOX labelsize 12
+        }
+        Fl_Check_Button enhanced_lighting {
+          label {Enhanced lighting}
+          private tooltip {Enable enhanced runway lighting} xywh {175 225 120 25} down_box DOWN_BOX labelsize 12
+        }
+        Fl_Check_Button distance_attenuation {
+          label {Distance attenuation}
+          private tooltip {Enable runway light distance attenuation} xywh {175 255 120 25} down_box DOWN_BOX labelsize 12
         }
       }
       Fl_Group {page[2]} {
@@ -643,7 +655,7 @@ else
       }
       Fl_Group {page[8]} {
         label {Input/Output}
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -911,8 +923,7 @@ else
   decl {void load_settings_cb();} {}
   decl {void save_settings_cb();} {}
   decl {void default_settings_cb();} {}
-  decl {int write_fgfsrc();} {selected
-  }
+  decl {int write_fgfsrc();} {}
   decl {friend void update_aircraft_cb(void*);} {}
   decl {friend void search_for_airports_cb(void*);} {}
   decl {void update_airports_cb();} {}

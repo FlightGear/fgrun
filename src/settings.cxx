@@ -55,6 +55,9 @@ UserInterface::save_settings_cb()
     prefs.set("hud", hud->value());
     prefs.set("antialias_hud", antialias_hud->value());
     prefs.set("auto_coordination", auto_coordination->value());
+    prefs.set("horizon_effect", horizon_effect->value());
+    prefs.set("enhanced_lighting", enhanced_lighting->value());
+    prefs.set("distance_attenuation", distance_attenuation->value());
 
     prefs.set("fdm", fdm->text());
     prefs.set("no_trim", notrim->value());
@@ -221,6 +224,12 @@ UserInterface::load_settings_cb()
     antialias_hud->value(iVal);
     prefs.get("auto_coordination", iVal, 0);
     auto_coordination->value(iVal);
+    prefs.get("horizon_effect", iVal, 0);
+    horizon_effect->value( iVal );
+    prefs.get("enhanced_lighting", iVal, 0);
+    enhanced_lighting->value( iVal );
+    prefs.get("distance_attenuation", iVal, 0);
+    distance_attenuation->value( iVal );
 
     prefs.get("fdm", buf, "jsb", buflen-1);
     set_choice(fdm, buf);

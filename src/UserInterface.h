@@ -82,6 +82,9 @@ private:
   static void cb_hud(Fl_Check_Button*, void*);
   Fl_Check_Button *antialias_hud;
   Fl_Check_Button *auto_coordination;
+  Fl_Check_Button *horizon_effect;
+  Fl_Check_Button *enhanced_lighting;
+  Fl_Check_Button *distance_attenuation;
   Fl_Choice *fdm;
   inline void cb_fdm_i(Fl_Choice*, void*);
   static void cb_fdm(Fl_Choice*, void*);

@@ -102,6 +102,12 @@ UserInterface::write_fgfsrc()
 	}
 	if (auto_coordination->value())
 	    ofs << "\n--enable-auto-coordination";
+	if (horizon_effect->value())
+	    ofs << "\n--enable-horizon-effect";
+	if (enhanced_lighting->value())
+	    ofs << "\n--enable-enhanced-lighting";
+	if (distance_attenuation->value())
+	    ofs << "\n--enable-distance-attenuation";
 
 	// Flight model
 	if (strcmp(fdm->text(), "jsb" ) != 0)
