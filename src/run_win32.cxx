@@ -31,21 +31,24 @@ Wizard::run_fgfs()
     char exe[ buflen ];
     char root[ buflen ];
     char buf[ buflen ];
+    char aircraft[128];
 
     prefs.get( "fg_exe", buf, "", buflen-1 );
     fl_filename_absolute( exe, buf );
 
-    prefs.get( "fg_root", exe, "", FL_PATH_MAX-1);
+    prefs.get( "fg_root", buf, "", buflen-1 );
     fl_filename_absolute( root, buf );
+
+    prefs.get( "aircraft", aircraft, "", sizeof(aircraft)-1);
 
     char* cmd = new char[ strlen(exe) +
                           strlen(root) +
-                          strlen(aircraft->text()) + 26 ];
+                          strlen(aircraft) + 26 ];
     strcpy( cmd, exe );
     strcat( cmd, " --fg-root=\"" );
     strcat( cmd, root );
     strcat( cmd, "\" --aircraft=" );
-    strcat( cmd, aircraft->text() );
+    strcat( cmd, aircraft );
 
     //SECURITY_ATTRIBUTES procAttrs;
     //SECURITY_ATTRIBUTES threadAttrs;
