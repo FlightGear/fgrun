@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <sstream>
+#include <iostream>
 
 #include <string.h>
 #include <FL/Fl.h>
@@ -49,27 +50,17 @@ struct Comp
     }
 };
 
-void
-UserInterface::update_aircraft()
+static void
+search_aircraft_dir( const string& dir,
+		     bool recursive,
+		     vector<string>& ac )
 {
-    aircraft->clear();
-
-    ostringstream buf;
-    buf << fg_root->value() << "/Aircraft/";
-
     dirent** files;
-
-    // Search $FG_ROOT/Aircraft directory.
-
-    int num_files = fl_filename_list( buf.str().c_str(),
+    int num_files = fl_filename_list( dir.c_str(),
 				      &files, fl_casenumericsort );
     if (num_files < 0)
 	return;
 
-    typedef vector< string > string_vec_t;
-    typedef string_vec_t::iterator SVI;
-
-    string_vec_t ac;
     for (int i = 0; i < num_files; ++i)
     {
 	if (fl_filename_match(files[i]->d_name, "*-set.xml"))
@@ -81,9 +72,42 @@ UserInterface::update_aircraft()
 	    ac.push_back( string( files[i]->d_name ) );
 
 	}
+	else if (recursive &&
+		 strcmp( files[i]->d_name, "CVS" ) != 0 &&
+		 strcmp( files[i]->d_name, ".." ) != 0 &&
+		 strcmp( files[i]->d_name, "." ) != 0 )
+	{
+	    string d( dir );
+	    d.append( "/" );
+	    d.append( files[i]->d_name );
+	    if (fl_filename_isdir( d.c_str() ))
+	    {
+		std::cout << d << "\n";
+		search_aircraft_dir( d.c_str(), false, ac );
+	    }
+	}
+
 	free( files[i] );
     }
     free( files );
+}
+
+void
+UserInterface::update_aircraft()
+{
+    aircraft->clear();
+
+    ostringstream buf;
+    buf << fg_root->value() << "/Aircraft/";
+
+    // Search $FG_ROOT/Aircraft directory.
+
+    typedef vector< string > string_vec_t;
+    typedef string_vec_t::iterator SVI;
+
+    string_vec_t ac;
+
+    search_aircraft_dir( buf.str(), true, ac );
 
     string_vec_t submenus;
     // Hardcoded aircraft submenus.
