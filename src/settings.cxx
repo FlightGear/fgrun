@@ -183,6 +183,11 @@ Advanced::save_settings( Fl_Preferences& prefs )
     for (i = 1; i <= io_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("io-item-%d", i), io_list->text(i));
 
+    prefs.set("property-count", prop_list->size());
+    for (i = 1; i <= prop_list->size(); ++i)
+	prefs.set( Fl_Preferences::Name("property-item-%d", i),
+		   prop_list->text(i));
+
     prefs.set("env-count", env_list->size());
     for (i = 1; i <= env_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("env-var-%d", i), env_list->text(i));
@@ -471,6 +476,16 @@ Advanced::load_settings( Fl_Preferences& prefs )
 	prefs.get( Fl_Preferences::Name("io-item-%d", i), buf, "", buflen-1 );
 	io_list->add( "" );
 	io_list->text( i, buf );
+    }
+
+    prefs.get( "property-count", iVal, 0 );
+    for (i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("property-item-%d", i),
+		   buf, "", buflen-1 );
+	prop_list->add( "" );
+	prop_list->text( i, buf );
     }
 
     prefs.get( "env-count", iVal, 0 );
