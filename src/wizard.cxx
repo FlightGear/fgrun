@@ -58,11 +58,11 @@ void Wizard::cb_2(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_2_i(o,v);
 }
 
-inline void Wizard::cb_cache_delete_i(Fl_Button*, void*) {
+inline void Wizard::cb_cache_delete__i(Fl_Button*, void*) {
   delete_cache_file_cb();
 }
-void Wizard::cb_cache_delete(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_cache_delete_i(o,v);
+void Wizard::cb_cache_delete_(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_cache_delete__i(o,v);
 }
 
 inline void Wizard::cb_aircraft_i(Fl_Browser*, void*) {
@@ -103,47 +103,51 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[0] = new Fl_Group(0, 0, 640, 440, "Select Paths");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        { Fl_Input* o = fg_exe_ = new Fl_Input(130, 30, 335, 25, "Executable:");
+        { Fl_Input* o = fg_exe_ = new Fl_Input(130, 175, 335, 25, "Executable:");
           o->tooltip("Full pathname to FlightGear executable");
           o->labelsize(12);
           o->textsize(12);
           o->callback((Fl_Callback*)cb_fg_exe_);
           o->when(FL_WHEN_ENTER_KEY);
         }
-        { Fl_Button* o = new Fl_Button(470, 30, 25, 25, "...");
+        { Fl_Button* o = new Fl_Button(470, 175, 25, 25, "...");
           o->tooltip("Full pathname to FlightGear executable");
           o->labelsize(12);
           o->callback((Fl_Callback*)cb_);
         }
-        { Fl_Input* o = fg_root_ = new Fl_Input(130, 60, 335, 25, "FG_ROOT:");
+        { Fl_Input* o = fg_root_ = new Fl_Input(130, 205, 335, 25, "FG_ROOT:");
           o->tooltip("root data path");
           o->labelsize(12);
           o->textsize(12);
           o->callback((Fl_Callback*)cb_fg_root_);
           o->when(FL_WHEN_ENTER_KEY);
         }
-        { Fl_Button* o = new Fl_Button(470, 60, 25, 25, "...");
+        { Fl_Button* o = new Fl_Button(470, 205, 25, 25, "...");
           o->labelsize(12);
           o->callback((Fl_Callback*)cb_1);
         }
-        { Fl_Input* o = fg_scenery_ = new Fl_Input(130, 90, 335, 25, "FG_SCENERY:");
+        { Fl_Input* o = fg_scenery_ = new Fl_Input(130, 235, 335, 25, "FG_SCENERY:");
           o->tooltip("base scenery path");
           o->labelsize(12);
           o->textsize(12);
           o->callback((Fl_Callback*)cb_fg_scenery_);
           o->when(FL_WHEN_ENTER_KEY);
         }
-        { Fl_Button* o = new Fl_Button(470, 90, 25, 25, "...");
+        { Fl_Button* o = new Fl_Button(470, 235, 25, 25, "...");
           o->labelsize(12);
           o->callback((Fl_Callback*)cb_2);
         }
-        { Fl_Button* o = cache_delete = new Fl_Button(470, 165, 60, 25, "Delete");
+        { Fl_Button* o = cache_delete_ = new Fl_Button(470, 310, 60, 25, "Delete");
           o->labelsize(12);
-          o->callback((Fl_Callback*)cb_cache_delete);
+          o->callback((Fl_Callback*)cb_cache_delete_);
+          o->deactivate();
         }
-        { Fl_Output* o = cache_file = new Fl_Output(130, 165, 335, 25, "Cache:");
+        { Fl_Output* o = cache_file_ = new Fl_Output(130, 310, 335, 25, "Airports Cache:");
           o->labelsize(12);
           o->textsize(12);
+        }
+        { Fl_Help_View* o = about_ = new Fl_Help_View(5, 25, 630, 115);
+          o->labeltype(FL_NO_LABEL);
         }
         o->end();
       }

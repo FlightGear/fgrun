@@ -13,6 +13,7 @@ class LogWindow;
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Output.H>
+#include <FL/Fl_Help_View.H>
 #include <FL/Fl_Browser.H>
 #include "Fl_Plib.h"
 #include "AirportBrowser.h"
@@ -44,10 +45,11 @@ private:
   static void cb_fg_scenery_(Fl_Input*, void*);
   inline void cb_2_i(Fl_Button*, void*);
   static void cb_2(Fl_Button*, void*);
-  Fl_Button *cache_delete;
-  inline void cb_cache_delete_i(Fl_Button*, void*);
-  static void cb_cache_delete(Fl_Button*, void*);
-  Fl_Output *cache_file;
+  Fl_Button *cache_delete_;
+  inline void cb_cache_delete__i(Fl_Button*, void*);
+  static void cb_cache_delete_(Fl_Button*, void*);
+  Fl_Output *cache_file_;
+  Fl_Help_View *about_;
   Fl_Browser *aircraft;
   inline void cb_aircraft_i(Fl_Browser*, void*);
   static void cb_aircraft(Fl_Browser*, void*);

@@ -20,6 +20,10 @@
 //
 // $Id$
 
+#ifdef HAVE_CONFIG_H
+#  include "config.h"
+#endif
+
 #include <string>
 #include <cstdio>
 #include <vector>
@@ -91,6 +95,7 @@ Wizard::airports_cb()
     if (airports_->loaded())
     {
 	airports_->show_installed();
+	cache_delete_->activate();
 
 	const int buflen = FL_PATH_MAX;
 	char buf[ buflen ];
@@ -101,6 +106,18 @@ Wizard::airports_cb()
 	}
     }
 }
+
+static const char* about_text = "\
+<html>\
+ <head>\
+  <title>FlightGear Launch Control 0.4.0</title>\
+ </head>\
+ <body>\
+  <h1>FlightGear Launch Control 0.4.0</h1>\
+  <p>This program is released under the GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>\
+  <p>Report bugs to bbright@users.sourceforge.net</p>\
+ </body>\
+</html>";
 
 void
 Wizard::init()
@@ -114,6 +131,14 @@ Wizard::init()
 
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];
+
+    prefs.getUserdataPath( buf, sizeof(buf) );
+    SGPath cache( buf );
+    cache.append( "airports.txt" );
+    cache_file_->value( cache.c_str() );
+
+    //about_->load( "about.html" );
+    about_->value( about_text );
 
     prefs.get( "fg_exe", buf, def_fg_exe.c_str(), buflen-1);
     fg_exe_->value( buf );
@@ -154,10 +179,6 @@ Wizard::init()
 	SGPath path( fg_root_->value() );
 	path.append( "/Airports/runways.dat.gz" );
 	airports_->load_runways( path.str(), airports_cb, this );
-
-	prefs.getUserdataPath( buf, sizeof(buf) );
-	SGPath cache( buf );
-	cache.append( "airports.txt" );
 
 	path = fg_scenery_->value();
 	airports_->load_airports( path, cache, airports_cb, this );

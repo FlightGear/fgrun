@@ -19,8 +19,8 @@ class Wizard {open
   Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0)} {open
   } {
     Fl_Window win {
-      label {FlightGear Wizard}
-      private xywh {594 144 640 480} type Double resizable visible
+      label {FlightGear Wizard} open
+      private xywh {504 43 640 480} type Double resizable visible
     } {
       Fl_Button next {
         label Next
@@ -42,41 +42,44 @@ class Wizard {open
           Fl_Input fg_exe_ {
             label {Executable:}
             callback {fg_exe_update_cb();}
-            private tooltip {Full pathname to FlightGear executable} xywh {130 30 335 25} labelsize 12 when 8 textsize 12
+            private tooltip {Full pathname to FlightGear executable} xywh {130 175 335 25} labelsize 12 when 8 textsize 12
           }
           Fl_Button {} {
             label {...}
             callback {fg_exe_select_cb();}
-            private tooltip {Full pathname to FlightGear executable} xywh {470 30 25 25} labelsize 12
+            private tooltip {Full pathname to FlightGear executable} xywh {470 175 25 25} labelsize 12
           }
           Fl_Input fg_root_ {
             label {FG_ROOT:}
             callback {fg_root_update_cb();}
-            private tooltip {root data path} xywh {130 60 335 25} labelsize 12 when 8 textsize 12
+            private tooltip {root data path} xywh {130 205 335 25} labelsize 12 when 8 textsize 12
           }
           Fl_Button {} {
             label {...}
             callback {fg_root_select_cb();}
-            private xywh {470 60 25 25} labelsize 12
+            private xywh {470 205 25 25} labelsize 12
           }
           Fl_Input fg_scenery_ {
             label {FG_SCENERY:}
             callback {fg_scenery_update_cb();}
-            private tooltip {base scenery path} xywh {130 90 335 25} labelsize 12 when 8 textsize 12
+            private tooltip {base scenery path} xywh {130 235 335 25} labelsize 12 when 8 textsize 12
           }
           Fl_Button {} {
             label {...}
             callback {fg_scenery_select_cb();}
-            private xywh {470 90 25 25} labelsize 12
+            private xywh {470 235 25 25} labelsize 12
           }
-          Fl_Button cache_delete {
+          Fl_Button cache_delete_ {
             label Delete
             callback {delete_cache_file_cb();}
-            private xywh {470 165 60 25} labelsize 12
+            private xywh {470 310 60 25} labelsize 12 deactivate
           }
-          Fl_Output cache_file {
-            label {Cache:}
-            private xywh {130 165 335 25} labelsize 12 textsize 12
+          Fl_Output cache_file_ {
+            label {Airports Cache:}
+            private xywh {130 310 335 25} labelsize 12 textsize 12
+          }
+          Fl_Help_View about_ {selected
+            private xywh {5 25 630 115} labeltype NO_LABEL
           }
         }
         Fl_Group {page[1]} {
@@ -158,7 +161,6 @@ class Wizard {open
   decl {LogWindow* logwin;} {}
   decl {void cancel_cb();} {}
   decl {void delete_cache_file_cb();} {}
-  decl {static void airports_cb( Fl_Widget*, void* )} {selected
-  }
+  decl {static void airports_cb( Fl_Widget*, void* )} {}
   decl {void airports_cb();} {}
 } 
