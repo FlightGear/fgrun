@@ -83,7 +83,7 @@ Wizard::airports_cb()
 {
     if (airports_->loaded())
     {
-	airports_->show_installed();
+	airports_->show_installed( true );
 	cache_delete_->activate();
 
 	const int buflen = FL_PATH_MAX;
@@ -167,12 +167,8 @@ Wizard::init()
     }
     else
     {
-	SGPath path( fg_root_->value() );
-	path.append( "/Airports/runways.dat.gz" );
-	airports_->load_runways( path.str(), airports_cb, this );
-
-	airports_->load_airports( v, cache, airports_cb, this );
-
+	airports_->set_refresh_callback( refresh_airports, this );
+	refresh_airports();
         aircraft_update();
 
         prev->activate();
@@ -256,11 +252,16 @@ Wizard::preview_aircraft()
 
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
-            ssgEntity* model = preview->load( path.str() );
-            if (model != 0)
+            try
             {
-                Fl::add_timeout( update_period, timeout_handler, this );
+                ssgEntity* model = preview->load( path.str() );
+                if (model != 0)
+                {
+                    Fl::add_timeout( update_period, timeout_handler, this );
+                }
             }
+            catch (...)
+            {}
             win->cursor( FL_CURSOR_DEFAULT );
             preview->redraw();
         }
@@ -715,3 +716,29 @@ Wizard::scenery_dir_down_cb()
 	scenery_dir_down_->deactivate();
 }
 
+/**
+ * Force a re-scan of the scenery directories for new airports.
+ */
+void
+Wizard::refresh_airports( Fl_Widget*, void* v )
+{
+    static_cast<Wizard*>(v)->refresh_airports();
+}
+
+void
+Wizard::refresh_airports()
+{
+    win->cursor( FL_CURSOR_WAIT );
+    delete_cache_file_cb();
+
+    vector<string> v;
+    for (int i = 1; i <= scenery_dir_list_->size(); ++i)
+	v.push_back( scenery_dir_list_->text(i) );
+
+    SGPath path( fg_root_->value() );
+    path.append( "/Airports/runways.dat.gz" );
+    airports_->load_runways( path.str(), airports_cb, this );
+
+    string cache( cache_file_->value() );
+    airports_->load_airports( v, cache, airports_cb, this );
+}
