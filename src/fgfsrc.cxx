@@ -217,7 +217,8 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--start-date-gmt=" << start_date_gmt_value->value();
 	else if (start_date_lat->value())
 	    ofs << "\n--start-date-lat=" << start_date_lat_value->value();
-	if (time_offset_value->size() > 0)
+
+	if (time_match_real->value() && time_offset_value->size() > 0)
 	    ofs << "\n--time-offset=" << time_offset_value->value();
 
 	// Network.
