@@ -21,11 +21,11 @@ decl {class LogWindow;} {public
 
 class Wizard {open
 } {
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm)} {open selected
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm)} {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
-      private xywh {621 93 640 480} type Double visible
+      private xywh {560 28 640 480} type Double visible
     } {
       Fl_Button next {
         label Next
@@ -60,8 +60,8 @@ class Wizard {open
           }
           Fl_Input fg_root_ {
             label {FG_ROOT:}
-            callback {fg_root_update_cb();}
-            private tooltip {root data path} xywh {130 205 335 25} labelsize 12 when 8 textsize 12
+            callback {fg_root_update_cb();} selected
+            private tooltip {root data path} xywh {130 205 335 25} labelsize 12 when 1 textsize 12
           }
           Fl_Button {} {
             callback {fg_root_select_cb();}

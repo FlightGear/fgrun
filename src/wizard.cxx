@@ -146,7 +146,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->labelsize(12);
           o->textsize(12);
           o->callback((Fl_Callback*)cb_fg_root_);
-          o->when(FL_WHEN_ENTER_KEY);
+          o->when(FL_WHEN_CHANGED);
         }
         { Fl_Button* o = new Fl_Button(470, 205, 25, 25);
           o->labelsize(12);
