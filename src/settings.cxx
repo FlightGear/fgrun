@@ -127,6 +127,8 @@ UserInterface::save_settings_cb()
     prefs.set("start-date-gmt-value", start_date_gmt_value->value());
     prefs.set("start-date-lat", start_date_lat->value());
     prefs.set("start-date-lat-value", start_date_gmt_value->value());
+    prefs.set("time_of_day", time_of_day->value());
+    prefs.set("time_of_day_value", time_of_day_value->text());
 
     if (httpd->value())
 	prefs.set("httpd", int(httpd_port->value()));
@@ -385,6 +387,10 @@ UserInterface::load_settings_cb()
     if (iVal) start_date_lat->setonly();
     prefs.get( "start-date-lat-value", buf, "", buflen-1 );
     start_date_lat_value->value(buf);
+    prefs.get( "time_of_day", iVal, 0 );
+    if (iVal) time_of_day->setonly();
+    prefs.get( "time_of_day_value", buf, "dawn", buflen-1 );
+    set_choice( time_of_day_value, buf );
 
     prefs.get( "io-count", iVal, 0 );
     int i;

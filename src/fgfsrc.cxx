@@ -209,17 +209,18 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--fov=" << fov->value();
 
 	// Time
-	if (time_match_local->value())
-	    ofs << "\n--time-match-local";
-	else if (start_date_sys->value())
-	    ofs << "\n--start-date-sys=" << start_date_sys_value->value();
-	else if (start_date_gmt->value())
-	    ofs << "\n--start-date-gmt=" << start_date_gmt_value->value();
-	else if (start_date_lat->value())
-	    ofs << "\n--start-date-lat=" << start_date_lat_value->value();
-
 	if (time_match_real->value() && time_offset_value->size() > 0)
 	    ofs << "\n--time-offset=" << time_offset_value->value();
+	else if (time_match_local->value())
+	    ofs << "\n--time-match-local";
+	else if (start_date_sys->value() && start_date_sys_value->size() > 0)
+	    ofs << "\n--start-date-sys=" << start_date_sys_value->value();
+	else if (start_date_gmt->value() && start_date_gmt_value->size() > 0)
+	    ofs << "\n--start-date-gmt=" << start_date_gmt_value->value();
+	else if (start_date_lat->value() && start_date_lat_value->size() > 0)
+	    ofs << "\n--start-date-lat=" << start_date_lat_value->value();
+	else if (time_of_day->value())
+	    ofs << "\n--timeofday=" << time_of_day_value->text();
 
 	// Network.
 	if (httpd->value())
