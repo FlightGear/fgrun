@@ -423,7 +423,7 @@ Advanced::load_settings( Fl_Preferences& prefs )
 	env_list->text( i, buf );
     }
 
-    prefs.get( "log-level", buf, "warn", buflen-1 );
+    prefs.get( "log-level", buf, "alert", buflen-1 );
     set_choice( log_level, buf );
     prefs.get( "trace-read-count", iVal, 0 );
     for (i = 1; i <= iVal; ++i)
