@@ -202,8 +202,40 @@ Fl_Menu_Item UserInterface::menu_bpp[] = {
  {0}
 };
 
+inline void UserInterface::cb_time_match_real_i(Fl_Round_Button* o, void*) {
+  if (o->value()) {
+  time_offset_value->activate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->deactivate();
+  time_offset_value->take_focus();
+};
+}
+void UserInterface::cb_time_match_real(Fl_Round_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_time_match_real_i(o,v);
+}
+
+inline void UserInterface::cb_time_match_local_i(Fl_Round_Button* o, void*) {
+  if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->deactivate();
+};
+}
+void UserInterface::cb_time_match_local(Fl_Round_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_time_match_local_i(o,v);
+}
+
 inline void UserInterface::cb_start_date_sys_i(Fl_Round_Button* o, void*) {
   if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->activate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->deactivate();
   start_date_sys_value->take_focus();
 };
 }
@@ -213,6 +245,11 @@ void UserInterface::cb_start_date_sys(Fl_Round_Button* o, void* v) {
 
 inline void UserInterface::cb_start_date_gmt_i(Fl_Round_Button* o, void*) {
   if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->activate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->deactivate();
   start_date_gmt_value->take_focus();
 };
 }
@@ -222,18 +259,16 @@ void UserInterface::cb_start_date_gmt(Fl_Round_Button* o, void* v) {
 
 inline void UserInterface::cb_start_date_lat_i(Fl_Round_Button* o, void*) {
   if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->activate();
+  time_of_day_value->deactivate();
   start_date_lat_value->take_focus();
 };
 }
 void UserInterface::cb_start_date_lat(Fl_Round_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_start_date_lat_i(o,v);
-}
-
-inline void UserInterface::cb_time_offset_value_i(Fl_Input*, void*) {
-  time_match_real->setonly();
-}
-void UserInterface::cb_time_offset_value(Fl_Input* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_time_offset_value_i(o,v);
 }
 
 inline void UserInterface::cb_start_date_sys_value_i(Fl_Input*, void*) {
@@ -256,6 +291,28 @@ inline void UserInterface::cb_start_date_lat_value_i(Fl_Input*, void*) {
 void UserInterface::cb_start_date_lat_value(Fl_Input* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_start_date_lat_value_i(o,v);
 }
+
+inline void UserInterface::cb_time_of_day_i(Fl_Round_Button* o, void*) {
+  if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->activate();
+  time_of_day_value->take_focus();
+};
+}
+void UserInterface::cb_time_of_day(Fl_Round_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_time_of_day_i(o,v);
+}
+
+Fl_Menu_Item UserInterface::menu_time_of_day_value[] = {
+ {"dawn", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"noon", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"dusk", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"midnight", 0,  0, 0, 0, 0, 0, 12, 56},
+ {0}
+};
 
 inline void UserInterface::cb_httpd_i(Fl_Check_Button* o, void*) {
   if (o->value()) {
@@ -713,6 +770,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 120, 25, "Game Mode");
         o->tooltip("Enable full screen game mode");
         o->down_box(FL_DOWN_BOX);
@@ -1138,19 +1196,20 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Round_Button* o = time_match_real = new Fl_Round_Button(175, 50, 140, 25, "Time match real");
         o->tooltip("Synchronize simulation time with real time");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
+        o->callback((Fl_Callback*)cb_time_match_real);
       }
       { Fl_Round_Button* o = time_match_local = new Fl_Round_Button(175, 80, 140, 25, "Time match local");
         o->tooltip("Synchronize simulation time with local time");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->labelsize(12);
+        o->callback((Fl_Callback*)cb_time_match_local);
       }
       { Fl_Round_Button* o = start_date_sys = new Fl_Round_Button(175, 110, 140, 25, "Start date sys");
         o->type(102);
@@ -1175,7 +1234,6 @@ UserInterface::UserInterface() {
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->textsize(12);
-        o->callback((Fl_Callback*)cb_time_offset_value);
         o->when(3);
       }
       { Fl_Input* o = start_date_sys_value = new Fl_Input(315, 110, 140, 25);
@@ -1198,6 +1256,19 @@ UserInterface::UserInterface() {
         o->textsize(12);
         o->callback((Fl_Callback*)cb_start_date_lat_value);
         o->when(3);
+      }
+      { Fl_Round_Button* o = time_of_day = new Fl_Round_Button(175, 200, 140, 25, "Time of day");
+        o->type(102);
+        o->down_box(FL_ROUND_DOWN_BOX);
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_time_of_day);
+      }
+      { Fl_Choice* o = time_of_day_value = new Fl_Choice(315, 200, 140, 25, "choice:");
+        o->down_box(FL_BORDER_BOX);
+        o->labeltype(FL_NO_LABEL);
+        o->labelsize(12);
+        o->textsize(12);
+        o->menu(menu_time_of_day_value);
       }
       o->end();
     }
@@ -1549,18 +1620,17 @@ UserInterface::UserInterface() {
         o->when(FL_WHEN_RELEASE);
         o->end();
       }
-      { Fl_Input* o = apt_id = new Fl_Input(155, 360, 45, 25);
+      { Fl_Input* o = apt_id = new Fl_Input(155, 360, 75, 25);
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_apt_id);
         o->when(FL_WHEN_CHANGED);
       }
-      { Fl_Input* o = apt_name = new Fl_Input(215, 360, 420, 25, "input:");
+      { Fl_Input* o = apt_name = new Fl_Input(235, 360, 400, 25, "input:");
         o->labeltype(FL_NO_LABEL);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_apt_name);
         o->when(FL_WHEN_CHANGED);
-        o->deactivate();
       }
       { Fl_Button* o = apt_select = new Fl_Button(585, 395, 50, 25, "Select");
         o->labelsize(12);

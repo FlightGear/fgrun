@@ -148,7 +148,11 @@ private:
   static Fl_Menu_Item menu_bpp[];
   Fl_Value_Input *fov;
   Fl_Round_Button *time_match_real;
+  inline void cb_time_match_real_i(Fl_Round_Button*, void*);
+  static void cb_time_match_real(Fl_Round_Button*, void*);
   Fl_Round_Button *time_match_local;
+  inline void cb_time_match_local_i(Fl_Round_Button*, void*);
+  static void cb_time_match_local(Fl_Round_Button*, void*);
   Fl_Round_Button *start_date_sys;
   inline void cb_start_date_sys_i(Fl_Round_Button*, void*);
   static void cb_start_date_sys(Fl_Round_Button*, void*);
@@ -159,8 +163,6 @@ private:
   inline void cb_start_date_lat_i(Fl_Round_Button*, void*);
   static void cb_start_date_lat(Fl_Round_Button*, void*);
   Fl_Input *time_offset_value;
-  inline void cb_time_offset_value_i(Fl_Input*, void*);
-  static void cb_time_offset_value(Fl_Input*, void*);
   Fl_Input *start_date_sys_value;
   inline void cb_start_date_sys_value_i(Fl_Input*, void*);
   static void cb_start_date_sys_value(Fl_Input*, void*);
@@ -170,6 +172,11 @@ private:
   Fl_Input *start_date_lat_value;
   inline void cb_start_date_lat_value_i(Fl_Input*, void*);
   static void cb_start_date_lat_value(Fl_Input*, void*);
+  Fl_Round_Button *time_of_day;
+  inline void cb_time_of_day_i(Fl_Round_Button*, void*);
+  static void cb_time_of_day(Fl_Round_Button*, void*);
+  Fl_Choice *time_of_day_value;
+  static Fl_Menu_Item menu_time_of_day_value[];
   Fl_Check_Button *httpd;
   inline void cb_httpd_i(Fl_Check_Button*, void*);
   static void cb_httpd(Fl_Check_Button*, void*);

@@ -29,7 +29,7 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {459 115 640 480} type Double labelsize 12
+      private xywh {507 81 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -205,7 +205,7 @@ if (p != 0)
       }
       Fl_Group {page[1]} {
         label Features
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button game_mode {
           label {Game Mode}
@@ -299,7 +299,7 @@ else
           private xywh {505 125 100 25} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button failure_vacuum {
-          label vacuum selected
+          label vacuum
           private xywh {505 150 100 25} down_box DOWN_BOX labelsize 12 deactivate
         }
       }
@@ -589,20 +589,40 @@ else
         }
       }
       Fl_Group {page[6]} {
-        label Time
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        label Time open
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Round_Button time_match_real {
           label {Time match real}
+          callback {if (o->value()) {
+  time_offset_value->activate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->deactivate();
+  time_offset_value->take_focus();
+}}
           private tooltip {Synchronize simulation time with real time} xywh {175 50 140 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
         }
         Fl_Round_Button time_match_local {
           label {Time match local}
+          callback {if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->deactivate();
+}} selected
           private tooltip {Synchronize simulation time with local time} xywh {175 80 140 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
         }
         Fl_Round_Button start_date_sys {
           label {Start date sys}
           callback {if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->activate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->deactivate();
   start_date_sys_value->take_focus();
 }}
           private xywh {175 110 140 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
@@ -610,6 +630,11 @@ else
         Fl_Round_Button start_date_gmt {
           label {Start date gmt}
           callback {if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->activate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->deactivate();
   start_date_gmt_value->take_focus();
 }}
           private xywh {175 140 140 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
@@ -617,12 +642,16 @@ else
         Fl_Round_Button start_date_lat {
           label {Start date lat}
           callback {if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->activate();
+  time_of_day_value->deactivate();
   start_date_lat_value->take_focus();
 }}
           private xywh {175 170 140 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
         }
         Fl_Input time_offset_value {
-          callback {time_match_real->setonly();}
           private tooltip {Offset (+/-) from real time} xywh {315 50 140 25} labeltype NO_LABEL labelsize 12 when 3 textsize 12
         }
         Fl_Input start_date_sys_value {
@@ -636,6 +665,39 @@ else
         Fl_Input start_date_lat_value {
           callback {start_date_lat->setonly();}
           private xywh {315 170 140 25} labeltype NO_LABEL labelsize 12 when 3 textsize 12
+        }
+        Fl_Round_Button time_of_day {
+          label {Time of day}
+          callback {if (o->value()) {
+  time_offset_value->deactivate();
+  start_date_sys_value->deactivate();
+  start_date_gmt_value->deactivate();
+  start_date_lat_value->deactivate();
+  time_of_day_value->activate();
+  time_of_day_value->take_focus();
+}}
+          private xywh {175 200 140 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+        }
+        Fl_Choice time_of_day_value {
+          label {choice:} open
+          private xywh {315 200 140 25} down_box BORDER_BOX labeltype NO_LABEL labelsize 12 textsize 12
+        } {
+          menuitem {} {
+            label dawn
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label noon
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label dusk
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label midnight
+            xywh {0 0 100 20} labelsize 12
+          }
         }
       }
       Fl_Group {page[7]} {
@@ -1024,12 +1086,12 @@ else
         }
         Fl_Input apt_id {
           callback {apt_id_cb();}
-          private xywh {155 360 45 25} labelsize 12 when 1 textsize 12
+          private xywh {155 360 75 25} labelsize 12 when 1 textsize 12
         }
         Fl_Input apt_name {
           label {input:}
           callback {apt_name_cb();}
-          private xywh {215 360 420 25} labeltype NO_LABEL when 1 textsize 12 deactivate
+          private xywh {235 360 400 25} labeltype NO_LABEL when 1 textsize 12
         }
         Fl_Button apt_select {
           label Select
