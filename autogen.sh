@@ -1,6 +1,6 @@
 #!/bin/sh
 
-aclocal \
+aclocal -I . \
   && autoheader \
   && automake --add-missing --copy \
   && autoconf

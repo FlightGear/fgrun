@@ -2,7 +2,7 @@ dnl (Process this file with autoconf to produce a configure script.)
 AC_REVISION($Revision$)dnl
 AC_PREREQ(2.54)
 
-AC_INIT([fgrun], [0.4.3], [bbright@users.sourceforge.net])
+AC_INIT([fgrun], [0.4.4], [bbright@users.sourceforge.net])
 AC_CONFIG_HEADER(src/config.h)
 AC_CONFIG_SRCDIR(src/main.cxx)
 
@@ -104,23 +104,9 @@ AC_CHECK_HEADER(zlib.h,
     AC_DEFINE([HAVE_LIBZ], 1, [Define if you have the <zlib.h> header file.])
     LIBS="$LIBS -lz"))
 
+XX_PATH_PLIB(1.8.0)
 
 AC_LANG_PUSH(C++)
-
-AC_ARG_WITH(plib,    [  --with-plib=DIR         Path to plib (/usr)],
-            plib_prefix="$withval", plib_prefix="")
-
-if test x$plib_prefix != x ; then
-  CPPFLAGS="-I$plib_prefix/include $CPPFLAGS"
-  LDFLAGS="-L$plib_prefix/lib $LDFLAGS"
-fi
-
-AC_CHECK_HEADER(plib/ul.h)
-if test "x$ac_cv_header_plib_ul_h" != "xyes"; then
-  echo "plib not found.  Aborting."
-  exit
-fi
-
 
 AC_ARG_WITH(simgear, [  --with-simgear=DIR      Path to simgear (/usr/local)],
             simgear_prefix="$withval", simgear_prefix="")
