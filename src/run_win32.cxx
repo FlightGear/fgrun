@@ -64,7 +64,7 @@ Wizard::run_fgfs()
         cmd, // lpCommandLine
         NULL, // lpProcessAttributes
         NULL, // lpThreadAttributes
-        FALSE,
+        TRUE,
         creationFlags,
         NULL, // lpEnvironment
         NULL, // lpCurrentDirectory
