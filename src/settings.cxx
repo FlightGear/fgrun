@@ -212,12 +212,18 @@ FGRunUI::save_settings()
 			"flightgear.org", "fgrun/preferences" );
     Fl_Preferences prefs( app, "Settings" );
 
-    prefs.set( "fg_exe", fg_exe->value() );
-    prefs.set( "fg_root", fg_root->value() );
-    prefs.set( "fg_scenery", fg_scenery->value() );
-    prefs.set( "aircraft", aircraft->text() );
-    prefs.set( "airport", airport->text() );
-    prefs.set( "browser", browser->value() );
+    if (fg_exe->value() != 0)
+	prefs.set( "fg_exe", fg_exe->value() );
+    if (fg_root->value() != 0)
+	prefs.set( "fg_root", fg_root->value() );
+    if (fg_scenery->value() != 0)
+	prefs.set( "fg_scenery", fg_scenery->value() );
+    if (aircraft->text() != 0)
+	prefs.set( "aircraft", aircraft->text() );
+    if (airport->text() != 0)
+	prefs.set( "airport", airport->text() );
+    if (browser->value() != 0)
+	prefs.set( "browser", browser->value() );
 
     // General tab.
 
