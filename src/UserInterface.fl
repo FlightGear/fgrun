@@ -22,10 +22,11 @@ class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
-  Function {UserInterface()} {} {
+  Function {UserInterface()} {open
+  } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {501 84 640 480} labelsize 12
+      private xywh {393 57 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -662,12 +663,12 @@ else
         }
         Fl_Choice io_protocol {
           label {Protocol:}
-          callback {io_list_update_cb();}
+          callback {io_list_update_cb();} open
           private xywh {220 200 125 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           menuitem {} {
             label atc610x
-            xywh {0 0 100 20}
+            xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
             label atlas
@@ -678,8 +679,16 @@ else
             private xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
+            label generic
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
             label {joy-client}
             private xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label native
+            xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
             label {native-ctrls}
@@ -690,8 +699,8 @@ else
             private xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
-            label native
-            xywh {0 0 100 20}
+            label {native-gui}
+            xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
             label nmea
@@ -813,7 +822,7 @@ else
       }
       Fl_Group {page[9]} {
         label Properties
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser prop_list {
           callback {prop_list_select_cb( o );}
@@ -826,7 +835,7 @@ else
         }
         Fl_Input prop_text {
           label {Property:}
-          callback {prop_list_update_cb();} selected
+          callback {prop_list_update_cb();}
           private xywh {220 200 290 25} labelsize 12 when 1 textsize 12 deactivate
         }
         Fl_Button {} {
@@ -837,8 +846,34 @@ else
       }
       Fl_Group {page[10]} {
         label Debugging open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
-      } {}
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+      } {
+        Fl_Choice log_level {
+          label {Log Level:} open selected
+          private xywh {225 60 90 25} down_box BORDER_BOX labelsize 12 textsize 12
+        } {
+          menuitem {} {
+            label Verbose
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label Debug
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label Info
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label Warnings
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label Alerts
+            xywh {0 0 100 20} labelsize 12
+          }
+        }
+      }
       Fl_Group {page[11]} {
         label Environment
         private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide

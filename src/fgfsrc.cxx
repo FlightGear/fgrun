@@ -196,6 +196,8 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--prop:" << prop_list->text(i);
 	}
 
+	ofs << "\n--log-level=" << (log_level->value() + 1);
+
 	ofs << "\n";
 	ofs.close();
     }

@@ -132,6 +132,8 @@ UserInterface::save_settings_cb()
     prefs.set("env-count", env_list->size());
     for (int i = 1; i <= env_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("env-var-%d", i), env_list->text(i));
+
+    prefs.set( "log-level", log_level->value()+1 );
 }
 
 void
@@ -339,6 +341,9 @@ UserInterface::load_settings_cb()
 	env_list->add( "" );
 	env_list->text( i, buf );
     }
+
+    prefs.get( "log-level", iVal, 4 );
+    log_level->value( iVal-1 );
 }
 
 void

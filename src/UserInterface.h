@@ -239,6 +239,8 @@ private:
   static void cb_prop_text(Fl_Input*, void*);
   inline void cb_New_i(Fl_Button*, void*);
   static void cb_New(Fl_Button*, void*);
+  Fl_Choice *log_level;
+  static Fl_Menu_Item menu_log_level[];
   Fl_Group *page[12];
 public:
   Fl_Browser *env_list;

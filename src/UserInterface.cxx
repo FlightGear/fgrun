@@ -332,13 +332,15 @@ void UserInterface::cb_io_protocol(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item UserInterface::menu_io_protocol[] = {
- {"atc610x", 0,  0, 0, 0, 0, 0, 14, 56},
+ {"atc610x", 0,  0, 0, 0, 0, 0, 12, 56},
  {"atlas", 0,  0, 0, 0, 0, 0, 12, 56},
  {"garmin", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"generic", 0,  0, 0, 0, 0, 0, 12, 56},
  {"joy-client", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"native", 0,  0, 0, 0, 0, 0, 12, 56},
  {"native-ctrls", 0,  0, 0, 0, 0, 0, 12, 56},
  {"native-fdm", 0,  0, 0, 0, 0, 0, 12, 56},
- {"native", 0,  0, 0, 0, 0, 0, 14, 56},
+ {"native-gui", 0,  0, 0, 0, 0, 0, 12, 56},
  {"nmea", 0,  0, 0, 0, 0, 0, 12, 56},
  {"opengc", 0,  0, 0, 0, 0, 0, 12, 56},
  {"pve", 0,  0, 0, 0, 0, 0, 12, 56},
@@ -459,6 +461,15 @@ inline void UserInterface::cb_New_i(Fl_Button*, void*) {
 void UserInterface::cb_New(Fl_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_New_i(o,v);
 }
+
+Fl_Menu_Item UserInterface::menu_log_level[] = {
+ {"Verbose", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"Debug", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"Info", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"Warnings", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"Alerts", 0,  0, 0, 0, 0, 0, 12, 56},
+ {0}
+};
 
 inline void UserInterface::cb_env_list_i(Fl_Browser* o, void*) {
   env_list_select_cb(o);
@@ -1247,6 +1258,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = prop_list = new Fl_Browser(155, 55, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
@@ -1276,7 +1288,12 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
+      { Fl_Choice* o = log_level = new Fl_Choice(225, 60, 90, 25, "Log Level:");
+        o->down_box(FL_BORDER_BOX);
+        o->labelsize(12);
+        o->textsize(12);
+        o->menu(menu_log_level);
+      }
       o->end();
     }
     { Fl_Group* o = page[11] = new Fl_Group(150, 25, 490, 420, "Environment");
