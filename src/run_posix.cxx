@@ -50,7 +50,7 @@
 using std::string;
 
 void
-Wizard::run_fgfs()
+Wizard::run_fgfs( const std::string &args )
 {
     pid_t pid;
     int master = -1;
@@ -120,8 +120,38 @@ Wizard::run_fgfs()
 	    char* s = strdup( buf );
 	    putenv( s );
 	}
+	vector<string> argv;
+	argv.push_back( arg0 );
+	string token;
+	string line = args;
+	while ( line.size() )
+	{
+	    idx = line.find( ' ' );
+	    if ( idx == string::npos )
+	    {
+		token = line;
+		line = "";
+	    }
+	    else
+	    {
+		token = line.substr( 0, idx );
+		line.erase( 0, idx + 1 );
+	    }
+	    if ( token.size() )
+	    {
+		argv.push_back( token );
+	    }
+	}
 
-	execl( path.c_str(), arg0.c_str(), NULL );
+	char **pt = new char *[argv.size() + 1];
+	for ( vector<string>::size_type i = 0; i < argv.size(); i++ )
+	{
+	    pt[i] = new char[ argv[i].size()+1 ];
+	    strcpy( pt[i], argv[i].c_str() );
+	}
+	pt[argv.size()] = NULL;
+	execv( path.c_str(), pt );
+	perror("execv :");
     }
 }
 

@@ -6,4 +6,9 @@ confdefs.h
 config.log
 config.status
 configure
-
+INSTALL
+config.guess
+config.sub
+depcomp
+install-sh
+missing

@@ -356,9 +356,10 @@ Wizard::next_cb()
     {
 	prefs.flush();
 
-	if (write_fgfsrc())
+	std::ostringstream ostr;
+	if (write_fgfsrc( ostr, " " ))
 	{
-	    run_fgfs();
+	    run_fgfs(ostr.str());
 	}
 	return;
     }

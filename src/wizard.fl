@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0104 
+version 1.0106 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include <string>} {public
@@ -25,7 +25,7 @@ class Wizard {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
-      private xywh {560 28 640 480} type Double visible
+      private xywh {560 29 640 480} type Double visible
     } {
       Fl_Button next {
         label Next
@@ -60,7 +60,7 @@ class Wizard {open
           }
           Fl_Input fg_root_ {
             label {FG_ROOT:}
-            callback {fg_root_update_cb();} selected
+            callback {fg_root_update_cb();}
             private tooltip {root data path} xywh {130 205 335 25} labelsize 12 when 1 textsize 12
           }
           Fl_Button {} {
@@ -174,7 +174,8 @@ class Wizard {open
   decl {void advanced_cb();} {}
   decl {int write_fgfsrc();} {}
   decl {int write_fgfsrc( std::ostream&, const char* pfx = "\\n");} {}
-  decl {void run_fgfs();} {}
+  decl {void run_fgfs( const std::string & );} {selected
+  }
   decl {static void stdout_cb( int, void* );} {}
   decl {void stdout_cb( int );} {}
   decl {void cancel_cb();} {}
