@@ -20,7 +20,7 @@ class Wizard {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
-      private xywh {500 133 640 480} type Double resizable visible
+      private xywh {500 133 640 480} type Double visible
     } {
       Fl_Button next {
         label Next
@@ -32,12 +32,13 @@ class Wizard {open
         callback {prev_cb();}
         private xywh {415 450 70 25} labelsize 12
       }
-      Fl_Wizard wiz {
+      Fl_Wizard wiz {open
         private xywh {0 0 640 440}
+        code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths} open
-          xywh {0 0 640 440} labelfont 1 align 21
+          label {Select Paths}
+          xywh {0 0 640 440} labelfont 1 align 21 hide
         } {
           Fl_Help_View about_ {
             private xywh {5 25 630 115} labeltype NO_LABEL
@@ -135,7 +136,7 @@ class Wizard {open
           }
         }
         Fl_Group {page[4]} {open
-          xywh {0 0 640 440} hide deactivate
+          xywh {0 0 640 440} deactivate
         } {}
       }
       Fl_Button cancel {
@@ -155,7 +156,7 @@ class Wizard {open
   }
   decl {void update_preview();} {public
   }
-  decl {void preview_aircraft();} {selected public
+  decl {void preview_aircraft();} {public
   }
   decl {void aircraft_update();} {}
   decl {void next_cb();} {}
@@ -175,11 +176,16 @@ class Wizard {open
   decl {LogWindow* logwin;} {}
   decl {void cancel_cb();} {}
   decl {void delete_cache_file_cb();} {}
-  decl {static void airports_cb( Fl_Widget*, void* )} {}
+  decl {static void airports_cb( Fl_Widget*, void* )} {selected
+  }
   decl {void airports_cb();} {}
   decl {void scenery_dir_select_cb();} {}
   decl {void scenery_dir_add_cb();} {}
   decl {void scenery_dir_delete_cb();} {}
   decl {void scenery_dir_up_cb();} {}
   decl {void scenery_dir_down_cb();} {}
+  decl {void refresh_airports();} {public
+  }
+  decl {static void refresh_airports( Fl_Widget*, void* );} {public
+  }
 } 

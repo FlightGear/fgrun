@@ -124,6 +124,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[0] = new Fl_Group(0, 0, 640, 440, "Select Paths");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        o->hide();
         { Fl_Help_View* o = about_ = new Fl_Help_View(5, 25, 630, 115);
           o->labeltype(FL_NO_LABEL);
         }
@@ -241,10 +242,10 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->end();
       }
       { Fl_Group* o = page[4] = new Fl_Group(0, 0, 640, 440);
-        o->hide();
         o->deactivate();
         o->end();
       }
+      win->resizable( wiz );
       o->end();
     }
     { Fl_Button* o = cancel = new Fl_Button(565, 450, 70, 25, "Cancel");
@@ -252,6 +253,5 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       o->callback((Fl_Callback*)cb_cancel);
     }
     o->end();
-    o->resizable(o);
   }
 }

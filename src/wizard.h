@@ -106,5 +106,8 @@ private:
   void scenery_dir_delete_cb();
   void scenery_dir_up_cb();
   void scenery_dir_down_cb();
+public:
+  void refresh_airports();
+  static void refresh_airports( Fl_Widget*, void* );
 };
 #endif
