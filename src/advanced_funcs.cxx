@@ -123,6 +123,7 @@ Advanced::init()
     page_list->add("Debugging");
     page_list->add("Environment");
     page_list->add("Weather");
+    page_list->add("Clouds");
 
     page_list->select(1);
     show_page(0);
@@ -169,4 +170,16 @@ void
 Advanced::wind_hdg_cb()
 {
     wind_dial->value( wind_hdg->value() );
+}
+
+void
+Advanced::cloud_layer_cb()
+{
+    int n = cloud_layer_->value();
+
+    cloud_elevation_->value( cloud_elevation[n] );
+    cloud_thickness_->value( cloud_thickness[n] );
+    cloud_transition_->value( cloud_transition[n] );
+    cloud_span_->value( cloud_span[n] );
+    cloud_coverage_->value( cloud_coverage[n] );
 }

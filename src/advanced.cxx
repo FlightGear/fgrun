@@ -598,6 +598,67 @@ void Advanced::cb_wind_hdg(Fl_Value_Input* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_wind_hdg_i(o,v);
 }
 
+inline void Advanced::cb_cloud_layer__i(Fl_Choice*, void*) {
+  cloud_layer_cb();
+}
+void Advanced::cb_cloud_layer_(Fl_Choice* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_cloud_layer__i(o,v);
+}
+
+Fl_Menu_Item Advanced::menu_cloud_layer_[] = {
+ {"0", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"1", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"2", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"3", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"4", 0,  0, 0, 0, 0, 0, 12, 56},
+ {0}
+};
+
+inline void Advanced::cb_cloud_elevation__i(Fl_Value_Input*, void*) {
+  cloud_elevation[ cloud_layer_->value() ] = cloud_elevation_->value();
+}
+void Advanced::cb_cloud_elevation_(Fl_Value_Input* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_cloud_elevation__i(o,v);
+}
+
+inline void Advanced::cb_cloud_thickness__i(Fl_Value_Input*, void*) {
+  cloud_thickness[ cloud_layer_->value() ] = cloud_thickness_->value();
+}
+void Advanced::cb_cloud_thickness_(Fl_Value_Input* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_cloud_thickness__i(o,v);
+}
+
+inline void Advanced::cb_cloud_coverage__i(Fl_Choice*, void*) {
+  cloud_coverage[ cloud_layer_->value() ] = cloud_coverage_->value();
+}
+void Advanced::cb_cloud_coverage_(Fl_Choice* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_cloud_coverage__i(o,v);
+}
+
+Fl_Menu_Item Advanced::menu_cloud_coverage_[] = {
+ {"overcast", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"broken", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"scattered", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"few", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"cirrus", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"clear", 0,  0, 0, 0, 0, 0, 13, 56},
+ {0}
+};
+
+inline void Advanced::cb_cloud_span__i(Fl_Value_Input*, void*) {
+  cloud_span[ cloud_layer_->value() ] = cloud_span_->value();
+}
+void Advanced::cb_cloud_span_(Fl_Value_Input* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_cloud_span__i(o,v);
+}
+
+inline void Advanced::cb_cloud_transition__i(Fl_Value_Input*, void*) {
+  cloud_transition[ cloud_layer_->value() ] = cloud_transition_->value();
+}
+void Advanced::cb_cloud_transition_(Fl_Value_Input* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_cloud_transition__i(o,v);
+}
+
 Advanced::Advanced() {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = main_window = new Fl_Double_Window(640, 480, "Advanced Options");
@@ -1171,6 +1232,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Check_Button* o = httpd = new Fl_Check_Button(175, 35, 100, 25, "httpd");
         o->tooltip("Enable HTTP server");
         o->down_box(FL_DOWN_BOX);
@@ -1582,6 +1644,55 @@ Advanced::Advanced() {
         o->tooltip("FT_ASL[:THICKNESS_FT]");
         o->labelsize(12);
         o->textsize(12);
+      }
+      o->end();
+    }
+    { Fl_Group* o = page[14] = new Fl_Group(150, 0, 490, 430, "Clouds");
+      o->labelfont(1);
+      o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      { Fl_Choice* o = cloud_layer_ = new Fl_Choice(255, 80, 120, 25, "Layer:");
+        o->down_box(FL_BORDER_BOX);
+        o->labelsize(12);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_cloud_layer_);
+        o->menu(menu_cloud_layer_);
+      }
+      { Fl_Value_Input* o = cloud_elevation_ = new Fl_Value_Input(255, 110, 120, 25, "Elevation(ft):");
+        o->labelsize(12);
+        o->maximum(100000);
+        o->step(100);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_cloud_elevation_);
+      }
+      { Fl_Value_Input* o = cloud_thickness_ = new Fl_Value_Input(255, 140, 120, 25, "Thickness (ft):");
+        o->labelsize(12);
+        o->maximum(100000);
+        o->step(10);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_cloud_thickness_);
+      }
+      { Fl_Choice* o = cloud_coverage_ = new Fl_Choice(255, 170, 120, 25, "Coverage:");
+        o->down_box(FL_BORDER_BOX);
+        o->labelsize(12);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_cloud_coverage_);
+        o->menu(menu_cloud_coverage_);
+      }
+      { Fl_Value_Input* o = cloud_span_ = new Fl_Value_Input(255, 200, 120, 25, "Span (m):");
+        o->labelsize(12);
+        o->maximum(100000);
+        o->step(1);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_cloud_span_);
+        o->deactivate();
+      }
+      { Fl_Value_Input* o = cloud_transition_ = new Fl_Value_Input(255, 230, 120, 25, "Transition (ft):");
+        o->labelsize(12);
+        o->maximum(100000);
+        o->step(1);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_cloud_transition_);
+        o->deactivate();
       }
       o->end();
     }

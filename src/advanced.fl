@@ -8,13 +8,16 @@ decl {\#include <FL/Fl_Preferences.h>} {public
 decl {\#include <string>} {public
 } 
 
+decl {\#define MAX_CLOUD_LAYERS 5} {public
+} 
+
 class Advanced {open
 } {
   Function {Advanced()} {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {606 154 640 480} type Double labelsize 12
+      private xywh {593 71 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -583,8 +586,8 @@ else
         }
       }
       Fl_Group {page[7]} {
-        label Network open
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        label Network
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button httpd {
           label httpd
@@ -630,7 +633,7 @@ else
           private tooltip {in|out,hz,address,port} xywh {240 195 230 25} labelsize 12 textsize 12
         }
         Fl_Input multiplay2 {
-          label {Multiplay 2:} selected
+          label {Multiplay 2:}
           private xywh {240 225 230 25} labelsize 12 textsize 12
         }
         Fl_Input callsign {
@@ -1045,7 +1048,7 @@ else
         }
       }
       Fl_Group {page[13]} {
-        label Weather open
+        label Weather
         private xywh {150 0 490 430} labelfont 1 align 21 hide
       } {
         Fl_Value_Input wind_speed {
@@ -1072,6 +1075,87 @@ else
           tooltip {FT_ASL[:THICKNESS_FT]} xywh {240 335 80 25} labelsize 12 textsize 12
         }
       }
+      Fl_Group {page[14]} {
+        label Clouds open
+        private xywh {150 0 490 430} labelfont 1 align 21
+      } {
+        Fl_Choice cloud_layer_ {
+          label {Layer:}
+          callback {cloud_layer_cb();}
+          private xywh {255 80 120 25} down_box BORDER_BOX labelsize 12 textsize 12
+        } {
+          menuitem {} {
+            label 0
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label 1
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label 2
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label 3
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label 4
+            xywh {0 0 100 20} labelsize 12
+          }
+        }
+        Fl_Value_Input cloud_elevation_ {
+          label {Elevation(ft):}
+          callback {cloud_elevation[ cloud_layer_->value() ] = cloud_elevation_->value();}
+          private xywh {255 110 120 25} labelsize 12 maximum 100000 step 100 textsize 12
+        }
+        Fl_Value_Input cloud_thickness_ {
+          label {Thickness (ft):}
+          callback {cloud_thickness[ cloud_layer_->value() ] = cloud_thickness_->value();}
+          private xywh {255 140 120 25} labelsize 12 maximum 100000 step 10 textsize 12
+        }
+        Fl_Choice cloud_coverage_ {
+          label {Coverage:}
+          callback {cloud_coverage[ cloud_layer_->value() ] = cloud_coverage_->value();}
+          private xywh {255 170 120 25} down_box BORDER_BOX labelsize 12 textsize 12
+        } {
+          menuitem {} {
+            label overcast
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label broken
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label scattered
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label few
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label cirrus
+            xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label clear
+            xywh {0 0 100 20} labelsize 13
+          }
+        }
+        Fl_Value_Input cloud_span_ {
+          label {Span (m):}
+          callback {cloud_span[ cloud_layer_->value() ] = cloud_span_->value();}
+          private xywh {255 200 120 25} labelsize 12 maximum 100000 step 1 textsize 12 deactivate
+        }
+        Fl_Value_Input cloud_transition_ {
+          label {Transition (ft):}
+          callback {cloud_transition[ cloud_layer_->value() ] = cloud_transition_->value();} selected
+          private xywh {255 230 120 25} labelsize 12 maximum 100000 step 1 textsize 12 deactivate
+        }
+      }
     }
   }
   decl {~Advanced();} {public
@@ -1096,4 +1180,10 @@ else
   decl {void save_settings(Fl_Preferences&);} {}
   decl {void wind_dial_cb();} {}
   decl {void wind_hdg_cb();} {}
+  decl {void cloud_layer_cb();} {}
+  decl {double cloud_elevation[ MAX_CLOUD_LAYERS ];} {}
+  decl {double cloud_thickness[ MAX_CLOUD_LAYERS ];} {}
+  decl {int cloud_coverage[ MAX_CLOUD_LAYERS ];} {}
+  decl {double cloud_span[ MAX_CLOUD_LAYERS ];} {}
+  decl {double cloud_transition[ MAX_CLOUD_LAYERS ];} {}
 } 

@@ -5,6 +5,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Preferences.h>
 #include <string>
+#define MAX_CLOUD_LAYERS 5
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Button.H>
@@ -282,7 +283,6 @@ private:
   Fl_Input *env_input;
   inline void cb_env_input_i(Fl_Input*, void*);
   static void cb_env_input(Fl_Input*, void*);
-  Fl_Group *page[14];
   Fl_Value_Input *wind_speed;
   Fl_Value_Slider *turbulence;
   Fl_Heading_Dial *wind_dial;
@@ -293,6 +293,29 @@ private:
   static void cb_wind_hdg(Fl_Value_Input*, void*);
 public:
   Fl_Input *ceiling;
+private:
+  Fl_Group *page[15];
+  Fl_Choice *cloud_layer_;
+  inline void cb_cloud_layer__i(Fl_Choice*, void*);
+  static void cb_cloud_layer_(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_cloud_layer_[];
+  Fl_Value_Input *cloud_elevation_;
+  inline void cb_cloud_elevation__i(Fl_Value_Input*, void*);
+  static void cb_cloud_elevation_(Fl_Value_Input*, void*);
+  Fl_Value_Input *cloud_thickness_;
+  inline void cb_cloud_thickness__i(Fl_Value_Input*, void*);
+  static void cb_cloud_thickness_(Fl_Value_Input*, void*);
+  Fl_Choice *cloud_coverage_;
+  inline void cb_cloud_coverage__i(Fl_Choice*, void*);
+  static void cb_cloud_coverage_(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_cloud_coverage_[];
+  Fl_Value_Input *cloud_span_;
+  inline void cb_cloud_span__i(Fl_Value_Input*, void*);
+  static void cb_cloud_span_(Fl_Value_Input*, void*);
+  Fl_Value_Input *cloud_transition_;
+  inline void cb_cloud_transition__i(Fl_Value_Input*, void*);
+  static void cb_cloud_transition_(Fl_Value_Input*, void*);
+public:
   ~Advanced();
   int exec(Fl_Preferences&);
 private:
@@ -314,5 +337,11 @@ private:
   void save_settings(Fl_Preferences&);
   void wind_dial_cb();
   void wind_hdg_cb();
+  void cloud_layer_cb();
+  double cloud_elevation[ MAX_CLOUD_LAYERS ];
+  double cloud_thickness[ MAX_CLOUD_LAYERS ];
+  int cloud_coverage[ MAX_CLOUD_LAYERS ];
+  double cloud_span[ MAX_CLOUD_LAYERS ];
+  double cloud_transition[ MAX_CLOUD_LAYERS ];
 };
 #endif
