@@ -80,6 +80,29 @@ is_valid_fg_scenery( const string& dir )
 }
 
 void
+Wizard::airports_cb( Fl_Widget*, void* v )
+{
+    ((Wizard*)v)->airports_cb();
+}
+
+void
+Wizard::airports_cb()
+{
+    if (airports_->loaded())
+    {
+	airports_->show_installed();
+
+	const int buflen = FL_PATH_MAX;
+	char buf[ buflen ];
+
+  	if (prefs.get( "airport", buf, "", buflen-1) && buf[0] != 0)
+	{
+	    airports_->select_id( buf );
+	}
+    }
+}
+
+void
 Wizard::init()
 {
     static const int npages = 5;
@@ -128,8 +151,17 @@ Wizard::init()
     }
     else
     {
-// 	prefs.get( "airport", buf, "", buflen-1);
-        airports_->init( fg_root_->value(), fg_scenery_->value() );
+	SGPath path( fg_root_->value() );
+	path.append( "/Airports/runways.dat.gz" );
+	airports_->load_runways( path.str(), airports_cb, this );
+
+	prefs.getUserdataPath( buf, sizeof(buf) );
+	SGPath cache( buf );
+	cache.append( "airports.txt" );
+
+	path = fg_scenery_->value();
+	airports_->load_airports( path, cache, airports_cb, this );
+
         aircraft_update();
 
         prev->activate();
@@ -554,4 +586,23 @@ Wizard::cancel_cb()
 {
     logwin->hide();
     win->hide();
+}
+
+void
+Wizard::delete_cache_file_cb()
+{
+    char buf[ FL_PATH_MAX ];
+    prefs.getUserdataPath( buf, sizeof(buf) );
+    SGPath path( buf );
+    path.append( "/airports.txt" );
+
+    if (!path.exists())
+	return;
+
+    //TODO: win32 support.
+    if (unlink( path.c_str() ) == 0)
+	return;
+
+    fl_alert( "Unable to delete '%s':\n%s",
+	      path.c_str(), strerror(errno) );
 }

@@ -21,8 +21,8 @@
 // $Id$
 
 #include <algorithm>
-#include <deque>
 #include <iterator>
+#include <fstream>
 
 #include <FL/filename.H>
 #include <FL/Fl_Round_Button.H>
@@ -38,7 +38,8 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
 				const char* l )
     : Fl_Group( X, Y, W, H, l )
     , gzf_(0)
-    , loaded_(false)
+    , runways_loaded_(false)
+    , airports_loaded_(false)
 {
     Y += 5;
     int tw = W - 120 - 5;
@@ -150,13 +151,13 @@ apt_id_comp( const apt_dat_t& a, const apt_dat_t& b )
  * 
  */
 void
-AirportBrowser::idle_proc( void* v )
+AirportBrowser::runways_idle_proc( void* v )
 {
-    ((AirportBrowser*)v)->idle_proc();
+    ((AirportBrowser*)v)->runways_idle_proc();
 }
 
 void
-AirportBrowser::idle_proc( )
+AirportBrowser::runways_idle_proc( )
 {
     int count = 200;
     char line[128];
@@ -191,12 +192,11 @@ AirportBrowser::idle_proc( )
     if (gzeof( gzf_ ))
     {
 	gzclose( gzf_ );
-	Fl::remove_idle( idle_proc, this );
+	Fl::remove_idle( runways_idle_proc, this );
 	std::sort( airports_.begin(), airports_.end(), apt_id_comp );
-	show_installed();
-	loaded_ = true;
-	id_->activate();
-	name_->activate();
+	runways_loaded_ = true;
+	if (runways_loaded_cb_ != 0)
+	    runways_loaded_cb_( this, runways_loaded_cb_data_ );
     }
 }
 
@@ -209,71 +209,6 @@ AirportBrowser::find( const string& id ) const
 	i( std::lower_bound( airports_.begin(), airports_.end(),
 			     key, apt_id_comp ) );
     return i == airports_.end() ? 0 : &*i;
-}
-
-void
-AirportBrowser::scan_installed_airports( const string& dir )
-{
-    if (!fl_filename_isdir( dir.c_str() ))
-	return;
-
-    deque< string > dirs;
-    dirs.push_back( dir );
-
-    installed_airports_.clear();
-
-    do
-    {
-	string cwd( dirs.front() );
-
-	// mingw requires a trailing slash on directory names.
-	if (cwd[ cwd.length() - 1 ] != '/')
-	    cwd.append( "/" );
-
-	dirent** files;
-	int n = fl_filename_list( cwd.c_str(), &files, fl_numericsort );
-	if (n > 0)
-	{
-	    for (int i = 0; i < n; ++i)
-	    {
-		if (fl_filename_match( files[i]->d_name,
-			       "[ew][0-9][0-9][0-9][ns][0-9][0-9]*"))
-		{
-		    // Found a scenery dub-directory.
-		    string d(cwd);
-		    d.append( files[i]->d_name );
-		    if (fl_filename_isdir( d.c_str() ) )
-		    {
-			dirs.push_back( d );
-		    }
-		}
-		else if (fl_filename_match( files[i]->d_name,
-					    "???.btg.gz" ) ||
-			 fl_filename_match( files[i]->d_name,
-					    "????.btg.gz" ))
-		{
-		    char* p = strstr( files[i]->d_name, ".btg" );
-		    if (p != 0)
-			*p = 0;
-		    installed_airports_.push_back(
-					  string( files[i]->d_name ) );
-		}
-
-		free( files[i] );
-	    }
-
-	    free( files );
-	}
-
-	dirs.pop_front();
-    }
-    while (!dirs.empty());
-
-    std::sort( installed_airports_.begin(), installed_airports_.end() );
-    // Remove duplicate airports.
-    installed_airports_.erase( std::unique( installed_airports_.begin(),
-					    installed_airports_.end() ),
-			       installed_airports_.end() );
 }
 
 void
@@ -290,40 +225,19 @@ AirportBrowser::show_installed()
 	{
 	    const apt_dat_t* apt = find( installed_airports_[i] );
 	    if (apt != 0)
+	    {
 		apts.push_back( apt );
+	    }
+	    else
+	    {
+		std::cout << " " << installed_airports_[i] << " not found\n";
+	    }
 	}
     }
 
     table_->set_airports( apts );
-}
-
-void
-AirportBrowser::init( const string& fg_root, const string& fg_scenery )
-{
-    string fname( fg_root );
-    fname += "/Airports/runways.dat.gz";
-    airports_.clear();
-    airports_.reserve( 27000 );
-
-    gzf_ = gzopen( fname.c_str(), "rb" );
-    if (gzf_ == 0)
-    {
-        throw "gzopen error";
-    }
-
-    // Skip first line.
-    char c;
-    while ((c = gzgetc(gzf_)) != -1 && c != '\n')
-        ;
-
-    loaded_ = false;
-    id_->deactivate();
-    name_->deactivate();
-
-    // Load the file in the background.
-    Fl::add_idle( idle_proc, this );
-
-    scan_installed_airports( fg_scenery );
+    id_->activate();
+    name_->activate();
 }
 
 /**
@@ -352,14 +266,37 @@ reverse_runway( const string& rwy )
     return string(buf);
 }
 
+bool rwy_comp( const string& a, const string& b )
+{
+    return a.substr(0,2) < b.substr(0,2);
+}
+
 void
 AirportBrowser::show_runways( const apt_dat_t* apt )
 {
     if (apt == 0)
 	return;
 
+#if 1
+    vector< string > rwys;
+    unsigned int i;
+
+    for (i = 0; i < apt->runways_.size(); ++i)
+    {
+	rwys.push_back( apt->runways_[i] );
+	string rev = reverse_runway( apt->runways_[i] );
+	if (!rev.empty())
+	    rwys.push_back( rev );
+    }
+    std::sort( rwys.begin(), rwys.end() );
+
     runways_->clear();
     runways_->add( "<default>" );
+    for (i = 0; i < rwys.size(); ++i)
+    {
+	runways_->add( rwys[i].c_str() );
+    }
+#else
     for (unsigned int i = 0; i < apt->runways_.size(); ++i)
     {
 	string rwy( apt->runways_[i] );
@@ -368,6 +305,7 @@ AirportBrowser::show_runways( const apt_dat_t* apt )
 	if (!rev.empty())
 	    runways_->add( rev.c_str() );
     }
+#endif
     runways_->select( 1 );
 }
 
@@ -408,5 +346,153 @@ AirportBrowser::get_selected_runway() const
 void
 AirportBrowser::select_id( const string& id )
 {
+    const apt_dat_t* apt = table_->select_id( id.c_str() );
+    show_runways( apt );
 }
 
+void
+AirportBrowser::load_runways( const string& path, Fl_Callback* cb, void* v )
+{
+    runways_loaded_cb_ = cb;
+    runways_loaded_cb_data_ = v;
+
+    airports_.clear();
+    airports_.reserve( 27000 );
+
+    gzf_ = gzopen( path.c_str(), "rb" );
+    if (gzf_ == 0)
+    {
+        throw "gzopen error";
+    }
+
+    // Skip first line.
+    char c;
+    while ((c = gzgetc(gzf_)) != -1 && c != '\n')
+        ;
+
+    runways_loaded_ = false;
+    id_->deactivate();
+    name_->deactivate();
+
+    // Load the file in the background.
+    Fl::add_idle( runways_idle_proc, this );
+}
+
+/**
+ * 
+ */
+void
+AirportBrowser::load_airports( const SGPath& dir, const SGPath& cache,
+			       Fl_Callback* cb, void* v )
+{
+    installed_airports_.clear();
+    airports_loaded_cb_ = cb;
+    airports_loaded_cb_data_ = v;
+    airports_cache_ = cache;
+    airports_loaded_ = false;
+
+    if (cache.exists())
+    {
+	std::ifstream ifs( cache.str().c_str() );
+	std::copy( std::istream_iterator<string>( ifs ),
+		   std::istream_iterator<string>(),
+		   std::back_inserter( installed_airports_ ) );
+	airports_loaded_ = true;
+	if (airports_loaded_cb_ != 0)
+	    airports_loaded_cb_( this, airports_loaded_cb_data_ );
+    }
+    else
+    {
+	if (!fl_filename_isdir( dir.str().c_str() ))
+	    return;
+
+	airports_dirs.clear();
+	airports_dirs.push_back( dir.str().c_str() );
+	airports_loaded_ = false;
+	Fl::add_idle( airports_idle_proc, this );
+    }
+}
+
+void
+AirportBrowser::airports_idle_proc( void* v )
+{
+    ((AirportBrowser*)v)->airports_idle_proc();
+}
+
+/**
+ * Scan FlightGear Scenery directory and sub-directories for airport files.
+ * Airpots ICAO ids are saved in a cache file.
+ */
+void
+AirportBrowser::airports_idle_proc()
+{
+    if (airports_dirs.empty())
+    {
+	Fl::remove_idle( airports_idle_proc, this );
+	// Sort and remove duplicate airports.
+	std::sort( installed_airports_.begin(), installed_airports_.end() );
+	installed_airports_.erase( std::unique( installed_airports_.begin(),
+						installed_airports_.end() ),
+				   installed_airports_.end() );
+
+	// Save airports ids to the cache file.
+	if (!airports_cache_.str().empty())
+	{
+	    std::ofstream ofs( airports_cache_.str().c_str() );
+	    if (ofs)  // !ofs.fail()
+	    {
+		std::copy( installed_airports_.begin(),
+			   installed_airports_.end(),
+			   std::ostream_iterator<string>( ofs, "\n" ) );
+	    }
+	}
+
+	airports_loaded_ = true;
+	if (airports_loaded_cb_ != 0)
+	    airports_loaded_cb_( this, airports_loaded_cb_data_ );
+
+	return;
+    }
+
+    string cwd( airports_dirs.front() );
+
+    // mingw requires a trailing slash on directory names.
+    if (cwd[ cwd.length() - 1 ] != '/')
+	cwd.append( "/" );
+
+    dirent** files;
+    int n = fl_filename_list( cwd.c_str(), &files, fl_numericsort );
+    if (n > 0)
+    {
+	for (int i = 0; i < n; ++i)
+	{
+	    if (fl_filename_match( files[i]->d_name,
+				   "[ew][0-9][0-9][0-9][ns][0-9][0-9]*"))
+	    {
+		// Found a scenery dub-directory.
+		string d(cwd);
+		d.append( files[i]->d_name );
+		if (fl_filename_isdir( d.c_str() ) )
+		{
+		    airports_dirs.push_back( d );
+		}
+	    }
+	    else if (fl_filename_match( files[i]->d_name,
+					"???.btg.gz" ) ||
+		     fl_filename_match( files[i]->d_name,
+					"????.btg.gz" ))
+	    {
+		char* p = strstr( files[i]->d_name, ".btg" );
+		if (p != 0)
+		    *p = 0;
+		installed_airports_.push_back( string( files[i]->d_name ) );
+	    }
+
+	    free( files[i] );
+	}
+
+	free( files );
+    }
+
+    airports_dirs.pop_front();
+}

@@ -12,10 +12,10 @@ class LogWindow;
 #include <FL/Fl_Wizard.H>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Input.H>
+#include <FL/Fl_Output.H>
 #include <FL/Fl_Browser.H>
 #include "Fl_Plib.h"
 #include "AirportBrowser.h"
-#include <FL/Fl_Output.H>
 
 class Wizard {
 public:
@@ -44,6 +44,10 @@ private:
   static void cb_fg_scenery_(Fl_Input*, void*);
   inline void cb_2_i(Fl_Button*, void*);
   static void cb_2(Fl_Button*, void*);
+  Fl_Button *cache_delete;
+  inline void cb_cache_delete_i(Fl_Button*, void*);
+  static void cb_cache_delete(Fl_Button*, void*);
+  Fl_Output *cache_file;
   Fl_Browser *aircraft;
   inline void cb_aircraft_i(Fl_Browser*, void*);
   static void cb_aircraft(Fl_Browser*, void*);
@@ -85,5 +89,8 @@ private:
   Fl_Preferences prefs;
   LogWindow* logwin;
   void cancel_cb();
+  void delete_cache_file_cb();
+  static void airports_cb( Fl_Widget*, void* );
+  void airports_cb();
 };
 #endif

@@ -58,6 +58,13 @@ void Wizard::cb_2(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_2_i(o,v);
 }
 
+inline void Wizard::cb_cache_delete_i(Fl_Button*, void*) {
+  delete_cache_file_cb();
+}
+void Wizard::cb_cache_delete(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_cache_delete_i(o,v);
+}
+
 inline void Wizard::cb_aircraft_i(Fl_Browser*, void*) {
   preview_aircraft();
 }
@@ -96,7 +103,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[0] = new Fl_Group(0, 0, 640, 440, "Select Paths");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        o->hide();
         { Fl_Input* o = fg_exe_ = new Fl_Input(130, 30, 335, 25, "Executable:");
           o->tooltip("Full pathname to FlightGear executable");
           o->labelsize(12);
@@ -131,11 +137,20 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->labelsize(12);
           o->callback((Fl_Callback*)cb_2);
         }
+        { Fl_Button* o = cache_delete = new Fl_Button(470, 165, 60, 25, "Delete");
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_cache_delete);
+        }
+        { Fl_Output* o = cache_file = new Fl_Output(130, 165, 335, 25, "Cache:");
+          o->labelsize(12);
+          o->textsize(12);
+        }
         o->end();
       }
       { Fl_Group* o = page[1] = new Fl_Group(0, 0, 640, 440, "Select an aircraft");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        o->hide();
         { Fl_Browser* o = aircraft = new Fl_Browser(5, 20, 200, 415);
           o->type(2);
           o->labelsize(12);
