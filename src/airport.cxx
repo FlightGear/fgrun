@@ -210,7 +210,15 @@ UserInterface::load_airport_browser()
     }
     else
     {
-	// TODO
+	AirportDB::const_iterator first( airportdb_->begin() ); 
+	AirportDB::const_iterator last( airportdb_->end() ); 
+	for (; first != last; ++first)
+	{
+	    char buf[ 80 ];
+	    snprintf( buf, sizeof buf, "@f%-4.4s\t%-s",
+		      first->id_.c_str(), first->name_.c_str() );
+	    apt_browser->add( buf );
+	}
     }
 }
 
@@ -222,6 +230,19 @@ UserInterface::apt_browser_cb()
 void
 UserInterface::apt_id_cb()
 {
+    string id( apt_id->value() );
+    std::transform( id.begin(), id.end(), id.begin(), toupper );
+
+    if (apt_show_installed->value())
+    {
+    }
+    else
+    {
+	int i = airportdb_->ifind( id.c_str() );
+	if (i >= 0)
+	    apt_browser->select(i+1);
+    }
+
 }
 
 void
@@ -240,6 +261,8 @@ void
 UserInterface::load_airportdb()
 {
     airportdb_ = new AirportDB;
+    if (!load_airports_->value())
+	return;
 
     char buf[FL_PATH_MAX];
     snprintf( buf, sizeof(buf), "%s/Airports/runways.dat.gz",

@@ -19,14 +19,13 @@ struct apt_dat_t
  */
 class AirportDB
 {
-private:
+public:
     typedef std::vector< apt_dat_t > airport_t;
     typedef airport_t::iterator iterator;
     typedef airport_t::const_iterator const_iterator;
 
-    airport_t airports_;
-
 public:
+
 
     AirportDB();
     void load( const char* fname );
@@ -35,6 +34,13 @@ public:
      * 
      */
     const apt_dat_t* find( const char* id ) const;
+    int ifind( const char* id ) const;
+
+    const_iterator begin() const { return airports_.begin(); }
+    const_iterator end()   const { return airports_.end(); }
+
+private:
+    airport_t airports_;
 };
 
 #endif // AIRPORT_DB_H_

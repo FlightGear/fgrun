@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <iterator>
 #include <zlib.h>
 
 #include <FL/Fl.H>
@@ -105,4 +106,20 @@ AirportDB::find( const char* id ) const
 					 key,
 					 apt_id_comp );
     return i == airports_.end() ? 0 : &*i;
+}
+
+int
+AirportDB::ifind( const char* id ) const
+{
+    apt_dat_t key;
+    key.id_ = string(id);
+    const_iterator i = std::lower_bound( airports_.begin(),
+					 airports_.end(),
+					 key,
+					 apt_id_comp );
+
+    if (i == airports_.end())
+	return -1;
+    else
+	return std::distance( airports_.begin(), i );
 }
