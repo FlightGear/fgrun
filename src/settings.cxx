@@ -73,16 +73,10 @@ Advanced::save_settings( Fl_Preferences& prefs )
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];
 
-    if (browser->size() > 0)
-	prefs.set( "browser", browser->value() );
-
+    prefs.set( "browser", browser->value() );
     prefs.set( "control", control->text() );
-
-    if (lang->size() > 0)
-	prefs.set("lang", lang->value());
-
-    if (config->size() > 0)
-	prefs.set( "config", config->value() );
+    prefs.set( "lang", lang->value());
+    prefs.set( "config", config->value() );
 
     prefs.set("game_mode", game_mode->value());
     prefs.set("splash_screen", splash_screen->value());
