@@ -372,7 +372,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--adf=" << buf;
     prefs.get( "dme", buf, "disabled", buflen-1 );
     if (strcmp( "disabled", buf ) != 0)
-	os << pfx << "-dme=" << buf;
+	os << pfx << "--dme=" << buf;
 
     // Clouds
     for (i = 0; i < 5; ++i)
