@@ -30,6 +30,7 @@
 #include <FL/filename.H>
 #include <FL/fl_ask.H>
 #include <FL/Fl_File_Chooser.H>
+#include <FL/fl_draw.h>
 
 #include <simgear/props/props_io.hxx>
 #include <simgear/structure/exception.hxx>
@@ -281,8 +282,12 @@ Wizard::next_cb()
     else if (wiz->value() == page[2])
     {
 	// "Select location" page
-// 	if (airports_->size() == 0)
-// 	    airports_update();
+	if (!airports_->loaded())
+	{
+// 	    fl_cursor( FL_CURSOR_WAIT );
+ 	    win->cursor( FL_CURSOR_WAIT );
+	    Fl::flush();
+	}
     }
     else if (wiz->value() == page[3])
     {
@@ -452,11 +457,11 @@ search_aircraft_dir( const SGPath& dir,
     dirent** files;
     string s( dir.str() );
 
-// #ifdef WIN32
-//     // Ensure there is a trailing slash.
-//     if (*s.rbegin() != '/')
-// 	s.append( "/" );
-// #endif
+#ifdef WIN32
+    // Ensure there is a trailing slash.
+    if (*s.rbegin() != '/')
+	s.append( "/" );
+#endif
 
     int num_files = fl_filename_list( s.c_str(),
                                       &files, fl_casenumericsort );
