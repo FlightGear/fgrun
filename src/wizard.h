@@ -53,6 +53,10 @@ private:
   static void cb_Advanced(Fl_Button*, void*);
 public:
   Fl_Group *page[5];
+private:
+  inline void cb_Cancel_i(Fl_Button*, void*);
+  static void cb_Cancel(Fl_Button*, void*);
+public:
   ~Wizard();
   void show();
   void show( int argc, char* argv[] );
@@ -78,5 +82,6 @@ private:
   void stdout_cb( int );
   Fl_Preferences prefs;
   LogWindow* logwin;
+  void cancel_cb();
 };
 #endif

@@ -15,21 +15,20 @@ decl {class LogWindow;} {public
 
 class Wizard {open
 } {
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0)} {selected
-  } {
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0)} {} {
     Fl_Window win {
       label {FlightGear Wizard} open
-      private xywh {180 418 640 480} type Double resizable visible
+      private xywh {194 254 640 480} type Double resizable visible
     } {
       Fl_Button next {
         label Next
         callback {next_cb();}
-        private xywh {565 450 70 25} labelsize 12
+        private xywh {490 450 70 25} labelsize 12
       }
       Fl_Button prev {
         label Prev
         callback {prev_cb();}
-        private xywh {490 450 70 25} labelsize 12
+        private xywh {415 450 70 25} labelsize 12
       }
       Fl_Wizard wiz {open
         private xywh {0 0 640 440}
@@ -75,11 +74,11 @@ class Wizard {open
         } {
           Fl_Browser aircraft {
             callback {preview_aircraft();}
-            private xywh {5 20 200 410} type Hold labelsize 12 align 1 textsize 12
+            private xywh {5 20 200 415} type Hold labelsize 12 align 1 textsize 12
           }
           Fl_Box preview {
             label Preview
-            private xywh {210 20 425 410} box THIN_DOWN_BOX labelsize 12
+            private xywh {210 20 425 415} box THIN_DOWN_BOX labelsize 12
             code0 {\#include "Fl_Plib.h"}
             class Fl_Plib
           }
@@ -109,6 +108,11 @@ class Wizard {open
         Fl_Group {page[4]} {open
           xywh {0 0 640 440} hide deactivate
         } {}
+      }
+      Fl_Button {} {
+        label Cancel
+        callback {cancel_cb();}
+        private xywh {565 450 70 25} labelsize 12
       }
     }
   }
@@ -141,4 +145,5 @@ class Wizard {open
   decl {void stdout_cb( int );} {}
   decl {Fl_Preferences prefs;} {}
   decl {LogWindow* logwin;} {}
+  decl {void cancel_cb();} {}
 } 

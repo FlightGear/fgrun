@@ -496,3 +496,9 @@ Wizard::~Wizard()
     delete logwin;
     delete win;
 }
+
+void
+Wizard::cancel_cb()
+{
+    win->hide();
+}

@@ -73,16 +73,23 @@ void Wizard::cb_Advanced(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_Advanced_i(o,v);
 }
 
+inline void Wizard::cb_Cancel_i(Fl_Button*, void*) {
+  cancel_cb();
+}
+void Wizard::cb_Cancel(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->user_data()))->cb_Cancel_i(o,v);
+}
+
 Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0) {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = win = new Fl_Double_Window(640, 480, "FlightGear Wizard");
     w = o;
     o->user_data((void*)(this));
-    { Fl_Button* o = next = new Fl_Button(565, 450, 70, 25, "Next");
+    { Fl_Button* o = next = new Fl_Button(490, 450, 70, 25, "Next");
       o->labelsize(12);
       o->callback((Fl_Callback*)cb_next);
     }
-    { Fl_Button* o = prev = new Fl_Button(490, 450, 70, 25, "Prev");
+    { Fl_Button* o = prev = new Fl_Button(415, 450, 70, 25, "Prev");
       o->labelsize(12);
       o->callback((Fl_Callback*)cb_prev);
     }
@@ -130,14 +137,14 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[1] = new Fl_Group(0, 0, 640, 440, "Select an aircraft");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        { Fl_Browser* o = aircraft = new Fl_Browser(5, 20, 200, 410);
+        { Fl_Browser* o = aircraft = new Fl_Browser(5, 20, 200, 415);
           o->type(2);
           o->labelsize(12);
           o->textsize(12);
           o->callback((Fl_Callback*)cb_aircraft);
           o->align(FL_ALIGN_TOP);
         }
-        { Fl_Plib* o = preview = new Fl_Plib(210, 20, 425, 410, "Preview");
+        { Fl_Plib* o = preview = new Fl_Plib(210, 20, 425, 415, "Preview");
           o->box(FL_THIN_DOWN_BOX);
           o->color(FL_BACKGROUND_COLOR);
           o->selection_color(FL_BACKGROUND_COLOR);
@@ -184,6 +191,10 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->end();
       }
       o->end();
+    }
+    { Fl_Button* o = new Fl_Button(565, 450, 70, 25, "Cancel");
+      o->labelsize(12);
+      o->callback((Fl_Callback*)cb_Cancel);
     }
     o->end();
     o->resizable(o);
