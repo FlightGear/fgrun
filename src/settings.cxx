@@ -20,6 +20,10 @@
 //
 // $Id$
 
+#ifdef HAVE_CONFIG_H
+#  include "config.h"
+#endif
+
 #include <string>
 
 #include <FL/filename.h>
@@ -28,6 +32,40 @@
 #include "util.h"
 
 using std::string;
+
+static const char*
+coverage_to_string( int coverage )
+{
+    switch (coverage)
+    {
+    case 0: return "overcast";
+    case 1: return "broken";
+    case 2: return "scattered";
+    case 3: return "few";
+    case 4: return "cirrus";
+    case 5: return "clear";
+    default: return "clear";
+    };
+}
+
+static int
+string_to_coverage( const char* s )
+{
+    if (strcmp( "overcast", s ) == 0)
+	return 0;
+    else if (strcmp( "broken", s ) == 0)
+	return 1;
+    else if (strcmp( "scattered", s ) == 0)
+	return 2;
+    else if (strcmp( "few", s ) == 0)
+	return 3;
+    else if (strcmp( "cirrus", s ) == 0)
+	return 4;
+    else if (strcmp( "clear", s ) == 0)
+	return 5;
+    else
+	return 5;
+}
 
 void
 Advanced::save_settings( Fl_Preferences& prefs )
@@ -175,6 +213,20 @@ Advanced::save_settings( Fl_Preferences& prefs )
     else
     {
 	prefs.set( "dme", "disabled" );
+    }
+
+    for( i = 0; i < MAX_CLOUD_LAYERS; ++i)
+    {
+	prefs.set( Fl_Preferences::Name("layer-%d-elevation-ft", i),
+		   cloud_elevation[i] );
+	prefs.set( Fl_Preferences::Name("layer-%d-thickness-ft", i),
+		   cloud_thickness[i] );
+	prefs.set( Fl_Preferences::Name("layer-%d-coverage", i),
+		   coverage_to_string( cloud_coverage[i] ) );
+	prefs.set( Fl_Preferences::Name("layer-%d-transition-ft", i),
+		   cloud_transition[i] );
+	prefs.set( Fl_Preferences::Name("layer-%d-span-m", i),
+		   cloud_span[i] );
     }
 }
 
@@ -479,4 +531,21 @@ Advanced::load_settings( Fl_Preferences& prefs )
 	    dme_int_freq->value( buf );
 	}
     }
+
+    for (i = 0; i < MAX_CLOUD_LAYERS; ++i)
+    {
+	prefs.get( Fl_Preferences::Name("layer-%d-elevation-ft", i),
+		   cloud_elevation[i], 0.0 );
+	prefs.get( Fl_Preferences::Name("layer-%d-thickness-ft", i),
+		   cloud_thickness[i], 0.0 );
+	prefs.get( Fl_Preferences::Name("layer-%d-transition-ft", i),
+		   cloud_transition[i], 0.0 );
+	prefs.get( Fl_Preferences::Name("layer-%d-span-m", i),
+		   cloud_span[i], 0.0 );
+	prefs.get( Fl_Preferences::Name("layer-%d-coverage", i),
+		   buf, "clear", buflen-1);
+	cloud_coverage[i] = string_to_coverage( buf );
+    }
+    cloud_layer_->value(0);
+    cloud_layer_->do_callback();
 }
