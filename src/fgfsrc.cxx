@@ -178,7 +178,7 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--fog-fastest";
 	if (geometry->size() > 0)
 	    ofs << "\n--geometry=" << geometry->value();
-	if (visibility->value())
+	if (visibility->size() > 0)
 	{
 	    if (vis_meters->value())
 		ofs << "\n--visibility=" << visibility->value();
