@@ -14,7 +14,7 @@ class Advanced {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {140 71 640 480} type Double labelsize 12
+      private xywh {145 91 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -595,8 +595,8 @@ else
         }
       }
       Fl_Group {page[7]} {
-        label Network open
-        private tooltip {in|out,hz,address,port} xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        label Network
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button httpd {
           label httpd
@@ -647,8 +647,8 @@ else
           }
         }
         Fl_Input multiplay {
-          label {Multiplay:} selected
-          private xywh {225 195 230 25} labelsize 12 textsize 12
+          label {Multiplay:}
+          private tooltip {in|out,hz,address,port} xywh {225 195 230 25} labelsize 12 textsize 12
         }
       }
       Fl_Group {page[8]} {
@@ -931,11 +931,11 @@ else
         }
       }
       Fl_Group {page[11]} {
-        label Debugging
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label Debugging open
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Choice log_level {
-          label {Log Level:}
+          label {Log Level:} selected
           private xywh {225 45 90 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           menuitem {} {
