@@ -33,7 +33,8 @@
 std::string def_fg_exe = "";
 std::string def_fg_root = "";
 std::string def_fg_scenery = "";
-bool silent = false;
+static bool silent = false;
+static bool fullscreen = false;
 
 /**
  * --fg-exe=<PATH>
@@ -70,7 +71,13 @@ parse_args( int, char** argv, int& i )
 	++i;
 	return 1;
     }
-
+    else if (strcmp( argv[i], "--fullscreen" ) == 0 ||
+	     strcmp( argv[i], "-f" ) == 0)
+    {
+	fullscreen = true;
+	++i;
+	return 1;
+    }
     return 0;
 }
 
@@ -80,7 +87,7 @@ main( int argc, char* argv[] )
     int i = 0;
     if (Fl::args( argc, argv, i, parse_args ) < argc)
     {
-        Fl::fatal("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n%s", Fl::help );
+        Fl::fatal("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n -f, --fullscreen\n%s", Fl::help );
     }
 
     if ( silent )
@@ -100,8 +107,11 @@ main( int argc, char* argv[] )
 	return 0;
     }
 
+    Fl::visual( FL_DOUBLE | FL_INDEX );
+
     Wizard ui;
-    ui.init();
+    ui.init( fullscreen );
+
     ui.show();
 
     return Fl::run();

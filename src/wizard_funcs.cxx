@@ -109,12 +109,27 @@ static const char* about_text = "\
 </html>";
 
 void
-Wizard::init()
+Wizard::init( bool fullscreen )
 {
     static const int npages = 5;
 
     for (int i = 0; i < npages; ++i)
         page[i]->hide();
+
+    if (fullscreen)
+    {
+	win->resize( 0, 0, Fl::w(), Fl::h() );
+    }
+    else
+    {
+	int X, Y, W, H;
+	prefs.get( "x", X, 0 );
+	prefs.get( "y", Y, 0 );
+	prefs.get( "width", W, 0 );
+	prefs.get( "height", H, 0 );
+	if (W > 0 && H > 0)
+	    win->resize( X, Y, W, H );
+    }
 
     logwin = new LogWindow( 640, 480, "Log Window" );
 

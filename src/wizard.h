@@ -77,7 +77,7 @@ public:
   ~Wizard();
   void show();
   void show( int argc, char* argv[] );
-  void init();
+  void init( bool fullscreen );
   void update_preview();
   void preview_aircraft();
 private:

@@ -19,7 +19,7 @@ class Wizard {open
   Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0)} {open
   } {
     Fl_Window win {
-      label {FlightGear Wizard} open
+      label {FlightGear Wizard}
       private xywh {500 133 640 480} type Double visible
     } {
       Fl_Button next {
@@ -152,7 +152,7 @@ class Wizard {open
   }
   decl {void show( int argc, char* argv[] );} {public
   }
-  decl {void init();} {public
+  decl {void init( bool fullscreen );} {selected public
   }
   decl {void update_preview();} {public
   }
@@ -176,8 +176,7 @@ class Wizard {open
   decl {LogWindow* logwin;} {}
   decl {void cancel_cb();} {}
   decl {void delete_cache_file_cb();} {}
-  decl {static void airports_cb( Fl_Widget*, void* )} {selected
-  }
+  decl {static void airports_cb( Fl_Widget*, void* )} {}
   decl {void airports_cb();} {}
   decl {void scenery_dir_select_cb();} {}
   decl {void scenery_dir_add_cb();} {}
