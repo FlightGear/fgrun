@@ -77,11 +77,9 @@ main( int argc, char* argv[] )
 	Fl::fatal("Options are:\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n%s", Fl::help );
     }
 
-    Wizard* ui = new Wizard;
-    ui->init();
-    ui->show();
+    Wizard ui;
+    ui.init();
+    ui.show();
 
-    int retval = Fl::run();
-    delete ui;
-    return retval;
+    return Fl::run();
 }
