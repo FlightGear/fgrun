@@ -19,7 +19,7 @@ UserInterface::init()
     page_list->add("Properties");
     page_list->add("Debugging");
     page_list->add("Environment");
-    page_list->add("Airport Finder");
+    page_list->add("Airport Browser");
     page_list->select(1);
     show_page(0);
 
