@@ -46,6 +46,12 @@
 #include "advanced.h"
 #include "logwin.h"
 
+#if defined(WIN32) || defined(__EMX__) && !defined(__CYGWIN__)
+# include "os_win32.h"
+#else
+# include "os_posix.h"
+#endif
+
 using std::string;
 using std::vector;
 
@@ -295,12 +301,6 @@ Wizard::preview_aircraft()
     next->activate();
 }
 
-#if defined(WIN32)
-static const char searchPathSep = ';';
-#else
-static const char searchPathSep = ':';
-#endif
-
 void
 Wizard::next_cb()
 {
@@ -319,7 +319,7 @@ Wizard::next_cb()
 	string fg_scenery = scenery_dir_list_->text(1);
 	for (int i = 2; i <= scenery_dir_list_->size(); ++i)
 	{
-	    fg_scenery += searchPathSep;
+	    fg_scenery += os::searchPathSep;
 	    fg_scenery += scenery_dir_list_->text(i);
 	}
 
@@ -395,12 +395,6 @@ Wizard::prev_cb()
     }
 }
 
-#if defined(WIN32) || defined(__EMX__) && !defined(__CYGWIN__)
-static inline bool isdirsep(char c) {return c=='/' || c=='\\';}
-#else
-static inline bool isdirsep(char c) { return c =='/'; }
-#endif
-
 void
 Wizard::fg_exe_select_cb()
 {
@@ -430,7 +424,7 @@ Wizard::fg_root_update_cb()
     string dir( fg_root_->value() );
 
     // Remove trailing separator.
-    if (isdirsep( dir[ dir.length() - 1 ] ))
+    if (os::isdirsep( dir[ dir.length() - 1 ] ))
     {
         dir.erase( dir.length() - 1 );
     }
@@ -480,11 +474,8 @@ Wizard::advanced_cb()
 	adv = new Advanced;
     }
 
-    {
-	prefs.set( "airport", airports_->get_selected_id().c_str() );
-	prefs.set( "airport-name",
-		   airports_->get_selected_name().c_str() );
-    }
+    prefs.set( "airport", airports_->get_selected_id().c_str() );
+    prefs.set( "airport-name", airports_->get_selected_name().c_str() );
 
     int r = adv->exec( prefs );
 
@@ -626,6 +617,13 @@ void
 Wizard::cancel_cb()
 {
     logwin->hide();
+
+    // Save main window size and position.
+    prefs.set( "x", win->x() );
+    prefs.set( "y", win->y() );
+    prefs.set( "width", win->w() );
+    prefs.set( "height", win->h() );
+
     win->hide();
 }
 
