@@ -35,7 +35,7 @@
 
 #include "UserInterface.h"
 
-using std::ofstream
+using std::ofstream;
 
 
 void
