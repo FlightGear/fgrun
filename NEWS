@@ -1,3 +1,10 @@
+* 0.4.1
+
+  * Scan for installed airports in the background.
+  * Cache installed airport codes.
+  * Added a cloud page to the advanced disalog.
+  * Saved airport is selected on startup.
+
 * 0.4.0
 
   * New wizard style interface to make it easier for first time and infrequent
