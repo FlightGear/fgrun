@@ -33,6 +33,8 @@
 
 #include <simgear/props/props_io.hxx>
 #include <simgear/structure/exception.hxx>
+#include <simgear/misc/sg_path.hxx>
+
 #include <plib/ul.h>
 
 #include "wizard.h"
@@ -114,16 +116,16 @@ Wizard::init()
         page[0]->activate();
         page[0]->show();
         prev->deactivate();
+	next->deactivate();
     }
     else
     {
         page[1]->show();
         prev->activate();
+	next->activate();
         aircraft_update();
         airports_->init( fg_root_->value(), fg_scenery_->value() );
     }
-
-    next->deactivate();
 }
 
 void
@@ -147,12 +149,19 @@ timeout_handler( void* v )
     Fl::repeat_timeout( update_period, timeout_handler, v );
 }
 
+static SGPath
+dir_path( const SGPath& p )
+{
+    return SGPath( p.dir() );
+}
+
 void
 Wizard::preview_aircraft()
 {
     Fl::remove_timeout( timeout_handler, this );
 
     preview->clear();
+    preview->redraw();
     preview->init();
 
     int n = aircraft->value();
@@ -169,32 +178,30 @@ Wizard::preview_aircraft()
 
         if (props.hasValue( "/sim/model/path" ))
         {
-            string mpath( fg_root_->value() );
-            mpath.append( "/" );
-            mpath.append( props.getStringValue( "/sim/model/path" ) );
-            if (!ulFileExists( mpath.c_str() ))
+            SGPath path( fg_root_->value() );
+            path.append( props.getStringValue( "/sim/model/path" ) );
+
+            if (!path.exists())
 	    {
-		fl_alert( "Model not found: '%s'", mpath.c_str() );
+		fl_alert( "Model not found: '%s'", path.c_str() );
                 return;
 	    }
 
-            if (mpath.find( ".xml", mpath.size() - 4 ) != string::npos)
+	    if (path.extension() == "xml")
             {
                 SGPropertyNode mprops;
-                readProperties( mpath, &mprops );
+                readProperties( path.str(), &mprops );
 
                 if (mprops.hasValue( "/path" ))
                 {
-                    string::size_type pos = mpath.rfind( "/" );
-                    mpath.replace( pos+1, string::npos,
-                                   mprops.getStringValue("/path") );
+		    path = dir_path( path );
+		    path.append( mprops.getStringValue("/path") );
                 }
             }
 
-
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
-            ssgEntity* model = preview->load( mpath );
+            ssgEntity* model = preview->load( path.str() );
             if (model != 0)
             {
                 Fl::add_timeout( update_period, timeout_handler, this );
@@ -202,6 +209,11 @@ Wizard::preview_aircraft()
             win->cursor( FL_CURSOR_DEFAULT );
             preview->redraw();
         }
+	else
+	{
+	    fl_alert( "Property '/sim/model/path' not found" );
+	    return;
+	}
     }
     catch (const sg_exception& exc )
     {
@@ -215,7 +227,6 @@ Wizard::preview_aircraft()
 void
 Wizard::next_cb()
 {
-    Fl::remove_timeout( timeout_handler, this );
     prev->activate();
 
     if (wiz->value() == page[0])
@@ -234,12 +245,14 @@ Wizard::next_cb()
     else if (wiz->value() == page[1])
     {
 	int n = aircraft->value();
-	prefs.set( "aircraft", aircraft->text(n) );
+	prefs.set( "aircraft", n > 0 ? aircraft->text(n) : "" );
+	Fl::remove_timeout( timeout_handler, this );
     }
     else if (wiz->value() == page[2])
     {
 	prefs.set( "airport", airports_->get_selected_id().c_str() );
-	prefs.set( "airport-name", airports_->get_selected_name().c_str() );
+	prefs.set( "airport-name",
+		   airports_->get_selected_name().c_str() );
 
 	string rwy( airports_->get_selected_runway() );
 	if (rwy.empty())
@@ -268,6 +281,8 @@ Wizard::next_cb()
     else if (wiz->value() == page[2])
     {
 	// "Select location" page
+// 	if (airports_->size() == 0)
+// 	    airports_update();
     }
     else if (wiz->value() == page[3])
     {
@@ -410,10 +425,17 @@ Wizard::advanced_cb()
 
     {
 	prefs.set( "airport", airports_->get_selected_id().c_str() );
-	prefs.set( "airport-name", airports_->get_selected_name().c_str() );
+	prefs.set( "airport-name",
+		   airports_->get_selected_name().c_str() );
     }
 
     int r = adv->exec( prefs );
+
+    // Update command text.
+    std::ostringstream ostr;
+    ostr << fg_exe_->value() << "\n  ";
+    write_fgfsrc( ostr, "\n  " );
+    text->value( ostr.str().c_str() );
 }
 
 void
@@ -423,12 +445,20 @@ Wizard::update_preview()
 }
 
 static void
-search_aircraft_dir( const string& dir,
+search_aircraft_dir( const SGPath& dir,
                      bool recursive,
-                     vector<string>& ac )
+                     vector<SGPath>& ac )
 {
     dirent** files;
-    int num_files = fl_filename_list( dir.c_str(),
+    string s( dir.str() );
+
+// #ifdef WIN32
+//     // Ensure there is a trailing slash.
+//     if (*s.rbegin() != '/')
+// 	s.append( "/" );
+// #endif
+
+    int num_files = fl_filename_list( s.c_str(),
                                       &files, fl_casenumericsort );
     if (num_files < 0)
         return;
@@ -437,23 +467,20 @@ search_aircraft_dir( const string& dir,
     {
         if (fl_filename_match(files[i]->d_name, "*-set.xml"))
         {
-            string d( dir );
-            d.append( "/" );
+            SGPath d( dir );
             d.append( files[i]->d_name );
             ac.push_back( d );
-
         }
         else if (recursive &&
                  strcmp( files[i]->d_name, "CVS" ) != 0 &&
                  strcmp( files[i]->d_name, ".." ) != 0 &&
                  strcmp( files[i]->d_name, "." ) != 0 )
         {
-            string d( dir );
-            d.append( "/" );
+            SGPath d( dir );
             d.append( files[i]->d_name );
             if (fl_filename_isdir( d.c_str() ))
             {
-                search_aircraft_dir( d.c_str(), false, ac );
+                search_aircraft_dir( d, false, ac );
             }
         }
 
@@ -465,10 +492,10 @@ search_aircraft_dir( const string& dir,
 void
 Wizard::aircraft_update()
 {
-    string s( fg_root_->value() );
-    s.append( "/Aircraft/" );
-    vector< string > ac;
-    search_aircraft_dir( s, true, ac );
+    SGPath path( fg_root_->value() );
+    path.append( "Aircraft" );
+    vector< SGPath > ac;
+    search_aircraft_dir( path, true, ac );
 
     for (int i = 1; i <= aircraft->size(); ++i)
     {
@@ -478,14 +505,15 @@ Wizard::aircraft_update()
     }
     aircraft->clear();
 
-    for (vector<string>::size_type i = 0; i < ac.size(); ++i)
+    for (vector<SGPath>::size_type i = 0; i < ac.size(); ++i)
     {
         // Extract aircraft name from filename.
-        string::size_type pos = ac[i].rfind( "/" );
-        string::size_type epos = ac[i].find( "-set.xml", pos );
+	string s( ac[i].str() );
+        string::size_type pos = s.rfind( "/" );
+        string::size_type epos = s.find( "-set.xml", pos );
 
-        char* data = strdup( ac[i].c_str() );
-        aircraft->add( ac[i].substr( pos+1, epos-pos-1 ).c_str(), data );
+        char* data = strdup( s.c_str() );
+        aircraft->add( s.substr( pos+1, epos-pos-1 ).c_str(), data );
     }
 }
 
