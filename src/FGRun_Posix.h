@@ -3,8 +3,7 @@
 
 #include "UserInterface.h"
 
-class Fl_Window;
-class Fl_Text_Display;
+class FGOutputWindow;
 
 class FGRun_Posix : public UserInterface
 {
@@ -21,11 +20,8 @@ private:
     static void stderr_cb( int fd, void* arg );
     void stderr_cb( int fd );
 
-    void create_output_window();
-
 private:
-    Fl_Window* win;
-    Fl_Text_Display* view;
+    FGOutputWindow* win;
 };
 
 #endif // FGRUN_POSIX_H

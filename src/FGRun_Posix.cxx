@@ -42,49 +42,25 @@
 
 #include <iostream>
 #include <string>
-#include <FL/Fl_Text_Display.H>
 
 #include "FGRun_Posix.h"
 #include "fgrun_pty.h"
+#include "output.h"
 
 using std::string;
 using std::cout;
 
 FGRun_Posix::FGRun_Posix()
     : win(0)
-    , view(0)
 {
 }
 
 FGRun_Posix::~FGRun_Posix()
 {
-    delete win;
-}
-
-static Fl_Menu_Item menu_[] = {
-    { "&File", 0, 0, 0, 64, 0, 0, 12, 56 },
-    { "&Save", 0x40073, 0, 0, 128, 0, 0, 12, 56 },
-    { "&Close", 0, 0, 0, 0, 0, 0, 12, 56 },
-    {0},
-    {0}
-};
-
-void
-FGRun_Posix::create_output_window()
-{
-    win = new Fl_Window( 640, 480, "FlightGear output" );
+    if (win != 0)
     {
-	win->labelsize(12);
-	win->user_data( this );
-	{
-	    Fl_Menu_Bar* o = new Fl_Menu_Bar( 0, 0, 640, 25 );
-	    o->labelsize(12);
-	    o->textsize(12);
-	    o->menu( ::menu_ );
-	}
-	view = new Fl_Text_Display( 0, 25, 640, 480 );
-	view->buffer( new Fl_Text_Buffer );
-	win->resizable( win );
+	win->hide();
+	delete win;
     }
 }
 
@@ -123,11 +99,11 @@ FGRun_Posix::run_fgfs_impl()
 	{
 	    if (win == 0)
 	    {
-		create_output_window();
+		win = new FGOutputWindow( 640, 480, "FlightGear output" );
 	    }
 	    else
 	    {
-		view->buffer()->remove( 0, view->buffer()->length() );
+		win->clear();
 	    }
 
 	    win->show();
@@ -179,11 +155,11 @@ FGRun_Posix::stdout_cb( int fd )
     ssize_t n = read( fd, buf, sizeof( buf ) - 1 );
     if (n > 0)
     {
-	buf[n] = 0;
-	// Ensure new text is added at the end.
-	view->insert_position( view->buffer()->length() );
-	view->insert( buf );
-	view->show_insert_position();
+	if (win != 0)
+	{
+	    buf[n] = 0;
+	    win->append( buf );
+	}
     }
     else
     {
