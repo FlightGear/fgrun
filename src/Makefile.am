@@ -13,6 +13,9 @@ BUILT_SOURCES = UserInterface.cxx UserInterface.h
 bin_PROGRAMS = fgrun
 
 fgrun_SOURCES = \
+	AirportBrowser.cxx AirportBrowser.h \
+	Fl_Table.cxx Fl_Table.H \
+	Fl_Table_Row.cxx Fl_Table_Row.H \
 	airportdb.cxx airportdb.h \
 	main.cxx \
 	settings.cxx \
@@ -27,12 +30,6 @@ fgrun_SOURCES = \
 	fgrun_pty.cxx fgrun_pty.h \
 	$(platform_srcs) \
 	UserInterface.cxx UserInterface.h
-
-# Sources that are compiled only on platforms that lack the functions.
-
-LIBADD_SOURCE = \
-	forkpty.c \
-	strdup.c
 
 if WIN32
 win32_libs = -luuid -lwsock32 -lole32 -lwinmm -lgdi32
@@ -49,5 +46,5 @@ UserInterface.cxx UserInterface.h: UserInterface.fl
 
 ##MAINTAINERCLEANFILES = UserInterface.cxx UserInterface.h
 EXTRA_DIST += \
-	UserInterface.fl \
-	$(LIBADD_SOURCE)
+	UserInterface.fl
+
