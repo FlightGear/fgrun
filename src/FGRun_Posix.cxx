@@ -28,6 +28,10 @@
 #  include <unistd.h>
 #endif
 
+#ifdef HAVE_STDLIB_H
+#  include <stdlib.h>
+#endif
+
 #ifdef HAVE_SYS_WAIT_H
 #  include <sys/wait.h>
 #endif
@@ -114,6 +118,14 @@ FGRun_Posix::run_fgfs_impl()
 	    arg0 = path;
 	}
 
+	// Append any new vars to environ array.
+	int n = env_list->size();
+	for (int i = 1; i <= n; ++i )
+	{
+	    // Need to keep this string value around.
+	    char* s = strdup( env_list->text( i ) );
+	    putenv( s );
+	}
 	execl( path.c_str(), arg0.c_str(), NULL );
     }
 }
