@@ -253,7 +253,8 @@ Advanced::load_settings( Fl_Preferences& prefs )
     aircraft_->value( buf );
 
     prefs.get( "airport", buf, "", buflen-1 );
-    string s( buf );
+    airport_id_ = buf;
+    string s( airport_id_ );
     prefs.get( "airport-name", buf, "", buflen-1);
     if (buf[0] != 0)
     {
