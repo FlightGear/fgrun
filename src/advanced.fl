@@ -17,7 +17,7 @@ class Advanced {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {593 71 640 480} type Double labelsize 12
+      private xywh {569 342 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -69,11 +69,12 @@ class Advanced {open
         }
         Fl_Input config {
           label {Config:}
-          private xywh {250 280 355 25} labelsize 12 textsize 12 deactivate
+          private tooltip {Path to additional XML properties file} xywh {250 280 355 25} labelsize 12 textsize 12
         }
         Fl_Button {} {
           label {...}
-          xywh {610 280 25 25} labelsize 12 deactivate
+          callback {fg_config_cb();}
+          private xywh {610 280 25 25} labelsize 12
         }
         Fl_Output fg_exe_ {
           label {Executable:}
@@ -1048,8 +1049,8 @@ else
         }
       }
       Fl_Group {page[13]} {
-        label Weather
-        private xywh {150 0 490 430} labelfont 1 align 21 hide
+        label Weather open
+        private xywh {150 0 490 430} labelfont 1 align 21
       } {
         Fl_Value_Input wind_speed {
           label {Speed (kts):}
@@ -1074,10 +1075,15 @@ else
           label {Ceiling:}
           tooltip {FT_ASL[:THICKNESS_FT]} xywh {240 335 80 25} labelsize 12 textsize 12
         }
+        Fl_Button {} {
+          label {Metar...}
+          callback {metar_cb();} selected
+          private xywh {525 40 70 25} deactivate
+        }
       }
       Fl_Group {page[14]} {
-        label Clouds open
-        private xywh {150 0 490 430} labelfont 1 align 21
+        label Clouds
+        private xywh {150 0 490 430} labelfont 1 align 21 hide
       } {
         Fl_Choice cloud_layer_ {
           label {Layer:}
@@ -1152,7 +1158,7 @@ else
         }
         Fl_Value_Input cloud_transition_ {
           label {Transition (ft):}
-          callback {cloud_transition[ cloud_layer_->value() ] = cloud_transition_->value();} selected
+          callback {cloud_transition[ cloud_layer_->value() ] = cloud_transition_->value();}
           private xywh {255 230 120 25} labelsize 12 maximum 100000 step 1 textsize 12 deactivate
         }
       }
@@ -1186,4 +1192,6 @@ else
   decl {int cloud_coverage[ MAX_CLOUD_LAYERS ];} {}
   decl {double cloud_span[ MAX_CLOUD_LAYERS ];} {}
   decl {double cloud_transition[ MAX_CLOUD_LAYERS ];} {}
+  decl {void metar_cb();} {}
+  decl {void fg_config_cb();} {}
 } 

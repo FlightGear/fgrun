@@ -183,3 +183,19 @@ Advanced::cloud_layer_cb()
     cloud_span_->value( cloud_span[n] );
     cloud_coverage_->value( cloud_coverage[n] );
 }
+
+void
+Advanced::fg_config_cb()
+{
+    char* p = fl_file_chooser( "Select a preferences file",
+			       "XML Files(*.xml)",
+			       config->value(), 0 );
+    if (p != 0)
+	config->value( p );
+}
+
+void
+Advanced::metar_cb()
+{
+}
+

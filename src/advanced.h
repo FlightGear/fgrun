@@ -35,6 +35,8 @@ private:
   inline void cb__i(Fl_Button*, void*);
   static void cb_(Fl_Button*, void*);
   Fl_Input *config;
+  inline void cb_1_i(Fl_Button*, void*);
+  static void cb_1(Fl_Button*, void*);
 public:
   Fl_Output *fg_exe_;
   Fl_Output *fg_root_;
@@ -190,8 +192,8 @@ private:
   Fl_Input *io_file_name;
   inline void cb_io_file_name_i(Fl_Input*, void*);
   static void cb_io_file_name(Fl_Input*, void*);
-  inline void cb_1_i(Fl_Button*, void*);
-  static void cb_1(Fl_Button*, void*);
+  inline void cb_2_i(Fl_Button*, void*);
+  static void cb_2(Fl_Button*, void*);
   Fl_Group *serial_group;
   Fl_Input *serial_port;
   inline void cb_serial_port_i(Fl_Input*, void*);
@@ -216,8 +218,8 @@ private:
   Fl_Input *io_generic_file;
   inline void cb_io_generic_file_i(Fl_Input*, void*);
   static void cb_io_generic_file(Fl_Input*, void*);
-  inline void cb_2_i(Fl_Button*, void*);
-  static void cb_2(Fl_Button*, void*);
+  inline void cb_3_i(Fl_Button*, void*);
+  static void cb_3(Fl_Button*, void*);
   Fl_Input *nav1;
   Fl_Input *nav2;
   Fl_Input *adf;
@@ -294,6 +296,8 @@ private:
 public:
   Fl_Input *ceiling;
 private:
+  inline void cb_Metar_i(Fl_Button*, void*);
+  static void cb_Metar(Fl_Button*, void*);
   Fl_Group *page[15];
   Fl_Choice *cloud_layer_;
   inline void cb_cloud_layer__i(Fl_Choice*, void*);
@@ -343,5 +347,7 @@ private:
   int cloud_coverage[ MAX_CLOUD_LAYERS ];
   double cloud_span[ MAX_CLOUD_LAYERS ];
   double cloud_transition[ MAX_CLOUD_LAYERS ];
+  void metar_cb();
+  void fg_config_cb();
 };
 #endif

@@ -24,6 +24,13 @@ void Advanced::cb_(Fl_Button* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb__i(o,v);
 }
 
+inline void Advanced::cb_1_i(Fl_Button*, void*) {
+  fg_config_cb();
+}
+void Advanced::cb_1(Fl_Button* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_1_i(o,v);
+}
+
 inline void Advanced::cb_hud_i(Fl_Check_Button* o, void*) {
   if (o->value())
   antialias_hud->activate();
@@ -322,11 +329,11 @@ void Advanced::cb_io_file_name(Fl_Input* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_file_name_i(o,v);
 }
 
-inline void Advanced::cb_1_i(Fl_Button*, void*) {
+inline void Advanced::cb_2_i(Fl_Button*, void*) {
   io_file_cb();
 }
-void Advanced::cb_1(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_1_i(o,v);
+void Advanced::cb_2(Fl_Button* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_2_i(o,v);
 }
 
 inline void Advanced::cb_serial_port_i(Fl_Input*, void*) {
@@ -378,11 +385,11 @@ void Advanced::cb_io_generic_file(Fl_Input* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_generic_file_i(o,v);
 }
 
-inline void Advanced::cb_2_i(Fl_Button*, void*) {
+inline void Advanced::cb_3_i(Fl_Button*, void*) {
   io_generic_file_cb();
 }
-void Advanced::cb_2(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_2_i(o,v);
+void Advanced::cb_3(Fl_Button* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_3_i(o,v);
 }
 
 inline void Advanced::cb_dme_nav1_i(Fl_Round_Button* o, void*) {
@@ -598,6 +605,13 @@ void Advanced::cb_wind_hdg(Fl_Value_Input* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_wind_hdg_i(o,v);
 }
 
+inline void Advanced::cb_Metar_i(Fl_Button*, void*) {
+  metar_cb();
+}
+void Advanced::cb_Metar(Fl_Button* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_Metar_i(o,v);
+}
+
 inline void Advanced::cb_cloud_layer__i(Fl_Choice*, void*) {
   cloud_layer_cb();
 }
@@ -702,13 +716,13 @@ Advanced::Advanced() {
         o->callback((Fl_Callback*)cb_);
       }
       { Fl_Input* o = config = new Fl_Input(250, 280, 355, 25, "Config:");
+        o->tooltip("Path to additional XML properties file");
         o->labelsize(12);
         o->textsize(12);
-        o->deactivate();
       }
       { Fl_Button* o = new Fl_Button(610, 280, 25, 25, "...");
         o->labelsize(12);
-        o->deactivate();
+        o->callback((Fl_Callback*)cb_1);
       }
       { Fl_Output* o = fg_exe_ = new Fl_Output(250, 25, 385, 25, "Executable:");
         o->labelsize(12);
@@ -1361,7 +1375,7 @@ Advanced::Advanced() {
         }
         { Fl_Button* o = new Fl_Button(350, 305, 25, 25, "...");
           o->labelsize(12);
-          o->callback((Fl_Callback*)cb_1);
+          o->callback((Fl_Callback*)cb_2);
         }
         o->end();
       }
@@ -1423,7 +1437,7 @@ Advanced::Advanced() {
         }
         { Fl_Button* o = new Fl_Button(350, 365, 25, 25, "...");
           o->labelsize(12);
-          o->callback((Fl_Callback*)cb_2);
+          o->callback((Fl_Callback*)cb_3);
         }
         o->end();
       }
@@ -1605,7 +1619,6 @@ Advanced::Advanced() {
     { Fl_Group* o = page[13] = new Fl_Group(150, 0, 490, 430, "Weather");
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Value_Input* o = wind_speed = new Fl_Value_Input(240, 240, 80, 25, "Speed (kts):");
         o->tooltip("Wind speed (kts)");
         o->labelsize(12);
@@ -1645,11 +1658,16 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->textsize(12);
       }
+      { Fl_Button* o = new Fl_Button(525, 40, 70, 25, "Metar...");
+        o->callback((Fl_Callback*)cb_Metar);
+        o->deactivate();
+      }
       o->end();
     }
     { Fl_Group* o = page[14] = new Fl_Group(150, 0, 490, 430, "Clouds");
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Choice* o = cloud_layer_ = new Fl_Choice(255, 80, 120, 25, "Layer:");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
