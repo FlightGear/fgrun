@@ -34,7 +34,7 @@
 #include <FL/filename.H>
 #include <FL/fl_ask.H>
 #include <FL/Fl_File_Chooser.H>
-#include <FL/fl_draw.h>
+#include <FL/fl_draw.H>
 
 #include <simgear/props/props_io.hxx>
 #include <simgear/structure/exception.hxx>
@@ -255,10 +255,10 @@ Wizard::preview_aircraft()
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
             ssgEntity* model = preview->load( path.str() );
-            if (model != 0)
-            {
-                Fl::add_timeout( update_period, timeout_handler, this );
-            }
+//             if (model != 0)
+//             {
+//                 Fl::add_timeout( update_period, timeout_handler, this );
+//             }
             win->cursor( FL_CURSOR_DEFAULT );
             preview->redraw();
         }

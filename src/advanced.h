@@ -3,7 +3,7 @@
 #ifndef advanced_h
 #define advanced_h
 #include <FL/Fl.H>
-#include <FL/Fl_Preferences.h>
+#include <FL/Fl_Preferences.H>
 #include <string>
 #define MAX_CLOUD_LAYERS 5
 #include <FL/Fl_Double_Window.H>
