@@ -176,6 +176,8 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set( "multiplay1", multiplay1->value() );
     prefs.set( "multiplay2", multiplay2->value() );
 
+    prefs.set( "proxy", proxy->value() );
+
     prefs.set("io-count", io_list->size());
     int i;
     for (i = 1; i <= io_list->size(); ++i)
@@ -473,6 +475,9 @@ Advanced::load_settings( Fl_Preferences& prefs )
     multiplay1->value( buf );
     prefs.get( "multiplay2", buf, "", buflen-1 );
     multiplay2->value( buf );
+
+    prefs.get( "proxy", buf, "", buflen-1 );
+    proxy->value( buf );
 
     io_list->clear();
     prefs.get( "io-count", iVal, 0 );

@@ -161,9 +161,10 @@ private:
   inline void cb_jpg_httpd_i(Fl_Check_Button*, void*);
   static void cb_jpg_httpd(Fl_Check_Button*, void*);
   Fl_Value_Input *jpg_httpd_port;
+  Fl_Input *callsign;
   Fl_Input *multiplay1;
   Fl_Input *multiplay2;
-  Fl_Input *callsign;
+  Fl_Input *proxy;
   Fl_Browser *io_list;
   inline void cb_io_list_i(Fl_Browser*, void*);
   static void cb_io_list(Fl_Browser*, void*);

@@ -310,6 +310,9 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     if (prefs.get( "multiplay2", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--multiplay=" << buf;
 
+    if (prefs.get( "proxy", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--proxy=" << buf;
+
     // I/O options.
     prefs.get( "io-count", iVal, 0 );
     int i;

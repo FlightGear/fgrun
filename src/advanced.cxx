@@ -274,6 +274,7 @@ Fl_Menu_Item Advanced::menu_io_protocol[] = {
  {"garmin", 0,  0, 0, 0, 0, 0, 12, 56},
  {"generic", 0,  0, 0, 0, 0, 0, 12, 56},
  {"joy-client", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"jsclient", 0,  0, 0, 0, 0, 0, 12, 56},
  {"native", 0,  0, 0, 0, 0, 0, 12, 56},
  {"native-ctrls", 0,  0, 0, 0, 0, 0, 12, 56},
  {"native-fdm", 0,  0, 0, 0, 0, 0, 12, 56},
@@ -1303,16 +1304,27 @@ Advanced::Advanced() {
         o->textsize(12);
         o->deactivate();
       }
-      { Fl_Input* o = multiplay1 = new Fl_Input(240, 195, 230, 25, "Multiplay 1:");
-        o->tooltip("in|out,hz,address,port");
+      { Fl_Group* o = new Fl_Group(155, 135, 480, 120, "Multiplayer Options");
+        o->box(FL_ENGRAVED_FRAME);
+        o->labelfont(1);
         o->labelsize(12);
-        o->textsize(12);
+        o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        { Fl_Input* o = callsign = new Fl_Input(240, 165, 135, 25, "Callsign:");
+          o->labelsize(12);
+          o->textsize(12);
+        }
+        { Fl_Input* o = multiplay1 = new Fl_Input(240, 195, 295, 25, "Multiplay 1:");
+          o->tooltip("in|out,hz,address,port");
+          o->labelsize(12);
+          o->textsize(12);
+        }
+        { Fl_Input* o = multiplay2 = new Fl_Input(240, 225, 295, 25, "Multiplay 2:");
+          o->labelsize(12);
+          o->textsize(12);
+        }
+        o->end();
       }
-      { Fl_Input* o = multiplay2 = new Fl_Input(240, 225, 230, 25, "Multiplay 2:");
-        o->labelsize(12);
-        o->textsize(12);
-      }
-      { Fl_Input* o = callsign = new Fl_Input(240, 165, 100, 25, "Callsign:");
+      { Fl_Input* o = proxy = new Fl_Input(240, 275, 230, 25, "Proxy:");
         o->labelsize(12);
         o->textsize(12);
       }
@@ -1322,7 +1334,6 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
@@ -1344,7 +1355,6 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_io_protocol);
-        o->deactivate();
         o->menu(menu_io_protocol);
       }
       { Fl_Choice* o = io_medium = new Fl_Choice(220, 215, 125, 25, "Medium:");
@@ -1510,6 +1520,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = prop_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);

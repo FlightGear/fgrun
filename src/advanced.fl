@@ -17,7 +17,7 @@ class Advanced {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {574 47 640 480} type Double labelsize 12
+      private xywh {512 38 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -629,22 +629,31 @@ else
         Fl_Value_Input jpg_httpd_port {
           private tooltip {Screen shot HTTP server port} xywh {275 95 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5502 textsize 12 deactivate
         }
-        Fl_Input multiplay1 {
-          label {Multiplay 1:}
-          private tooltip {in|out,hz,address,port} xywh {240 195 230 25} labelsize 12 textsize 12
+        Fl_Group {} {
+          label {Multiplayer Options} open
+          xywh {155 135 480 120} box ENGRAVED_FRAME labelfont 1 labelsize 12 align 21
+        } {
+          Fl_Input callsign {
+            label {Callsign:}
+            private xywh {240 165 135 25} labelsize 12 textsize 12
+          }
+          Fl_Input multiplay1 {
+            label {Multiplay 1:}
+            private tooltip {in|out,hz,address,port} xywh {240 195 295 25} labelsize 12 textsize 12
+          }
+          Fl_Input multiplay2 {
+            label {Multiplay 2:}
+            private xywh {240 225 295 25} labelsize 12 textsize 12
+          }
         }
-        Fl_Input multiplay2 {
-          label {Multiplay 2:}
-          private xywh {240 225 230 25} labelsize 12 textsize 12
-        }
-        Fl_Input callsign {
-          label {Callsign:}
-          private xywh {240 165 100 25} labelsize 12 textsize 12
+        Fl_Input proxy {
+          label {Proxy:}
+          private xywh {240 275 230 25} labelsize 12 textsize 12
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output}
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label {Input/Output} open
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -664,8 +673,8 @@ else
         }
         Fl_Choice io_protocol {
           label {Protocol:}
-          callback {io_protocol_update_cb();}
-          private xywh {220 185 125 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
+          callback {io_protocol_update_cb();} open
+          private xywh {220 185 125 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           menuitem {} {
             label atc610x
@@ -686,6 +695,10 @@ else
           menuitem {} {
             label {joy-client}
             private xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label jsclient selected
+            xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
             label native
@@ -887,8 +900,8 @@ else
         }
       }
       Fl_Group {page[10]} {
-        label Properties selected
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        label Properties
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser prop_list {
           callback {list_select_cb(
