@@ -25,6 +25,10 @@
 #include <FL/filename.h>
 #include <FL/fl_ask.h>
 
+#if defined(HAVE_STRING_H)
+#include <string.h>	// strcmp
+#endif
+
 #include "UserInterface.h"
 
 using std::ofstream;
@@ -64,11 +68,11 @@ UserInterface::write_fgfsrc()
 	// Only write non-default options.
 
 	// General options.
-	if (strcmp(airport->text(), "KSFO") != 0)
+	if (airport->text() && strcmp(airport->text(), "KSFO") != 0)
 	    ofs << "\n--airport-id=" << airport->text();
 	if (runway->value() > 1)
 	    ofs << "\n--runway=" << runway->text();
-	if (strcmp(aircraft->text(), "c172") != 0)
+	if (aircraft->text() && strcmp(aircraft->text(), "c172") != 0)
 	    ofs << "\n--aircraft=" << aircraft->text();
 	if (strcmp(control->text(), "joystick") != 0)
 	    ofs << "\n--control=" << control->text();

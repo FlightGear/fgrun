@@ -36,6 +36,10 @@
 #  include <unistd.h>
 #endif
 
+#if defined(HAVE_FCNTL_H)
+#include <fcntl.h>	// O_RDWR
+#endif
+
 /**
  * 
  */
@@ -69,7 +73,8 @@ pty_open( int* amaster,
     }
     *amaster = master;
     *aslave = pts_fd;
-    strcpy( name, pts_name );
+    if (name)
+        strcpy( name, pts_name );
     return 0;
 
 #elif defined(HAVE_DEV_PTMX)
@@ -110,7 +115,8 @@ pty_open( int* amaster,
 
     *amaster = ptm;
     *aslave = pts;
-    strcpy( name, pts_name );
+    if (name)
+        strcpy( name, pts_name );
     return 0;
 
 #elif defined(HAVE_DEV_PTS)
