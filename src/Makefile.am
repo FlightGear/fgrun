@@ -24,7 +24,7 @@ else
 win32_libs =
 endif
 
-fgrun_LDADD = -lfltk $(win32_libs)
+fgrun_LDADD = -lfltk -lmk4 $(win32_libs)
 
 
 FLUID = @FLUID@
