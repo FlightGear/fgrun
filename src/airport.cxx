@@ -32,6 +32,8 @@
 #include <cctype>
 #include <iomanip>
 #include <iterator>
+#include <utility>
+#include <iostream>
 
 #include <FL/Fl.h>
 #include <FL/filename.h>
@@ -55,7 +57,23 @@ static deque< string > apt_dirs;
 /**
  * Installed airport ICAO identifiers.
  */
-static vector< string > airports;
+typedef vector<string> vs_t;
+typedef vs_t::iterator vsi_t;
+
+static vs_t airports;
+
+static bool
+comp( const string& a, const string& b )
+{
+    string::size_type len = std::min( a.length(), b.length() );
+    return a.compare( 0, 1, b ) < 0;
+}
+
+static bool
+id_comp( const apt_dat_t* a, const apt_dat_t* b )
+{
+    return a->id_ == b->id_;
+}
 
 /**
  * 
@@ -106,16 +124,33 @@ search_for_airports_cb( void* v )
 	if (!airports.empty())
 	{
 	    std::sort( airports.begin(), airports.end() );
-	    typedef vector<string> StringVec;
-	    StringVec::iterator i = airports.begin();
-	    StringVec::iterator end = airports.end();
+
+	    vsi_t first = airports.begin();
+	    vsi_t last = airports.end();
 	    int index = 0;
-	    for (; i != end; ++i)
+
+	    if (airports.size() > (26+10))
 	    {
-		index = ui->airport->add( i->c_str() );
-		if (ui->default_airport == *i)
-		    ui->airport->value(index);
+		for (; first != last; ++first)
+		{
+		    string s = first->substr( 0, 1 );
+		    s.append( "/" );
+		    s.append( *first );
+		    index = ui->airport->add( s.c_str() );
+		    if (ui->default_airport == *first)
+			ui->airport->value(index);
+		}
 	    }
+	    else
+	    {
+		for (; first != last; ++first)
+		{
+		    index = ui->airport->add( first->c_str() );
+		    if (ui->default_airport == *first)
+			ui->airport->value(index);
+		}
+	    }
+
 	    ui->airport->activate();
 	    ui->update_runways();
 	    ui->load_airport_browser();
@@ -198,33 +233,43 @@ UserInterface::load_airport_browser()
 {
     std::vector< const apt_dat_t* > apts;
 
-    apt_browser->clear();
-
     if (apt_show_installed->value())
     {
-	int count = airport->size() - 1;
+	vs_t::size_type count = airports.size();
 	apts.reserve( count );
+	
 	for (int i = 0; i < count; ++i)
 	{
-	    const apt_dat_t* apt = airportdb_->find( airport->text(i) );
+	    const apt_dat_t* apt = airportdb_->find( airports[i].c_str() );
 	    if (apt != 0)
 	    {
 		apts.push_back( apt );
 	    }
 	}
+
+	apt_browser->set_airports( apts );
     }
     else
     {
-	apts.reserve( airportdb_->size() );
-	AirportDB::const_iterator first( airportdb_->begin() ); 
-	AirportDB::const_iterator last( airportdb_->end() ); 
-	for (; first != last; ++first)
-	{
-	    apts.push_back( &*first );
-	}
-    }
+	static std::vector< const apt_dat_t* > all_apts;
 
-    apt_browser->set_airports( apts );
+	if (all_apts.empty())
+	{
+	    all_apts.reserve( airportdb_->size() );
+	    AirportDB::const_iterator first( airportdb_->begin() ); 
+	    AirportDB::const_iterator last( airportdb_->end() ); 
+	    for (; first != last; ++first)
+	    {
+		all_apts.push_back( &*first );
+	    }
+
+	    // Remove duplicate airport ids.
+	    all_apts.erase( std::unique( all_apts.begin(),
+					 all_apts.end(), id_comp ),
+			    all_apts.end() );
+	}
+	apt_browser->set_airports( all_apts );
+    }
 }
 
 void
@@ -252,6 +297,7 @@ UserInterface::apt_id_cb()
 void
 UserInterface::apt_name_cb()
 {
+    apt_browser->select_name( apt_name->value() );
 }
 
 void
