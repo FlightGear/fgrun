@@ -2,6 +2,9 @@
 
   * Support multiple scenery directories,
   * Fixed handling of generic I/O file option.
+  * Support for new --random-wind and --proxy options.
+  * Fixed properties output bug.
+  * Display selected aircraft at startup.
 
 * 0.4.1
 
