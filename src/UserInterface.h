@@ -224,9 +224,11 @@ private:
   inline void cb_io_hz_i(Fl_Value_Input*, void*);
   static void cb_io_hz(Fl_Value_Input*, void*);
   Fl_Group *file_group;
-  Fl_Input *file_name;
-  inline void cb_file_name_i(Fl_Input*, void*);
-  static void cb_file_name(Fl_Input*, void*);
+  Fl_Input *io_file_name;
+  inline void cb_io_file_name_i(Fl_Input*, void*);
+  static void cb_io_file_name(Fl_Input*, void*);
+  inline void cb_4_i(Fl_Button*, void*);
+  static void cb_4(Fl_Button*, void*);
   Fl_Group *serial_group;
   Fl_Input *serial_port;
   inline void cb_serial_port_i(Fl_Input*, void*);
@@ -247,6 +249,12 @@ private:
   Fl_Round_Button *socket_udp;
   inline void cb_socket_udp_i(Fl_Round_Button*, void*);
   static void cb_socket_udp(Fl_Round_Button*, void*);
+  Fl_Group *generic_group;
+  Fl_Input *io_generic_file;
+  inline void cb_io_generic_file_i(Fl_Input*, void*);
+  static void cb_io_generic_file(Fl_Input*, void*);
+  inline void cb_5_i(Fl_Button*, void*);
+  static void cb_5(Fl_Button*, void*);
   Fl_Input *nav1;
   Fl_Input *nav2;
   Fl_Input *adf;
@@ -349,7 +357,8 @@ private:
   void io_list_select_cb( Fl_Browser* );
   void io_list_new_cb();
   void io_list_update_cb();
-  void io_list_medium_update_cb( Fl_Choice* );
+  void io_medium_update_cb( Fl_Choice* );
+  void io_protocol_update_cb();
   void show_page( unsigned int n );
   void update_runways();
   void run_fgfs();
@@ -367,6 +376,13 @@ private:
   void list_update_cb(Fl_Browser*,Fl_Input*);
 public:
   virtual void show_log_window();
+private:
+  void io_file_cb();
+  void io_generic_file_cb();
+  void fg_exe_cb();
+  void fg_root_cb();
+  void fg_scenery_cb();
+  void fg_browser_cb();
 };
 void update_aircraft_cb(void* v);
 #endif

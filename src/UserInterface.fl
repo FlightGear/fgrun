@@ -2,15 +2,7 @@
 version 1.0104 
 header_name {.h} 
 code_name {.cxx}
-declblock {\#if defined(_MSC_VER)} {open after {\#endif}
-} {
-  decl {\#pragma warning(disable: 4786)} {}
-  decl {\#define snprintf _snprintf} {}
-} 
-
 decl {\#include <string.h>} {} 
-
-decl {\#include <FL/Fl_File_Chooser.h>} {} 
 
 decl {\#include <FL/Fl_Preferences.h>} {public
 } 
@@ -25,17 +17,16 @@ class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
-  Function {UserInterface()} {open
-  } {
+  Function {UserInterface()} {} {
     Fl_Window main_window {
       label {FlightGear Launch Control}
       callback {if (Fl::event_key() == FL_Escape)
   return; // ignore Escape
 exit(0);} open
-      private xywh {627 248 640 480} type Double labelsize 12
+      private xywh {463 56 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
-      Fl_Menu_Bar {} {open
+      Fl_Menu_Bar {} {
         private xywh {0 0 640 25} labelsize 12 textsize 12
       } {
         submenu {} {
@@ -49,7 +40,7 @@ exit(0);} open
           }
           menuitem {} {
             label {&Quit}
-            callback {exit(0);} selected
+            callback {exit(0);}
             private xywh {0 0 100 20} shortcut 0x40071 labelsize 12
           }
         }
@@ -95,7 +86,7 @@ exit(0);} open
       }
       Fl_Group {page[0]} {
         label General
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Input fg_exe {
           label {Executable:}
@@ -103,11 +94,7 @@ exit(0);} open
         }
         Fl_Button {} {
           label {...}
-          callback {char* p = fl_file_chooser("Select executable", 0, fg_exe->value(), 0);
-if (p != 0) {
-  fg_exe->value( p );
-  run->activate();
-}}
+          callback {fg_exe_cb();}
           private xywh {610 50 25 25} labelsize 12
         }
         Fl_Input fg_root {
@@ -116,17 +103,7 @@ if (p != 0) {
         }
         Fl_Button {} {
           label {...}
-          callback {char* p = fl_dir_chooser( "Select FG_ROOT directory", fg_root->value(), 0);
-if (p != 0) {
-  fg_root->value(p);
-  char buf[FL_PATH_MAX];
-  snprintf( buf, sizeof(buf), "%s/Scenery", p);
-  if (fl_filename_isdir(buf)) {
-    fg_scenery->value(buf);
-    airport_update->activate();
-    aircraft_update->activate();
-  }
-}}
+          callback {fg_root_cb();}
           private xywh {610 80 25 25} labelsize 12
         }
         Fl_Input fg_scenery {
@@ -135,12 +112,7 @@ if (p != 0) {
         }
         Fl_Button {} {
           label {...}
-          callback {char* p = fl_dir_chooser("Select FG_SCENERY directory", fg_scenery->value(), 0);
-if (p != 0) {
-  fg_scenery->value(p);
-  airport_update->activate();
-  aircraft_update->activate();
-}}
+          callback {fg_scenery_cb();}
           private xywh {610 110 25 25} labelsize 12
         }
         Fl_Choice airport {
@@ -189,9 +161,7 @@ if (p != 0) {
         }
         Fl_Button {} {
           label {...}
-          callback {char* p = fl_file_chooser("Select browser", 0, browser->value(), 0);
-if (p != 0)
-  browser->value( p );}
+          callback {fg_browser_cb();}
           private xywh {610 275 25 25} labelsize 12
         }
         Fl_Input config {
@@ -705,8 +675,8 @@ else
         }
       }
       Fl_Group {page[7]} {
-        label Network open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        label Network
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button httpd {
           label httpd
@@ -782,7 +752,7 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output}
+        label {Input/Output} open
         private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
@@ -803,7 +773,7 @@ else
         }
         Fl_Choice io_protocol {
           label {Protocol:}
-          callback {io_list_update_cb();} open
+          callback {io_protocol_update_cb();}
           private xywh {220 200 125 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           menuitem {} {
@@ -869,7 +839,7 @@ else
         }
         Fl_Choice io_medium {
           label {Medium:}
-          callback {io_list_medium_update_cb( o );}
+          callback {io_medium_update_cb( o );}
           private xywh {220 230 125 25} down_box BORDER_BOX labelsize 12 when 6 textsize 12 deactivate
         } {
           menuitem {} {
@@ -909,20 +879,21 @@ else
           private xywh {220 290 125 25} labelsize 12 minimum 1 maximum 1000 value 5 textsize 12 deactivate
         }
         Fl_Group file_group {
-          private xywh {150 320 245 115} hide
+          private xywh {150 320 225 25}
         } {
-          Fl_Input file_name {
+          Fl_Input io_file_name {
             label {File:}
             callback {io_list_update_cb();}
             private xywh {220 320 125 25} labelsize 12 when 1 textsize 12
           }
           Fl_Button {} {
             label {...}
+            callback {io_file_cb();}
             private xywh {350 320 25 25} labelsize 12
           }
         }
-        Fl_Group serial_group {
-          private xywh {150 320 245 115} hide
+        Fl_Group serial_group {open
+          private xywh {150 320 225 55} hide
         } {
           Fl_Input serial_port {
             label {Port:}
@@ -936,7 +907,7 @@ else
           }
         }
         Fl_Group socket_group {
-          private xywh {150 320 245 115} hide
+          private xywh {150 320 225 85} hide
         } {
           Fl_Input socket_host {
             label {Hostname:}
@@ -956,7 +927,21 @@ else
           Fl_Round_Button socket_udp {
             label UDP
             callback {io_list_update_cb();}
-            private xywh {290 380 55 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+            private xywh {290 380 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+          }
+        }
+        Fl_Group generic_group {open
+          private xywh {150 380 225 25}
+        } {
+          Fl_Input io_generic_file {
+            label {File:}
+            callback {io_list_update_cb();}
+            private xywh {220 380 125 25} labelsize 12 textsize 12
+          }
+          Fl_Button {} {
+            label {...}
+            callback {io_generic_file_cb();}
+            private xywh {350 380 25 25} labelsize 12
           }
         }
       }
@@ -1225,7 +1210,8 @@ else
   decl {void io_list_select_cb( Fl_Browser* );} {}
   decl {void io_list_new_cb();} {}
   decl {void io_list_update_cb();} {}
-  decl {void io_list_medium_update_cb( Fl_Choice* );} {}
+  decl {void io_medium_update_cb( Fl_Choice* );} {}
+  decl {void io_protocol_update_cb();} {}
   decl {void show_page( unsigned int n );} {}
   decl {void update_runways();} {}
   decl {void run_fgfs();} {}
@@ -1242,6 +1228,12 @@ else
   decl {void list_update_cb(Fl_Browser*,Fl_Input*);} {}
   Function {show_log_window()} {open return_type {virtual void}
   } {}
+  decl {void io_file_cb();} {}
+  decl {void io_generic_file_cb();} {}
+  decl {void fg_exe_cb();} {}
+  decl {void fg_root_cb();} {}
+  decl {void fg_scenery_cb();} {}
+  decl {void fg_browser_cb();} {}
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void
