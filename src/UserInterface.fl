@@ -22,11 +22,10 @@ class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
-  Function {UserInterface()} {open
-  } {
+  Function {UserInterface()} {} {
     Fl_Window main_window {
       label {FlightGear Launch Control}
-      private xywh {582 74 640 480} labelsize 12
+      private xywh {592 114 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -87,8 +86,8 @@ class UserInterface {open
         private xywh {475 450 50 25} labelsize 12
       }
       Fl_Group {page[0]} {
-        label General
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        label General open
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Input fg_exe {
           label {Executable:}
@@ -606,7 +605,7 @@ else
       }
       Fl_Group {page[8]} {
         label {Input/Output} open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -839,44 +838,13 @@ prop_delete->activate();}
   } {
     code {main_window->show();} {}
   }
-  Function {update_aircraft()} {open private return_type void
-  } {
-    code {aircraft->clear();
-char buf[FL_PATH_MAX];
-snprintf( buf, sizeof(buf), "%s/Aircraft/", fg_root->value() );
-dirent** files;
-
-// Search $FG_ROOT/Aircraft directory.
-
-int num_files = fl_filename_list( buf, &files, fl_numericsort);
-if (num_files < 0)
-  return;
-
-for (int i = 0; i < num_files; ++i)
-{
-  if (fl_filename_match(files[i]->d_name, "*-set.xml"))
-  {
-    // Extract aircraft name from filename.
-    char* p = strstr( files[i]->d_name, "-set.xml" );
-    if (p != 0) *p = 0;
-    int index = aircraft->add( files[i]->d_name, 0, 0, 0, 0);
-
-    if (strcmp(files[i]->d_name, default_aircraft.c_str()) == 0)
-      aircraft->value(index);
-
-  }
-  free( files[i] );
-}
-
-free( files );} {selected
-    }
-  }
-  Function {run_fgfs()} {open return_type void
+  decl {void update_aircraft();} {}
+  Function {run_fgfs()} {open selected return_type void
   } {
     code {write_fgfsrc();
 run_fgfs_impl();} {}
   }
-  Function {run_fgfs_impl()} {open return_type void
+  Function {run_fgfs_impl()} {open return_type {virtual void}
   } {}
   decl {void load_settings_cb();} {}
   decl {void save_settings_cb();} {}
