@@ -48,16 +48,21 @@ using std::vector;
 using std::ofstream;
 using std::string;
 
+//static void idle_cb( void* );
+
 FGRunUI::FGRunUI()
     : UserInterface()
       , default_aircraft("c172")
       , default_airport("KSFO")
       , modflag(false)
       , io_options_list_value(0)
+      , output_fname("")
 {
     // Ensure the "General" tab is displayed.
     tabs->value( general_tab );
     output_text->buffer( new Fl_Text_Buffer );
+    load_settings();
+    airport->deactivate();
 }
 
 FGRunUI::~FGRunUI()
@@ -140,11 +145,11 @@ FGRunUI::update_aircraft()
 /**
  * Recursively search through scenery directories looking for airport files.
  */
-static void
-scan_for_airports( const char* scenery, vector<string>& apts )
+void
+FGRunUI::scan_for_airports( const char* dir )
 {
     dirent **files;
-    int num_files = fl_filename_list( scenery, &files, fl_numericsort );
+    int num_files = fl_filename_list( dir, &files, fl_numericsort );
     if (num_files < 0)
 	return;
 
@@ -153,12 +158,12 @@ scan_for_airports( const char* scenery, vector<string>& apts )
 	if (fl_filename_match( files[i]->d_name,
 			       "[ew][0-9][0-9][0-9][ns][0-9][0-9]"))
 	{
-	    string dir = scenery;
-	    dir += "/";
-	    dir += files[i]->d_name;
-	    if (fl_filename_isdir( dir.c_str() ))
+	    string d = dir;
+	    d += "/";
+	    d += files[i]->d_name;
+	    if (fl_filename_isdir( d.c_str() ))
 	    {
-		scan_for_airports( dir.c_str(), apts );
+		scan_for_airports( d.c_str() );
 	    }
 	}
 	else if (fl_filename_match( files[i]->d_name, "???.btg.gz") ||
@@ -168,7 +173,7 @@ scan_for_airports( const char* scenery, vector<string>& apts )
 	    char* p = strstr( files[i]->d_name, ".btg");
 	    if (p != 0)
 		*p = 0;
-	    apts.push_back( string( files[i]->d_name ) );
+	    airports.push_back( string( files[i]->d_name ) );
 	}
 	free( files[i] );
     }
@@ -200,11 +205,13 @@ FGRunUI::update_airports()
 {
     airport->clear();
     cout << "Searching for airports...\n";
-    vector< string > apts;
-    scan_for_airports( fg_scenery->value(), apts );
-    std::sort( apts.begin(), apts.end() );
-    std::for_each( apts.begin(), apts.end(), AddAirportHelper( airport ) );
+    airports.clear();
+    scan_for_airports( fg_scenery->value() );
+    std::sort( airports.begin(), airports.end() );
+    std::for_each( airports.begin(), airports.end(),
+		   AddAirportHelper( airport ) );
     set_choice( airport, default_airport.c_str() );
+    airport->activate();
 }
 
 void
@@ -218,9 +225,11 @@ FGRunUI::write_dot_fgfsrc()
 	int i;
 
 	ofs << "--fg-root=" << fg_root->value()
-	    << "\n--fg-scenery=" << fg_scenery->value()
-	    << "\n--airport-id=" << airport->text()
-	    << "\n--aircraft=" << aircraft->text();
+	    << "\n--fg-scenery=" << fg_scenery->value();
+	if (airport->text() != 0)
+	    ofs << "\n--airport-id=" << airport->text();
+	if (aircraft->text() != 0)
+	    ofs << "\n--aircraft=" << aircraft->text();
 
 	// Only write non-default options.
 
@@ -590,3 +599,27 @@ void FGRunUI::reset()
     time_match_real->setonly();
     time_match_real->do_callback();
 }
+
+void
+FGRunUI::output_save()
+{
+    if (output_fname.empty())
+    {
+	this->output_save_as();
+	return;
+    }
+
+    output_text->buffer()->savefile( output_fname.c_str() );
+}
+
+void
+FGRunUI::output_save_as()
+{
+    char* p = fl_file_chooser( "Save Output As", NULL, NULL, 0);
+    if (p != 0)
+    {
+	output_fname = p;
+	output_text->buffer()->savefile( p );
+    }
+}
+

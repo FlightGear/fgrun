@@ -2,6 +2,7 @@
 #define FGRUNUI_H_INCLUDED
 
 #include <string>
+#include <vector>
 #include "ui.h"
 
 /**
@@ -31,6 +32,9 @@ public:
     void io_medium_cb( Fl_Choice*, void* );
     void reset();
 
+    void output_save();
+    void output_save_as();
+
 protected:
     int set_choice( Fl_Choice* w, const char* s );
     void write_dot_fgfsrc();
@@ -38,8 +42,16 @@ protected:
 protected:
     std::string default_aircraft;
     std::string default_airport;
+    std::vector< std::string > airports;
+    //std::vector< std::string > dirs;
+
     bool modflag;
     int io_options_list_value;
+    std::string output_fname;
+
+private:
+    void scan_for_airports( const char* dir );
+    //friend void idle_cb( void* );
 };
 
 #endif // FGRUNUI_H_INCLUDED
