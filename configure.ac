@@ -5,6 +5,11 @@ AC_PREREQ(2.54)
 AC_INIT([fgrun], [0.2], [bbright@bigpond.net.au])
 AC_CONFIG_HEADER(src/config.h)
 AC_CONFIG_SRCDIR(src/main.cxx)
+
+AC_CANONICAL_BUILD
+AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
+
 AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
 #AM_MAINTAINER_MODE
 
@@ -15,7 +20,6 @@ AC_SUBST(VERSION)
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE", [Name of this package])
 AC_DEFINE_UNQUOTED(VERSION, "$VERSION", [Version of this package])
 
-AC_CANONICAL_HOST
 
 dnl
 dnl Checks for programs
