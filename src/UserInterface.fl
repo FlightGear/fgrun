@@ -17,13 +17,14 @@ class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
-  Function {UserInterface()} {} {
+  Function {UserInterface()} {open
+  } {
     Fl_Window main_window {
       label {FlightGear Launch Control}
       callback {if (Fl::event_key() == FL_Escape)
   return; // ignore Escape
 exit(0);} open
-      private xywh {228 211 640 480} type Double labelsize 12
+      private xywh {90 94 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -87,7 +88,7 @@ exit(0);} open
       }
       Fl_Group {page[0]} {
         label General
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Input fg_exe {
           label {Executable:}
@@ -100,7 +101,7 @@ exit(0);} open
         }
         Fl_Input fg_root {
           label {FG_ROOT:}
-          callback {fg_root_update_cb();} selected
+          callback {fg_root_update_cb();}
           tooltip {root data path} xywh {250 80 355 25} labelsize 12 when 8 textsize 12
         }
         Fl_Button {} {
@@ -678,8 +679,8 @@ else
         }
       }
       Fl_Group {page[7]} {
-        label Network
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        label Network open
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Check_Button httpd {
           label httpd
@@ -721,36 +722,12 @@ else
           private tooltip {Screen shot HTTP server port} xywh {275 110 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5502 textsize 12 deactivate
         }
         Fl_Group {} {
-          label {Multipilot Options} open
-          private xywh {150 165 490 110} labelfont 1 labelsize 12 align 5 deactivate
-        } {
-          Fl_Check_Button network_olk {
-            label {network-olk}
-            callback {if (o->value()) {
-  net_hud->activate();
-  net_id->activate();
-} else {
-  net_hud->deactivate();
-  net_id->deactivate();
-}}
-            private xywh {175 175 100 25} down_box DOWN_BOX labelsize 12 deactivate
-          }
-          Fl_Check_Button net_hud {
-            label {net-hud}
-            private xywh {175 200 100 25} down_box DOWN_BOX labelsize 12 deactivate
-          }
-          Fl_Input net_id {
-            label {net ID:}
-            private xywh {215 230 100 25} labelsize 12 textsize 12 deactivate
-          }
-        }
-        Fl_Group {} {
-          label {Multiplayer Options} open
-          private xywh {150 290 490 155} labelfont 1 labelsize 12 align 5 deactivate
+          label {Multiplayer Options} open selected
+          private xywh {150 165 490 60} labelfont 1 labelsize 12 align 5 deactivate
         } {
           Fl_Input callsign {
             label {Callsign:}
-            private xywh {215 305 100 25} labelsize 12 textsize 12
+            private xywh {215 180 100 25} labelsize 12 textsize 12
           }
         }
       }

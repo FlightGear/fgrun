@@ -203,11 +203,6 @@ private:
   inline void cb_jpg_httpd_i(Fl_Check_Button*, void*);
   static void cb_jpg_httpd(Fl_Check_Button*, void*);
   Fl_Value_Input *jpg_httpd_port;
-  Fl_Check_Button *network_olk;
-  inline void cb_network_olk_i(Fl_Check_Button*, void*);
-  static void cb_network_olk(Fl_Check_Button*, void*);
-  Fl_Check_Button *net_hud;
-  Fl_Input *net_id;
   Fl_Input *callsign;
   Fl_Browser *io_list;
   inline void cb_io_list_i(Fl_Browser*, void*);

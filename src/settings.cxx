@@ -149,9 +149,6 @@ UserInterface::save_settings_cb()
 	prefs.set("props", int(props_port->value()));
     if (jpg_httpd->value())
 	prefs.set("jpg-httpd", int(jpg_httpd_port->value()));
-    prefs.set("network-olk", network_olk->value());
-    prefs.set("net-id", net_id->value());
-    prefs.set("net-hud", net_hud->value());
 
     prefs.set("io-count", io_list->size());
     int i;

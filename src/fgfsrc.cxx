@@ -245,13 +245,6 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--props=" << int(props_port->value());
 	if (jpg_httpd->value())
 	    ofs << "\n--jpg_httpd=" << int(jpg_httpd_port->value());
-	if (network_olk->value()) {
-	    ofs << "\n--enable-network-olk";
-	    if (net_hud->value())
-		ofs << "\n--net-hud";
-	    if (net_id->size() < 0)
-		ofs << "\n--net-id=" << net_id->value();
-	}
 
 	int i;
 

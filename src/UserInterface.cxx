@@ -361,19 +361,6 @@ void UserInterface::cb_jpg_httpd(Fl_Check_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_jpg_httpd_i(o,v);
 }
 
-inline void UserInterface::cb_network_olk_i(Fl_Check_Button* o, void*) {
-  if (o->value()) {
-  net_hud->activate();
-  net_id->activate();
-} else {
-  net_hud->deactivate();
-  net_id->deactivate();
-};
-}
-void UserInterface::cb_network_olk(Fl_Check_Button* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->parent()->user_data()))->cb_network_olk_i(o,v);
-}
-
 inline void UserInterface::cb_io_list_i(Fl_Browser* o, void*) {
   io_list_select_cb(o);
 }
@@ -795,6 +782,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Input* o = fg_exe = new Fl_Input(250, 50, 355, 25, "Executable:");
         o->tooltip("Filename of FlightGear executable");
         o->labelsize(12);
@@ -1399,7 +1387,6 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Check_Button* o = httpd = new Fl_Check_Button(175, 50, 100, 25, "httpd");
         o->tooltip("Enable HTTP server");
         o->down_box(FL_DOWN_BOX);
@@ -1449,35 +1436,12 @@ UserInterface::UserInterface() {
         o->textsize(12);
         o->deactivate();
       }
-      { Fl_Group* o = new Fl_Group(150, 165, 490, 110, "Multipilot Options");
+      { Fl_Group* o = new Fl_Group(150, 165, 490, 60, "Multiplayer Options");
         o->labelfont(1);
         o->labelsize(12);
         o->align(FL_ALIGN_TOP_LEFT);
         o->deactivate();
-        { Fl_Check_Button* o = network_olk = new Fl_Check_Button(175, 175, 100, 25, "network-olk");
-          o->down_box(FL_DOWN_BOX);
-          o->labelsize(12);
-          o->callback((Fl_Callback*)cb_network_olk);
-          o->deactivate();
-        }
-        { Fl_Check_Button* o = net_hud = new Fl_Check_Button(175, 200, 100, 25, "net-hud");
-          o->down_box(FL_DOWN_BOX);
-          o->labelsize(12);
-          o->deactivate();
-        }
-        { Fl_Input* o = net_id = new Fl_Input(215, 230, 100, 25, "net ID:");
-          o->labelsize(12);
-          o->textsize(12);
-          o->deactivate();
-        }
-        o->end();
-      }
-      { Fl_Group* o = new Fl_Group(150, 290, 490, 155, "Multiplayer Options");
-        o->labelfont(1);
-        o->labelsize(12);
-        o->align(FL_ALIGN_TOP_LEFT);
-        o->deactivate();
-        { Fl_Input* o = callsign = new Fl_Input(215, 305, 100, 25, "Callsign:");
+        { Fl_Input* o = callsign = new Fl_Input(215, 180, 100, 25, "Callsign:");
           o->labelsize(12);
           o->textsize(12);
         }
