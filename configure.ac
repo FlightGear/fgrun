@@ -37,18 +37,18 @@ AC_PROG_CXXCPP
 AC_PROG_RANLIB
 AC_PROG_INSTALL
 AC_PROG_LN_S
-#AM_PROG_LIBTOOL
 
 dnl
 dnl Checks for compiler features
 dnl
 
-CYGWIN=
-MINGW32=
-
-case $host_os in
-*cygwin*) CYGWIN=yes;;
-*mingw32*) MINGW32=yes;;
+case "${target_os}" in
+mingw32)
+  CPPFLAGS="-DWIN32 $CPPFLAGS"
+  CXXFLAGS="-mwindows -mno-cygwin $CXXFLAGS"
+  LDFLAGS="-mwindows $LDFLAGS"
+  LIBS="-lglu32 -lopengl32 -lcomctl32 -luuid -lwsock32 -lole32 -lwinmm -lgdi32 $LIBS"
+  ;;
 esac
 
 AC_C_CONST
@@ -98,8 +98,38 @@ AC_CHECK_HEADER(zlib.h,
     AC_DEFINE([HAVE_LIBZ], 1, [Define if you have the <zlib.h> header file.])
     LIBS="$LIBS -lz"))
 
+
 AC_LANG_PUSH(C++)
+
+AC_ARG_WITH(plib,    [  --with-plib=DIR         Path to plib (/usr)],
+            plib_prefix="$withval", plib_prefix="")
+
+if test x$plib_prefix != x ; then
+  CPPFLAGS="-I$plib_prefix/include $CPPFLAGS"
+  LDFLAGS="-L$plib_prefix/lib $LDFLAGS"
+fi
+
 AC_CHECK_HEADER(plib/ul.h)
+if test "x$ac_cv_header_plib_ul_h" != "xyes"; then
+  echo "plib not found.  Aborting."
+  exit
+fi
+
+
+AC_ARG_WITH(simgear, [  --with-simgear=DIR      Path to simgear (/usr/local)],
+            simgear_prefix="$withval", simgear_prefix="")
+
+if test x$simgear_prefix != x ; then
+  CPPFLAGS="-I$simgear_prefix/include $CPPFLAGS"
+  LDFLAGS="-L$simgear_prefix/lib $LDFLAGS"
+fi
+
+AC_CHECK_HEADER(simgear/props/props_io.hxx)
+if test "x$ac_cv_header_simgear_props_props_io_hxx" != "xyes"; then
+  echo "SimGear not found.  Aborting."
+  exit
+fi
+
 AC_LANG_POP
 
 dnl
@@ -161,11 +191,13 @@ fi
 dnl Check for fltk
 FLUID="fluid"
 
-AC_ARG_WITH(fltk, [  --with-fltk=DIR         Path to FLTK v1.1])
-if test "x$with_fltk" != "x"; then
-  CPPFLAGS="$CPPFLAGS -I$with_fltk/include"
-  LDFLAGS="$LDFLAGS -L$with_fltk/lib"
-  FLUID="$with_fltk/bin/fluid"
+AC_ARG_WITH(fltk,    [  --with-fltk=DIR         Path to FLTK v1.1],
+	fltk_prefix="$withval", fltk_prefix="")
+
+if test x$fltk_prefix != x ; then
+  FLUID="$fltk_prefix/bin/fluid"
+  CPPFLAGS="-I$fltk_prefix/include $CPPFLAGS"
+  LDFLAGS="-L$fltk_prefix/lib $LDFLAGS"
 fi
 
 AC_SUBST(FLUID)
@@ -175,6 +207,17 @@ AC_LANG_PUSH(C++)
 dnl Check for FLTK header and library.
 AC_CHECK_HEADER(FL/Fl.h)
 AC_CHECK_LIB(fltk, fl_numericsort)
+
+save_LIBS="$LIBS"
+LIBS="-lfltk_gl $LIBS"
+AC_MSG_CHECKING(for gl_start in -lfltk_gl)
+AC_TRY_LINK([
+#include <FL/gl.h>
+], gl_start(),
+  AC_MSG_RESULT(yes),
+  LIBS="$save_LIBS"
+  AC_MSG_RESULT(no)
+)
 
 AC_LANG_POP
 
