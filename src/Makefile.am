@@ -15,7 +15,7 @@ bin_PROGRAMS = fgrun
 fgrun_SOURCES = \
 	wizard.cxx wizard.h wizard_funcs.cxx \
 	advanced.cxx advanced.h advanced_funcs.cxx \
-	AirportBrowser.cxx AirportBrowser.h \
+	AirportBrowser.cxx AirportBrowser.h apt_dat.h \
 	AirportTable.cxx AirportTable.h \
 	Fl_Table.cxx Fl_Table.H \
 	Fl_Table_Row.cxx Fl_Table_Row.H \
