@@ -29,10 +29,10 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {582 68 640 480} type Double labelsize 12
+      private xywh {592 108 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
-      Fl_Menu_Bar {} {
+      Fl_Menu_Bar {} {open
         private xywh {0 0 640 25} labelsize 12 textsize 12
       } {
         submenu {} {
@@ -57,6 +57,10 @@ class UserInterface {open
           menuitem output_to_window {
             label {Output To Window}
             private tooltip {Redirect FlightGear output to a window.} xywh {0 0 100 20} type Toggle value 1 labelsize 12
+          }
+          menuitem load_airports_db {
+            label {Load airports database} selected
+            private xywh {0 0 100 20} type Toggle labelsize 12
           }
         }
         submenu {} {
@@ -701,60 +705,80 @@ else
         }
       }
       Fl_Group {page[7]} {
-        label Network
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        label Network open
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Check_Button httpd {
           label httpd
           callback {if (o->value()) {
+  httpd_port->activate();
   httpd_port->take_focus();
+} else {
+  httpd_port->deactivate();
 }}
           private tooltip {Enable HTTP server} xywh {175 50 100 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Value_Input httpd_port {
-          callback {httpd->set();}
-          private tooltip {HTTP server port} xywh {275 50 100 25} labeltype NO_LABEL labelsize 12 when 3 minimum 1025 maximum 65535 value 5500 textsize 12
+          private tooltip {HTTP server port} xywh {275 50 100 25} labeltype NO_LABEL labelsize 12 when 3 minimum 1025 maximum 65535 value 5500 textsize 12 deactivate
         }
         Fl_Check_Button props {
           label props
           callback {if (o->value()) {
+  props_port->activate();
   props_port->take_focus();
+} else {
+  props_port->deactivate();
 }}
           private tooltip {Enable property server} xywh {175 80 100 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Value_Input props_port {
-          callback {props->set();}
-          private tooltip {Property server port} xywh {275 80 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5501 textsize 12
+          private tooltip {Property server port} xywh {275 80 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5501 textsize 12 deactivate
         }
         Fl_Check_Button jpg_httpd {
           label {jpg-httpd}
           callback {if (o->value()) {
+  jpg_httpd_port->activate();
   jpg_httpd_port->take_focus();
+} else {
+  jpg_httpd_port->deactivate();
 }}
           private tooltip {Enable screen shot HTTP server} xywh {175 110 100 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Value_Input jpg_httpd_port {
-          callback {jpg_httpd->set();}
-          private tooltip {Screen shot HTTP server port} xywh {275 110 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5502 textsize 12
+          private tooltip {Screen shot HTTP server port} xywh {275 110 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5502 textsize 12 deactivate
         }
-        Fl_Check_Button network_olk {
-          label {network-olk}
-          callback {if (o->value()) {
+        Fl_Group {} {
+          label {Multipilot Options} open
+          private xywh {150 165 490 110} labelfont 1 labelsize 12 align 5 deactivate
+        } {
+          Fl_Check_Button network_olk {
+            label {network-olk}
+            callback {if (o->value()) {
   net_hud->activate();
   net_id->activate();
 } else {
   net_hud->deactivate();
   net_id->deactivate();
 }}
-          private xywh {175 170 100 25} down_box DOWN_BOX labelsize 12 deactivate
+            private xywh {175 175 100 25} down_box DOWN_BOX labelsize 12 deactivate
+          }
+          Fl_Check_Button net_hud {
+            label {net-hud}
+            private xywh {175 200 100 25} down_box DOWN_BOX labelsize 12 deactivate
+          }
+          Fl_Input net_id {
+            label {net ID:}
+            private xywh {215 230 100 25} labelsize 12 textsize 12 deactivate
+          }
         }
-        Fl_Check_Button net_hud {
-          label {net-hud}
-          private xywh {175 195 100 25} down_box DOWN_BOX labelsize 12 deactivate
-        }
-        Fl_Input net_id {
-          label {net ID:}
-          private xywh {215 225 100 25} labelsize 12 textsize 12 deactivate
+        Fl_Group {} {
+          label {Multiplayer Options} open
+          private xywh {150 290 490 155} labelfont 1 labelsize 12 align 5 deactivate
+        } {
+          Fl_Input callsign {
+            label {Callsign:}
+            private xywh {215 305 100 25} labelsize 12 textsize 12
+          }
         }
       }
       Fl_Group {page[8]} {
@@ -1114,8 +1138,8 @@ else
         }
       }
       Fl_Group {page[12]} {
-        label Environment open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        label Environment
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser env_list {
           callback {list_select_cb(
@@ -1206,8 +1230,7 @@ else
   }
   decl {void show_page( unsigned int n );} {}
   decl {void update_runways();} {}
-  decl {void run_fgfs();} {selected
-  }
+  decl {void run_fgfs();} {}
   decl {void load_airport_browser();} {}
   decl {void apt_browser_cb();} {}
   decl {void apt_id_cb();} {}

@@ -29,6 +29,7 @@ Fl_Menu_Item UserInterface::menu_[] = {
  {0},
  {"&Settings", 0,  0, 0, 64, 0, 0, 12, 56},
  {"Output To Window", 0,  0, 0, 6, 0, 0, 12, 56},
+ {"Load airports database", 0,  0, 0, 2, 0, 0, 12, 56},
  {0},
  {"&Help", 0,  0, 0, 64, 0, 0, 12, 56},
  {"&About...", 0,  0, 0, 0, 0, 0, 12, 56},
@@ -36,6 +37,7 @@ Fl_Menu_Item UserInterface::menu_[] = {
  {0}
 };
 Fl_Menu_Item* UserInterface::output_to_window = UserInterface::menu_ + 5;
+Fl_Menu_Item* UserInterface::load_airports_db = UserInterface::menu_ + 6;
 
 inline void UserInterface::cb_page_list_i(Fl_Browser* o, void*) {
   if (o->value() > 0)
@@ -316,50 +318,38 @@ Fl_Menu_Item UserInterface::menu_time_of_day_value[] = {
 
 inline void UserInterface::cb_httpd_i(Fl_Check_Button* o, void*) {
   if (o->value()) {
+  httpd_port->activate();
   httpd_port->take_focus();
+} else {
+  httpd_port->deactivate();
 };
 }
 void UserInterface::cb_httpd(Fl_Check_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_httpd_i(o,v);
 }
 
-inline void UserInterface::cb_httpd_port_i(Fl_Value_Input*, void*) {
-  httpd->set();
-}
-void UserInterface::cb_httpd_port(Fl_Value_Input* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_httpd_port_i(o,v);
-}
-
 inline void UserInterface::cb_props_i(Fl_Check_Button* o, void*) {
   if (o->value()) {
+  props_port->activate();
   props_port->take_focus();
+} else {
+  props_port->deactivate();
 };
 }
 void UserInterface::cb_props(Fl_Check_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_props_i(o,v);
 }
 
-inline void UserInterface::cb_props_port_i(Fl_Value_Input*, void*) {
-  props->set();
-}
-void UserInterface::cb_props_port(Fl_Value_Input* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_props_port_i(o,v);
-}
-
 inline void UserInterface::cb_jpg_httpd_i(Fl_Check_Button* o, void*) {
   if (o->value()) {
+  jpg_httpd_port->activate();
   jpg_httpd_port->take_focus();
+} else {
+  jpg_httpd_port->deactivate();
 };
 }
 void UserInterface::cb_jpg_httpd(Fl_Check_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_jpg_httpd_i(o,v);
-}
-
-inline void UserInterface::cb_jpg_httpd_port_i(Fl_Value_Input*, void*) {
-  jpg_httpd->set();
-}
-void UserInterface::cb_jpg_httpd_port(Fl_Value_Input* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_jpg_httpd_port_i(o,v);
 }
 
 inline void UserInterface::cb_network_olk_i(Fl_Check_Button* o, void*) {
@@ -372,7 +362,7 @@ inline void UserInterface::cb_network_olk_i(Fl_Check_Button* o, void*) {
 };
 }
 void UserInterface::cb_network_olk(Fl_Check_Button* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_network_olk_i(o,v);
+  ((UserInterface*)(o->parent()->parent()->parent()->user_data()))->cb_network_olk_i(o,v);
 }
 
 inline void UserInterface::cb_io_list_i(Fl_Browser* o, void*) {
@@ -1377,7 +1367,6 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Check_Button* o = httpd = new Fl_Check_Button(175, 50, 100, 25, "httpd");
         o->tooltip("Enable HTTP server");
         o->down_box(FL_DOWN_BOX);
@@ -1392,8 +1381,8 @@ UserInterface::UserInterface() {
         o->maximum(65535);
         o->value(5500);
         o->textsize(12);
-        o->callback((Fl_Callback*)cb_httpd_port);
         o->when(3);
+        o->deactivate();
       }
       { Fl_Check_Button* o = props = new Fl_Check_Button(175, 80, 100, 25, "props");
         o->tooltip("Enable property server");
@@ -1409,7 +1398,7 @@ UserInterface::UserInterface() {
         o->maximum(65535);
         o->value(5501);
         o->textsize(12);
-        o->callback((Fl_Callback*)cb_props_port);
+        o->deactivate();
       }
       { Fl_Check_Button* o = jpg_httpd = new Fl_Check_Button(175, 110, 100, 25, "jpg-httpd");
         o->tooltip("Enable screen shot HTTP server");
@@ -1425,23 +1414,41 @@ UserInterface::UserInterface() {
         o->maximum(65535);
         o->value(5502);
         o->textsize(12);
-        o->callback((Fl_Callback*)cb_jpg_httpd_port);
-      }
-      { Fl_Check_Button* o = network_olk = new Fl_Check_Button(175, 170, 100, 25, "network-olk");
-        o->down_box(FL_DOWN_BOX);
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_network_olk);
         o->deactivate();
       }
-      { Fl_Check_Button* o = net_hud = new Fl_Check_Button(175, 195, 100, 25, "net-hud");
-        o->down_box(FL_DOWN_BOX);
+      { Fl_Group* o = new Fl_Group(150, 165, 490, 110, "Multipilot Options");
+        o->labelfont(1);
         o->labelsize(12);
+        o->align(FL_ALIGN_TOP_LEFT);
         o->deactivate();
+        { Fl_Check_Button* o = network_olk = new Fl_Check_Button(175, 175, 100, 25, "network-olk");
+          o->down_box(FL_DOWN_BOX);
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_network_olk);
+          o->deactivate();
+        }
+        { Fl_Check_Button* o = net_hud = new Fl_Check_Button(175, 200, 100, 25, "net-hud");
+          o->down_box(FL_DOWN_BOX);
+          o->labelsize(12);
+          o->deactivate();
+        }
+        { Fl_Input* o = net_id = new Fl_Input(215, 230, 100, 25, "net ID:");
+          o->labelsize(12);
+          o->textsize(12);
+          o->deactivate();
+        }
+        o->end();
       }
-      { Fl_Input* o = net_id = new Fl_Input(215, 225, 100, 25, "net ID:");
+      { Fl_Group* o = new Fl_Group(150, 290, 490, 155, "Multiplayer Options");
+        o->labelfont(1);
         o->labelsize(12);
-        o->textsize(12);
+        o->align(FL_ALIGN_TOP_LEFT);
         o->deactivate();
+        { Fl_Input* o = callsign = new Fl_Input(215, 305, 100, 25, "Callsign:");
+          o->labelsize(12);
+          o->textsize(12);
+        }
+        o->end();
       }
       o->end();
     }
@@ -1712,6 +1719,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = env_list = new Fl_Browser(155, 55, 480, 125);
         o->type(2);
         o->labelsize(12);
