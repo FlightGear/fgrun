@@ -28,7 +28,6 @@ UserInterface::save_settings_cb()
 {
     Fl_Preferences prefs(Fl_Preferences::USER, "flightgear.org", "fgrun");
     prefs.set( "output_to_window", output_to_window->value() );
-    prefs.set( "load_airports", load_airports_->value() );
 
     if (fg_exe->value() != 0)
 	prefs.set( "fg_exe", fg_exe->value() );
@@ -210,8 +209,6 @@ UserInterface::load_settings_cb()
     default_aircraft = buf;
     prefs.get("airport", buf, "KSFO", buflen-1);
     default_airport = buf;
-    // TODO
-//     prefs.get( "runway", buf, "<default>", buflen-1 );
     prefs.get("lang", buf, "", buflen-1);
     lang->value(buf);
     prefs.get("control", buf, "joystick", buflen-1);
@@ -232,12 +229,6 @@ UserInterface::load_settings_cb()
 	output_to_window->set();
     else
 	output_to_window->clear();
-
-    prefs.get( "load_airports", iVal, 1 );
-    if (iVal)
-	load_airports_->set();
-    else
-	load_airports_->clear();
 
     prefs.get("game_mode", iVal, 0);
     game_mode->value(iVal);
