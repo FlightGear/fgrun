@@ -61,13 +61,9 @@ typedef vs_t::iterator vsi_t;
 
 static vs_t airports;
 
-static bool
-comp( const string& a, const string& b )
-{
-    string::size_type len = std::min( a.length(), b.length() );
-    return a.compare( 0, 1, b ) < 0;
-}
-
+/**
+ * Helper function to compare airport ICAO identifiers.
+ */
 static bool
 id_comp( const apt_dat_t* a, const apt_dat_t* b )
 {
@@ -233,7 +229,7 @@ UserInterface::load_airport_browser()
 	vs_t::size_type count = airports.size();
 	apts.reserve( count );
 	
-	for (int i = 0; i < count; ++i)
+	for (vs_t::size_type i = 0; i < count; ++i)
 	{
 	    const apt_dat_t* apt = airportdb_->find( airports[i].c_str() );
 	    if (apt != 0)
@@ -294,6 +290,12 @@ void
 UserInterface::apt_name_cb()
 {
     apt_browser->select_name( apt_name->value() );
+    string id = apt_browser->get_selected_id();
+    if (!id.empty())
+    {
+	set_choice( airport, id.c_str() );
+	update_runways();
+    }
 }
 
 void
