@@ -16,8 +16,8 @@
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Round_Button.H>
-#include <FL/Fl_Value_Slider.H>
 #include "Fl_Heading_Dial.H"
+#include <FL/Fl_Value_Slider.H>
 
 class Advanced {
 public:
@@ -285,14 +285,17 @@ private:
   Fl_Input *env_input;
   inline void cb_env_input_i(Fl_Input*, void*);
   static void cb_env_input(Fl_Input*, void*);
-  Fl_Value_Input *wind_speed;
-  Fl_Value_Slider *turbulence;
   Fl_Heading_Dial *wind_dial;
   inline void cb_wind_dial_i(Fl_Heading_Dial*, void*);
   static void cb_wind_dial(Fl_Heading_Dial*, void*);
   Fl_Value_Input *wind_hdg;
   inline void cb_wind_hdg_i(Fl_Value_Input*, void*);
   static void cb_wind_hdg(Fl_Value_Input*, void*);
+  Fl_Value_Input *wind_speed;
+  Fl_Check_Button *random_wind;
+  inline void cb_random_wind_i(Fl_Check_Button*, void*);
+  static void cb_random_wind(Fl_Check_Button*, void*);
+  Fl_Value_Slider *turbulence;
 public:
   Fl_Input *ceiling;
 private:
@@ -350,5 +353,6 @@ private:
   void metar_cb();
   void fg_config_cb();
   std::string airport_id_;
+  void random_wind_cb();
 };
 #endif

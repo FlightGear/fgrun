@@ -595,14 +595,21 @@ inline void Advanced::cb_wind_dial_i(Fl_Heading_Dial*, void*) {
   wind_dial_cb();
 }
 void Advanced::cb_wind_dial(Fl_Heading_Dial* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_wind_dial_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_wind_dial_i(o,v);
 }
 
 inline void Advanced::cb_wind_hdg_i(Fl_Value_Input*, void*) {
   wind_hdg_cb();
 }
 void Advanced::cb_wind_hdg(Fl_Value_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_wind_hdg_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_wind_hdg_i(o,v);
+}
+
+inline void Advanced::cb_random_wind_i(Fl_Check_Button*, void*) {
+  random_wind_cb();
+}
+void Advanced::cb_random_wind(Fl_Check_Button* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_random_wind_i(o,v);
 }
 
 inline void Advanced::cb_Metar_i(Fl_Button*, void*) {
@@ -1315,6 +1322,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
@@ -1502,7 +1510,6 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Browser* o = prop_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
@@ -1516,6 +1523,7 @@ Advanced::Advanced() {
         o->deactivate();
       }
       { Fl_Input* o = prop_input = new Fl_Input(220, 185, 290, 25, "Property:");
+        o->tooltip("prop=value");
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_prop_input);
@@ -1620,39 +1628,51 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
-      { Fl_Value_Input* o = wind_speed = new Fl_Value_Input(240, 240, 80, 25, "Speed (kts):");
-        o->tooltip("Wind speed (kts)");
-        o->labelsize(12);
-        o->maximum(500);
-        o->step(0.1);
-        o->textsize(12);
+      { Fl_Group* o = new Fl_Group(155, 35, 230, 280);
+        o->box(FL_ENGRAVED_FRAME);
+        o->labeltype(FL_NO_LABEL);
+        o->align(FL_ALIGN_TOP|FL_ALIGN_INSIDE);
+        { Fl_Heading_Dial* o = wind_dial = new Fl_Heading_Dial(205, 60, 130, 130, "Wind Direction");
+          o->type(1);
+          o->box(FL_OVAL_BOX);
+          o->color(FL_BACKGROUND_COLOR);
+          o->selection_color(FL_INACTIVE_COLOR);
+          o->labeltype(FL_NORMAL_LABEL);
+          o->labelfont(0);
+          o->labelsize(12);
+          o->labelcolor(FL_BLACK);
+          o->callback((Fl_Callback*)cb_wind_dial);
+          o->align(FL_ALIGN_TOP);
+          o->when(FL_WHEN_CHANGED);
+        }
+        { Fl_Value_Input* o = wind_hdg = new Fl_Value_Input(235, 200, 80, 25, "Heading:");
+          o->tooltip("Direction wind is coming from.");
+          o->labelsize(12);
+          o->maximum(360);
+          o->step(0.1);
+          o->textsize(12);
+          o->callback((Fl_Callback*)cb_wind_hdg);
+        }
+        { Fl_Value_Input* o = wind_speed = new Fl_Value_Input(235, 245, 80, 25, "Speed (kts):");
+          o->tooltip("Wind speed (kts)");
+          o->labelsize(12);
+          o->maximum(500);
+          o->step(0.1);
+          o->textsize(12);
+        }
+        { Fl_Check_Button* o = random_wind = new Fl_Check_Button(230, 280, 105, 25, "Random Winds");
+          o->down_box(FL_DOWN_BOX);
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_random_wind);
+        }
+        o->end();
       }
-      { Fl_Value_Slider* o = turbulence = new Fl_Value_Slider(405, 45, 25, 275, "Turbulence");
+      { Fl_Value_Slider* o = turbulence = new Fl_Value_Slider(430, 35, 25, 275, "Turbulence");
         o->tooltip("calm (0.0) to severe (1.0)");
         o->labelsize(12);
         o->minimum(1);
         o->maximum(0);
-      }
-      { Fl_Heading_Dial* o = wind_dial = new Fl_Heading_Dial(215, 45, 130, 130);
-        o->type(1);
-        o->box(FL_OVAL_BOX);
-        o->color(FL_BACKGROUND_COLOR);
-        o->selection_color(FL_INACTIVE_COLOR);
-        o->labeltype(FL_NORMAL_LABEL);
-        o->labelfont(0);
-        o->labelsize(14);
-        o->labelcolor(FL_BLACK);
-        o->callback((Fl_Callback*)cb_wind_dial);
-        o->align(FL_ALIGN_BOTTOM);
-        o->when(FL_WHEN_CHANGED);
-      }
-      { Fl_Value_Input* o = wind_hdg = new Fl_Value_Input(240, 185, 80, 25, "Heading:");
-        o->tooltip("Direction wind is coming from.");
-        o->labelsize(12);
-        o->maximum(360);
-        o->step(0.1);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_wind_hdg);
+        o->step(0.01);
       }
       { Fl_Input* o = ceiling = new Fl_Input(240, 335, 80, 25, "Ceiling:");
         o->tooltip("FT_ASL[:THICKNESS_FT]");

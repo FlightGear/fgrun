@@ -643,8 +643,8 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output} open
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        label {Input/Output}
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -821,7 +821,7 @@ else
             private xywh {290 365 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
         }
-        Fl_Group generic_group {selected
+        Fl_Group generic_group {
           private xywh {150 365 225 25} hide
         } {
           Fl_Input io_generic_file {
@@ -887,8 +887,8 @@ else
         }
       }
       Fl_Group {page[10]} {
-        label Properties
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label Properties selected
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser prop_list {
           callback {list_select_cb(
@@ -910,7 +910,7 @@ else
           callback {list_update_cb(
   prop_list,
   prop_input );}
-          private xywh {220 185 290 25} labelsize 12 when 1 textsize 12 deactivate
+          private tooltip {prop=value} xywh {220 185 290 25} labelsize 12 when 1 textsize 12 deactivate
         }
         Fl_Button {} {
           label New
@@ -1052,24 +1052,34 @@ else
         label Weather
         private xywh {150 0 490 430} labelfont 1 align 21 hide
       } {
-        Fl_Value_Input wind_speed {
-          label {Speed (kts):}
-          private tooltip {Wind speed (kts)} xywh {240 240 80 25} labelsize 12 maximum 500 step 0.1 textsize 12
+        Fl_Group {} {open
+          xywh {155 35 230 280} box ENGRAVED_FRAME labeltype NO_LABEL align 17
+        } {
+          Fl_Dial wind_dial {
+            label {Wind Direction}
+            callback {wind_dial_cb();}
+            private xywh {205 60 130 130} type Line labelsize 12 align 1
+            code0 {\#include "Fl_Heading_Dial.H"}
+            class Fl_Heading_Dial
+          }
+          Fl_Value_Input wind_hdg {
+            label {Heading:}
+            callback {wind_hdg_cb();}
+            private tooltip {Direction wind is coming from.} xywh {235 200 80 25} labelsize 12 maximum 360 step 0.1 textsize 12
+          }
+          Fl_Value_Input wind_speed {
+            label {Speed (kts):}
+            private tooltip {Wind speed (kts)} xywh {235 245 80 25} labelsize 12 maximum 500 step 0.1 textsize 12
+          }
+          Fl_Check_Button random_wind {
+            label {Random Winds}
+            callback {random_wind_cb();}
+            private xywh {230 280 105 25} down_box DOWN_BOX labelsize 12
+          }
         }
         Fl_Value_Slider turbulence {
           label Turbulence
-          private tooltip {calm (0.0) to severe (1.0)} xywh {405 45 25 275} labelsize 12 minimum 1 maximum 0
-        }
-        Fl_Dial wind_dial {
-          callback {wind_dial_cb();}
-          private xywh {215 45 130 130} type Line
-          code0 {\#include "Fl_Heading_Dial.H"}
-          class Fl_Heading_Dial
-        }
-        Fl_Value_Input wind_hdg {
-          label {Heading:}
-          callback {wind_hdg_cb();}
-          private tooltip {Direction wind is coming from.} xywh {240 185 80 25} labelsize 12 maximum 360 step 0.1 textsize 12
+          private tooltip {calm (0.0) to severe (1.0)} xywh {430 35 25 275} labelsize 12 minimum 1 maximum 0 step 0.01
         }
         Fl_Input ceiling {
           label {Ceiling:}
@@ -1195,4 +1205,5 @@ else
   decl {void metar_cb();} {}
   decl {void fg_config_cb();} {}
   decl {std::string airport_id_;} {}
+  decl {void random_wind_cb();} {}
 } 

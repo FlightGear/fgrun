@@ -191,3 +191,20 @@ void
 Advanced::metar_cb()
 {
 }
+
+void
+Advanced::random_wind_cb()
+{
+    if (random_wind->value())
+    {
+	wind_hdg->deactivate();
+	wind_dial->deactivate();
+	wind_speed->deactivate();
+    }
+    else
+    {
+	wind_hdg->activate();
+	wind_dial->activate();
+	wind_speed->activate();
+    }
+}
