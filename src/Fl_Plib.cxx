@@ -68,7 +68,16 @@ Fl_Plib::set_model( ssgEntity* obj, ssgEntity* bounding_obj )
     if ( bounding_obj == 0 )
         bounding_obj = obj;
     EyeDist = bounding_obj->getBSphere()->getRadius() + 5.f;
-    scene->addKid(obj);
+    const float *center = bounding_obj->getBSphere()->getCenter();
+    sgVec3 dir;
+    sgSetVec3( dir, -center[0], -center[1], -center[2] );
+
+    sgMat4 transMat;
+    sgMakeTransMat4 ( transMat, dir ) ;
+    ssgTransform *trans = new ssgTransform();
+    trans->setTransform( transMat );
+    trans->addKid( obj );
+    scene->addKid( trans );
 }
 
 void
