@@ -1,3 +1,5 @@
 SUBDIRS = src
 
-EXTRA_DIST = fgrun.dsw fgrun.dsp
+EXTRA_DIST = \
+	     autogen.sh \
+	     fgrun.dsw fgrun.dsp
