@@ -1,5 +1,7 @@
+#include <iostream>
 #include <algorithm>
 #include <string>
+#include <cctype>
 
 #include <FL/fl_draw.h>
 
@@ -7,6 +9,12 @@
 #include "airportdb.h"
 
 using std::string;
+
+static bool
+nocase_comp( char a, char b )
+{
+    return toupper(a) == toupper( b );
+}
 
 /**
  * 
@@ -21,7 +29,7 @@ public:
     SortColumn( int col, bool reverse )
 	: col_(col), reverse_(reverse) {}
 
-    bool operator()( const apt_dat_t* a, const apt_dat_t* b )
+    bool operator()( const apt_dat_t* a, const apt_dat_t* b ) const
     {
 	if (col_ == 0)
 	    return reverse_ ? (b->id_ < a->id_) : (a->id_ < b->id_);
@@ -33,7 +41,7 @@ public:
 AirportBrowser::AirportBrowser( int x, int y, int w, int h, const char *l )
     : Fl_Table_Row(x,y,w,h,l)
     , sort_reverse_(false)
-    , sort_lastcol_(-1)
+    , sort_lastcol_(0)
 {
     callback( event_callback, this );
 }
@@ -45,19 +53,25 @@ AirportBrowser::~AirportBrowser()
 void
 AirportBrowser::set_airports( const airports_t& apts )
 {
+    clear();
+    fl_cursor( FL_CURSOR_WAIT );
+    Fl::check();
+
     rowdata_ = apts;
     rows( int(apts.size()) );
     cols(2);
     col_header(1);
     //col_resize(1);
     col_width( 1, tiw-col_width(0) );
-    //redraw();
+    row_height_all( 16 );
+    fl_cursor( FL_CURSOR_DEFAULT );
 }
 
 void
 AirportBrowser::sort_column( int col, bool reverse )
 {
-    std::sort( rowdata_.begin(), rowdata_.end(), SortColumn( col, reverse ) );
+    std::sort( rowdata_.begin(), rowdata_.end(),
+	       SortColumn( col, reverse ) );
     redraw();
 }
 
@@ -124,7 +138,7 @@ AirportBrowser::draw_cell( TableContext context,
 	    fl_color( row_selected(R) ? selection_color() : FL_WHITE);
 	    fl_rectf(X, Y, W, H);
 
-	    string s = C == 0 ? rowdata_[R]->id_ : rowdata_[R]->name_;
+	    const string& s = (C == 0 ? rowdata_[R]->id_ : rowdata_[R]->name_);
 	    fl_color(FL_BLACK);
 	    fl_draw(s.c_str(), X+2, Y, W, H, FL_ALIGN_LEFT);
 
@@ -181,11 +195,13 @@ AirportBrowser::select_id( const char* id )
 
     select_all_rows( 0 ); // de-select all rows
 
-    iterator i = lower_bound( rowdata_.begin(), rowdata_.end(),
-				    &key, SortColumn( 0, sort_reverse_ ) );
+    iterator i = std::lower_bound( rowdata_.begin(), rowdata_.end(),
+			   &key, SortColumn( 0, sort_reverse_ ) );
     if (i != rowdata_.end())
     {
 	int row = std::distance( rowdata_.begin(), i );
+	if (sort_reverse_ && row > 0)
+	    --row;
 	top_row( row );
 	select_row( row, 1 );
     }
@@ -194,4 +210,11 @@ AirportBrowser::select_id( const char* id )
 void
 AirportBrowser::select_name( const char* name )
 {
+    apt_dat_t key;
+    key.name_ = string(name);
+
+    select_all_rows( 0 ); // de-select all rows
+
+    iterator i = std::lower_bound( rowdata_.begin(), rowdata_.end(),
+			   &key, SortColumn( 1, sort_reverse_ ) );
 }

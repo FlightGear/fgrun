@@ -13,6 +13,7 @@ public:
     typedef std::vector< const apt_dat_t* > airports_t;
     typedef airports_t::iterator iterator;
     typedef airports_t::const_iterator const_iterator;
+    typedef airports_t::reverse_iterator reverse_iterator;
 
 public:
     AirportBrowser( int x, int y, int w, int h, const char *l=0 );
