@@ -173,7 +173,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     }
 
     if (prefs.get( "model_hz", iVal, 0 ) && iVal != 120)
-	os << pfx << "--model_hz=" << iVal;
+	os << pfx << "--model-hz=" << iVal;
     if (prefs.get( "speed", iVal, 0 ) && iVal > 1)
 	os << pfx << "--speed=" << iVal;
     if (prefs.get( "in_air", iVal, 0 ) && iVal)
