@@ -21,15 +21,15 @@ decl {\#include <string>} {public
 decl {class AirportDB;} {public
 } 
 
-class UserInterface {open
+class UserInterface {open selected
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
   Function {UserInterface()} {open
   } {
     Fl_Window main_window {
-      label {FlightGear Launch Control} open
-      private xywh {592 108 640 480} type Double labelsize 12
+      label {FlightGear Launch Control}
+      private xywh {597 128 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {open
@@ -59,7 +59,7 @@ class UserInterface {open
             private tooltip {Redirect FlightGear output to a window.} xywh {0 0 100 20} type Toggle value 1 labelsize 12
           }
           menuitem load_airports_db {
-            label {Load airports database} selected
+            label {Load airports database}
             private xywh {0 0 100 20} type Toggle labelsize 12
           }
         }
@@ -1226,8 +1226,6 @@ else
   decl {void io_list_new_cb();} {}
   decl {void io_list_update_cb();} {}
   decl {void io_list_medium_update_cb( Fl_Choice* );} {}
-  decl {static int set_choice( Fl_Choice* c, const char* s );} {public
-  }
   decl {void show_page( unsigned int n );} {}
   decl {void update_runways();} {}
   decl {void run_fgfs();} {}

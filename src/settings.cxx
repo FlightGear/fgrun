@@ -22,6 +22,7 @@
 
 #include <FL/filename.h>
 #include "UserInterface.h"
+#include "util.h"
 
 void
 UserInterface::save_settings_cb()

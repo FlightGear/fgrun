@@ -347,9 +347,6 @@ private:
   void io_list_new_cb();
   void io_list_update_cb();
   void io_list_medium_update_cb( Fl_Choice* );
-public:
-  static int set_choice( Fl_Choice* c, const char* s );
-private:
   void show_page( unsigned int n );
   void update_runways();
   void run_fgfs();

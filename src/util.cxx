@@ -37,7 +37,7 @@ UserInterface::show_page( unsigned int n )
 }
 
 int
-UserInterface::set_choice( Fl_Choice* c, const char* s )
+set_choice( Fl_Choice* c, const char* s )
 {
     const Fl_Menu_Item* m = c->menu();
     int i = 0;

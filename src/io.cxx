@@ -23,6 +23,7 @@
 #include <sstream>
 
 #include "UserInterface.h"
+#include "util.h"
 
 void
 UserInterface::io_list_select_cb( Fl_Browser* o )

@@ -40,6 +40,7 @@
 
 #include "UserInterface.h"
 #include "airportdb.h"
+#include "util.h"
 
 using std::deque;
 using std::string;
