@@ -29,7 +29,7 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {536 44 640 480} type Double labelsize 12
+      private xywh {582 68 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -991,22 +991,33 @@ else
         private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser prop_list {
-          callback {prop_list_select_cb( o );}
+          callback {list_select_cb(
+  prop_list,
+  prop_input,
+  prop_delete );}
           private xywh {155 55 480 125} type Hold labeltype NO_LABEL labelsize 12 textsize 12
         }
         Fl_Button prop_delete {
           label Delete
-          callback {prop_delete_cb();}
+          callback {list_delete_cb(
+  prop_list,
+  prop_input,
+  prop_delete );}
           private xywh {580 200 55 25} labelsize 12 deactivate
         }
-        Fl_Input prop_text {
+        Fl_Input prop_input {
           label {Property:}
-          callback {prop_list_update_cb();}
+          callback {list_update_cb(
+  prop_list,
+  prop_input );}
           private xywh {220 200 290 25} labelsize 12 when 1 textsize 12 deactivate
         }
         Fl_Button {} {
           label New
-          callback {prop_new_cb();}
+          callback {list_new_cb(
+  prop_list,
+  prop_input,
+  prop_delete );}
           private xywh {520 200 55 25} labelsize 12
         }
       }
@@ -1015,7 +1026,7 @@ else
         private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Choice log_level {
-          label {Log Level:} open
+          label {Log Level:}
           private xywh {225 60 90 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           menuitem {} {
@@ -1039,34 +1050,107 @@ else
             xywh {0 0 100 20} labelsize 12
           }
         }
+        Fl_Browser trace_read_list {
+          label {Trace Read Properties}
+          callback {list_select_cb(
+  trace_read_list,
+  trace_read_input,
+  trace_read_delete );}
+          private xywh {160 120 475 80} type Hold labelfont 1 align 5 textsize 12
+        }
+        Fl_Input trace_read_input {
+          label {Value:}
+          callback {list_update_cb(
+  trace_read_list,
+  trace_read_input );}
+          private xywh {200 210 320 25} labelsize 12 when 1 textsize 12 deactivate
+        }
+        Fl_Button {} {
+          label New
+          callback {list_new_cb(
+  trace_read_list,
+  trace_read_input,
+  trace_read_delete );}
+          private xywh {530 210 50 25} labelsize 12
+        }
+        Fl_Button trace_read_delete {
+          label Delete
+          callback {list_delete_cb(
+  trace_read_list,
+  trace_read_input,
+  trace_read_delete );}
+          private xywh {585 210 50 25} labelsize 12 deactivate
+        }
+        Fl_Browser trace_write_list {
+          label {Trace Write Properties}
+          callback {list_select_cb(
+  trace_write_list,
+  trace_write_input,
+  trace_write_delete );}
+          private xywh {160 280 475 80} type Hold labelfont 1 align 5 textsize 12
+        }
+        Fl_Input trace_write_input {
+          label {Value:}
+          callback {list_update_cb(
+  trace_write_list,
+  trace_write_input );}
+          private xywh {200 370 320 25} labelsize 12 when 1 textsize 12 deactivate
+        }
+        Fl_Button {} {
+          label New
+          callback {list_new_cb(
+  trace_write_list,
+  trace_write_input,
+  trace_write_delete );}
+          private xywh {530 370 50 25} labelsize 12
+        }
+        Fl_Button trace_write_delete {
+          label Delete
+          callback {list_delete_cb(
+  trace_write_list,
+  trace_write_input,
+  trace_write_delete );}
+          private xywh {585 370 50 25} labelsize 12 deactivate
+        }
       }
       Fl_Group {page[12]} {
-        label Environment
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        label Environment open
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser env_list {
-          callback {env_list_select_cb(o);}
+          callback {list_select_cb(
+  env_list,
+  env_input,
+  env_delete );}
           xywh {155 55 480 125} type Hold labelsize 12 textsize 12
         }
         Fl_Button {} {
           label New
-          callback {env_new_cb();}
+          callback {list_new_cb(
+  env_list,
+  env_input,
+  env_delete );}
           private xywh {520 200 55 25} labelsize 12
         }
         Fl_Button env_delete {
           label Delete
-          callback {env_delete_cb();}
+          callback {list_delete_cb(
+  env_list,
+  env_input,
+  env_delete );}
           private xywh {580 200 55 25} labelsize 12 deactivate
         }
-        Fl_Input env_var {
+        Fl_Input env_input {
           label {Value:}
-          callback {env_list_update_cb();}
+          callback {list_update_cb(
+  env_list,
+  env_input );}
           private xywh {220 200 295 25} labelsize 12 when 1 textsize 12 deactivate
         }
       }
       Fl_Group {page[13]} {
-        label {Airport Browser} open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        label {Airport Browser}
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Round_Button apt_show_all {
           label All
@@ -1079,7 +1163,7 @@ else
           private xywh {215 55 70 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
         }
         Fl_Box apt_browser {
-          callback {apt_browser_cb();} selected
+          callback {apt_browser_cb();}
           private xywh {155 80 480 335} box THIN_DOWN_FRAME color 54 selection_color 3 labeltype NO_LABEL
           code0 {\#include "AirportBrowser.h"}
           code1 {o->end();}
@@ -1096,6 +1180,8 @@ else
         }
       }
     }
+  }
+  decl {virtual ~UserInterface();} {public
   }
   decl {void init();} {}
   Function {show()} {return_type void
@@ -1118,17 +1204,10 @@ else
   decl {void io_list_medium_update_cb( Fl_Choice* );} {}
   decl {static int set_choice( Fl_Choice* c, const char* s );} {public
   }
-  decl {void show_page( int n );} {}
+  decl {void show_page( unsigned int n );} {}
   decl {void update_runways();} {}
-  decl {void env_new_cb();} {}
-  decl {void env_delete_cb();} {}
-  decl {void env_list_update_cb();} {}
-  decl {void env_list_select_cb( Fl_Browser* );} {}
-  decl {void prop_new_cb();} {}
-  decl {void prop_delete_cb();} {}
-  decl {void prop_list_select_cb( Fl_Browser* o );} {}
-  decl {void prop_list_update_cb();} {}
-  decl {void run_fgfs();} {}
+  decl {void run_fgfs();} {selected
+  }
   decl {void load_airport_browser();} {}
   decl {void apt_browser_cb();} {}
   decl {void apt_id_cb();} {}
@@ -1136,6 +1215,10 @@ else
   decl {AirportDB* airportdb_;} {}
   decl {void load_airportdb();} {public
   }
+  decl {void list_new_cb( Fl_Browser*, Fl_Input*, Fl_Button*);} {}
+  decl {void list_delete_cb(Fl_Browser*,Fl_Input*,Fl_Button*);} {}
+  decl {void list_select_cb(Fl_Browser*,Fl_Input*,Fl_Button*);} {}
+  decl {void list_update_cb(Fl_Browser*,Fl_Input*);} {}
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void

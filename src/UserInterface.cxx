@@ -542,29 +542,40 @@ void UserInterface::cb_dme(Fl_Check_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_dme_i(o,v);
 }
 
-inline void UserInterface::cb_prop_list_i(Fl_Browser* o, void*) {
-  prop_list_select_cb( o );
+inline void UserInterface::cb_prop_list_i(Fl_Browser*, void*) {
+  list_select_cb(
+  prop_list,
+  prop_input,
+  prop_delete );
 }
 void UserInterface::cb_prop_list(Fl_Browser* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_prop_list_i(o,v);
 }
 
 inline void UserInterface::cb_prop_delete_i(Fl_Button*, void*) {
-  prop_delete_cb();
+  list_delete_cb(
+  prop_list,
+  prop_input,
+  prop_delete );
 }
 void UserInterface::cb_prop_delete(Fl_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_prop_delete_i(o,v);
 }
 
-inline void UserInterface::cb_prop_text_i(Fl_Input*, void*) {
-  prop_list_update_cb();
+inline void UserInterface::cb_prop_input_i(Fl_Input*, void*) {
+  list_update_cb(
+  prop_list,
+  prop_input );
 }
-void UserInterface::cb_prop_text(Fl_Input* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_prop_text_i(o,v);
+void UserInterface::cb_prop_input(Fl_Input* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_prop_input_i(o,v);
 }
 
 inline void UserInterface::cb_New_i(Fl_Button*, void*) {
-  prop_new_cb();
+  list_new_cb(
+  prop_list,
+  prop_input,
+  prop_delete );
 }
 void UserInterface::cb_New(Fl_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_New_i(o,v);
@@ -579,32 +590,121 @@ Fl_Menu_Item UserInterface::menu_log_level[] = {
  {0}
 };
 
-inline void UserInterface::cb_env_list_i(Fl_Browser* o, void*) {
-  env_list_select_cb(o);
+inline void UserInterface::cb_trace_read_list_i(Fl_Browser*, void*) {
+  list_select_cb(
+  trace_read_list,
+  trace_read_input,
+  trace_read_delete );
 }
-void UserInterface::cb_env_list(Fl_Browser* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_env_list_i(o,v);
+void UserInterface::cb_trace_read_list(Fl_Browser* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_trace_read_list_i(o,v);
+}
+
+inline void UserInterface::cb_trace_read_input_i(Fl_Input*, void*) {
+  list_update_cb(
+  trace_read_list,
+  trace_read_input );
+}
+void UserInterface::cb_trace_read_input(Fl_Input* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_trace_read_input_i(o,v);
 }
 
 inline void UserInterface::cb_New1_i(Fl_Button*, void*) {
-  env_new_cb();
+  list_new_cb(
+  trace_read_list,
+  trace_read_input,
+  trace_read_delete );
 }
 void UserInterface::cb_New1(Fl_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_New1_i(o,v);
 }
 
+inline void UserInterface::cb_trace_read_delete_i(Fl_Button*, void*) {
+  list_delete_cb(
+  trace_read_list,
+  trace_read_input,
+  trace_read_delete );
+}
+void UserInterface::cb_trace_read_delete(Fl_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_trace_read_delete_i(o,v);
+}
+
+inline void UserInterface::cb_trace_write_list_i(Fl_Browser*, void*) {
+  list_select_cb(
+  trace_write_list,
+  trace_write_input,
+  trace_write_delete );
+}
+void UserInterface::cb_trace_write_list(Fl_Browser* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_trace_write_list_i(o,v);
+}
+
+inline void UserInterface::cb_trace_write_input_i(Fl_Input*, void*) {
+  list_update_cb(
+  trace_write_list,
+  trace_write_input );
+}
+void UserInterface::cb_trace_write_input(Fl_Input* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_trace_write_input_i(o,v);
+}
+
+inline void UserInterface::cb_New2_i(Fl_Button*, void*) {
+  list_new_cb(
+  trace_write_list,
+  trace_write_input,
+  trace_write_delete );
+}
+void UserInterface::cb_New2(Fl_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_New2_i(o,v);
+}
+
+inline void UserInterface::cb_trace_write_delete_i(Fl_Button*, void*) {
+  list_delete_cb(
+  trace_write_list,
+  trace_write_input,
+  trace_write_delete );
+}
+void UserInterface::cb_trace_write_delete(Fl_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_trace_write_delete_i(o,v);
+}
+
+inline void UserInterface::cb_env_list_i(Fl_Browser*, void*) {
+  list_select_cb(
+  env_list,
+  env_input,
+  env_delete );
+}
+void UserInterface::cb_env_list(Fl_Browser* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_env_list_i(o,v);
+}
+
+inline void UserInterface::cb_New3_i(Fl_Button*, void*) {
+  list_new_cb(
+  env_list,
+  env_input,
+  env_delete );
+}
+void UserInterface::cb_New3(Fl_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_New3_i(o,v);
+}
+
 inline void UserInterface::cb_env_delete_i(Fl_Button*, void*) {
-  env_delete_cb();
+  list_delete_cb(
+  env_list,
+  env_input,
+  env_delete );
 }
 void UserInterface::cb_env_delete(Fl_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_env_delete_i(o,v);
 }
 
-inline void UserInterface::cb_env_var_i(Fl_Input*, void*) {
-  env_list_update_cb();
+inline void UserInterface::cb_env_input_i(Fl_Input*, void*) {
+  list_update_cb(
+  env_list,
+  env_input );
 }
-void UserInterface::cb_env_var(Fl_Input* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_env_var_i(o,v);
+void UserInterface::cb_env_input(Fl_Input* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_env_input_i(o,v);
 }
 
 inline void UserInterface::cb_apt_show_all_i(Fl_Round_Button*, void*) {
@@ -1536,10 +1636,10 @@ UserInterface::UserInterface() {
         o->callback((Fl_Callback*)cb_prop_delete);
         o->deactivate();
       }
-      { Fl_Input* o = prop_text = new Fl_Input(220, 200, 290, 25, "Property:");
+      { Fl_Input* o = prop_input = new Fl_Input(220, 200, 290, 25, "Property:");
         o->labelsize(12);
         o->textsize(12);
-        o->callback((Fl_Callback*)cb_prop_text);
+        o->callback((Fl_Callback*)cb_prop_input);
         o->when(FL_WHEN_CHANGED);
         o->deactivate();
       }
@@ -1560,13 +1660,58 @@ UserInterface::UserInterface() {
         o->textsize(12);
         o->menu(menu_log_level);
       }
+      { Fl_Browser* o = trace_read_list = new Fl_Browser(160, 120, 475, 80, "Trace Read Properties");
+        o->type(2);
+        o->labelfont(1);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_trace_read_list);
+        o->align(FL_ALIGN_TOP_LEFT);
+      }
+      { Fl_Input* o = trace_read_input = new Fl_Input(200, 210, 320, 25, "Value:");
+        o->labelsize(12);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_trace_read_input);
+        o->when(FL_WHEN_CHANGED);
+        o->deactivate();
+      }
+      { Fl_Button* o = new Fl_Button(530, 210, 50, 25, "New");
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_New1);
+      }
+      { Fl_Button* o = trace_read_delete = new Fl_Button(585, 210, 50, 25, "Delete");
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_trace_read_delete);
+        o->deactivate();
+      }
+      { Fl_Browser* o = trace_write_list = new Fl_Browser(160, 280, 475, 80, "Trace Write Properties");
+        o->type(2);
+        o->labelfont(1);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_trace_write_list);
+        o->align(FL_ALIGN_TOP_LEFT);
+      }
+      { Fl_Input* o = trace_write_input = new Fl_Input(200, 370, 320, 25, "Value:");
+        o->labelsize(12);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_trace_write_input);
+        o->when(FL_WHEN_CHANGED);
+        o->deactivate();
+      }
+      { Fl_Button* o = new Fl_Button(530, 370, 50, 25, "New");
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_New2);
+      }
+      { Fl_Button* o = trace_write_delete = new Fl_Button(585, 370, 50, 25, "Delete");
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_trace_write_delete);
+        o->deactivate();
+      }
       o->end();
     }
     { Fl_Group* o = page[12] = new Fl_Group(150, 25, 490, 420, "Environment");
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Browser* o = env_list = new Fl_Browser(155, 55, 480, 125);
         o->type(2);
         o->labelsize(12);
@@ -1575,17 +1720,17 @@ UserInterface::UserInterface() {
       }
       { Fl_Button* o = new Fl_Button(520, 200, 55, 25, "New");
         o->labelsize(12);
-        o->callback((Fl_Callback*)cb_New1);
+        o->callback((Fl_Callback*)cb_New3);
       }
       { Fl_Button* o = env_delete = new Fl_Button(580, 200, 55, 25, "Delete");
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_env_delete);
         o->deactivate();
       }
-      { Fl_Input* o = env_var = new Fl_Input(220, 200, 295, 25, "Value:");
+      { Fl_Input* o = env_input = new Fl_Input(220, 200, 295, 25, "Value:");
         o->labelsize(12);
         o->textsize(12);
-        o->callback((Fl_Callback*)cb_env_var);
+        o->callback((Fl_Callback*)cb_env_input);
         o->when(FL_WHEN_CHANGED);
         o->deactivate();
       }
@@ -1595,6 +1740,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Round_Button* o = apt_show_all = new Fl_Round_Button(155, 55, 60, 25, "All");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);

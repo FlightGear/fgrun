@@ -25,8 +25,6 @@ fgrun_SOURCES = \
 	aircraft.cxx \
 	io.cxx \
 	util.cxx \
-	env.cxx \
-	prop.cxx \
 	$(platform_srcs) \
 	UserInterface.cxx UserInterface.h
 

@@ -271,26 +271,48 @@ private:
   Fl_Button *prop_delete;
   inline void cb_prop_delete_i(Fl_Button*, void*);
   static void cb_prop_delete(Fl_Button*, void*);
-  Fl_Input *prop_text;
-  inline void cb_prop_text_i(Fl_Input*, void*);
-  static void cb_prop_text(Fl_Input*, void*);
+  Fl_Input *prop_input;
+  inline void cb_prop_input_i(Fl_Input*, void*);
+  static void cb_prop_input(Fl_Input*, void*);
   inline void cb_New_i(Fl_Button*, void*);
   static void cb_New(Fl_Button*, void*);
   Fl_Choice *log_level;
   static Fl_Menu_Item menu_log_level[];
+  Fl_Browser *trace_read_list;
+  inline void cb_trace_read_list_i(Fl_Browser*, void*);
+  static void cb_trace_read_list(Fl_Browser*, void*);
+  Fl_Input *trace_read_input;
+  inline void cb_trace_read_input_i(Fl_Input*, void*);
+  static void cb_trace_read_input(Fl_Input*, void*);
+  inline void cb_New1_i(Fl_Button*, void*);
+  static void cb_New1(Fl_Button*, void*);
+  Fl_Button *trace_read_delete;
+  inline void cb_trace_read_delete_i(Fl_Button*, void*);
+  static void cb_trace_read_delete(Fl_Button*, void*);
+  Fl_Browser *trace_write_list;
+  inline void cb_trace_write_list_i(Fl_Browser*, void*);
+  static void cb_trace_write_list(Fl_Browser*, void*);
+  Fl_Input *trace_write_input;
+  inline void cb_trace_write_input_i(Fl_Input*, void*);
+  static void cb_trace_write_input(Fl_Input*, void*);
+  inline void cb_New2_i(Fl_Button*, void*);
+  static void cb_New2(Fl_Button*, void*);
+  Fl_Button *trace_write_delete;
+  inline void cb_trace_write_delete_i(Fl_Button*, void*);
+  static void cb_trace_write_delete(Fl_Button*, void*);
 public:
   Fl_Browser *env_list;
 private:
   inline void cb_env_list_i(Fl_Browser*, void*);
   static void cb_env_list(Fl_Browser*, void*);
-  inline void cb_New1_i(Fl_Button*, void*);
-  static void cb_New1(Fl_Button*, void*);
+  inline void cb_New3_i(Fl_Button*, void*);
+  static void cb_New3(Fl_Button*, void*);
   Fl_Button *env_delete;
   inline void cb_env_delete_i(Fl_Button*, void*);
   static void cb_env_delete(Fl_Button*, void*);
-  Fl_Input *env_var;
-  inline void cb_env_var_i(Fl_Input*, void*);
-  static void cb_env_var(Fl_Input*, void*);
+  Fl_Input *env_input;
+  inline void cb_env_input_i(Fl_Input*, void*);
+  static void cb_env_input(Fl_Input*, void*);
   Fl_Group *page[14];
   Fl_Round_Button *apt_show_all;
   inline void cb_apt_show_all_i(Fl_Round_Button*, void*);
@@ -307,6 +329,9 @@ private:
   Fl_Input *apt_name;
   inline void cb_apt_name_i(Fl_Input*, void*);
   static void cb_apt_name(Fl_Input*, void*);
+public:
+  virtual ~UserInterface();
+private:
   void init();
 public:
   void show();
@@ -329,16 +354,8 @@ private:
 public:
   static int set_choice( Fl_Choice* c, const char* s );
 private:
-  void show_page( int n );
+  void show_page( unsigned int n );
   void update_runways();
-  void env_new_cb();
-  void env_delete_cb();
-  void env_list_update_cb();
-  void env_list_select_cb( Fl_Browser* );
-  void prop_new_cb();
-  void prop_delete_cb();
-  void prop_list_select_cb( Fl_Browser* o );
-  void prop_list_update_cb();
   void run_fgfs();
   void load_airport_browser();
   void apt_browser_cb();
@@ -347,6 +364,11 @@ private:
   AirportDB* airportdb_;
 public:
   void load_airportdb();
+private:
+  void list_new_cb( Fl_Browser*, Fl_Input*, Fl_Button*);
+  void list_delete_cb(Fl_Browser*,Fl_Input*,Fl_Button*);
+  void list_select_cb(Fl_Browser*,Fl_Input*,Fl_Button*);
+  void list_update_cb(Fl_Browser*,Fl_Input*);
 };
 void update_aircraft_cb(void* v);
 #endif
