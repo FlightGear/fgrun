@@ -8,6 +8,9 @@ bin_PROGRAMS = fgrun
 
 fgrun_SOURCES = \
 	main.cxx \
+	settings.cxx \
+	init.cxx \
+	fgfsrc.cxx \
 	$(platform_srcs) \
 	UserInterface.cxx UserInterface.h
 
