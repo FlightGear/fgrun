@@ -434,6 +434,40 @@ void UserInterface::cb_socket_udp(Fl_Round_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->parent()->user_data()))->cb_socket_udp_i(o,v);
 }
 
+inline void UserInterface::cb_dme_nav1_i(Fl_Round_Button* o, void*) {
+  if (o->value())
+  dme_int_freq->deactivate();
+}
+void UserInterface::cb_dme_nav1(Fl_Round_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->parent()->user_data()))->cb_dme_nav1_i(o,v);
+}
+
+inline void UserInterface::cb_dme_nav2_i(Fl_Round_Button* o, void*) {
+  if (o->value())
+  dme_int_freq->deactivate();
+}
+void UserInterface::cb_dme_nav2(Fl_Round_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->parent()->user_data()))->cb_dme_nav2_i(o,v);
+}
+
+inline void UserInterface::cb_dme_int_i(Fl_Round_Button* o, void*) {
+  if (o->value())
+  dme_int_freq->activate();
+}
+void UserInterface::cb_dme_int(Fl_Round_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->parent()->user_data()))->cb_dme_int_i(o,v);
+}
+
+inline void UserInterface::cb_dme_i(Fl_Check_Button* o, void*) {
+  if (o->value())
+  dme_group->activate();
+else
+  dme_group->deactivate();
+}
+void UserInterface::cb_dme(Fl_Check_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_dme_i(o,v);
+}
+
 inline void UserInterface::cb_prop_list_i(Fl_Browser* o, void*) {
   prop_list_select_cb( o );
 }
@@ -629,6 +663,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 120, 25, "Game Mode");
         o->tooltip("Enable full screen game mode");
         o->down_box(FL_DOWN_BOX);
@@ -1273,7 +1308,61 @@ UserInterface::UserInterface() {
       }
       o->end();
     }
-    { Fl_Group* o = page[9] = new Fl_Group(150, 25, 490, 420, "Properties");
+    { Fl_Group* o = page[9] = new Fl_Group(150, 25, 490, 420, "Avionics");
+      o->labelfont(1);
+      o->labelsize(16);
+      o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      { Fl_Input* o = nav1 = new Fl_Input(205, 55, 150, 25, "Nav1:");
+        o->tooltip("Set the NAV1 radio frequency, optionally preceded by a radial");
+        o->labelsize(12);
+        o->textsize(12);
+      }
+      { Fl_Input* o = nav2 = new Fl_Input(205, 85, 150, 25, "Nav2:");
+        o->labelsize(12);
+        o->textsize(12);
+      }
+      { Fl_Input* o = adf = new Fl_Input(205, 115, 150, 25, "ADF:");
+        o->labelsize(12);
+        o->textsize(12);
+      }
+      { Fl_Group* o = dme_group = new Fl_Group(205, 185, 165, 85);
+        o->labelsize(12);
+        o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        o->deactivate();
+        { Fl_Round_Button* o = dme_nav1 = new Fl_Round_Button(215, 185, 85, 25, "Nav1");
+          o->type(102);
+          o->down_box(FL_ROUND_DOWN_BOX);
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_dme_nav1);
+        }
+        { Fl_Round_Button* o = dme_nav2 = new Fl_Round_Button(215, 210, 85, 25, "Nav2");
+          o->type(102);
+          o->down_box(FL_ROUND_DOWN_BOX);
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_dme_nav2);
+        }
+        { Fl_Round_Button* o = dme_int = new Fl_Round_Button(215, 235, 70, 25, "Internal");
+          o->type(102);
+          o->down_box(FL_ROUND_DOWN_BOX);
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_dme_int);
+        }
+        { Fl_Input* o = dme_int_freq = new Fl_Input(285, 235, 70, 25);
+          o->labelsize(12);
+          o->textsize(12);
+          o->deactivate();
+        }
+        o->end();
+      }
+      { Fl_Check_Button* o = dme = new Fl_Check_Button(205, 155, 20, 25, "DME:");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_dme);
+        o->align(FL_ALIGN_LEFT);
+      }
+      o->end();
+    }
+    { Fl_Group* o = page[10] = new Fl_Group(150, 25, 490, 420, "Properties");
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
@@ -1303,7 +1392,7 @@ UserInterface::UserInterface() {
       }
       o->end();
     }
-    { Fl_Group* o = page[10] = new Fl_Group(150, 25, 490, 420, "Debugging");
+    { Fl_Group* o = page[11] = new Fl_Group(150, 25, 490, 420, "Debugging");
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
@@ -1316,7 +1405,7 @@ UserInterface::UserInterface() {
       }
       o->end();
     }
-    { Fl_Group* o = page[11] = new Fl_Group(150, 25, 490, 420, "Environment");
+    { Fl_Group* o = page[12] = new Fl_Group(150, 25, 490, 420, "Environment");
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);

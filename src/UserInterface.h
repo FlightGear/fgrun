@@ -230,6 +230,23 @@ private:
   Fl_Round_Button *socket_udp;
   inline void cb_socket_udp_i(Fl_Round_Button*, void*);
   static void cb_socket_udp(Fl_Round_Button*, void*);
+  Fl_Input *nav1;
+  Fl_Input *nav2;
+  Fl_Input *adf;
+  Fl_Group *dme_group;
+  Fl_Round_Button *dme_nav1;
+  inline void cb_dme_nav1_i(Fl_Round_Button*, void*);
+  static void cb_dme_nav1(Fl_Round_Button*, void*);
+  Fl_Round_Button *dme_nav2;
+  inline void cb_dme_nav2_i(Fl_Round_Button*, void*);
+  static void cb_dme_nav2(Fl_Round_Button*, void*);
+  Fl_Round_Button *dme_int;
+  inline void cb_dme_int_i(Fl_Round_Button*, void*);
+  static void cb_dme_int(Fl_Round_Button*, void*);
+  Fl_Input *dme_int_freq;
+  Fl_Check_Button *dme;
+  inline void cb_dme_i(Fl_Check_Button*, void*);
+  static void cb_dme(Fl_Check_Button*, void*);
   Fl_Browser *prop_list;
   inline void cb_prop_list_i(Fl_Browser*, void*);
   static void cb_prop_list(Fl_Browser*, void*);
@@ -243,7 +260,7 @@ private:
   static void cb_New(Fl_Button*, void*);
   Fl_Choice *log_level;
   static Fl_Menu_Item menu_log_level[];
-  Fl_Group *page[12];
+  Fl_Group *page[13];
 public:
   Fl_Browser *env_list;
 private:

@@ -26,7 +26,7 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {570 197 640 480} labelsize 12
+      private xywh {467 212 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -206,7 +206,7 @@ if (p != 0)
       }
       Fl_Group {page[1]} {
         label Features
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button game_mode {
           label {Game Mode}
@@ -241,7 +241,7 @@ if (p != 0)
           callback {if (o->value())
   antialias_hud->activate();
 else
-  antialias_hud->deactivate();} selected
+  antialias_hud->deactivate();}
           private tooltip {Enable Heads Up Display} xywh {320 110 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button antialias_hud {
@@ -837,6 +837,56 @@ else
         }
       }
       Fl_Group {page[9]} {
+        label Avionics open
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+      } {
+        Fl_Input nav1 {
+          label {Nav1:}
+          private tooltip {Set the NAV1 radio frequency, optionally preceded by a radial} xywh {205 55 150 25} labelsize 12 textsize 12
+        }
+        Fl_Input nav2 {
+          label {Nav2:}
+          private xywh {205 85 150 25} labelsize 12 textsize 12
+        }
+        Fl_Input adf {
+          label {ADF:}
+          private xywh {205 115 150 25} labelsize 12 textsize 12
+        }
+        Fl_Group dme_group {open
+          private xywh {205 185 165 85} labelsize 12 align 21 deactivate
+        } {
+          Fl_Round_Button dme_nav1 {
+            label Nav1
+            callback {if (o->value())
+  dme_int_freq->deactivate();}
+            private xywh {215 185 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+          }
+          Fl_Round_Button dme_nav2 {
+            label Nav2
+            callback {if (o->value())
+  dme_int_freq->deactivate();}
+            private xywh {215 210 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+          }
+          Fl_Round_Button dme_int {
+            label Internal
+            callback {if (o->value())
+  dme_int_freq->activate();} selected
+            private xywh {215 235 70 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+          }
+          Fl_Input dme_int_freq {
+            private xywh {285 235 70 25} labelsize 12 textsize 12 deactivate
+          }
+        }
+        Fl_Check_Button dme {
+          label {DME:}
+          callback {if (o->value())
+  dme_group->activate();
+else
+  dme_group->deactivate();}
+          private xywh {205 155 20 25} down_box DOWN_BOX labelsize 12 align 4
+        }
+      }
+      Fl_Group {page[10]} {
         label Properties
         private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
@@ -860,7 +910,7 @@ else
           private xywh {520 200 55 25} labelsize 12
         }
       }
-      Fl_Group {page[10]} {
+      Fl_Group {page[11]} {
         label Debugging
         private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
@@ -890,7 +940,7 @@ else
           }
         }
       }
-      Fl_Group {page[11]} {
+      Fl_Group {page[12]} {
         label Environment
         private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {

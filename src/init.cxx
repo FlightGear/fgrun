@@ -13,6 +13,7 @@ UserInterface::init()
     page_list->add("Time");
     page_list->add("Network");
     page_list->add("Input/Output");
+    page_list->add("Avioncs");
     page_list->add("Properties");
     page_list->add("Debugging");
     page_list->add("Environment");
