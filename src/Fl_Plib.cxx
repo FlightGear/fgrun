@@ -32,8 +32,10 @@ Fl_Plib::init()
 
   //make_current();
   ssgInit();
-  ssgSetFOV( 60.0f, 60.0f * h() / double(w()) );
-  ssgSetNearFar( 1.0f, 700.0f );
+  ssgSetFOV( 60.0f,
+             atan(tan(30.0 * SG_DEGREES_TO_RADIANS) * h() / w() ) *
+	     SG_RADIANS_TO_DEGREES * 2 );
+   ssgSetNearFar( 1.0f, 700.0f );
 
   sgVec3 sunposn;
   sgSetVec3( sunposn, 0.2f, -0.5f, 0.5f );
@@ -96,7 +98,9 @@ Fl_Plib::draw()
 	glShadeModel(GL_SMOOTH);
 	glViewport(0,0,w(),h());
 	if (go == 1)
-	    ssgSetFOV( 60.0f, 60.0f * h() / double(w()) );
+	    ssgSetFOV( 60.0f,
+		       atan(tan(30.0 * SG_DEGREES_TO_RADIANS) * h() / w() ) *
+		       SG_RADIANS_TO_DEGREES * 2 );
     }
 
     glClearColor (0.14f, 0.18f, 0.2f, 1.0f); 
