@@ -21,7 +21,7 @@ decl {\#include <string>} {public
 decl {class AirportDB;} {public
 } 
 
-class UserInterface {open selected
+class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
@@ -29,7 +29,10 @@ class UserInterface {open selected
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control}
-      private xywh {597 128 640 480} type Double labelsize 12
+      callback {if (Fl::event_key() == FL_Escape)
+  return; // ignore Escape
+exit(0);} open
+      private xywh {622 228 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {open
@@ -51,16 +54,13 @@ class UserInterface {open selected
           }
         }
         submenu {} {
-          label {&Settings} open
+          label {&View} open
           xywh {0 0 100 20} labelsize 12
         } {
-          menuitem output_to_window {
-            label {Output To Window}
-            private tooltip {Redirect FlightGear output to a window.} xywh {0 0 100 20} type Toggle value 1 labelsize 12
-          }
-          menuitem load_airports_db {
-            label {Load airports database}
-            private xywh {0 0 100 20} type Toggle labelsize 12
+          menuitem log_window {
+            label {&Log Window}
+            callback {show_log_window();} selected
+            private tooltip {Display FlightGear output window.} xywh {0 0 100 20} shortcut 0x5006c value 1 labelsize 12
           }
         }
         submenu {} {
@@ -1213,7 +1213,7 @@ else
     code {main_window->show();} {}
   }
   decl {void update_aircraft();} {}
-  Function {run_fgfs_impl()} {return_type {virtual void}
+  Function {run_fgfs_impl()} {open return_type {virtual void}
   } {}
   decl {void load_settings_cb();} {}
   decl {void save_settings_cb();} {}
@@ -1240,6 +1240,8 @@ else
   decl {void list_delete_cb(Fl_Browser*,Fl_Input*,Fl_Button*);} {}
   decl {void list_select_cb(Fl_Browser*,Fl_Input*,Fl_Button*);} {}
   decl {void list_update_cb(Fl_Browser*,Fl_Input*);} {}
+  Function {show_log_window()} {open return_type {virtual void}
+  } {}
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void

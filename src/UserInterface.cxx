@@ -8,6 +8,15 @@
 #include <string.h>
 #include <FL/Fl_File_Chooser.h>
 
+inline void UserInterface::cb_main_window_i(Fl_Double_Window*, void*) {
+  if (Fl::event_key() == FL_Escape)
+  return; // ignore Escape
+exit(0);
+}
+void UserInterface::cb_main_window(Fl_Double_Window* o, void* v) {
+  ((UserInterface*)(o->user_data()))->cb_main_window_i(o,v);
+}
+
 inline void UserInterface::cb_Save_i(Fl_Menu_*, void*) {
   save_settings_cb();
 }
@@ -22,22 +31,27 @@ void UserInterface::cb_Quit(Fl_Menu_* o, void* v) {
   ((UserInterface*)(o->parent()->user_data()))->cb_Quit_i(o,v);
 }
 
+inline void UserInterface::cb_log_window_i(Fl_Menu_*, void*) {
+  show_log_window();
+}
+void UserInterface::cb_log_window(Fl_Menu_* o, void* v) {
+  ((UserInterface*)(o->parent()->user_data()))->cb_log_window_i(o,v);
+}
+
 Fl_Menu_Item UserInterface::menu_[] = {
  {"&File", 0,  0, 0, 64, 0, 0, 12, 56},
  {"&Save", 0x40073,  (Fl_Callback*)UserInterface::cb_Save, 0, 128, 0, 0, 12, 56},
  {"&Quit", 0x40071,  (Fl_Callback*)UserInterface::cb_Quit, 0, 0, 0, 0, 12, 56},
  {0},
- {"&Settings", 0,  0, 0, 64, 0, 0, 12, 56},
- {"Output To Window", 0,  0, 0, 6, 0, 0, 12, 56},
- {"Load airports database", 0,  0, 0, 2, 0, 0, 12, 56},
+ {"&View", 0,  0, 0, 64, 0, 0, 12, 56},
+ {"&Log Window", 0x5006c,  (Fl_Callback*)UserInterface::cb_log_window, 0, 4, 0, 0, 12, 56},
  {0},
  {"&Help", 0,  0, 0, 64, 0, 0, 12, 56},
  {"&About...", 0,  0, 0, 0, 0, 0, 12, 56},
  {0},
  {0}
 };
-Fl_Menu_Item* UserInterface::output_to_window = UserInterface::menu_ + 5;
-Fl_Menu_Item* UserInterface::load_airports_db = UserInterface::menu_ + 6;
+Fl_Menu_Item* UserInterface::log_window = UserInterface::menu_ + 5;
 
 inline void UserInterface::cb_page_list_i(Fl_Browser* o, void*) {
   if (o->value() > 0)
@@ -737,7 +751,7 @@ UserInterface::UserInterface() {
   { Fl_Double_Window* o = main_window = new Fl_Double_Window(640, 480, "FlightGear Launch Control");
     w = o;
     o->labelsize(12);
-    o->user_data((void*)(this));
+    o->callback((Fl_Callback*)cb_main_window, (void*)(this));
     { Fl_Menu_Bar* o = new Fl_Menu_Bar(0, 0, 640, 25);
       o->labelsize(12);
       o->textsize(12);
@@ -1799,6 +1813,9 @@ void UserInterface::show() {
 }
 
 void UserInterface::run_fgfs_impl() {
+}
+
+void UserInterface::show_log_window() {
 }
 
 void update_aircraft_cb(void* v) {

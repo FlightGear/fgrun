@@ -67,24 +67,25 @@ FGRun_Posix::~FGRun_Posix()
 void
 FGRun_Posix::run_fgfs_impl()
 {
+    pid_t pid;
+    int master = -1;
+
 #if defined(HAVE_TERMIOS_H)
     struct termios term;
     tcgetattr( STDOUT_FILENO, &term );
     term.c_oflag &= ~( OLCUC | ONLCR );
 #endif
 
-    int master = -1;
-
 #if defined(HAVE_TERMIOS_H)
-    pid_t pid = pty_fork( &master, 0, &term, 0 );
+    pid = pty_fork( &master, 0, &term, 0 );
 #else
-    pid_t pid = pty_fork( &master, 0, 0, 0 );
+    pid = pty_fork( &master, 0, 0, 0 );
 #endif
 
     if (pid < 0)
     {
 	perror( "fork error" );
-	close( master );
+	(void) close( master );
 	return;
     }
 
@@ -95,20 +96,18 @@ FGRun_Posix::run_fgfs_impl()
 	if (master < 0)
 	    return;
 
-//  	if (output_to_window->value())
+	if (win == 0)
 	{
-	    if (win == 0)
-	    {
-		win = new FGOutputWindow( 640, 480, "FlightGear output" );
-	    }
-	    else
-	    {
-		win->clear();
-	    }
-
-	    win->show();
-	    Fl::add_fd( master, stdout_cb, this );
+	    win = new FGOutputWindow( 640, 480, "FlightGear output" );
 	}
+	else
+	{
+	    win->clear();
+	}
+
+	win->show();
+	Fl::add_fd( master, stdout_cb, this );
+
 	return;
     }
     else
@@ -169,4 +168,12 @@ FGRun_Posix::stdout_cb( int fd )
 	int status;
 	int pid = wait( &status );
     }
+}
+
+void
+FGRun_Posix::show_log_window()
+{
+    std::cout << "win=" << win << "\n";
+    if (win != 0)
+	win->show();
 }

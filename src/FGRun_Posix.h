@@ -42,6 +42,8 @@ private:
     static void stderr_cb( int fd, void* arg );
     void stderr_cb( int fd );
 
+    void show_log_window();
+
 private:
     FGOutputWindow* win;
 };

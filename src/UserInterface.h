@@ -25,13 +25,16 @@ public:
   UserInterface();
 private:
   Fl_Double_Window *main_window;
+  inline void cb_main_window_i(Fl_Double_Window*, void*);
+  static void cb_main_window(Fl_Double_Window*, void*);
   static Fl_Menu_Item menu_[];
   inline void cb_Save_i(Fl_Menu_*, void*);
   static void cb_Save(Fl_Menu_*, void*);
   inline void cb_Quit_i(Fl_Menu_*, void*);
   static void cb_Quit(Fl_Menu_*, void*);
-  static Fl_Menu_Item *output_to_window;
-  static Fl_Menu_Item *load_airports_db;
+  static Fl_Menu_Item *log_window;
+  inline void cb_log_window_i(Fl_Menu_*, void*);
+  static void cb_log_window(Fl_Menu_*, void*);
   Fl_Browser *page_list;
   inline void cb_page_list_i(Fl_Browser*, void*);
   static void cb_page_list(Fl_Browser*, void*);
@@ -362,6 +365,8 @@ private:
   void list_delete_cb(Fl_Browser*,Fl_Input*,Fl_Button*);
   void list_select_cb(Fl_Browser*,Fl_Input*,Fl_Button*);
   void list_update_cb(Fl_Browser*,Fl_Input*);
+public:
+  virtual void show_log_window();
 };
 void update_aircraft_cb(void* v);
 #endif
