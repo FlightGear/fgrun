@@ -25,7 +25,7 @@
 
 class Fl_Window;
 class Fl_Text_Display;
-class Fl_Menu_Item;
+struct Fl_Menu_Item;
 
 /**
  * 
