@@ -1,0 +1,21 @@
+* 0.4.0
+
+  * New wizard style interface to make it easier for first time and infrequent
+    users to get started.  The original interface is now the advanced options 
+    interface.
+  * Aircraft preview (requires plib and simgear).
+  * New airport browser with incremental search facility.
+  * runways.dat is loaded in the background.
+
+* 0.3.3
+
+  * Not released.
+
+* 0.3.2
+
+  * Windows updates.
+
+* 0.3.1
+
+  * Use absolute pathnames on Windows.
+
