@@ -217,7 +217,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--lon=" << buf;
     if (prefs.get( "lat", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--lat=" << buf;
-    if (prefs.get( "lat", buf, "", buflen-1 ) && buf[0] != 0)
+    if (prefs.get( "altitude", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--altitude=" << buf;
     if (prefs.get( "heading", dVal, 0. ) && dVal != 0.)
 	os << pfx << "--heading=" << dVal;
