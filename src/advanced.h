@@ -69,6 +69,7 @@ private:
   Fl_Check_Button *failure_static;
   Fl_Check_Button *failure_system;
   Fl_Check_Button *failure_vacuum;
+  Fl_Check_Button *ai_models;
   Fl_Choice *fdm;
   inline void cb_fdm_i(Fl_Choice*, void*);
   static void cb_fdm(Fl_Choice*, void*);

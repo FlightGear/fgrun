@@ -762,7 +762,6 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 120, 25, "Game Mode");
         o->tooltip("Enable full screen game mode");
         o->down_box(FL_DOWN_BOX);
@@ -868,6 +867,11 @@ Advanced::Advanced() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
+      }
+      { Fl_Check_Button* o = ai_models = new Fl_Check_Button(345, 230, 120, 25, "AI Traffic");
+        o->tooltip("Enable AI traffic");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
       }
       o->end();
     }
@@ -1334,6 +1338,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);

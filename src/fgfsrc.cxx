@@ -162,6 +162,12 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	    os << pfx << "--failure=vacuum";
     }
 
+    prefs.get( "ai_models", iVal, 0 );
+    if (iVal)
+	os << pfx << "--enable-ai-models";
+    else
+	os << pfx << "--disable-ai-models";
+
     // Flight model
     prefs.get( "fdm", buf, "", buflen-1 );
     if (buf[0] != 0)

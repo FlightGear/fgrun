@@ -98,6 +98,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("failure_static", failure_static->value());
     prefs.set("failure_system", failure_system->value());
     prefs.set("failure_vacuum", failure_vacuum->value());
+    prefs.set("ai_models", ai_models->value());
 
     prefs.set("fdm", fdm->text());
     prefs.set("no_trim", notrim->value());
@@ -330,6 +331,8 @@ Advanced::load_settings( Fl_Preferences& prefs )
     failure_system->value( iVal );
     prefs.get("failure_vacuum", iVal, 0);
     failure_vacuum->value( iVal );
+    prefs.get("ai_models", iVal, 0);
+    ai_models->value( iVal );
 
     prefs.get("fdm", buf, "jsb", buflen-1);
     set_choice(fdm, buf);

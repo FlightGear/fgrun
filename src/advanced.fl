@@ -17,7 +17,7 @@ class Advanced {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {512 38 640 480} type Double labelsize 12
+      private xywh {91 152 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -103,7 +103,7 @@ class Advanced {open
       }
       Fl_Group {page[1]} {
         label Features
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Check_Button game_mode {
           label {Game Mode}
@@ -199,6 +199,10 @@ else
         Fl_Check_Button failure_vacuum {
           label vacuum
           private xywh {505 150 100 25} down_box DOWN_BOX labelsize 12 deactivate
+        }
+        Fl_Check_Button ai_models {
+          label {AI Traffic} selected
+          private tooltip {Enable AI traffic} xywh {345 230 120 25} down_box DOWN_BOX labelsize 12
         }
       }
       Fl_Group {page[2]} {
@@ -653,7 +657,7 @@ else
       }
       Fl_Group {page[8]} {
         label {Input/Output} open
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -697,7 +701,7 @@ else
             private xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
-            label jsclient selected
+            label jsclient
             xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
