@@ -11,10 +11,10 @@ class LogWindow;
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Wizard.H>
 #include <FL/Fl_Group.H>
-#include <FL/Fl_Input.H>
-#include <FL/Fl_Output.H>
 #include <FL/Fl_Help_View.H>
+#include <FL/Fl_Input.H>
 #include <FL/Fl_Browser.H>
+#include <FL/Fl_Output.H>
 #include "Fl_Plib.h"
 #include "AirportBrowser.h"
 
@@ -30,6 +30,7 @@ private:
   inline void cb_prev_i(Fl_Button*, void*);
   static void cb_prev(Fl_Button*, void*);
   Fl_Wizard *wiz;
+  Fl_Help_View *about_;
   Fl_Input *fg_exe_;
   inline void cb_fg_exe__i(Fl_Input*, void*);
   static void cb_fg_exe_(Fl_Input*, void*);
@@ -40,16 +41,24 @@ private:
   static void cb_fg_root_(Fl_Input*, void*);
   inline void cb_1_i(Fl_Button*, void*);
   static void cb_1(Fl_Button*, void*);
-  Fl_Input *fg_scenery_;
-  inline void cb_fg_scenery__i(Fl_Input*, void*);
-  static void cb_fg_scenery_(Fl_Input*, void*);
-  inline void cb_2_i(Fl_Button*, void*);
-  static void cb_2(Fl_Button*, void*);
+  Fl_Browser *scenery_dir_list_;
+  inline void cb_scenery_dir_list__i(Fl_Browser*, void*);
+  static void cb_scenery_dir_list_(Fl_Browser*, void*);
+  Fl_Button *scenery_dir_up_;
+  inline void cb_scenery_dir_up__i(Fl_Button*, void*);
+  static void cb_scenery_dir_up_(Fl_Button*, void*);
+  Fl_Button *scenery_dir_down_;
+  inline void cb_scenery_dir_down__i(Fl_Button*, void*);
+  static void cb_scenery_dir_down_(Fl_Button*, void*);
+  Fl_Button *scenery_dir_delete_;
+  inline void cb_scenery_dir_delete__i(Fl_Button*, void*);
+  static void cb_scenery_dir_delete_(Fl_Button*, void*);
+  inline void cb_Add_i(Fl_Button*, void*);
+  static void cb_Add(Fl_Button*, void*);
   Fl_Button *cache_delete_;
   inline void cb_cache_delete__i(Fl_Button*, void*);
   static void cb_cache_delete_(Fl_Button*, void*);
   Fl_Output *cache_file_;
-  Fl_Help_View *about_;
   Fl_Browser *aircraft;
   inline void cb_aircraft_i(Fl_Browser*, void*);
   static void cb_aircraft(Fl_Browser*, void*);
@@ -80,8 +89,6 @@ private:
   void fg_exe_select_cb();
   void fg_root_update_cb();
   void fg_root_select_cb();
-  void fg_scenery_update_cb();
-  void fg_scenery_select_cb();
   void advanced_cb();
   int write_fgfsrc();
   int write_fgfsrc( std::ostream&, const char* pfx = "\n");
@@ -94,5 +101,10 @@ private:
   void delete_cache_file_cb();
   static void airports_cb( Fl_Widget*, void* );
   void airports_cb();
+  void scenery_dir_select_cb();
+  void scenery_dir_add_cb();
+  void scenery_dir_delete_cb();
+  void scenery_dir_up_cb();
+  void scenery_dir_down_cb();
 };
 #endif

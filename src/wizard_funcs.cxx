@@ -72,17 +72,6 @@ is_valid_fg_root( const string& dir )
     return false;
 }
 
-static bool
-is_valid_fg_scenery( const string& dir )
-{
-    if (!fl_filename_isdir( dir.c_str() ))
-        return false;
-
-    // TODO: more definitive tests?
-
-    return true;
-}
-
 void
 Wizard::airports_cb( Fl_Widget*, void* v )
 {
@@ -110,10 +99,10 @@ Wizard::airports_cb()
 static const char* about_text = "\
 <html>\
  <head>\
-  <title>FlightGear Launch Control 0.4.0</title>\
+  <title>FlightGear Launch Control " VERSION "</title>\
  </head>\
  <body>\
-  <h1>FlightGear Launch Control 0.4.0</h1>\
+  <h1>FlightGear Launch Control " VERSION "</h1>\
   <p>This program is released under the GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>\
   <p>Report bugs to bbright@users.sourceforge.net</p>\
  </body>\
@@ -137,7 +126,6 @@ Wizard::init()
     cache.append( "airports.txt" );
     cache_file_->value( cache.c_str() );
 
-    //about_->load( "about.html" );
     about_->value( about_text );
 
     prefs.get( "fg_exe", buf, def_fg_exe.c_str(), buflen-1);
@@ -146,27 +134,30 @@ Wizard::init()
     prefs.get( "fg_root", buf, def_fg_root.c_str(), buflen-1);
     fg_root_->value( buf );
 
-    if (prefs.entryExists( "fg_scenery" ))
+    string fg_scenery;
+    if (!def_fg_scenery.empty())
     {
-	prefs.get( "fg_scenery", buf, "", buflen-1);
-	fg_scenery_->value( buf );
+	fg_scenery = def_fg_scenery;
     }
-    else if (!def_fg_scenery.empty())
+    else if (prefs.get( "fg_scenery", buf, "", buflen-1))
     {
-        fg_scenery_->value( def_fg_scenery.c_str() );
+	fg_scenery = buf;
     }
     else if (fg_root_->size() > 0)
     {
-        string dir( fg_root_->value() );
-        dir += "/Scenery";
-        fg_scenery_->value( dir.c_str() );
+	fg_scenery = fg_root_->value();
+	fg_scenery += "/Scenery";
     }
+
+    typedef vector<string> vs_t;
+    vs_t v( sgPathSplit( fg_scenery ) );
+    for (vs_t::size_type i = 0; i < v.size(); ++i)
+	scenery_dir_list_->add( v[i].c_str() );
 
     if (fg_exe_->size() == 0 ||
 	fg_root_->size() == 0 ||
         !is_valid_fg_root( fg_root_->value() ) ||
-        fg_scenery_->size() == 0 ||
-        !is_valid_fg_scenery( fg_scenery_->value() ))
+	fg_scenery.empty() )
     {
         // First time through or FG_ROOT is not valid.
         page[0]->activate();
@@ -180,8 +171,7 @@ Wizard::init()
 	path.append( "/Airports/runways.dat.gz" );
 	airports_->load_runways( path.str(), airports_cb, this );
 
-	path = fg_scenery_->value();
-	airports_->load_airports( path, cache, airports_cb, this );
+	airports_->load_airports( v, cache, airports_cb, this );
 
         aircraft_update();
 
@@ -287,6 +277,12 @@ Wizard::preview_aircraft()
     next->activate();
 }
 
+#if defined(WIN32)
+static const char searchPathSep = ';';
+#else
+static const char searchPathSep = ':';
+#endif
+
 void
 Wizard::next_cb()
 {
@@ -302,8 +298,14 @@ Wizard::next_cb()
 	fl_filename_absolute( abs_name, fg_root_->value() );
 	prefs.set( "fg_root", abs_name );
 
-	fl_filename_absolute( abs_name, fg_scenery_->value() );
-	prefs.set( "fg_scenery", abs_name );
+	string fg_scenery = scenery_dir_list_->text(1);
+	for (int i = 2; i <= scenery_dir_list_->size(); ++i)
+	{
+	    fg_scenery += searchPathSep;
+	    fg_scenery += scenery_dir_list_->text(i);
+	}
+
+ 	prefs.set( "fg_scenery", fg_scenery.c_str() );
     }
     else if (wiz->value() == page[1])
     {
@@ -420,16 +422,16 @@ Wizard::fg_root_update_cb()
 
     fg_root_->value( dir.c_str() );
 
-    // Derive FG_SCENERY from FG_ROOT. 
-    if (fg_scenery_->size() == 0)
+    if (scenery_dir_list_->size() == 0)
     {
+	// Derive FG_SCENERY from FG_ROOT. 
 	string d( dir );
 	d.append( "/Scenery" );
-	if (!is_valid_fg_scenery( d ))
+
+	if (!fl_filename_isdir( d.c_str() ))
 	    return;
 
-	fg_scenery_->value( d.c_str() );
-        //airports_->init( fg_root_->value(), fg_scenery_->value() );
+	scenery_dir_list_->add( d.c_str() );
     }
 
     next->activate();
@@ -444,40 +446,6 @@ Wizard::fg_root_select_cb()
         fg_root_->value( p );
 
     fg_root_update_cb();
-}
-
-void
-Wizard::fg_scenery_update_cb()
-{
-    next->deactivate();
-
-    if (fg_scenery_->size() == 0)
-        return;
-
-    string dir( fg_scenery_->value() );
-
-    // Remove trailing separator.
-    if (isdirsep( dir[ dir.length() - 1 ] ))
-    {
-        dir.erase( dir.length() - 1 );
-    }
-
-    if (!is_valid_fg_scenery( dir ))
-	return;
-
-    fg_scenery_->value( dir.c_str() );
-    next->activate();
-}
-
-void
-Wizard::fg_scenery_select_cb()
-{
-    char* p = fl_dir_chooser( "Select FG_SCENERY directory",
-                              fg_scenery_->value(), 0);
-    if (p != 0)
-        fg_scenery_->value( p );
-
-    fg_scenery_update_cb();
 }
 
 void
@@ -627,3 +595,57 @@ Wizard::delete_cache_file_cb()
     fl_alert( "Unable to delete '%s':\n%s",
 	      path.c_str(), strerror(errno) );
 }
+
+void
+Wizard::scenery_dir_select_cb()
+{
+    int n = scenery_dir_list_->value();
+    if (n > 0)
+	scenery_dir_delete_->activate();
+    else
+	scenery_dir_delete_->deactivate();
+}
+
+void
+Wizard::scenery_dir_add_cb()
+{
+    char* p = fl_dir_chooser( "Select FG_SCENERY directory", 0, 0);
+    if (p != 0)
+    {
+	scenery_dir_list_->add( p );
+	scenery_dir_list_->value( scenery_dir_list_->size() );
+	scenery_dir_delete_->activate();
+// 	if (scenery_dir_list_->size() > 1)
+// 	{
+// 	}
+    }
+}
+
+void
+Wizard::scenery_dir_delete_cb()
+{
+    int n = scenery_dir_list_->value();
+    if (n > 0)
+    {
+	scenery_dir_list_->remove( n );
+    }
+
+    if (scenery_dir_list_->size() == 0)
+    {
+	scenery_dir_delete_->deactivate();
+    }
+	
+}
+
+void
+Wizard::scenery_dir_up_cb()
+{
+    int n = scenery_dir_list_->value();
+}
+
+void
+Wizard::scenery_dir_down_cb()
+{
+    int n = scenery_dir_list_->value();
+}
+

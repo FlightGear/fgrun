@@ -14,13 +14,13 @@ decl {\#include <FL/Fl_Preferences.H>} {public
 decl {class LogWindow;} {public
 } 
 
-class Wizard {open
+class Wizard {open selected
 } {
   Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0)} {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
-      private xywh {504 43 640 480} type Double resizable visible
+      private xywh {500 133 640 480} type Double resizable visible
     } {
       Fl_Button next {
         label Next
@@ -32,13 +32,16 @@ class Wizard {open
         callback {prev_cb();}
         private xywh {415 450 70 25} labelsize 12
       }
-      Fl_Wizard wiz {open
+      Fl_Wizard wiz {
         private xywh {0 0 640 440}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths}
+          label {Select Paths} open
           xywh {0 0 640 440} labelfont 1 align 21
         } {
+          Fl_Help_View about_ {
+            private xywh {5 25 630 115} labeltype NO_LABEL
+          }
           Fl_Input fg_exe_ {
             label {Executable:}
             callback {fg_exe_update_cb();}
@@ -59,31 +62,43 @@ class Wizard {open
             callback {fg_root_select_cb();}
             private xywh {470 205 25 25} labelsize 12
           }
-          Fl_Input fg_scenery_ {
+          Fl_Browser scenery_dir_list_ {
             label {FG_SCENERY:}
-            callback {fg_scenery_update_cb();}
-            private tooltip {base scenery path} xywh {130 235 335 25} labelsize 12 when 8 textsize 12
+            callback {scenery_dir_select_cb();}
+            private tooltip {Scenery directories} xywh {130 275 335 55} type Hold labelsize 12 align 4 textsize 12
+          }
+          Fl_Button scenery_dir_up_ {
+            label {@8>}
+            callback {scenery_dir_up_cb();}
+            private xywh {470 275 25 25} deactivate
+          }
+          Fl_Button scenery_dir_down_ {
+            label {@2>}
+            callback {scenery_dir_down_cb();}
+            private xywh {470 305 25 25} deactivate
+          }
+          Fl_Button scenery_dir_delete_ {
+            label Delete
+            callback {scenery_dir_delete_cb();}
+            private tooltip {Delete a scenery directory} xywh {195 245 60 25} labelsize 12 deactivate
           }
           Fl_Button {} {
-            label {...}
-            callback {fg_scenery_select_cb();}
-            private xywh {470 235 25 25} labelsize 12
+            label {Add...}
+            callback {scenery_dir_add_cb();}
+            private tooltip {Add a scenery directory} xywh {130 245 60 25} labelsize 12
           }
           Fl_Button cache_delete_ {
             label Delete
             callback {delete_cache_file_cb();}
-            private xywh {470 310 60 25} labelsize 12 deactivate
+            private xywh {470 370 60 25} labelsize 12 deactivate
           }
           Fl_Output cache_file_ {
             label {Airports Cache:}
-            private xywh {130 310 335 25} labelsize 12 textsize 12
-          }
-          Fl_Help_View about_ {selected
-            private xywh {5 25 630 115} labeltype NO_LABEL
+            private xywh {130 370 335 25} labelsize 12 textsize 12
           }
         }
         Fl_Group {page[1]} {
-          label {Select an aircraft} open
+          label {Select an aircraft}
           private xywh {0 0 640 440} labelfont 1 align 21 hide
         } {
           Fl_Browser aircraft {
@@ -149,8 +164,6 @@ class Wizard {open
   decl {void fg_exe_select_cb();} {}
   decl {void fg_root_update_cb();} {}
   decl {void fg_root_select_cb();} {}
-  decl {void fg_scenery_update_cb();} {}
-  decl {void fg_scenery_select_cb();} {}
   decl {void advanced_cb();} {}
   decl {int write_fgfsrc();} {}
   decl {int write_fgfsrc( std::ostream&, const char* pfx = "\\n");} {}
@@ -163,4 +176,9 @@ class Wizard {open
   decl {void delete_cache_file_cb();} {}
   decl {static void airports_cb( Fl_Widget*, void* )} {}
   decl {void airports_cb();} {}
+  decl {void scenery_dir_select_cb();} {}
+  decl {void scenery_dir_add_cb();} {}
+  decl {void scenery_dir_delete_cb();} {}
+  decl {void scenery_dir_up_cb();} {}
+  decl {void scenery_dir_down_cb();} {}
 } 
