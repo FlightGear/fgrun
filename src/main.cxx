@@ -26,12 +26,14 @@
 
 #include <string>
 #include <FL/Fl.H>
+#include <FL/filename.H>
 
 #include "wizard.h"
 
 std::string def_fg_exe = "";
 std::string def_fg_root = "";
 std::string def_fg_scenery = "";
+bool silent = false;
 
 /**
  * --fg-exe=<PATH>
@@ -41,14 +43,19 @@ std::string def_fg_scenery = "";
 static int
 parse_args( int, char** argv, int& i )
 {
-    if (strncmp( argv[i], "--fg-exe=", 9 ) == 0)
+    if (strcmp( argv[i], "--silent" ) == 0)
+    {
+	silent = true;
+	++i;
+	return 1;
+    }
+    else if (strncmp( argv[i], "--fg-exe=", 9 ) == 0)
     {
 	def_fg_exe.assign( &argv[i][9] );
 	++i;
 	return 1;
     }
-
-    if (strncmp( argv[i], "--fg-root=", 10 ) == 0)
+    else if (strncmp( argv[i], "--fg-root=", 10 ) == 0)
     {
 	def_fg_root.assign( &argv[i][10] );
 	def_fg_scenery = def_fg_root;
@@ -57,8 +64,7 @@ parse_args( int, char** argv, int& i )
 	++i;
 	return 1;
     }
-
-    if (strncmp( argv[i], "--fg-scenery=", 13 ) == 0)
+    else if (strncmp( argv[i], "--fg-scenery=", 13 ) == 0)
     {
 	def_fg_scenery.assign( &argv[i][13] );
 	++i;
@@ -74,7 +80,24 @@ main( int argc, char* argv[] )
     int i = 0;
     if (Fl::args( argc, argv, i, parse_args ) < argc)
     {
-	Fl::fatal("Options are:\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n%s", Fl::help );
+        Fl::fatal("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n%s", Fl::help );
+    }
+
+    if ( silent )
+    {
+        Fl_Preferences prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" );
+	char abs_name[ FL_PATH_MAX ];
+
+	fl_filename_absolute( abs_name, def_fg_exe.c_str() );
+	prefs.set( "fg_exe", abs_name );
+
+	fl_filename_absolute( abs_name, def_fg_root.c_str() );
+        prefs.set( "fg_root", abs_name );
+
+	fl_filename_absolute( abs_name, def_fg_scenery.c_str() );
+        prefs.set( "fg_scenery", abs_name );
+
+	return 0;
     }
 
     Wizard ui;
