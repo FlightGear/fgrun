@@ -22,6 +22,7 @@
 
 #include "FGRun_Win32.h"
 #include <windows.h>
+#include <FL/filename.h>
 
 FGRun_Win32::FGRun_Win32()
 {
@@ -34,12 +35,18 @@ FGRun_Win32::~FGRun_Win32()
 void
 FGRun_Win32::run_fgfs_impl()
 {
-    char* cmd = new char[ strlen(fg_exe->value()) +
-                          strlen(fg_root->value()) +
+    char exe[ FL_PATH_MAX ];
+    char root[ FL_PATH_MAX ];
+
+    fl_filename_absolute( exe, fg_exe->value() );
+    fl_filename_absolute( root, fg_root->value() );
+
+    char* cmd = new char[ strlen(exe) +
+                          strlen(root) +
                           strlen(aircraft->text()) + 24 ];
-    strcpy( cmd, fg_exe->value() );
+    strcpy( cmd, exe );
     strcat( cmd, " --fg-root=" );
-    strcat( cmd, fg_root->value() );
+    strcat( cmd, root );
     strcat( cmd, " --aircraft=" );
     strcat( cmd, aircraft->text() );
 

@@ -20,6 +20,10 @@
 //
 // $Id$
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <cstdio>
 #include <fstream>
 #include <FL/filename.h>
@@ -31,7 +35,8 @@
 
 #include "UserInterface.h"
 
-using std::ofstream;
+using std::ofstream
+
 
 void
 UserInterface::run_fgfs()
@@ -44,8 +49,10 @@ int
 UserInterface::write_fgfsrc()
 {
     char fname[ FL_PATH_MAX ];
-#if defined(_MSC_VER)
-    _snprintf( fname, sizeof(fname), "%s\\\\system.fgfsrc", fg_root->value() );
+#if defined(WIN32)
+    strcpy( fname, fg_root->value() );
+    strcat( fname, "/system.fgfsrc" );
+    fl_filename_absolute( fname, fname );
 #else
     fl_filename_expand( fname, "~/.fgfsrc" );
 #endif
@@ -62,8 +69,13 @@ UserInterface::write_fgfsrc()
 
     ofstream ofs( fname );
     if (ofs) {
-	ofs << "--fg-root=" << fg_root->value()
-	    << "\n--fg-scenery=" << fg_scenery->value();
+	char root[ FL_PATH_MAX ];
+	char scenery[ FL_PATH_MAX ];
+	fl_filename_absolute( root, fg_root->value() );
+	fl_filename_absolute( scenery, fg_scenery->value() );
+
+	ofs << "--fg-root=" << root
+	    << "\n--fg-scenery=" << scenery;
 
 	// Only write non-default options.
 
