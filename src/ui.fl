@@ -8,69 +8,69 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launcher} open
-      private xywh {547 52 640 480} box ENGRAVED_BOX
+      private xywh {569 78 640 480} box ENGRAVED_BOX
       code0 {\#include <string.h>} visible
     } {
       Fl_Input fg_exe {
         label {Executable:}
-        xywh {105 30 500 25}
+        xywh {105 35 500 25}
       }
       Fl_Button {} {
         label {...}
         callback {select_fg_exe();}
-        xywh {610 30 25 25}
+        xywh {610 35 25 25}
       }
       Fl_Input fg_root {
         label {FG_ROOT:}
-        xywh {105 60 500 25}
+        xywh {105 65 500 25}
       }
       Fl_Button {} {
         label {...}
         callback {select_fg_root();}
-        xywh {610 60 25 25}
+        xywh {610 65 25 25}
       }
       Fl_Input fg_scenery {
         label {FG_SCENERY:}
-        xywh {105 90 500 25}
+        xywh {105 95 500 25}
       }
       Fl_Button {} {
         label {...}
         callback {select_fg_scenery();}
-        xywh {610 90 25 25}
+        xywh {610 95 25 25}
       }
       Fl_Choice airport {
         label Airport open
-        xywh {105 120 200 25} down_box BORDER_BOX
+        xywh {105 125 200 25} down_box BORDER_BOX
       } {}
       Fl_Button {} {
         label Update
         callback {update_airports();}
-        xywh {310 120 55 25}
+        xywh {310 125 55 25}
       }
       Fl_Choice aircraft {
         label {Aircraft:} open
-        xywh {105 150 200 25} down_box BORDER_BOX
+        xywh {105 155 200 25} down_box BORDER_BOX
       } {}
       Fl_Button {} {
         label Update
         callback {update_aircraft();}
-        xywh {310 150 55 25}
+        xywh {310 155 55 25}
       }
       Fl_Input browser {
         label {Browser:}
-        tooltip {Path to your web browser} xywh {445 120 160 25}
+        tooltip {Path to your web browser} xywh {445 125 160 25}
       }
       Fl_Button {} {
         label {...}
         callback {select_browser();}
-        private xywh {610 120 25 25}
+        private xywh {610 125 25 25}
       }
       Fl_Tabs tabs {open
-        xywh {0 190 640 255} labeltype NO_LABEL
+        xywh {0 190 645 255} labeltype NO_LABEL
       } {
         Fl_Group general_tab {
-          label General open
-          xywh {0 215 640 230}
+          label General
+          xywh {0 215 640 230} hide
         } {
           Fl_Check_Button enable_game_mode {
             label {Game Mode}
@@ -100,10 +100,6 @@ class UserInterface {open
             label {Clouds 3D}
             tooltip {Enable 3D (volumetric) clouds} xywh {30 405 140 25} down_box DOWN_BOX
           }
-          Fl_Check_Button enable_fullscreen {
-            label {Full Screen}
-            tooltip {Enable fullscreen mode} xywh {170 315 140 25} down_box DOWN_BOX
-          }
           Fl_Check_Button enable_skyblend {
             label {Sky Blend}
             tooltip {Enable sky blending} xywh {170 225 140 25} down_box DOWN_BOX value 1
@@ -115,6 +111,10 @@ class UserInterface {open
           Fl_Check_Button enable_wireframe {
             label Wireframe
             tooltip {Enable wireframe drawing mode} xywh {170 285 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_fullscreen {
+            label {Full Screen}
+            tooltip {Enable fullscreen mode} xywh {170 315 140 25} down_box DOWN_BOX
           }
           Fl_Check_Button enable_panel {
             label Panel
@@ -175,7 +175,7 @@ class UserInterface {open
             }
           }
           Fl_Choice fog {
-            label {Fog:} open selected
+            label {Fog:}
             xywh {520 255 95 25} down_box BORDER_BOX
           } {
             menuitem {} {
@@ -197,26 +197,8 @@ class UserInterface {open
           }
         }
         Fl_Group {} {
-          label Rendering open
-          private tooltip {Enable 2D (flat) clouds} xywh {0 215 640 230} hide
-        } {
-          Fl_Group {} {
-            label Units open
-            xywh {380 255 140 55} box ENGRAVED_BOX align 5
-          } {
-            Fl_Round_Button units_feet {
-              label feet
-              xywh {385 255 120 25} type Radio down_box ROUND_DOWN_BOX value 1
-            }
-            Fl_Round_Button units_meters {
-              label meters
-              xywh {385 285 120 25} type Radio down_box ROUND_DOWN_BOX
-            }
-          }
-        }
-        Fl_Group {} {
-          label {Flight Model}
-          private xywh {0 215 640 230} hide
+          label Advanced
+          private xywh {0 215 640 230}
         } {
           Fl_Choice fdm {
             label {FDM:}
@@ -225,7 +207,7 @@ class UserInterface {open
 } else {
   notrim->deactivate();
 }}
-            tooltip {Core Flight Dynamics Model} xywh {80 230 100 25} down_box BORDER_BOX
+            tooltip {Core Flight Dynamics Model} xywh {80 225 100 25} down_box BORDER_BOX
           } {
             menuitem {} {
               label ada
@@ -268,35 +250,58 @@ class UserInterface {open
               xywh {0 0 100 20}
             }
           }
+          Fl_Check_Button notrim {
+            label {No Trim}
+            xywh {80 255 100 25} down_box DOWN_BOX
+          }
           Fl_Value_Input model_hz {
             label {Model Hz:}
-            tooltip {Rate to run FDM at (iterations per second)} xywh {80 265 100 25} minimum 1 maximum 1000 step 1 value 120
+            tooltip {Rate to run FDM at (iterations per second)} xywh {80 285 100 25} minimum 1 maximum 1000 step 1 value 120
           }
           Fl_Value_Input speed {
             label {Speed:}
-            tooltip {Run FDM 'n' times faster than real time} xywh {80 300 100 25} minimum 1 maximum 1000 step 1 value 1
-          }
-          Fl_Check_Button notrim {
-            label {No Trim}
-            xywh {80 335 100 25} down_box DOWN_BOX
+            tooltip {Run FDM 'n' times faster than real time} xywh {80 315 100 25} minimum 1 maximum 1000 step 1 value 1
           }
           Fl_Group {} {open
-            xywh {80 365 100 55} labeltype NO_LABEL
+            xywh {80 345 100 60} labeltype NO_LABEL
           } {
             Fl_Round_Button on_ground {
               label {On Ground}
-              tooltip {Start at ground level} xywh {80 365 100 25} type Radio down_box ROUND_DOWN_BOX value 1
+              tooltip {Start at ground level} xywh {80 345 100 25} type Radio down_box ROUND_DOWN_BOX value 1
             }
             Fl_Round_Button in_air {
               label {In Air}
-              tooltip {Start in the air} xywh {80 395 100 25} type Radio down_box ROUND_DOWN_BOX
+              tooltip {Start in the air} xywh {80 375 100 25} type Radio down_box ROUND_DOWN_BOX
             }
           }
-        }
-        Fl_Group {} {
-          label Time
-          private xywh {0 215 640 230} hide
-        } {
+          Fl_Input lon {
+            label {Longitude:}
+            tooltip {Initial longitude (west = -)} xywh {270 225 85 25} type Float
+          }
+          Fl_Input lat {
+            label {Latitude:}
+            tooltip {Initial latitude (south = -)} xywh {270 255 85 25} type Float
+          }
+          Fl_Input altitude {
+            label {Altitude:}
+            tooltip {Initial altitude in feet} xywh {270 285 85 25} type Float
+          }
+          Fl_Input heading {
+            label {Heading:}
+            tooltip {Initial heading (yaw) angle} xywh {270 315 85 25} type Float
+          }
+          Fl_Input roll {
+            label {Roll:}
+            tooltip {Initial roll angle} xywh {270 345 85 25} type Float
+          }
+          Fl_Input pitch {
+            label {Pitch:}
+            tooltip {Initial pitch angle} xywh {270 375 85 25} type Float
+          }
+          Fl_Input vc {
+            label {Airspeed:}
+            tooltip {Initial airspeed in knots} xywh {270 405 85 25} type Float
+          }
           Fl_Round_Button time_offset {
             label {Time Offset = }
             callback {if (o->value()) {
@@ -305,12 +310,12 @@ class UserInterface {open
   start_date_sys_text->deactivate();
   start_date_lat_text->deactivate();
   start_date_gmt_text->deactivate();
-}}
-            xywh {25 225 110 25} type Radio down_box ROUND_DOWN_BOX
+}} selected
+            xywh {390 225 110 25} type Radio down_box ROUND_DOWN_BOX
           }
           Fl_Input time_offset_text {
             label {input:}
-            xywh {165 225 85 25} labeltype NO_LABEL deactivate
+            xywh {530 225 85 25} labeltype NO_LABEL deactivate
           }
           Fl_Round_Button time_match_real {
             label {Time Match Real}
@@ -320,7 +325,7 @@ class UserInterface {open
   start_date_lat_text->deactivate();
   start_date_gmt_text->deactivate();
 }}
-            xywh {25 255 140 25} type Radio down_box ROUND_DOWN_BOX
+            xywh {390 255 140 25} type Radio down_box ROUND_DOWN_BOX
           }
           Fl_Round_Button time_match_local {
             label {Time Match Local}
@@ -330,7 +335,7 @@ class UserInterface {open
   start_date_lat_text->deactivate();
   start_date_gmt_text->deactivate();
 }}
-            xywh {25 285 140 25} type Radio down_box ROUND_DOWN_BOX
+            xywh {390 285 140 25} type Radio down_box ROUND_DOWN_BOX
           }
           Fl_Round_Button start_date_sys {
             label {Start Date Sys = }
@@ -341,11 +346,11 @@ class UserInterface {open
   start_date_lat_text->deactivate();
   start_date_gmt_text->deactivate();
 }}
-            xywh {25 315 140 25} type Radio down_box ROUND_DOWN_BOX
+            xywh {390 315 140 25} type Radio down_box ROUND_DOWN_BOX
           }
           Fl_Input start_date_sys_text {
             label {input:}
-            xywh {165 315 85 25} labeltype NO_LABEL deactivate
+            xywh {530 315 85 25} labeltype NO_LABEL deactivate
           }
           Fl_Round_Button start_date_lat {
             label {Start Date Lat =}
@@ -356,7 +361,11 @@ class UserInterface {open
   start_date_sys_text->deactivate();
   start_date_gmt_text->deactivate();
 }}
-            xywh {25 345 140 25} type Radio down_box ROUND_DOWN_BOX
+            xywh {390 345 140 25} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Input start_date_lat_text {
+            label {input:}
+            xywh {530 345 85 25} labeltype NO_LABEL deactivate
           }
           Fl_Round_Button start_date_gmt {
             label {Start Date GMT =}
@@ -367,22 +376,19 @@ class UserInterface {open
   start_date_lat_text->deactivate();
   start_date_sys_text->deactivate();
 }}
-            xywh {25 375 140 25} type Radio down_box ROUND_DOWN_BOX
-          }
-          Fl_Input start_date_lat_text {
-            label {input:}
-            xywh {165 345 85 25} labeltype NO_LABEL deactivate
+            xywh {390 375 140 25} type Radio down_box ROUND_DOWN_BOX
           }
           Fl_Input start_date_gmt_text {
             label {input:}
-            xywh {165 375 85 25} labeltype NO_LABEL deactivate
+            xywh {530 375 85 25} labeltype NO_LABEL deactivate
           }
         }
         Fl_Group {} {
-          label {I/O} open
+          label {I/O}
           private xywh {0 215 640 230} hide
         } {
           Fl_Browser io_options_list {
+            label {I/O Options}
             callback {if (o->value()) {
   io_edit->activate();
   io_delete->activate();
@@ -390,30 +396,25 @@ class UserInterface {open
   io_edit->deactivate();
   io_delete->deactivate();
 }}
-            xywh {10 225 475 210} type Hold
+            xywh {220 235 360 200} type Hold align 5
           }
           Fl_Button {} {
             label Add
             user_data {"add"}
             callback {add_io_item();}
-            xywh {490 225 50 25}
+            xywh {585 235 50 25}
           }
           Fl_Button io_edit {
             label Edit
             user_data {"edit"}
             callback {edit_io_item();}
-            xywh {490 255 50 25} deactivate
+            xywh {585 265 50 25} deactivate
           }
           Fl_Button io_delete {
             label Delete
             callback {delete_io_item();}
-            xywh {490 285 50 25} deactivate
+            xywh {585 295 50 25} deactivate
           }
-        }
-        Fl_Group {} {
-          label Network
-          private tooltip {Enable telnet style property server} xywh {0 215 640 230} hide
-        } {
           Fl_Check_Button httpd {
             label {httpd:}
             callback {if (o->value()) {
@@ -422,7 +423,7 @@ class UserInterface {open
 } else {
   httpd_port->deactivate();
 }}
-            tooltip {Enable http style property server} xywh {70 235 25 25} down_box DOWN_BOX align 4
+            tooltip {Enable http style property server} xywh {75 225 25 25} down_box DOWN_BOX align 4
           }
           Fl_Check_Button props {
             label {props:}
@@ -432,7 +433,7 @@ class UserInterface {open
 } else {
   props_port->deactivate();
 }}
-            xywh {70 265 25 25} down_box DOWN_BOX align 4
+            tooltip {Enable telnet style property server} xywh {75 255 25 25} down_box DOWN_BOX align 4
           }
           Fl_Check_Button jpg_httpd {
             label {jpg-httpd:}
@@ -442,23 +443,23 @@ class UserInterface {open
 } else {
   jpg_httpd_port->deactivate();
 }}
-            tooltip {Enable screen shot http server} xywh {70 295 25 25} down_box DOWN_BOX align 4
+            tooltip {Enable screen shot http server} xywh {75 285 25 25} down_box DOWN_BOX align 4
           }
           Fl_Input httpd_port {
             label {input:}
-            xywh {105 235 75 25} labeltype NO_LABEL deactivate
+            tooltip {httpd server port number} xywh {100 225 75 25} labeltype NO_LABEL deactivate
           }
           Fl_Input props_port {
             label {input:}
-            xywh {105 265 75 25} labeltype NO_LABEL deactivate
+            tooltip {props server port number} xywh {100 255 75 25} labeltype NO_LABEL deactivate
           }
           Fl_Input jpg_httpd_port {
             label {input:}
-            xywh {105 295 75 25} labeltype NO_LABEL deactivate
+            tooltip {jpg httpd server port number} xywh {100 285 75 25} labeltype NO_LABEL deactivate
           }
         }
         Fl_Group {} {
-          label Props open
+          label Props
           xywh {0 215 640 230} hide
         } {
           Fl_Browser props_list {
@@ -498,10 +499,27 @@ class UserInterface {open
         callback {main_window->hide();}
         private xywh {580 450 55 25}
       }
+      Fl_Menu_Bar {} {open
+        xywh {0 0 640 25}
+      } {
+        submenu {} {
+          label {&File} open
+          xywh {0 0 100 20}
+        } {
+          menuitem {} {
+            label {&Save}
+            xywh {0 0 100 20} shortcut 0x40073 divider
+          }
+          menuitem {} {
+            label {&Quit}
+            xywh {0 0 100 20} shortcut 0x40071
+          }
+        }
+      }
     }
     Fl_Window addOptionDlg {
       label {I/O Options}
-      xywh {547 587 496 189} modal visible
+      xywh {577 723 496 189} modal visible
     } {
       Fl_Choice io_protocol {
         label {Protocol:} open
@@ -671,7 +689,7 @@ class UserInterface {open
     }
     Fl_Window output_window {
       label Output
-      xywh {166 543 640 480} resizable visible
+      xywh {208 458 640 480} resizable visible
     } {
       Fl_Text_Display output_text {
         xywh {0 25 640 455}
