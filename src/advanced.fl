@@ -17,7 +17,7 @@ class Advanced {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {569 342 640 480} type Double labelsize 12
+      private xywh {531 458 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -1049,7 +1049,7 @@ else
         }
       }
       Fl_Group {page[13]} {
-        label Weather open
+        label Weather
         private xywh {150 0 490 430} labelfont 1 align 21
       } {
         Fl_Value_Input wind_speed {
@@ -1194,4 +1194,5 @@ else
   decl {double cloud_transition[ MAX_CLOUD_LAYERS ];} {}
   decl {void metar_cb();} {}
   decl {void fg_config_cb();} {}
+  decl {std::string airport_id_;} {}
 } 

@@ -33,13 +33,6 @@ Advanced::~Advanced()
 {
 }
 
-// void
-// Advanced::show()
-// {
-//     load_settings();
-//     main_window->show();
-// }
-
 void
 Advanced::show_page( unsigned int n )
 {
@@ -198,4 +191,3 @@ void
 Advanced::metar_cb()
 {
 }
-

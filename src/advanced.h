@@ -349,5 +349,6 @@ private:
   double cloud_transition[ MAX_CLOUD_LAYERS ];
   void metar_cb();
   void fg_config_cb();
+  std::string airport_id_;
 };
 #endif
