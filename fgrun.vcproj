@@ -20,7 +20,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.1\&quot; /DVERSION=\&quot;0.4.1\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.2\&quot; /DVERSION=\&quot;0.4.2\&quot;"
 				Optimization="0"
 				AdditionalIncludeDirectories="i:\fltk-1.1.4"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS"
@@ -79,7 +79,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.1\&quot; /DVERSION=\&quot;0.4.1\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.2\&quot; /DVERSION=\&quot;0.4.2\&quot;"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="i:\fltk-1.1.4"
 				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS"
