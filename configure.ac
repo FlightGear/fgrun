@@ -43,19 +43,20 @@ dnl Checks for libraries
 dnl
 
 AC_PATH_XTRA
-if test "$x_libraries" = "/usr/lib"; then
-        echo "Ignoring X library directory \"$x_libraries\" requested by configure."
-        x_libraries="NONE"
-fi
-if test ! "$x_libraries" = "NONE" -a ! "$x_libraries" = ""; then
-        LDFLAGS="$LDFLAGS -L$x_libraries"
-fi
-if test "$x_includes" = "/usr/include"; then
-        echo "Ignoring X include directory \"$x_includes\" requested by configure."
-        x_includes="NONE"
-fi
-if test ! "$x_includes" = "NONE" -a ! "$x_includes" = ""; then
-        CPPFLAGS="$CPPFLAGS -I$x_includes"
+
+if test "x$with_x" = "xno"; then
+  :;
+else
+    CPPFLAGS="$CPPFLAGS $X_CFLAGS"
+    LDFLAGS="$LDFLAGS $X_LIBS"
+
+    AC_CHECK_LIB(X11, XCreateWindow)
+    AC_CHECK_LIB(Xext, XShmCreateImage)
+    AC_CHECK_LIB(Xi, XGetExtensionVersion)
+    AC_CHECK_LIB(ICE, IceOpenConnection)
+    AC_CHECK_LIB(SM, SmcOpenConnection)
+    ##AC_CHECK_LIB(Xt, XtMalloc)
+    AC_CHECK_LIB(Xmu, XmuLookupStandardColormap)
 fi
 
 dnl
@@ -85,8 +86,6 @@ AC_CHECK_FUNCS(socket strdup strcasecmp atexit)
 
 dnl Check for fltk
 
-FLUID="fluid"
-
 AC_ARG_WITH(fltk, dnl
             [  --with-fltk=DIR      Path to FLTK v1.1],
             FLTK="$withval",)
@@ -98,21 +97,13 @@ AC_LANG_PUSH(C++)
 
 AC_CHECK_HEADER(FL/Fl.h)
 
-save_LIBS=$LIBS
-LIBS="$LIBS -lfltk -lX11"
-AC_MSG_CHECKING([for Fl::run in -lfltk])
-AC_TRY_LINK(dnl
-  [#include <FL/Fl.h>],
-  [Fl::run()],
-  AC_MSG_RESULT(yes),
-  AC_MSG_RESULT(no)
-  LIBS="$save_LIBS"
-)
+AC_CHECK_LIB(fltk, fl_numericsort)
+
+FLUID="fluid"
+AC_SUBST(FLUID)
 
 AC_LANG_POP
 
-FLUID_COMPILE="$FLUID -c"
-AC_SUBST(FLUID_COMPILE)
 
 AC_CONFIG_FILES([
 Makefile
