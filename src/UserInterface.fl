@@ -29,7 +29,7 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {620 297 640 480} type Double labelsize 12
+      private xywh {459 115 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -142,9 +142,7 @@ if (p != 0) {
         Fl_Choice airport {
           label {Airport:}
           callback {update_runways();} open
-          private tooltip {Available airports} xywh {250 140 150 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
-          code0 {int i = airport->add( "KSFO", 0, 0, 0, 0);}
-          code1 {airport->value(i);}
+          private tooltip {Available airports} xywh {250 140 150 25} down_box BORDER_BOX labelsize 12 textfont 4 textsize 12 deactivate
         } {}
         Fl_Button airport_update {
           label Update
@@ -153,9 +151,7 @@ if (p != 0) {
         }
         Fl_Choice aircraft {
           label {Aircraft:} open
-          private tooltip {Available aircraft types} xywh {250 170 150 25} down_box BORDER_BOX labelsize 12 textsize 12
-          code0 {int i = aircraft->add("c172", 0, 0, 0, 0);}
-          code1 {aircraft->value(i);}
+          private tooltip {Available aircraft types} xywh {250 170 150 25} down_box BORDER_BOX labelsize 12 textfont 4 textsize 12
         } {}
         Fl_Button aircraft_update {
           label Update
@@ -209,7 +205,7 @@ if (p != 0)
       }
       Fl_Group {page[1]} {
         label Features
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Check_Button game_mode {
           label {Game Mode}
@@ -233,11 +229,11 @@ if (p != 0)
         }
         Fl_Check_Button panel {
           label Panel
-          private tooltip {Enable the instrument panel} xywh {320 50 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable the instrument panel} xywh {345 50 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button sound {
           label Sound
-          private tooltip {Enable sound effects} xywh {320 80 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable sound effects} xywh {345 80 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button hud {
           label HUD
@@ -245,15 +241,15 @@ if (p != 0)
   antialias_hud->activate();
 else
   antialias_hud->deactivate();}
-          private tooltip {Enable Heads Up Display} xywh {320 110 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable Heads Up Display} xywh {345 110 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button antialias_hud {
           label {Anti-alias HUD}
-          private tooltip {Enable anti-aliased HUD} xywh {335 140 110 25} down_box DOWN_BOX labelsize 12 deactivate
+          private tooltip {Enable anti-aliased HUD} xywh {360 140 110 25} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button auto_coordination {
           label {Auto-coordination}
-          private tooltip {Enable auto-coordinated turns.} xywh {320 200 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable auto-coordinated turns.} xywh {345 200 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button horizon_effect {
           label {Horizon effect}
@@ -269,7 +265,42 @@ else
         }
         Fl_Check_Button hud_3d {
           label {Hud-3D}
-          private tooltip {Enable 3D HUD} xywh {320 170 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable 3D HUD} xywh {345 170 120 25} down_box DOWN_BOX labelsize 12
+        }
+        Fl_Check_Button specular_highlight {
+          label {Specular highlight}
+          private tooltip {Enable specular reflections on textured objects} xywh {175 290 120 25} down_box DOWN_BOX labelsize 12
+        }
+        Fl_Check_Button failure {
+          label Failures
+          callback {if (o->value()) {
+  failure_pitot->activate();
+  failure_static->activate();
+  failure_system->activate();
+  failure_vacuum->activate();
+} else {
+  failure_pitot->deactivate();
+  failure_static->deactivate();
+  failure_system->deactivate();
+  failure_vacuum->deactivate();
+}}
+          private xywh {485 50 120 25} down_box DOWN_BOX labelsize 12
+        }
+        Fl_Check_Button failure_pitot {
+          label pitot
+          private xywh {505 75 100 25} down_box DOWN_BOX labelsize 12 deactivate
+        }
+        Fl_Check_Button failure_static {
+          label static
+          private xywh {505 100 100 25} down_box DOWN_BOX labelsize 12 deactivate
+        }
+        Fl_Check_Button failure_system {
+          label system
+          private xywh {505 125 100 25} down_box DOWN_BOX labelsize 12 deactivate
+        }
+        Fl_Check_Button failure_vacuum {
+          label vacuum selected
+          private xywh {505 150 100 25} down_box DOWN_BOX labelsize 12 deactivate
         }
       }
       Fl_Group {page[2]} {
@@ -973,7 +1004,7 @@ else
       }
       Fl_Group {page[13]} {
         label {Airport Browser} open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Round_Button apt_show_all {
           label All
@@ -992,7 +1023,7 @@ else
           class AirportBrowser
         }
         Fl_Input apt_id {
-          callback {apt_id_cb();} selected
+          callback {apt_id_cb();}
           private xywh {155 360 45 25} labelsize 12 when 1 textsize 12
         }
         Fl_Input apt_name {
@@ -1002,6 +1033,7 @@ else
         }
         Fl_Button apt_select {
           label Select
+          callback {apt_select_cb();}
           private xywh {585 395 50 25} labelsize 12 deactivate
         }
       }
@@ -1042,6 +1074,7 @@ else
   decl {void apt_browser_cb();} {}
   decl {void apt_id_cb();} {}
   decl {void apt_name_cb();} {}
+  decl {void apt_select_cb();} {}
   decl {AirportDB* airportdb_;} {}
   decl {void load_airportdb();} {public
   }

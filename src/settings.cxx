@@ -60,6 +60,12 @@ UserInterface::save_settings_cb()
     prefs.set("horizon_effect", horizon_effect->value());
     prefs.set("enhanced_lighting", enhanced_lighting->value());
     prefs.set("distance_attenuation", distance_attenuation->value());
+    prefs.set("specular_highlight", specular_highlight->value());
+    prefs.set("failure", failure->value());
+    prefs.set("failure_pitot", failure_pitot->value());
+    prefs.set("failure_static", failure_static->value());
+    prefs.set("failure_system", failure_system->value());
+    prefs.set("failure_vacuum", failure_vacuum->value());
 
     prefs.set("fdm", fdm->text());
     prefs.set("no_trim", notrim->value());
@@ -205,7 +211,7 @@ UserInterface::load_settings_cb()
 	aircraft_update->activate();
     }
 
-    prefs.get("aircraft", buf, "c172", buflen-1);
+    prefs.get("aircraft", buf, "c172-3d", buflen-1);
     default_aircraft = buf;
     prefs.get("airport", buf, "KSFO", buflen-1);
     default_airport = buf;
@@ -259,6 +265,19 @@ UserInterface::load_settings_cb()
     enhanced_lighting->value( iVal );
     prefs.get("distance_attenuation", iVal, 0);
     distance_attenuation->value( iVal );
+    prefs.get("specular_highlight", iVal, 1);
+    specular_highlight->value( iVal );
+    prefs.get("failure", iVal, 0);
+    failure->value( iVal );
+    failure->do_callback();
+    prefs.get("failure_pitot", iVal, 0);
+    failure_pitot->value( iVal );
+    prefs.get("failure_static", iVal, 0);
+    failure_static->value( iVal );
+    prefs.get("failure_system", iVal, 0);
+    failure_system->value( iVal );
+    prefs.get("failure_vacuum", iVal, 0);
+    failure_vacuum->value( iVal );
 
     prefs.get("fdm", buf, "jsb", buflen-1);
     set_choice(fdm, buf);

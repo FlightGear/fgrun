@@ -110,6 +110,20 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--enable-enhanced-lighting";
 	if (distance_attenuation->value())
 	    ofs << "\n--enable-distance-attenuation";
+	if (!specular_highlight->value())
+	    ofs << "\n--disable-specular-highlight";
+
+	if (failure->value())
+	{
+	    if (failure_pitot->value())
+		ofs << "\n--failure=pitot";
+	    if (failure_static->value())
+		ofs << "\n--failure=static";
+	    if (failure_system->value())
+		ofs << "\n--failure=system";
+	    if (failure_vacuum->value())
+		ofs << "\n--failure=vacuum";
+	}
 
 	// Flight model
 	if (strcmp(fdm->text(), "jsb" ) != 0)

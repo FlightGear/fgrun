@@ -86,6 +86,14 @@ private:
   Fl_Check_Button *enhanced_lighting;
   Fl_Check_Button *distance_attenuation;
   Fl_Check_Button *hud_3d;
+  Fl_Check_Button *specular_highlight;
+  Fl_Check_Button *failure;
+  inline void cb_failure_i(Fl_Check_Button*, void*);
+  static void cb_failure(Fl_Check_Button*, void*);
+  Fl_Check_Button *failure_pitot;
+  Fl_Check_Button *failure_static;
+  Fl_Check_Button *failure_system;
+  Fl_Check_Button *failure_vacuum;
   Fl_Choice *fdm;
   inline void cb_fdm_i(Fl_Choice*, void*);
   static void cb_fdm(Fl_Choice*, void*);
@@ -291,6 +299,8 @@ private:
   inline void cb_apt_name_i(Fl_Input*, void*);
   static void cb_apt_name(Fl_Input*, void*);
   Fl_Button *apt_select;
+  inline void cb_apt_select_i(Fl_Button*, void*);
+  static void cb_apt_select(Fl_Button*, void*);
   void init();
 public:
   void show();
@@ -326,6 +336,7 @@ private:
   void apt_browser_cb();
   void apt_id_cb();
   void apt_name_cb();
+  void apt_select_cb();
   AirportDB* airportdb_;
 public:
   void load_airportdb();

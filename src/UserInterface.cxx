@@ -153,6 +153,23 @@ void UserInterface::cb_hud(Fl_Check_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_hud_i(o,v);
 }
 
+inline void UserInterface::cb_failure_i(Fl_Check_Button* o, void*) {
+  if (o->value()) {
+  failure_pitot->activate();
+  failure_static->activate();
+  failure_system->activate();
+  failure_vacuum->activate();
+} else {
+  failure_pitot->deactivate();
+  failure_static->deactivate();
+  failure_system->deactivate();
+  failure_vacuum->deactivate();
+};
+}
+void UserInterface::cb_failure(Fl_Check_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_failure_i(o,v);
+}
+
 inline void UserInterface::cb_fdm_i(Fl_Choice* o, void*) {
   if (strcmp(o->text(), "jsb") == 0){
   notrim->activate();
@@ -561,6 +578,13 @@ void UserInterface::cb_apt_name(Fl_Input* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_apt_name_i(o,v);
 }
 
+inline void UserInterface::cb_apt_select_i(Fl_Button*, void*) {
+  apt_select_cb();
+}
+void UserInterface::cb_apt_select(Fl_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_apt_select_i(o,v);
+}
+
 UserInterface::UserInterface() {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = main_window = new Fl_Double_Window(640, 480, "FlightGear Launch Control");
@@ -626,11 +650,10 @@ UserInterface::UserInterface() {
         o->tooltip("Available airports");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
+        o->textfont(4);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_airport);
         o->deactivate();
-        int i = airport->add( "KSFO", 0, 0, 0, 0);
-        airport->value(i);
       }
       { Fl_Button* o = airport_update = new Fl_Button(405, 140, 60, 25, "Update");
         o->labelsize(12);
@@ -641,9 +664,8 @@ UserInterface::UserInterface() {
         o->tooltip("Available aircraft types");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
+        o->textfont(4);
         o->textsize(12);
-        int i = aircraft->add("c172", 0, 0, 0, 0);
-        aircraft->value(i);
       }
       { Fl_Button* o = aircraft_update = new Fl_Button(405, 170, 60, 25, "Update");
         o->labelsize(12);
@@ -691,7 +713,6 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 120, 25, "Game Mode");
         o->tooltip("Enable full screen game mode");
         o->down_box(FL_DOWN_BOX);
@@ -719,31 +740,31 @@ UserInterface::UserInterface() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = panel = new Fl_Check_Button(320, 50, 120, 25, "Panel");
+      { Fl_Check_Button* o = panel = new Fl_Check_Button(345, 50, 120, 25, "Panel");
         o->tooltip("Enable the instrument panel");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = sound = new Fl_Check_Button(320, 80, 120, 25, "Sound");
+      { Fl_Check_Button* o = sound = new Fl_Check_Button(345, 80, 120, 25, "Sound");
         o->tooltip("Enable sound effects");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = hud = new Fl_Check_Button(320, 110, 120, 25, "HUD");
+      { Fl_Check_Button* o = hud = new Fl_Check_Button(345, 110, 120, 25, "HUD");
         o->tooltip("Enable Heads Up Display");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_hud);
       }
-      { Fl_Check_Button* o = antialias_hud = new Fl_Check_Button(335, 140, 110, 25, "Anti-alias HUD");
+      { Fl_Check_Button* o = antialias_hud = new Fl_Check_Button(360, 140, 110, 25, "Anti-alias HUD");
         o->tooltip("Enable anti-aliased HUD");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
-      { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(320, 200, 120, 25, "Auto-coordination");
+      { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(345, 200, 120, 25, "Auto-coordination");
         o->tooltip("Enable auto-coordinated turns.");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
@@ -763,10 +784,40 @@ UserInterface::UserInterface() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = hud_3d = new Fl_Check_Button(320, 170, 120, 25, "Hud-3D");
+      { Fl_Check_Button* o = hud_3d = new Fl_Check_Button(345, 170, 120, 25, "Hud-3D");
         o->tooltip("Enable 3D HUD");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
+      }
+      { Fl_Check_Button* o = specular_highlight = new Fl_Check_Button(175, 290, 120, 25, "Specular highlight");
+        o->tooltip("Enable specular reflections on textured objects");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+      }
+      { Fl_Check_Button* o = failure = new Fl_Check_Button(485, 50, 120, 25, "Failures");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_failure);
+      }
+      { Fl_Check_Button* o = failure_pitot = new Fl_Check_Button(505, 75, 100, 25, "pitot");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+        o->deactivate();
+      }
+      { Fl_Check_Button* o = failure_static = new Fl_Check_Button(505, 100, 100, 25, "static");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+        o->deactivate();
+      }
+      { Fl_Check_Button* o = failure_system = new Fl_Check_Button(505, 125, 100, 25, "system");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+        o->deactivate();
+      }
+      { Fl_Check_Button* o = failure_vacuum = new Fl_Check_Button(505, 150, 100, 25, "vacuum");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+        o->deactivate();
       }
       o->end();
     }
@@ -1472,6 +1523,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Round_Button* o = apt_show_all = new Fl_Round_Button(155, 55, 60, 25, "All");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
@@ -1512,6 +1564,7 @@ UserInterface::UserInterface() {
       }
       { Fl_Button* o = apt_select = new Fl_Button(585, 395, 50, 25, "Select");
         o->labelsize(12);
+        o->callback((Fl_Callback*)cb_apt_select);
         o->deactivate();
       }
       o->end();
