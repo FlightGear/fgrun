@@ -77,8 +77,10 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
     refresh_ = new Fl_Button( X+tw+5, Y+th+5, 120, 25, "Refresh" );
     refresh_->labelsize(12);
     refresh_->callback( refresh_cb, this );
-    //refresh_->tooltip( "" );
+    refresh_->tooltip( "Reload airports" );
     end();
+
+    resizable( table_ );
 }
 
 AirportBrowser::~AirportBrowser()
@@ -469,7 +471,9 @@ AirportBrowser::airports_idle_proc()
 	for (int i = 0; i < n; ++i)
 	{
 	    if (fl_filename_match( files[i]->d_name,
-				   "[ew][01][0-9][0-9][ns][0-9][0-9]"))
+				   "[ew][01][0-9][0-9][ns][0-9][0-9]") ||
+		fl_filename_match( files[i]->d_name,
+				   "[ew][01][0-9][0-9][ns][0-9][0-9]/"))
 	    {
 		// Found a scenery sub-directory.
 		string d(cwd);
