@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0101 
+version 1.0102 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include <string.h>} {} 
@@ -41,8 +41,8 @@ class UserInterface {open
   Function {UserInterface()} {open
   } {
     Fl_Window main_window {
-      label {FlightGear Launch Control}
-      private xywh {587 91 640 480} labelsize 12 visible
+      label {FlightGear Launch Control} open
+      private xywh {615 79 640 480} labelsize 12 visible
     } {
       Fl_Menu_Bar {} {
         private xywh {0 0 640 25} labelsize 12 textsize 12
@@ -86,7 +86,7 @@ class UserInterface {open
   show_page(o->value()-1);}
         private xywh {0 25 150 420} type Hold labelsize 12 textsize 12
       }
-      Fl_Button {} {
+      Fl_Button run {
         label Run
         callback {run_fgfs();}
         private xywh {585 450 50 25} labelsize 12
@@ -107,13 +107,15 @@ class UserInterface {open
       } {
         Fl_Input fg_exe {
           label {Executable:}
-          xywh {250 50 355 25} labelsize 12 textsize 12
+          tooltip {Filename of FlightGear executable} xywh {250 50 355 25} labelsize 12 textsize 12
         }
         Fl_Button {} {
           label {...}
           callback {char* p = fl_file_chooser("Select executable", 0, fg_exe->value(), 0);
-if (p != 0)
-  fg_exe->value( p );}
+if (p != 0) {
+  fg_exe->value( p );
+  run->activate();
+}}
           private xywh {610 50 25 25} labelsize 12
         }
         Fl_Input fg_root {
@@ -151,7 +153,7 @@ if (p != 0) {
         }
         Fl_Choice airport {
           label {Airports:} open
-          private xywh {250 140 150 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
+          private tooltip {Available airports} xywh {250 140 150 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
           code0 {int i = airport->add( "KSFO", 0, 0, 0, 0);}
           code1 {airport->value(i);}
         } {}
@@ -162,7 +164,7 @@ if (p != 0) {
         }
         Fl_Choice aircraft {
           label {Aircraft:} open
-          private xywh {250 170 150 25} down_box BORDER_BOX labelsize 12 textsize 12
+          private tooltip {Available aircraft types} xywh {250 170 150 25} down_box BORDER_BOX labelsize 12 textsize 12
           code0 {int i = aircraft->add("c172", 0, 0, 0, 0);}
           code1 {aircraft->value(i);}
         } {}
@@ -202,6 +204,14 @@ if (p != 0) {
 if (p != 0)
   browser->value( p );}
           private xywh {610 275 25 25} labelsize 12
+        }
+        Fl_Input config {
+          label {Config:}
+          private xywh {250 305 355 25} labelsize 12 textsize 12 deactivate
+        }
+        Fl_Button {} {
+          label {...} selected
+          xywh {610 305 25 25} labelsize 12 deactivate
         }
       }
       Fl_Group {page[1]} {
@@ -970,7 +980,7 @@ run_fgfs_impl();} {}
   }
   Function {run_fgfs_impl()} {open return_type {virtual void}
   } {}
-  Function {load_settings()} {return_type void
+  Function {load_settings()} {open return_type void
   } {
     code {Fl_Preferences prefs(Fl_Preferences::USER, "flightgear.org", "fgrun");
 const int buflen = 1024;
@@ -978,6 +988,17 @@ char buf[ buflen ];
 
 prefs.get( "fg_exe", buf, "", buflen-1);
 fg_exe->value(buf);
+
+// If executable doesn't exist disable "Run" button.
+if (buf[0] != 0) {
+  FILE* fp = fopen( buf, "rb" );
+  if (fp == 0) {
+    run->deactivate();
+  }
+  else {
+    fclose(fp);
+  }
+}
 
 \#if defined(WIN32)
 prefs.get( "fg_root", buf, "\\\\FlightGear", buflen-1);
@@ -1123,9 +1144,28 @@ if (strcmp(buf,"meters") == 0)
 else if (strcmp(buf,"miles") == 0)
   vis_miles->setonly();
 
+prefs.get( "time-match-real", iVal, 1 );
+if (iVal) time_match_real->setonly();
+prefs.get( "time-offset", buf, "", buflen-1 );
+time_offset_value->value( buf );
+prefs.get( "time-match-local", iVal, 0 );
+if (iVal) time_match_local->setonly();
+prefs.get( "start-date-sys", iVal, 0 );
+if (iVal) start_date_sys->setonly();
+prefs.get( "start-date-sys-value", buf, "", buflen-1 );
+start_date_sys_value->value(buf);
+prefs.get( "start-date-gmt", iVal, 0 );
+if (iVal) start_date_gmt->setonly();
+prefs.get( "start-date-gmt-value", buf, "", buflen-1 );
+start_date_gmt_value->value(buf);
+prefs.get( "start-date-lat", iVal, 0 );
+if (iVal) start_date_lat->setonly();
+prefs.get( "start-date-lat-value", buf, "", buflen-1 );
+start_date_lat_value->value(buf);
+
 //end} {}
   }
-  Function {save_settings()} {return_type void
+  Function {save_settings()} {open return_type void
   } {
     code {Fl_Preferences prefs(Fl_Preferences::USER, "flightgear.org", "fgrun");
 if (fg_exe->value() != 0)
@@ -1206,9 +1246,12 @@ prefs.set("fov", fov->value());
 prefs.set("time-match-real", time_match_real->value());
 prefs.set("time-offset", time_offset_value->value());
 prefs.set("time-match-local", time_match_local->value());
-prefs.set("start-date-sys", start_date_sys_value->value());
-prefs.set("start-date-gmt", start_date_gmt_value->value());
-prefs.set("start-date-lat", start_date_lat_value->value());
+prefs.set("start-date-sys", start_date_sys->value());
+prefs.set("start-date-sys-value", start_date_sys_value->value());
+prefs.set("start-date-gmt", start_date_gmt->value());
+prefs.set("start-date-gmt-value", start_date_gmt_value->value());
+prefs.set("start-date-lat", start_date_lat->value());
+prefs.set("start-date-lat-value", start_date_gmt_value->value());
 
 if (httpd->value())
   prefs.set("httpd", int(httpd_port->value()));
@@ -1463,8 +1506,7 @@ if (ofs) {
 Function {update_aircraft_cb(void* v)} {open return_type void
 } {
   code {((UserInterface*)v)->update_aircraft();
-Fl::remove_idle( update_aircraft_cb, v );} {selected
-  }
+Fl::remove_idle( update_aircraft_cb, v );} {}
 } 
 
 Function {search_for_airports_cb(void* v)} {open return_type void
