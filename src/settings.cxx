@@ -149,7 +149,7 @@ UserInterface::save_settings_cb()
     for (i = 1; i <= env_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("env-var-%d", i), env_list->text(i));
 
-    prefs.set( "log-level", log_level->value()+1 );
+    prefs.set( "log-level", log_level->text() );
 
     prefs.set( "nav1", nav1->value() );
     prefs.set( "nav2", nav2->value() );
@@ -411,8 +411,8 @@ UserInterface::load_settings_cb()
 	env_list->text( i, buf );
     }
 
-    prefs.get( "log-level", iVal, 4 );
-    log_level->value( iVal-1 );
+    prefs.get( "log-level", buf, "warn", buflen-1 );
+    set_choice( log_level, buf );
 
     prefs.get( "nav1", buf, "", buflen-1 );
     nav1->value( buf );
