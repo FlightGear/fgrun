@@ -38,7 +38,7 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
 				const char* l )
     : Fl_Group( X, Y, W, H, l )
     , gzf_(0)
-    , airports_loaded(false)
+    , loaded_(false)
 {
     Y += 5;
     int tw = W - 120 - 5;
@@ -206,6 +206,7 @@ AirportBrowser::idle_proc( )
 	Fl::remove_idle( idle_proc, this );
 	std::sort( airports_.begin(), airports_.end(), apt_id_comp );
 	show_installed();
+	loaded_ = true;
     }
 }
 
@@ -330,6 +331,7 @@ AirportBrowser::init( const string& fg_root, const string& fg_scenery )
     while ((c = gzgetc(gzf_)) != -1 && c != '\n')
         ;
 
+    loaded_ = false;
     // Load the file in the background.
     Fl::add_idle( idle_proc, this );
 

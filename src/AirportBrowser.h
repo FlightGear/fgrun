@@ -37,6 +37,7 @@ class AirportTable;
 
 /**
  * An airport and runway browser.
+ * Data is read from FlightGear's runways.dat.gz file.
  */
 class AirportBrowser : public Fl_Group
 {
@@ -86,6 +87,11 @@ public:
 
     int handle( int e );
 
+    /**
+     * 
+     */
+    bool loaded() const { return loaded_; }
+
 protected:
 
     void draw();
@@ -117,10 +123,20 @@ private:
     Fl_Input* name_;
     gzFile gzf_;
 
+    /**
+     * Array of installed airport names.
+     */
     std::vector< std::string > installed_airports_;
 
+    /**
+     * Array of all airports and runways loaded from runways.dat.
+     */
     std::vector< apt_dat_t > airports_;
-    bool airports_loaded;
+
+    /**
+     * True once runways.dat has been loaded.
+     */
+    bool loaded_;
 };
 
 #endif // AirportBrowser_h_included
