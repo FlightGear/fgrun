@@ -43,11 +43,11 @@ FGRun_Win32::run_fgfs_impl()
 
     char* cmd = new char[ strlen(exe) +
                           strlen(root) +
-                          strlen(aircraft->text()) + 24 ];
+                          strlen(aircraft->text()) + 26 ];
     strcpy( cmd, exe );
-    strcat( cmd, " --fg-root=" );
+    strcat( cmd, " --fg-root=\"" );
     strcat( cmd, root );
-    strcat( cmd, " --aircraft=" );
+    strcat( cmd, "\" --aircraft=" );
     strcat( cmd, aircraft->text() );
 
     //SECURITY_ATTRIBUTES procAttrs;
