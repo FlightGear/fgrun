@@ -60,7 +60,8 @@ public:
      * Start scanning scenery directories for airport files in the background.
      * Invoke callback when scan complete.
      */
-    void load_airports( const SGPath& dir, const SGPath& cache,
+    void load_airports( const std::vector<std::string>& dirs,
+			const SGPath& cache,
 			Fl_Callback* cb =0, void* v =0);
 
     /**

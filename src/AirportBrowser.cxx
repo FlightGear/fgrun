@@ -382,7 +382,7 @@ AirportBrowser::load_runways( const string& path, Fl_Callback* cb, void* v )
  * 
  */
 void
-AirportBrowser::load_airports( const SGPath& dir, const SGPath& cache,
+AirportBrowser::load_airports( const vector<string>& dirs, const SGPath& cache,
 			       Fl_Callback* cb, void* v )
 {
     installed_airports_.clear();
@@ -403,11 +403,10 @@ AirportBrowser::load_airports( const SGPath& dir, const SGPath& cache,
     }
     else
     {
-	if (!fl_filename_isdir( dir.str().c_str() ))
-	    return;
-
 	airports_dirs.clear();
-	airports_dirs.push_back( dir.str().c_str() );
+	std::copy( dirs.begin(), dirs.end(),
+		   std::back_inserter( airports_dirs ) );
+
 	airports_loaded_ = false;
 	Fl::add_idle( airports_idle_proc, this );
     }
