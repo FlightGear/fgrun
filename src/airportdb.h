@@ -23,6 +23,7 @@ public:
     typedef std::vector< apt_dat_t > airport_t;
     typedef airport_t::iterator iterator;
     typedef airport_t::const_iterator const_iterator;
+    typedef airport_t::size_type size_type;
 
 public:
 
@@ -38,6 +39,7 @@ public:
 
     const_iterator begin() const { return airports_.begin(); }
     const_iterator end()   const { return airports_.end(); }
+    size_type size() const { return airports_.size(); }
 
 private:
     airport_t airports_;

@@ -30,7 +30,7 @@ void
 AirportDB::load( const char* fname )
 {
     airports_.clear();
-    airports_.reserve( 22705 );
+    airports_.reserve( 27000 );
 
     gzFile gzf = gzopen( fname, "rb" );
     if (gzf == 0)
@@ -38,14 +38,13 @@ AirportDB::load( const char* fname )
 	throw "gzopen error";
     }
 
-#if 1
+    // Create a progress window.
     Fl_Window* win = new Fl_Window( 300, 100 );
     Fl_Progress* progress = new Fl_Progress( 10, 30, 280, 25,
 					     "Loading airport database" );
     win->end();
     win->set_modal();
     win->show();
-#endif
 
     // Skip first line.
     char c;
