@@ -147,12 +147,13 @@ UserInterface::load_settings_cb()
     fg_exe->value(buf);
 
     // If executable doesn't exist disable "Run" button.
-    if (buf[0] != 0) {
+    run->deactivate();
+    if (buf[0] != 0)
+    {
 	FILE* fp = fopen( buf, "rb" );
-	if (fp == 0) {
-	    run->deactivate();
-	}
-	else {
+	if (fp != 0)
+	{
+	    run->activate();
 	    fclose(fp);
 	}
     }
