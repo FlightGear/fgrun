@@ -22,10 +22,6 @@ AirportDB::AirportDB()
 {
 }
 
-//012345678901234567
-//A KSFO    13 CYN San Francisco Intl
-//R KSFO 10L  37.621134 -122.375264 117.90 11845   200 YAPHN NYPN...
-
 void
 AirportDB::load( const char* fname )
 {
@@ -55,6 +51,10 @@ AirportDB::load( const char* fname )
     char line[128];
     while (gzgets( gzf, line, sizeof line ) != 0)
     {
+	//012345678901234567
+	//A KSFO    13 CYN San Francisco Intl
+	//R KSFO 10L  37.621134 -122.375264 ...
+
 	if (line[0] == 'A' || line[0] == 'H' || line[0] == 'S')
 	{
 	    ++count;
@@ -105,20 +105,4 @@ AirportDB::find( const char* id ) const
 					 key,
 					 apt_id_comp );
     return i == airports_.end() ? 0 : &*i;
-}
-
-int
-AirportDB::ifind( const char* id ) const
-{
-    apt_dat_t key;
-    key.id_ = string(id);
-    const_iterator i = std::lower_bound( airports_.begin(),
-					 airports_.end(),
-					 key,
-					 apt_id_comp );
-
-    if (i == airports_.end())
-	return -1;
-    else
-	return std::distance( airports_.begin(), i );
 }

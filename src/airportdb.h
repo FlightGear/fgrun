@@ -35,7 +35,6 @@ public:
      * 
      */
     const apt_dat_t* find( const char* id ) const;
-    int ifind( const char* id ) const;
 
     const_iterator begin() const { return airports_.begin(); }
     const_iterator end()   const { return airports_.end(); }
