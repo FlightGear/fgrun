@@ -599,11 +599,24 @@ Wizard::delete_cache_file_cb()
 void
 Wizard::scenery_dir_select_cb()
 {
+    scenery_dir_up_->deactivate();
+    scenery_dir_down_->deactivate();
     int n = scenery_dir_list_->value();
     if (n > 0)
+    {
 	scenery_dir_delete_->activate();
+	if (n > 1)
+	    scenery_dir_up_->activate();
+	if (n < scenery_dir_list_->size())
+	    scenery_dir_down_->activate();
+
+	scenery_dir_list_->deselect();
+	scenery_dir_list_->select( n );
+    }
     else
+    {
 	scenery_dir_delete_->deactivate();
+    }
 }
 
 void
@@ -615,9 +628,7 @@ Wizard::scenery_dir_add_cb()
 	scenery_dir_list_->add( p );
 	scenery_dir_list_->value( scenery_dir_list_->size() );
 	scenery_dir_delete_->activate();
-// 	if (scenery_dir_list_->size() > 1)
-// 	{
-// 	}
+	scenery_dir_list_->select( scenery_dir_list_->size() );
     }
 }
 
@@ -626,26 +637,45 @@ Wizard::scenery_dir_delete_cb()
 {
     int n = scenery_dir_list_->value();
     if (n > 0)
-    {
 	scenery_dir_list_->remove( n );
-    }
 
     if (scenery_dir_list_->size() == 0)
-    {
 	scenery_dir_delete_->deactivate();
-    }
-	
 }
 
+/**
+ * Move a directory entry up the list.
+ */
 void
 Wizard::scenery_dir_up_cb()
 {
-    int n = scenery_dir_list_->value();
+    int from = scenery_dir_list_->value();
+    int to = from - 1;
+    scenery_dir_list_->move( to, from );
+
+    scenery_dir_list_->deselect();
+    scenery_dir_list_->select( to );
+
+    scenery_dir_down_->activate();
+    if (to == 1)
+	scenery_dir_up_->deactivate();
 }
 
+/**
+ * Move a directory entry down the list.
+ */
 void
 Wizard::scenery_dir_down_cb()
 {
     int n = scenery_dir_list_->value();
+    scenery_dir_list_->insert( n+2, scenery_dir_list_->text(n) );
+    scenery_dir_list_->remove( n );
+
+    scenery_dir_list_->deselect();
+    scenery_dir_list_->select( n+1 );
+
+    scenery_dir_up_->activate();
+    if (n+1 == scenery_dir_list_->size())
+	scenery_dir_down_->deactivate();
 }
 
