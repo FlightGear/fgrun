@@ -23,6 +23,7 @@
 #include <cctype>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include <FL/fl_draw.h>
 
