@@ -32,7 +32,7 @@ Fl_Plib::init()
 
   //make_current();
   ssgInit();
-  ssgSetFOV( 60.0f, 0.0f );
+  ssgSetFOV( 60.0f, 60.0f * h() / double(w()) );
   ssgSetNearFar( 1.0f, 700.0f );
 
   sgVec3 sunposn;
@@ -95,6 +95,8 @@ Fl_Plib::draw()
 	glEnable(GL_BLEND);
 	glShadeModel(GL_SMOOTH);
 	glViewport(0,0,w(),h());
+	if (go == 1)
+	    ssgSetFOV( 60.0f, 60.0f * h() / double(w()) );
     }
 
     glClearColor (0.14f, 0.18f, 0.2f, 1.0f); 
