@@ -8,13 +8,13 @@ decl {\#include <FL/Fl_Preferences.h>} {public
 decl {\#include <string>} {public
 } 
 
-class Advanced {open selected
+class Advanced {open
 } {
   Function {Advanced()} {open
   } {
     Fl_Window main_window {
-      label {Advanced Options}
-      private xywh {166 297 640 480} type Double labelsize 12
+      label {Advanced Options} open
+      private xywh {140 71 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -32,7 +32,7 @@ class Advanced {open selected
       }
       Fl_Group {page[0]} {
         label General
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Choice control {
           label {Control:}
@@ -595,8 +595,8 @@ else
         }
       }
       Fl_Group {page[7]} {
-        label Network
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label Network open
+        private tooltip {in|out,hz,address,port} xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Check_Button httpd {
           label httpd
@@ -639,12 +639,16 @@ else
         }
         Fl_Group {} {
           label {Multiplayer Options} open
-          private xywh {150 150 490 60} labelfont 1 labelsize 12 align 5 deactivate
+          private xywh {150 150 490 60} labelfont 1 labelsize 12 align 5
         } {
           Fl_Input callsign {
             label {Callsign:}
-            private xywh {215 165 100 25} labelsize 12 textsize 12
+            private xywh {225 165 100 25} labelsize 12 textsize 12
           }
+        }
+        Fl_Input multiplay {
+          label {Multiplay:} selected
+          private xywh {225 195 230 25} labelsize 12 textsize 12
         }
       }
       Fl_Group {page[8]} {

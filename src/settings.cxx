@@ -128,12 +128,16 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("time_of_day", time_of_day->value());
     prefs.set("time_of_day_value", time_of_day_value->text());
 
+    // Network options.
     if (httpd->value())
 	prefs.set("httpd", int(httpd_port->value()));
     if (props->value())
 	prefs.set("props", int(props_port->value()));
     if (jpg_httpd->value())
 	prefs.set("jpg-httpd", int(jpg_httpd_port->value()));
+    // Multiplayer options
+    prefs.set( "callsign", callsign->value() );
+    prefs.set( "multiplay", multiplay->value() );
 
     prefs.set("io-count", io_list->size());
     int i;
@@ -395,6 +399,11 @@ Advanced::load_settings( Fl_Preferences& prefs )
 	jpg_httpd->set();
 	jpg_httpd_port->value( double(iVal) );
     }
+
+    prefs.get( "callsign", buf, "", buflen-1 );
+    callsign->value( buf );
+    prefs.get( "multiplay", buf, "", buflen-1 );
+    multiplay->value( buf );
 
     prefs.get( "io-count", iVal, 0 );
     int i;

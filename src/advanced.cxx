@@ -606,6 +606,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Choice* o = control = new Fl_Choice(250, 175, 150, 25, "Control:");
         o->tooltip("Primary control mode");
         o->down_box(FL_BORDER_BOX);
@@ -1168,10 +1169,10 @@ Advanced::Advanced() {
       o->end();
     }
     { Fl_Group* o = page[7] = new Fl_Group(150, 0, 490, 430, "Network");
+      o->tooltip("in|out,hz,address,port");
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Check_Button* o = httpd = new Fl_Check_Button(175, 35, 100, 25, "httpd");
         o->tooltip("Enable HTTP server");
         o->down_box(FL_DOWN_BOX);
@@ -1225,12 +1226,15 @@ Advanced::Advanced() {
         o->labelfont(1);
         o->labelsize(12);
         o->align(FL_ALIGN_TOP_LEFT);
-        o->deactivate();
-        { Fl_Input* o = callsign = new Fl_Input(215, 165, 100, 25, "Callsign:");
+        { Fl_Input* o = callsign = new Fl_Input(225, 165, 100, 25, "Callsign:");
           o->labelsize(12);
           o->textsize(12);
         }
         o->end();
+      }
+      { Fl_Input* o = multiplay = new Fl_Input(225, 195, 230, 25, "Multiplay:");
+        o->labelsize(12);
+        o->textsize(12);
       }
       o->end();
     }
