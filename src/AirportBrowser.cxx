@@ -33,12 +33,6 @@
 
 using std::string;
 
-static bool
-nocase_comp( char a, char b )
-{
-    return toupper(a) == toupper( b );
-}
-
 /**
  * 
  */
