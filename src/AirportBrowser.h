@@ -28,14 +28,15 @@
 #include <string>
 #include <zlib.h>
 
-#include <FL/Fl_Input.H>
 #include <FL/Fl_Group.H>
-#include <FL/Fl_Hold_Browser.H>
 
 #include <simgear/misc/sg_path.hxx>
 
 #include "apt_dat.h"
 
+class Fl_Input;
+class Fl_Hold_Browser;
+class Fl_Button;
 class AirportTable;
 
 /**
@@ -98,14 +99,16 @@ public:
     /**
      * 
      */
-    void show_installed();
+    void show_installed( bool refresh = false );
 
     int handle( int e );
 
     /**
      * 
      */
-    bool loaded() const { return runways_loaded_ && airports_loaded_; }
+    bool loaded() const;
+
+    void set_refresh_callback( Fl_Callback* cbp, void* v );
 
 protected:
 
@@ -118,6 +121,9 @@ private:
     void id_cb();
     static void name_cb( Fl_Widget*, void* );
     void name_cb();
+
+    static void refresh_cb( Fl_Widget*, void* );
+    void refresh_cb();
 
     const apt_dat_t* find( const std::string& id ) const;
 
@@ -137,21 +143,22 @@ private:
     Fl_Hold_Browser* runways_;
     Fl_Input* id_;
     Fl_Input* name_;
+    Fl_Button* refresh_;
     gzFile gzf_;
 
     /**
-     * Array of directory names to search while scanning
-     * for airport files.
+     * Directory names to search while scanning
+     * for installed airport files.
      */
     std::deque< std::string > airports_dirs;
 
     /**
-     * Array of installed airport names.
+     * Names of all airports located in the scenery directories.
      */
     std::vector< std::string > installed_airports_;
 
     /**
-     * Array of all airports and runways loaded from runways.dat.
+     * Names of airports and runways loaded from runways.dat.
      */
     std::vector< apt_dat_t > airports_;
 
@@ -173,7 +180,13 @@ private:
     Fl_Callback* runways_loaded_cb_;
     void* runways_loaded_cb_data_;
 
+    /*
+     * Installed airport name cache file.
+     */
     SGPath airports_cache_;
+
+    Fl_Callback* refresh_cb_;
+    void* refresh_cb_data_;
 };
 
 #endif // AirportBrowser_h_included

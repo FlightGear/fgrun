@@ -30,6 +30,10 @@
 #include "AirportBrowser.h"
 #include "AirportTable.h"
 
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Hold_Browser.H>
+#include <FL/Fl_Input.H>
+
 using std::string;
 using std::vector;
 using std::deque;
@@ -40,6 +44,7 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
     , gzf_(0)
     , runways_loaded_(false)
     , airports_loaded_(false)
+    , refresh_cb_(0)
 {
     Y += 5;
     int tw = W - 120 - 5;
@@ -68,6 +73,12 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
 
     runways_ = new Fl_Hold_Browser( X+tw+5, Y, 120, th, "Runways" );
     runways_->align( FL_ALIGN_TOP );
+
+    refresh_ = new Fl_Button( X+tw+5, Y+th+5, 120, 25, "Refresh" );
+    refresh_->labelsize(12);
+    refresh_->callback( refresh_cb, this );
+    //refresh_->tooltip( "" );
+    end();
 }
 
 AirportBrowser::~AirportBrowser()
@@ -212,10 +223,13 @@ AirportBrowser::find( const string& id ) const
 }
 
 void
-AirportBrowser::show_installed()
+AirportBrowser::show_installed( bool refresh )
 {
     static vector<const apt_dat_t*> apts;
     typedef vector<string>::size_type size_type;
+
+    if (refresh)
+	apts.clear();
 
     if (apts.empty())
     {
@@ -227,10 +241,6 @@ AirportBrowser::show_installed()
 	    if (apt != 0)
 	    {
 		apts.push_back( apt );
-	    }
-	    else
-	    {
-		std::cout << " " << installed_airports_[i] << " not found\n";
 	    }
 	}
     }
@@ -277,7 +287,6 @@ AirportBrowser::show_runways( const apt_dat_t* apt )
     if (apt == 0)
 	return;
 
-#if 1
     vector< string > rwys;
     unsigned int i;
 
@@ -296,16 +305,7 @@ AirportBrowser::show_runways( const apt_dat_t* apt )
     {
 	runways_->add( rwys[i].c_str() );
     }
-#else
-    for (unsigned int i = 0; i < apt->runways_.size(); ++i)
-    {
-	string rwy( apt->runways_[i] );
-	runways_->add( rwy.c_str() );
-	string rev = reverse_runway( rwy );
-	if (!rev.empty())
-	    runways_->add( rev.c_str() );
-    }
-#endif
+
     runways_->select( 1 );
 }
 
@@ -382,9 +382,12 @@ AirportBrowser::load_runways( const string& path, Fl_Callback* cb, void* v )
  * 
  */
 void
-AirportBrowser::load_airports( const vector<string>& dirs, const SGPath& cache,
+AirportBrowser::load_airports( const vector<string>& dirs,
+			       const SGPath& cache,
 			       Fl_Callback* cb, void* v )
 {
+    table_->clear();
+    runways_->clear();
     installed_airports_.clear();
     airports_loaded_cb_ = cb;
     airports_loaded_cb_data_ = v;
@@ -466,9 +469,9 @@ AirportBrowser::airports_idle_proc()
 	for (int i = 0; i < n; ++i)
 	{
 	    if (fl_filename_match( files[i]->d_name,
-				   "[ew][0-9][0-9][0-9][ns][0-9][0-9]*"))
+				   "[ew][01][0-9][0-9][ns][0-9][0-9]"))
 	    {
-		// Found a scenery dub-directory.
+		// Found a scenery sub-directory.
 		string d(cwd);
 		d.append( files[i]->d_name );
 		if (fl_filename_isdir( d.c_str() ) )
@@ -494,4 +497,30 @@ AirportBrowser::airports_idle_proc()
     }
 
     airports_dirs.pop_front();
+}
+
+void
+AirportBrowser::refresh_cb( Fl_Widget* o, void* v )
+{
+    static_cast<AirportBrowser*>(v)->refresh_cb();
+}
+
+void
+AirportBrowser::refresh_cb()
+{
+    if (refresh_cb_)
+	refresh_cb_( this, refresh_cb_data_ );
+}
+
+void
+AirportBrowser::set_refresh_callback( Fl_Callback* cbp, void* v )
+{
+    refresh_cb_ = cbp;
+    refresh_cb_data_ = v;
+}
+
+bool
+AirportBrowser::loaded() const
+{
+    return runways_loaded_ && airports_loaded_;
 }
