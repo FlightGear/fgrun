@@ -20,13 +20,23 @@
 //
 // $Id$
 
+#include <cstdio>
 #include <fstream>
 #include <FL/filename.h>
+#include <FL/fl_ask.h>
+
 #include "UserInterface.h"
 
 using std::ofstream;
 
 void
+UserInterface::run_fgfs()
+{
+    if (write_fgfsrc())
+	run_fgfs_impl();
+}
+
+int
 UserInterface::write_fgfsrc()
 {
     char fname[ FL_PATH_MAX ];
@@ -35,6 +45,16 @@ UserInterface::write_fgfsrc()
 #else
     fl_filename_expand( fname, "~/.fgfsrc" );
 #endif
+
+    FILE* fp = fopen( fname, "r" );
+    if (fp != 0)
+    {
+	fclose( fp );
+	int r = fl_ask( "About to overwrite %s.\nDo you want to continue?",
+			fname );
+	if (!r)
+	    return 0;
+    }
 
     ofstream ofs( fname );
     if (ofs) {
@@ -81,7 +101,7 @@ UserInterface::write_fgfsrc()
 		ofs << "\n--disable-anti-alias-hud";
 	}
 	if (auto_coordination->value())
-	    ofs << "\n--enable-autocoordination";
+	    ofs << "\n--enable-auto-coordination";
 
 	// Flight model
 	if (strcmp(fdm->text(), "jsb" ) != 0)
@@ -200,5 +220,8 @@ UserInterface::write_fgfsrc()
 
 	ofs << "\n";
 	ofs.close();
+	return 1;
     }
+
+    return 0;
 }

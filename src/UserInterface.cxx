@@ -1139,7 +1139,6 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 55, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
@@ -1288,6 +1287,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Choice* o = log_level = new Fl_Choice(225, 60, 90, 25, "Log Level:");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
@@ -1332,11 +1332,6 @@ UserInterface::UserInterface() {
 
 void UserInterface::show() {
   main_window->show();
-}
-
-void UserInterface::run_fgfs() {
-  write_fgfsrc();
-run_fgfs_impl();
 }
 
 void UserInterface::run_fgfs_impl() {

@@ -261,13 +261,12 @@ public:
 private:
   void update_aircraft();
 public:
-  void run_fgfs();
   virtual void run_fgfs_impl();
 private:
   void load_settings_cb();
   void save_settings_cb();
   void default_settings_cb();
-  void write_fgfsrc();
+  int write_fgfsrc();
   friend void update_aircraft_cb(void*);
   friend void search_for_airports_cb(void*);
   void update_airports_cb();
@@ -286,6 +285,7 @@ private:
   void prop_delete_cb();
   void prop_list_select_cb( Fl_Browser* o );
   void prop_list_update_cb();
+  void run_fgfs();
 };
 void update_aircraft_cb(void* v);
 #endif
