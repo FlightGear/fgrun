@@ -2,7 +2,7 @@
 //
 // Written by Bernie Bright, started Aug 2003.
 //
-// Copyright (c) 2003  Bernie Bright - bbright@bigpond.net.au
+// Copyright (c) 2003  Bernie Bright - bbright@users.sourceforge.net
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as
