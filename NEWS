@@ -1,3 +1,10 @@
+* 0.4.4
+
+  * Fixed FlightGear --fullscreen typo.
+  * Restore window size and position at start up.
+  * Added enable-ai-models option.
+  * Support new Scenery/Terrain directory structure.
+
 * 0.4.3
 
   * Maintain proper aspect ratio of aircraft preview window.
