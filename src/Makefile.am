@@ -39,7 +39,7 @@ simgear_libs = -lsgprops -lsgxml -lsgmisc -lsgstructure -lsgdebug
 plib_libs = -lplibssg -lplibsg -lplibul
 fltk_libs = -lfltk_gl -lfltk
 
-fgrun_LDADD = $(simgear_libs) $(plib_libs)
+fgrun_LDADD = $(simgear_libs) $(plib_libs) -lm
 
 FLUID = @FLUID@
 
