@@ -221,8 +221,10 @@ Wizard::preview_aircraft()
     if (n == 0)
         return;
 
-    string ac( aircraft->text(n) );
     string fname( (char*)aircraft->data(n) );
+    string::size_type pos = fname.rfind( "/" );
+    string::size_type epos = fname.find( "-set.xml", pos );
+    string ac( fname.substr( pos+1, epos-pos-1 ) );
 
     SGPropertyNode props;
     try
@@ -310,7 +312,11 @@ Wizard::next_cb()
     else if (wiz->value() == page[1])
     {
 	int n = aircraft->value();
-	prefs.set( "aircraft", n > 0 ? aircraft->text(n) : "" );
+        string fname( (char*)aircraft->data(n) );
+        string::size_type pos = fname.rfind( "/" );
+        string::size_type epos = fname.find( "-set.xml", pos );
+        string ac( fname.substr( pos+1, epos-pos-1 ) );
+	prefs.set( "aircraft", n > 0 ? ac.c_str() : "" );
 	Fl::remove_timeout( timeout_handler, this );
     }
     else if (wiz->value() == page[2])
@@ -557,22 +563,41 @@ Wizard::aircraft_update()
     {
         // Extract aircraft name from filename.
 	string s( ac[vi].str() );
-        string::size_type pos = s.rfind( "/" );
-        string::size_type epos = s.find( "-set.xml", pos );
 
-        char* data = strdup( s.c_str() );
-	string ss( s.substr( pos+1, epos-pos-1 ) );
-        aircraft->add( ss.c_str(), data );
-	if (buf[0] != 0 && strcmp( buf, ss.c_str() ) == 0)
+        SGPropertyNode props;
+	try
 	{
-	    aircraft->select( vi+1 );
-            selected = true;
-	    //aircraft->do_callback();
+	    readProperties( s.c_str(), &props );
 	}
+	catch (const sg_exception& e)
+	{
+	    //cout << e.getformattedMessage() << "\n";
+	    continue;
+	}
+
+        if (props.hasValue( "/sim/description" ))
+        {
+            string desc = props.getStringValue( "/sim/description" );
+
+            if ( desc.find( "Alias " ) == string::npos )
+            {
+                string::size_type pos = s.rfind( "/" );
+                string::size_type epos = s.find( "-set.xml", pos );
+
+                char* data = strdup( s.c_str() );
+	        string ss( s.substr( pos+1, epos-pos-1 ) );
+                aircraft->add( desc.c_str(), data );
+	        if (buf[0] != 0 && strcmp( buf, ss.c_str() ) == 0)
+	        {
+	             aircraft->select( aircraft->size() );
+                     selected = true;
+	        }
+            }
+        }
     }
 
-   if ( selected )
-      Fl::add_timeout( 0.5, delayed_preview, this );
+    if ( selected )
+        Fl::add_timeout( 0.5, delayed_preview, this );
 }
 
 Wizard::~Wizard()
