@@ -1,17 +1,15 @@
 if WIN32
-platform_srcs = FGRunUI_Win32.cxx FGRunUI_Win32.h
+platform_srcs = FGRun_Win32.cxx FGRun_Win32.h
 else
-platform_srcs = FGRunUI_Posix.cxx FGRunUI_Posix.h
+platform_srcs = FGRun_Posix.cxx FGRun_Posix.h
 endif
 
 bin_PROGRAMS = fgrun
 
 fgrun_SOURCES = \
 	main.cxx \
-	FGRunUI.cxx FGRunUI.h \
 	$(platform_srcs) \
-	settings.cxx \
-	ui.cxx ui.h
+	UserInterface.cxx UserInterface.h
 
 if WIN32
 win32_libs = -luuid -lwsock32 -lole32 -lwinmm -lgdi32
@@ -24,8 +22,8 @@ fgrun_LDADD = -lfltk $(win32_libs)
 
 FLUID = @FLUID@
 
-ui.cxx ui.h: ui.fl
-	$(FLUID) -c ui.fl
+UserInterface.cxx UserInterface.h: UserInterface.fl
+	$(FLUID) -c UserInterface.fl
 
-##MAINTAINERCLEANFILES = ui.cxx ui.h
-EXTRA_DIST = ui.fl
+##MAINTAINERCLEANFILES = UserInterface.cxx UserInterface.h
+EXTRA_DIST = UserInterface.fl

@@ -27,20 +27,20 @@
 #include <FL/Fl.h>
 
 #if defined(WIN32)
-#  include "FGRunUI_Win32.h"
+#  include "FGRun_Win32.h"
 #else
-#  include "FGRunUI_Posix.h"
+#  include "FGRun_Posix.h"
 #endif
 
 int
 main( int argc, char* argv[] )
 {
-    FGRunUI* ui;
+    UserInterface* ui;
 
 #if defined(WIN32)
-    ui = new FGRunUI_Win32;
+    ui = new FGRun_Win32;
 #else
-    ui = new FGRunUI_Posix;
+    ui = new FGRun_Posix;
 #endif
 
 //     ui->update_aircraft();
