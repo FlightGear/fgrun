@@ -11,6 +11,9 @@ fgrun_SOURCES = \
 	settings.cxx \
 	init.cxx \
 	fgfsrc.cxx \
+	airport.cxx \
+	io.cxx \
+	util.cxx \
 	$(platform_srcs) \
 	UserInterface.cxx UserInterface.h
 

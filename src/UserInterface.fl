@@ -18,25 +18,7 @@ decl {\#include <FL/Fl_Preferences.h>} {public
 decl {\#include <string>} {public
 } 
 
-decl {\#include <iostream>} {} 
-
-decl {\#include <deque>} {} 
-
-decl {\#include <vector>} {} 
-
-decl {\#include <algorithm>} {} 
-
-decl {using std::deque;} {} 
-
-decl {using std::vector;} {} 
-
-decl {using std::string;} {} 
-
-decl {deque<string> apt_dirs;} {} 
-
-decl {vector<string> airports;} {} 
-
-class UserInterface {open selected
+class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
@@ -44,7 +26,7 @@ class UserInterface {open selected
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control}
-      private xywh {644 299 640 480} labelsize 12
+      private xywh {582 74 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -106,7 +88,7 @@ class UserInterface {open selected
       }
       Fl_Group {page[0]} {
         label General
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Input fg_exe {
           label {Executable:}
@@ -162,7 +144,7 @@ if (p != 0) {
         } {}
         Fl_Button airport_update {
           label Update
-          callback {update_airports();}
+          callback {update_airports_cb();}
           private xywh {405 140 60 25} labelsize 12 deactivate
         }
         Fl_Choice aircraft {
@@ -623,58 +605,16 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output}
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        label {Input/Output} open
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser io_list {
-          callback {int n = o->value();
-if (n > 0) {
-  const char* p = o->text(n);
-  char protocol[32];
-  char medium[32];
-  char dir[32];
-  int hz = 0;
-  char args[256];
-  sscanf(p, "--%[^=]=%[^,],%[^,],%d,%s",
-    protocol, medium, dir, &hz, args );
-  set_choice( io_protocol, protocol );
-  set_choice( io_medium, medium );
-  io_medium->do_callback();
-  set_choice( io_dir, dir );
-  io_hz->value( hz );
-  if (strcmp(medium, "file") == 0) {
-    file_name->value( args );
-  } else if (strcmp(medium, "serial") == 0) {
-    char device[256];
-    char baud[32];
-    sscanf(args, "%[^,],%s", device, baud );
-    serial_port->value( device );
-    serial_baud_rate->value( baud );
-  } else if (strcmp(medium, "socket") == 0) {
-    char host[128];
-    int port;
-    char type[32];
-    sscanf(args, "%[^,],%d,%s", host, &port, type );
-    socket_host->value(host);
-    socket_port->value( port );
-    if (strcmp(type, "tcp") == 0)
-      socket_tcp->setonly();
-    else
-      socket_udp->setonly();
-  }
-}}
+          callback {io_list_select_cb(o);}
           private xywh {155 55 480 125} type Hold labeltype NO_LABEL labelsize 12 textsize 12
         }
         Fl_Button io_new {
           label New
-          callback {io_list->add("");
-io_list->value( io_list->size() );
-io_delete->activate();
-io_protocol->activate();
-io_medium->activate();
-io_medium->do_callback();
-io_dir->activate();
-io_hz->activate();}
+          callback {io_list_new_cb();}
           private xywh {520 200 55 25} labelsize 12
         }
         Fl_Button io_delete {
@@ -686,7 +626,7 @@ io_hz->activate();}
         }
         Fl_Choice io_protocol {
           label {Protocol:}
-          callback {update_io_list();}
+          callback {io_list_update_cb();}
           private xywh {220 200 125 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           menuitem {} {
@@ -736,23 +676,7 @@ io_hz->activate();}
         }
         Fl_Choice io_medium {
           label {Medium:}
-          callback {if (strcmp(o->text(), "file") == 0) {
-  file_group->show();
-  menu_io_dir[2].deactivate();
-  serial_group->hide();
-  socket_group->hide();
-} else if (strcmp(o->text(), "serial") == 0){
-  file_group->hide();
-  serial_group->show();
-  socket_group->hide();
-  menu_io_dir[2].activate();
-} else if (strcmp(o->text(), "socket") == 0){
-  file_group->hide();
-  serial_group->hide();
-  socket_group->show();
-  menu_io_dir[2].activate();
-}
-update_io_list();}
+          callback {io_list_medium_update_cb( o );} open
           private xywh {220 230 125 25} down_box BORDER_BOX labelsize 12 when 6 textsize 12 deactivate
         } {
           menuitem {} {
@@ -770,7 +694,7 @@ update_io_list();}
         }
         Fl_Choice io_dir {
           label {Direction:}
-          callback {update_io_list();}
+          callback {io_list_update_cb();}
           private xywh {220 260 125 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           menuitem {} {
@@ -788,7 +712,7 @@ update_io_list();}
         }
         Fl_Value_Input io_hz {
           label {Hz:}
-          callback {update_io_list();}
+          callback {io_list_update_cb();}
           private xywh {220 290 125 25} labelsize 12 minimum 1 maximum 1000 value 5 textsize 12 deactivate
         }
         Fl_Group file_group {
@@ -796,7 +720,7 @@ update_io_list();}
         } {
           Fl_Input file_name {
             label {File:}
-            callback {update_io_list();}
+            callback {io_list_update_cb();}
             private xywh {220 320 125 25} labelsize 12 when 1 textsize 12
           }
           Fl_Button {} {
@@ -809,12 +733,12 @@ update_io_list();}
         } {
           Fl_Input serial_port {
             label {Port:}
-            callback {update_io_list();}
+            callback {io_list_update_cb();}
             private xywh {220 320 125 25} labelsize 12 when 1 textsize 12
           }
           Fl_Input serial_baud_rate {
             label {Baud Rate:}
-            callback {update_io_list();}
+            callback {io_list_update_cb();}
             private xywh {220 350 125 25} type Int labelsize 12 when 1 textsize 12
           }
         }
@@ -823,22 +747,22 @@ update_io_list();}
         } {
           Fl_Input socket_host {
             label {Hostname:}
-            callback {update_io_list();}
+            callback {io_list_update_cb();}
             private xywh {220 320 125 25} labelsize 12 when 1 textsize 12
           }
           Fl_Value_Input socket_port {
             label {Port:}
-            callback {update_io_list();}
+            callback {io_list_update_cb();}
             private xywh {220 350 125 25} labelsize 12 minimum 1024 maximum 65535 step 1 value 5500 textsize 12
           }
           Fl_Round_Button socket_tcp {
             label TCP
-            callback {update_io_list();}
+            callback {io_list_update_cb();}
             private xywh {220 380 55 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
           }
           Fl_Round_Button socket_udp {
             label UDP
-            callback {update_io_list();}
+            callback {io_list_update_cb();}
             private xywh {290 380 55 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
         }
@@ -911,19 +835,11 @@ prop_delete->activate();}
     }
   }
   decl {void init();} {}
-  Function {show_page(int n)} {return_type void
-  } {
-    code {for (int i = 0; i < sizeof(page)/sizeof(page[0]); ++i)
-  if (i == n)
-    page[i]->show();
-  else
-    page[i]->hide();} {}
-  }
   Function {show()} {return_type void
   } {
     code {main_window->show();} {}
   }
-  Function {update_aircraft()} {private return_type void
+  Function {update_aircraft()} {open private return_type void
   } {
     code {aircraft->clear();
 char buf[FL_PATH_MAX];
@@ -952,7 +868,8 @@ for (int i = 0; i < num_files; ++i)
   free( files[i] );
 }
 
-free( files );} {}
+free( files );} {selected
+    }
   }
   Function {run_fgfs()} {open return_type void
   } {
@@ -964,128 +881,20 @@ run_fgfs_impl();} {}
   decl {void load_settings_cb();} {}
   decl {void save_settings_cb();} {}
   decl {void default_settings_cb();} {}
-  Function {set_choice(Fl_Choice* c, const char* s)} {private return_type int
-  } {
-    code {const Fl_Menu_Item* m = c->menu();
-int i = 0;
-int nest = 0;
-for (i = 0; i < m->size(); ++i)
-{
-  if (m[i].submenu())
-  {
-    ++nest;
-  }
-  else if (m[i].label() != 0)
-  {
-    if (strcmp(s, m[i].label()) == 0)
-    {
-      c->value(i);
-      return 1;
-    }
-  }
-  else
-  {
-    --nest;
-  }
-}
-return 0;} {}
-  }
-  Function {update_io_list()} {private return_type void
-  } {
-    code {char buf[256];
-
-// --protocol=medium,dir,hz,file|(device,baud)|(host,port,tcp|udp)
-
-if (strcmp(io_medium->text(), "file") == 0) {
-  snprintf( buf, sizeof(buf), "--%s=file,%s,%d,%s",
-    io_protocol->text(), io_dir->text(), int(io_hz->value()),
-    file_name->value());
-} else if (strcmp(io_medium->text(), "serial") == 0) {
-  snprintf( buf, sizeof(buf), "--%s=serial,%s,%d,%s,%s",
-    io_protocol->text(), io_dir->text(), int(io_hz->value()),
-    serial_port->value(), serial_baud_rate->value());
-} else if (strcmp(io_medium->text(), "socket") == 0) {
-  snprintf( buf, sizeof(buf), "--%s=socket,%s,%d,%s,%d,%s",
-    io_protocol->text(), io_dir->text(), int(io_hz->value()),
-    socket_host->value(), int(socket_port->value()),
-    socket_tcp->value() ? "tcp" : "udp" );
-}
-
-int n = io_list->value();
-if (n > 0) {
-  io_list->text(n, buf );
-}} {}
-  }
   decl {void write_fgfsrc();} {}
   decl {friend void update_aircraft_cb(void*);} {}
   decl {friend void search_for_airports_cb(void*);} {}
-  Function {update_airports()} {return_type void
-  } {
-    code {if (fg_scenery->size() > 0
-    && fl_filename_isdir(fg_scenery->value())) {
-  airports.clear();
-  string dir = fg_scenery->value();
-  dir += "/";
-  apt_dirs.push_back( dir );
-  Fl::add_idle( search_for_airports_cb, this );
-}} {}
-  }
+  decl {void update_airports_cb();} {}
+  decl {void io_list_select_cb( Fl_Browser* );} {}
+  decl {void io_list_new_cb();} {}
+  decl {void io_list_update_cb();} {}
+  decl {void io_list_medium_update_cb( Fl_Choice* );} {}
+  decl {int set_choice( Fl_Choice* c, const char* s );} {}
+  decl {void show_page( int n );} {}
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void
 } {
   code {((UserInterface*)v)->update_aircraft();
 Fl::remove_idle( update_aircraft_cb, v );} {}
-} 
-
-Function {search_for_airports_cb(void* v)} {open return_type void
-} {
-  code {string dir = apt_dirs.front();
-dirent** files;
-int n = fl_filename_list( dir.c_str(), &files, fl_numericsort );
-if (n > 0) {
-  for (int i = 0; i < n; ++i) {
-    if (fl_filename_match( files[i]->d_name,
-                           "[ew][0-9][0-9][0-9][ns][0-9][0-9]*")) {
-      // Found a scenery sub-directory.
-      string d = dir;
-      d += "/";
-      d += files[i]->d_name;
-      if (fl_filename_isdir( d.c_str() )) {
-        apt_dirs.push_back( d );
-      }
-    }
-    else if (fl_filename_match( files[i]->d_name, "???.btg.gz") ||
-             fl_filename_match( files[i]->d_name, "????.btg.gz")) {
-      char* p = strstr( files[i]->d_name, ".btg" );
-      if (p != 0)
-        *p = 0;
-      airports.push_back( string( files[i]->d_name ) );
-    }
-
-    free( files[i] );
-  }
-
-  free( files );
-}
-
-apt_dirs.pop_front();
-if (apt_dirs.empty()) {
-  Fl::remove_idle( search_for_airports_cb, v );
-  if (!airports.empty()) {
-    UserInterface* ui = (UserInterface*)v;
-    ui->airport->clear();
-    std::sort( airports.begin(), airports.end() );
-    typedef vector<string> StringVec;
-    StringVec::iterator i = airports.begin();
-    StringVec::iterator end = airports.end();
-    int index = 0;
-    for (; i != end; ++i) {
-      index = ui->airport->add( i->c_str() );
-      if (ui->default_airport == *i)
-        ui->airport->value(index);
-    }
-    ui->airport->activate();
-  }
-}} {}
 } 
