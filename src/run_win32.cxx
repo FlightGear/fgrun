@@ -24,8 +24,10 @@
 #include <windows.h>
 #include <FL/filename.h>
 
+using std::string;
+
 void
-Wizard::run_fgfs(const std::string &args)
+Wizard::run_fgfs(const string &args)
 {
     const int buflen = FL_PATH_MAX;
     char exe[ buflen ];
@@ -34,11 +36,30 @@ Wizard::run_fgfs(const std::string &args)
     prefs.get( "fg_exe", buf, "", buflen-1 );
     fl_filename_absolute( exe, buf );
 
+    string line = args;
+    string::size_type pos_fg_root = args.find( "--fg-root=" ),
+                      end_fg_root = string::npos;
+    if ( pos_fg_root != string::npos )
+    {
+        end_fg_root = args.find( " --", pos_fg_root + 10 );
+        line.insert( end_fg_root, "\"" );
+        line.insert( pos_fg_root + 10, "\"" );
+    }
+
+    string::size_type pos_fg_scenery = args.find( "--fg-scenery=" ),
+                      end_fg_scenery = string::npos;
+    if ( pos_fg_scenery != string::npos )
+    {
+        end_fg_scenery = args.find( " --", pos_fg_scenery + 13 );
+        line.insert( end_fg_scenery, "\"" );
+        line.insert( pos_fg_scenery + 13, "\"" );
+    }
+
     char* cmd = new char[ strlen(exe) +
-                          args.size() + 2 ];
+                          line.size() + 2 ];
     strcpy( cmd, exe );
     strcat( cmd, " " );
-    strcat( cmd, args.c_str() );
+    strcat( cmd, line.c_str() );
 
     //SECURITY_ATTRIBUTES procAttrs;
     //SECURITY_ATTRIBUTES threadAttrs;
