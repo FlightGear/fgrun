@@ -64,12 +64,31 @@ FGRun_Posix::~FGRun_Posix()
     delete win;
 }
 
+static Fl_Menu_Item menu_[] = {
+    { "&File", 0, 0, 0, 64, 0, 0, 12, 56 },
+    { "&Save", 0x40073, 0, 0, 128, 0, 0, 12, 56 },
+    { "&Close", 0, 0, 0, 0, 0, 0, 12, 56 },
+    {0},
+    {0}
+};
+
 void
 FGRun_Posix::create_output_window()
 {
     win = new Fl_Window( 640, 480, "FlightGear output" );
-    view = new Fl_Text_Display( 0, 0, 640, 480 );
-    view->buffer( new Fl_Text_Buffer );
+    {
+	win->labelsize(12);
+	win->user_data( this );
+	{
+	    Fl_Menu_Bar* o = new Fl_Menu_Bar( 0, 0, 640, 25 );
+	    o->labelsize(12);
+	    o->textsize(12);
+	    o->menu( ::menu_ );
+	}
+	view = new Fl_Text_Display( 0, 25, 640, 480 );
+	view->buffer( new Fl_Text_Buffer );
+	win->resizable( win );
+    }
 }
 
 void
@@ -92,13 +111,21 @@ FGRun_Posix::run_fgfs_impl()
     if (pid > 0)
     {
 	// parent
-// 	cout << "pty master fd =" << master << "\n";
+// 	if (output_to_window->value())
+	{
+	    if (win == 0)
+	    {
+		create_output_window();
+	    }
+	    else
+	    {
+		view->buffer()->remove( 0, view->buffer()->length() );
+	    }
 
-	delete win;
-	create_output_window();
-	win->show();
+	    win->show();
 
-	Fl::add_fd( master, stdout_cb, this );
+	    Fl::add_fd( master, stdout_cb, this );
+	}
 	return;
     }
     else
@@ -158,30 +185,3 @@ FGRun_Posix::stdout_cb( int fd )
 	int pid = wait( &status );
     }
 }
-
-// void
-// FGRun_Posix::stderr_cb( int fd, void* p )
-// {
-//     static_cast<FGRun_Posix*>(p)->stderr_cb( fd );
-// }
-
-// void
-// FGRun_Posix::stderr_cb( int fd )
-// {
-//     char buf[256];
-//     ssize_t n = read( fd, buf, sizeof( buf ) - 1 );
-//     if (n > 0)
-//     {
-// 	printf( "stderr: %d\n", n );
-// 	buf[n] = 0;
-//     }
-//     else
-//     {
-// 	Fl::remove_fd( fd );
-// 	close( fd );
-
-// 	int status;
-// 	waitpid( -1, &status, WNOHANG );
-//     }
-// }
-
