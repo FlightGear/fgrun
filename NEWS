@@ -1,3 +1,11 @@
+* 0.4.3
+
+  * Maintain proper aspect ratio of aircraft preview window.
+  * Added control to refresh airport and runway data.
+  * Display aircraft description.
+  * Smarter handling of aircraft aliases.
+  * Fullscreen option at startup.
+
 * 0.4.2
 
   * Support multiple scenery directories,
