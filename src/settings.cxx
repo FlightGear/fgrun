@@ -150,6 +150,14 @@ UserInterface::save_settings_cb()
 	prefs.set( Fl_Preferences::Name("env-var-%d", i), env_list->text(i));
 
     prefs.set( "log-level", log_level->text() );
+    prefs.set("trace-read-count", trace_read_list->size());
+    for (i = 1; i <= trace_read_list->size(); ++i)
+	prefs.set( Fl_Preferences::Name("trace-read-%d", i),
+		   trace_read_list->text(i) );
+    prefs.set("trace-write-count", trace_write_list->size());
+    for (i = 1; i <= trace_write_list->size(); ++i)
+	prefs.set( Fl_Preferences::Name("trace-write-%d", i),
+		   trace_write_list->text(i) );
 
     prefs.set( "nav1", nav1->value() );
     prefs.set( "nav2", nav2->value() );
@@ -413,6 +421,24 @@ UserInterface::load_settings_cb()
 
     prefs.get( "log-level", buf, "warn", buflen-1 );
     set_choice( log_level, buf );
+    prefs.get( "trace-read-count", iVal, 0 );
+    for (i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("trace-read-%d", i),
+		   buf, "", buflen-1 );
+	trace_read_list->add( "" );
+	trace_read_list->text( i, buf );
+    }
+    prefs.get( "trace-write-count", iVal, 0 );
+    for (i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("trace-write-%d", i),
+		   buf, "", buflen-1 );
+	trace_write_list->add( "" );
+	trace_write_list->text( i, buf );
+    }
 
     prefs.get( "nav1", buf, "", buflen-1 );
     nav1->value( buf );
