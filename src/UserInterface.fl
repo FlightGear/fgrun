@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0103 
+version 1.0104 
 header_name {.h} 
 code_name {.cxx}
 declblock {\#if defined(_MSC_VER)} {open after {\#endif}
@@ -29,10 +29,10 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {610 257 640 480} labelsize 12
+      private xywh {620 297 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
-      Fl_Menu_Bar {} {open
+      Fl_Menu_Bar {} {
         private xywh {0 0 640 25} labelsize 12 textsize 12
       } {
         submenu {} {
@@ -993,7 +993,7 @@ else
         }
         Fl_Input apt_id {
           callback {apt_id_cb();} selected
-          private xywh {155 360 45 25} labelsize 12 when 1 textsize 12 deactivate
+          private xywh {155 360 45 25} labelsize 12 when 1 textsize 12
         }
         Fl_Input apt_name {
           label {input:}
