@@ -251,7 +251,16 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--prop:" << prop_list->text(i);
 	}
 
+	// Debugging
 	ofs << "\n--log-level=" << log_level->text();
+	for (i = 1; i <= trace_read_list->size(); ++i)
+	{
+	    ofs << "\n--trace-read=" << trace_read_list->text(i);
+	}
+	for (i = 1; i <= trace_write_list->size(); ++i)
+	{
+	    ofs << "\n--trace-write=" << trace_write_list->text(i);
+	}
 
 	// Avionics
 	if (nav1->size() > 1)
