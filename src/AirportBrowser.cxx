@@ -30,6 +30,7 @@
 #include "AirportBrowser.h"
 #include "airportdb.h"
 #include "UserInterface.h"
+#include "util.h"
 
 using std::string;
 
