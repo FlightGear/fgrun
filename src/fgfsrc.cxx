@@ -231,7 +231,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--disable-clouds";
     if (prefs.get( "clouds3d", iVal, 0 ) && iVal)
 	os << pfx << "--enable-clouds3d";
-    if (prefs.get( "fullsceen", iVal, 0 ) && iVal)
+    if (prefs.get( "fullscreen", iVal, 0 ) && iVal)
 	os << pfx << "--enable-fullscreen";
     if (prefs.get( "skyblend", iVal, 1 ) && !iVal)
 	os << pfx << "--disable-skyblend";
