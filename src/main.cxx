@@ -43,9 +43,6 @@ main( int argc, char* argv[] )
     ui = new FGRun_Posix;
 #endif
 
-//     ui->update_aircraft();
-//     ui->update_airports();
-
     ui->show();
     return Fl::run();
 }
