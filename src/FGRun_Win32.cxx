@@ -21,6 +21,7 @@
 // $Id$
 
 #include "FGRun_Win32.h"
+#include <windows.h>
 
 FGRun_Win32::FGRun_Win32()
 {
@@ -33,6 +34,50 @@ FGRun_Win32::~FGRun_Win32()
 void
 FGRun_Win32::run_fgfs_impl()
 {
+    char* cmd = new char[ strlen(fg_exe->value()) + 1 ];
+    strcpy( cmd, fg_exe->value() );
+
+    //SECURITY_ATTRIBUTES procAttrs;
+    //SECURITY_ATTRIBUTES threadAttrs;
+    BOOL inheritHandles = FALSE;
+    DWORD creationFlags = 0;
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+
+    memset( &si, 0, sizeof(si) );
+    si.cb = sizeof(si);
+
+    BOOL bStarted = ::CreateProcess( NULL, // lpApplicationName
+        cmd, // lpCommandLine
+        NULL, // lpProcessAttributes
+        NULL, // lpThreadAttributes
+        FALSE,
+        creationFlags,
+        NULL, // lpEnvironment
+        NULL, // lpCurrentDirectory
+        &si,
+        &pi
+        );
+    if (!bStarted)
+    {
+        LPVOID lpMsgBuf;
+        FormatMessage( 
+            FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+            FORMAT_MESSAGE_FROM_SYSTEM | 
+            FORMAT_MESSAGE_IGNORE_INSERTS,
+            NULL,
+            GetLastError(),
+            MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
+            (LPTSTR) &lpMsgBuf,
+            0,
+            NULL 
+        );
+        MessageBox( NULL, (LPCTSTR)lpMsgBuf, "Error", MB_OK | MB_ICONINFORMATION );
+        // Free the buffer.
+        LocalFree( lpMsgBuf );
+    }
+
+    delete[] cmd;
 }
 
 
