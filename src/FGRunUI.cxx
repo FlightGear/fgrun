@@ -32,23 +32,21 @@
 #include <FL/Fl_File_Chooser.h>
 #include <FL/Fl_Text_Buffer.h>
 #include <FL/filename.h>
+
 #ifdef HAVE_STRING_H
-#  include <string.h>
+#  include <cstring>
 #endif
 #ifdef HAVE_STDLIB_H
-#  include <stdlib.h>
+#  include <cstdlib>
 #endif
-#ifdef HAVE_UNISTD_H
-#  include <unistd.h>
-#endif
-#include <sys/wait.h>
-#include <fcntl.h>
+
 #include "FGRunUI.h"
 
 using std::cout;
 using std::cerr;
 using std::vector;
 using std::ofstream;
+using std::string;
 
 FGRunUI::FGRunUI()
     : UserInterface()
@@ -64,6 +62,7 @@ FGRunUI::FGRunUI()
 
 FGRunUI::~FGRunUI()
 {
+    output_window->hide();
 }
 
 /**
@@ -344,134 +343,6 @@ FGRunUI::write_dot_fgfsrc()
 
 }
 
-/**
- * 
- */
-void
-FGRunUI::run_fgfs()
-{
-    this->write_dot_fgfsrc();
-
-    //Create pipes for stdout and stderr.
-    int fd1[2];
-    int fd2[2];
-    if (pipe( fd1 ) < 0 || pipe( fd2 ) < 0)
-    {
-	perror( "pipe error" );
-	return;
-    }
-
-    pid_t pid = fork();
-    if (pid < 0)
-    {
-	perror( "fork error" );
-	return;
-    }
-    else if (pid > 0)
-    {
-	// parent
-
-	// Close write-end of pipes.
- 	close( fd1[1] );
- 	close( fd2[1] );
-
-	// Establish callbacks to read from pipes.
-	Fl::add_fd( fd1[0], FL_READ, stdout_cb, (void*)this );
-	Fl::add_fd( fd2[0], FL_READ, stderr_cb, (void*)this );
-
-	output_text->buffer()->remove( 0, output_text->buffer()->length() );
-	output_window->show();
-    }
-    else
-    {
-	// child
-
-	// Close the read end of pipes.
-	close( fd1[0] );
-	close( fd2[0] );
-
-	// Redirect stdout to write end of pipe 1.
-	close(1);
-	if (dup( fd1[1] ) < 0)
-	    perror( "dup(fd1[1] error");
-
-	// Redirect stderr to write end of pipe 2.
-	close(2);
-	if (dup( fd2[1] ) < 0)
-	    perror( "dup(fd2[1] error");
-
-	string path = fg_exe->value();
-	string arg0;
-	string::size_type idx = path.find_last_of( "/\\" );
-	if (idx != string::npos)
-	{
-	    arg0 = path.substr( idx+1 );
-	}
-	else
-	{
-	    arg0 = path;
-	}
-
-	execl( path.c_str(), arg0.c_str(), NULL );
-    }
-}
-
-void
-FGRunUI::stdout_cb( int fd, void* p )
-{
-    if (p != 0)
-	((FGRunUI*)p)->stdout_cb_i( fd );
-}
-
-void
-FGRunUI::stderr_cb( int fd, void* p )
-{
-    if (p != 0)
-	((FGRunUI*)p)->stderr_cb_i( fd );
-}
-
-
-void
-FGRunUI::stdout_cb_i( int fd )
-{
-    char buf[200];
-    int r = read( fd, buf, sizeof(buf)-1 );
-    if (r > 0)
-    {
-	buf[r] = 0;
-	//fputs( buf, stdout );
-    }
-    else
-    {
-	Fl::remove_fd( fd );
-	close( fd );
-	int status;
-	waitpid( -1, &status, WNOHANG );
-	return;
-    }
-}
-
-void
-FGRunUI::stderr_cb_i( int fd )
-{
-    char buf[200];
-    int r = read( fd, buf, sizeof(buf)-1 );
-    if (r > 0)
-    {
-	buf[r] = 0;
-	//output_text->buffer()->append( buf );
-	output_text->insert( buf );
-	output_text->show_insert_position();
-    }
-    else
-    {
-	Fl::remove_fd( fd );
-	close( fd );
-	int status;
-	waitpid( -1, &status, WNOHANG );
-	return;
-    }
-}
 void
 FGRunUI::select_fg_exe()
 {

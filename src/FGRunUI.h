@@ -4,13 +4,16 @@
 #include <string>
 #include "ui.h"
 
-using std::string;
-
+/**
+ * 
+ */
 class FGRunUI : public UserInterface
 {
 public:
     FGRunUI();
-    ~FGRunUI();
+    virtual ~FGRunUI();
+
+    virtual void run_fgfs() = 0;
 
     void load_settings();
     void save_settings();
@@ -19,7 +22,6 @@ public:
     void select_fg_exe();
     void select_fg_root();
     void select_fg_scenery();
-    void run_fgfs();
     void select_browser();
     void add_io_item();
     void edit_io_item();
@@ -29,18 +31,13 @@ public:
     void io_medium_cb( Fl_Choice*, void* );
     void reset();
 
-private:
+protected:
     int set_choice( Fl_Choice* w, const char* s );
     void write_dot_fgfsrc();
-
-    void stdout_cb_i( int fd );
-    static void stdout_cb( int fd, void* );
-    void stderr_cb_i( int fd );
-    static void stderr_cb( int fd, void* );
     
-private:
-    string default_aircraft;
-    string default_airport;
+protected:
+    std::string default_aircraft;
+    std::string default_airport;
     bool modflag;
     int io_options_list_value;
 };
