@@ -32,7 +32,7 @@ fgrun_LDADD = -lfltk -lmk4 $(win32_libs)
 FLUID = @FLUID@
 
 UserInterface.cxx UserInterface.h: UserInterface.fl
-	$(FLUID) -c UserInterface.fl
+	$(FLUID) -c $(top_srcdir)/UserInterface.fl
 
 ##MAINTAINERCLEANFILES = UserInterface.cxx UserInterface.h
 EXTRA_DIST = UserInterface.fl

@@ -95,7 +95,7 @@ UserInterface::update_aircraft()
     int index;
     for (; first != last; ++first)
     {
-	SVI i( find_if( submenus.begin(), submenus.end(), Comp(*first) ) );
+	SVI i( std::find_if( submenus.begin(), submenus.end(), Comp(*first) ) );
 	if (i != submenus.end())
 	{
 	    string s( *i );

@@ -132,11 +132,12 @@ UserInterface::save_settings_cb()
     prefs.set("net-hud", net_hud->value());
 
     prefs.set("io-count", io_list->size());
-    for (int i = 1; i <= io_list->size(); ++i)
+    int i;
+    for (i = 1; i <= io_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("io-item-%d", i), io_list->text(i));
 
     prefs.set("env-count", env_list->size());
-    for (int i = 1; i <= env_list->size(); ++i)
+    for (i = 1; i <= env_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("env-var-%d", i), env_list->text(i));
 
     prefs.set( "log-level", log_level->value()+1 );
@@ -366,7 +367,8 @@ UserInterface::load_settings_cb()
     start_date_lat_value->value(buf);
 
     prefs.get( "io-count", iVal, 0 );
-    for (int i = 1; i <= iVal; ++i)
+    int i;
+    for (i = 1; i <= iVal; ++i)
     {
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("io-item-%d", i), buf, "", buflen-1 );
@@ -375,7 +377,7 @@ UserInterface::load_settings_cb()
     }
 
     prefs.get( "env-count", iVal, 0 );
-    for (int i = 1; i <= iVal; ++i)
+    for (i = 1; i <= iVal; ++i)
     {
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("env-var-%d", i), buf, "", buflen-1 );

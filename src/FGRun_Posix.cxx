@@ -94,12 +94,19 @@ FGRun_Posix::create_output_window()
 void
 FGRun_Posix::run_fgfs_impl()
 {
+#if defined(HAVE_TERMIOS_H)
     struct termios term;
     tcgetattr( STDOUT_FILENO, &term );
     term.c_oflag &= ~( OLCUC | ONLCR );
+#endif
 
-    int master;
+    int master = -1;
+
+#if defined(HAVE_PTY_H)
     pid_t pid = forkpty( &master, 0, &term, 0 );
+#else
+    pid_t pid = fork();
+#endif
 
     if (pid < 0)
     {
