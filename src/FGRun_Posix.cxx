@@ -36,10 +36,6 @@
 #  include <sys/wait.h>
 #endif
 
-#ifdef HAVE_PTY_H
-#  include <pty.h>
-#endif
-
 #ifdef HAVE_TERMIOS_H
 #  include <termios.h>
 #endif
@@ -49,6 +45,7 @@
 #include <FL/Fl_Text_Display.H>
 
 #include "FGRun_Posix.h"
+#include "fgrun_pty.h"
 
 using std::string;
 using std::cout;
@@ -102,10 +99,10 @@ FGRun_Posix::run_fgfs_impl()
 
     int master = -1;
 
-#if defined(HAVE_PTY_H)
-    pid_t pid = forkpty( &master, 0, &term, 0 );
+#if defined(HAVE_TERMIOS_H)
+    pid_t pid = pty_fork( &master, 0, &term, 0 );
 #else
-    pid_t pid = fork();
+    pid_t pid = pty_fork( &master, 0, 0, 0 );
 #endif
 
     if (pid < 0)
@@ -118,7 +115,11 @@ FGRun_Posix::run_fgfs_impl()
     if (pid > 0)
     {
 	// parent
-// 	if (output_to_window->value())
+
+	if (master < 0)
+	    return;
+
+//  	if (output_to_window->value())
 	{
 	    if (win == 0)
 	    {
@@ -130,7 +131,6 @@ FGRun_Posix::run_fgfs_impl()
 	    }
 
 	    win->show();
-
 	    Fl::add_fd( master, stdout_cb, this );
 	}
 	return;
@@ -138,7 +138,9 @@ FGRun_Posix::run_fgfs_impl()
     else
     {
 	// child
-	close( master );
+
+	if (master >= 0)
+	    close( master );
 
 	string path = fg_exe->value();
 	string arg0;
