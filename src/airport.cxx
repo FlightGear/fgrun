@@ -309,12 +309,12 @@ load_airportdb_cb( void* v )
 void
 UserInterface::load_airportdb()
 {
-    ostringstream buf;
-    buf << fg_root->value() << "/Airports/runways.dat.gz";
+    string s( fg_root->value() );
+    s.append( "/Airports/runways.dat.gz" );
 
     try
     {
-	airportdb_->load( buf.str().c_str() );
+	airportdb_->load( s.c_str() );
     }
     catch (const char* msg)
     {
