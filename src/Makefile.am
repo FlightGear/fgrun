@@ -28,13 +28,17 @@ fgrun_SOURCES = \
 	util.cxx util.h \
 	$(platform_srcs)
 
-if WIN32
-win32_libs = -luuid -lwsock32 -lole32 -lwinmm -lgdi32
-else
-win32_libs =
-endif
+#if WIN32
+#win32_libs = -lglu32 -lopengl32 -lcomctl32 -luuid -lwsock32 -lole32 -lwinmm -lgdi32
+#else
+#win32_libs =
+#endif
 
-fgrun_LDADD = -lsgprops -lsgmisc -lsgxml -lsgstructure -lsgdebug -lfltk_gl -lfltk -lplibssg -lplibsg -lplibul -lGL $(win32_libs)
+simgear_libs = -lsgprops -lsgxml -lsgmisc -lsgstructure -lsgdebug
+plib_libs = -lplibssg -lplibsg -lplibul
+fltk_libs = -lfltk_gl -lfltk
+
+fgrun_LDADD = $(simgear_libs) $(plib_libs)
 
 FLUID = @FLUID@
 
