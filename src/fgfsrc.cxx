@@ -88,14 +88,14 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     os << pfx << "--fg-scenery=" << buf;
 
     // General options.
-    if (prefs.get( "airport", buf, "", buflen-1 ))
+    if (prefs.get( "airport", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--airport-id=" << buf;
 
     if (prefs.get( "runway", buf, "", buflen-1 ) &&
 	strcmp( "<default>", buf ) != 0)
 	os << pfx << "--runway=" << buf;
 
-    if (prefs.get( "aircraft", buf, "", buflen-1 ))
+    if (prefs.get( "aircraft", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--aircraft=" << buf;
 
     if (prefs.get( "control", buf, "", buflen-1 ))
