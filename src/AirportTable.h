@@ -51,6 +51,7 @@ public:
     const apt_dat_t* get_selected() const;
 
     void set_airports( const rowdata_type& apts );
+    void resize( int X, int Y, int W, int H );
 
 protected:
 

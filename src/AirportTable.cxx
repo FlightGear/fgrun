@@ -319,3 +319,10 @@ AirportTable::get_selected() const
     else
 	return 0;
 }
+
+void
+AirportTable::resize( int X, int Y, int W, int H )
+{
+    Fl_Table::resize( X, Y, W, H );
+    col_width( 1, tiw - col_width(0) );
+}
