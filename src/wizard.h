@@ -17,6 +17,7 @@ class LogWindow;
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Output.H>
+#include <FL/Fl_Tile.H>
 #include "Fl_Plib.h"
 #include "AirportBrowser.h"
 

@@ -77,7 +77,7 @@ inline void Wizard::cb_aircraft_i(Fl_Browser*, void*) {
   preview_aircraft();
 }
 void Wizard::cb_aircraft(Fl_Browser* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_aircraft_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_aircraft_i(o,v);
 }
 
 inline void Wizard::cb_Advanced_i(Fl_Button*, void*) {
@@ -200,23 +200,30 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[1] = new Fl_Group(0, 0, 640, 440, "Select an aircraft");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        { Fl_Browser* o = aircraft = new Fl_Browser(5, 20, 200, 415);
-          o->type(2);
-          o->labelsize(12);
-          o->textsize(12);
-          o->callback((Fl_Callback*)cb_aircraft);
-          o->align(FL_ALIGN_TOP);
-        }
-        { Fl_Plib* o = preview = new Fl_Plib(210, 20, 425, 415, "Preview");
-          o->box(FL_THIN_DOWN_BOX);
-          o->color(FL_BACKGROUND_COLOR);
-          o->selection_color(FL_BACKGROUND_COLOR);
-          o->labeltype(FL_NORMAL_LABEL);
-          o->labelfont(0);
-          o->labelsize(12);
-          o->labelcolor(FL_BLACK);
-          o->align(FL_ALIGN_CENTER);
-          o->when(FL_WHEN_RELEASE);
+        { Fl_Tile* o = new Fl_Tile(0, 20, 635, 415);
+          { Fl_Browser* o = aircraft = new Fl_Browser(5, 20, 200, 415);
+            o->type(2);
+            o->labelsize(12);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_aircraft);
+            o->align(FL_ALIGN_TOP);
+          }
+          { Fl_Plib* o = preview = new Fl_Plib(205, 20, 430, 415, "Preview");
+            o->box(FL_THIN_DOWN_BOX);
+            o->color(FL_BACKGROUND_COLOR);
+            o->selection_color(FL_BACKGROUND_COLOR);
+            o->labeltype(FL_NORMAL_LABEL);
+            o->labelfont(0);
+            o->labelsize(12);
+            o->labelcolor(FL_BLACK);
+            o->align(FL_ALIGN_CENTER);
+            o->when(FL_WHEN_RELEASE);
+          }
+          { Fl_Box* o = new Fl_Box(80, 190, 265, 65);
+            o->hide();
+            Fl_Group::current()->resizable(o);
+          }
+          o->end();
           Fl_Group::current()->resizable(o);
         }
         o->end();
