@@ -404,3 +404,9 @@ AirportBrowser::get_selected_runway() const
     int n = runways_->value();
     return n > 1 ? string( runways_->text(n) ) : string("");
 }
+
+void
+AirportBrowser::select_id( const string& id )
+{
+}
+

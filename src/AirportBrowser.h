@@ -77,6 +77,11 @@ public:
     /**
      * 
      */
+    void select_id( const std::string& id );
+
+    /**
+     * 
+     */
     void scan_installed_airports( const std::string& dir );
 
     /**
