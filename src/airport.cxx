@@ -203,9 +203,10 @@ UserInterface::update_runways()
     typedef vector<string> vs_type;
     vs_type::iterator first = rwys.begin();
     vs_type::iterator last = rwys.end();
+    int index = 0;
     while (first != last)
     {
-	runway->add( first->c_str() );
+	index = runway->add( first->c_str() );
 	++first;
     }
 

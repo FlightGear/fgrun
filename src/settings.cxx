@@ -128,6 +128,10 @@ UserInterface::save_settings_cb()
     prefs.set("io-count", io_list->size());
     for (int i = 1; i <= io_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("io-item-%d", i), io_list->text(i));
+
+    prefs.set("env-count", env_list->size());
+    for (int i = 1; i <= env_list->size(); ++i)
+	prefs.set( Fl_Preferences::Name("env-var-%d", i), env_list->text(i));
 }
 
 void
@@ -176,8 +180,8 @@ UserInterface::load_settings_cb()
     default_aircraft = buf;
     prefs.get("airport", buf, "KSFO", buflen-1);
     default_airport = buf;
+    // TODO
 //     prefs.get( "runway", buf, "<default>", buflen-1 );
-//     default_airport = buf;
     prefs.get("lang", buf, "", buflen-1);
     lang->value(buf);
     prefs.get("control", buf, "joystick", buflen-1);
@@ -325,6 +329,15 @@ UserInterface::load_settings_cb()
 	prefs.get( Fl_Preferences::Name("io-item-%d", i), buf, "", buflen-1 );
 	io_list->add( "" );
 	io_list->text( i, buf );
+    }
+
+    prefs.get( "env-count", iVal, 0 );
+    for (int i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("env-var-%d", i), buf, "", buflen-1 );
+	env_list->add( "" );
+	env_list->text( i, buf );
     }
 }
 

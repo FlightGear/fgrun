@@ -1,4 +1,4 @@
-// env.cxx -- Env option browser functions.
+// env.cxx -- Environment page callbacks.
 //
 // Written by Bernie Bright, started May 2003.
 //
@@ -22,10 +22,6 @@
 
 #include "UserInterface.h"
 
-#if defined(_MSC_VER)
-#define snprintf _snprintf
-#endif
-
 void
 UserInterface::env_new_cb()
 {
@@ -40,6 +36,13 @@ UserInterface::env_new_cb()
 void
 UserInterface::env_delete_cb()
 {
+    int n = env_list->value();
+    if (n > 0)
+    {
+	env_list->remove( n );
+	env_var->value( "" );
+	env_var->take_focus();
+    }
 }
 
 void
@@ -48,6 +51,10 @@ UserInterface::env_list_select_cb( Fl_Browser* o )
     int n = o->value();
     if (n > 0)
     {
+	env_var->activate();
+	env_var->value( o->text( n ) );
+	env_var->take_focus();
+	env_delete->activate();
     }
 }
 
