@@ -1,4 +1,4 @@
-#include <FL/Fl.h>
+#include <FL/Fl.H>
 #include <plib/ssg.h>
 
 #include "Fl_Plib.h"

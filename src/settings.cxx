@@ -26,7 +26,7 @@
 
 #include <string>
 
-#include <FL/filename.h>
+#include <FL/filename.H>
 
 #include "advanced.h"
 #include "util.h"

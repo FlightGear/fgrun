@@ -25,7 +25,7 @@
 #include <vector>
 #include <algorithm>
 
-#include <FL/fl_draw.h>
+#include <FL/fl_draw.H>
 
 #include "AirportTable.h"
 #include "apt_dat.h"

@@ -1,7 +1,7 @@
 #ifndef Fl_Plib_h
 #define Fl_Plib_h
 
-#include <FL/Fl_Gl_Window.h>
+#include <FL/Fl_Gl_Window.H>
 #include <string>
 
 #include <plib/ssg.h>

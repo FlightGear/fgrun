@@ -23,8 +23,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <FL/Fl_File_Chooser.h>
-#include <FL/filename.h>
+#include <FL/Fl_File_Chooser.H>
+#include <FL/filename.H>
 
 #include "advanced.h"
 #include "util.h"

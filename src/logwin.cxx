@@ -20,10 +20,10 @@
 //
 // $Id$
 
-#include <FL/Fl_Window.h>
-#include <FL/Fl_Text_Display.h>
-#include <FL/Fl_Menu_Bar.h>
-#include <FL/Fl_File_Chooser.h>
+#include <FL/Fl_Window.H>
+#include <FL/Fl_Text_Display.H>
+#include <FL/Fl_Menu_Bar.H>
+#include <FL/Fl_File_Chooser.H>
 
 #include "logwin.h"
 
