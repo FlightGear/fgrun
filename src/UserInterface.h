@@ -16,6 +16,7 @@ class AirportDB;
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Round_Button.H>
+#include "AirportBrowser.h"
 
 class UserInterface {
   std::string default_aircraft;
@@ -30,7 +31,6 @@ private:
   inline void cb_Quit_i(Fl_Menu_*, void*);
   static void cb_Quit(Fl_Menu_*, void*);
   static Fl_Menu_Item *output_to_window;
-  static Fl_Menu_Item *load_airports_;
   Fl_Browser *page_list;
   inline void cb_page_list_i(Fl_Browser*, void*);
   static void cb_page_list(Fl_Browser*, void*);
@@ -277,21 +277,19 @@ private:
   inline void cb_env_var_i(Fl_Input*, void*);
   static void cb_env_var(Fl_Input*, void*);
   Fl_Group *page[14];
-  Fl_Browser *apt_browser;
-  inline void cb_apt_browser_i(Fl_Browser*, void*);
-  static void cb_apt_browser(Fl_Browser*, void*);
-  Fl_Input *apt_id;
-  inline void cb_apt_id_i(Fl_Input*, void*);
-  static void cb_apt_id(Fl_Input*, void*);
-  Fl_Input *apt_name;
-  inline void cb_apt_name_i(Fl_Input*, void*);
-  static void cb_apt_name(Fl_Input*, void*);
   Fl_Round_Button *apt_show_all;
   inline void cb_apt_show_all_i(Fl_Round_Button*, void*);
   static void cb_apt_show_all(Fl_Round_Button*, void*);
   Fl_Round_Button *apt_show_installed;
   inline void cb_apt_show_installed_i(Fl_Round_Button*, void*);
   static void cb_apt_show_installed(Fl_Round_Button*, void*);
+  AirportBrowser *apt_browser;
+  Fl_Input *apt_id;
+  inline void cb_apt_id_i(Fl_Input*, void*);
+  static void cb_apt_id(Fl_Input*, void*);
+  Fl_Input *apt_name;
+  inline void cb_apt_name_i(Fl_Input*, void*);
+  static void cb_apt_name(Fl_Input*, void*);
   Fl_Button *apt_select;
   void init();
 public:
