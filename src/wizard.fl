@@ -169,7 +169,7 @@ class Wizard {open
               private xywh {10 405 180 25} down_box DOWN_BOX
             }
           }
-          Fl_Text_Display text {selected
+          Fl_Text_Display text {
             private xywh {5 250 630 145} box THIN_DOWN_BOX align 4 hide
           }
           Fl_Group {} {
@@ -213,9 +213,9 @@ class Wizard {open
               private xywh {250 10 170 20} down_box DOWN_BOX
             }
             Fl_Check_Button enhanced_lighting {
-              label {Enhanced lighting}
-              callback {enhanced_lighting_cb();}
-              private xywh {250 35 170 20} down_box DOWN_BOX
+              label {Enhanced runway lighting}
+              callback {enhanced_lighting_cb();} selected
+              private tooltip {Use with caution. It may drop your framerate dramatically} xywh {250 35 205 20} down_box DOWN_BOX
             }
             Fl_Check_Button specular_highlight {
               label {Specular highlight}
@@ -450,7 +450,7 @@ class Wizard {open
         private xywh {15 25 425 115}
       } {
         Fl_Box {} {
-          label {FlightGear is now started}
+          label {FlightGear has been started}
           private xywh {15 25 425 25} labelfont 1 labelsize 18 align 128
         }
         Fl_Box {} {

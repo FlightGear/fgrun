@@ -453,7 +453,8 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_horizon_effect);
           }
-          { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(250, 35, 170, 20, "Enhanced lighting");
+          { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(250, 35, 205, 20, "Enhanced runway lighting");
+            o->tooltip("Use with caution. It may drop your framerate dramatically");
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_enhanced_lighting);
           }
@@ -599,7 +600,7 @@ Fl_Double_Window* Wizard::make_launch_window() {
     w = o;
     o->user_data((void*)(this));
     { Fl_Group* o = new Fl_Group(15, 25, 425, 115);
-      { Fl_Box* o = new Fl_Box(15, 25, 425, 25, "FlightGear is now started");
+      { Fl_Box* o = new Fl_Box(15, 25, 425, 25, "FlightGear has been started");
         o->labelfont(1);
         o->labelsize(18);
         o->align(FL_ALIGN_WRAP);
