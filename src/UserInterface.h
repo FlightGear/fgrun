@@ -92,6 +92,7 @@ private:
   Fl_Round_Button *on_ground;
   Fl_Round_Button *in_air;
   Fl_Input *wind;
+  Fl_Input *turbulence;
   Fl_Check_Button *freeze;
   Fl_Check_Button *fuel_freeze;
   Fl_Check_Button *clock_freeze;
@@ -107,6 +108,13 @@ private:
 public:
   Fl_Value_Input *pitch;
 private:
+  Fl_Input *vor;
+  Fl_Input *ndb;
+  Fl_Input *fix;
+  Fl_Input *offset_distance;
+  Fl_Input *offset_azimuth;
+  Fl_Input *glideslope;
+  Fl_Input *roc;
   Fl_Check_Button *clouds;
   Fl_Check_Button *clouds3d;
   Fl_Check_Button *fullscreen;
@@ -229,17 +237,16 @@ private:
   Fl_Input *prop_text;
   inline void cb_prop_text_i(Fl_Input*, void*);
   static void cb_prop_text(Fl_Input*, void*);
-  Fl_Button *prop_new;
-  inline void cb_prop_new_i(Fl_Button*, void*);
-  static void cb_prop_new(Fl_Button*, void*);
+  inline void cb_New_i(Fl_Button*, void*);
+  static void cb_New(Fl_Button*, void*);
   Fl_Group *page[12];
 public:
   Fl_Browser *env_list;
 private:
   inline void cb_env_list_i(Fl_Browser*, void*);
   static void cb_env_list(Fl_Browser*, void*);
-  inline void cb_New_i(Fl_Button*, void*);
-  static void cb_New(Fl_Button*, void*);
+  inline void cb_New1_i(Fl_Button*, void*);
+  static void cb_New1(Fl_Button*, void*);
   Fl_Button *env_delete;
   inline void cb_env_delete_i(Fl_Button*, void*);
   static void cb_env_delete(Fl_Button*, void*);
@@ -273,6 +280,10 @@ private:
   void env_delete_cb();
   void env_list_update_cb();
   void env_list_select_cb( Fl_Browser* );
+  void prop_new_cb();
+  void prop_delete_cb();
+  void prop_list_select_cb( Fl_Browser* o );
+  void prop_list_update_cb();
 };
 void update_aircraft_cb(void* v);
 #endif

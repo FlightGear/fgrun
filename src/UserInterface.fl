@@ -25,7 +25,7 @@ class UserInterface {open
   Function {UserInterface()} {} {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {606 424 640 480} labelsize 12
+      private xywh {501 84 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -104,7 +104,7 @@ if (p != 0) {
         }
         Fl_Input fg_root {
           label {FG_ROOT:}
-          private xywh {250 80 355 25} labelsize 12 textsize 12
+          private tooltip {root data path} xywh {250 80 355 25} labelsize 12 textsize 12
         }
         Fl_Button {} {
           label {...}
@@ -123,7 +123,7 @@ if (p != 0) {
         }
         Fl_Input fg_scenery {
           label {FG_SCENERY:}
-          private xywh {250 110 355 25} labelsize 12 textsize 12
+          private tooltip {Base scenery path} xywh {250 110 355 25} labelsize 12 textsize 12
         }
         Fl_Button {} {
           label {...}
@@ -160,7 +160,7 @@ if (p != 0) {
         }
         Fl_Choice control {
           label {Control:}
-          private xywh {250 200 150 25} down_box BORDER_BOX labelsize 12 textsize 12
+          private tooltip {Primary control mode} xywh {250 200 150 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           menuitem {} {
             label joystick
@@ -200,7 +200,7 @@ if (p != 0)
         }
         Fl_Choice runway {
           label {Runway:} open
-          private xywh {525 140 80 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
+          private tooltip {Available runways} xywh {525 140 80 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {}
       }
       Fl_Group {page[1]} {
@@ -209,31 +209,31 @@ if (p != 0)
       } {
         Fl_Check_Button game_mode {
           label {Game Mode}
-          private xywh {175 50 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable full screen game mode} xywh {175 50 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button splash_screen {
           label {Splash Screen}
-          private xywh {175 80 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Display splash screen at startup} xywh {175 80 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button intro_music {
           label {Intro Music}
-          private xywh {175 110 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable introduction music during start up} xywh {175 110 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button mouse_pointer {
           label {Mouse Pointer}
-          private xywh {175 140 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable extra mouse pointer} xywh {175 140 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button random_objects {
           label {Random Objects}
-          private xywh {175 170 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable random scenery objects} xywh {175 170 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button panel {
           label Panel
-          private xywh {295 50 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable the instrument panel} xywh {295 50 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button sound {
           label Sound
-          private xywh {295 80 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable sound effects} xywh {295 80 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button hud {
           label HUD
@@ -241,15 +241,15 @@ if (p != 0)
   antialias_hud->activate();
 else
   antialias_hud->deactivate();}
-          private xywh {295 110 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable Heads Up Display} xywh {295 110 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button antialias_hud {
           label {Anti-alias HUD}
-          private xywh {295 140 120 25} down_box DOWN_BOX labelsize 12 deactivate
+          private tooltip {Enable anti-aliased HUD} xywh {295 140 120 25} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button auto_coordination {
           label {Auto-coordination}
-          private xywh {295 170 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable auto-coordinated turns.} xywh {295 170 120 25} down_box DOWN_BOX labelsize 12
         }
       }
       Fl_Group {page[2]} {
@@ -263,7 +263,7 @@ else
 } else {
   notrim->deactivate();
 }}
-          private xywh {220 60 105 25} down_box BORDER_BOX labelsize 12 textsize 12
+          private tooltip {Core Flight Dynamics Model} xywh {220 60 105 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           menuitem {} {
             label ada
@@ -308,31 +308,35 @@ else
         }
         Fl_Check_Button notrim {
           label {No Trim}
-          private xywh {240 90 85 25} down_box DOWN_BOX labelsize 12 deactivate
+          private tooltip {Do not attempt to trim the model} xywh {240 90 85 25} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Value_Input model_hz {
           label {Model Hz:}
-          private xywh {220 120 105 25} labelsize 12 minimum 1 maximum 1000 step 1 value 120 textsize 12
+          private tooltip {Run the FDM at this rate (iterations per second)} xywh {220 120 105 25} labelsize 12 minimum 1 maximum 1000 step 1 value 120 textsize 12
         }
         Fl_Value_Input speed {
           label {Speed:}
-          private xywh {220 150 105 25} labelsize 12 minimum 1 maximum 1000 step 1 value 1 textsize 12
+          private tooltip {Run FDM faster than real time} xywh {220 150 105 25} labelsize 12 minimum 1 maximum 1000 step 1 value 1 textsize 12
         }
         Fl_Group {} {open
           private xywh {220 185 105 50}
         } {
           Fl_Round_Button on_ground {
             label {On Ground}
-            private xywh {220 185 105 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
+            private tooltip {Start at ground level} xywh {220 185 105 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
           }
           Fl_Round_Button in_air {
             label {In Air}
-            private xywh {220 210 105 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+            private tooltip {Start in the air} xywh {220 210 105 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
         }
         Fl_Input wind {
           label {Wind:}
-          private xywh {220 240 105 25} labelsize 12 textsize 12
+          private tooltip {Wind direction and speed, dir@speed} xywh {220 240 105 25} labelsize 12 textsize 12
+        }
+        Fl_Input turbulence {
+          label Turbulence
+          private tooltip {Turbulence, 0.0 (calm) to 1.0 (severe)} xywh {220 270 105 25} labelsize 12 textsize 12
         }
       }
       Fl_Group {page[3]} {
@@ -341,7 +345,7 @@ else
       } {
         Fl_Check_Button freeze {
           label Freeze
-          private xywh {175 50 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Start paused} xywh {175 50 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button fuel_freeze {
           label {Fuel Freeze}
@@ -358,19 +362,19 @@ else
       } {
         Fl_Input lon {
           label {Longitude:}
-          private xywh {225 50 150 25} labelsize 12 textsize 12
+          private tooltip {Initial longitude, west is negative} xywh {225 50 150 25} labelsize 12 textsize 12
         }
         Fl_Input lat {
           label {Latitude:}
-          private xywh {225 80 150 25} labelsize 12 textsize 12
+          private tooltip {Initial latitude, south is negative} xywh {225 80 150 25} labelsize 12 textsize 12
         }
         Fl_Input altitude {
           label {Altitude:}
-          private xywh {225 110 150 25} type Float labelsize 12 textsize 12
+          private tooltip {Initial altitude in feet} xywh {225 110 150 25} type Float labelsize 12 textsize 12
         }
         Fl_Input vc {
           label {Airspeed:}
-          private xywh {225 230 150 25} type Float labelsize 12 textsize 12
+          private tooltip {Initial airspeed in knots} xywh {225 230 150 25} type Float labelsize 12 textsize 12
         }
         Fl_Input uBody {
           label {uBody:}
@@ -386,15 +390,43 @@ else
         }
         Fl_Value_Input heading {
           label {Heading:}
-          private xywh {225 140 150 25} labelsize 12 maximum 360 step 1 textsize 12
+          private tooltip {Initial aircraft heading (yaw) angle 0 to 360 degreesInitial aircraft heading (yaw) angle (Psi)} xywh {225 140 150 25} labelsize 12 maximum 360 step 1 textsize 12
         }
         Fl_Value_Input roll {
           label {Roll:}
-          private xywh {225 170 150 25} labelsize 12 minimum -180 maximum 180 step 0.1 textsize 12
+          private tooltip {Initial roll angle, (Phi)} xywh {225 170 150 25} labelsize 12 minimum -180 maximum 180 step 0.1 textsize 12
         }
         Fl_Value_Input pitch {
           label {Pitch:}
-          xywh {225 200 150 25} labelsize 12 minimum -180 maximum 180 step 0.1 textsize 12
+          tooltip {Initial pitch angle (Theta)} xywh {225 200 150 25} labelsize 12 minimum -180 maximum 180 step 0.1 textsize 12
+        }
+        Fl_Input vor {
+          label {VOR:}
+          private xywh {520 50 80 25} labelsize 12 textsize 12 deactivate
+        }
+        Fl_Input ndb {
+          label {NDB:}
+          private xywh {520 80 80 25} labelsize 12 textsize 12 deactivate
+        }
+        Fl_Input fix {
+          label {Fix:}
+          private xywh {520 110 80 25} labelsize 12 textsize 12 deactivate
+        }
+        Fl_Input offset_distance {
+          label {offset distance:}
+          private xywh {520 140 80 25} labelsize 12 textsize 12 deactivate
+        }
+        Fl_Input offset_azimuth {
+          label {offset azimuth:}
+          private xywh {520 170 80 25} labelsize 12 textsize 12 deactivate
+        }
+        Fl_Input glideslope {
+          label {Glide slope:}
+          private xywh {520 200 80 25} labelsize 12 textsize 12 deactivate
+        }
+        Fl_Input roc {
+          label {Climb rate:}
+          private xywh {520 230 80 25} labelsize 12 textsize 12 deactivate
         }
       }
       Fl_Group {page[5]} {
@@ -403,27 +435,27 @@ else
       } {
         Fl_Check_Button clouds {
           label Clouds
-          private xywh {180 55 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable 2D (flat) cloud layers} xywh {180 55 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button clouds3d {
           label {3D Clouds}
-          private xywh {180 85 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable 3D (volumetric) cloud layers} xywh {180 85 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button fullscreen {
           label {Full Screen}
-          private xywh {180 115 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable full screen mode} xywh {180 115 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button skyblend {
           label {Sky Blend}
-          private xywh {180 145 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable sky blending} xywh {180 145 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button textures {
           label Textures
-          private xywh {180 175 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable textures} xywh {180 175 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button wireframe {
           label Wireframe
-          private xywh {180 205 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable wireframe drawing mode} xywh {180 205 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Group {} {
           label Shading
@@ -457,22 +489,22 @@ else
         }
         Fl_Input geometry {
           label {Geometry:}
-          private xywh {225 280 120 25} labelsize 12 textsize 12
+          private tooltip {Window geometry, WxH} xywh {225 280 120 25} labelsize 12 textsize 12
         }
         Fl_Input visibility {
           label {Visibility:}
-          private xywh {225 310 120 25} type Float labelsize 12 textsize 12
+          private tooltip {Initial visibility distance} xywh {225 310 120 25} type Float labelsize 12 textsize 12
         }
         Fl_Group {} {
           private xywh {225 335 120 25}
         } {
           Fl_Round_Button vis_meters {
             label Meters
-            private xywh {225 335 60 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
+            private tooltip {Specify visibilty in meters} xywh {225 335 60 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
           }
           Fl_Round_Button vis_miles {
             label Miles
-            private xywh {285 335 60 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+            private tooltip {Specify visiblity in miles} xywh {285 335 60 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
         }
         Fl_Input view_offset {
@@ -481,7 +513,7 @@ else
         }
         Fl_Choice bpp {
           label {bpp:}
-          private xywh {450 310 120 25} down_box BORDER_BOX labelsize 12 textsize 12
+          private tooltip {Color depth (bits per pixel)} xywh {450 310 120 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           menuitem {} {
             label 16
@@ -498,7 +530,7 @@ else
         }
         Fl_Value_Input fov {
           label {FOV:}
-          private xywh {450 340 120 25} labelsize 12 minimum 1 maximum 360 value 60 textsize 12
+          private tooltip {Field of View angle} xywh {450 340 120 25} labelsize 12 minimum 1 maximum 360 value 60 textsize 12
         }
       }
       Fl_Group {page[6]} {
@@ -507,11 +539,11 @@ else
       } {
         Fl_Round_Button time_match_real {
           label {Time match real}
-          private xywh {175 50 140 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
+          private tooltip {Synchronize simulation time with real time} xywh {175 50 140 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
         }
         Fl_Round_Button time_match_local {
           label {Time match local}
-          private xywh {175 80 140 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+          private tooltip {Synchronize simulation time with local time} xywh {175 80 140 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
         }
         Fl_Round_Button start_date_sys {
           label {Start date sys}
@@ -560,33 +592,33 @@ else
           callback {if (o->value()) {
   httpd_port->take_focus();
 }}
-          private xywh {175 50 100 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable HTTP server} xywh {175 50 100 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Value_Input httpd_port {
           callback {httpd->set();}
-          private xywh {275 50 100 25} labeltype NO_LABEL labelsize 12 when 3 minimum 1025 maximum 65535 value 5500 textsize 12
+          private tooltip {HTTP server port} xywh {275 50 100 25} labeltype NO_LABEL labelsize 12 when 3 minimum 1025 maximum 65535 value 5500 textsize 12
         }
         Fl_Check_Button props {
           label props
           callback {if (o->value()) {
   props_port->take_focus();
 }}
-          private xywh {175 80 100 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable property server} xywh {175 80 100 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Value_Input props_port {
           callback {props->set();}
-          private xywh {275 80 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5501 textsize 12
+          private tooltip {Property server port} xywh {275 80 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5501 textsize 12
         }
         Fl_Check_Button jpg_httpd {
           label {jpg-httpd}
           callback {if (o->value()) {
   jpg_httpd_port->take_focus();
 }}
-          private xywh {175 110 100 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable screen shot HTTP server} xywh {175 110 100 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Value_Input jpg_httpd_port {
           callback {jpg_httpd->set();}
-          private xywh {275 110 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5502 textsize 12
+          private tooltip {Screen shot HTTP server port} xywh {275 110 100 25} labeltype NO_LABEL labelsize 12 minimum 1025 maximum 65535 value 5502 textsize 12
         }
         Fl_Check_Button network_olk {
           label {network-olk}
@@ -597,7 +629,7 @@ else
   net_hud->deactivate();
   net_id->deactivate();
 }}
-          private xywh {175 170 100 25} down_box DOWN_BOX labelsize 12
+          private xywh {175 170 100 25} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button net_hud {
           label {net-hud}
@@ -634,6 +666,10 @@ else
           private xywh {220 200 125 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           menuitem {} {
+            label atc610x
+            xywh {0 0 100 20}
+          }
+          menuitem {} {
             label atlas
             private xywh {0 0 100 20} labelsize 12
           }
@@ -652,6 +688,10 @@ else
           menuitem {} {
             label {native-fdm}
             private xywh {0 0 100 20} labelsize 12
+          }
+          menuitem {} {
+            label native
+            xywh {0 0 100 20}
           }
           menuitem {} {
             label nmea
@@ -680,7 +720,7 @@ else
         }
         Fl_Choice io_medium {
           label {Medium:}
-          callback {io_list_medium_update_cb( o );} open
+          callback {io_list_medium_update_cb( o );}
           private xywh {220 230 125 25} down_box BORDER_BOX labelsize 12 when 6 textsize 12 deactivate
         } {
           menuitem {} {
@@ -773,42 +813,25 @@ else
       }
       Fl_Group {page[9]} {
         label Properties
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser prop_list {
-          callback {if (o->value() > 0) {
-  prop_delete->activate();
-  prop_text->value( o->text(o->value()) );
-} else {
-  prop_text->value("");
-}}
+          callback {prop_list_select_cb( o );}
           private xywh {155 55 480 125} type Hold labeltype NO_LABEL labelsize 12 textsize 12
         }
         Fl_Button prop_delete {
           label Delete
-          callback {if (prop_list->value() > 0) {
-  prop_list->remove( prop_list->value() );
-  prop_text->value("");
-}}
+          callback {prop_delete_cb();}
           private xywh {580 200 55 25} labelsize 12 deactivate
         }
         Fl_Input prop_text {
           label {Property:}
-          callback {int n = prop_list->value();
-if (n > 0) {
-  prop_list->text( n, prop_text->value() );
-}}
+          callback {prop_list_update_cb();} selected
           private xywh {220 200 290 25} labelsize 12 when 1 textsize 12 deactivate
         }
-        Fl_Button prop_new {
+        Fl_Button {} {
           label New
-          callback {prop_text->value("");
-prop_text->activate();
-prop_text->parent()->redraw();
-prop_text->take_focus();
-prop_list->add("");
-prop_list->value( prop_list->size() );
-prop_delete->activate();}
+          callback {prop_new_cb();}
           private xywh {520 200 55 25} labelsize 12
         }
       }
@@ -818,10 +841,10 @@ prop_delete->activate();}
       } {}
       Fl_Group {page[11]} {
         label Environment
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser env_list {
-          callback {env_list_select_cb(o);} selected
+          callback {env_list_select_cb(o);}
           xywh {155 55 480 125} type Hold labelsize 12 textsize 12
         }
         Fl_Button {} {
@@ -873,6 +896,10 @@ run_fgfs_impl();} {}
   decl {void env_delete_cb();} {}
   decl {void env_list_update_cb();} {}
   decl {void env_list_select_cb( Fl_Browser* );} {}
+  decl {void prop_new_cb();} {}
+  decl {void prop_delete_cb();} {}
+  decl {void prop_list_select_cb( Fl_Browser* o );} {}
+  decl {void prop_list_update_cb();} {}
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void

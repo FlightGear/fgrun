@@ -332,11 +332,13 @@ void UserInterface::cb_io_protocol(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item UserInterface::menu_io_protocol[] = {
+ {"atc610x", 0,  0, 0, 0, 0, 0, 14, 56},
  {"atlas", 0,  0, 0, 0, 0, 0, 12, 56},
  {"garmin", 0,  0, 0, 0, 0, 0, 12, 56},
  {"joy-client", 0,  0, 0, 0, 0, 0, 12, 56},
  {"native-ctrls", 0,  0, 0, 0, 0, 0, 12, 56},
  {"native-fdm", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"native", 0,  0, 0, 0, 0, 0, 14, 56},
  {"nmea", 0,  0, 0, 0, 0, 0, 12, 56},
  {"opengc", 0,  0, 0, 0, 0, 0, 12, 56},
  {"pve", 0,  0, 0, 0, 0, 0, 12, 56},
@@ -431,48 +433,31 @@ void UserInterface::cb_socket_udp(Fl_Round_Button* o, void* v) {
 }
 
 inline void UserInterface::cb_prop_list_i(Fl_Browser* o, void*) {
-  if (o->value() > 0) {
-  prop_delete->activate();
-  prop_text->value( o->text(o->value()) );
-} else {
-  prop_text->value("");
-};
+  prop_list_select_cb( o );
 }
 void UserInterface::cb_prop_list(Fl_Browser* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_prop_list_i(o,v);
 }
 
 inline void UserInterface::cb_prop_delete_i(Fl_Button*, void*) {
-  if (prop_list->value() > 0) {
-  prop_list->remove( prop_list->value() );
-  prop_text->value("");
-};
+  prop_delete_cb();
 }
 void UserInterface::cb_prop_delete(Fl_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_prop_delete_i(o,v);
 }
 
 inline void UserInterface::cb_prop_text_i(Fl_Input*, void*) {
-  int n = prop_list->value();
-if (n > 0) {
-  prop_list->text( n, prop_text->value() );
-};
+  prop_list_update_cb();
 }
 void UserInterface::cb_prop_text(Fl_Input* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_prop_text_i(o,v);
 }
 
-inline void UserInterface::cb_prop_new_i(Fl_Button*, void*) {
-  prop_text->value("");
-prop_text->activate();
-prop_text->parent()->redraw();
-prop_text->take_focus();
-prop_list->add("");
-prop_list->value( prop_list->size() );
-prop_delete->activate();
+inline void UserInterface::cb_New_i(Fl_Button*, void*) {
+  prop_new_cb();
 }
-void UserInterface::cb_prop_new(Fl_Button* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_prop_new_i(o,v);
+void UserInterface::cb_New(Fl_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_New_i(o,v);
 }
 
 inline void UserInterface::cb_env_list_i(Fl_Browser* o, void*) {
@@ -482,11 +467,11 @@ void UserInterface::cb_env_list(Fl_Browser* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_env_list_i(o,v);
 }
 
-inline void UserInterface::cb_New_i(Fl_Button*, void*) {
+inline void UserInterface::cb_New1_i(Fl_Button*, void*) {
   env_new_cb();
 }
-void UserInterface::cb_New(Fl_Button* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_New_i(o,v);
+void UserInterface::cb_New1(Fl_Button* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_New1_i(o,v);
 }
 
 inline void UserInterface::cb_env_delete_i(Fl_Button*, void*) {
@@ -547,6 +532,7 @@ UserInterface::UserInterface() {
         o->callback((Fl_Callback*)cb_);
       }
       { Fl_Input* o = fg_root = new Fl_Input(250, 80, 355, 25, "FG_ROOT:");
+        o->tooltip("root data path");
         o->labelsize(12);
         o->textsize(12);
       }
@@ -555,6 +541,7 @@ UserInterface::UserInterface() {
         o->callback((Fl_Callback*)cb_1);
       }
       { Fl_Input* o = fg_scenery = new Fl_Input(250, 110, 355, 25, "FG_SCENERY:");
+        o->tooltip("Base scenery path");
         o->labelsize(12);
         o->textsize(12);
       }
@@ -591,6 +578,7 @@ UserInterface::UserInterface() {
         o->deactivate();
       }
       { Fl_Choice* o = control = new Fl_Choice(250, 200, 150, 25, "Control:");
+        o->tooltip("Primary control mode");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
         o->textsize(12);
@@ -618,6 +606,7 @@ UserInterface::UserInterface() {
         o->deactivate();
       }
       { Fl_Choice* o = runway = new Fl_Choice(525, 140, 80, 25, "Runway:");
+        o->tooltip("Available runways");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
         o->textsize(12);
@@ -631,48 +620,58 @@ UserInterface::UserInterface() {
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
       { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 120, 25, "Game Mode");
+        o->tooltip("Enable full screen game mode");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = splash_screen = new Fl_Check_Button(175, 80, 120, 25, "Splash Screen");
+        o->tooltip("Display splash screen at startup");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = intro_music = new Fl_Check_Button(175, 110, 120, 25, "Intro Music");
+        o->tooltip("Enable introduction music during start up");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = mouse_pointer = new Fl_Check_Button(175, 140, 120, 25, "Mouse Pointer");
+        o->tooltip("Enable extra mouse pointer");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = random_objects = new Fl_Check_Button(175, 170, 120, 25, "Random Objects");
+        o->tooltip("Enable random scenery objects");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = panel = new Fl_Check_Button(295, 50, 120, 25, "Panel");
+        o->tooltip("Enable the instrument panel");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = sound = new Fl_Check_Button(295, 80, 120, 25, "Sound");
+        o->tooltip("Enable sound effects");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = hud = new Fl_Check_Button(295, 110, 120, 25, "HUD");
+        o->tooltip("Enable Heads Up Display");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_hud);
       }
       { Fl_Check_Button* o = antialias_hud = new Fl_Check_Button(295, 140, 120, 25, "Anti-alias HUD");
+        o->tooltip("Enable anti-aliased HUD");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
       { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(295, 170, 120, 25, "Auto-coordination");
+        o->tooltip("Enable auto-coordinated turns.");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
@@ -684,6 +683,7 @@ UserInterface::UserInterface() {
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
       { Fl_Choice* o = fdm = new Fl_Choice(220, 60, 105, 25, "FDM:");
+        o->tooltip("Core Flight Dynamics Model");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
         o->textsize(12);
@@ -691,11 +691,13 @@ UserInterface::UserInterface() {
         o->menu(menu_fdm);
       }
       { Fl_Check_Button* o = notrim = new Fl_Check_Button(240, 90, 85, 25, "No Trim");
+        o->tooltip("Do not attempt to trim the model");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
       { Fl_Value_Input* o = model_hz = new Fl_Value_Input(220, 120, 105, 25, "Model Hz:");
+        o->tooltip("Run the FDM at this rate (iterations per second)");
         o->labelsize(12);
         o->minimum(1);
         o->maximum(1000);
@@ -704,6 +706,7 @@ UserInterface::UserInterface() {
         o->textsize(12);
       }
       { Fl_Value_Input* o = speed = new Fl_Value_Input(220, 150, 105, 25, "Speed:");
+        o->tooltip("Run FDM faster than real time");
         o->labelsize(12);
         o->minimum(1);
         o->maximum(1000);
@@ -713,12 +716,14 @@ UserInterface::UserInterface() {
       }
       { Fl_Group* o = new Fl_Group(220, 185, 105, 50);
         { Fl_Round_Button* o = on_ground = new Fl_Round_Button(220, 185, 105, 25, "On Ground");
+          o->tooltip("Start at ground level");
           o->type(102);
           o->down_box(FL_ROUND_DOWN_BOX);
           o->value(1);
           o->labelsize(12);
         }
         { Fl_Round_Button* o = in_air = new Fl_Round_Button(220, 210, 105, 25, "In Air");
+          o->tooltip("Start in the air");
           o->type(102);
           o->down_box(FL_ROUND_DOWN_BOX);
           o->labelsize(12);
@@ -726,6 +731,12 @@ UserInterface::UserInterface() {
         o->end();
       }
       { Fl_Input* o = wind = new Fl_Input(220, 240, 105, 25, "Wind:");
+        o->tooltip("Wind direction and speed, dir@speed");
+        o->labelsize(12);
+        o->textsize(12);
+      }
+      { Fl_Input* o = turbulence = new Fl_Input(220, 270, 105, 25, "Turbulence");
+        o->tooltip("Turbulence, 0.0 (calm) to 1.0 (severe)");
         o->labelsize(12);
         o->textsize(12);
       }
@@ -737,6 +748,7 @@ UserInterface::UserInterface() {
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
       { Fl_Check_Button* o = freeze = new Fl_Check_Button(175, 50, 120, 25, "Freeze");
+        o->tooltip("Start paused");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
@@ -756,19 +768,23 @@ UserInterface::UserInterface() {
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
       { Fl_Input* o = lon = new Fl_Input(225, 50, 150, 25, "Longitude:");
+        o->tooltip("Initial longitude, west is negative");
         o->labelsize(12);
         o->textsize(12);
       }
       { Fl_Input* o = lat = new Fl_Input(225, 80, 150, 25, "Latitude:");
+        o->tooltip("Initial latitude, south is negative");
         o->labelsize(12);
         o->textsize(12);
       }
       { Fl_Input* o = altitude = new Fl_Input(225, 110, 150, 25, "Altitude:");
+        o->tooltip("Initial altitude in feet");
         o->type(1);
         o->labelsize(12);
         o->textsize(12);
       }
       { Fl_Input* o = vc = new Fl_Input(225, 230, 150, 25, "Airspeed:");
+        o->tooltip("Initial airspeed in knots");
         o->type(1);
         o->labelsize(12);
         o->textsize(12);
@@ -786,12 +802,15 @@ UserInterface::UserInterface() {
         o->textsize(12);
       }
       { Fl_Value_Input* o = heading = new Fl_Value_Input(225, 140, 150, 25, "Heading:");
+        o->tooltip("Initial aircraft heading (yaw) angle 0 to 360 degreesInitial aircraft heading\
+ (yaw) angle (Psi)");
         o->labelsize(12);
         o->maximum(360);
         o->step(1);
         o->textsize(12);
       }
       { Fl_Value_Input* o = roll = new Fl_Value_Input(225, 170, 150, 25, "Roll:");
+        o->tooltip("Initial roll angle, (Phi)");
         o->labelsize(12);
         o->minimum(-180);
         o->maximum(180);
@@ -799,11 +818,47 @@ UserInterface::UserInterface() {
         o->textsize(12);
       }
       { Fl_Value_Input* o = pitch = new Fl_Value_Input(225, 200, 150, 25, "Pitch:");
+        o->tooltip("Initial pitch angle (Theta)");
         o->labelsize(12);
         o->minimum(-180);
         o->maximum(180);
         o->step(0.1);
         o->textsize(12);
+      }
+      { Fl_Input* o = vor = new Fl_Input(520, 50, 80, 25, "VOR:");
+        o->labelsize(12);
+        o->textsize(12);
+        o->deactivate();
+      }
+      { Fl_Input* o = ndb = new Fl_Input(520, 80, 80, 25, "NDB:");
+        o->labelsize(12);
+        o->textsize(12);
+        o->deactivate();
+      }
+      { Fl_Input* o = fix = new Fl_Input(520, 110, 80, 25, "Fix:");
+        o->labelsize(12);
+        o->textsize(12);
+        o->deactivate();
+      }
+      { Fl_Input* o = offset_distance = new Fl_Input(520, 140, 80, 25, "offset distance:");
+        o->labelsize(12);
+        o->textsize(12);
+        o->deactivate();
+      }
+      { Fl_Input* o = offset_azimuth = new Fl_Input(520, 170, 80, 25, "offset azimuth:");
+        o->labelsize(12);
+        o->textsize(12);
+        o->deactivate();
+      }
+      { Fl_Input* o = glideslope = new Fl_Input(520, 200, 80, 25, "Glide slope:");
+        o->labelsize(12);
+        o->textsize(12);
+        o->deactivate();
+      }
+      { Fl_Input* o = roc = new Fl_Input(520, 230, 80, 25, "Climb rate:");
+        o->labelsize(12);
+        o->textsize(12);
+        o->deactivate();
       }
       o->end();
     }
@@ -813,29 +868,35 @@ UserInterface::UserInterface() {
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
       { Fl_Check_Button* o = clouds = new Fl_Check_Button(180, 55, 120, 25, "Clouds");
+        o->tooltip("Enable 2D (flat) cloud layers");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = clouds3d = new Fl_Check_Button(180, 85, 120, 25, "3D Clouds");
+        o->tooltip("Enable 3D (volumetric) cloud layers");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = fullscreen = new Fl_Check_Button(180, 115, 120, 25, "Full Screen");
+        o->tooltip("Enable full screen mode");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = skyblend = new Fl_Check_Button(180, 145, 120, 25, "Sky Blend");
+        o->tooltip("Enable sky blending");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = textures = new Fl_Check_Button(180, 175, 120, 25, "Textures");
+        o->tooltip("Enable textures");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
       { Fl_Check_Button* o = wireframe = new Fl_Check_Button(180, 205, 120, 25, "Wireframe");
+        o->tooltip("Enable wireframe drawing mode");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
@@ -877,22 +938,26 @@ UserInterface::UserInterface() {
         o->end();
       }
       { Fl_Input* o = geometry = new Fl_Input(225, 280, 120, 25, "Geometry:");
+        o->tooltip("Window geometry, WxH");
         o->labelsize(12);
         o->textsize(12);
       }
       { Fl_Input* o = visibility = new Fl_Input(225, 310, 120, 25, "Visibility:");
+        o->tooltip("Initial visibility distance");
         o->type(1);
         o->labelsize(12);
         o->textsize(12);
       }
       { Fl_Group* o = new Fl_Group(225, 335, 120, 25);
         { Fl_Round_Button* o = vis_meters = new Fl_Round_Button(225, 335, 60, 25, "Meters");
+          o->tooltip("Specify visibilty in meters");
           o->type(102);
           o->down_box(FL_ROUND_DOWN_BOX);
           o->value(1);
           o->labelsize(12);
         }
         { Fl_Round_Button* o = vis_miles = new Fl_Round_Button(285, 335, 60, 25, "Miles");
+          o->tooltip("Specify visiblity in miles");
           o->type(102);
           o->down_box(FL_ROUND_DOWN_BOX);
           o->labelsize(12);
@@ -904,12 +969,14 @@ UserInterface::UserInterface() {
         o->textsize(12);
       }
       { Fl_Choice* o = bpp = new Fl_Choice(450, 310, 120, 25, "bpp:");
+        o->tooltip("Color depth (bits per pixel)");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
         o->textsize(12);
         o->menu(menu_bpp);
       }
       { Fl_Value_Input* o = fov = new Fl_Value_Input(450, 340, 120, 25, "FOV:");
+        o->tooltip("Field of View angle");
         o->labelsize(12);
         o->minimum(1);
         o->maximum(360);
@@ -924,12 +991,14 @@ UserInterface::UserInterface() {
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
       { Fl_Round_Button* o = time_match_real = new Fl_Round_Button(175, 50, 140, 25, "Time match real");
+        o->tooltip("Synchronize simulation time with real time");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
       { Fl_Round_Button* o = time_match_local = new Fl_Round_Button(175, 80, 140, 25, "Time match local");
+        o->tooltip("Synchronize simulation time with local time");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->labelsize(12);
@@ -989,11 +1058,13 @@ UserInterface::UserInterface() {
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
       { Fl_Check_Button* o = httpd = new Fl_Check_Button(175, 50, 100, 25, "httpd");
+        o->tooltip("Enable HTTP server");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_httpd);
       }
       { Fl_Value_Input* o = httpd_port = new Fl_Value_Input(275, 50, 100, 25);
+        o->tooltip("HTTP server port");
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->minimum(1025);
@@ -1004,11 +1075,13 @@ UserInterface::UserInterface() {
         o->when(3);
       }
       { Fl_Check_Button* o = props = new Fl_Check_Button(175, 80, 100, 25, "props");
+        o->tooltip("Enable property server");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_props);
       }
       { Fl_Value_Input* o = props_port = new Fl_Value_Input(275, 80, 100, 25);
+        o->tooltip("Property server port");
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->minimum(1025);
@@ -1018,11 +1091,13 @@ UserInterface::UserInterface() {
         o->callback((Fl_Callback*)cb_props_port);
       }
       { Fl_Check_Button* o = jpg_httpd = new Fl_Check_Button(175, 110, 100, 25, "jpg-httpd");
+        o->tooltip("Enable screen shot HTTP server");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_jpg_httpd);
       }
       { Fl_Value_Input* o = jpg_httpd_port = new Fl_Value_Input(275, 110, 100, 25);
+        o->tooltip("Screen shot HTTP server port");
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->minimum(1025);
@@ -1035,6 +1110,7 @@ UserInterface::UserInterface() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_network_olk);
+        o->deactivate();
       }
       { Fl_Check_Button* o = net_hud = new Fl_Check_Button(175, 195, 100, 25, "net-hud");
         o->down_box(FL_DOWN_BOX);
@@ -1171,7 +1247,6 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Browser* o = prop_list = new Fl_Browser(155, 55, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
@@ -1191,9 +1266,9 @@ UserInterface::UserInterface() {
         o->when(FL_WHEN_CHANGED);
         o->deactivate();
       }
-      { Fl_Button* o = prop_new = new Fl_Button(520, 200, 55, 25, "New");
+      { Fl_Button* o = new Fl_Button(520, 200, 55, 25, "New");
         o->labelsize(12);
-        o->callback((Fl_Callback*)cb_prop_new);
+        o->callback((Fl_Callback*)cb_New);
       }
       o->end();
     }
@@ -1208,6 +1283,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = env_list = new Fl_Browser(155, 55, 480, 125);
         o->type(2);
         o->labelsize(12);
@@ -1216,7 +1292,7 @@ UserInterface::UserInterface() {
       }
       { Fl_Button* o = new Fl_Button(520, 200, 55, 25, "New");
         o->labelsize(12);
-        o->callback((Fl_Callback*)cb_New);
+        o->callback((Fl_Callback*)cb_New1);
       }
       { Fl_Button* o = env_delete = new Fl_Button(580, 200, 55, 25, "Delete");
         o->labelsize(12);
