@@ -4,6 +4,7 @@
   * Restore window size and position at start up.
   * Added enable-ai-models option.
   * Support new Scenery/Terrain directory structure.
+  * Removed METAR button.
 
 * 0.4.3
 

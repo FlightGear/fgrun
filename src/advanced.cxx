@@ -613,13 +613,6 @@ void Advanced::cb_random_wind(Fl_Check_Button* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_random_wind_i(o,v);
 }
 
-inline void Advanced::cb_Metar_i(Fl_Button*, void*) {
-  metar_cb();
-}
-void Advanced::cb_Metar(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_Metar_i(o,v);
-}
-
 inline void Advanced::cb_cloud_layer__i(Fl_Choice*, void*) {
   cloud_layer_cb();
 }
@@ -762,6 +755,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 120, 25, "Game Mode");
         o->tooltip("Enable full screen game mode");
         o->down_box(FL_DOWN_BOX);
@@ -1643,7 +1637,6 @@ Advanced::Advanced() {
     { Fl_Group* o = page[13] = new Fl_Group(150, 0, 490, 430, "Weather");
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Group* o = new Fl_Group(155, 35, 230, 280);
         o->box(FL_ENGRAVED_FRAME);
         o->labeltype(FL_NO_LABEL);
@@ -1688,16 +1681,11 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->minimum(1);
         o->maximum(0);
-        o->step(0.01);
       }
       { Fl_Input* o = ceiling = new Fl_Input(240, 335, 80, 25, "Ceiling:");
         o->tooltip("FT_ASL[:THICKNESS_FT]");
         o->labelsize(12);
         o->textsize(12);
-      }
-      { Fl_Button* o = new Fl_Button(525, 40, 70, 25, "Metar...");
-        o->callback((Fl_Callback*)cb_Metar);
-        o->deactivate();
       }
       o->end();
     }

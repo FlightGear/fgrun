@@ -301,8 +301,6 @@ private:
 public:
   Fl_Input *ceiling;
 private:
-  inline void cb_Metar_i(Fl_Button*, void*);
-  static void cb_Metar(Fl_Button*, void*);
   Fl_Group *page[15];
   Fl_Choice *cloud_layer_;
   inline void cb_cloud_layer__i(Fl_Choice*, void*);
@@ -352,7 +350,6 @@ private:
   int cloud_coverage[ MAX_CLOUD_LAYERS ];
   double cloud_span[ MAX_CLOUD_LAYERS ];
   double cloud_transition[ MAX_CLOUD_LAYERS ];
-  void metar_cb();
   void fg_config_cb();
   std::string airport_id_;
   void random_wind_cb();

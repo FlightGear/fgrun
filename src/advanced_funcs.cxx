@@ -188,11 +188,6 @@ Advanced::fg_config_cb()
 }
 
 void
-Advanced::metar_cb()
-{
-}
-
-void
 Advanced::random_wind_cb()
 {
     if (random_wind->value())

@@ -11,13 +11,13 @@ decl {\#include <string>} {public
 decl {\#define MAX_CLOUD_LAYERS 5} {public
 } 
 
-class Advanced {open
+class Advanced {open selected
 } {
   Function {Advanced()} {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {91 152 640 480} type Double labelsize 12
+      private xywh {556 310 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -103,7 +103,7 @@ class Advanced {open
       }
       Fl_Group {page[1]} {
         label Features
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button game_mode {
           label {Game Mode}
@@ -201,7 +201,7 @@ else
           private xywh {505 150 100 25} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button ai_models {
-          label {AI Traffic} selected
+          label {AI Traffic}
           private tooltip {Enable AI traffic} xywh {345 230 120 25} down_box DOWN_BOX labelsize 12
         }
       }
@@ -656,7 +656,7 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output} open
+        label {Input/Output}
         private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
@@ -1067,7 +1067,7 @@ else
       }
       Fl_Group {page[13]} {
         label Weather
-        private xywh {150 0 490 430} labelfont 1 align 21 hide
+        private xywh {150 0 490 430} labelfont 1 align 21
       } {
         Fl_Group {} {open
           xywh {155 35 230 280} box ENGRAVED_FRAME labeltype NO_LABEL align 17
@@ -1096,16 +1096,11 @@ else
         }
         Fl_Value_Slider turbulence {
           label Turbulence
-          private tooltip {calm (0.0) to severe (1.0)} xywh {430 35 25 275} labelsize 12 minimum 1 maximum 0 step 0.01
+          private tooltip {calm (0.0) to severe (1.0)} xywh {430 35 25 275} labelsize 12 minimum 1 maximum 0
         }
         Fl_Input ceiling {
           label {Ceiling:}
           tooltip {FT_ASL[:THICKNESS_FT]} xywh {240 335 80 25} labelsize 12 textsize 12
-        }
-        Fl_Button {} {
-          label {Metar...}
-          callback {metar_cb();}
-          private xywh {525 40 70 25} deactivate
         }
       }
       Fl_Group {page[14]} {
@@ -1219,7 +1214,6 @@ else
   decl {int cloud_coverage[ MAX_CLOUD_LAYERS ];} {}
   decl {double cloud_span[ MAX_CLOUD_LAYERS ];} {}
   decl {double cloud_transition[ MAX_CLOUD_LAYERS ];} {}
-  decl {void metar_cb();} {}
   decl {void fg_config_cb();} {}
   decl {std::string airport_id_;} {}
   decl {void random_wind_cb();} {}
