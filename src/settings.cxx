@@ -36,6 +36,8 @@ UserInterface::save_settings_cb()
 	prefs.set( "fg_scenery", fg_scenery->value() );
     if (aircraft->text() != 0)
 	prefs.set( "aircraft", aircraft->text() );
+    if (runway->value() != 0)
+	prefs.set( "runway", runway->text() );
     if (airport->text() != 0)
 	prefs.set( "airport", airport->text() );
     if (browser->value() != 0)
@@ -174,6 +176,8 @@ UserInterface::load_settings_cb()
     default_aircraft = buf;
     prefs.get("airport", buf, "KSFO", buflen-1);
     default_airport = buf;
+//     prefs.get( "runway", buf, "<default>", buflen-1 );
+//     default_airport = buf;
     prefs.get("lang", buf, "", buflen-1);
     lang->value(buf);
     prefs.get("control", buf, "joystick", buflen-1);
