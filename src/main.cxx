@@ -1,4 +1,4 @@
-// main.cxx -- FlightGear Launcher
+// main.cxx -- FlightGear Launch Control
 //
 // Written by Bernie Bright, started Oct 2002.
 //
@@ -43,9 +43,8 @@ main( int argc, char* argv[] )
     ui = new FGRunUI_Posix;
 #endif
 
-    ui->load_settings();
-    ui->update_aircraft();
-    ui->update_airports();
+//     ui->update_aircraft();
+//     ui->update_airports();
 
     ui->show();
     return Fl::run();
