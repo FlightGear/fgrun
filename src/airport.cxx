@@ -22,15 +22,16 @@
 
 #ifdef _MSC_VER
 # pragma warning(disable: 4786)
-# define snprintf _snprintf
 #endif
 
-#include <iostream>
+#include <sstream>
 #include <deque>
 #include <vector>
 #include <string>
 #include <algorithm>
 #include <cctype>
+#include <iomanip>
+#include <iterator>
 
 #include <FL/Fl.h>
 #include <FL/filename.h>
@@ -42,6 +43,9 @@
 using std::deque;
 using std::string;
 using std::vector;
+using std::ostringstream;
+
+void load_airportdb_cb( void* v );
 
 /**
  * FIFO queue of directory names in which to search for airport files.
@@ -49,7 +53,7 @@ using std::vector;
 static deque< string > apt_dirs;
 
 /**
- * Array of (sorted) airport ICAO identifiers.
+ * Installed airport ICAO identifiers.
  */
 static vector< string > airports;
 
@@ -133,6 +137,7 @@ UserInterface::update_airports_cb()
 	dir += "/";
 	apt_dirs.push_back( dir );
 	Fl::add_idle( search_for_airports_cb, this );
+	Fl::add_idle( load_airportdb_cb, this );
     }
 }
 
@@ -157,9 +162,9 @@ reverse_runway( const string& rwy )
     else if (c != 'C')
 	c = 0;
 
-    char buf[8];
-    snprintf( buf, sizeof(buf)-1, "%0d%c", heading, c );
-    return string(buf);
+    ostringstream buf;
+    buf << std::setw(2) << std::setfill('0') << heading << c;
+    return buf.str();
 }
 
 void
@@ -191,35 +196,35 @@ UserInterface::update_runways()
 void
 UserInterface::load_airport_browser()
 {
+    std::vector< const apt_dat_t* > apts;
+
     apt_browser->clear();
 
     if (apt_show_installed->value())
     {
 	int count = airport->size() - 1;
+	apts.reserve( count );
 	for (int i = 0; i < count; ++i)
 	{
 	    const apt_dat_t* apt = airportdb_->find( airport->text(i) );
 	    if (apt != 0)
 	    {
-		char buf[ 80 ];
-		snprintf( buf, sizeof buf, "@f%-4.4s\t%-s",
-			  apt->id_.c_str(), apt->name_.c_str() );
-		apt_browser->add( buf );
+		apts.push_back( apt );
 	    }
 	}
     }
     else
     {
+	apts.reserve( airportdb_->size() );
 	AirportDB::const_iterator first( airportdb_->begin() ); 
 	AirportDB::const_iterator last( airportdb_->end() ); 
 	for (; first != last; ++first)
 	{
-	    char buf[ 80 ];
-	    snprintf( buf, sizeof buf, "@f%-4.4s\t%-s",
-		      first->id_.c_str(), first->name_.c_str() );
-	    apt_browser->add( buf );
+	    apts.push_back( &*first );
 	}
     }
+
+    apt_browser->set_airports( apts );
 }
 
 void
@@ -230,19 +235,18 @@ UserInterface::apt_browser_cb()
 void
 UserInterface::apt_id_cb()
 {
-    string id( apt_id->value() );
-    std::transform( id.begin(), id.end(), id.begin(), toupper );
-
-    if (apt_show_installed->value())
+    // Convert to uppercase.
+    const char* s = apt_id->value();
+    for (int i = 0; s[i] != 0; ++i)
     {
-    }
-    else
-    {
-	int i = airportdb_->ifind( id.c_str() );
-	if (i >= 0)
-	    apt_browser->select(i+1);
+	if (islower(s[i]))
+	{
+	    char c = toupper( s[i] );
+	    apt_id->replace( i, i+1, &c, 1 );
+	}
     }
 
+    apt_browser->select_id( s );
 }
 
 void
@@ -260,21 +264,15 @@ load_airportdb_cb( void* v )
 void
 UserInterface::load_airportdb()
 {
-    airportdb_ = new AirportDB;
-    if (!load_airports_->value())
-	return;
-
-    char buf[FL_PATH_MAX];
-    snprintf( buf, sizeof(buf), "%s/Airports/runways.dat.gz",
-	      fg_root->value() );
+    ostringstream buf;
+    buf << fg_root->value() << "/Airports/runways.dat.gz";
 
     try
     {
-	airportdb_->load( buf );
+	airportdb_->load( buf.str().c_str() );
     }
     catch (const char* msg)
     {
 	fl_alert( "Error loading airport database: %s", msg );
-	//delete airportdb_;
     }
 }
