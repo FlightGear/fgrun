@@ -59,12 +59,16 @@ Fl_Plib::load( const string& fname )
     }
 
     ssgEntity *obj = ssgLoad( (char*) fname.c_str() );
-    if (obj == 0)
-	return 0;
-
-    EyeDist = obj->getBSphere()->getRadius() + 5.f;
-    scene->addKid(obj);
     return obj;
+}
+
+void
+Fl_Plib::set_model( ssgEntity* obj, ssgEntity* bounding_obj )
+{
+    if ( bounding_obj == 0 )
+        bounding_obj = obj;
+    EyeDist = bounding_obj->getBSphere()->getRadius() + 5.f;
+    scene->addKid(obj);
 }
 
 void

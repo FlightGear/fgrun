@@ -246,6 +246,27 @@ dir_path( const SGPath& p )
     return SGPath( p.dir() );
 }
 
+/**
+ * Locate a named SSG node in a branch.
+ */
+static ssgEntity *
+find_named_node (ssgEntity * node, const char * name)
+{
+  char * node_name = node->getName();
+  if (node_name != 0 && !strcmp(name, node_name))
+    return node;
+  else if (node->isAKindOf(ssgTypeBranch())) {
+    int nKids = node->getNumKids();
+    for (int i = 0; i < nKids; i++) {
+      ssgEntity * result =
+        find_named_node(((ssgBranch*)node)->getKid(i), name);
+      if (result != 0)
+        return result;
+    }
+  } 
+  return 0;
+}
+
 void
 Wizard::preview_aircraft()
 {
@@ -295,6 +316,9 @@ Wizard::preview_aircraft()
 	    ssgEntity* model = preview->load( path.str() );
 	    if (model != 0)
 	    {
+                ssgEntity *bounding_obj = find_named_node( model, "Aircraft" );
+                preview->set_model( model, bounding_obj );
+
 		Fl::add_timeout( update_period, timeout_handler, this );
 	    }
             win->cursor( FL_CURSOR_DEFAULT );

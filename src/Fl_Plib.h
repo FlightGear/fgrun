@@ -14,6 +14,7 @@ public:
 
     void init();
     ssgEntity* load( const std::string& fname );
+    void set_model( ssgEntity* obj, ssgEntity* bounding_obj = 0 );
     void clear();
 
     void update();
