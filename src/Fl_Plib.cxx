@@ -30,7 +30,7 @@ Fl_Plib::init()
   if (go == 1)
     return;
 
-  make_current();
+  //make_current();
   ssgInit();
   ssgSetFOV( 60.0f, 0.0f );
   ssgSetNearFar( 1.0f, 700.0f );
