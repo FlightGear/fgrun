@@ -109,6 +109,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("wind_speed", wind_speed->value());
     prefs.set("turbulence", turbulence->value());
     prefs.set("ceiling", ceiling->value());
+    prefs.set("random_wind", random_wind->value());
 
     prefs.set("freeze", freeze->value());
     prefs.set("fuel_freeze", fuel_freeze->value());
@@ -350,6 +351,9 @@ Advanced::load_settings( Fl_Preferences& prefs )
     turbulence->value(dVal);
     prefs.get("ceiling", buf, "", buflen-1);
     ceiling->value(buf);
+    prefs.get("random_wind", iVal, 0);
+    random_wind->value( iVal );
+    random_wind->do_callback();
 
     prefs.get("freeze", iVal, 0);
     freeze->value(iVal);
@@ -470,53 +474,55 @@ Advanced::load_settings( Fl_Preferences& prefs )
     prefs.get( "multiplay2", buf, "", buflen-1 );
     multiplay2->value( buf );
 
+    io_list->clear();
     prefs.get( "io-count", iVal, 0 );
     for (i = 1; i <= iVal; ++i)
     {
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("io-item-%d", i), buf, "", buflen-1 );
-	io_list->add( "" );
-	io_list->text( i, buf );
+	io_list->add( buf );
     }
 
+    prop_list->clear();
     prefs.get( "property-count", iVal, 0 );
     for (i = 1; i <= iVal; ++i)
     {
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("property-item-%d", i),
 		   buf, "", buflen-1 );
-	prop_list->add( "" );
-	prop_list->text( i, buf );
+	prop_list->add( buf );
     }
 
+    env_list->clear();
     prefs.get( "env-count", iVal, 0 );
     for (i = 1; i <= iVal; ++i)
     {
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("env-var-%d", i), buf, "", buflen-1 );
-	env_list->add( "" );
-	env_list->text( i, buf );
+	env_list->add( buf );
     }
 
     prefs.get( "log-level", buf, "alert", buflen-1 );
     set_choice( log_level, buf );
+
+    trace_read_list->clear();
     prefs.get( "trace-read-count", iVal, 0 );
     for (i = 1; i <= iVal; ++i)
     {
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("trace-read-%d", i),
 		   buf, "", buflen-1 );
-	trace_read_list->add( "" );
-	trace_read_list->text( i, buf );
+	trace_read_list->add( buf );
     }
+
+    trace_write_list->clear();
     prefs.get( "trace-write-count", iVal, 0 );
     for (i = 1; i <= iVal; ++i)
     {
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("trace-write-%d", i),
 		   buf, "", buflen-1 );
-	trace_write_list->add( "" );
-	trace_write_list->text( i, buf );
+	trace_write_list->add( buf );
     }
 
     prefs.get( "nav1", buf, "", buflen-1 );
