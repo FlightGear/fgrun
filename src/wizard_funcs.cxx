@@ -444,10 +444,15 @@ Wizard::fg_root_update_cb()
     {
 	// Derive FG_SCENERY from FG_ROOT. 
 	string d( dir );
-	d.append( "/Scenery" );
+	d.append( "/Scenery/Terrain" );
 
 	if (!fl_filename_isdir( d.c_str() ))
-	    return;
+	{
+	    d = dir;
+	    d.append( "/Scenery" );
+	    if (!fl_filename_isdir( d.c_str() ))
+		return;
+	}
 
 	scenery_dir_list_->add( d.c_str() );
     }
