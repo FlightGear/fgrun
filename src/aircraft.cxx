@@ -22,13 +22,12 @@
 
 #ifdef _MSC_VER
 # pragma warning(disable: 4786)
-# define snprintf _snprintf
 #endif
 
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <iostream>
+#include <sstream>
 
 #include <string.h>
 #include <FL/Fl.h>
@@ -38,6 +37,7 @@
 
 using std::vector;
 using std::string;
+using std::ostringstream;
 
 struct Comp
 {
@@ -53,13 +53,16 @@ void
 UserInterface::update_aircraft()
 {
     aircraft->clear();
-    char buf[FL_PATH_MAX];
-    snprintf( buf, sizeof(buf), "%s/Aircraft/", fg_root->value() );
+
+    ostringstream buf;
+    buf << fg_root->value() << "/Aircraft/";
+
     dirent** files;
 
     // Search $FG_ROOT/Aircraft directory.
 
-    int num_files = fl_filename_list( buf, &files, fl_casenumericsort );
+    int num_files = fl_filename_list( buf.str().c_str(),
+				      &files, fl_casenumericsort );
     if (num_files < 0)
 	return;
 
