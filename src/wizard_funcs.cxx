@@ -238,6 +238,8 @@ Wizard::preview_aircraft()
 {
     Fl::remove_timeout( timeout_handler, this );
 
+    preview->make_current();
+
     preview->clear();
     preview->redraw();
     preview->init();
@@ -325,6 +327,8 @@ Wizard::next_cb()
 	}
 
  	prefs.set( "fg_scenery", fg_scenery.c_str() );
+
+	refresh_airports();
     }
     else if (wiz->value() == page[1])
     {
@@ -372,7 +376,6 @@ Wizard::next_cb()
 	// "Select location" page
 	if (!airports_->loaded())
 	{
-// 	    fl_cursor( FL_CURSOR_WAIT );
  	    win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
 	}
@@ -383,6 +386,7 @@ Wizard::next_cb()
 	ostr << fg_exe_->value() << "\n  ";
 	write_fgfsrc( ostr, "\n  " );
 	text->value( ostr.str().c_str() );
+	next->label( "Run" );
     }
 }
 
@@ -390,6 +394,7 @@ void
 Wizard::prev_cb()
 {
     next->activate();
+    next->label( "Next" );
     wiz->prev();
     if (wiz->value() == page[0])
     {
@@ -444,15 +449,9 @@ Wizard::fg_root_update_cb()
     {
 	// Derive FG_SCENERY from FG_ROOT. 
 	string d( dir );
-	d.append( "/Scenery/Terrain" );
-
+	d.append( "/Scenery" );
 	if (!fl_filename_isdir( d.c_str() ))
-	{
-	    d = dir;
-	    d.append( "/Scenery" );
-	    if (!fl_filename_isdir( d.c_str() ))
-		return;
-	}
+	    return;
 
 	scenery_dir_list_->add( d.c_str() );
     }
@@ -618,7 +617,7 @@ Wizard::aircraft_update()
     }
 
     if ( selected )
-        Fl::add_timeout( 0.5, delayed_preview, this );
+        Fl::add_timeout( 0.1, delayed_preview, this );
 }
 
 Wizard::~Wizard()
@@ -752,15 +751,23 @@ Wizard::refresh_airports( Fl_Widget*, void* v )
     static_cast<Wizard*>(v)->refresh_airports();
 }
 
+
 void
 Wizard::refresh_airports()
 {
-    win->cursor( FL_CURSOR_WAIT );
+//     win->cursor( FL_CURSOR_WAIT );
     delete_cache_file_cb();
 
     vector<string> v;
     for (int i = 1; i <= scenery_dir_list_->size(); ++i)
-	v.push_back( scenery_dir_list_->text(i) );
+    {
+	SGPath dir( scenery_dir_list_->text(i) );
+	dir.append( "Terrain" );
+	if (fl_filename_isdir( dir.c_str() ))
+	    v.push_back( dir.str() );
+	else
+	    v.push_back( scenery_dir_list_->text(i) );
+    }
 
     SGPath path( fg_root_->value() );
     path.append( "/Airports/runways.dat.gz" );
