@@ -128,18 +128,6 @@ AirportBrowser::name_cb()
     table_->select_name( name_->value() );
 }
 
-void
-AirportBrowser::show_all_cb( Fl_Widget* o, void* v )
-{
-    ((AirportBrowser*)v)->show_all();
-}
-
-void
-AirportBrowser::show_installed_cb( Fl_Widget* o, void* v )
-{
-    ((AirportBrowser*)v)->show_installed();
-}
-
 Fl_Color
 AirportBrowser::col_header_color() const
 {
@@ -207,6 +195,8 @@ AirportBrowser::idle_proc( )
 	std::sort( airports_.begin(), airports_.end(), apt_id_comp );
 	show_installed();
 	loaded_ = true;
+	id_->activate();
+	name_->activate();
     }
 }
 
@@ -287,11 +277,6 @@ AirportBrowser::scan_installed_airports( const string& dir )
 }
 
 void
-AirportBrowser::show_all()
-{
-}
-
-void
 AirportBrowser::show_installed()
 {
     static vector<const apt_dat_t*> apts;
@@ -332,6 +317,9 @@ AirportBrowser::init( const string& fg_root, const string& fg_scenery )
         ;
 
     loaded_ = false;
+    id_->deactivate();
+    name_->deactivate();
+
     // Load the file in the background.
     Fl::add_idle( idle_proc, this );
 

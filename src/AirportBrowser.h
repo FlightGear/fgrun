@@ -82,7 +82,6 @@ public:
     /**
      * 
      */
-    void show_all();
     void show_installed();
 
     int handle( int e );
@@ -103,8 +102,6 @@ private:
     void id_cb();
     static void name_cb( Fl_Widget*, void* );
     void name_cb();
-    static void show_all_cb( Fl_Widget*, void* );
-    static void show_installed_cb( Fl_Widget*, void* );
 
     const apt_dat_t* find( const std::string& id ) const;
 
