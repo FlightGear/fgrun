@@ -25,7 +25,6 @@
 #endif
 
 #include <string>
-#include <iostream>
 #include <FL/Fl.H>
 
 #include "wizard.h"

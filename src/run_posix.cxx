@@ -40,7 +40,6 @@
 #  include <termios.h>
 #endif
 
-#include <iostream>
 #include <string>
 #include <FL/filename.H>
 
@@ -49,7 +48,6 @@
 #include "logwin.h"
 
 using std::string;
-using std::cout;
 
 void
 Wizard::run_fgfs()

@@ -21,7 +21,6 @@
 // $Id$
 
 #include <string>
-#include <iostream>
 
 #include <FL/filename.h>
 

@@ -20,26 +20,23 @@
 //
 // $Id$
 
-#include "FGRun_Win32.h"
+#include "wizard.h"
 #include <windows.h>
 #include <FL/filename.h>
 
-FGRun_Win32::FGRun_Win32()
-{
-}
-
-FGRun_Win32::~FGRun_Win32()
-{
-}
-
 void
-FGRun_Win32::run_fgfs_impl()
+Wizard::run_fgfs()
 {
-    char exe[ FL_PATH_MAX ];
-    char root[ FL_PATH_MAX ];
+    const int buflen = FL_PATH_MAX;
+    char exe[ buflen ];
+    char root[ buflen ];
+    char buf[ buflen ];
 
-    fl_filename_absolute( exe, fg_exe->value() );
-    fl_filename_absolute( root, fg_root->value() );
+    prefs.get( "fg_exe", buf, "", buflen-1 );
+    fl_filename_absolute( exe, buf );
+
+    prefs.get( "fg_root", exe, "", FL_PATH_MAX-1);
+    fl_filename_absolute( root, buf );
 
     char* cmd = new char[ strlen(exe) +
                           strlen(root) +

@@ -23,7 +23,6 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include <iostream>
 #include <sstream>
 
 #include <FL/Fl.H>
@@ -253,7 +252,6 @@ Wizard::next_cb()
 
 	if (write_fgfsrc())
 	{
-	    std::cout << "launching flightgear\n";
 	    run_fgfs();
 	}
 	return;

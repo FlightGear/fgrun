@@ -20,7 +20,6 @@
 //
 // $Id$
 
-#include <iostream>
 #include <algorithm>
 #include <deque>
 #include <iterator>
@@ -34,7 +33,6 @@
 using std::string;
 using std::vector;
 using std::deque;
-using std::cout;
 
 AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
 				const char* l )
@@ -220,7 +218,6 @@ AirportBrowser::idle_proc( )
 
     if (gzeof( gzf_ ))
     {
-	std::cout << "loaded " << airports_.size() << " airports\n";
 	gzclose( gzf_ );
 	Fl::remove_idle( idle_proc, this );
 	std::sort( airports_.begin(), airports_.end(), apt_id_comp );
@@ -337,7 +334,6 @@ AirportBrowser::init( const string& fg_root, const string& fg_scenery )
     gzf_ = gzopen( fname.c_str(), "rb" );
     if (gzf_ == 0)
     {
-	std::cout << "Error opening '" << fname << "'\n";
         throw "gzopen error";
     }
 
