@@ -1,0 +1,27 @@
+;; -*- coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Tue Oct 15 09:42:53 2002
+;; Emacs version 21.2.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("X11" "fluid" "ui.c" "io_options_" "fdm" "fstrea" "IO_Options" "fog_fas" "strcmp" "medium_changed_cb" "fog_fastest" "c172" "load_aircraft" "scan_for_airc" "fg_exe" "airport"))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+
+;; Buffer section:
+(desktop-create-buffer 205
+  "/home/bbright/src/fg-utils/launcher/src/main.cxx"
+  "main.cxx"
+  'c++-mode
+  '(abbrev-mode)
+  71
+  '(nil nil)
+  nil
+  nil
+  nil)
+

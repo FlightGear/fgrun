@@ -1,0 +1,60 @@
+;; -*- coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Tue Oct 22 09:37:52 2002
+;; Emacs version 21.2.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("set_airpo" "default_airport" "units_" "units" "un" "feet" "default_airport" "output_text" "output_window" "stdout_cb" "output" "skyb" "shading" "->callback" "text" "fog"))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+
+;; Buffer section:
+(desktop-create-buffer 205
+  nil
+  "src"
+  'dired-mode
+  nil
+  589
+  '(nil nil)
+  t
+  '("/home/bbright/src/fg-utils/fgrun/src/")
+  nil)
+
+(desktop-create-buffer 205
+  "/home/bbright/src/fg-utils/fgrun/src/ui.h"
+  "ui.h"
+  'c++-mode
+  '(abbrev-mode)
+  1837
+  '(1 nil)
+  nil
+  nil
+  nil)
+
+(desktop-create-buffer 205
+  "/home/bbright/src/fltk-1.1.0/src/Fl_Menu.cxx"
+  "Fl_Menu.cxx"
+  'c++-mode
+  '(abbrev-mode)
+  1753
+  '(78 nil)
+  nil
+  nil
+  nil)
+
+(desktop-create-buffer 205
+  "/home/bbright/src/fg-utils/fgrun/src/FGRunUI.cxx"
+  "FGRunUI.cxx"
+  'c++-mode
+  '(abbrev-mode)
+  1239
+  '(867 nil)
+  nil
+  nil
+  nil)
+

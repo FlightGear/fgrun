@@ -1,0 +1,745 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0100 
+header_name {.h} 
+code_name {.cxx}
+class UserInterface {open
+} {
+  Function {UserInterface()} {open
+  } {
+    Fl_Window main_window {
+      label {FlightGear Launcher} open
+      private xywh {549 102 640 480}
+      code0 {\#include <string.h>} visible
+    } {
+      Fl_Button quit {
+        label Quit
+        callback {main_window->hide();}
+        private xywh {580 450 55 25}
+      }
+      Fl_Button save {
+        label Save
+        callback {save_settings();}
+        private xywh {520 450 55 25}
+      }
+      Fl_Button run {
+        label Run
+        callback {run_fgfs();}
+        private xywh {460 450 55 25}
+      }
+      Fl_Input fg_exe {
+        label {Executable:}
+        xywh {105 30 500 25}
+      }
+      Fl_Button {} {
+        label {...}
+        callback {select_fg_exe();}
+        xywh {610 30 25 25}
+      }
+      Fl_Input fg_root {
+        label {FG_ROOT:}
+        xywh {105 60 500 25}
+      }
+      Fl_Input fg_scenery {
+        label {FG_SCENERY:}
+        xywh {105 90 500 25}
+      }
+      Fl_Button {} {
+        label {...}
+        callback {select_fg_root();}
+        xywh {610 60 25 25}
+      }
+      Fl_Button {} {
+        label {...}
+        callback {select_fg_scenery();}
+        xywh {610 90 25 25}
+      }
+      Fl_Choice airport {
+        label Airport open
+        xywh {105 120 240 25} down_box BORDER_BOX
+      } {}
+      Fl_Choice aircraft {
+        label {Aircraft:} open
+        xywh {105 150 240 25} down_box BORDER_BOX
+      } {}
+      Fl_Tabs tabs {open
+        xywh {0 190 640 255} labeltype NO_LABEL
+      } {
+        Fl_Group general_tab {
+          label General open
+          xywh {0 215 640 230}
+        } {
+          Fl_Check_Button enable_game_mode {
+            label {Game Mode}
+            tooltip {Enable full screen game mode} xywh {30 225 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_splash_screen {
+            label {Splash Screen}
+            tooltip {Enable splash screen} xywh {30 255 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_intro_music {
+            label {Intro Music}
+            tooltip {Enable introduction music} xywh {30 285 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_mouse_pointer {
+            label {Mouse Pointer}
+            tooltip {Enable extra mouse pointer} xywh {30 315 140 25} down_box DOWN_BOX deactivate
+          }
+          Fl_Check_Button enable_random_objects {
+            label {Random Objects}
+            tooltip {Enable random scenery objects} xywh {30 345 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button freeze {
+            label Freeze
+            xywh {200 225 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button fuel_freeze {
+            label {Fuel Freeze}
+            xywh {200 255 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button clock_freeze {
+            label {Clock Freeze}
+            xywh {200 285 140 25} down_box DOWN_BOX
+          }
+          Fl_Choice control {
+            label {Control:}
+            tooltip {Primary control device} xywh {370 390 140 25} down_box BORDER_BOX
+          } {
+            menuitem {} {
+              label joystick
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label keyboard
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label mouse
+              xywh {0 0 100 20}
+            }
+          }
+          Fl_Check_Button auto_coordination {
+            label {Auto-coordination}
+            tooltip {Enable auto-coordination} xywh {200 315 140 25} down_box DOWN_BOX
+          }
+          Fl_Input browser {
+            label {Browser:}
+            tooltip {Path to your web browser} xywh {125 390 140 25}
+          }
+          Fl_Button {} {
+            label {...}
+            callback {select_browser();}
+            private xywh {270 390 25 25}
+          }
+          Fl_Group {} {open selected
+            xywh {370 225 140 55}
+          } {
+            Fl_Round_Button units_feet {
+              label feet
+              xywh {370 225 140 25} type Radio down_box ROUND_DOWN_BOX value 1
+            }
+            Fl_Round_Button units_meters {
+              label meters
+              xywh {370 255 140 25} type Radio down_box ROUND_DOWN_BOX
+            }
+          }
+        }
+        Fl_Group {} {
+          label Features
+          private xywh {0 215 640 230} hide
+        } {
+          Fl_Check_Button enable_hud {
+            label HUD
+            callback {if (o->value()) {
+  enable_antialias_hud->activate();
+} else {
+  enable_antialias_hud->deactivate();
+}}
+            tooltip {Enable Heads Up Display (HUD)} xywh {30 225 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_panel {
+            label Panel
+            tooltip {Enable instrument panel} xywh {30 285 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_sound {
+            label Sound
+            tooltip {Enable sound effects} xywh {30 315 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_antialias_hud {
+            label {Anti-alias HUD}
+            tooltip {Enable anti-aliased HUD} xywh {45 255 140 25} down_box DOWN_BOX deactivate
+          }
+        }
+        Fl_Group {} {
+          label Rendering
+          private tooltip {Enable 2D (flat) clouds} xywh {0 215 640 230} hide
+        } {
+          Fl_Group {} {
+            label Fog open
+            xywh {170 250 140 90} align 5
+          } {
+            Fl_Round_Button fog_disabled {
+              label Disabled
+              tooltip {Disable fog} xywh {170 255 120 25} type Radio down_box ROUND_DOWN_BOX
+            }
+            Fl_Round_Button fog_fastest {
+              label Fast
+              tooltip {Enable fastest fog/haze} xywh {170 285 120 25} type Radio down_box ROUND_DOWN_BOX
+            }
+            Fl_Round_Button fog_nicest {
+              label Nice
+              tooltip {Enable nicest fog/haze} xywh {170 315 120 25} type Radio down_box ROUND_DOWN_BOX value 1
+            }
+          }
+          Fl_Check_Button enable_clouds {
+            label Clouds
+            tooltip {Enable 2D (flat) clouds} xywh {30 225 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_clouds3d {
+            label {Clouds 3D}
+            tooltip {Enable 3D (volumetric) clouds} xywh {30 255 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_fullscreen {
+            label {Full Screen}
+            tooltip {Enable fullscreen mode} xywh {30 375 140 25} down_box DOWN_BOX
+          }
+          Fl_Check_Button enable_skyblend {
+            label {Sky Blend}
+            tooltip {Enable sky blending} xywh {30 285 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_textures {
+            label Textures
+            tooltip {Enable textures} xywh {30 315 140 25} down_box DOWN_BOX value 1
+          }
+          Fl_Check_Button enable_wireframe {
+            label Wireframe
+            tooltip {Enable wireframe drawing mode} xywh {30 345 140 25} down_box DOWN_BOX
+          }
+          Fl_Value_Input fov {
+            label {FOV:}
+            tooltip {Field of view (0.1 to 179.9 degrees)} xywh {205 345 45 25} minimum 0.1 maximum 179.9 step 0.1 value 60
+          }
+          Fl_Check_Button shading_flat {
+            label {Flat Shading}
+            tooltip {Enable flat shading} xywh {170 375 140 25} down_box DOWN_BOX
+          }
+        }
+        Fl_Group {} {
+          label {Flight Model}
+          private xywh {0 215 640 230} hide
+        } {
+          Fl_Choice fdm {
+            label {FDM:}
+            callback {if (strcmp(o->text(), "jsb") == 0) {
+  notrim->activate();
+} else {
+  notrim->deactivate();
+}}
+            tooltip {Core Flight Dynamics Model} xywh {80 230 100 25} down_box BORDER_BOX
+          } {
+            menuitem {} {
+              label ada
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label balloon
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label external
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label jsb
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label larcsim
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label magic
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label network
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label null
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label ufo
+              xywh {0 0 100 20}
+            }
+            menuitem {} {
+              label yasim
+              xywh {0 0 100 20}
+            }
+          }
+          Fl_Value_Input model_hz {
+            label {Model Hz:}
+            tooltip {Rate to run FDM at (iterations per second)} xywh {80 265 100 25} minimum 1 maximum 1000 step 1 value 120
+          }
+          Fl_Value_Input speed {
+            label {Speed:}
+            tooltip {Run FDM 'n' times faster than real time} xywh {80 300 100 25} minimum 1 maximum 1000 step 1 value 1
+          }
+          Fl_Check_Button notrim {
+            label {No Trim}
+            xywh {80 335 100 25} down_box DOWN_BOX
+          }
+          Fl_Group {} {open
+            xywh {80 365 100 55} labeltype NO_LABEL
+          } {
+            Fl_Round_Button on_ground {
+              label {On Ground}
+              tooltip {Start at ground level} xywh {80 365 100 25} type Radio down_box ROUND_DOWN_BOX value 1
+            }
+            Fl_Round_Button in_air {
+              label {In Air}
+              tooltip {Start in the air} xywh {80 395 100 25} type Radio down_box ROUND_DOWN_BOX
+            }
+          }
+        }
+        Fl_Group {} {
+          label Time
+          private xywh {0 215 640 230} hide
+        } {
+          Fl_Round_Button time_offset {
+            label {Time Offset = }
+            callback {if (o->value()) {
+  time_offset_text->activate();
+  time_offset_text->take_focus();
+  start_date_sys_text->deactivate();
+  start_date_lat_text->deactivate();
+  start_date_gmt_text->deactivate();
+}}
+            xywh {25 225 110 25} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Input time_offset_text {
+            label {input:}
+            xywh {165 225 85 25} labeltype NO_LABEL deactivate
+          }
+          Fl_Round_Button time_match_real {
+            label {Time Match Real}
+            callback {if (o->value()) {
+  time_offset_text->deactivate();
+  start_date_sys_text->deactivate();
+  start_date_lat_text->deactivate();
+  start_date_gmt_text->deactivate();
+}}
+            xywh {25 255 140 25} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Round_Button time_match_local {
+            label {Time Match Local}
+            callback {if (o->value()) {
+  time_offset_text->deactivate();
+  start_date_sys_text->deactivate();
+  start_date_lat_text->deactivate();
+  start_date_gmt_text->deactivate();
+}}
+            xywh {25 285 140 25} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Round_Button start_date_sys {
+            label {Start Date Sys = }
+            callback {if (o->value()) {
+  start_date_sys_text->activate();
+  start_date_sys_text->take_focus();
+  time_offset_text->deactivate();
+  start_date_lat_text->deactivate();
+  start_date_gmt_text->deactivate();
+}}
+            xywh {25 315 140 25} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Input start_date_sys_text {
+            label {input:}
+            xywh {165 315 85 25} labeltype NO_LABEL deactivate
+          }
+          Fl_Round_Button start_date_lat {
+            label {Start Date Lat =}
+            callback {if (o->value()) {
+  start_date_lat_text->activate();
+  start_date_lat_text->take_focus();
+  time_offset_text->deactivate();
+  start_date_sys_text->deactivate();
+  start_date_gmt_text->deactivate();
+}}
+            xywh {25 345 140 25} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Round_Button start_date_gmt {
+            label {Start Date GMT =}
+            callback {if (o->value()) {
+  start_date_gmt_text->activate();
+  start_date_gmt_text->take_focus();
+  time_offset_text->deactivate();
+  start_date_lat_text->deactivate();
+  start_date_sys_text->deactivate();
+}}
+            xywh {25 375 140 25} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Input start_date_lat_text {
+            label {input:}
+            xywh {165 345 85 25} labeltype NO_LABEL deactivate
+          }
+          Fl_Input start_date_gmt_text {
+            label {input:}
+            xywh {165 375 85 25} labeltype NO_LABEL deactivate
+          }
+        }
+        Fl_Group {} {
+          label {I/O} open
+          private xywh {0 215 640 230} hide
+        } {
+          Fl_Browser io_options_list {
+            callback {if (o->value()) {
+  io_edit->activate();
+  io_delete->activate();
+} else {
+  io_edit->deactivate();
+  io_delete->deactivate();
+}}
+            xywh {10 225 475 210} type Hold
+          }
+          Fl_Button {} {
+            label Add
+            user_data {"add"}
+            callback {add_io_item();}
+            xywh {490 225 50 25}
+          }
+          Fl_Button io_edit {
+            label Edit
+            user_data {"edit"}
+            callback {edit_io_item();}
+            xywh {490 255 50 25} deactivate
+          }
+          Fl_Button io_delete {
+            label Delete
+            callback {delete_io_item();}
+            xywh {490 285 50 25} deactivate
+          }
+        }
+        Fl_Group {} {
+          label Network
+          private tooltip {Enable telnet style property server} xywh {0 215 640 230} hide
+        } {
+          Fl_Check_Button httpd {
+            label {httpd:}
+            callback {if (o->value()) {
+  httpd_port->activate();
+  httpd_port->take_focus();
+} else {
+  httpd_port->deactivate();
+}}
+            tooltip {Enable http style property server} xywh {70 235 25 25} down_box DOWN_BOX align 4
+          }
+          Fl_Check_Button props {
+            label {props:}
+            callback {if (o->value()) {
+  props_port->activate();
+  props_port->take_focus();
+} else {
+  props_port->deactivate();
+}}
+            xywh {70 265 25 25} down_box DOWN_BOX align 4
+          }
+          Fl_Check_Button jpg_httpd {
+            label {jpg-httpd:}
+            callback {if (o->value()) {
+  jpg_httpd_port->activate();
+  jpg_httpd_port->take_focus();
+} else {
+  jpg_httpd_port->deactivate();
+}}
+            tooltip {Enable screen shot http server} xywh {70 295 25 25} down_box DOWN_BOX align 4
+          }
+          Fl_Input httpd_port {
+            label {input:}
+            xywh {105 235 75 25} labeltype NO_LABEL deactivate
+          }
+          Fl_Input props_port {
+            label {input:}
+            xywh {105 265 75 25} labeltype NO_LABEL deactivate
+          }
+          Fl_Input jpg_httpd_port {
+            label {input:}
+            xywh {105 295 75 25} labeltype NO_LABEL deactivate
+          }
+        }
+        Fl_Group {} {
+          label Props open
+          xywh {0 215 640 230} hide
+        } {
+          Fl_Browser props_list {
+            xywh {10 225 570 210} type Hold
+          }
+          Fl_Button {} {
+            label Add
+            xywh {585 225 50 25}
+          }
+          Fl_Button {} {
+            label Edit
+            xywh {585 255 50 25}
+          }
+          Fl_Button {} {
+            label Delete
+            xywh {585 285 50 25}
+          }
+        }
+      }
+      Fl_Button {} {
+        label Reset
+        callback {reset();}
+        tooltip {Reset all values to their defaults} xywh {400 450 55 25}
+      }
+      Fl_Button {} {
+        label Update
+        callback {update_airports();}
+        xywh {350 120 55 25}
+      }
+      Fl_Button {} {
+        label Update
+        callback {update_aircraft();}
+        xywh {350 150 55 25}
+      }
+    }
+    Fl_Window addOptionDlg {
+      label {I/O Options}
+      xywh {653 797 496 189} modal visible
+    } {
+      Fl_Choice io_protocol {
+        label {Protocol:}
+        xywh {70 10 115 25} down_box BORDER_BOX
+      } {
+        menuitem {} {
+          label garmin
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label joyclient
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label {native-ctrls}
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label {native-fdm}
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label nmea
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label opengc
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label pve
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label props
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label ray
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label rul
+          xywh {0 0 100 20}
+        }
+      }
+      Fl_Choice io_medium {
+        label {Medium:}
+        callback {io_medium_cb(o,v);}
+        xywh {70 40 115 25} down_box BORDER_BOX
+      } {
+        menuitem {} {
+          label file
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label serial
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label socket
+          xywh {0 0 100 20}
+        }
+      }
+      Fl_Button {} {
+        label Cancel
+        callback {addOptionDlg->hide();}
+        xywh {430 160 60 25}
+      }
+      Fl_Button io_option_ok {
+        label OK
+        callback {OptionDlg_ok_cb();}
+        xywh {365 160 60 25}
+      }
+      Fl_Value_Input io_hz {
+        label {Hz:}
+        xywh {70 70 115 25} minimum 1 maximum 1000 step 1 value 5
+      }
+      Fl_Choice io_dir {
+        label {Direction:}
+        xywh {70 100 115 25} down_box BORDER_BOX
+      } {
+        menuitem {} {
+          label in
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label out
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label bi
+          xywh {0 0 100 20}
+        }
+      }
+      Fl_Group file_group {
+        xywh {195 0 300 155} labeltype NO_LABEL hide
+      } {
+        Fl_Input file_name {
+          label {File:}
+          xywh {245 10 210 25}
+        }
+        Fl_Button file_button {
+          label {...}
+          xywh {460 10 25 25}
+        }
+      }
+      Fl_Group serial_group {
+        xywh {195 0 300 155} labeltype NO_LABEL hide
+      } {
+        Fl_Input serial_port {
+          label {Port:}
+          xywh {300 10 180 25}
+        }
+        Fl_Input serial_baud {
+          label {Baud Rate:}
+          xywh {300 40 180 25}
+        }
+      }
+      Fl_Group socket_group {
+        xywh {195 0 300 155} labeltype NO_LABEL hide
+      } {
+        Fl_Input socket_hostname {
+          label {Hostname:}
+          xywh {300 10 180 25}
+        }
+        Fl_Value_Input socket_port {
+          label {Port:}
+          xywh {300 40 80 25} minimum 1025 maximum 65535 step 1 value 5050
+        }
+        Fl_Round_Button socket_tcp {
+          label TCP
+          xywh {300 70 80 25} type Radio down_box ROUND_DOWN_BOX value 1
+        }
+        Fl_Round_Button socket_udp {
+          label UDP
+          xywh {380 70 80 25} type Radio down_box ROUND_DOWN_BOX
+        }
+      }
+    }
+    Fl_Window propertyDlg {
+      label Property
+      xywh {740 584 334 129} visible
+    } {
+      Fl_Input prop_name {
+        label {Name:}
+        xywh {65 10 265 25}
+      }
+      Fl_Input prop_value {
+        label {Value:}
+        xywh {65 40 265 25}
+      }
+      Fl_Button {} {
+        label Cancel
+        callback {propertyDlg_cancel();}
+        xywh {270 100 60 25}
+      }
+      Fl_Button {} {
+        label OK
+        callback {propertyDlg_ok();}
+        xywh {205 100 60 25}
+      }
+    }
+    Fl_Window output_window {
+      label Output open
+      xywh {166 879 640 480} resizable visible
+    } {
+      Fl_Text_Display output_text {
+        xywh {0 25 640 455}
+      }
+      Fl_Menu_Bar {} {open
+        xywh {0 0 640 25}
+      } {
+        submenu {} {
+          label {&File} open
+          xywh {0 0 100 20}
+        } {
+          menuitem {} {
+            label {&Save}
+            xywh {0 0 100 20} shortcut 0x40073
+          }
+          menuitem {} {
+            label {Save &as...}
+            xywh {0 0 100 20} shortcut 0x50073 divider
+          }
+          menuitem {} {
+            label {&Close}
+            callback {output_window->hide();}
+            xywh {0 0 100 20} shortcut 0x40077
+          }
+        }
+      }
+    }
+  }
+  Function {show()} {return_type void
+  } {
+    code {main_window->show();} {}
+  }
+  Function {hide()} {return_type void
+  } {
+    code {main_window->hide();} {}
+  }
+  Function {load_settings()} {open return_type {virtual void}
+  } {}
+  Function {save_settings()} {open return_type {virtual void}
+  } {}
+  Function {reset()} {open return_type {virtual void}
+  } {}
+  Function {run_fgfs()} {open return_type {virtual void}
+  } {}
+  Function {update_airports()} {open return_type {virtual void}
+  } {}
+  Function {update_aircraft()} {open return_type {virtual void}
+  } {}
+  Function {select_fg_exe()} {open return_type {virtual void}
+  } {}
+  Function {select_fg_root()} {open return_type {virtual void}
+  } {}
+  Function {select_fg_scenery()} {open return_type {virtual void}
+  } {}
+  Function {select_browser()} {open return_type {virtual void}
+  } {}
+  Function {add_io_item()} {open return_type {virtual void}
+  } {}
+  Function {edit_io_item()} {open return_type {virtual void}
+  } {}
+  Function {delete_io_item()} {open return_type {virtual void}
+  } {}
+  Function {OptionDlg_ok_cb()} {open return_type {virtual void}
+  } {}
+  Function {io_medium_cb(Fl_Choice*, void*)} {open return_type {virtual void}
+  } {}
+  Function {propertyDlg_ok()} {open return_type {virtual void}
+  } {}
+  Function {propertyDlg_cancel()} {open return_type {virtual void}
+  } {}
+} 
