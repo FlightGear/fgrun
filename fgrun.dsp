@@ -114,6 +114,10 @@ SOURCE=.\src\init.cxx
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\io.cxx
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\main.cxx
 # End Source File
 # Begin Source File
@@ -123,6 +127,10 @@ SOURCE=.\src\settings.cxx
 # Begin Source File
 
 SOURCE=.\src\UserInterface.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\util.cxx
 # End Source File
 # End Group
 # Begin Group "Header Files"
