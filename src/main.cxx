@@ -81,6 +81,7 @@ main( int argc, char* argv[] )
     ui->init();
     ui->show();
 
-    return Fl::run();
+    int retval = Fl::run();
     delete ui;
+    return retval;
 }
