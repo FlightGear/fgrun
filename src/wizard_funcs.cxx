@@ -763,6 +763,7 @@ Wizard::scenery_dir_down_cb()
 void
 Wizard::refresh_airports( Fl_Widget*, void* v )
 {
+    static_cast<Wizard*>(v)->delete_cache_file_cb();
     static_cast<Wizard*>(v)->refresh_airports();
 }
 
@@ -771,7 +772,6 @@ void
 Wizard::refresh_airports()
 {
 //     win->cursor( FL_CURSOR_WAIT );
-    delete_cache_file_cb();
 
     vector<string> v;
     for (int i = 1; i <= scenery_dir_list_->size(); ++i)
