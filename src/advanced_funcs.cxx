@@ -122,6 +122,7 @@ Advanced::init()
     page_list->add("Properties");
     page_list->add("Debugging");
     page_list->add("Environment");
+    page_list->add("Weather");
 
     page_list->select(1);
     show_page(0);
@@ -156,4 +157,16 @@ Advanced::exec( Fl_Preferences& prefs )
 	save_settings( prefs );
 
     return r;
+}
+
+void
+Advanced::wind_dial_cb()
+{
+    wind_hdg->value( wind_dial->value() );
+}
+
+void
+Advanced::wind_hdg_cb()
+{
+    wind_dial->value( wind_hdg->value() );
 }

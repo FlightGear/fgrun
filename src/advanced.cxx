@@ -584,6 +584,20 @@ void Advanced::cb_env_input(Fl_Input* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_env_input_i(o,v);
 }
 
+inline void Advanced::cb_wind_dial_i(Fl_Heading_Dial*, void*) {
+  wind_dial_cb();
+}
+void Advanced::cb_wind_dial(Fl_Heading_Dial* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_wind_dial_i(o,v);
+}
+
+inline void Advanced::cb_wind_hdg_i(Fl_Value_Input*, void*) {
+  wind_hdg_cb();
+}
+void Advanced::cb_wind_hdg(Fl_Value_Input* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_wind_hdg_i(o,v);
+}
+
 Advanced::Advanced() {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = main_window = new Fl_Double_Window(640, 480, "Advanced Options");
@@ -826,21 +840,6 @@ Advanced::Advanced() {
           o->labelsize(12);
         }
         o->end();
-      }
-      { Fl_Input* o = wind = new Fl_Input(220, 225, 105, 25, "Wind:");
-        o->tooltip("Wind direction and speed, dir@speed");
-        o->labelsize(12);
-        o->textsize(12);
-      }
-      { Fl_Value_Input* o = turbulence = new Fl_Value_Input(220, 255, 105, 25, "Turbulence:");
-        o->tooltip("Specify turbulence from 0.0 (calm) to 1.0 (severe)");
-        o->labelsize(12);
-        o->textsize(12);
-      }
-      { Fl_Input* o = ceiling = new Fl_Input(220, 285, 105, 25, "Ceiling:");
-        o->tooltip("Create an overcast ceiling, optionally with a specific thickness");
-        o->labelsize(12);
-        o->textsize(12);
       }
       o->end();
     }
@@ -1460,6 +1459,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Choice* o = log_level = new Fl_Choice(225, 45, 90, 25, "Log Level:");
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
@@ -1540,6 +1540,50 @@ Advanced::Advanced() {
         o->callback((Fl_Callback*)cb_env_input);
         o->when(FL_WHEN_CHANGED);
         o->deactivate();
+      }
+      o->end();
+    }
+    { Fl_Group* o = page[13] = new Fl_Group(150, 0, 490, 430, "Weather");
+      o->labelfont(1);
+      o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      { Fl_Value_Input* o = wind_speed = new Fl_Value_Input(240, 240, 80, 25, "Speed (kts):");
+        o->tooltip("Wind speed (kts)");
+        o->labelsize(12);
+        o->maximum(500);
+        o->step(0.1);
+        o->textsize(12);
+      }
+      { Fl_Value_Slider* o = turbulence = new Fl_Value_Slider(405, 45, 25, 275, "Turbulence");
+        o->tooltip("calm (0.0) to severe (1.0)");
+        o->labelsize(12);
+        o->minimum(1);
+        o->maximum(0);
+      }
+      { Fl_Heading_Dial* o = wind_dial = new Fl_Heading_Dial(215, 45, 130, 130);
+        o->type(1);
+        o->box(FL_OVAL_BOX);
+        o->color(FL_BACKGROUND_COLOR);
+        o->selection_color(FL_INACTIVE_COLOR);
+        o->labeltype(FL_NORMAL_LABEL);
+        o->labelfont(0);
+        o->labelsize(14);
+        o->labelcolor(FL_BLACK);
+        o->callback((Fl_Callback*)cb_wind_dial);
+        o->align(FL_ALIGN_BOTTOM);
+        o->when(FL_WHEN_CHANGED);
+      }
+      { Fl_Value_Input* o = wind_hdg = new Fl_Value_Input(240, 185, 80, 25, "Heading:");
+        o->tooltip("Direction wind is coming from.");
+        o->labelsize(12);
+        o->maximum(360);
+        o->step(0.1);
+        o->textsize(12);
+        o->callback((Fl_Callback*)cb_wind_hdg);
+      }
+      { Fl_Input* o = ceiling = new Fl_Input(240, 335, 80, 25, "Ceiling:");
+        o->tooltip("FT_ASL[:THICKNESS_FT]");
+        o->labelsize(12);
+        o->textsize(12);
       }
       o->end();
     }

@@ -14,7 +14,7 @@ class Advanced {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {145 91 640 480} type Double labelsize 12
+      private xywh {361 148 640 480} type Double labelsize 12
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -274,18 +274,6 @@ else
             label {In Air}
             private tooltip {Start in the air} xywh {220 195 105 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
-        }
-        Fl_Input wind {
-          label {Wind:}
-          private tooltip {Wind direction and speed, dir@speed} xywh {220 225 105 25} labelsize 12 textsize 12
-        }
-        Fl_Value_Input turbulence {
-          label {Turbulence:}
-          private tooltip {Specify turbulence from 0.0 (calm) to 1.0 (severe)} xywh {220 255 105 25} labelsize 12 textsize 12
-        }
-        Fl_Input ceiling {
-          label {Ceiling:}
-          private tooltip {Create an overcast ceiling, optionally with a specific thickness} xywh {220 285 105 25} labelsize 12 textsize 12
         }
       }
       Fl_Group {page[3]} {
@@ -931,11 +919,11 @@ else
         }
       }
       Fl_Group {page[11]} {
-        label Debugging open
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        label Debugging
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Choice log_level {
-          label {Log Level:} selected
+          label {Log Level:}
           private xywh {225 45 90 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           menuitem {} {
@@ -1057,6 +1045,34 @@ else
           private xywh {220 185 295 25} labelsize 12 when 1 textsize 12 deactivate
         }
       }
+      Fl_Group {page[13]} {
+        label Weather open
+        private xywh {150 0 490 430} labelfont 1 align 21
+      } {
+        Fl_Value_Input wind_speed {
+          label {Speed (kts):}
+          private tooltip {Wind speed (kts)} xywh {240 240 80 25} labelsize 12 maximum 500 step 0.1 textsize 12
+        }
+        Fl_Value_Slider turbulence {
+          label Turbulence
+          private tooltip {calm (0.0) to severe (1.0)} xywh {405 45 25 275} labelsize 12 minimum 1 maximum 0
+        }
+        Fl_Dial wind_dial {
+          callback {wind_dial_cb();}
+          private xywh {215 45 130 130} type Line
+          code0 {\#include "Fl_Heading_Dial.H"}
+          class Fl_Heading_Dial
+        }
+        Fl_Value_Input wind_hdg {
+          label {Heading:}
+          callback {wind_hdg_cb();}
+          private tooltip {Direction wind is coming from.} xywh {240 185 80 25} labelsize 12 maximum 360 step 0.1 textsize 12
+        }
+        Fl_Input ceiling {
+          label {Ceiling:} selected
+          tooltip {FT_ASL[:THICKNESS_FT]} xywh {240 335 80 25} labelsize 12 textsize 12
+        }
+      }
     }
   }
   decl {~Advanced();} {public
@@ -1079,4 +1095,6 @@ else
   decl {void fg_browser_cb();} {}
   decl {void load_settings(Fl_Preferences&);} {}
   decl {void save_settings(Fl_Preferences&);} {}
+  decl {void wind_dial_cb();} {}
+  decl {void wind_hdg_cb();} {}
 } 

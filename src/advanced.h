@@ -15,6 +15,8 @@
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Round_Button.H>
+#include <FL/Fl_Value_Slider.H>
+#include "Fl_Heading_Dial.H"
 
 class Advanced {
 public:
@@ -73,9 +75,6 @@ private:
   Fl_Value_Input *speed;
   Fl_Round_Button *on_ground;
   Fl_Round_Button *in_air;
-  Fl_Input *wind;
-  Fl_Value_Input *turbulence;
-  Fl_Input *ceiling;
   Fl_Check_Button *freeze;
   Fl_Check_Button *fuel_freeze;
   Fl_Check_Button *clock_freeze;
@@ -269,7 +268,6 @@ private:
   Fl_Button *trace_write_delete;
   inline void cb_trace_write_delete_i(Fl_Button*, void*);
   static void cb_trace_write_delete(Fl_Button*, void*);
-  Fl_Group *page[13];
 public:
   Fl_Browser *env_list;
 private:
@@ -283,7 +281,17 @@ private:
   Fl_Input *env_input;
   inline void cb_env_input_i(Fl_Input*, void*);
   static void cb_env_input(Fl_Input*, void*);
+  Fl_Group *page[14];
+  Fl_Value_Input *wind_speed;
+  Fl_Value_Slider *turbulence;
+  Fl_Heading_Dial *wind_dial;
+  inline void cb_wind_dial_i(Fl_Heading_Dial*, void*);
+  static void cb_wind_dial(Fl_Heading_Dial*, void*);
+  Fl_Value_Input *wind_hdg;
+  inline void cb_wind_hdg_i(Fl_Value_Input*, void*);
+  static void cb_wind_hdg(Fl_Value_Input*, void*);
 public:
+  Fl_Input *ceiling;
   ~Advanced();
   int exec(Fl_Preferences&);
 private:
@@ -303,5 +311,7 @@ private:
   void fg_browser_cb();
   void load_settings(Fl_Preferences&);
   void save_settings(Fl_Preferences&);
+  void wind_dial_cb();
+  void wind_hdg_cb();
 };
 #endif
