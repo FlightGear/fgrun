@@ -2,7 +2,7 @@ dnl (Process this file with autoconf to produce a configure script.)
 AC_REVISION($Revision$)dnl
 AC_PREREQ(2.54)
 
-AC_INIT([fgrun], [0.3.3], [bbright@users.sourceforge.net])
+AC_INIT([fgrun], [0.4.0], [bbright@users.sourceforge.net])
 AC_CONFIG_HEADER(src/config.h)
 AC_CONFIG_SRCDIR(src/main.cxx)
 
@@ -70,6 +70,12 @@ if test "x$have_x" = "xyes"; then
     AC_CHECK_LIB(SM, SmcOpenConnection)
     AC_CHECK_LIB(Xt, XtMalloc)
     AC_CHECK_LIB(Xmu, XmuLookupStandardColormap)
+
+    AC_SEARCH_LIBS(glNewList, [ GL GLcore MesaGL ])
+    if test "x$ac_cv_search_glNewList" = "x-lGLcore"; then
+        dnl if GLcore found, then also check for GL
+        AC_SEARCH_LIBS(glXCreateContext, GL)
+    fi
 fi
 
 dnl
@@ -91,6 +97,10 @@ AC_CHECK_HEADER(zlib.h,
   AC_CHECK_LIB(z, gzopen,
     AC_DEFINE([HAVE_LIBZ], 1, [Define if you have the <zlib.h> header file.])
     LIBS="$LIBS -lz"))
+
+AC_LANG_PUSH(C++)
+AC_CHECK_HEADER(plib/ul.h)
+AC_LANG_POP
 
 dnl
 dnl Checks for typedefs, structures, and compiler characteristics.
