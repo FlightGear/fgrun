@@ -75,7 +75,7 @@ dnl
 AC_HEADER_STDC
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
-AC_CHECK_HEADERS(fcntl.h windows.h)
+AC_CHECK_HEADERS(fcntl.h windows.h pty.h termios.h)
 
 if test "x$ac_cv_header_windows_h" = "xyes"; then
   AC_DEFINE([WIN32], 1, [Define if building on a Win32 platform])
@@ -98,6 +98,7 @@ dnl
 #AC_FUNC_STRFTIME
 AC_FUNC_FORK
 AC_CHECK_FUNCS(socket strdup strcasecmp atexit)
+AC_CHECK_FUNCS(openpty,, AC_CHECK_LIB(util,openpty, [AC_DEFINE(HAVE_OPENPTY) LIBS="$LIBS -lutil"]))
 
 dnl Check for fltk
 FLUID="fluid"
