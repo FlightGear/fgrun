@@ -17,14 +17,13 @@ class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
-  Function {UserInterface()} {open
-  } {
+  Function {UserInterface()} {} {
     Fl_Window main_window {
       label {FlightGear Launch Control}
       callback {if (Fl::event_key() == FL_Escape)
   return; // ignore Escape
 exit(0);} open
-      private xywh {604 153 640 480} type Double labelsize 12
+      private xywh {228 211 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -88,7 +87,7 @@ exit(0);} open
       }
       Fl_Group {page[0]} {
         label General
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Input fg_exe {
           label {Executable:}
@@ -101,7 +100,8 @@ exit(0);} open
         }
         Fl_Input fg_root {
           label {FG_ROOT:}
-          tooltip {root data path} xywh {250 80 355 25} labelsize 12 textsize 12
+          callback {fg_root_update_cb();} selected
+          tooltip {root data path} xywh {250 80 355 25} labelsize 12 when 8 textsize 12
         }
         Fl_Button {} {
           label {...}
@@ -110,6 +110,7 @@ exit(0);} open
         }
         Fl_Input fg_scenery {
           label {FG_SCENERY:}
+          callback {fg_scenery_update_cb();}
           private tooltip {Base scenery path} xywh {250 110 355 25} labelsize 12 textsize 12
         }
         Fl_Button {} {
@@ -754,8 +755,8 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output} open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        label {Input/Output}
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -932,7 +933,7 @@ else
             private xywh {290 380 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
         }
-        Fl_Group generic_group {open selected
+        Fl_Group generic_group {open
           private xywh {150 380 225 25} hide
         } {
           Fl_Input io_generic_file {
@@ -1237,6 +1238,8 @@ else
   decl {void fg_scenery_cb();} {}
   decl {void fg_browser_cb();} {}
   decl {void help_about_cb();} {}
+  decl {void fg_root_update_cb();} {}
+  decl {void fg_scenery_update_cb();} {}
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void

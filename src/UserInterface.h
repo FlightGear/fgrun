@@ -55,9 +55,13 @@ private:
 public:
   Fl_Input *fg_root;
 private:
+  inline void cb_fg_root_i(Fl_Input*, void*);
+  static void cb_fg_root(Fl_Input*, void*);
   inline void cb_1_i(Fl_Button*, void*);
   static void cb_1(Fl_Button*, void*);
   Fl_Input *fg_scenery;
+  inline void cb_fg_scenery_i(Fl_Input*, void*);
+  static void cb_fg_scenery(Fl_Input*, void*);
   inline void cb_2_i(Fl_Button*, void*);
   static void cb_2(Fl_Button*, void*);
   Fl_Choice *airport;
@@ -390,6 +394,8 @@ private:
   void fg_scenery_cb();
   void fg_browser_cb();
   void help_about_cb();
+  void fg_root_update_cb();
+  void fg_scenery_update_cb();
 };
 void update_aircraft_cb(void* v);
 #endif

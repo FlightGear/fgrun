@@ -91,11 +91,25 @@ void UserInterface::cb_(Fl_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb__i(o,v);
 }
 
+inline void UserInterface::cb_fg_root_i(Fl_Input*, void*) {
+  fg_root_update_cb();
+}
+void UserInterface::cb_fg_root(Fl_Input* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_fg_root_i(o,v);
+}
+
 inline void UserInterface::cb_1_i(Fl_Button*, void*) {
   fg_root_cb();
 }
 void UserInterface::cb_1(Fl_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_1_i(o,v);
+}
+
+inline void UserInterface::cb_fg_scenery_i(Fl_Input*, void*) {
+  fg_scenery_update_cb();
+}
+void UserInterface::cb_fg_scenery(Fl_Input* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_fg_scenery_i(o,v);
 }
 
 inline void UserInterface::cb_2_i(Fl_Button*, void*) {
@@ -781,7 +795,6 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Input* o = fg_exe = new Fl_Input(250, 50, 355, 25, "Executable:");
         o->tooltip("Filename of FlightGear executable");
         o->labelsize(12);
@@ -795,6 +808,8 @@ UserInterface::UserInterface() {
         o->tooltip("root data path");
         o->labelsize(12);
         o->textsize(12);
+        o->callback((Fl_Callback*)cb_fg_root);
+        o->when(FL_WHEN_ENTER_KEY);
       }
       { Fl_Button* o = new Fl_Button(610, 80, 25, 25, "...");
         o->labelsize(12);
@@ -804,6 +819,7 @@ UserInterface::UserInterface() {
         o->tooltip("Base scenery path");
         o->labelsize(12);
         o->textsize(12);
+        o->callback((Fl_Callback*)cb_fg_scenery);
       }
       { Fl_Button* o = new Fl_Button(610, 110, 25, 25, "...");
         o->labelsize(12);
@@ -1473,6 +1489,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 55, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
