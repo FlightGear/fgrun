@@ -33,6 +33,13 @@ void UserInterface::cb_log_window(Fl_Menu_* o, void* v) {
   ((UserInterface*)(o->parent()->user_data()))->cb_log_window_i(o,v);
 }
 
+inline void UserInterface::cb_About_i(Fl_Menu_*, void*) {
+  help_about_cb();
+}
+void UserInterface::cb_About(Fl_Menu_* o, void* v) {
+  ((UserInterface*)(o->parent()->user_data()))->cb_About_i(o,v);
+}
+
 Fl_Menu_Item UserInterface::menu_[] = {
  {"&File", 0,  0, 0, 64, 0, 0, 12, 56},
  {"&Save", 0x40073,  (Fl_Callback*)UserInterface::cb_Save, 0, 128, 0, 0, 12, 56},
@@ -42,7 +49,7 @@ Fl_Menu_Item UserInterface::menu_[] = {
  {"&Log Window", 0x5006c,  (Fl_Callback*)UserInterface::cb_log_window, 0, 4, 0, 0, 12, 56},
  {0},
  {"&Help", 0,  0, 0, 64, 0, 0, 12, 56},
- {"&About...", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"&About...", 0,  (Fl_Callback*)UserInterface::cb_About, 0, 0, 0, 0, 12, 56},
  {0},
  {0}
 };

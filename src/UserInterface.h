@@ -35,6 +35,8 @@ private:
   static Fl_Menu_Item *log_window;
   inline void cb_log_window_i(Fl_Menu_*, void*);
   static void cb_log_window(Fl_Menu_*, void*);
+  inline void cb_About_i(Fl_Menu_*, void*);
+  static void cb_About(Fl_Menu_*, void*);
   Fl_Browser *page_list;
   inline void cb_page_list_i(Fl_Browser*, void*);
   static void cb_page_list(Fl_Browser*, void*);
@@ -383,6 +385,7 @@ private:
   void fg_root_cb();
   void fg_scenery_cb();
   void fg_browser_cb();
+  void help_about_cb();
 };
 void update_aircraft_cb(void* v);
 #endif

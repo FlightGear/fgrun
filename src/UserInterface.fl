@@ -23,7 +23,7 @@ class UserInterface {open
       callback {if (Fl::event_key() == FL_Escape)
   return; // ignore Escape
 exit(0);} open
-      private xywh {463 56 640 480} type Double labelsize 12
+      private xywh {594 113 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -60,7 +60,8 @@ exit(0);} open
         } {
           menuitem {} {
             label {&About...}
-            xywh {0 0 100 20} labelsize 12
+            callback {help_about_cb();}
+            private xywh {0 0 100 20} labelsize 12
           }
         }
       }
@@ -1234,6 +1235,8 @@ else
   decl {void fg_root_cb();} {}
   decl {void fg_scenery_cb();} {}
   decl {void fg_browser_cb();} {}
+  decl {void help_about_cb();} {selected
+  }
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void

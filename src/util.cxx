@@ -20,6 +20,12 @@
 //
 // $Id$
 
+#ifdef HAVE_CONFIG_H
+#  include "config.h"
+#endif
+
+#include <FL/fl_ask.h>
+
 #include "UserInterface.h"
 
 UserInterface::~UserInterface()
@@ -120,3 +126,12 @@ UserInterface::list_update_cb( Fl_Browser* browser,
     }
 }
 
+void
+UserInterface::help_about_cb()
+{
+    fl_message( "FlightGear Launch Control\n"
+		"Version " PACKAGE_VERSION "\n"
+		"Copyright 2003 Bernie Bright\n"
+		"This program is free software distributed under the terms\n"
+		"of the GNU General Public License, Version 2 June 1991" );
+}
