@@ -2,6 +2,12 @@
 version 1.0102 
 header_name {.h} 
 code_name {.cxx}
+declblock {\#if defined(_MSC_VER)} {open after {\#endif}
+} {
+  decl {\#pragma warning(disable: 4786)} {}
+  decl {\#define snprintf _snprintf} {}
+} 
+
 decl {\#include <string.h>} {} 
 
 decl {\#include <FL/Fl_File_Chooser.h>} {} 
@@ -38,11 +44,10 @@ class UserInterface {open
 } {
   decl {std::string default_aircraft;} {}
   decl {std::string default_airport;} {}
-  Function {UserInterface()} {open
-  } {
+  Function {UserInterface()} {} {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {615 79 640 480} labelsize 12 visible
+      private xywh {644 219 640 480} labelsize 12 visible
     } {
       Fl_Menu_Bar {} {
         private xywh {0 0 640 25} labelsize 12 textsize 12
@@ -210,7 +215,7 @@ if (p != 0)
           private xywh {250 305 355 25} labelsize 12 textsize 12 deactivate
         }
         Fl_Button {} {
-          label {...} selected
+          label {...}
           xywh {610 305 25 25} labelsize 12 deactivate
         }
       }
@@ -942,11 +947,11 @@ update_airports();} {}
   } {
     code {main_window->show();} {}
   }
-  Function {update_aircraft()} {open private return_type void
+  Function {update_aircraft()} {private return_type void
   } {
     code {aircraft->clear();
 char buf[FL_PATH_MAX];
-snprintf( buf, sizeof(buf), "%s/Aircraft", fg_root->value() );
+snprintf( buf, sizeof(buf), "%s/Aircraft/", fg_root->value() );
 dirent** files;
 
 // Search $FG_ROOT/Aircraft directory.
@@ -973,14 +978,14 @@ for (int i = 0; i < num_files; ++i)
 
 free( files );} {}
   }
-  Function {run_fgfs()} {open return_type void
+  Function {run_fgfs()} {return_type void
   } {
     code {write_dot_fgfsrc();
 run_fgfs_impl();} {}
   }
-  Function {run_fgfs_impl()} {open return_type {virtual void}
+  Function {run_fgfs_impl()} {return_type {virtual void}
   } {}
-  Function {load_settings()} {open return_type void
+  Function {load_settings()} {return_type void
   } {
     code {Fl_Preferences prefs(Fl_Preferences::USER, "flightgear.org", "fgrun");
 const int buflen = 1024;
@@ -1165,7 +1170,7 @@ start_date_lat_value->value(buf);
 
 //end} {}
   }
-  Function {save_settings()} {open return_type void
+  Function {save_settings()} {return_type void
   } {
     code {Fl_Preferences prefs(Fl_Preferences::USER, "flightgear.org", "fgrun");
 if (fg_exe->value() != 0)
@@ -1326,7 +1331,11 @@ if (n > 0) {
   Function {write_dot_fgfsrc()} {private return_type void
   } {
     code {char fname[ FL_PATH_MAX ];
+\#if defined(_MSC_VER)
+_snprintf( fname, sizeof(fname), "%s\\\\system.fgfsrc", fg_root->value() );
+\#else
 fl_filename_expand( fname, "~/.fgfsrc" );
+\#endif
 ofstream ofs( fname );
 if (ofs) {
   ofs << "--fg-root=" << fg_root->value()
@@ -1492,18 +1501,20 @@ if (ofs) {
   }
   decl {friend void update_aircraft_cb(void*);} {}
   decl {friend void search_for_airports_cb(void*);} {}
-  Function {update_airports()} {open return_type void
+  Function {update_airports()} {return_type void
   } {
     code {if (fg_scenery->size() > 0
     && fl_filename_isdir(fg_scenery->value())) {
   airports.clear();
-  apt_dirs.push_back( string(fg_scenery->value()) );
+  string dir = fg_scenery->value();
+  dir += "/";
+  apt_dirs.push_back( dir );
   Fl::add_idle( search_for_airports_cb, this );
 }} {}
   }
 } 
 
-Function {update_aircraft_cb(void* v)} {open return_type void
+Function {update_aircraft_cb(void* v)} {return_type void
 } {
   code {((UserInterface*)v)->update_aircraft();
 Fl::remove_idle( update_aircraft_cb, v );} {}
@@ -1517,7 +1528,7 @@ int n = fl_filename_list( dir.c_str(), &files, fl_numericsort );
 if (n > 0) {
   for (int i = 0; i < n; ++i) {
     if (fl_filename_match( files[i]->d_name,
-                           "[ew][0-9][0-9][0-9][ns][0-9][0-9]")) {
+                           "[ew][0-9][0-9][0-9][ns][0-9][0-9]*")) {
       // Found a scenery sub-directory.
       string d = dir;
       d += "/";
@@ -1547,8 +1558,9 @@ if (apt_dirs.empty()) {
     UserInterface* ui = (UserInterface*)v;
     ui->airport->clear();
     std::sort( airports.begin(), airports.end() );
-    vector<string>::iterator i = airports.begin();
-    vector<string>::iterator end = airports.end();
+    typedef vector<string> StringVec;
+    StringVec::iterator i = airports.begin();
+    StringVec::iterator end = airports.end();
     int index = 0;
     for (; i != end; ++i) {
       index = ui->airport->add( i->c_str() );
@@ -1557,5 +1569,6 @@ if (apt_dirs.empty()) {
     }
     ui->airport->activate();
   }
-}} {}
+}} {selected
+  }
 } 
