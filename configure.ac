@@ -2,7 +2,7 @@ dnl (Process this file with autoconf to produce a configure script.)
 AC_REVISION($Revision$)dnl
 AC_PREREQ(2.54)
 
-AC_INIT([fgrun], [0.3.1], [bbright@users.sourceforge.net])
+AC_INIT([fgrun], [0.3.2], [bbright@users.sourceforge.net])
 AC_CONFIG_HEADER(src/config.h)
 AC_CONFIG_SRCDIR(src/main.cxx)
 
@@ -103,6 +103,8 @@ AC_TYPE_SIGNAL
 dnl
 dnl Checks for library functions.
 dnl
+
+AC_CHECK_FUNCS(strdup strlcat strlcpy)
 
 AC_FUNC_FORK
 AC_CHECK_FUNCS(waitpid)
