@@ -339,21 +339,49 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     }
 
     // Avionics
-// 	if (nav1->size() > 1)
-// 	    os << pfx << "--nav1=" << nav1->value();
-// 	if (nav2->size() > 1)
-// 	    os << pfx << "--nav2=" << nav2->value();
-// 	if (adf->size() > 1)
-// 	    os << pfx << "--adf=" << adf->value();
-// 	if (dme->value())
-// 	{
-// 	    if (dme_nav1->value())
-// 		os << pfx << "--dme=nav1";
-// 	    else if (dme_nav2->value())
-// 		os << pfx << "--dme=nav2";
-// 	    else if (dme_int->value())
-// 		os << pfx << "--dme=" << dme_int_freq->value();
-// 	}
+    if (prefs.get( "nav1", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--nav1=" << buf;
+    if (prefs.get( "nav2", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--nav2=" << buf;
+    if (prefs.get( "adf", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--adf=" << buf;
+    prefs.get( "dme", buf, "disabled", buflen-1 );
+    if (strcmp( "disabled", buf ) != 0)
+	os << pfx << "-dme=" << buf;
+
+    // Clouds
+    for (i = 0; i < 5; ++i)
+    {
+	double el, th;
+
+	prefs.get( Fl_Preferences::Name("layer-%d-elevation-ft", i), el, 0.0 );
+	prefs.get( Fl_Preferences::Name("layer-%d-thickness-ft", i), th, 0.0 );
+	if (el > 0.0 && th > 0.0 )
+	{
+	    os << pfx << "--prop:/environment/clouds/layer[" << i
+	       << "]/elevation-ft=" << el;
+
+	    os << pfx << "--prop:/environment/clouds/layer[" << i
+	       << "]/thickness-ft=" << th;
+
+	    prefs.get( Fl_Preferences::Name("layer-%d-coverage", i),
+		       buf, "clear", buflen-1);
+	    os << pfx << "--prop:/environment/clouds/layer[" << i
+	       << "]/coverage=" << buf;
+
+	    prefs.get( Fl_Preferences::Name("layer-%d-transition-ft", i),
+		       dVal, 0.0 );
+	    if (dVal > 0.0)
+		os << pfx << "--prop:/environment/clouds/layer[" << i
+		   << "]/transition-ft=" << dVal;
+
+	    prefs.get( Fl_Preferences::Name("layer-%d-span-m", i),
+		       dVal, 0.0 );
+	    if (dVal > 0.0)
+		os << pfx << "--prop:/environment/clouds/layer[" << i
+		   << "]/span-m=" << dVal;
+	}
+    }
 
     return 1;
 }
