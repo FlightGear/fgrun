@@ -255,10 +255,10 @@ Wizard::preview_aircraft()
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
             ssgEntity* model = preview->load( path.str() );
-//             if (model != 0)
-//             {
-//                 Fl::add_timeout( update_period, timeout_handler, this );
-//             }
+            if (model != 0)
+            {
+                Fl::add_timeout( update_period, timeout_handler, this );
+            }
             win->cursor( FL_CURSOR_DEFAULT );
             preview->redraw();
         }
