@@ -8,6 +8,8 @@ else
 platform_srcs = FGRun_Posix.cxx FGRun_Posix.h
 endif
 
+BUILT_SOURCES = UserInterface.cxx UserInterface.h
+
 bin_PROGRAMS = fgrun
 
 fgrun_SOURCES = \
@@ -43,7 +45,7 @@ fgrun_LDADD = -lfltk $(win32_libs)
 FLUID = @FLUID@
 
 UserInterface.cxx UserInterface.h: UserInterface.fl
-	$(FLUID) -c $(top_srcdir)/UserInterface.fl
+	$(FLUID) -c $(srcdir)/UserInterface.fl
 
 ##MAINTAINERCLEANFILES = UserInterface.cxx UserInterface.h
 EXTRA_DIST += \
