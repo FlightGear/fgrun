@@ -1,3 +1,8 @@
+* 0.4.5
+
+  * Fixed win32 GL context bug.
+  * Scanning for installed airports recognises new directory structure.
+
 * 0.4.4
 
   * Fixed FlightGear --fullscreen typo.
