@@ -4,6 +4,7 @@
 #define wizard_h
 #include <FL/Fl.H>
 #include <string>
+#include <iostream>
 #include <FL/Fl_Preferences.H>
 class LogWindow;
 #include <FL/Fl_Double_Window.H>
