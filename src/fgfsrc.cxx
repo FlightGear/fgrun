@@ -46,6 +46,8 @@ UserInterface::write_fgfsrc()
 	// General options.
 	if (strcmp(airport->text(), "KSFO") != 0)
 	    ofs << "\n--airport-id=" << airport->text();
+	if (strcmp( runway->text(), "<default>") != 0)
+	    ofs << "\n--runway=" << runway->text();
 	if (strcmp(aircraft->text(), "c172") != 0)
 	    ofs << "\n--aircraft=" << aircraft->text();
 	if (strcmp(control->text(), "joystick") != 0)
