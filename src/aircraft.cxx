@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <sstream>
-#include <iostream>
 
 #include <string.h>
 #include <FL/Fl.h>
@@ -82,7 +81,6 @@ search_aircraft_dir( const string& dir,
 	    d.append( files[i]->d_name );
 	    if (fl_filename_isdir( d.c_str() ))
 	    {
-		std::cout << d << "\n";
 		search_aircraft_dir( d.c_str(), false, ac );
 	    }
 	}
