@@ -1,10 +1,10 @@
 dnl (Process this file with autoconf to produce a configure script.)
 AC_REVISION($Revision$)dnl
-AC_PREREQ(2.53)
+AC_PREREQ(2.54)
 
 AC_INIT([fgrun], [0.1], [bbright@bigpond.net.au])
-AC_CONFIG_HEADER([src/config.h])
-AC_CONFIG_SRCDIR([src/main.cxx])
+AC_CONFIG_HEADER(src/config.h)
+AC_CONFIG_SRCDIR(src/main.cxx)
 AM_INIT_AUTOMAKE($PACKAGE_NAME, $PACKAGE_VERSION)
 #AM_MAINTAINER_MODE
 
