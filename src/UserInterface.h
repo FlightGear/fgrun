@@ -299,15 +299,14 @@ private:
   inline void cb_apt_show_installed_i(Fl_Round_Button*, void*);
   static void cb_apt_show_installed(Fl_Round_Button*, void*);
   AirportBrowser *apt_browser;
+  inline void cb_apt_browser_i(AirportBrowser*, void*);
+  static void cb_apt_browser(AirportBrowser*, void*);
   Fl_Input *apt_id;
   inline void cb_apt_id_i(Fl_Input*, void*);
   static void cb_apt_id(Fl_Input*, void*);
   Fl_Input *apt_name;
   inline void cb_apt_name_i(Fl_Input*, void*);
   static void cb_apt_name(Fl_Input*, void*);
-  Fl_Button *apt_select;
-  inline void cb_apt_select_i(Fl_Button*, void*);
-  static void cb_apt_select(Fl_Button*, void*);
   void init();
 public:
   void show();
@@ -327,7 +326,9 @@ private:
   void io_list_new_cb();
   void io_list_update_cb();
   void io_list_medium_update_cb( Fl_Choice* );
-  int set_choice( Fl_Choice* c, const char* s );
+public:
+  static int set_choice( Fl_Choice* c, const char* s );
+private:
   void show_page( int n );
   void update_runways();
   void env_new_cb();
@@ -343,7 +344,6 @@ private:
   void apt_browser_cb();
   void apt_id_cb();
   void apt_name_cb();
-  void apt_select_cb();
   AirportDB* airportdb_;
 public:
   void load_airportdb();

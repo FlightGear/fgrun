@@ -29,7 +29,7 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {507 81 640 480} type Double labelsize 12
+      private xywh {536 44 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -589,8 +589,8 @@ else
         }
       }
       Fl_Group {page[6]} {
-        label Time open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        label Time
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Round_Button time_match_real {
           label {Time match real}
@@ -612,7 +612,7 @@ else
   start_date_gmt_value->deactivate();
   start_date_lat_value->deactivate();
   time_of_day_value->deactivate();
-}} selected
+}}
           private tooltip {Synchronize simulation time with local time} xywh {175 80 140 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
         }
         Fl_Round_Button start_date_sys {
@@ -1019,23 +1019,23 @@ else
           private xywh {225 60 90 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           menuitem {} {
-            label Verbose
+            label bulk
             xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
-            label Debug
+            label debug
             xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
-            label Info
+            label info
             xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
-            label Warnings
+            label warn
             xywh {0 0 100 20} labelsize 12
           }
           menuitem {} {
-            label Alerts
+            label alert
             xywh {0 0 100 20} labelsize 12
           }
         }
@@ -1066,7 +1066,7 @@ else
       }
       Fl_Group {page[13]} {
         label {Airport Browser} open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Round_Button apt_show_all {
           label All
@@ -1079,24 +1079,20 @@ else
           private xywh {215 55 70 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
         }
         Fl_Box apt_browser {
-          private xywh {155 80 480 275} box THIN_DOWN_FRAME color 54 selection_color 3 labeltype NO_LABEL
+          callback {apt_browser_cb();} selected
+          private xywh {155 80 480 335} box THIN_DOWN_FRAME color 54 selection_color 3 labeltype NO_LABEL
           code0 {\#include "AirportBrowser.h"}
           code1 {o->end();}
           class AirportBrowser
         }
         Fl_Input apt_id {
           callback {apt_id_cb();}
-          private xywh {155 360 75 25} labelsize 12 when 1 textsize 12
+          private xywh {155 420 75 25} labelsize 12 when 1 textsize 12
         }
         Fl_Input apt_name {
           label {input:}
           callback {apt_name_cb();}
-          private xywh {235 360 400 25} labeltype NO_LABEL when 1 textsize 12
-        }
-        Fl_Button apt_select {
-          label Select
-          callback {apt_select_cb();}
-          private xywh {585 395 50 25} labelsize 12 deactivate
+          private xywh {235 420 400 25} labeltype NO_LABEL when 1 textsize 12
         }
       }
     }
@@ -1120,7 +1116,8 @@ else
   decl {void io_list_new_cb();} {}
   decl {void io_list_update_cb();} {}
   decl {void io_list_medium_update_cb( Fl_Choice* );} {}
-  decl {int set_choice( Fl_Choice* c, const char* s );} {}
+  decl {static int set_choice( Fl_Choice* c, const char* s );} {public
+  }
   decl {void show_page( int n );} {}
   decl {void update_runways();} {}
   decl {void env_new_cb();} {}
@@ -1136,7 +1133,6 @@ else
   decl {void apt_browser_cb();} {}
   decl {void apt_id_cb();} {}
   decl {void apt_name_cb();} {}
-  decl {void apt_select_cb();} {}
   decl {AirportDB* airportdb_;} {}
   decl {void load_airportdb();} {public
   }

@@ -571,11 +571,11 @@ void UserInterface::cb_New(Fl_Button* o, void* v) {
 }
 
 Fl_Menu_Item UserInterface::menu_log_level[] = {
- {"Verbose", 0,  0, 0, 0, 0, 0, 12, 56},
- {"Debug", 0,  0, 0, 0, 0, 0, 12, 56},
- {"Info", 0,  0, 0, 0, 0, 0, 12, 56},
- {"Warnings", 0,  0, 0, 0, 0, 0, 12, 56},
- {"Alerts", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"bulk", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"debug", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"info", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"warn", 0,  0, 0, 0, 0, 0, 12, 56},
+ {"alert", 0,  0, 0, 0, 0, 0, 12, 56},
  {0}
 };
 
@@ -621,6 +621,13 @@ void UserInterface::cb_apt_show_installed(Fl_Round_Button* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_apt_show_installed_i(o,v);
 }
 
+inline void UserInterface::cb_apt_browser_i(AirportBrowser*, void*) {
+  apt_browser_cb();
+}
+void UserInterface::cb_apt_browser(AirportBrowser* o, void* v) {
+  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_apt_browser_i(o,v);
+}
+
 inline void UserInterface::cb_apt_id_i(Fl_Input*, void*) {
   apt_id_cb();
 }
@@ -633,13 +640,6 @@ inline void UserInterface::cb_apt_name_i(Fl_Input*, void*) {
 }
 void UserInterface::cb_apt_name(Fl_Input* o, void* v) {
   ((UserInterface*)(o->parent()->parent()->user_data()))->cb_apt_name_i(o,v);
-}
-
-inline void UserInterface::cb_apt_select_i(Fl_Button*, void*) {
-  apt_select_cb();
-}
-void UserInterface::cb_apt_select(Fl_Button* o, void* v) {
-  ((UserInterface*)(o->parent()->parent()->user_data()))->cb_apt_select_i(o,v);
 }
 
 UserInterface::UserInterface() {
@@ -1196,6 +1196,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Round_Button* o = time_match_real = new Fl_Round_Button(175, 50, 140, 25, "Time match real");
         o->tooltip("Synchronize simulation time with real time");
         o->type(102);
@@ -1594,7 +1595,6 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Round_Button* o = apt_show_all = new Fl_Round_Button(155, 55, 60, 25, "All");
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
@@ -1608,7 +1608,7 @@ UserInterface::UserInterface() {
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_apt_show_installed);
       }
-      { AirportBrowser* o = apt_browser = new AirportBrowser(155, 80, 480, 275);
+      { AirportBrowser* o = apt_browser = new AirportBrowser(155, 80, 480, 335);
         o->box(FL_THIN_DOWN_FRAME);
         o->color(FL_LIGHT3);
         o->selection_color((Fl_Color)3);
@@ -1616,26 +1616,22 @@ UserInterface::UserInterface() {
         o->labelfont(0);
         o->labelsize(14);
         o->labelcolor(FL_BLACK);
+        o->callback((Fl_Callback*)cb_apt_browser);
         o->align(FL_ALIGN_CENTER);
         o->when(FL_WHEN_RELEASE);
         o->end();
       }
-      { Fl_Input* o = apt_id = new Fl_Input(155, 360, 75, 25);
+      { Fl_Input* o = apt_id = new Fl_Input(155, 420, 75, 25);
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_apt_id);
         o->when(FL_WHEN_CHANGED);
       }
-      { Fl_Input* o = apt_name = new Fl_Input(235, 360, 400, 25, "input:");
+      { Fl_Input* o = apt_name = new Fl_Input(235, 420, 400, 25, "input:");
         o->labeltype(FL_NO_LABEL);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_apt_name);
         o->when(FL_WHEN_CHANGED);
-      }
-      { Fl_Button* o = apt_select = new Fl_Button(585, 395, 50, 25, "Select");
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_apt_select);
-        o->deactivate();
       }
       o->end();
     }
