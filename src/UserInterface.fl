@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0102 
+version 1.0103 
 header_name {.h} 
 code_name {.cxx}
 declblock {\#if defined(_MSC_VER)} {open after {\#endif}
@@ -24,8 +24,8 @@ class UserInterface {open
   decl {std::string default_airport;} {}
   Function {UserInterface()} {} {
     Fl_Window main_window {
-      label {FlightGear Launch Control}
-      private xywh {581 324 640 480} labelsize 12
+      label {FlightGear Launch Control} open
+      private xywh {601 404 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -86,8 +86,8 @@ class UserInterface {open
         private xywh {475 450 50 25} labelsize 12
       }
       Fl_Group {page[0]} {
-        label General open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        label General
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Input fg_exe {
           label {Executable:}
@@ -137,7 +137,7 @@ if (p != 0) {
         }
         Fl_Choice airport {
           label {Airports:}
-          callback {update_runways();} open selected
+          callback {update_runways();} open
           private tooltip {Available airports} xywh {250 140 150 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
           code0 {int i = airport->add( "KSFO", 0, 0, 0, 0);}
           code1 {airport->value(i);}
@@ -200,7 +200,7 @@ if (p != 0)
         }
         Fl_Choice runway {
           label {Runway:} open
-          private xywh {545 140 60 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
+          private xywh {525 140 80 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {}
       }
       Fl_Group {page[1]} {
@@ -609,7 +609,7 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output} open
+        label {Input/Output}
         private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
@@ -818,22 +818,26 @@ prop_delete->activate();}
       } {}
       Fl_Group {page[11]} {
         label Environment
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser env_list {
+          callback {env_list_select_cb(o);}
           private xywh {155 55 480 125} type Hold labelsize 12 textsize 12
         }
         Fl_Button {} {
           label New
+          callback {env_new_cb();}
           private xywh {520 200 55 25} labelsize 12
         }
-        Fl_Button {} {
+        Fl_Button env_delete {
           label Delete
+          callback {env_delete_cb();}
           private xywh {580 200 55 25} labelsize 12 deactivate
         }
         Fl_Input env_var {
           label {Value:}
-          private xywh {220 200 295 25} labelsize 12 textsize 12
+          callback {env_list_update_cb();} selected
+          private xywh {220 200 295 25} labelsize 12 when 1 textsize 12 deactivate
         }
       }
     }
@@ -865,6 +869,10 @@ run_fgfs_impl();} {}
   decl {int set_choice( Fl_Choice* c, const char* s );} {}
   decl {void show_page( int n );} {}
   decl {void update_runways();} {}
+  decl {void env_new_cb();} {}
+  decl {void env_delete_cb();} {}
+  decl {void env_list_update_cb();} {}
+  decl {void env_list_select_cb( Fl_Browser* );} {}
 } 
 
 Function {update_aircraft_cb(void* v)} {return_type void
