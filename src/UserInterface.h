@@ -28,9 +28,7 @@ private:
   static void cb_Save(Fl_Menu_*, void*);
   inline void cb_Quit_i(Fl_Menu_*, void*);
   static void cb_Quit(Fl_Menu_*, void*);
-public:
-  static Fl_Menu_Item *view_output_window;
-private:
+  static Fl_Menu_Item *output_to_window;
   Fl_Browser *page_list;
   inline void cb_page_list_i(Fl_Browser*, void*);
   static void cb_page_list(Fl_Browser*, void*);
@@ -85,6 +83,7 @@ private:
   Fl_Check_Button *horizon_effect;
   Fl_Check_Button *enhanced_lighting;
   Fl_Check_Button *distance_attenuation;
+  Fl_Check_Button *hud_3d;
   Fl_Choice *fdm;
   inline void cb_fdm_i(Fl_Choice*, void*);
   static void cb_fdm(Fl_Choice*, void*);
@@ -95,7 +94,7 @@ private:
   Fl_Round_Button *on_ground;
   Fl_Round_Button *in_air;
   Fl_Input *wind;
-  Fl_Input *turbulence;
+  Fl_Value_Input *turbulence;
   Fl_Check_Button *freeze;
   Fl_Check_Button *fuel_freeze;
   Fl_Check_Button *clock_freeze;

@@ -100,6 +100,8 @@ UserInterface::write_fgfsrc()
 	    else
 		ofs << "\n--disable-anti-alias-hud";
 	}
+	if (!hud_3d->value())
+	    ofs << "\n--disable-hud-3d";
 	if (auto_coordination->value())
 	    ofs << "\n--enable-auto-coordination";
 	if (horizon_effect->value())
@@ -122,6 +124,8 @@ UserInterface::write_fgfsrc()
 	    ofs << "\n--in-air";
 	if (wind->size() > 0)
 	    ofs << "\n--wind=" << wind->value();
+	if (turbulence->value() > 0)
+	    ofs << "\n--turbulence=" << turbulence->value();
 
 	// Freeze
 	if (freeze->value())

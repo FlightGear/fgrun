@@ -28,14 +28,14 @@ Fl_Menu_Item UserInterface::menu_[] = {
  {"&Quit", 0x40071,  (Fl_Callback*)UserInterface::cb_Quit, 0, 0, 0, 0, 12, 56},
  {0},
  {"&Settings", 0,  0, 0, 64, 0, 0, 12, 56},
- {"Output Window", 0,  0, 0, 2, 0, 0, 12, 56},
+ {"Output To Window", 0,  0, 0, 2, 0, 0, 12, 56},
  {0},
  {"&Help", 0,  0, 0, 64, 0, 0, 12, 56},
  {"&About...", 0,  0, 0, 0, 0, 0, 12, 56},
  {0},
  {0}
 };
-Fl_Menu_Item* UserInterface::view_output_window = UserInterface::menu_ + 5;
+Fl_Menu_Item* UserInterface::output_to_window = UserInterface::menu_ + 5;
 
 inline void UserInterface::cb_page_list_i(Fl_Browser* o, void*) {
   if (o->value() > 0)
@@ -656,31 +656,31 @@ UserInterface::UserInterface() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = panel = new Fl_Check_Button(295, 50, 120, 25, "Panel");
+      { Fl_Check_Button* o = panel = new Fl_Check_Button(320, 50, 120, 25, "Panel");
         o->tooltip("Enable the instrument panel");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = sound = new Fl_Check_Button(295, 80, 120, 25, "Sound");
+      { Fl_Check_Button* o = sound = new Fl_Check_Button(320, 80, 120, 25, "Sound");
         o->tooltip("Enable sound effects");
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = hud = new Fl_Check_Button(295, 110, 120, 25, "HUD");
+      { Fl_Check_Button* o = hud = new Fl_Check_Button(320, 110, 120, 25, "HUD");
         o->tooltip("Enable Heads Up Display");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_hud);
       }
-      { Fl_Check_Button* o = antialias_hud = new Fl_Check_Button(295, 140, 120, 25, "Anti-alias HUD");
+      { Fl_Check_Button* o = antialias_hud = new Fl_Check_Button(335, 140, 110, 25, "Anti-alias HUD");
         o->tooltip("Enable anti-aliased HUD");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
-      { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(295, 170, 120, 25, "Auto-coordination");
+      { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(320, 200, 120, 25, "Auto-coordination");
         o->tooltip("Enable auto-coordinated turns.");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
@@ -690,13 +690,18 @@ UserInterface::UserInterface() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(175, 225, 120, 25, "Enhanced lighting");
+      { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(175, 230, 120, 25, "Enhanced lighting");
         o->tooltip("Enable enhanced runway lighting");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = distance_attenuation = new Fl_Check_Button(175, 255, 120, 25, "Distance attenuation");
+      { Fl_Check_Button* o = distance_attenuation = new Fl_Check_Button(175, 260, 120, 25, "Distance attenuation");
         o->tooltip("Enable runway light distance attenuation");
+        o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
+      }
+      { Fl_Check_Button* o = hud_3d = new Fl_Check_Button(320, 170, 120, 25, "Hud-3D");
+        o->tooltip("Enable 3D HUD");
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
@@ -760,8 +765,8 @@ UserInterface::UserInterface() {
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Input* o = turbulence = new Fl_Input(220, 270, 105, 25, "Turbulence");
-        o->tooltip("Turbulence, 0.0 (calm) to 1.0 (severe)");
+      { Fl_Value_Input* o = turbulence = new Fl_Value_Input(220, 270, 105, 25, "Turbulence:");
+        o->tooltip("Specify turbulence from 0.0 (calm) to 1.0 (severe)");
         o->labelsize(12);
         o->textsize(12);
       }

@@ -26,7 +26,7 @@ class UserInterface {open
   } {
     Fl_Window main_window {
       label {FlightGear Launch Control} open
-      private xywh {586 162 640 480} labelsize 12
+      private xywh {570 197 640 480} labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -51,9 +51,9 @@ class UserInterface {open
           label {&Settings} open
           xywh {0 0 100 20} labelsize 12
         } {
-          menuitem view_output_window {
-            label {Output Window}
-            xywh {0 0 100 20} type Toggle labelsize 12
+          menuitem output_to_window {
+            label {Output To Window}
+            private xywh {0 0 100 20} type Toggle labelsize 12
           }
         }
         submenu {} {
@@ -230,39 +230,43 @@ if (p != 0)
         }
         Fl_Check_Button panel {
           label Panel
-          private tooltip {Enable the instrument panel} xywh {295 50 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable the instrument panel} xywh {320 50 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button sound {
           label Sound
-          private tooltip {Enable sound effects} xywh {295 80 120 25} down_box DOWN_BOX value 1 labelsize 12
+          private tooltip {Enable sound effects} xywh {320 80 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button hud {
           label HUD
           callback {if (o->value())
   antialias_hud->activate();
 else
-  antialias_hud->deactivate();}
-          private tooltip {Enable Heads Up Display} xywh {295 110 120 25} down_box DOWN_BOX labelsize 12
+  antialias_hud->deactivate();} selected
+          private tooltip {Enable Heads Up Display} xywh {320 110 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button antialias_hud {
           label {Anti-alias HUD}
-          private tooltip {Enable anti-aliased HUD} xywh {295 140 120 25} down_box DOWN_BOX labelsize 12 deactivate
+          private tooltip {Enable anti-aliased HUD} xywh {335 140 110 25} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button auto_coordination {
           label {Auto-coordination}
-          private tooltip {Enable auto-coordinated turns.} xywh {295 170 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable auto-coordinated turns.} xywh {320 200 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button horizon_effect {
-          label {Horizon effect} selected
+          label {Horizon effect}
           private tooltip {Enable celestial body growth illusion near the horizon} xywh {175 200 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button enhanced_lighting {
           label {Enhanced lighting}
-          private tooltip {Enable enhanced runway lighting} xywh {175 225 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable enhanced runway lighting} xywh {175 230 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button distance_attenuation {
           label {Distance attenuation}
-          private tooltip {Enable runway light distance attenuation} xywh {175 255 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable runway light distance attenuation} xywh {175 260 120 25} down_box DOWN_BOX labelsize 12
+        }
+        Fl_Check_Button hud_3d {
+          label {Hud-3D}
+          private tooltip {Enable 3D HUD} xywh {320 170 120 25} down_box DOWN_BOX labelsize 12
         }
       }
       Fl_Group {page[2]} {
@@ -347,9 +351,9 @@ else
           label {Wind:}
           private tooltip {Wind direction and speed, dir@speed} xywh {220 240 105 25} labelsize 12 textsize 12
         }
-        Fl_Input turbulence {
-          label Turbulence
-          private tooltip {Turbulence, 0.0 (calm) to 1.0 (severe)} xywh {220 270 105 25} labelsize 12 textsize 12
+        Fl_Value_Input turbulence {
+          label {Turbulence:}
+          private tooltip {Specify turbulence from 0.0 (calm) to 1.0 (severe)} xywh {220 270 105 25} labelsize 12 textsize 12
         }
       }
       Fl_Group {page[3]} {

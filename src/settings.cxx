@@ -27,6 +27,7 @@ void
 UserInterface::save_settings_cb()
 {
     Fl_Preferences prefs(Fl_Preferences::USER, "flightgear.org", "fgrun");
+    prefs.set( "output_to_window", output_to_window->value() );
 
     if (fg_exe->value() != 0)
 	prefs.set( "fg_exe", fg_exe->value() );
@@ -54,6 +55,7 @@ UserInterface::save_settings_cb()
     prefs.set("sound", sound->value());
     prefs.set("hud", hud->value());
     prefs.set("antialias_hud", antialias_hud->value());
+    prefs.set("hud_3d", hud_3d->value());
     prefs.set("auto_coordination", auto_coordination->value());
     prefs.set("horizon_effect", horizon_effect->value());
     prefs.set("enhanced_lighting", enhanced_lighting->value());
@@ -66,6 +68,7 @@ UserInterface::save_settings_cb()
     prefs.set("on_ground", on_ground->value());
     prefs.set("in_air", in_air->value());
     prefs.set("wind", wind->value());
+    prefs.set("turbulence", turbulence->value());
 
     prefs.set("freeze", freeze->value());
     prefs.set("fuel_freeze", fuel_freeze->value());
@@ -203,6 +206,12 @@ UserInterface::load_settings_cb()
     int iVal;
     double dVal;
 
+    prefs.get( "output_to_window", iVal, 1 );
+    if (iVal)
+	output_to_window->set();
+    else
+	output_to_window->clear();
+
     prefs.get("game_mode", iVal, 0);
     game_mode->value(iVal);
     prefs.get("splash_screen", iVal, 1);
@@ -222,6 +231,8 @@ UserInterface::load_settings_cb()
     hud->do_callback();
     prefs.get("antialias_hud", iVal, 0);
     antialias_hud->value(iVal);
+    prefs.get("hud_3d", iVal, 1);
+    hud_3d->value(iVal);
     prefs.get("auto_coordination", iVal, 0);
     auto_coordination->value(iVal);
     prefs.get("horizon_effect", iVal, 0);
@@ -246,6 +257,8 @@ UserInterface::load_settings_cb()
     in_air->value(iVal);
     prefs.get("wind", buf, "", buflen-1);
     wind->value(buf);
+    prefs.get("turbulence", dVal, 0.0 );
+    turbulence->value(dVal);
 
     prefs.get("freeze", iVal, 0);
     freeze->value(iVal);
