@@ -176,8 +176,12 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 // 	    os << pfx << "--speed=" << speed->value();
     if (prefs.get( "in_air", iVal, 0 ) && iVal)
 	os << pfx << "--in-air";
-    if (prefs.get( "wind", buf, "", buflen-1 ) && buf[0] != 0)
-	os << pfx << "--wind=" << buf;
+    if (prefs.get( "wind_speed", dVal, 0.0 ) && dVal > 0.0)
+    {
+	double dVal2;
+	prefs.get( "wind_heading", dVal2, 0.0 );
+	os << pfx << "--wind=" << dVal2 << "@" << dVal;
+    }
     if (prefs.get( "turbulence", dVal, 0. ) && dVal > 0.)
 	os << pfx << "--turbulence=" << dVal;
     if (prefs.get( "ceiling", buf, "", buflen-1 ) && buf[0] != 0)

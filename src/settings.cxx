@@ -70,7 +70,8 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("speed", int(speed->value()));
     prefs.set("on_ground", on_ground->value());
     prefs.set("in_air", in_air->value());
-    prefs.set("wind", wind->value());
+    prefs.set("wind_heading", wind_dial->value());
+    prefs.set("wind_speed", wind_speed->value());
     prefs.set("turbulence", turbulence->value());
     prefs.set("ceiling", ceiling->value());
 
@@ -280,8 +281,11 @@ Advanced::load_settings( Fl_Preferences& prefs )
     on_ground->value(iVal);
     prefs.get("in_air", iVal, 0);
     in_air->value(iVal);
-    prefs.get("wind", buf, "", buflen-1);
-    wind->value(buf);
+    prefs.get( "wind_heading", dVal, 0.0 );
+    wind_dial->value( dVal );
+    wind_hdg->value( dVal );
+    prefs.get( "wind_speed", dVal, 0.0 );
+    wind_speed->value( dVal );
     prefs.get("turbulence", dVal, 0.0 );
     turbulence->value(dVal);
     prefs.get("ceiling", buf, "", buflen-1);
