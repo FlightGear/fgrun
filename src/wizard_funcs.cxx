@@ -524,6 +524,12 @@ search_aircraft_dir( const SGPath& dir,
     free( files );
 }
 
+static void
+delayed_preview( void* v )
+{
+    ((Wizard*)v)->preview_aircraft();
+}
+
 void
 Wizard::aircraft_update()
 {
@@ -545,6 +551,7 @@ Wizard::aircraft_update()
     char buf[ buflen ];
     prefs.get( "aircraft", buf, "", buflen-1);
 
+    bool selected = false;
     // Populate the aircraft browser list.
     for (vector<SGPath>::size_type vi = 0; vi < ac.size(); ++vi)
     {
@@ -559,9 +566,13 @@ Wizard::aircraft_update()
 	if (buf[0] != 0 && strcmp( buf, ss.c_str() ) == 0)
 	{
 	    aircraft->select( vi+1 );
+            selected = true;
 	    //aircraft->do_callback();
 	}
     }
+
+   if ( selected )
+      Fl::add_timeout( 0.5, delayed_preview, this );
 }
 
 Wizard::~Wizard()

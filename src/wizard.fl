@@ -14,7 +14,7 @@ decl {\#include <FL/Fl_Preferences.H>} {public
 decl {class LogWindow;} {public
 } 
 
-class Wizard {open selected
+class Wizard {open
 } {
   Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0)} {open
   } {
@@ -155,7 +155,8 @@ class Wizard {open selected
   }
   decl {void update_preview();} {public
   }
-  decl {void preview_aircraft();} {}
+  decl {void preview_aircraft();} {selected public
+  }
   decl {void aircraft_update();} {}
   decl {void next_cb();} {}
   decl {void prev_cb();} {}

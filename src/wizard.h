@@ -79,8 +79,8 @@ public:
   void show( int argc, char* argv[] );
   void init();
   void update_preview();
-private:
   void preview_aircraft();
+private:
   void aircraft_update();
   void next_cb();
   void prev_cb();
