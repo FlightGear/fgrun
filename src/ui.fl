@@ -4,8 +4,7 @@ header_name {.h}
 code_name {.cxx}
 class UserInterface {open
 } {
-  Function {UserInterface()} {open
-  } {
+  Function {UserInterface()} {} {
     Fl_Window main_window {
       label {FlightGear Launcher}
       private xywh {569 78 640 480} box ENGRAVED_BOX
@@ -198,7 +197,7 @@ class UserInterface {open
         }
         Fl_Group {} {
           label Advanced
-          private xywh {0 215 640 230}
+          private xywh {0 215 640 230} hide
         } {
           Fl_Choice fdm {
             label {FDM:}
@@ -385,7 +384,7 @@ class UserInterface {open
         }
         Fl_Group {} {
           label {I/O}
-          private xywh {0 215 640 230} hide
+          private xywh {0 215 640 230}
         } {
           Fl_Browser io_options_list {
             label {I/O Options}
@@ -395,7 +394,7 @@ class UserInterface {open
 } else {
   io_edit->deactivate();
   io_delete->deactivate();
-}}
+}} selected
             xywh {220 235 360 200} type Hold align 5
           }
           Fl_Button {} {
@@ -497,7 +496,7 @@ class UserInterface {open
       Fl_Button quit {
         label Quit
         callback {output_window->hide();
-main_window->hide();} selected
+main_window->hide();}
         private xywh {580 450 55 25}
       }
       Fl_Menu_Bar {} {open
@@ -690,7 +689,7 @@ main_window->hide();} selected
     }
     Fl_Window output_window {
       label Output
-      xywh {79 483 640 480} resizable visible
+      xywh {80 561 640 480} resizable visible
     } {
       Fl_Text_Display output_text {
         xywh {0 25 640 455}
@@ -704,10 +703,12 @@ main_window->hide();} selected
         } {
           menuitem {} {
             label {&Save}
+            callback {output_save();}
             xywh {0 0 100 20} shortcut 0x40073
           }
           menuitem {} {
             label {Save &as...}
+            callback {output_save_as();}
             xywh {0 0 100 20} shortcut 0x50073 divider
           }
           menuitem {} {
@@ -760,5 +761,11 @@ main_window->hide();} selected
   Function {propertyDlg_ok()} {open return_type {virtual void}
   } {}
   Function {propertyDlg_cancel()} {open return_type {virtual void}
+  } {}
+  Function {~UserInterface()} {open return_type virtual
+  } {}
+  Function {output_save()} {open return_type {virtual void}
+  } {}
+  Function {output_save_as()} {open return_type {virtual void}
   } {}
 } 
