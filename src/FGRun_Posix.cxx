@@ -51,17 +51,14 @@ using std::string;
 using std::cout;
 
 FGRun_Posix::FGRun_Posix()
-    : win(0)
+    : win(new FGOutputWindow( 640, 480, "FlightGear Log" ))
 {
 }
 
 FGRun_Posix::~FGRun_Posix()
 {
-    if (win != 0)
-    {
-	win->hide();
-	delete win;
-    }
+    win->hide();
+    delete win;
 }
 
 void
@@ -74,9 +71,7 @@ FGRun_Posix::run_fgfs_impl()
     struct termios term;
     tcgetattr( STDOUT_FILENO, &term );
     term.c_oflag &= ~( OLCUC | ONLCR );
-#endif
 
-#if defined(HAVE_TERMIOS_H)
     pid = pty_fork( &master, 0, &term, 0 );
 #else
     pid = pty_fork( &master, 0, 0, 0 );
@@ -96,16 +91,9 @@ FGRun_Posix::run_fgfs_impl()
 	if (master < 0)
 	    return;
 
-	if (win == 0)
-	{
-	    win = new FGOutputWindow( 640, 480, "FlightGear output" );
-	}
-	else
-	{
-	    win->clear();
-	}
-
+	win->clear();
 	win->show();
+
 	Fl::add_fd( master, stdout_cb, this );
 
 	return;
@@ -154,11 +142,8 @@ FGRun_Posix::stdout_cb( int fd )
     ssize_t n = read( fd, buf, sizeof( buf ) - 1 );
     if (n > 0)
     {
-	if (win != 0)
-	{
-	    buf[n] = 0;
-	    win->append( buf );
-	}
+	buf[n] = 0;
+	win->append( buf );
     }
     else
     {
@@ -173,7 +158,5 @@ FGRun_Posix::stdout_cb( int fd )
 void
 FGRun_Posix::show_log_window()
 {
-    std::cout << "win=" << win << "\n";
-    if (win != 0)
-	win->show();
+    win->show();
 }
