@@ -3,9 +3,10 @@
   * New wizard style interface to make it easier for first time and infrequent
     users to get started.  The original interface is now the advanced options 
     interface.
-  * Aircraft preview (requires plib and simgear).
+  * Aircraft preview (requires plib, simgear and opengl).
   * New airport browser with incremental search facility.
   * runways.dat is loaded in the background.
+  * New weather page in advanced dialog.
 
 * 0.3.3
 
