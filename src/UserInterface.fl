@@ -24,7 +24,7 @@ class UserInterface {open
       callback {if (Fl::event_key() == FL_Escape)
   return; // ignore Escape
 exit(0);} open
-      private xywh {599 133 640 480} type Double labelsize 12
+      private xywh {604 153 640 480} type Double labelsize 12
       code0 {init();} visible
     } {
       Fl_Menu_Bar {} {
@@ -87,8 +87,8 @@ exit(0);} open
         private xywh {475 450 50 25} labelsize 12
       }
       Fl_Group {page[0]} {
-        label General open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
+        label General
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Input fg_exe {
           label {Executable:}
@@ -128,7 +128,7 @@ exit(0);} open
           private xywh {405 140 60 25} labelsize 12 deactivate
         }
         Fl_Choice aircraft {
-          label {Aircraft:} open selected
+          label {Aircraft:} open
           tooltip {Available aircraft types} xywh {250 170 150 25} down_box BORDER_BOX labelsize 12 textfont 4 textsize 12
         } {}
         Fl_Button aircraft_update {
@@ -755,7 +755,7 @@ else
       }
       Fl_Group {page[8]} {
         label {Input/Output} open
-        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 25 490 420} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -932,8 +932,8 @@ else
             private xywh {290 380 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
         }
-        Fl_Group generic_group {open
-          private xywh {150 380 225 25}
+        Fl_Group generic_group {open selected
+          private xywh {150 380 225 25} hide
         } {
           Fl_Input io_generic_file {
             label {File:}

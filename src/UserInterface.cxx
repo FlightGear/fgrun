@@ -781,6 +781,7 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Input* o = fg_exe = new Fl_Input(250, 50, 355, 25, "Executable:");
         o->tooltip("Filename of FlightGear executable");
         o->labelsize(12);
@@ -1472,7 +1473,6 @@ UserInterface::UserInterface() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 55, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
@@ -1586,6 +1586,7 @@ UserInterface::UserInterface() {
         o->end();
       }
       { Fl_Group* o = generic_group = new Fl_Group(150, 380, 225, 25);
+        o->hide();
         { Fl_Input* o = io_generic_file = new Fl_Input(220, 380, 125, 25, "File:");
           o->labelsize(12);
           o->textsize(12);
