@@ -20,11 +20,9 @@
 //
 // $Id$
 
-#include "UserInterface.h"
+#include <sstream>
 
-#if defined(_MSC_VER)
-#define snprintf _snprintf
-#endif
+#include "UserInterface.h"
 
 void
 UserInterface::io_list_select_cb( Fl_Browser* o )
@@ -105,34 +103,39 @@ UserInterface::io_list_new_cb()
 void
 UserInterface::io_list_update_cb()
 {
-    char buf[256];
+    std::ostringstream oss;
 
     // --protocol=medium,dir,hz,filename|(device,baud)|(host,port,tcp|udp)
 
     if (strcmp(io_medium->text(), "file") == 0)
     {
-	snprintf( buf, sizeof(buf), "--%s=file,%s,%d,%s",
-		  io_protocol->text(), io_dir->text(), int(io_hz->value()),
-		  file_name->value());
+	oss << "--" << io_protocol->text()
+	    << "=file," << io_dir->text()
+	    << "," << int(io_hz->value())
+	    << "," << file_name->value();
     }
     else if (strcmp(io_medium->text(), "serial") == 0)
     {
-	snprintf( buf, sizeof(buf), "--%s=serial,%s,%d,%s,%s",
-		  io_protocol->text(), io_dir->text(), int(io_hz->value()),
-		  serial_port->value(), serial_baud_rate->value());
+	oss << "--" << io_protocol->text()
+	    << "=serial," << io_dir->text()
+	    << "," << int(io_hz->value())
+	    << "," << serial_port->value()
+	    << "," <<  serial_baud_rate->value();
     }
     else if (strcmp(io_medium->text(), "socket") == 0)
     {
-	snprintf( buf, sizeof(buf), "--%s=socket,%s,%d,%s,%d,%s",
-		  io_protocol->text(), io_dir->text(), int(io_hz->value()),
-		  socket_host->value(), int(socket_port->value()),
-		  socket_tcp->value() ? "tcp" : "udp" );
+	oss << "--" << io_protocol->text()
+	    << "=socket," << io_dir->text()
+	    << "," << int(io_hz->value())
+	    << "," << socket_host->value()
+	    << "," <<  int(socket_port->value())
+	    << (socket_tcp->value() ? ",tcp" : ",udp");
     }
 
     int n = io_list->value();
     if (n > 0)
     {
-	io_list->text(n, buf );
+	io_list->text(n, oss.str().c_str() );
     }
 }
 
