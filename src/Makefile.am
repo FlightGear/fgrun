@@ -5,7 +5,7 @@ CLEANFILES =
 if WIN32
 platform_srcs = FGRun_Win32.cxx FGRun_Win32.h
 else
-platform_srcs = FGRun_Posix.cxx FGRun_Posix.h
+platform_srcs = FGRun_Posix.cxx FGRun_Posix.h fgrun_pty.cxx fgrun_pty.h
 endif
 
 BUILT_SOURCES = UserInterface.cxx UserInterface.h
@@ -27,7 +27,6 @@ fgrun_SOURCES = \
 	util.cxx \
 	env.cxx \
 	prop.cxx \
-	fgrun_pty.cxx fgrun_pty.h \
 	$(platform_srcs) \
 	UserInterface.cxx UserInterface.h
 
