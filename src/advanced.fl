@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0104 
+version 1.0106 
 header_name {.h} 
 code_name {.cxx}
 decl {\#include <FL/Fl_Preferences.H>} {public
@@ -11,7 +11,7 @@ decl {\#include <string>} {public
 decl {\#define MAX_CLOUD_LAYERS 5} {public
 } 
 
-class Advanced {open selected
+class Advanced {open
 } {
   Function {Advanced()} {open
   } {
@@ -1066,7 +1066,7 @@ else
         }
       }
       Fl_Group {page[13]} {
-        label Weather
+        label Weather open
         private xywh {150 0 490 430} labelfont 1 align 21
       } {
         Fl_Group {} {open
@@ -1090,8 +1090,8 @@ else
           }
           Fl_Check_Button random_wind {
             label {Random Winds}
-            callback {random_wind_cb();}
-            private xywh {230 280 105 25} down_box DOWN_BOX labelsize 12
+            callback {random_wind_cb();} selected
+            private xywh {235 280 105 25} down_box DOWN_BOX labelsize 12
           }
         }
         Fl_Value_Slider turbulence {
@@ -1100,7 +1100,11 @@ else
         }
         Fl_Input ceiling {
           label {Ceiling:}
-          tooltip {FT_ASL[:THICKNESS_FT]} xywh {240 335 80 25} labelsize 12 textsize 12
+          tooltip {FT_ASL[:THICKNESS_FT]} xywh {235 335 80 25} labelsize 12 textsize 12
+        }
+        Fl_Check_Button fetch_real_weather {
+          label {Fetch real weather}
+          xywh {235 370 155 25} down_box DOWN_BOX labelsize 12
         }
       }
       Fl_Group {page[14]} {

@@ -111,6 +111,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("turbulence", turbulence->value());
     prefs.set("ceiling", ceiling->value());
     prefs.set("random_wind", random_wind->value());
+    prefs.set("fetch_real_weather", fetch_real_weather->value());
 
     prefs.set("freeze", freeze->value());
     prefs.set("fuel_freeze", fuel_freeze->value());
@@ -359,6 +360,8 @@ Advanced::load_settings( Fl_Preferences& prefs )
     prefs.get("random_wind", iVal, 0);
     random_wind->value( iVal );
     random_wind->do_callback();
+    prefs.get("fetch_real_weather", iVal, 0);
+    fetch_real_weather->value( iVal );
 
     prefs.get("freeze", iVal, 0);
     freeze->value(iVal);
