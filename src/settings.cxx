@@ -167,12 +167,9 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("time_of_day_value", time_of_day_value->text());
 
     // Network options.
-    if (httpd->value())
-	prefs.set("httpd", int(httpd_port->value()));
-    if (props->value())
-	prefs.set("props", int(props_port->value()));
-    if (jpg_httpd->value())
-	prefs.set("jpg-httpd", int(jpg_httpd_port->value()));
+    prefs.set("httpd", httpd->value() ? int(httpd_port->value()) : 0);
+    prefs.set("props", props->value() ? int(props_port->value()) : 0);
+    prefs.set("jpg-httpd", jpg_httpd->value() ? int(jpg_httpd_port->value()) : 0);
     // Multiplayer options
     prefs.set( "callsign", callsign->value() );
     prefs.set( "multiplay1", multiplay1->value() );

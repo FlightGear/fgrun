@@ -20,6 +20,7 @@ class LogWindow;
 #include <FL/Fl_Tile.H>
 #include "Fl_Plib.h"
 #include "AirportBrowser.h"
+#include <FL/Fl_Scroll.H>
 
 class Wizard {
 public:
@@ -61,9 +62,9 @@ private:
   static void cb_aircraft(Fl_Browser*, void*);
   Fl_Plib *preview;
   AirportBrowser *airports_;
-  Fl_Output *text;
   inline void cb_Advanced_i(Fl_Button*, void*);
   static void cb_Advanced(Fl_Button*, void*);
+  Fl_Output *text;
 public:
   Fl_Group *page[5];
 private:
