@@ -205,6 +205,9 @@
 			<File
 				RelativePath="src\wizard.h">
 			</File>
+			<File
+				RelativePath="src\os_win32.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"

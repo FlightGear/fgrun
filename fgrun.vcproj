@@ -20,7 +20,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.3\&quot; /DVERSION=\&quot;0.4.3\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.4\&quot; /DVERSION=\&quot;0.4.4\&quot;"
 				Optimization="0"
 				AdditionalIncludeDirectories="i:\fltk-1.1.4"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS"
@@ -204,6 +204,9 @@
 			</File>
 			<File
 				RelativePath="src\wizard.h">
+			</File>
+			<File
+				RelativePath="src\os_win32.h">
 			</File>
 		</Filter>
 		<Filter
