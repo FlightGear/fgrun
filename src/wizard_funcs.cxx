@@ -59,6 +59,14 @@ extern string def_fg_exe;
 extern string def_fg_root;
 extern string def_fg_scenery;
 
+/**
+ * Data associated with each entry in the aircraft browser.
+ */
+struct AircraftData
+{
+    SGPropertyNode props;
+    std::string name;
+};
 
 static bool
 is_valid_fg_root( const string& dir )
@@ -238,27 +246,22 @@ Wizard::preview_aircraft()
     if (n == 0)
         return;
 
-    string fname( (char*)aircraft->data(n) );
-    string::size_type pos = fname.rfind( "/" );
-    string::size_type epos = fname.find( "-set.xml", pos );
-    string ac( fname.substr( pos+1, epos-pos-1 ) );
+    AircraftData* data =
+	reinterpret_cast<AircraftData*>( aircraft->data(n) );
 
-    SGPropertyNode props;
-    try
+    if (data->props.hasValue( "/sim/model/path" ))
     {
-        readProperties( fname, &props );
+	SGPath path( fg_root_->value() );
+	path.append( data->props.getStringValue( "/sim/model/path" ) );
 
-        if (props.hasValue( "/sim/model/path" ))
-        {
-            SGPath path( fg_root_->value() );
-            path.append( props.getStringValue( "/sim/model/path" ) );
+	if (!path.exists())
+	{
+	    fl_alert( "Model not found: '%s'", path.c_str() );
+	    return;
+	}
 
-            if (!path.exists())
-	    {
-		fl_alert( "Model not found: '%s'", path.c_str() );
-                return;
-	    }
-
+	try
+	{
 	    if (path.extension() == "xml")
             {
                 SGPropertyNode mprops;
@@ -273,29 +276,27 @@ Wizard::preview_aircraft()
 
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
-            try
-            {
-                ssgEntity* model = preview->load( path.str() );
-                if (model != 0)
-                {
-                    Fl::add_timeout( update_period, timeout_handler, this );
-                }
-            }
-            catch (...)
-            {}
+
+	    ssgEntity* model = preview->load( path.str() );
+	    if (model != 0)
+	    {
+		Fl::add_timeout( update_period, timeout_handler, this );
+	    }
             win->cursor( FL_CURSOR_DEFAULT );
             preview->redraw();
-        }
-	else
+	}
+	catch (const sg_exception& exc )
 	{
-	    fl_alert( "Property '/sim/model/path' not found" );
+	    fl_alert( exc.getFormattedMessage().c_str() );
 	    return;
 	}
+	catch (...)
+	{}
     }
-    catch (const sg_exception& exc )
+    else
     {
-        fl_alert( exc.getFormattedMessage().c_str() );
-        return;
+	fl_alert( "Property '/sim/model/path' not found" );
+	return;
     }
 
     next->activate();
@@ -328,11 +329,12 @@ Wizard::next_cb()
     else if (wiz->value() == page[1])
     {
 	int n = aircraft->value();
-        string fname( (char*)aircraft->data(n) );
-        string::size_type pos = fname.rfind( "/" );
-        string::size_type epos = fname.find( "-set.xml", pos );
-        string ac( fname.substr( pos+1, epos-pos-1 ) );
-	prefs.set( "aircraft", n > 0 ? ac.c_str() : "" );
+	if (n > 0)
+	{
+	    AircraftData* data =
+		reinterpret_cast<AircraftData*>( aircraft->data(n) );
+	    prefs.set( "aircraft", n > 0 ? data->name.c_str() : "" );
+	}
 	Fl::remove_timeout( timeout_handler, this );
     }
     else if (wiz->value() == page[2])
@@ -478,6 +480,9 @@ Wizard::advanced_cb()
     prefs.set( "airport-name", airports_->get_selected_name().c_str() );
 
     int r = adv->exec( prefs );
+    if (r)
+    {
+    }
 
     // Update command text.
     std::ostringstream ostr;
@@ -554,9 +559,9 @@ Wizard::aircraft_update()
     // Empty the aircraft browser list.
     for (int i = 1; i <= aircraft->size(); ++i)
     {
-        char* data = (char*)aircraft->data(i);
-        if (data != 0)
-            free( data );
+	AircraftData* data =
+	    reinterpret_cast<AircraftData*>( aircraft->data(i) );
+	delete data;
     }
     aircraft->clear();
 
@@ -568,10 +573,9 @@ Wizard::aircraft_update()
     // Populate the aircraft browser list.
     for (vector<SGPath>::size_type vi = 0; vi < ac.size(); ++vi)
     {
-        // Extract aircraft name from filename.
 	string s( ac[vi].str() );
 
-        SGPropertyNode props;
+	SGPropertyNode props;
 	try
 	{
 	    readProperties( s.c_str(), &props );
@@ -588,12 +592,17 @@ Wizard::aircraft_update()
 
             if ( desc.find( "Alias " ) == string::npos )
             {
+		// Extract aircraft name from filename.
                 string::size_type pos = s.rfind( "/" );
                 string::size_type epos = s.find( "-set.xml", pos );
-
-                char* data = strdup( s.c_str() );
 	        string ss( s.substr( pos+1, epos-pos-1 ) );
+
+		AircraftData* data = new AircraftData;
+		copyProperties( &props, &data->props );
+		//data->props = props;
+		data->name = ss;
                 aircraft->add( desc.c_str(), data );
+
 	        if (buf[0] != 0 && strcmp( buf, ss.c_str() ) == 0)
 	        {
 	             aircraft->select( aircraft->size() );
