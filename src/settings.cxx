@@ -81,6 +81,9 @@ Advanced::save_settings( Fl_Preferences& prefs )
     if (lang->size() > 0)
 	prefs.set("lang", lang->value());
 
+    if (config->size() > 0)
+	prefs.set( "config", config->value() );
+
     prefs.set("game_mode", game_mode->value());
     prefs.set("splash_screen", splash_screen->value());
     prefs.set("intro_music", intro_music->value());
@@ -241,6 +244,7 @@ Advanced::load_settings( Fl_Preferences& prefs )
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];
     const char* not_set = "NOT SET";
+    int i = 0;
 
     prefs.get( "fg_exe", buf, not_set, buflen-1);
     fg_exe_->value(buf);
@@ -279,6 +283,9 @@ Advanced::load_settings( Fl_Preferences& prefs )
 //     prefs.get("browser", buf, "netscape", buflen-1);
 // #endif
 //     browser->value(buf);
+
+    if (prefs.get( "config", buf, "", buflen-1) && buf[0] != 0)
+	config->value( buf );
 
     int iVal;
     double dVal;
@@ -469,7 +476,6 @@ Advanced::load_settings( Fl_Preferences& prefs )
     multiplay2->value( buf );
 
     prefs.get( "io-count", iVal, 0 );
-    int i;
     for (i = 1; i <= iVal; ++i)
     {
 	buf[0] = 0;

@@ -104,6 +104,8 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--lang=" << buf;
     if (prefs.get( "browser", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--browser-app=" << buf;
+    if (prefs.get( "config", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--config=" << buf;
   
     int iVal;
     double dVal;
