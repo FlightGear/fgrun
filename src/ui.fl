@@ -7,7 +7,7 @@ class UserInterface {open
   Function {UserInterface()} {open
   } {
     Fl_Window main_window {
-      label {FlightGear Launcher} open
+      label {FlightGear Launcher}
       private xywh {569 78 640 480} box ENGRAVED_BOX
       code0 {\#include <string.h>} visible
     } {
@@ -310,7 +310,7 @@ class UserInterface {open
   start_date_sys_text->deactivate();
   start_date_lat_text->deactivate();
   start_date_gmt_text->deactivate();
-}} selected
+}}
             xywh {390 225 110 25} type Radio down_box ROUND_DOWN_BOX
           }
           Fl_Input time_offset_text {
@@ -496,7 +496,8 @@ class UserInterface {open
       }
       Fl_Button quit {
         label Quit
-        callback {main_window->hide();}
+        callback {output_window->hide();
+main_window->hide();} selected
         private xywh {580 450 55 25}
       }
       Fl_Menu_Bar {} {open
@@ -689,7 +690,7 @@ class UserInterface {open
     }
     Fl_Window output_window {
       label Output
-      xywh {208 458 640 480} resizable visible
+      xywh {79 483 640 480} resizable visible
     } {
       Fl_Text_Display output_text {
         xywh {0 25 640 455}
