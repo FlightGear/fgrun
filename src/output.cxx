@@ -111,4 +111,5 @@ FGOutputWindow::close_cb( Fl_Widget* o, void* v )
 void
 FGOutputWindow::close_cb()
 {
+    win->hide();
 }
