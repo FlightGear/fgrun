@@ -25,30 +25,20 @@
 #include <FL/filename.h>
 
 void
-Wizard::run_fgfs()
+Wizard::run_fgfs(const std::string &args)
 {
     const int buflen = FL_PATH_MAX;
     char exe[ buflen ];
-    char root[ buflen ];
     char buf[ buflen ];
-    char aircraft[128];
 
     prefs.get( "fg_exe", buf, "", buflen-1 );
     fl_filename_absolute( exe, buf );
 
-    prefs.get( "fg_root", buf, "", buflen-1 );
-    fl_filename_absolute( root, buf );
-
-    prefs.get( "aircraft", aircraft, "", sizeof(aircraft)-1);
-
     char* cmd = new char[ strlen(exe) +
-                          strlen(root) +
-                          strlen(aircraft) + 26 ];
+                          args.size() + 2 ];
     strcpy( cmd, exe );
-    strcat( cmd, " --fg-root=\"" );
-    strcat( cmd, root );
-    strcat( cmd, "\" --aircraft=" );
-    strcat( cmd, aircraft );
+    strcat( cmd, " " );
+    strcat( cmd, args.c_str() );
 
     //SECURITY_ATTRIBUTES procAttrs;
     //SECURITY_ATTRIBUTES threadAttrs;
