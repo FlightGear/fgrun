@@ -233,7 +233,9 @@ private:
   inline void cb_prop_new_i(Fl_Button*, void*);
   static void cb_prop_new(Fl_Button*, void*);
   Fl_Group *page[12];
+public:
   Fl_Browser *env_list;
+private:
   inline void cb_env_list_i(Fl_Browser*, void*);
   static void cb_env_list(Fl_Browser*, void*);
   inline void cb_New_i(Fl_Button*, void*);
