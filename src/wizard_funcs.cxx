@@ -21,7 +21,7 @@
 // $Id$
 
 #include <string>
-#include <fstream>
+#include <cstdio>
 #include <vector>
 #include <sstream>
 
@@ -49,6 +49,7 @@ extern string def_fg_exe;
 extern string def_fg_root;
 extern string def_fg_scenery;
 
+
 static bool
 is_valid_fg_root( const string& dir )
 {
@@ -57,8 +58,14 @@ is_valid_fg_root( const string& dir )
 
     string fname( dir );
     fname.append( "/version" );
-    std::ifstream file( fname.c_str() );
-    return file.is_open();
+    FILE* fp = fopen( fname.c_str(), "r" );
+    if (fp != 0)
+    {
+	fclose(fp);
+	return true;
+    }
+
+    return false;
 }
 
 static bool
@@ -121,11 +128,13 @@ Wizard::init()
     }
     else
     {
-        page[1]->show();
+// 	prefs.get( "airport", buf, "", buflen-1);
+        airports_->init( fg_root_->value(), fg_scenery_->value() );
+        aircraft_update();
+
         prev->activate();
 	next->activate();
-        aircraft_update();
-        airports_->init( fg_root_->value(), fg_scenery_->value() );
+        page[1]->show();
     }
 }
 
@@ -502,6 +511,7 @@ Wizard::aircraft_update()
     vector< SGPath > ac;
     search_aircraft_dir( path, true, ac );
 
+    // Empty the aircraft browser list.
     for (int i = 1; i <= aircraft->size(); ++i)
     {
         char* data = (char*)aircraft->data(i);
@@ -510,15 +520,26 @@ Wizard::aircraft_update()
     }
     aircraft->clear();
 
-    for (vector<SGPath>::size_type i = 0; i < ac.size(); ++i)
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+    prefs.get( "aircraft", buf, "", buflen-1);
+
+    // Populate the aircraft browser list.
+    for (vector<SGPath>::size_type vi = 0; vi < ac.size(); ++vi)
     {
         // Extract aircraft name from filename.
-	string s( ac[i].str() );
+	string s( ac[vi].str() );
         string::size_type pos = s.rfind( "/" );
         string::size_type epos = s.find( "-set.xml", pos );
 
         char* data = strdup( s.c_str() );
-        aircraft->add( s.substr( pos+1, epos-pos-1 ).c_str(), data );
+	string ss( s.substr( pos+1, epos-pos-1 ) );
+        aircraft->add( ss.c_str(), data );
+	if (buf[0] != 0 && strcmp( buf, ss.c_str() ) == 0)
+	{
+	    aircraft->select( vi+1 );
+	    //aircraft->do_callback();
+	}
     }
 }
 
@@ -531,5 +552,6 @@ Wizard::~Wizard()
 void
 Wizard::cancel_cb()
 {
+    logwin->hide();
     win->hide();
 }
