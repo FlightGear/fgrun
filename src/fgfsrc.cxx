@@ -228,6 +228,23 @@ UserInterface::write_fgfsrc()
 
 	ofs << "\n--log-level=" << (log_level->value() + 1);
 
+	// Avionics
+	if (nav1->size() > 1)
+	    ofs << "\n--nav1=" << nav1->value();
+	if (nav2->size() > 1)
+	    ofs << "\n--nav2=" << nav2->value();
+	if (adf->size() > 1)
+	    ofs << "\n--adf=" << adf->value();
+	if (dme->value())
+	{
+	    if (dme_nav1->value())
+		ofs << "\n--dme=nav1";
+	    else if (dme_nav2->value())
+		ofs << "\n--dme=nav2";
+	    else if (dme_int->value())
+		ofs << "\n--dme=" << dme_int_freq->value();
+	}
+
 	ofs << "\n";
 	ofs.close();
 	return 1;

@@ -140,6 +140,24 @@ UserInterface::save_settings_cb()
 	prefs.set( Fl_Preferences::Name("env-var-%d", i), env_list->text(i));
 
     prefs.set( "log-level", log_level->value()+1 );
+
+    prefs.set( "nav1", nav1->value() );
+    prefs.set( "nav2", nav2->value() );
+    prefs.set( "adf", adf->value() );
+
+    if (dme->value())
+    {
+	if (dme_nav1->value())
+	    prefs.set( "dme", "nav1" );
+	else if (dme_nav2->value())
+	    prefs.set( "dme", "nav2" );
+	else if (dme_int->value())
+	    prefs.set( "dme", dme_int_freq->value() );
+    }
+    else
+    {
+	prefs.set( "dme", "disabled" );
+    }
 }
 
 void
@@ -367,6 +385,35 @@ UserInterface::load_settings_cb()
 
     prefs.get( "log-level", iVal, 4 );
     log_level->value( iVal-1 );
+
+    prefs.get( "nav1", buf, "", buflen-1 );
+    nav1->value( buf );
+    prefs.get( "nav2", buf, "", buflen-1 );
+    nav2->value( buf );
+    prefs.get( "adf", buf, "", buflen-1 );
+    adf->value( buf );
+
+    prefs.get( "dme", buf, "disabled", buflen-1 );
+    if (strcmp( buf, "disabled" ) == 0)
+    {
+	dme->clear();
+	dme_group->deactivate();
+    }
+    else
+    {
+	dme->set();
+	dme_group->activate();
+	dme_int_freq->deactivate();
+	if (strcmp( buf, "nav1" ) == 0)
+	    dme_nav1->setonly();
+	else if (strcmp( buf, "nav2" ) == 0)
+	    dme_nav2->setonly();
+	else
+	{
+	    dme_int->setonly();
+	    dme_int_freq->value( buf );
+	}
+    }
 }
 
 void
