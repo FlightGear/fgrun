@@ -177,8 +177,11 @@ Advanced::save_settings( Fl_Preferences& prefs )
 
     prefs.set( "proxy", proxy->value() );
 
-    prefs.set("io-count", io_list->size());
     int i;
+    for (i = io_list->size(); i >= 1; --i)
+	if ( strlen( io_list->text(i) ) == 0 )
+            io_list->remove( i );
+    prefs.set("io-count", io_list->size());
     for (i = 1; i <= io_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("io-item-%d", i), io_list->text(i));
 

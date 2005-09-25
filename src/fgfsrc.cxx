@@ -329,7 +329,8 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("io-item-%d", i),
 		   buf, "", buflen-1 );
-	os << pfx << buf;
+        if ( strlen( buf ) > 0 )
+	    os << pfx << buf;
     }
 
     // Properties
@@ -339,7 +340,8 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	buf[0] = 0;
 	prefs.get( Fl_Preferences::Name("property-item-%d", i),
 		   buf, "", buflen-1 );
-	os << pfx << "--prop:" << buf;
+        if ( strlen( buf ) > 0 )
+	    os << pfx << "--prop:" << buf;
     }
 
     // Debugging
