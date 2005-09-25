@@ -13,7 +13,7 @@ public:
     Fl_Plib( int x, int y, int w, int h, const char *l=0 );
 
     void init();
-    ssgEntity* load( const std::string& fname );
+    ssgEntity* load( const std::string& fname, const std::string& tpath );
     void set_model( ssgEntity* obj, ssgEntity* bounding_obj = 0 );
     void clear();
 

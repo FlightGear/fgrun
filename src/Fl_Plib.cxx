@@ -48,16 +48,9 @@ Fl_Plib::init()
 using std::string;
 
 ssgEntity*
-Fl_Plib::load( const string& fname )
+Fl_Plib::load( const string& fname, const string& tpath )
 {
-    string dir(fname);
-    string::size_type pos = dir.rfind( "/" );
-    if (pos != string::npos)
-    {
-	dir.erase( pos, string::npos );
-	ssgTexturePath( (char*) dir.c_str() );
-    }
-
+    ssgTexturePath( (char*) tpath.c_str() );
     ssgEntity *obj = ssgLoad( (char*) fname.c_str() );
     return obj;
 }

@@ -287,7 +287,7 @@ Wizard::preview_aircraft()
 
     if (data->props.hasValue( "/sim/model/path" ))
     {
-	SGPath path( fg_root_->value() );
+	SGPath path( fg_root_->value() ), tpath;
 	path.append( data->props.getStringValue( "/sim/model/path" ) );
 
 	if (!path.exists())
@@ -303,17 +303,21 @@ Wizard::preview_aircraft()
                 SGPropertyNode mprops;
                 readProperties( path.str(), &mprops );
 
-                if (mprops.hasValue( "/path" ))
+                tpath = dir_path( path );
+                if (mprops.hasValue( "path" ))
                 {
 		    path = dir_path( path );
-		    path.append( mprops.getStringValue("/path") );
+		    path.append( mprops.getStringValue("path") );
                 }
+
+                if (mprops.hasValue( "texture-path" ))
+                    tpath.append( mprops.getStringValue("texture-path") );
             }
 
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
 
-	    ssgEntity* model = preview->load( path.str() );
+	    ssgEntity* model = preview->load( path.str(), tpath.str() );
 	    if (model != 0)
 	    {
                 ssgEntity *bounding_obj = find_named_node( model, "Aircraft" );
