@@ -1,3 +1,12 @@
+* 0.4.6
+
+  * New wizard page with most common options directly available
+  * A modal window prevent multiple launch of fgfs
+  * Read new fgfs airport format
+  * Refresh airport list only on demand
+  * Aircraft viewer preserve image aspect ratio and auto scale the view to the aircraft dimensions
+  * Several fixes
+
 * 0.4.5
 
   * Fixed win32 GL context bug.
