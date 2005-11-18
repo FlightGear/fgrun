@@ -118,7 +118,7 @@ static const char* about_text = "\
  <body>\
   <h1>FlightGear Launch Control " VERSION "</h1>\
   <p>This program is released under the GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>\
-  <p>Report bugs to bbright@users.sourceforge.net</p>\
+  <p>Report bugs to http://sourceforge.net/projects/fgrun</p>\
  </body>\
 </html>";
 
