@@ -84,6 +84,12 @@ parse_args( int, char** argv, int& i )
 int
 main( int argc, char* argv[] )
 {
+#ifdef WIN32
+    WORD wVersionRequested;
+    WSADATA wsaData;
+    wVersionRequested = MAKEWORD( 2, 2 );
+    WSAStartup( wVersionRequested, &wsaData );
+#endif
     Fl::lock(); // initialize multithreading
 
     int i = 0;

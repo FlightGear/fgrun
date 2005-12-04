@@ -1090,7 +1090,9 @@ Wizard::multiplay_cb()
 	str << "out,10," << host << "," << out;
 	prefs.set("multiplay1",str.str().c_str());
 	str.str("");
-	str << "in,10,localhost," << in;
+	char hostname[256];
+	gethostname( hostname, 256 );
+	str << "in,10," << hostname << "," << in;
 	prefs.set("multiplay2",str.str().c_str());
     }
     update_options();
