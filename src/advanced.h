@@ -343,6 +343,7 @@ private:
   void fg_browser_cb();
   void load_settings(Fl_Preferences&);
   void save_settings(Fl_Preferences&);
+  void reset_settings(Fl_Preferences&);
   void wind_dial_cb();
   void wind_hdg_cb();
   void cloud_layer_cb();

@@ -70,9 +70,6 @@ string_to_coverage( const char* s )
 void
 Advanced::save_settings( Fl_Preferences& prefs )
 {
-    const int buflen = FL_PATH_MAX;
-    char buf[ buflen ];
-
     prefs.set( "browser", browser->value() );
     prefs.set( "control", control->text() );
     prefs.set( "lang", lang->value());
@@ -581,4 +578,161 @@ Advanced::load_settings( Fl_Preferences& prefs )
     }
     cloud_layer_->value(0);
     cloud_layer_->do_callback();
+}
+
+void
+Advanced::reset_settings( Fl_Preferences& prefs )
+{
+    prefs.deleteEntry( "browser" );
+    prefs.deleteEntry( "control" );
+    prefs.deleteEntry( "lang" );
+    prefs.deleteEntry( "config" );
+
+    prefs.deleteEntry("game_mode" );
+    prefs.deleteEntry("splash_screen" );
+    prefs.deleteEntry("intro_music" );
+    prefs.deleteEntry("mouse_pointer" );
+    prefs.deleteEntry("random_objects" );
+    prefs.deleteEntry("panel" );
+    prefs.deleteEntry("sound" );
+    prefs.deleteEntry("hud" );
+    prefs.deleteEntry("antialias_hud" );
+    prefs.deleteEntry("hud_3d" );
+    prefs.deleteEntry("auto_coordination" );
+    prefs.deleteEntry("horizon_effect" );
+    prefs.deleteEntry("enhanced_lighting" );
+    prefs.deleteEntry("distance_attenuation" );
+    prefs.deleteEntry("specular_highlight" );
+    prefs.deleteEntry("failure" );
+    prefs.deleteEntry("failure_pitot" );
+    prefs.deleteEntry("failure_static" );
+    prefs.deleteEntry("failure_system" );
+    prefs.deleteEntry("failure_vacuum" );
+    prefs.deleteEntry("ai_models" );
+
+    prefs.deleteEntry("fdm" );
+    prefs.deleteEntry("no_trim" );
+    prefs.deleteEntry("model_hz" );
+    prefs.deleteEntry("speed" );
+    prefs.deleteEntry("on_ground" );
+    prefs.deleteEntry("in_air" );
+    prefs.deleteEntry("wind_heading" );
+    prefs.deleteEntry("wind_speed" );
+    prefs.deleteEntry("turbulence" );
+    prefs.deleteEntry("ceiling" );
+    prefs.deleteEntry("random_wind" );
+    prefs.deleteEntry("fetch_real_weather" );
+
+    prefs.deleteEntry("freeze" );
+    prefs.deleteEntry("fuel_freeze" );
+    prefs.deleteEntry("clock_freeze" );
+
+    prefs.deleteEntry("lon" );
+    prefs.deleteEntry("lat" );
+    prefs.deleteEntry("altitude" );
+    prefs.deleteEntry("heading" );
+    prefs.deleteEntry("roll" );
+    prefs.deleteEntry("pitch" );
+    prefs.deleteEntry("vc" );
+    prefs.deleteEntry("uBody" );
+    prefs.deleteEntry("vBody" );
+    prefs.deleteEntry("wBody" );
+
+    prefs.deleteEntry("clouds" );
+    prefs.deleteEntry("clouds3d" );
+    prefs.deleteEntry("fullscreen" );
+    prefs.deleteEntry("skyblend" );
+    prefs.deleteEntry("textures" );
+    prefs.deleteEntry("wireframe" );
+    prefs.deleteEntry("fog" );
+    prefs.deleteEntry("shading" );
+    prefs.deleteEntry("geometry" );
+    prefs.deleteEntry("visibility" );
+    prefs.deleteEntry("visibility-units" );
+    prefs.deleteEntry("view-offset" );
+    prefs.deleteEntry("bpp" );
+    prefs.deleteEntry("fov" );
+
+    prefs.deleteEntry("time-match-real" );
+    prefs.deleteEntry("time-offset" );
+    prefs.deleteEntry("time-match-local" );
+    prefs.deleteEntry("start-date-sys" );
+    prefs.deleteEntry("start-date-sys-value" );
+    prefs.deleteEntry("start-date-gmt" );
+    prefs.deleteEntry("start-date-gmt-value" );
+    prefs.deleteEntry("start-date-lat" );
+    prefs.deleteEntry("start-date-lat-value" );
+    prefs.deleteEntry("time_of_day" );
+    prefs.deleteEntry("time_of_day_value" );
+
+    // Network options.
+    prefs.deleteEntry("httpd" );
+    prefs.deleteEntry("props" );
+    prefs.deleteEntry("jpg-httpd" );
+    // Multiplayer options
+    prefs.deleteEntry( "callsign" );
+    prefs.deleteEntry( "multiplay1" );
+    prefs.deleteEntry( "multiplay2" );
+
+    prefs.deleteEntry( "proxy" );
+
+    int i;
+    prefs.deleteEntry("io-count" );
+    for (i = 1; i <= io_list->size(); ++i)
+	prefs.deleteEntry( Fl_Preferences::Name("io-item-%d", i) );
+
+    prefs.deleteEntry("property-count" );
+    for (i = 1; i <= prop_list->size(); ++i)
+	prefs.deleteEntry( Fl_Preferences::Name("property-item-%d", i) );
+
+    prefs.deleteEntry("env-count" );
+    for (i = 1; i <= env_list->size(); ++i)
+	prefs.deleteEntry( Fl_Preferences::Name("env-var-%d", i) );
+
+    prefs.deleteEntry( "log-level" );
+    prefs.deleteEntry("trace-read-count" );
+    for (i = 1; i <= trace_read_list->size(); ++i)
+	prefs.deleteEntry( Fl_Preferences::Name("trace-read-%d", i) );
+    prefs.deleteEntry("trace-write-count" );
+    for (i = 1; i <= trace_write_list->size(); ++i)
+	prefs.deleteEntry( Fl_Preferences::Name("trace-write-%d", i) );
+
+    prefs.deleteEntry( "nav1" );
+    prefs.deleteEntry( "nav2" );
+    prefs.deleteEntry( "adf" );
+    prefs.deleteEntry( "dme" );
+
+    for( i = 0; i < MAX_CLOUD_LAYERS; ++i)
+    {
+	prefs.deleteEntry( Fl_Preferences::Name("layer-%d-elevation-ft", i) );
+	prefs.deleteEntry( Fl_Preferences::Name("layer-%d-thickness-ft", i) );
+	prefs.deleteEntry( Fl_Preferences::Name("layer-%d-coverage", i) );
+	prefs.deleteEntry( Fl_Preferences::Name("layer-%d-transition-ft", i) );
+	prefs.deleteEntry( Fl_Preferences::Name("layer-%d-span-m", i) );
+    }
+
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+    const char* not_set = "NOT SET";
+
+    prefs.get( "fg_exe_init", buf, not_set, buflen-1);
+    if ( strcmp( buf, not_set ) != 0 )
+    {
+        prefs.set( "fg_exe", buf );
+        fg_exe_->value(buf);
+    }
+
+    prefs.get( "fg_root_init", buf, not_set, buflen-1);
+    if ( strcmp( buf, not_set ) != 0 )
+    {
+        prefs.set( "fg_root", buf );
+        fg_root_->value( buf );
+    }
+
+    prefs.get( "fg_scenery_init", buf, not_set, buflen-1 );
+    if ( strcmp( buf, not_set ) != 0 )
+    {
+        prefs.set( "fg_scenery", buf );
+        fg_scenery_->value( buf );
+    }
 }
