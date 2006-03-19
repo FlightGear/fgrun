@@ -162,6 +162,7 @@ public:
   void update_preview();
   void preview_aircraft();
 private:
+  void reset();
   void aircraft_update();
   void next_cb();
   void prev_cb();
@@ -224,7 +225,6 @@ private:
   Fl_Double_Window *launch_window;
   int launch_result;
   void exec_launch_window();
-  bool fullscreen;
   Advanced *adv;
 };
 #endif

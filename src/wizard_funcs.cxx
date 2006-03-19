@@ -123,51 +123,25 @@ static const char* about_text = "\
 </html>";
 
 void
-Wizard::init( bool fs )
+Wizard::reset()
 {
-    static const int npages = 5;
-
-    fullscreen = fs;
-    make_launch_window();
-
-    for (int i = 0; i < npages; ++i)
-        page[i]->hide();
-
-    if (fullscreen)
-    {
-	win->resize( 0, 0, Fl::w(), Fl::h() );
-    }
-    else
-    {
-	int X, Y, W, H;
-	prefs.get( "x", X, 0 );
-	prefs.get( "y", Y, 0 );
-	prefs.get( "width", W, 0 );
-	prefs.get( "height", H, 0 );
-	if (W > 0 && H > 0)
-	    win->resize( X, Y, W, H );
-    }
-
-    win->size_range( 640, 480 );
-    text->buffer( new Fl_Text_Buffer );
-
-    logwin = new LogWindow( 640, 480, "Log Window" );
-
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];
-
-    prefs.getUserdataPath( buf, sizeof(buf) );
-    SGPath cache( buf );
-    cache.append( "airports.txt" );
-    cache_file_->value( cache.c_str() );
-
-    about_->value( about_text );
 
     prefs.get( "fg_exe", buf, def_fg_exe.c_str(), buflen-1);
     fg_exe_->value( buf );
 
     prefs.get( "fg_root", buf, def_fg_root.c_str(), buflen-1);
     fg_root_->value( buf );
+    if ( fg_root_->size() == 0 )
+    {
+        char *e = getenv( "FG_ROOT" );
+        if ( e )
+        {
+            prefs.set( "fg_root", e );
+            fg_root_->value( e );
+        }
+    }
 
     string fg_scenery;
     if (!def_fg_scenery.empty())
@@ -180,8 +154,17 @@ Wizard::init( bool fs )
     }
     else if (fg_root_->size() > 0)
     {
-	fg_scenery = fg_root_->value();
-	fg_scenery += "/Scenery";
+        char *e = getenv( "FG_SCENERY" );
+        if ( e )
+        {
+            prefs.set( "fg_scenery", e );
+            fg_scenery = e;
+        }
+        else
+        {
+	    fg_scenery = fg_root_->value();
+	    fg_scenery += "/Scenery";
+        }
     }
 
     typedef vector<string> vs_t;
@@ -219,6 +202,49 @@ Wizard::init( bool fs )
 	text->show();
     else
 	text->hide();
+}
+
+void
+Wizard::init( bool fullscreen )
+{
+    static const int npages = 5;
+
+    make_launch_window();
+
+    for (int i = 0; i < npages; ++i)
+        page[i]->hide();
+
+    if (fullscreen)
+    {
+	win->resize( 0, 0, Fl::w(), Fl::h() );
+    }
+    else
+    {
+	int X, Y, W, H;
+	prefs.get( "x", X, 0 );
+	prefs.get( "y", Y, 0 );
+	prefs.get( "width", W, 0 );
+	prefs.get( "height", H, 0 );
+	if (W > 0 && H > 0)
+	    win->resize( X, Y, W, H );
+    }
+
+    win->size_range( 640, 480 );
+    text->buffer( new Fl_Text_Buffer );
+
+    logwin = new LogWindow( 640, 480, "Log Window" );
+
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+
+    prefs.getUserdataPath( buf, sizeof(buf) );
+    SGPath cache( buf );
+    cache.append( "airports.txt" );
+    cache_file_->value( cache.c_str() );
+
+    about_->value( about_text );
+
+    reset();
 }
 
 void
@@ -1447,5 +1473,5 @@ Wizard::reset_settings()
         prefs.set( "fg_scenery", buf );
     }
 
-    init( fullscreen );
+    reset();
 }
