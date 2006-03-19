@@ -27,7 +27,7 @@ decl {class Advanced;} {public
 
 class Wizard {open
 } {
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0), fullscreen(false)} {open
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0)} {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
@@ -320,22 +320,22 @@ class Wizard {open
               }
               Fl_Input multiplay_callsign {
                 label {Callsign :}
-                callback {multiplay_callsign_cb();}
+                callback {multiplay_field_cb();} selected
                 private xywh {480 190 145 25} when 1
               }
               Fl_Input multiplay_host {
                 label {Hostname :}
-                callback {multiplay_host_cb();}
+                callback {multiplay_field_cb();}
                 private tooltip {Peer hostname} xywh {345 215 95 25} when 1
               }
               Fl_Value_Input multiplay_in {
                 label {in :}
-                callback {multiplay_in_cb();}
+                callback {multiplay_field_cb();}
                 private tooltip {Input port number} xywh {480 215 50 25}
               }
               Fl_Value_Input multiplay_out {
                 label {out :}
-                callback {multiplay_out_cb();}
+                callback {multiplay_field_cb();}
                 private tooltip {Output port number} xywh {575 215 50 25}
               }
               Fl_Box {} {
@@ -392,6 +392,7 @@ class Wizard {open
   }
   decl {void preview_aircraft();} {public
   }
+  decl {void reset();} {}
   decl {void aircraft_update();} {}
   decl {void next_cb();} {}
   decl {void prev_cb();} {}
@@ -440,14 +441,10 @@ class Wizard {open
   decl {void atlas_host_cb();} {}
   decl {void atlas_port_cb();} {}
   decl {void multiplay_cb();} {}
-  decl {void multiplay_callsign_cb();} {}
-  decl {void multiplay_host_cb();} {}
-  decl {void multiplay_in_cb();} {}
-  decl {void multiplay_out_cb();} {}
+  decl {void multiplay_field_cb();} {}
   decl {void update_basic_options();} {}
   decl {void show_cmd_line_cb();} {}
-  decl {void reset_settings();} {selected
-  }
+  decl {void reset_settings();} {}
   decl {pthread_t th;} {}
   decl {static void *startFlightGear_cb( void *d );} {}
   decl {void startFlightGear_cb();} {}
@@ -481,6 +478,5 @@ class Wizard {open
   }
   decl {int launch_result;} {}
   decl {void exec_launch_window();} {}
-  decl {bool fullscreen;} {}
   decl {Advanced *adv;} {}
 } 

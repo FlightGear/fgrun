@@ -475,6 +475,9 @@ Wizard::prev_cb()
 void
 Wizard::defaults_cb()
 {
+    int r = fl_ask( "About to reset current parameters.\nDo you want to continue?" );
+    if (!r)
+	return;
     if (adv == 0)
     {
 	adv = new Advanced;
@@ -704,6 +707,7 @@ Wizard::~Wizard()
 {
     delete logwin;
     delete win;
+    delete adv;
 }
 
 void
@@ -1136,67 +1140,7 @@ Wizard::multiplay_cb()
 }
 
 void
-Wizard::multiplay_callsign_cb()
-{
-    string callsign = multiplay_callsign->value();
-    string host = multiplay_host->value();
-    int in = (int)multiplay_in->value();
-    int out = (int)multiplay_out->value();
-
-    prefs.set("callsign",callsign.c_str());
-    std::ostringstream str;
-    str << "out,10," << host << "," << out;
-    prefs.set("multiplay1",str.str().c_str());
-    str.str("");
-    char hostname[256];
-    gethostname( hostname, 256 );
-    str << "in,10," << hostname << "," << in;
-    prefs.set("multiplay2",str.str().c_str());
-    update_options();
-}
-
-void
-Wizard::multiplay_host_cb()
-{
-    string callsign = multiplay_callsign->value();
-    string host = multiplay_host->value();
-    int in = (int)multiplay_in->value();
-    int out = (int)multiplay_out->value();
-
-    prefs.set("callsign",callsign.c_str());
-    std::ostringstream str;
-    str << "out,10," << host << "," << out;
-    prefs.set("multiplay1",str.str().c_str());
-    str.str("");
-    char hostname[256];
-    gethostname( hostname, 256 );
-    str << "in,10," << hostname << "," << in;
-    prefs.set("multiplay2",str.str().c_str());
-    update_options();
-}
-
-void
-Wizard::multiplay_in_cb()
-{
-    string callsign = multiplay_callsign->value();
-    string host = multiplay_host->value();
-    int in = (int)multiplay_in->value();
-    int out = (int)multiplay_out->value();
-
-    prefs.set("callsign",callsign.c_str());
-    std::ostringstream str;
-    str << "out,10," << host << "," << out;
-    prefs.set("multiplay1",str.str().c_str());
-    str.str("");
-    char hostname[256];
-    gethostname( hostname, 256 );
-    str << "in,10," << hostname << "," << in;
-    prefs.set("multiplay2",str.str().c_str());
-    update_options();
-}
-
-void
-Wizard::multiplay_out_cb()
+Wizard::multiplay_field_cb()
 {
     string callsign = multiplay_callsign->value();
     string host = multiplay_host->value();
@@ -1222,6 +1166,10 @@ Wizard::update_basic_options()
     char buf[ buflen ];
 
     prefs.get("geometry", buf, "", buflen-1);
+    if ( buf[0] == '\0' )
+    {
+	strcpy( buf, "800x600" );
+    }
     int i;
     for ( i = 0; menu_resolution[i].text != 0; i++ )
     {
@@ -1447,9 +1395,15 @@ Wizard::reset_settings()
     prefs.deleteEntry( "fg_root" );
     prefs.deleteEntry( "fg_scenery" );
     prefs.deleteEntry( "aircraft" );
-    prefs.deleteEntry( "airport" );
-    prefs.deleteEntry( "airport-name" );
-    prefs.deleteEntry( "runway" );
+ 
+    prefs.set( "time_of_day", 1 );
+    prefs.set( "time_of_day_value", "noon" );
+
+    aircraft->value( 0 );
+    preview->make_current();
+    preview->clear();
+    preview->redraw();
+    preview->init();
 
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];

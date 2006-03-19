@@ -211,10 +211,7 @@ private:
   void atlas_host_cb();
   void atlas_port_cb();
   void multiplay_cb();
-  void multiplay_callsign_cb();
-  void multiplay_host_cb();
-  void multiplay_in_cb();
-  void multiplay_out_cb();
+  void multiplay_field_cb();
   void update_basic_options();
   void show_cmd_line_cb();
   void reset_settings();

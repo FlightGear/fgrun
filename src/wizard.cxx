@@ -224,28 +224,28 @@ void Wizard::cb_multiplay(Fl_Check_Button* o, void* v) {
 }
 
 inline void Wizard::cb_multiplay_callsign_i(Fl_Input*, void*) {
-  multiplay_callsign_cb();
+  multiplay_field_cb();
 }
 void Wizard::cb_multiplay_callsign(Fl_Input* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_callsign_i(o,v);
 }
 
 inline void Wizard::cb_multiplay_host_i(Fl_Input*, void*) {
-  multiplay_host_cb();
+  multiplay_field_cb();
 }
 void Wizard::cb_multiplay_host(Fl_Input* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_host_i(o,v);
 }
 
 inline void Wizard::cb_multiplay_in_i(Fl_Value_Input*, void*) {
-  multiplay_in_cb();
+  multiplay_field_cb();
 }
 void Wizard::cb_multiplay_in(Fl_Value_Input* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_in_i(o,v);
 }
 
 inline void Wizard::cb_multiplay_out_i(Fl_Value_Input*, void*) {
-  multiplay_out_cb();
+  multiplay_field_cb();
 }
 void Wizard::cb_multiplay_out(Fl_Value_Input* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_out_i(o,v);
