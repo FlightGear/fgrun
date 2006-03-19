@@ -104,12 +104,15 @@ main( int argc, char* argv[] )
 	char abs_name[ FL_PATH_MAX ];
 
 	fl_filename_absolute( abs_name, def_fg_exe.c_str() );
+	prefs.set( "fg_exe_init", abs_name );
 	prefs.set( "fg_exe", abs_name );
 
 	fl_filename_absolute( abs_name, def_fg_root.c_str() );
+        prefs.set( "fg_root_init", abs_name );
         prefs.set( "fg_root", abs_name );
 
 	fl_filename_absolute( abs_name, def_fg_scenery.c_str() );
+        prefs.set( "fg_scenery_init", abs_name );
         prefs.set( "fg_scenery", abs_name );
 
 	return 0;

@@ -9,6 +9,7 @@
 #include <FL/Fl_Pixmap.H>
 #include <pthread.h>
 class LogWindow;
+class Advanced;
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Wizard.H>
 #include <FL/Fl_Group.H>
@@ -149,6 +150,11 @@ private:
   inline void cb_cancel_i(Fl_Button*, void*);
   static void cb_cancel(Fl_Button*, void*);
 public:
+  Fl_Button *defaults;
+private:
+  inline void cb_defaults_i(Fl_Button*, void*);
+  static void cb_defaults(Fl_Button*, void*);
+public:
   ~Wizard();
   void show();
   void show( int argc, char* argv[] );
@@ -159,6 +165,7 @@ private:
   void aircraft_update();
   void next_cb();
   void prev_cb();
+  void defaults_cb();
   void advanced_options_cb();
   void fg_exe_update_cb();
   void fg_exe_select_cb();
@@ -209,7 +216,7 @@ private:
   void multiplay_out_cb();
   void update_basic_options();
   void show_cmd_line_cb();
-  void reset_settings(Fl_Preferences&);
+  void reset_settings();
   pthread_t th;
   static void *startFlightGear_cb( void *d );
   void startFlightGear_cb();
@@ -217,5 +224,7 @@ private:
   Fl_Double_Window *launch_window;
   int launch_result;
   void exec_launch_window();
+  bool fullscreen;
+  Advanced *adv;
 };
 #endif

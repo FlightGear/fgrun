@@ -1090,7 +1090,7 @@ else
           }
           Fl_Check_Button random_wind {
             label {Random Winds}
-            callback {random_wind_cb();} selected
+            callback {random_wind_cb();}
             private xywh {235 280 105 25} down_box DOWN_BOX labelsize 12
           }
         }
@@ -1193,6 +1193,8 @@ else
   decl {~Advanced();} {public
   }
   decl {int exec(Fl_Preferences&);} {public
+  }
+  decl {void reset_settings(Fl_Preferences&);} {selected public
   }
   decl {void init();} {}
   decl {void io_list_select_cb( Fl_Browser* );} {}

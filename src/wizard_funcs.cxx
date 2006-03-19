@@ -123,10 +123,11 @@ static const char* about_text = "\
 </html>";
 
 void
-Wizard::init( bool fullscreen )
+Wizard::init( bool fs )
 {
     static const int npages = 5;
 
+    fullscreen = fs;
     make_launch_window();
 
     for (int i = 0; i < npages; ++i)
@@ -209,6 +210,7 @@ Wizard::init( bool fullscreen )
 	next->activate();
         page[1]->show();
     }
+    next->label( "Next" );
 
     int iVal;
     prefs.get("show_cmd_line", iVal, 0);
@@ -445,6 +447,17 @@ Wizard::prev_cb()
 }
 
 void
+Wizard::defaults_cb()
+{
+    if (adv == 0)
+    {
+	adv = new Advanced;
+    }
+    adv->reset_settings( prefs );
+    reset_settings();
+}
+
+void
 Wizard::fg_exe_select_cb()
 {
     char* p = fl_file_chooser( "Select FlightGear executable",
@@ -515,8 +528,6 @@ Wizard::fg_root_select_cb()
 void
 Wizard::advanced_cb()
 {
-    static Advanced* adv = 0;
-
     if (adv == 0)
     {
 	adv = new Advanced;
@@ -1404,9 +1415,8 @@ Wizard::exec_launch_window()
 }
 
 void
-Wizard::reset_settings( Fl_Preferences& prefs )
+Wizard::reset_settings()
 {
-    //adv->reset_settings( prefs );
     prefs.deleteEntry( "fg_exe" );
     prefs.deleteEntry( "fg_root" );
     prefs.deleteEntry( "fg_scenery" );
@@ -1437,5 +1447,5 @@ Wizard::reset_settings( Fl_Preferences& prefs )
         prefs.set( "fg_scenery", buf );
     }
 
-    init( false );
+    init( fullscreen );
 }

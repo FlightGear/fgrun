@@ -22,20 +22,23 @@ decl {\#include "folder_open.xpm"} {}
 decl {class LogWindow;} {public
 } 
 
+decl {class Advanced;} {public
+} 
+
 class Wizard {open
 } {
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm)} {open
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0), fullscreen(false)} {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
       private xywh {619 204 640 480} type Double visible
     } {
-      Fl_Wizard wiz {open
+      Fl_Wizard wiz {
         private xywh {0 0 645 440}
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths} open
+          label {Select Paths}
           xywh {0 0 640 440} labelfont 1 align 21 hide
         } {
           Fl_Help_View about_ {
@@ -214,7 +217,7 @@ class Wizard {open
             }
             Fl_Check_Button enhanced_lighting {
               label {Enhanced runway lighting}
-              callback {enhanced_lighting_cb();} selected
+              callback {enhanced_lighting_cb();}
               private tooltip {Use with caution. It may drop your framerate dramatically} xywh {250 35 205 20} down_box DOWN_BOX
             }
             Fl_Check_Button specular_highlight {
@@ -348,7 +351,7 @@ class Wizard {open
           xywh {0 0 640 440} hide deactivate
         } {}
       }
-      Fl_Group {} {open
+      Fl_Group {} {
         xywh {0 450 640 25}
       } {
         Fl_Button next {
@@ -367,7 +370,12 @@ class Wizard {open
           private xywh {565 450 70 25} labelsize 12
         }
         Fl_Box {} {
-          xywh {0 450 415 25} resizable
+          xywh {75 450 340 25} resizable
+        }
+        Fl_Button defaults {
+          label Defaults
+          callback {defaults_cb();}
+          xywh {5 450 70 25}
         }
       }
     }
@@ -387,6 +395,7 @@ class Wizard {open
   decl {void aircraft_update();} {}
   decl {void next_cb();} {}
   decl {void prev_cb();} {}
+  decl {void defaults_cb();} {}
   decl {void advanced_options_cb();} {}
   decl {void fg_exe_update_cb();} {}
   decl {void fg_exe_select_cb();} {}
@@ -437,6 +446,8 @@ class Wizard {open
   decl {void multiplay_out_cb();} {}
   decl {void update_basic_options();} {}
   decl {void show_cmd_line_cb();} {}
+  decl {void reset_settings();} {selected
+  }
   decl {pthread_t th;} {}
   decl {static void *startFlightGear_cb( void *d );} {}
   decl {void startFlightGear_cb();} {}
@@ -470,4 +481,6 @@ class Wizard {open
   }
   decl {int launch_result;} {}
   decl {void exec_launch_window();} {}
+  decl {bool fullscreen;} {}
+  decl {Advanced *adv;} {}
 } 
