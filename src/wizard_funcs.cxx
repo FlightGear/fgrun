@@ -1402,3 +1402,40 @@ Wizard::exec_launch_window()
     launch_window->set_non_modal();
     launch_window->hide();
 }
+
+void
+Wizard::reset_settings( Fl_Preferences& prefs )
+{
+    //adv->reset_settings( prefs );
+    prefs.deleteEntry( "fg_exe" );
+    prefs.deleteEntry( "fg_root" );
+    prefs.deleteEntry( "fg_scenery" );
+    prefs.deleteEntry( "aircraft" );
+    prefs.deleteEntry( "airport" );
+    prefs.deleteEntry( "airport-name" );
+    prefs.deleteEntry( "runway" );
+
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+    const char* not_set = "NOT SET";
+
+    prefs.get( "fg_exe_init", buf, not_set, buflen-1);
+    if ( strcmp( buf, not_set ) != 0 )
+    {
+        prefs.set( "fg_exe", buf );
+    }
+
+    prefs.get( "fg_root_init", buf, not_set, buflen-1);
+    if ( strcmp( buf, not_set ) != 0 )
+    {
+        prefs.set( "fg_root", buf );
+    }
+
+    prefs.get( "fg_scenery_init", buf, not_set, buflen-1 );
+    if ( strcmp( buf, not_set ) != 0 )
+    {
+        prefs.set( "fg_scenery", buf );
+    }
+
+    init( false );
+}

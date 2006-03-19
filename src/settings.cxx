@@ -710,29 +710,4 @@ Advanced::reset_settings( Fl_Preferences& prefs )
 	prefs.deleteEntry( Fl_Preferences::Name("layer-%d-transition-ft", i) );
 	prefs.deleteEntry( Fl_Preferences::Name("layer-%d-span-m", i) );
     }
-
-    const int buflen = FL_PATH_MAX;
-    char buf[ buflen ];
-    const char* not_set = "NOT SET";
-
-    prefs.get( "fg_exe_init", buf, not_set, buflen-1);
-    if ( strcmp( buf, not_set ) != 0 )
-    {
-        prefs.set( "fg_exe", buf );
-        fg_exe_->value(buf);
-    }
-
-    prefs.get( "fg_root_init", buf, not_set, buflen-1);
-    if ( strcmp( buf, not_set ) != 0 )
-    {
-        prefs.set( "fg_root", buf );
-        fg_root_->value( buf );
-    }
-
-    prefs.get( "fg_scenery_init", buf, not_set, buflen-1 );
-    if ( strcmp( buf, not_set ) != 0 )
-    {
-        prefs.set( "fg_scenery", buf );
-        fg_scenery_->value( buf );
-    }
 }

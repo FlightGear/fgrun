@@ -209,6 +209,7 @@ private:
   void multiplay_out_cb();
   void update_basic_options();
   void show_cmd_line_cb();
+  void reset_settings(Fl_Preferences&);
   pthread_t th;
   static void *startFlightGear_cb( void *d );
   void startFlightGear_cb();
