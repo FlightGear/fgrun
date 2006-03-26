@@ -180,7 +180,7 @@ AirportBrowser::runways_idle_proc( )
 
     while (count-- > 0 && gzgets( gzf_, line, sizeof line ) != 0)
     {
-	// Read 'count' airports, or until EOF or error.
+        // Read 'count' airports, or until EOF or error.
         token = strtok(line, space);       
 
         if(token == NULL) {
@@ -201,15 +201,14 @@ AirportBrowser::runways_idle_proc( )
             apt_dat_t apt;
             apt.id_ = token;
             apt.name_ = strtok(NULL, junk);
-	    if (apt.name_[0] == ' ')
-	        apt.name_.erase( 0, 1);
+            if (apt.name_[0] == ' ')
+                apt.name_.erase( 0, 1);
             if (apt.name_.find( "[H] " ) == 0)
             {
                 apt.name_.erase(0, 4);
                 apt.name_ += " [H]";
             }
             airports_.push_back( apt );
-
         }
         else if (type_num == 10)	// Now read in the runways and taxiways
         {
