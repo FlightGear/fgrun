@@ -61,49 +61,23 @@ public:
  * Helper class to perform a case insensitve search
  * on airport names.
  */
-class NoCaseCompare
-{
-private:
-    static bool nocase_compare( char c1, char c2 )
-    {
-        return toupper(c1) < toupper(c2);
-    }
-
-public:
-
-    NoCaseCompare() {}
-
-    bool operator()( const apt_dat_t* a, const apt_dat_t* b ) const
-    {
-        return std::lexicographical_compare( a->name_.begin(), a->name_.end(),
-                                             b->name_.begin(), b->name_.end(),
-                                             nocase_compare );
-    }
-};
-
-/**
- * Helper class to perform a case insensitve search
- * on airport names.
- */
 class NoCaseFind
 {
 private:
-  std::string key;
+    std::string key;
    
 public:
-  NoCaseFind( const char *name) : key( name) {
-
-  }
+    NoCaseFind( const char *name) : key( name) {}
 
     bool operator()( const apt_dat_t* a) const
     {
-      std::string name( a->name_);
-      std::string::size_type mini = std::min( name.size(), key.size());
-      for ( std::string::size_type i=0; i < mini; i++) {
-	if ( toupper( key[i]) != toupper(name[i]))
-	  return false;
-      }
-      return true;
+        std::string name( a->name_);
+        std::string::size_type mini = std::min( name.size(), key.size() );
+        for ( std::string::size_type i=0; i < mini; i++ ) {
+	    if ( toupper( key[i]) != toupper(name[i]) )
+	        return false;
+        }
+        return true;
    }
 };
 
@@ -306,7 +280,7 @@ AirportTable::select_name( const char* name )
 
     select_all_rows( 0 ); // de-select all rows
     
-   iterator i = std::find_if( rowdata_.begin(), rowdata_.end(),  NoCaseFind( name) );
+   iterator i = std::find_if( rowdata_.begin(), rowdata_.end(),  NoCaseFind( name ) );
 
     if (i != rowdata_.end())
     {
