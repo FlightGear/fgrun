@@ -992,7 +992,7 @@ Wizard::atlas_cb()
 	    }
 	}
 	prefs.set("io-count",(int)io_list.size());
-	for ( i = 0; i < io_list.size(); ++i )
+	for ( i = 0; i < (int)io_list.size(); ++i )
 	{
 	    prefs.set( Fl_Preferences::Name( "io-item-%d", i+1 ), io_list[i].c_str());
 	}

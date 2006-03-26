@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding = "Windows-1252"?>
+<?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.00"
+	Version="7.10"
 	Name="fgrun"
+	ProjectGUID="{B25B33CB-2D7F-4D25-A73A-B05E86C48F7E}"
 	SccProjectName=""
 	SccLocalPath="">
 	<Platforms>
@@ -20,16 +21,13 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.7\&quot; /DVERSION=\&quot;0.4.7\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.6\&quot; /DVERSION=\&quot;0.4.7\&quot;"
 				Optimization="0"
-				AdditionalIncludeDirectories="i:\fltk-1.1.4"
-				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS"
+				AdditionalIncludeDirectories="&quot;i:\fltk-1.1.7&quot;;..;..\SimGear;&quot;..\..\zlib-1.1.4&quot;;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
+				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=".\Debug/fgrun.pch"
-				AssemblerListingLocation=".\Debug/"
-				ObjectFile=".\Debug/"
-				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				DebugInformationFormat="4"
@@ -39,14 +37,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib ssg_d.lib sg_d.lib ul_d.lib opengl32.lib simgear_d.lib winmm.lib"
-				OutputFile=".\Debug/fgrun.exe"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlibd.lib ssg_d.lib sg_d.lib ul_d.lib opengl32.lib simgear_d.lib winmm.lib pthreadVC2d.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="i:\fltk-1.1.4\lib"
+				AdditionalLibraryDirectories="&quot;i:\fltk-1.1.7\lib&quot;;i:\FlightGear\cvs\SimGear\Debug;&quot;..\..\zlib-1.1.4&quot;;..\plib;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\Debug/fgrun.pdb"
-				SubSystem="2"/>
+				SubSystem="1"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="_DEBUG"
@@ -67,7 +64,13 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
 				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
@@ -79,17 +82,14 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.2\&quot; /DVERSION=\&quot;0.4.2\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.3\&quot; /DVERSION=\&quot;0.4.5\&quot;"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="i:\fltk-1.1.4"
-				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS"
+				AdditionalIncludeDirectories="&quot;..\..\..\fltk-1.1.7&quot;;..\..\..\FlightGear\cvs;..\..\..\FlightGear\cvs\SimGear;&quot;..\..\..\FlightGear\zlib-1.1.4&quot;;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
+				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS,NOMINMAX"
 				StringPooling="TRUE"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="TRUE"
 				PrecompiledHeaderFile=".\Release/fgrun.pch"
-				AssemblerListingLocation=".\Release/"
-				ObjectFile=".\Release/"
-				ProgramDataBaseFileName=".\Release/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				CompileAs="0"/>
@@ -98,13 +98,12 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltk.lib fltkgl.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib ssg.lib sg.lib ul.lib opengl32.lib simgear.lib winmm.lib"
-				OutputFile=".\Release/fgrun.exe"
+				AdditionalDependencies="fltk-nd.lib fltkgl-nd.lib ws2_32.lib comctl32.lib zlib-nd.lib ssg-nd.lib sg-nd.lib ul-nd.lib opengl32.lib simgear-nd.lib winmm.lib pthreadVC2-nd.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="i:\fltk-1.1.4\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\fltk-1.1.7\lib&quot;;&quot;..\..\..\FlightGear\cvs\SimGear\release-nd&quot;;&quot;..\..\..\FlightGear\zlib-1.1.4&quot;;..\..\..\FlightGear\cvs\plib;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
 				ProgramDatabaseFile=".\Release/fgrun.pdb"
-				SubSystem="2"/>
+				SubSystem="1"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="NDEBUG"
@@ -125,18 +124,99 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
 				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release-nodll|Win32"
+			OutputDirectory="Release-nd"
+			IntermediateDirectory="Release-nd"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.6\&quot; /DVERSION=\&quot;0.4.7\&quot;"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="&quot;i:\fltk-1.1.7&quot;;..;..\SimGear;&quot;..\..\zlib-1.1.4&quot;;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
+				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES"
+				StringPooling="TRUE"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="TRUE"
+				PrecompiledHeaderFile=".\Release-nd/fgrun.pch"
+				AssemblerListingLocation=""
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/MACHINE:I386"
+				AdditionalDependencies="fltk-nd.lib fltkgl-nd.lib ws2_32.lib comctl32.lib zlib-nd.lib ssg-nd.lib sg-nd.lib ul-nd.lib opengl32.lib simgear-nd.lib winmm.lib pthreadVC2-nd.lib"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				AdditionalLibraryDirectories="&quot;i:\fltk-1.1.7\lib&quot;;&quot;i:\FlightGear\cvs\SimGear\release-nd&quot;;&quot;..\..\zlib-1.1.4&quot;;..\plib;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
+				ProgramDatabaseFile=".\Release/fgrun.pdb"
+				SubSystem="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="TRUE"
+				SuppressStartupBanner="TRUE"
+				TargetEnvironment="1"
+				TypeLibraryName=".\Release/fgrun.tlb"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="3081"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 	</Configurations>
+	<References>
+	</References>
 	<Files>
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
+				RelativePath="src\advanced.cxx">
+			</File>
+			<File
+				RelativePath="src\advanced_funcs.cxx">
+			</File>
+			<File
 				RelativePath="src\AirportBrowser.cxx">
 			</File>
 			<File
 				RelativePath="src\AirportTable.cxx">
+			</File>
+			<File
+				RelativePath=".\src\fgfsrc.cxx">
+			</File>
+			<File
+				RelativePath=".\fgrun.rc">
 			</File>
 			<File
 				RelativePath="src\Fl_Heading_Dial.cxx">
@@ -149,15 +229,6 @@
 			</File>
 			<File
 				RelativePath="src\Fl_Table_Row.cxx">
-			</File>
-			<File
-				RelativePath="src\advanced.cxx">
-			</File>
-			<File
-				RelativePath="src\advanced_funcs.cxx">
-			</File>
-			<File
-				RelativePath=".\src\fgfsrc.cxx">
 			</File>
 			<File
 				RelativePath=".\src\io.cxx">
@@ -188,6 +259,12 @@
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl">
 			<File
+				RelativePath="src\advanced.h">
+			</File>
+			<File
+				RelativePath="src\AirportBrowser.h">
+			</File>
+			<File
 				RelativePath="src\AirportTable.h">
 			</File>
 			<File
@@ -197,21 +274,24 @@
 				RelativePath="src\Fl_Plib.h">
 			</File>
 			<File
-				RelativePath="src\advanced.h">
-			</File>
-			<File
 				RelativePath="src\logwin.h">
 			</File>
 			<File
-				RelativePath="src\wizard.h">
+				RelativePath="src\os_win32.h">
 			</File>
 			<File
-				RelativePath="src\os_win32.h">
+				RelativePath=".\resource.h">
+			</File>
+			<File
+				RelativePath="src\wizard.h">
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
+			<File
+				RelativePath=".\icon1.ico">
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
