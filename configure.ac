@@ -198,7 +198,18 @@ AC_LANG_PUSH(C++)
 
 dnl Check for FLTK header and library.
 AC_CHECK_HEADER(FL/Fl.H)
-AC_CHECK_LIB(fltk, fl_numericsort)
+
+dnl ----------------------------------------------------------------------
+dnl check if fltk has been compiled with Xft (and add lib if required)
+dnl if the check is not done before the other checks, linking will fail
+dnl on platforms with Xft enabled fltk builds
+dnl ----------------------------------------------------------------------
+
+AC_CHECK_LIB(fltk,XftFontOpen,LIBS=" -lfltk -lXft $LIBS", AC_CHECK_LIB(fltk, fl_numericsort) , -lXft)
+dnl save_LIBS="$LIBS"
+
+dnl the next line could be used instead of the following chunk of code
+dnl AC_CHECK_LIB(fltk_gl,gl_start)
 
 save_LIBS="$LIBS"
 LIBS="-lfltk_gl $LIBS"

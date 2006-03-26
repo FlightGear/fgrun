@@ -40,6 +40,8 @@
 #include <fcntl.h>	// O_RDWR
 #endif
 
+#include <stdlib.h> //needed on some linux systems for grantpt()
+#include <string.h> //strcpy is not necessarily already included
 /**
  * 
  */
