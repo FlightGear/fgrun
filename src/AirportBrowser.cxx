@@ -201,6 +201,13 @@ AirportBrowser::runways_idle_proc( )
             apt_dat_t apt;
             apt.id_ = token;
             apt.name_ = strtok(NULL, junk);
+	    if (apt.name_[0] == ' ')
+	        apt.name_.erase( 0, 1);
+            if (apt.name_.find( "[H] " ) == 0)
+            {
+                apt.name_.erase(0, 4);
+                apt.name_ += " [H]";
+            }
             airports_.push_back( apt );
 
         }

@@ -81,6 +81,32 @@ public:
     }
 };
 
+/**
+ * Helper class to perform a case insensitve search
+ * on airport names.
+ */
+class NoCaseFind
+{
+private:
+  std::string key;
+   
+public:
+  NoCaseFind( const char *name) : key( name) {
+
+  }
+
+    bool operator()( const apt_dat_t* a) const
+    {
+      std::string name( a->name_);
+      std::string::size_type mini = std::min( name.size(), key.size());
+      for ( std::string::size_type i=0; i < mini; i++) {
+	if ( toupper( key[i]) != toupper(name[i]))
+	  return false;
+      }
+      return true;
+   }
+};
+
 AirportTable::AirportTable( int X, int Y, int W, int H, const char* l )
     : Fl_Table_Row( X, Y, W, H, l )
     , sort_reverse_(false)
@@ -270,19 +296,18 @@ const apt_dat_t*
 AirportTable::select_name( const char* name )
 {
     // Ensure we use the correct sort order.
-    if (sort_lastcol_ != 0)
+    if (sort_lastcol_ != 1)
     {
-        sort_column( 0, sort_reverse_ );
-        sort_lastcol_ = 0;
+        sort_column( 1, sort_reverse_ );
+        sort_lastcol_ = 1;
     }
 
-    apt_dat_t key;
-    key.name_ = string(name);
+   
 
     select_all_rows( 0 ); // de-select all rows
+    
+   iterator i = std::find_if( rowdata_.begin(), rowdata_.end(),  NoCaseFind( name) );
 
-    iterator i = std::lower_bound( rowdata_.begin(), rowdata_.end(),
-                                   &key, NoCaseCompare() );
     if (i != rowdata_.end())
     {
         selected_ = std::distance( rowdata_.begin(), i );
@@ -315,7 +340,7 @@ AirportTable::set_airports( const vector<const apt_dat_t*>& apts )
 const apt_dat_t*
 AirportTable::get_selected() const
 {
-    if (selected_ >= 0 && selected_ < rowdata_.size())
+    if (selected_ >= 0 && selected_ < (int)rowdata_.size())
 	return rowdata_[ selected_ ];
     else
 	return 0;
