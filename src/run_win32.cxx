@@ -20,6 +20,10 @@
 //
 // $Id$
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include "wizard.h"
 #include <windows.h>
 #include <FL/filename.h>
@@ -56,6 +60,12 @@ Wizard::run_fgfs(const string &args)
 
     prefs.get( "fg_exe", buf, "", buflen-1 );
     fl_filename_absolute( exe, buf );
+    // Convert cygwin path ( if any ) into real windows path
+    if ( strncmp( exe, "/cygdrive", 9 ) == 0 ) {
+        memmove( exe, exe+9, strlen(exe)-8 );
+        exe[0] = exe[1];
+        exe[1] = ':';
+    }
 
     string line = args;
     encase_arg( line, "fg-root" );

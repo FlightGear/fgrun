@@ -50,6 +50,9 @@ mingw32)
   LDFLAGS="-mwindows $LDFLAGS"
   LIBS="-lglu32 -lopengl32 -lcomctl32 -luuid -lwsock32 -lole32 -lwinmm -lgdi32 $LIBS"
   ;;
+cygwin)
+  LIBS="-lglu32 -lopengl32 -lcomctl32 -luuid -lwsock32 -lole32 -lwinmm -lgdi32 $LIBS"
+  ;;
 *)
   AC_CHECK_LIB(m, cos, LIBM="-lm")
   ;;
@@ -95,6 +98,7 @@ AC_CHECK_HEADERS(fcntl.h libutil.h pty.h termios.h utmp.h util.h windows.h)
 
 if test "x$ac_cv_header_windows_h" = "xyes"; then
   AC_DEFINE([WIN32], 1, [Define if building on a Win32 platform])
+  AC_DEFINE([NOMINMAX], 1, [Define for Win32 platforms])
 fi
 
 AM_CONDITIONAL(WIN32, test "x$ac_cv_header_windows_h" = "xyes")
@@ -205,7 +209,7 @@ dnl if the check is not done before the other checks, linking will fail
 dnl on platforms with Xft enabled fltk builds
 dnl ----------------------------------------------------------------------
 
-AC_CHECK_LIB(fltk,XftFontOpen,LIBS=" -lfltk -lXft $LIBS", AC_CHECK_LIB(fltk, fl_numericsort) , -lXft)
+AC_CHECK_LIB(fltk,XftFontOpen,LIBS=" -lfltk -lXft $LIBS", AC_CHECK_LIB(fltk, fl_snprintf) , -lXft)
 dnl save_LIBS="$LIBS"
 
 dnl the next line could be used instead of the following chunk of code
