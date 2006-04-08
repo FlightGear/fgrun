@@ -2,6 +2,11 @@
 version 1.0106 
 header_name {.h} 
 code_name {.cxx}
+declblock {\#if HAVE_CONFIG_H} {open selected after {\#endif}
+} {
+  decl {\#include <config.h>} {}
+} 
+
 decl {\#include <FL/Fl_Preferences.H>} {public
 } 
 
@@ -1194,7 +1199,7 @@ else
   }
   decl {int exec(Fl_Preferences&);} {public
   }
-  decl {void reset_settings(Fl_Preferences&);} {selected public
+  decl {void reset_settings(Fl_Preferences&);} {public
   }
   decl {void init();} {}
   decl {void io_list_select_cb( Fl_Browser* );} {}
