@@ -1,10 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0106 
+do_not_include_H_from_C 
 header_name {.h} 
 code_name {.cxx}
-declblock {\#if HAVE_CONFIG_H} {open selected after {\#endif}
+declblock {\#if HAVE_CONFIG_H} {open after {\#endif}
 } {
   decl {\#include <config.h>} {}
+} 
+
+decl {\#include "advanced.h"} {selected
 } 
 
 decl {\#include <FL/Fl_Preferences.H>} {public
