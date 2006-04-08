@@ -5,9 +5,9 @@ This project is released under the terms of the GNU General Public
 License.  See COPYING for details.
 
 Requirements:
-- FLTK-1.1.x.  Tested with FLTK-1.1.4 but earlier versions should work.
-- Plib 1.6.0 or greater.
-- SimGear 0.3.4.
+- FLTK-1.1.x with threads enabled.  Tested with FLTK-1.1.6 and 1.1.7 but earlier versions should work.
+- Plib 1.8.4 or greater.
+- SimGear 0.3.10.
 - OpenGL or equivalent
 
   
