@@ -61,6 +61,8 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
     table_->when( FL_WHEN_RELEASE );
     table_->end();
 
+    Fl_Group *g = new Fl_Group( X, Y+th+5, X+75+5+tw-75, 25 );
+    g->begin();
     id_ = new Fl_Input( X, Y+th+5, 75, 25 );
     id_->textsize( 12 );
     id_->callback( id_cb, this );
@@ -70,6 +72,8 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
     name_->textsize( 12 );
     name_->callback( name_cb, this );
     name_->when( FL_WHEN_CHANGED );
+    g->end();
+    g->resizable(name_);
 
     runways_ = new Fl_Hold_Browser( X+tw+5, Y, 120, th, "Runways" );
     runways_->align( FL_ALIGN_TOP );
