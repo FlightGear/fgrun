@@ -1,3 +1,7 @@
+
+  * Compiles and runs under Cygwin
+  * --carrier and --parkpos options
+
 * 0.4.7
 
   * New 'Defaults' button in the wizard to restore default settings

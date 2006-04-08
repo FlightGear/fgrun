@@ -98,6 +98,11 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     if (prefs.get( "aircraft", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--aircraft=" << buf;
 
+    if (prefs.get( "carrier", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--carrier=" << buf;
+    if (prefs.get( "parkpos", buf, "", buflen-1 ) && buf[0] != 0)
+	os << pfx << "--parkpos=" << buf;
+
     if (prefs.get( "control", buf, "", buflen-1 ))
 	os << pfx << "--control=" << buf;
     if (prefs.get( "lang", buf, "", buflen-1 ) && buf[0] != 0)

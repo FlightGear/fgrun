@@ -67,6 +67,10 @@ private:
   static void cb_aircraft(Fl_Browser*, void*);
   Fl_Plib *preview;
   AirportBrowser *airports_;
+public:
+  Fl_Input *carrier_;
+  Fl_Input *parkpos_;
+private:
   inline void cb_Advanced_i(Fl_Button*, void*);
   static void cb_Advanced(Fl_Button*, void*);
   Fl_Check_Button *show_cmd_line;

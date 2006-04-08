@@ -412,8 +412,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[2] = new Fl_Group(0, 0, 640, 440, "Select a location");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        o->hide();
-        { AirportBrowser* o = airports_ = new AirportBrowser(5, 25, 630, 410);
+        { AirportBrowser* o = airports_ = new AirportBrowser(5, 25, 630, 380);
           o->box(FL_NO_BOX);
           o->color(FL_BACKGROUND_COLOR);
           o->selection_color(FL_BACKGROUND_COLOR);
@@ -425,9 +424,18 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->when(FL_WHEN_RELEASE);
           Fl_Group::current()->resizable(o);
         }
+        { Fl_Group* o = new Fl_Group(5, 410, 630, 25);
+          carrier_ = new Fl_Input(100, 410, 100, 25, "Carrier : ");
+          parkpos_ = new Fl_Input(300, 410, 100, 25, "Park pos :");
+          { Fl_Box* o = new Fl_Box(400, 410, 235, 25);
+            Fl_Group::current()->resizable(o);
+          }
+          o->end();
+        }
         o->end();
       }
       { Fl_Group* o = page[3] = new Fl_Group(0, 0, 645, 440);
+        o->hide();
         { Fl_Group* o = new Fl_Group(0, 405, 640, 25);
           { Fl_Button* o = new Fl_Button(545, 405, 90, 25, "Advanced...");
             o->callback((Fl_Callback*)cb_Advanced);

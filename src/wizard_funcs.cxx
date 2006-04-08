@@ -415,6 +415,8 @@ Wizard::next_cb()
 	prefs.set( "airport", airports_->get_selected_id().c_str() );
 	prefs.set( "airport-name",
 		   airports_->get_selected_name().c_str() );
+	prefs.set( "carrier", carrier_->value() );
+	prefs.set( "parkpos", parkpos_->value() );
 
 	string rwy( airports_->get_selected_runway() );
 	if (rwy.empty())
@@ -443,6 +445,12 @@ Wizard::next_cb()
     }
     else if (wiz->value() == page[2])
     {
+	char buf[256];
+	prefs.get( "carrier", buf, "", sizeof buf - 1 );
+	carrier_->value( buf );
+	prefs.get( "parkpos", buf, "", sizeof buf - 1 );
+	parkpos_->value( buf );
+
 	// "Select location" page
 	if (!airports_->loaded())
 	{
@@ -469,6 +477,10 @@ Wizard::prev_cb()
     if (wiz->value() == page[0])
     {
         prev->deactivate();
+    }
+    else if (wiz->value() == page[1])
+    {
+	Fl::add_timeout( update_period, timeout_handler, this );
     }
 }
 
