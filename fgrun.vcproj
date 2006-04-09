@@ -21,7 +21,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.6\&quot; /DVERSION=\&quot;0.4.7\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.6\&quot; /DVERSION=\&quot;0.4.8\&quot;"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;i:\fltk-1.1.7&quot;;..;..\SimGear;&quot;..\..\zlib-1.1.4&quot;;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES"
@@ -82,7 +82,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.3\&quot; /DVERSION=\&quot;0.4.5\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.3\&quot; /DVERSION=\&quot;0.4.8\&quot;"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="&quot;..\..\..\fltk-1.1.7&quot;;..\..\..\FlightGear\cvs;..\..\..\FlightGear\cvs\SimGear;&quot;..\..\..\FlightGear\zlib-1.1.4&quot;;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
 				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS,NOMINMAX"
@@ -142,7 +142,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.6\&quot; /DVERSION=\&quot;0.4.7\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.6\&quot; /DVERSION=\&quot;0.4.8\&quot;"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="&quot;i:\fltk-1.1.7&quot;;..;..\SimGear;&quot;..\..\zlib-1.1.4&quot;;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
 				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES"
