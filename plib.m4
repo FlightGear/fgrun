@@ -45,7 +45,7 @@ fi
 AC_MSG_RESULT($PLIB_LDFLAGS)
 LDFLAGS="$LDFLAGS $PLIB_LDFLAGS"
 
-min_plib_version=ifelse([$1], ,1.6.0,$1)
+min_plib_version=ifelse([$1], ,1.8.0,$1)
 AC_MSG_CHECKING(for PLIB - version >= $min_plib_version)
 no_plib=""
 plib_min_major_version=`echo $min_plib_version | sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`

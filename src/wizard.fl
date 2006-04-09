@@ -151,27 +151,28 @@ class Wizard {open
           }
         }
         Fl_Group {page[2]} {
-          label {Select a location} open
+          label {Select a location} open selected
           private xywh {0 0 640 440} labelfont 1 align 21
         } {
-          Fl_Box airports_ {selected
-            private xywh {5 25 630 380} resizable
+          Fl_Box airports_ {
+            private xywh {5 25 630 360} resizable
             code0 {\#include "AirportBrowser.h"}
             class AirportBrowser
           }
-          Fl_Group {} {open
-            xywh {5 410 630 25}
+          Fl_Group {} {
+            label {Carrier Ops} open
+            xywh {5 390 630 45} box ENGRAVED_FRAME labelfont 1 align 21
           } {
             Fl_Input carrier_ {
               label {Carrier : }
-              xywh {100 410 100 25}
+              xywh {200 405 100 25}
             }
             Fl_Input parkpos_ {
               label {Park pos :}
-              xywh {300 410 100 25}
+              xywh {400 405 100 25}
             }
             Fl_Box {} {
-              xywh {400 410 235 25} resizable
+              xywh {500 405 135 25} resizable
             }
           }
         }
