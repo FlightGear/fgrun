@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0106 
+version 1.0107 
 do_not_include_H_from_C 
 header_name {.h} 
 code_name {.cxx}
@@ -41,8 +41,8 @@ class Wizard {open
       label {FlightGear Wizard} open
       private xywh {619 204 640 480} type Double visible
     } {
-      Fl_Wizard wiz {open
-        private xywh {0 0 645 440}
+      Fl_Wizard wiz {open selected
+        private xywh {0 0 640 440}
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
@@ -151,7 +151,7 @@ class Wizard {open
           }
         }
         Fl_Group {page[2]} {
-          label {Select a location} open selected
+          label {Select a location} open
           private xywh {0 0 640 440} labelfont 1 align 21
         } {
           Fl_Box airports_ {
@@ -208,23 +208,23 @@ class Wizard {open
               callback {resolution_cb();} open
               private xywh {100 30 125 25} down_box BORDER_BOX
             } {
-              menuitem {} {
+              MenuItem {} {
                 label 640x480
                 private xywh {0 0 100 20}
               }
-              menuitem {} {
+              MenuItem {} {
                 label 800x600
                 private xywh {0 0 100 20}
               }
-              menuitem {} {
+              MenuItem {} {
                 label 1024x768
                 private xywh {0 0 100 20}
               }
-              menuitem {} {
+              MenuItem {} {
                 label 1280x1024
                 private xywh {0 0 100 20}
               }
-              menuitem {} {
+              MenuItem {} {
                 label 1600x1200
                 private xywh {0 0 100 20}
               }
@@ -281,19 +281,19 @@ class Wizard {open
               callback {time_of_day_value_cb();}
               private xywh {375 100 115 25} down_box BORDER_BOX
             } {
-              menuitem {} {
+              MenuItem {} {
                 label noon
                 xywh {0 0 100 20}
               }
-              menuitem {} {
+              MenuItem {} {
                 label dusk
                 xywh {0 0 100 20}
               }
-              menuitem {} {
+              MenuItem {} {
                 label midnight
                 xywh {0 0 100 20}
               }
-              menuitem {} {
+              MenuItem {} {
                 label dawn
                 xywh {0 0 100 20}
               }
