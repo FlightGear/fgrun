@@ -84,7 +84,7 @@ parse_args( int, char** argv, int& i )
 int
 main( int argc, char* argv[] )
 {
-#ifdef WIN32
+#ifdef _MSC_VER
     WORD wVersionRequested;
     WSADATA wsaData;
     wVersionRequested = MAKEWORD( 2, 2 );
