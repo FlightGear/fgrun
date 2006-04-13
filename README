@@ -10,4 +10,6 @@ Requirements:
 - SimGear 0.3.10.
 - OpenGL or equivalent
 
-  
+Cygwin users should ensure that their fltk library has been configured with at least the following flags :
+  --enable-threads --enable-gl --enable-cygwin
+
