@@ -602,7 +602,6 @@ search_aircraft_dir( const SGPath& dir,
                      bool recursive,
                      vector<SGPath>& ac )
 {
-    dirent** files;
     string s( dir.str() );
 
 #ifdef WIN32
@@ -611,35 +610,30 @@ search_aircraft_dir( const SGPath& dir,
 	s.append( "/" );
 #endif
 
-    int num_files = fl_filename_list( s.c_str(),
-                                      &files, fl_casenumericsort );
-    if (num_files < 0)
-        return;
-
-    for (int i = 0; i < num_files; ++i)
+    ulDir *dh = ulOpenDir( s.c_str() );
+    ulDirEnt *ent;
+    while (dh != 0 && (ent = ulReadDir( dh )))
     {
-        if (fl_filename_match(files[i]->d_name, "*-set.xml"))
+        if (fl_filename_match(ent->d_name, "*-set.xml"))
         {
             SGPath d( dir );
-            d.append( files[i]->d_name );
+            d.append( ent->d_name );
             ac.push_back( d );
         }
         else if (recursive &&
-                 strcmp( files[i]->d_name, "CVS" ) != 0 &&
-                 strcmp( files[i]->d_name, ".." ) != 0 &&
-                 strcmp( files[i]->d_name, "." ) != 0 )
+                 strcmp( ent->d_name, "CVS" ) != 0 &&
+                 strcmp( ent->d_name, ".." ) != 0 &&
+                 strcmp( ent->d_name, "." ) != 0 )
         {
             SGPath d( dir );
-            d.append( files[i]->d_name );
+            d.append( ent->d_name );
             if (fl_filename_isdir( d.c_str() ))
             {
                 search_aircraft_dir( d, false, ac );
             }
         }
-
-        free( files[i] );
     }
-    free( files );
+    ulCloseDir( dh );
 }
 
 static void
