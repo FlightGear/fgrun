@@ -215,6 +215,8 @@ dnl save_LIBS="$LIBS"
 dnl the next line could be used instead of the following chunk of code
 dnl AC_CHECK_LIB(fltk_gl,gl_start)
 
+AC_CHECK_LIB(pthread,pthread_create)
+
 save_LIBS="$LIBS"
 LIBS="-lfltk_gl $LIBS"
 AC_MSG_CHECKING(for gl_start in -lfltk_gl)
