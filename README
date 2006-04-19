@@ -5,7 +5,7 @@ This project is released under the terms of the GNU General Public
 License.  See COPYING for details.
 
 Requirements:
-- FLTK-1.1.x with threads enabled.  Tested with FLTK-1.1.6 and 1.1.7 but earlier versions should work.
+- FLTK-1.1.x with threads enabled.  Tested with FLTK-1.1.6 and 1.1.7[1] but earlier versions should work.
 - Plib 1.8.4 or greater.
 - SimGear 0.3.10.
 - OpenGL or equivalent
@@ -13,3 +13,4 @@ Requirements:
 Cygwin users should ensure that their fltk library has been configured with at least the following flags :
   --enable-threads --enable-gl --enable-cygwin
 
+[1] under Linux, fltk 1.1.7 should be configured with the --disable-largefile option. Otherwise, the aircraft list will be empty. This requirement is only for 1.1.7
