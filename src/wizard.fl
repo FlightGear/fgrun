@@ -41,7 +41,7 @@ class Wizard {open
       label {FlightGear Wizard} open
       private xywh {619 204 640 480} type Double visible
     } {
-      Fl_Wizard wiz {open selected
+      Fl_Wizard wiz {open
         private xywh {0 0 640 440}
         code0 {win->resizable( wiz );}
       } {
@@ -152,7 +152,7 @@ class Wizard {open
         }
         Fl_Group {page[2]} {
           label {Select a location} open
-          private xywh {0 0 640 440} labelfont 1 align 21
+          private xywh {0 0 640 440} labelfont 1 align 21 hide
         } {
           Fl_Box airports_ {
             private xywh {5 25 630 360} resizable
@@ -176,10 +176,10 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {
-          private xywh {0 0 645 440} hide
+        Fl_Group {page[3]} {open
+          private xywh {0 0 645 440}
         } {
-          Fl_Group {} {open
+          Fl_Group {} {
             private xywh {0 405 640 25}
           } {
             Fl_Button {} {
@@ -259,27 +259,27 @@ class Wizard {open
             }
           }
           Fl_Group {} {
-            label Features
+            label Features open
             private xywh {5 95 630 85} box ENGRAVED_FRAME labelfont 1 align 21
           } {
             Fl_Check_Button random_objects {
               label {Random objects}
               callback {random_objects_cb();}
-              private xywh {25 125 180 25} down_box DOWN_BOX
+              private xywh {25 125 150 25} down_box DOWN_BOX
             }
             Fl_Check_Button ai_models {
               label {AI models}
               callback {ai_models_cb();}
-              private xywh {25 150 180 25} down_box DOWN_BOX
+              private xywh {25 150 150 25} down_box DOWN_BOX
             }
             Fl_Check_Button time_of_day {
               label {Time of day :}
               callback {time_of_day_cb();}
-              private xywh {250 100 120 25} down_box DOWN_BOX
+              private xywh {180 100 120 25} down_box DOWN_BOX
             }
             Fl_Choice time_of_day_value {
               callback {time_of_day_value_cb();}
-              private xywh {375 100 115 25} down_box BORDER_BOX
+              private xywh {295 100 115 25} down_box BORDER_BOX
             } {
               MenuItem {} {
                 label noon
@@ -301,15 +301,20 @@ class Wizard {open
             Fl_Check_Button real_weather_fetch {
               label {Real weather fetch}
               callback {real_weather_fetch_cb();}
-              private xywh {250 125 180 25} down_box DOWN_BOX
+              private xywh {180 125 170 25} down_box DOWN_BOX
             }
             Fl_Check_Button auto_coordination {
               label {Auto-coordination}
               callback {auto_coordination_cb();}
-              private xywh {250 150 180 25} down_box DOWN_BOX
+              private xywh {180 149 170 25} down_box DOWN_BOX
+            }
+            Fl_Browser scenarii {
+              label {Scenario :}
+              callback {scenarii_cb();} selected
+              private xywh {425 117 190 52} type Multi align 5
             }
             Fl_Box {} {
-              private xywh {605 170 30 10} resizable
+              private xywh {615 170 20 10} resizable
             }
           }
           Fl_Group {} {
@@ -375,7 +380,7 @@ class Wizard {open
           xywh {0 0 640 440} hide deactivate
         } {}
       }
-      Fl_Group {} {open
+      Fl_Group {} {
         xywh {0 450 640 25}
       } {
         Fl_Button next {
@@ -461,12 +466,14 @@ class Wizard {open
   decl {void time_of_day_value_cb();} {}
   decl {void real_weather_fetch_cb();} {}
   decl {void auto_coordination_cb();} {}
+  decl {void scenarii_cb();} {}
   decl {void atlas_cb();} {}
   decl {void atlas_host_cb();} {}
   decl {void atlas_port_cb();} {}
   decl {void multiplay_cb();} {}
   decl {void multiplay_field_cb();} {}
   decl {void update_basic_options();} {}
+  decl {void display_scenarii();} {}
   decl {void show_cmd_line_cb();} {}
   decl {void reset_settings();} {}
   decl {pthread_t th;} {}

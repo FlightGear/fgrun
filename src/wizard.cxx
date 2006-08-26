@@ -198,6 +198,13 @@ void Wizard::cb_auto_coordination(Fl_Check_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_auto_coordination_i(o,v);
 }
 
+void Wizard::cb_scenarii_i(Fl_Browser*, void*) {
+  scenarii_cb();
+}
+void Wizard::cb_scenarii(Fl_Browser* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_scenarii_i(o,v);
+}
+
 void Wizard::cb_atlas_i(Fl_Check_Button*, void*) {
   atlas_cb();
 }
@@ -412,6 +419,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[2] = new Fl_Group(0, 0, 640, 440, "Select a location");
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        o->hide();
         { AirportBrowser* o = airports_ = new AirportBrowser(5, 25, 630, 360);
           o->box(FL_NO_BOX);
           o->color(FL_BACKGROUND_COLOR);
@@ -438,7 +446,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->end();
       }
       { Fl_Group* o = page[3] = new Fl_Group(0, 0, 645, 440);
-        o->hide();
         { Fl_Group* o = new Fl_Group(0, 405, 640, 25);
           { Fl_Button* o = new Fl_Button(545, 405, 90, 25, "Advanced...");
             o->callback((Fl_Callback*)cb_Advanced);
@@ -496,32 +503,37 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->box(FL_ENGRAVED_FRAME);
           o->labelfont(1);
           o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-          { Fl_Check_Button* o = random_objects = new Fl_Check_Button(25, 125, 180, 25, "Random objects");
+          { Fl_Check_Button* o = random_objects = new Fl_Check_Button(25, 125, 150, 25, "Random objects");
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_random_objects);
           }
-          { Fl_Check_Button* o = ai_models = new Fl_Check_Button(25, 150, 180, 25, "AI models");
+          { Fl_Check_Button* o = ai_models = new Fl_Check_Button(25, 150, 150, 25, "AI models");
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_ai_models);
           }
-          { Fl_Check_Button* o = time_of_day = new Fl_Check_Button(250, 100, 120, 25, "Time of day :");
+          { Fl_Check_Button* o = time_of_day = new Fl_Check_Button(180, 100, 120, 25, "Time of day :");
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_time_of_day);
           }
-          { Fl_Choice* o = time_of_day_value = new Fl_Choice(375, 100, 115, 25);
+          { Fl_Choice* o = time_of_day_value = new Fl_Choice(295, 100, 115, 25);
             o->down_box(FL_BORDER_BOX);
             o->callback((Fl_Callback*)cb_time_of_day_value);
             o->menu(menu_time_of_day_value);
           }
-          { Fl_Check_Button* o = real_weather_fetch = new Fl_Check_Button(250, 125, 180, 25, "Real weather fetch");
+          { Fl_Check_Button* o = real_weather_fetch = new Fl_Check_Button(180, 125, 170, 25, "Real weather fetch");
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_real_weather_fetch);
           }
-          { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(250, 150, 180, 25, "Auto-coordination");
+          { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(180, 149, 170, 25, "Auto-coordination");
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_auto_coordination);
           }
-          { Fl_Box* o = new Fl_Box(605, 170, 30, 10);
+          { Fl_Browser* o = scenarii = new Fl_Browser(425, 117, 190, 52, "Scenario :");
+            o->type(3);
+            o->callback((Fl_Callback*)cb_scenarii);
+            o->align(FL_ALIGN_TOP_LEFT);
+          }
+          { Fl_Box* o = new Fl_Box(615, 170, 20, 10);
             Fl_Group::current()->resizable(o);
           }
           o->end();

@@ -115,6 +115,9 @@ private:
   Fl_Check_Button *auto_coordination;
   void cb_auto_coordination_i(Fl_Check_Button*, void*);
   static void cb_auto_coordination(Fl_Check_Button*, void*);
+  Fl_Browser *scenarii;
+  void cb_scenarii_i(Fl_Browser*, void*);
+  static void cb_scenarii(Fl_Browser*, void*);
   Fl_Group *atlas_group;
   Fl_Check_Button *atlas;
   void cb_atlas_i(Fl_Check_Button*, void*);
@@ -211,12 +214,14 @@ private:
   void time_of_day_value_cb();
   void real_weather_fetch_cb();
   void auto_coordination_cb();
+  void scenarii_cb();
   void atlas_cb();
   void atlas_host_cb();
   void atlas_port_cb();
   void multiplay_cb();
   void multiplay_field_cb();
   void update_basic_options();
+  void display_scenarii();
   void show_cmd_line_cb();
   void reset_settings();
   pthread_t th;

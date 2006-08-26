@@ -27,6 +27,7 @@
 #include <string>
 #include <cstdio>
 #include <vector>
+#include <set>
 #include <sstream>
 
 #include <FL/Fl.H>
@@ -54,6 +55,7 @@
 
 using std::string;
 using std::vector;
+using std::set;
 
 extern string def_fg_exe;
 extern string def_fg_root;
@@ -424,6 +426,7 @@ Wizard::next_cb()
 	prefs.set( "runway", rwy.c_str() );
 
 	update_basic_options();
+	display_scenarii();
     }
     else if (wiz->value() == page[3])
     {
@@ -977,6 +980,22 @@ Wizard::auto_coordination_cb()
 }
 
 void
+Wizard::scenarii_cb()
+{
+    int nb = 0;
+    for (int i = 1; i <= scenarii->size(); ++i)
+    {
+	if ( scenarii->selected(i) )
+	{
+	    nb += 1;
+	    prefs.set( Fl_Preferences::Name("scenario-item-%d", nb), scenarii->text(i));
+	}
+    }
+    prefs.set("scenario-count", nb);
+    update_options();
+}
+
+void
 Wizard::atlas_cb()
 {
     int v = atlas->value();
@@ -1343,6 +1362,54 @@ Wizard::update_basic_options()
 	    }
 	}
     }
+}
+
+void
+Wizard::display_scenarii()
+{
+    set<string> selected;
+    int iVal;
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+    prefs.get( "scenario-count", iVal, 0 );
+    int i;
+    for (i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("scenario-item-%d", i), buf, "", buflen-1 );
+	if ( strlen( buf ) > 0 )
+	    selected.insert( buf );
+    }
+
+    scenarii->clear();
+
+    SGPath path( fg_root_->value() );
+    path.append( "AI" );
+
+    i = 1;
+    ulDir *dh = ulOpenDir( path.c_str() );
+    ulDirEnt *ent;
+    while (dh != 0 && (ent = ulReadDir( dh )))
+    {
+        if ( strcmp( ent->d_name, "CVS" ) != 0 &&
+	     strcmp( ent->d_name, ".." ) != 0 &&
+	     strcmp( ent->d_name, "." ) != 0 )
+        {
+            SGPath d( path );
+            d.append( ent->d_name );
+            if (!fl_filename_isdir( d.c_str() ) &&
+		 fl_filename_match(ent->d_name, "*.xml"))
+	    {
+		string n( ent->d_name );
+		n.erase(n.size()-4);
+		scenarii->add( n.c_str() );
+		if ( selected.find( n ) != selected.end() )
+		    scenarii->select(i);
+		i += 1;
+            }
+        }
+    }
+    ulCloseDir( dh );
 }
 
 void

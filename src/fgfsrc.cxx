@@ -326,9 +326,20 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     if (prefs.get( "proxy", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--proxy=" << buf;
 
+    // Scenarii options.
+    prefs.get( "scenario-count", iVal, 0 );
+    int i;
+    for (i = 1; i <= iVal; ++i)
+    {
+	buf[0] = 0;
+	prefs.get( Fl_Preferences::Name("scenario-item-%d", i),
+		   buf, "", buflen-1 );
+        if ( strlen( buf ) > 0 )
+	    os << pfx << "--ai-scenario=" << buf;
+    }
+
     // I/O options.
     prefs.get( "io-count", iVal, 0 );
-    int i;
     for (i = 1; i <= iVal; ++i)
     {
 	buf[0] = 0;
