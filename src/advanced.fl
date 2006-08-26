@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0106 
+version 1.0107 
 do_not_include_H_from_C 
 header_name {.h} 
 code_name {.cxx}
@@ -8,8 +8,7 @@ declblock {\#if HAVE_CONFIG_H} {open after {\#endif}
   decl {\#include <config.h>} {}
 } 
 
-decl {\#include "advanced.h"} {selected
-} 
+decl {\#include "advanced.h"} {} 
 
 decl {\#include <FL/Fl_Preferences.H>} {public
 } 
@@ -50,15 +49,15 @@ class Advanced {open
           label {Control:}
           private tooltip {Primary control mode} xywh {250 175 150 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
-          menuitem {} {
+          MenuItem {} {
             label joystick
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label keyboard
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label mouse
             private xywh {0 0 100 20} labelsize 12
           }
@@ -227,43 +226,43 @@ else
 }}
           private tooltip {Core Flight Dynamics Model} xywh {220 45 105 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
-          menuitem {} {
+          MenuItem {} {
             label ada
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label balloon
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label external
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label jsb
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label larcsim
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label magic
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label network
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label null
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label ufo
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label yasim
             private xywh {0 0 100 20} labelsize 12
           }
@@ -469,15 +468,15 @@ else
           label {bpp:}
           private tooltip {Color depth (bits per pixel)} xywh {450 295 120 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
-          menuitem {} {
+          MenuItem {} {
             label 16
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label 24
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label 32
             private xywh {0 0 100 20} labelsize 12
           }
@@ -581,19 +580,19 @@ else
           label {choice:} open
           private xywh {315 185 140 25} down_box BORDER_BOX labeltype NO_LABEL labelsize 12 textsize 12
         } {
-          menuitem {} {
+          MenuItem {} {
             label dawn
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label noon
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label dusk
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label midnight
             xywh {0 0 100 20} labelsize 12
           }
@@ -665,8 +664,8 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output}
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label {Input/Output} open
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -689,67 +688,71 @@ else
           callback {io_protocol_update_cb();} open
           private xywh {220 185 125 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
-          menuitem {} {
+          MenuItem {} {
             label atc610x
-            xywh {0 0 100 20} labelsize 12
+            private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label atlas
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label garmin
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
-            label generic
-            xywh {0 0 100 20} labelsize 12
+          MenuItem {} {
+            label AV400 selected
+            private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
+            label generic
+            private xywh {0 0 100 20} labelsize 12
+          }
+          MenuItem {} {
             label {joy-client}
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label jsclient
-            xywh {0 0 100 20} labelsize 12
+            private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label native
-            xywh {0 0 100 20} labelsize 12
+            private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label {native-ctrls}
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label {native-fdm}
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label {native-gui}
-            xywh {0 0 100 20} labelsize 12
+            private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label nmea
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label opengc
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label pve
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label props
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label ray
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label rul
             private xywh {0 0 100 20} labelsize 12
           }
@@ -759,15 +762,15 @@ else
           callback {io_medium_update_cb( o );}
           private xywh {220 215 125 25} down_box BORDER_BOX labelsize 12 when 6 textsize 12 deactivate
         } {
-          menuitem {} {
+          MenuItem {} {
             label file
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label serial
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label socket
             private xywh {0 0 100 20} labelsize 12
           }
@@ -777,15 +780,15 @@ else
           callback {io_list_update_cb();}
           private xywh {220 245 125 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
-          menuitem {} {
+          MenuItem {} {
             label in
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label out
             private xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label bi
             private xywh {0 0 100 20} labelsize 12
           }
@@ -955,23 +958,23 @@ else
           label {Log Level:}
           private xywh {225 45 90 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
-          menuitem {} {
+          MenuItem {} {
             label bulk
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label debug
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label info
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label warn
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label alert
             xywh {0 0 100 20} labelsize 12
           }
@@ -1076,7 +1079,7 @@ else
       }
       Fl_Group {page[13]} {
         label Weather open
-        private xywh {150 0 490 430} labelfont 1 align 21
+        private xywh {150 0 490 430} labelfont 1 align 21 hide
       } {
         Fl_Group {} {open
           xywh {155 35 230 280} box ENGRAVED_FRAME labeltype NO_LABEL align 17
@@ -1125,23 +1128,23 @@ else
           callback {cloud_layer_cb();}
           private xywh {255 80 120 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
-          menuitem {} {
+          MenuItem {} {
             label 0
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label 1
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label 2
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label 3
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label 4
             xywh {0 0 100 20} labelsize 12
           }
@@ -1161,27 +1164,27 @@ else
           callback {cloud_coverage[ cloud_layer_->value() ] = cloud_coverage_->value();}
           private xywh {255 170 120 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
-          menuitem {} {
+          MenuItem {} {
             label overcast
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label broken
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label scattered
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label few
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label cirrus
             xywh {0 0 100 20} labelsize 12
           }
-          menuitem {} {
+          MenuItem {} {
             label clear
             xywh {0 0 100 20} labelsize 13
           }
