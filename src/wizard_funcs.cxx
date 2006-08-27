@@ -999,6 +999,13 @@ Wizard::scenarii_cb()
 	    tooltip += scenarii->text( scenarii->value() );
 	    tooltip += "\n";
 	    tooltip += scenario.getStringValue( "scenario/description" );
+
+	    size_t p = 0;
+	    while ( ( p = tooltip.find( '@', p ) ) != string::npos )
+	    {
+		tooltip.insert( p, "@" );
+		p += 2;
+	    }
 	}
 	catch (const sg_exception& exc )
 	{
