@@ -490,7 +490,7 @@ Wizard::prev_cb()
 void
 Wizard::defaults_cb()
 {
-    int r = fl_ask( "About to reset current parameters.\nDo you want to continue?" );
+    int r = fl_choice( "About to reset current parameters", "Abort", "Reset", 0 );
     if (!r)
 	return;
     if (adv == 0)
@@ -982,6 +982,34 @@ Wizard::auto_coordination_cb()
 void
 Wizard::scenarii_cb()
 {
+    static string tooltip;
+    if ( scenarii->value() )
+    {
+	SGPath path( fg_root_->value() );
+	path.append( "AI" );
+	path.append( scenarii->text( scenarii->value() ) );
+	path.concat( ".xml" );
+
+	try
+	{
+	    SGPropertyNode scenario;
+	    readProperties( path.str(), &scenario );
+
+	    tooltip = "Description of ";
+	    tooltip += scenarii->text( scenarii->value() );
+	    tooltip += "\n";
+	    tooltip += scenario.getStringValue( "scenario/description" );
+	}
+	catch (const sg_exception& exc )
+	{
+	    tooltip = "";
+	}
+    }
+    else
+	tooltip = "";
+
+    scenarii->tooltip( tooltip.c_str() );
+
     int nb = 0;
     for (int i = 1; i <= scenarii->size(); ++i)
     {

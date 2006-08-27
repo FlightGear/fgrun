@@ -57,8 +57,7 @@ Wizard::write_fgfsrc()
     if (fp != 0)
     {
 	fclose( fp );
-	int r = fl_ask( "About to overwrite %s.\nDo you want to continue?",
-			buf );
+	int r = fl_choice( "About to overwrite %s.", "Abort", "Overwrite", 0, buf );
 	if (!r)
 	    return 0;
     }
