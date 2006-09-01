@@ -40,6 +40,7 @@
 #include <simgear/props/props_io.hxx>
 #include <simgear/structure/exception.hxx>
 #include <simgear/misc/sg_path.hxx>
+#include <simgear/scene/model/model.hxx>
 
 #include <plib/ul.h>
 
@@ -297,6 +298,91 @@ find_named_node (ssgEntity * node, const char * name)
   return 0;
 }
 
+static ssgBranch *
+loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
+{
+    ssgBranch * model = 0;
+    SGPropertyNode props;
+
+                                  // Load the 3D aircraft object itself
+    SGPath modelpath = path, texturepath = path;
+    if ( !ulIsAbsolutePathName( path.c_str() ) ) {
+        SGPath tmp = fg_root;
+        tmp.append(modelpath.str());
+        modelpath = texturepath = tmp;
+    }
+
+                                  // Check for an XML wrapper
+    if (modelpath.str().substr(modelpath.str().size() - 4, 4) == ".xml") {
+        readProperties(modelpath.str(), &props);
+        if (props.hasValue("/path")) {
+            modelpath = modelpath.dir();
+            modelpath.append(props.getStringValue("/path"));
+            if (props.hasValue("/texture-path")) {
+                texturepath = texturepath.dir();
+                texturepath.append(props.getStringValue("/texture-path"));
+            }
+        } else if (model == 0) {
+            model = new ssgBranch;
+        }
+    }
+
+    if (model == 0) {
+        if (texturepath.extension() != "")
+            texturepath = texturepath.dir();
+
+        ssgTexturePath((char *)texturepath.c_str());
+        model = (ssgBranch *)preview->load( modelpath.c_str(), texturepath.c_str() );
+        if (model == 0)
+            throw sg_io_exception("Failed to load 3D model", 
+			        sg_location(modelpath.str()));
+    }
+                                  // Set up the alignment node
+    ssgTransform * alignmainmodel = new ssgTransform;
+    alignmainmodel->addKid(model);
+    sgMat4 res_matrix;
+    sgMakeOffsetsMatrix(&res_matrix,
+                        props.getFloatValue("/offsets/heading-deg", 0.0),
+                        props.getFloatValue("/offsets/roll-deg", 0.0),
+                        props.getFloatValue("/offsets/pitch-deg", 0.0),
+                        props.getFloatValue("/offsets/x-m", 0.0),
+                        props.getFloatValue("/offsets/y-m", 0.0),
+                        props.getFloatValue("/offsets/z-m", 0.0));
+    alignmainmodel->setTransform(res_matrix);
+
+    unsigned int i;
+
+    vector<SGPropertyNode_ptr> model_nodes = props.getChildren("model");
+    for (i = 0; i < model_nodes.size(); i++) {
+        SGPropertyNode_ptr node = model_nodes[i];
+        ssgTransform * align = new ssgTransform;
+        sgMat4 res_matrix;
+        sgMakeOffsetsMatrix(&res_matrix,
+                            node->getFloatValue("offsets/heading-deg", 0.0),
+                            node->getFloatValue("offsets/roll-deg", 0.0),
+                            node->getFloatValue("offsets/pitch-deg", 0.0),
+                            node->getFloatValue("offsets/x-m", 0.0),
+                            node->getFloatValue("offsets/y-m", 0.0),
+                            node->getFloatValue("offsets/z-m", 0.0));
+        align->setTransform(res_matrix);
+
+        ssgBranch * kid;
+        const char * submodel = node->getStringValue("path");
+        try {
+            kid = loadModel( fg_root, submodel, preview );
+
+        } catch (const sg_throwable &t) {
+            SG_LOG(SG_INPUT, SG_ALERT, "Failed to load submodel: " << t.getFormattedMessage());
+            throw;
+        }
+        align->addKid(kid);
+        align->setName(node->getStringValue("name", ""));
+        model->addKid(align);
+    }
+
+    return alignmainmodel;
+}
+
 void
 Wizard::preview_aircraft()
 {
@@ -328,26 +414,10 @@ Wizard::preview_aircraft()
 
 	try
 	{
-	    if (path.extension() == "xml")
-            {
-                SGPropertyNode mprops;
-                readProperties( path.str(), &mprops );
-
-                tpath = dir_path( path );
-                if (mprops.hasValue( "path" ))
-                {
-		    path = dir_path( path );
-		    path.append( mprops.getStringValue("path") );
-                }
-
-                if (mprops.hasValue( "texture-path" ))
-                    tpath.append( mprops.getStringValue("texture-path") );
-            }
-
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
 
-	    ssgEntity* model = preview->load( path.str(), tpath.str() );
+	    ssgEntity* model = loadModel( fg_root_->value(), path.str(), preview );
 	    if (model != 0)
 	    {
                 ssgEntity *bounding_obj = find_named_node( model, "Aircraft" );
@@ -1007,7 +1077,7 @@ Wizard::scenarii_cb()
 		p += 2;
 	    }
 	}
-	catch (const sg_exception& exc )
+	catch ( const sg_exception& )
 	{
 	    tooltip = "";
 	}
