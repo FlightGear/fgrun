@@ -29,7 +29,7 @@ fgrun_SOURCES = \
 	util.cxx util.h \
 	$(platform_srcs)
 
-simgear_libs = -lsgprops -lsgxml -lsgmisc -lsgstructure -lsgdebug
+simgear_libs = -lsgmodel -lsgmath -lsgscreen -lsgprops -lsgxml -lsgmisc -lsgdebug -lsgstructure 
 plib_libs = -lplibssg -lplibsg -lplibul
 
 fgrun_LDADD = $(simgear_libs) $(plib_libs)
