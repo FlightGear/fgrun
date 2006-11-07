@@ -312,7 +312,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     if (prefs.get( "props", iVal, 0 ) && iVal)
 	os << pfx << "--props=" << iVal;
     if (prefs.get( "jpg-httpd", iVal, 0 ) && iVal)
-	os << pfx << "--jpg_httpd=" << iVal;
+	os << pfx << "--jpg-httpd=" << iVal;
 
     // Multiplayer options.
     if (prefs.get( "callsign", buf, "", buflen-1 ) && buf[0] != 0)
