@@ -40,7 +40,6 @@
 #include <simgear/props/props_io.hxx>
 #include <simgear/structure/exception.hxx>
 #include <simgear/misc/sg_path.hxx>
-#include <simgear/scene/model/model.hxx>
 
 #include <plib/ul.h>
 
@@ -61,6 +60,20 @@ using std::set;
 extern string def_fg_exe;
 extern string def_fg_root;
 extern string def_fg_scenery;
+
+/**
+ * Make an offset matrix from rotations and position offset.
+ */
+void
+sgMakeOffsetsMatrix( sgMat4 * result, double h_rot, double p_rot, double r_rot,
+                     double x_off, double y_off, double z_off )
+{
+  sgMat4 rot_matrix;
+  sgMat4 pos_matrix;
+  sgMakeRotMat4(rot_matrix, h_rot, p_rot, r_rot);
+  sgMakeTransMat4(pos_matrix, x_off, y_off, z_off);
+  sgMultMat4(*result, pos_matrix, rot_matrix);
+}
 
 /**
  * Data associated with each entry in the aircraft browser.
