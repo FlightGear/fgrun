@@ -88,7 +88,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 
     // General options.
     if (prefs.get( "airport", buf, "", buflen-1 ) && buf[0] != 0)
-	os << pfx << "--airport-id=" << buf;
+	os << pfx << "--airport=" << buf;
 
     if (prefs.get( "runway", buf, "", buflen-1 ) &&
 	strcmp( "<default>", buf ) != 0)
