@@ -29,6 +29,7 @@
 #include <vector>
 #include <set>
 #include <sstream>
+#include <string.h>
 
 #include <FL/Fl.H>
 #include <FL/Fl_Preferences.H>
