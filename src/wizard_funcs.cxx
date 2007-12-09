@@ -50,6 +50,7 @@
 
 #if defined(WIN32) || defined(__EMX__) && !defined(__CYGWIN__)
 # include "os_win32.h"
+# define strcasecmp stricmp
 #else
 # include "os_posix.h"
 #endif
@@ -755,7 +756,7 @@ delayed_preview( void* v )
 
 struct ICompare {
     bool operator()( const string &a, const string &b ) const {
-        return stricmp( a.c_str(), b.c_str() ) < 0;
+        return strcasecmp( a.c_str(), b.c_str() ) < 0;
     }
 };
 
