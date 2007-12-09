@@ -81,7 +81,8 @@ sgMakeOffsetsMatrix( sgMat4 * result, double h_rot, double p_rot, double r_rot,
 struct AircraftData
 {
     SGPropertyNode props;
-    std::string name;
+    string name;
+    string desc;
 };
 
 static bool
@@ -749,11 +750,18 @@ Wizard::aircraft_update()
     char buf[ buflen ];
     prefs.get( "aircraft", buf, "", buflen-1);
 
+    map<string,vector<AircraftData*> > am;
     bool selected = false;
     // Populate the aircraft browser list.
     for (vector<SGPath>::size_type vi = 0; vi < ac.size(); ++vi)
     {
-	string s( ac[vi].str() );
+	string s( ac[vi].str() ), name( s );
+        name.erase( 0, path.str().size() );
+        if ( name[0] == '/' )
+            name.erase( 0, 1 );
+        string::size_type p = name.find( '/' );
+        if ( p != string::npos )
+            name.erase( p );
 
 	SGPropertyNode props;
 	try
@@ -780,14 +788,28 @@ Wizard::aircraft_update()
 		copyProperties( &props, &data->props );
 		//data->props = props;
 		data->name = ss;
-                aircraft->add( desc.c_str(), data );
-
-	        if (buf[0] != 0 && strcmp( buf, ss.c_str() ) == 0)
-	        {
-	             aircraft->select( aircraft->size() );
-                     selected = true;
-	        }
+                data->desc = desc;
+                am[name].push_back( data );
             }
+        }
+    }
+
+    for ( map<string,vector<AircraftData*> >::iterator it = am.begin(); it != am.end(); ++it )
+    {
+        aircraft->add( it->first.c_str(), it->second[0] );
+
+        for ( vector<AircraftData*>::size_type i = 0; i < it->second.size(); ++i )
+        {
+            AircraftData* data = it->second[i];
+            string desc = data->desc;
+            desc.insert( 0, "    " );
+            aircraft->add( desc.c_str(), data );
+
+	    if (buf[0] != 0 && strcmp( buf, data->name.c_str() ) == 0)
+	    {
+	        aircraft->select( aircraft->size() );
+                selected = true;
+	    }
         }
     }
 

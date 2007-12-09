@@ -21,9 +21,9 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.6\&quot; /DVERSION=\&quot;0.4.8\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.9\&quot; /DVERSION=\&quot;0.4.9\&quot;"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear;&quot;..\zlib-1.1.4&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;;..\OpenSceneGraph\include;..\OpenThreads\include"
+				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear;&quot;..\zlib&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;;..\OpenSceneGraph\include;..\OpenThreads\include"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -41,7 +41,7 @@
 				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlibd.lib ssg_d.lib sg_d.lib ul_d.lib opengl32.lib simgear_d.lib winmm.lib pthreadVC2d.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;..\SimGear.plib\Debug;&quot;..\zlib-1.1.4&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;"
+				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;..\SimGear.plib\Debug;&quot;..\zlib&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\Debug/fgrun.pdb"
 				SubSystem="1"/>
@@ -83,7 +83,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.3\&quot; /DVERSION=\&quot;0.4.8\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.9\&quot; /DVERSION=\&quot;0.4.9\&quot;"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="&quot;..\..\..\fltk-1.1.7&quot;;..\..\..\FlightGear\cvs;..\..\..\FlightGear\cvs\SimGear;&quot;..\..\..\FlightGear\zlib-1.1.4&quot;;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;"
 				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS,NOMINMAX"
@@ -143,12 +143,12 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.6\&quot; /DVERSION=\&quot;0.4.8\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.9\&quot; /DVERSION=\&quot;0.4.9\&quot;"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear.plib;&quot;..\zlib-1.1.4&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;"
+				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear.plib;&quot;..\zlib&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;"
 				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES"
 				StringPooling="TRUE"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="TRUE"
 				RuntimeTypeInfo="TRUE"
 				PrecompiledHeaderFile=".\Release-nd/fgrun.pch"
@@ -164,7 +164,7 @@
 				AdditionalDependencies="fltk-nd.lib fltkgl-nd.lib ws2_32.lib comctl32.lib zlib-nd.lib ssg-nd.lib sg-nd.lib ul-nd.lib opengl32.lib simgear-nd.lib winmm.lib pthreadVC2-nd.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;&quot;..\SimGear.plib\release-nd&quot;;&quot;..\zlib-1.1.4&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;"
+				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;&quot;..\SimGear.plib\release-nd&quot;;&quot;..\zlib&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;"
 				ProgramDatabaseFile=".\Release/fgrun.pdb"
 				SubSystem="1"/>
 			<Tool
