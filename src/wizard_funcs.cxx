@@ -295,7 +295,7 @@ dir_path( const SGPath& p )
  * Locate a named SSG node in a branch.
  */
 static ssgEntity *
-find_named_node (ssgEntity * node, const char * name)
+find_named_node( ssgEntity * node, const char * name )
 {
   char * node_name = node->getName();
   if (node_name != 0 && !strcmp(name, node_name))
@@ -341,6 +341,10 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
         }
     }
 
+    vector<SGPropertyNode_ptr> nopreview_nodes = props.getChildren("nopreview");
+    if ( !nopreview_nodes.empty() )
+        return 0;
+
     if (model == 0) {
         if (texturepath.extension() != "")
             texturepath = texturepath.dir();
@@ -369,29 +373,48 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
     vector<SGPropertyNode_ptr> model_nodes = props.getChildren("model");
     for (i = 0; i < model_nodes.size(); i++) {
         SGPropertyNode_ptr node = model_nodes[i];
-        ssgTransform * align = new ssgTransform;
-        sgMat4 res_matrix;
-        sgMakeOffsetsMatrix(&res_matrix,
-                            node->getFloatValue("offsets/heading-deg", 0.0),
-                            node->getFloatValue("offsets/roll-deg", 0.0),
-                            node->getFloatValue("offsets/pitch-deg", 0.0),
-                            node->getFloatValue("offsets/x-m", 0.0),
-                            node->getFloatValue("offsets/y-m", 0.0),
-                            node->getFloatValue("offsets/z-m", 0.0));
-        align->setTransform(res_matrix);
 
-        ssgBranch * kid;
-        const char * submodel = node->getStringValue("path");
-        try {
-            kid = loadModel( fg_root, submodel, preview );
+        vector<SGPropertyNode_ptr> nopreview_nodes = node->getChildren("nopreview");
+        if ( nopreview_nodes.empty() ) {
+            ssgTransform * align = new ssgTransform;
+            sgMat4 res_matrix;
+            sgMakeOffsetsMatrix(&res_matrix,
+                                node->getFloatValue("offsets/heading-deg", 0.0),
+                                node->getFloatValue("offsets/roll-deg", 0.0),
+                                node->getFloatValue("offsets/pitch-deg", 0.0),
+                                node->getFloatValue("offsets/x-m", 0.0),
+                                node->getFloatValue("offsets/y-m", 0.0),
+                                node->getFloatValue("offsets/z-m", 0.0));
+            align->setTransform(res_matrix);
 
-        } catch (const sg_throwable &t) {
-            SG_LOG(SG_INPUT, SG_ALERT, "Failed to load submodel: " << t.getFormattedMessage());
-            throw;
+            ssgBranch * kid = 0;
+            const char * submodel = node->getStringValue("path");
+            try {
+                kid = loadModel( fg_root, submodel, preview );
+            } catch (const sg_throwable &t) {
+                SG_LOG(SG_INPUT, SG_ALERT, "Failed to load submodel: " << t.getFormattedMessage());
+                throw;
+            }
+            if ( kid ) {
+                align->addKid(kid);
+                align->setName(node->getStringValue("name", ""));
+                model->addKid(align);
+            }
         }
-        align->addKid(kid);
-        align->setName(node->getStringValue("name", ""));
-        model->addKid(align);
+    }
+
+    vector<SGPropertyNode_ptr> animation_nodes = props.getChildren("animation");
+    for (i = 0; i < animation_nodes.size(); i++) {
+        const char * name = animation_nodes[i]->getStringValue("name", 0);
+        vector<SGPropertyNode_ptr> nopreview_nodes = animation_nodes[i]->getChildren("nopreview");
+        if ( !nopreview_nodes.empty() ) {
+            vector<SGPropertyNode_ptr> name_nodes = animation_nodes[i]->getChildren("object-name");
+            for (size_t j = 0; j < name_nodes.size(); j++ ) {
+                ssgEntity *e = find_named_node( model, name_nodes[j]->getStringValue() );
+                ssgBranch *b = e->getParent( 0 );
+                b->removeKid( e );
+            }
+        }
     }
 
     return alignmainmodel;
@@ -729,6 +752,12 @@ delayed_preview( void* v )
     ((Wizard*)v)->preview_aircraft();
 }
 
+struct ICompare {
+    bool operator()( const string &a, const string &b ) const {
+        return stricmp( a.c_str(), b.c_str() ) < 0;
+    }
+};
+
 void
 Wizard::aircraft_update()
 {
@@ -750,7 +779,7 @@ Wizard::aircraft_update()
     char buf[ buflen ];
     prefs.get( "aircraft", buf, "", buflen-1);
 
-    map<string,vector<AircraftData*> > am;
+    map<string,vector<AircraftData*>,ICompare> am;
     bool selected = false;
     // Populate the aircraft browser list.
     for (vector<SGPath>::size_type vi = 0; vi < ac.size(); ++vi)
@@ -794,7 +823,7 @@ Wizard::aircraft_update()
         }
     }
 
-    for ( map<string,vector<AircraftData*> >::iterator it = am.begin(); it != am.end(); ++it )
+    for ( map<string,vector<AircraftData*>,ICompare>::iterator it = am.begin(); it != am.end(); ++it )
     {
         aircraft->add( it->first.c_str(), it->second[0] );
 

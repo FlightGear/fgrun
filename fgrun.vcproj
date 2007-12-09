@@ -23,7 +23,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;0.4.9\&quot; /DVERSION=\&quot;0.4.9\&quot;"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear;&quot;..\zlib&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;;..\OpenSceneGraph\include;..\OpenThreads\include"
+				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear.plib;&quot;..\zlib&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
