@@ -5,7 +5,7 @@
   * Fix --jpg-httpd option
   * Fix problem with space in path
   * Load aircraft submodels in the preview browser
-  * Support scenerii without having to modify preferences.xml
+  * Support scenarios without having to modify preferences.xml
   * Support the AV400 protocol
   * Use plib to browse aircrafts
   * Fix resizing bug
