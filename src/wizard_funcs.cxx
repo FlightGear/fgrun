@@ -413,6 +413,8 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
             vector<SGPropertyNode_ptr> name_nodes = animation_nodes[i]->getChildren("object-name");
             for (size_t j = 0; j < name_nodes.size(); j++ ) {
                 ssgEntity *e = find_named_node( model, name_nodes[j]->getStringValue() );
+                if ( !e )
+                    continue;
                 ssgBranch *b = e->getParent( 0 );
                 b->removeKid( e );
             }
