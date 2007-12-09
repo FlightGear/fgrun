@@ -1,6 +1,14 @@
 * 0.4.9
 
   * Ordered aircraft list
+  * Changed --aircraft-id to --aircraft
+  * Fix --jpg-httpd option
+  * Fix problem with space in path
+  * Load aircraft submodels in the preview browser
+  * Support scenerii without having to modify preferences.xml
+  * Support the AV400 protocol
+  * Use plib to browse aircrafts
+  * Fix resizing bug
   * Migrated to Sourceforge SVN
 
 * 0.4.8
