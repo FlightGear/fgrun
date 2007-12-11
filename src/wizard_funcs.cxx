@@ -395,7 +395,6 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
                 kid = loadModel( fg_root, submodel, preview );
             } catch (const sg_throwable &t) {
                 SG_LOG(SG_INPUT, SG_ALERT, "Failed to load submodel: " << t.getFormattedMessage());
-                throw;
             }
             if ( kid ) {
                 align->addKid(kid);
