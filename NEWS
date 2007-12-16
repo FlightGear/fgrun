@@ -1,3 +1,10 @@
+* 1.0.0
+
+  * Match the Flightgear version number
+  * Don't complain about unsupported file type, just ignore them
+  * Support of <nopreview/> tag in animations and submodels to improve aircraft preview
+  * Case unsensitive sort of aircraft in the preview list
+
 * 0.4.9
 
   * Ordered aircraft list
