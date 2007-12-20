@@ -186,6 +186,7 @@ Wizard::reset()
         }
     }
 
+    scenery_dir_list_->clear();
     typedef vector<string> vs_t;
     vs_t v( sgPathSplit( fg_scenery ) );
     for (vs_t::size_type i = 0; i < v.size(); ++i)
@@ -498,7 +499,19 @@ Wizard::next_cb()
 	prefs.set( "fg_exe", abs_name );
 
 	fl_filename_absolute( abs_name, fg_root_->value() );
-	prefs.set( "fg_root", abs_name );
+
+        const int buflen = FL_PATH_MAX;
+        char buf[ buflen ];
+        const char* not_set = "NOT SET";
+        prefs.get( "fg_root", buf, not_set, buflen-1);
+        if ( strcmp( buf, abs_name ) != 0 )
+        {
+	    prefs.set( "fg_root", abs_name );
+ 	    win->cursor( FL_CURSOR_WAIT );
+	    Fl::flush();
+            aircraft_update();
+ 	    win->cursor( FL_CURSOR_DEFAULT );
+        }
 
 	string fg_scenery = scenery_dir_list_->text(1);
 	for (int i = 2; i <= scenery_dir_list_->size(); ++i)
@@ -772,9 +785,12 @@ Wizard::aircraft_update()
     // Empty the aircraft browser list.
     for (int i = 1; i <= aircraft->size(); ++i)
     {
-	AircraftData* data =
-	    reinterpret_cast<AircraftData*>( aircraft->data(i) );
-	delete data;
+        if ( aircraft->text(i)[0] != ' ' )
+        {
+	    AircraftData* data =
+	        reinterpret_cast<AircraftData*>( aircraft->data(i) );
+	    delete data;
+        }
     }
     aircraft->clear();
 
