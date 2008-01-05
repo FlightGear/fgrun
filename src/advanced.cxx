@@ -953,7 +953,6 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Input* o = lon = new Fl_Input(225, 35, 150, 25, _("Longitude:"));
         o->tooltip(_("Initial longitude, west is negative"));
         o->labelsize(12);
@@ -989,8 +988,7 @@ Advanced::Advanced() {
         o->textsize(12);
       }
       { Fl_Value_Input* o = heading = new Fl_Value_Input(225, 125, 150, 25, _("Heading:"));
-        o->tooltip(_("Initial aircraft heading (yaw) angle 0 to 360 degreesInitial aircraft heading\
- (yaw) angle (Psi)"));
+        o->tooltip(_("Initial aircraft heading (yaw) angle 0 to 360 degrees"));
         o->labelsize(12);
         o->maximum(360);
         o->step(1);
@@ -1337,6 +1335,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);

@@ -1,6 +1,9 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0107 
 do_not_include_H_from_C 
+i18n_type 1 
+i18n_include "i18n.h" 
+i18n_function _ 
 header_name {.h} 
 code_name {.cxx}
 declblock {\#if HAVE_CONFIG_H} {open after {\#endif}
@@ -311,7 +314,7 @@ else
       }
       Fl_Group {page[4]} {
         label {Initial Position}
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Input lon {
           label {Longitude:}
@@ -326,7 +329,7 @@ else
           private tooltip {Initial altitude in feet} xywh {225 95 150 25} type Float labelsize 12 textsize 12
         }
         Fl_Input vc {
-          label {Airspeed:}
+          label {Airspeed:} selected
           private tooltip {Initial airspeed in knots} xywh {225 215 150 25} type Float labelsize 12 textsize 12
         }
         Fl_Input uBody {
@@ -343,7 +346,7 @@ else
         }
         Fl_Value_Input heading {
           label {Heading:}
-          private tooltip {Initial aircraft heading (yaw) angle 0 to 360 degreesInitial aircraft heading (yaw) angle (Psi)} xywh {225 125 150 25} labelsize 12 maximum 360 step 1 textsize 12
+          private tooltip {Initial aircraft heading (yaw) angle 0 to 360 degrees} xywh {225 125 150 25} labelsize 12 maximum 360 step 1 textsize 12
         }
         Fl_Value_Input roll {
           label {Roll:}
@@ -665,7 +668,7 @@ else
       }
       Fl_Group {page[8]} {
         label {Input/Output} open
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -701,7 +704,7 @@ else
             private xywh {0 0 100 20} labelsize 12
           }
           MenuItem {} {
-            label AV400 selected
+            label AV400
             private xywh {0 0 100 20} labelsize 12
           }
           MenuItem {} {
