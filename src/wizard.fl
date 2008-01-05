@@ -1,6 +1,9 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0107 
 do_not_include_H_from_C 
+i18n_type 1 
+i18n_include "i18n.h" 
+i18n_function _ 
 header_name {.h} 
 code_name {.cxx}
 declblock {\#ifdef HAVE_CONFIG_H} {open after {\#endif}
@@ -310,11 +313,15 @@ class Wizard {open
             }
             Fl_Browser scenarii {
               label {Scenario :}
-              callback {scenarii_cb();} selected
+              callback {scenarii_cb();}
               private xywh {425 117 190 52} type Multi align 5
             }
             Fl_Box {} {
               private xywh {615 170 20 10} resizable
+            }
+            Fl_Round_Button {} {
+              label button
+              xywh {425 120 64 15} down_box ROUND_DOWN_BOX
             }
           }
           Fl_Group {} {
@@ -486,7 +493,7 @@ class Wizard {open
       private xywh {580 456 455 155} type Double visible
     } {
       Fl_Group {} {open
-        private xywh {15 25 425 115}
+        private xywh {15 25 425 120}
       } {
         Fl_Box {} {
           label {FlightGear has been started}
@@ -497,12 +504,8 @@ class Wizard {open
           private xywh {15 50 425 25} labelfont 1
         }
         Fl_Box {} {
-          label {To change aircraft, exit FlightGear}
-          private xywh {15 90 425 25} labelfont 1
-        }
-        Fl_Box {} {
-          label {and return to this launcher}
-          private xywh {15 115 425 25} labelfont 1
+          label {To change aircraft, exit FlightGear and return to this launcher} selected
+          private xywh {95 90 265 50} labelfont 1 align 128
         }
       }
     }

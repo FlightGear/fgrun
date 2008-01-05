@@ -29,6 +29,7 @@
 #include <FL/filename.H>
 
 #include "wizard.h"
+#include "i18n.h"
 
 std::string def_fg_exe = "";
 std::string def_fg_root = "";
@@ -81,6 +82,19 @@ parse_args( int, char** argv, int& i )
     return 0;
 }
 
+string
+get_locale_directory( const char *argv0 )
+{
+#if _MSC_VER
+    SGPath path = argv0;
+    path = path.dir();
+    path.append( "locale" );
+    return path.str();
+#else
+    return LOCALEDIR;
+#endif
+}
+
 int
 main( int argc, char* argv[] )
 {
@@ -90,12 +104,17 @@ main( int argc, char* argv[] )
     wVersionRequested = MAKEWORD( 2, 2 );
     WSAStartup( wVersionRequested, &wsaData );
 #endif
+    setlocale( LC_ALL, "" );
+    string localedir = get_locale_directory( argv[0] );
+    bindtextdomain( PACKAGE, localedir.c_str() );
+    textdomain( PACKAGE );
+
     Fl::lock(); // initialize multithreading
 
     int i = 0;
     if (Fl::args( argc, argv, i, parse_args ) < argc)
     {
-        Fl::fatal("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n -f, --fullscreen\n%s", Fl::help );
+        Fl::fatal(_("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n -f, --fullscreen\n%s"), Fl::help );
     }
 
     if ( silent )

@@ -28,6 +28,7 @@
 
 #include "advanced.h"
 #include "util.h"
+#include "i18n.h"
 
 using std::string;
 using std::vector;
@@ -254,7 +255,7 @@ Advanced::io_generic_file_cb()
     string dir = fg_root_->value();
     dir += "/Protocol";
     const char* pat = "*.xml";
-    const char* message = "Select protocol file";
+    const char* message = _("Select protocol file");
 
     Fl_File_Chooser fc( dir.c_str(), pat, Fl_File_Chooser::SINGLE, message );
     fc.show();

@@ -28,6 +28,7 @@
 #include <FL/Fl_File_Chooser.H>
 
 #include "advanced.h"
+#include "i18n.h"
 
 Advanced::~Advanced()
 {
@@ -102,21 +103,21 @@ Advanced::list_update_cb( Fl_Browser* browser,
 void
 Advanced::init()
 {
-    page_list->add("General");
-    page_list->add("Features");
-    page_list->add("Flight Model");
-    page_list->add("Freeze");
-    page_list->add("Initial Position");
-    page_list->add("Rendering");
-    page_list->add("Time");
-    page_list->add("Network");
-    page_list->add("Input/Output");
-    page_list->add("Avionics");
-    page_list->add("Properties");
-    page_list->add("Debugging");
-    page_list->add("Environment");
-    page_list->add("Weather");
-    page_list->add("Clouds");
+    page_list->add(_("General"));
+    page_list->add(_("Features"));
+    page_list->add(_("Flight Model"));
+    page_list->add(_("Freeze"));
+    page_list->add(_("Initial Position"));
+    page_list->add(_("Rendering"));
+    page_list->add(_("Time"));
+    page_list->add(_("Network"));
+    page_list->add(_("Input/Output"));
+    page_list->add(_("Avionics"));
+    page_list->add(_("Properties"));
+    page_list->add(_("Debugging"));
+    page_list->add(_("Environment"));
+    page_list->add(_("Weather"));
+    page_list->add(_("Clouds"));
 
     page_list->select(1);
     show_page(0);
@@ -125,7 +126,7 @@ Advanced::init()
 void
 Advanced::fg_browser_cb()
 {
-    char* p = fl_file_chooser("Select browser", 0, browser->value(), 0);
+    char* p = fl_file_chooser(_("Select browser"), 0, browser->value(), 0);
     if (p != 0)
 	browser->value( p );
 }
@@ -180,8 +181,8 @@ Advanced::cloud_layer_cb()
 void
 Advanced::fg_config_cb()
 {
-    char* p = fl_file_chooser( "Select a preferences file",
-			       "XML Files(*.xml)",
+    char* p = fl_file_chooser( _("Select a preferences file"),
+			       _("XML Files(*.xml)"),
 			       config->value(), 0 );
     if (p != 0)
 	config->value( p );

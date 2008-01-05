@@ -29,6 +29,7 @@
 
 #include "AirportTable.h"
 #include "apt_dat.h"
+#include "i18n.h"
 
 using std::string;
 using std::vector;
@@ -117,7 +118,7 @@ AirportTable::draw_cell( TableContext context,
         fl_font( FL_HELVETICA /*| FL_BOLD*/, 12 );
         fl_push_clip( X, Y, W, H );
         {
-            static char* headers[2] = { "ICAO Id", "Name" };
+            static char* headers[2] = { _("ICAO Id"), _("Name") };
             fl_draw_box( FL_THIN_UP_BOX, X, Y, W, H,
 			 col_header_color() );
             fl_color(FL_BLACK);

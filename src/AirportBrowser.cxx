@@ -29,6 +29,7 @@
 
 #include "AirportBrowser.h"
 #include "AirportTable.h"
+#include "i18n.h"
 
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Hold_Browser.H>
@@ -75,13 +76,13 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
     g->end();
     g->resizable(name_);
 
-    runways_ = new Fl_Hold_Browser( X+tw+5, Y, 120, th, "Runways" );
+    runways_ = new Fl_Hold_Browser( X+tw+5, Y, 120, th, _("Runways") );
     runways_->align( FL_ALIGN_TOP );
 
-    refresh_ = new Fl_Button( X+tw+5, Y+th+5, 120, 25, "Refresh" );
+    refresh_ = new Fl_Button( X+tw+5, Y+th+5, 120, 25, _("Refresh") );
     refresh_->labelsize(12);
     refresh_->callback( refresh_cb, this );
-    refresh_->tooltip( "Reload airports" );
+    refresh_->tooltip( _("Reload airports") );
     end();
 
     resizable( table_ );
@@ -328,7 +329,7 @@ AirportBrowser::show_runways( const apt_dat_t* apt )
     std::sort( rwys.begin(), rwys.end() );
 
     runways_->clear();
-    runways_->add( "<default>" );
+    runways_->add( _("<default>") );
     for (i = 0; i < rwys.size(); ++i)
     {
 	runways_->add( rwys[i].c_str() );
@@ -390,7 +391,7 @@ AirportBrowser::load_runways( const string& path, Fl_Callback* cb, void* v )
     gzf_ = gzopen( path.c_str(), "rb" );
     if (gzf_ == 0)
     {
-        throw "gzopen error";
+        throw _("gzopen error");
     }
 
     // Skip first line.

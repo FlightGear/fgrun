@@ -47,6 +47,7 @@
 #include "wizard.h"
 #include "advanced.h"
 #include "logwin.h"
+#include "i18n.h"
 
 #if defined(WIN32) || defined(__EMX__) && !defined(__CYGWIN__)
 # include "os_win32.h"
@@ -213,7 +214,7 @@ Wizard::reset()
 	next->activate();
         page[1]->show();
     }
-    next->label( "Next" );
+    next->label( _("Next") );
 
     int iVal;
     prefs.get("show_cmd_line", iVal, 0);
@@ -252,7 +253,7 @@ Wizard::init( bool fullscreen )
     win->size_range( 640, 480 );
     text->buffer( new Fl_Text_Buffer );
 
-    logwin = new LogWindow( 640, 480, "Log Window" );
+    logwin = new LogWindow( 640, 480, _("Log Window") );
 
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];
@@ -355,7 +356,7 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
         ssgTexturePath((char *)texturepath.c_str());
         model = (ssgBranch *)preview->load( modelpath.c_str(), texturepath.c_str() );
         if (model == 0)
-            throw sg_io_exception("Failed to load 3D model", 
+            throw sg_io_exception(_("Failed to load 3D model"), 
 			        sg_location(modelpath.str()));
     }
                                   // Set up the alignment node
@@ -395,7 +396,7 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
             try {
                 kid = loadModel( fg_root, submodel, preview );
             } catch (const sg_throwable &t) {
-                SG_LOG(SG_INPUT, SG_ALERT, "Failed to load submodel: " << t.getFormattedMessage());
+                SG_LOG(SG_INPUT, SG_ALERT, _("Failed to load submodel: ") << t.getFormattedMessage());
             }
             if ( kid ) {
                 align->addKid(kid);
@@ -449,7 +450,7 @@ Wizard::preview_aircraft()
 
 	if (!path.exists())
 	{
-	    fl_alert( "Model not found: '%s'", path.c_str() );
+	    fl_alert( _("Model not found: '%s'"), path.c_str() );
 	    return;
 	}
 
@@ -458,7 +459,9 @@ Wizard::preview_aircraft()
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
 
+            setlocale( LC_ALL, "C" );
 	    ssgEntity* model = loadModel( fg_root_->value(), path.str(), preview );
+            setlocale( LC_ALL, "" );
 	    if (model != 0)
 	    {
                 ssgEntity *bounding_obj = find_named_node( model, "Aircraft" );
@@ -479,7 +482,7 @@ Wizard::preview_aircraft()
     }
     else
     {
-	fl_alert( "Property '/sim/model/path' not found" );
+	fl_alert( _("Property '/sim/model/path' not found") );
 	return;
     }
 
@@ -545,7 +548,7 @@ Wizard::next_cb()
 
 	string rwy( airports_->get_selected_runway() );
 	if (rwy.empty())
-	    rwy = "<default>";
+	    rwy = _("<default>");
 	prefs.set( "runway", rwy.c_str() );
 
 	update_basic_options();
@@ -590,7 +593,7 @@ Wizard::next_cb()
 	ostr << fg_exe_->value() << "\n  ";
 	write_fgfsrc( ostr, "\n  " );
 	text->buffer()->text( ostr.str().c_str() );
-	next->label( "Run" );
+	next->label( _("Run") );
     }
 }
 
@@ -598,7 +601,7 @@ void
 Wizard::prev_cb()
 {
     next->activate();
-    next->label( "Next" );
+    next->label( _("Next") );
     wiz->prev();
     if (wiz->value() == page[0])
     {
@@ -613,7 +616,7 @@ Wizard::prev_cb()
 void
 Wizard::defaults_cb()
 {
-    int r = fl_choice( "About to reset current parameters", "Abort", "Reset", 0 );
+    int r = fl_choice( _("About to reset current parameters"), _("Abort"), _("Reset"), 0 );
     if (!r)
 	return;
     if (adv == 0)
@@ -627,7 +630,7 @@ Wizard::defaults_cb()
 void
 Wizard::fg_exe_select_cb()
 {
-    char* p = fl_file_chooser( "Select FlightGear executable",
+    char* p = fl_file_chooser( _("Select FlightGear executable"),
                               fg_exe_->value(), 0);
     if (p != 0)
         fg_exe_->value( p );
@@ -684,7 +687,7 @@ Wizard::fg_root_update_cb()
 void
 Wizard::fg_root_select_cb()
 {
-    char* p = fl_dir_chooser( "Select FG_ROOT directory",
+    char* p = fl_dir_chooser( _("Select FG_ROOT directory"),
                               fg_root_->value(), 0);
     if (p != 0)
         fg_root_->value( p );
@@ -901,7 +904,7 @@ Wizard::delete_cache_file_cb()
     if (unlink( path.c_str() ) == 0)
 	return;
 
-    fl_alert( "Unable to delete '%s':\n%s",
+    fl_alert( _("Unable to delete '%s':\n%s"),
 	      path.c_str(), strerror(errno) );
 }
 
@@ -931,7 +934,7 @@ Wizard::scenery_dir_select_cb()
 void
 Wizard::scenery_dir_add_cb()
 {
-    char* p = fl_dir_chooser( "Select FG_SCENERY directory", 0, 0);
+    char* p = fl_dir_chooser( _("Select FG_SCENERY directory"), 0, 0);
     if (p != 0)
     {
 	scenery_dir_list_->add( p );
@@ -1148,7 +1151,7 @@ Wizard::scenarii_cb()
 	    SGPropertyNode scenario;
 	    readProperties( path.str(), &scenario );
 
-	    tooltip = "Description of ";
+	    tooltip = _("Description of ");
 	    tooltip += scenarii->text( scenarii->value() );
 	    tooltip += "\n";
 	    tooltip += scenario.getStringValue( "scenario/description" );

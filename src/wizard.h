@@ -25,6 +25,7 @@ class Advanced;
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Choice.H>
+#include <FL/Fl_Round_Button.H>
 #include <FL/Fl_Value_Input.H>
 
 class Wizard {

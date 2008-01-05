@@ -26,11 +26,12 @@
 #include <FL/Fl_File_Chooser.H>
 
 #include "logwin.h"
+#include "i18n.h"
 
 Fl_Menu_Item LogWindow::menu_[] = {
-    { "&File", 0, 0, 0,  64, 0, 0, 12, 56 },
-    { "&Save",  FL_CTRL+'s', LogWindow::save_cb, 0, 128, 0, 0, 12, 56 },
-    { "&Close", FL_CTRL+'w', LogWindow::close_cb, 0, 0, 0, 0, 12, 56 },
+    { _("&File"), 0, 0, 0,  64, 0, 0, 12, 56 },
+    { _("&Save"),  FL_CTRL+'s', LogWindow::save_cb, 0, 128, 0, 0, 12, 56 },
+    { _("&Close"), FL_CTRL+'w', LogWindow::close_cb, 0, 0, 0, 0, 12, 56 },
     {0},
     {0}
 };
@@ -95,7 +96,7 @@ LogWindow::save_cb( Fl_Widget* o, void* v )
 void
 LogWindow::save_cb()
 {
-    char* fname = fl_file_chooser( "Save file as?", "*.txt", 0, 0 );
+    char* fname = fl_file_chooser( _("Save file as?"), "*.txt", 0, 0 );
     if (fname != 0)
     {
 	text->buffer()->savefile( fname );

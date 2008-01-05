@@ -36,6 +36,7 @@
 #endif
 
 #include "wizard.h"
+#include "i18n.h"
 
 using std::ofstream;
 
@@ -57,7 +58,7 @@ Wizard::write_fgfsrc()
     if (fp != 0)
     {
 	fclose( fp );
-	int r = fl_choice( "About to overwrite %s.", "Abort", "Overwrite", 0, buf );
+	int r = fl_choice( _("About to overwrite %s."), _("Abort"), _("Overwrite"), 0, buf );
 	if (!r)
 	    return 0;
     }
@@ -91,7 +92,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--airport=" << buf;
 
     if (prefs.get( "runway", buf, "", buflen-1 ) &&
-	strcmp( "<default>", buf ) != 0)
+	strcmp( _("<default>"), buf ) != 0)
 	os << pfx << "--runway=" << buf;
 
     if (prefs.get( "aircraft", buf, "", buflen-1 ) && buf[0] != 0)
