@@ -12,6 +12,8 @@ BUILT_SOURCES = wizard.cxx wizard.h advanced.cxx advanced.h
 
 bin_PROGRAMS = fgrun
 
+AM_CXXFLAGS = -DLOCALEDIR=\"$(localedir)\"
+
 fgrun_SOURCES = \
 	wizard.cxx wizard.h wizard_funcs.cxx \
 	advanced.cxx advanced.h advanced_funcs.cxx \
