@@ -139,17 +139,17 @@ Wizard::airports_cb()
     }
 }
 
-static const char* about_text = "\
+static const char* about_text = N_("\
 <html>\
  <head>\
-  <title>FlightGear Launch Control " VERSION "</title>\
+  <title>FlightGear Launch Control %s</title>\
  </head>\
  <body>\
-  <h1>FlightGear Launch Control " VERSION "</h1>\
+  <h1>FlightGear Launch Control %s</h1>\
   <p>This program is released under the GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>\
   <p>Report bugs to http://sourceforge.net/projects/fgrun</p>\
  </body>\
-</html>";
+</html>");
 
 void
 Wizard::reset()
@@ -278,7 +278,10 @@ Wizard::init( bool fullscreen )
     cache.append( "airports.txt" );
     cache_file_->value( cache.c_str() );
 
-    about_->value( about_text );
+    char *about_text_buffer = new char[2*strlen(about_text)];
+    sprintf( about_text_buffer, _(about_text), VERSION, VERSION );
+    about_->value( about_text_buffer );
+    delete[] about_text_buffer;
 
     reset();
 }
