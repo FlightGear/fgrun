@@ -19,15 +19,15 @@ msgstr ""
 
 #: advanced.cxx:18
 msgid "joystick"
-msgstr ""
+msgstr "manette"
 
 #: advanced.cxx:19
 msgid "keyboard"
-msgstr ""
+msgstr "clavier"
 
 #: advanced.cxx:20
 msgid "mouse"
-msgstr ""
+msgstr "souris"
 
 #: advanced.cxx:77
 msgid "ada"
