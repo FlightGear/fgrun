@@ -1,8 +1,8 @@
-# French translations for PACKAGE package
-# Traduction anglaise du package PACKAGE.
+# French translations for fgrun package
+# Traduction Française du package fgrun.
 # Copyright (C) 2008 Frederic Bouvier
 # This file is distributed under the same license as the fgrun package.
-# FIRST AUTHOR <fredb@users.sourceforge.net>, 2008.
+# Frédéric Bouvier <fredb@users.sourceforge.net>, 2008.
 #
 msgid ""
 msgstr ""
