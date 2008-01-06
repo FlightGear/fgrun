@@ -4,6 +4,7 @@
 	Version="7.10"
 	Name="fgrun"
 	ProjectGUID="{B25B33CB-2D7F-4D25-A73A-B05E86C48F7E}"
+	RootNamespace="fgrun"
 	SccProjectName=""
 	SccLocalPath="">
 	<Platforms>
@@ -24,7 +25,7 @@
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.0.0\&quot; /DVERSION=\&quot;1.0.0\&quot;"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear.plib;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;&quot;..\zlib-1.2.3&quot;;..\gettext\include"
-				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;"
+				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
@@ -38,10 +39,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib pthreadVC2d.lib intl.lib ssg_d.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib pthreadVC2d.lib intl.lib ssg_d.lib simgear_d.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;..\SimGear\Debug;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\lib"
+				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;..\SimGear.plib\Debug;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\lib"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\Debug/fgrun.pdb"
 				SubSystem="1"/>
@@ -145,8 +146,8 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.0.0\&quot; /DVERSION=\&quot;1.0.0\&quot;"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear.plib;&quot;..\zlib&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;"
-				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES"
+				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear.plib;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\include"
+				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="TRUE"
@@ -161,10 +162,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltk-nd.lib fltkgl-nd.lib ws2_32.lib comctl32.lib zlib-nd.lib ssg-nd.lib sg-nd.lib ul-nd.lib opengl32.lib simgear-nd.lib winmm.lib pthreadVC2-nd.lib"
+				AdditionalDependencies="fltk-nd.lib fltkgl-nd.lib ws2_32.lib comctl32.lib zlib-nd.lib ssg-nd.lib sg-nd.lib ul-nd.lib opengl32.lib simgear-nd.lib winmm.lib pthreadVC2-nd.lib intl.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;&quot;..\SimGear.plib\release-nd&quot;;&quot;..\zlib&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;"
+				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;&quot;..\SimGear.plib\release-nd&quot;;..\zlib;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\lib"
 				ProgramDatabaseFile=".\Release/fgrun.pdb"
 				SubSystem="1"/>
 			<Tool
@@ -216,9 +217,6 @@
 			</File>
 			<File
 				RelativePath=".\src\fgfsrc.cxx">
-			</File>
-			<File
-				RelativePath=".\fgrun.rc">
 			</File>
 			<File
 				RelativePath="src\Fl_Heading_Dial.cxx">
@@ -295,7 +293,37 @@
 			Name="Resource Files"
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
 			<File
-				RelativePath=".\icon1.ico">
+				RelativePath=".\fgrun.rc">
+			</File>
+			<File
+				RelativePath=".\flightgear.ico">
+			</File>
+			<File
+				RelativePath=".\po\fr.po">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generation of French translation"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\fr\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						Outputs="$(OutDir)\locale\fr\LC_MESSAGES\$(TargetName).mo"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generation of French translation"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\fr\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						Outputs="$(OutDir)\locale\fr\LC_MESSAGES\$(TargetName).mo"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-nodll|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generation of French translation"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\fr\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						Outputs="$(OutDir)\locale\fr\LC_MESSAGES\$(TargetName).mo"/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 	</Files>

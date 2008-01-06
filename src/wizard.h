@@ -25,7 +25,6 @@ class Advanced;
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Round_Button.H>
 #include <FL/Fl_Value_Input.H>
 
 class Wizard {
@@ -97,6 +96,10 @@ private:
   Fl_Check_Button *clouds_3d;
   void cb_clouds_3d_i(Fl_Check_Button*, void*);
   static void cb_clouds_3d(Fl_Check_Button*, void*);
+public:
+  Fl_Choice *bpp;
+  static Fl_Menu_Item menu_bpp[];
+private:
   Fl_Check_Button *random_objects;
   void cb_random_objects_i(Fl_Check_Button*, void*);
   static void cb_random_objects(Fl_Check_Button*, void*);
@@ -109,7 +112,6 @@ private:
   Fl_Choice *time_of_day_value;
   void cb_time_of_day_value_i(Fl_Choice*, void*);
   static void cb_time_of_day_value(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_time_of_day_value[];
   Fl_Check_Button *real_weather_fetch;
   void cb_real_weather_fetch_i(Fl_Check_Button*, void*);
   static void cb_real_weather_fetch(Fl_Check_Button*, void*);
@@ -148,12 +150,12 @@ private:
 public:
   Fl_Group *page[5];
 private:
-  Fl_Button *next;
-  void cb_next_i(Fl_Button*, void*);
-  static void cb_next(Fl_Button*, void*);
   Fl_Button *prev;
   void cb_prev_i(Fl_Button*, void*);
   static void cb_prev(Fl_Button*, void*);
+  Fl_Button *next;
+  void cb_next_i(Fl_Button*, void*);
+  static void cb_next(Fl_Button*, void*);
   Fl_Button *cancel;
   void cb_cancel_i(Fl_Button*, void*);
   static void cb_cancel(Fl_Button*, void*);
@@ -233,5 +235,6 @@ private:
   int launch_result;
   void exec_launch_window();
   Advanced *adv;
+  static Fl_Menu_Item menu_time_of_day_value[];
 };
 #endif

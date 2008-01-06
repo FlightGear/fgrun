@@ -100,9 +100,38 @@ Advanced::list_update_cb( Fl_Browser* browser,
     }
 }
 
+Fl_Menu_Item Advanced::menu_time_of_day_value[] = {
+ {N_("noon"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dusk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("midnight"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dawn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+Fl_Menu_Item Advanced::menu_log_level[] = {
+ {_("bulk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("debug"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("info"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("warn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("alert"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void
 Advanced::init()
 {
+    for ( int i = 0; menu_time_of_day_value[i].text != 0; ++i )
+    {
+        menu_time_of_day_value[i].text = _( menu_time_of_day_value[i].text );
+    }
+    time_of_day_value->menu(menu_time_of_day_value);
+
+    for ( int i = 0; menu_log_level[i].text != 0; ++i )
+    {
+        menu_log_level[i].text = _( menu_log_level[i].text );
+    }
+    log_level->menu(menu_log_level);
+
     page_list->add(_("General"));
     page_list->add(_("Features"));
     page_list->add(_("Flight Model"));
@@ -203,4 +232,28 @@ Advanced::random_wind_cb()
 	wind_dial->activate();
 	wind_speed->activate();
     }
+}
+
+const char *
+Advanced::time_of_day_rvalue(Fl_Choice *time_of_day_value)
+{
+    static const char *codes[] = { "noon", "dawn", "dusk", "midnight", 0 };
+    for ( int i = 0; codes[i] != 0; ++i )
+    {
+        if ( strcmp( time_of_day_value->text(), _( codes[i] ) ) == 0 )
+            return codes[i];
+    }
+    return codes[0];
+}
+
+const char *
+Advanced::log_level_rvalue()
+{
+    static const char *codes[] = { "bulk", "debug", "info", "warn", "alert", 0 };
+    for ( int i = 0; codes[i] != 0; ++i )
+    {
+        if ( strcmp( log_level->text(), _( codes[i] ) ) == 0 )
+            return codes[i];
+    }
+    return codes[0];
 }

@@ -149,7 +149,6 @@ private:
   void cb_time_of_day_i(Fl_Round_Button*, void*);
   static void cb_time_of_day(Fl_Round_Button*, void*);
   Fl_Choice *time_of_day_value;
-  static Fl_Menu_Item menu_time_of_day_value[];
   Fl_Check_Button *httpd;
   void cb_httpd_i(Fl_Check_Button*, void*);
   static void cb_httpd(Fl_Check_Button*, void*);
@@ -251,7 +250,6 @@ private:
   void cb_New_i(Fl_Button*, void*);
   static void cb_New(Fl_Button*, void*);
   Fl_Choice *log_level;
-  static Fl_Menu_Item menu_log_level[];
   Fl_Browser *trace_read_list;
   void cb_trace_read_list_i(Fl_Browser*, void*);
   static void cb_trace_read_list(Fl_Browser*, void*);
@@ -355,5 +353,12 @@ private:
   void fg_config_cb();
   std::string airport_id_;
   void random_wind_cb();
+  static Fl_Menu_Item menu_time_of_day_value[];
+public:
+  static const char *time_of_day_rvalue(Fl_Choice *time_of_day_value);
+private:
+  static Fl_Menu_Item menu_log_level[];
+public:
+  const char *log_level_rvalue();
 };
 #endif

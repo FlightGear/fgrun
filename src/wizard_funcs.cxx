@@ -47,6 +47,7 @@
 #include "wizard.h"
 #include "advanced.h"
 #include "logwin.h"
+#include "util.h"
 #include "i18n.h"
 
 #if defined(WIN32) || defined(__EMX__) && !defined(__CYGWIN__)
@@ -63,6 +64,14 @@ using std::set;
 extern string def_fg_exe;
 extern string def_fg_root;
 extern string def_fg_scenery;
+
+Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
+ {_("noon"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {_("dusk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {_("midnight"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {_("dawn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 /**
  * Make an offset matrix from rotations and position offset.
@@ -228,6 +237,12 @@ Wizard::reset()
 void
 Wizard::init( bool fullscreen )
 {
+    for ( int i = 0; menu_time_of_day_value[i].text != 0; ++i )
+    {
+        menu_time_of_day_value[i].text = _( menu_time_of_day_value[i].text );
+    }
+    time_of_day_value->menu( menu_time_of_day_value );
+
     static const int npages = 5;
 
     make_launch_window();
@@ -250,7 +265,7 @@ Wizard::init( bool fullscreen )
 	    win->resize( X, Y, W, H );
     }
 
-    win->size_range( 640, 480 );
+    win->size_range( 800, 600 );
     text->buffer( new Fl_Text_Buffer );
 
     logwin = new LogWindow( 640, 480, _("Log Window") );
@@ -1117,7 +1132,7 @@ Wizard::time_of_day_cb()
 void
 Wizard::time_of_day_value_cb()
 {
-    prefs.set("time_of_day_value", time_of_day_value->text());
+    prefs.set("time_of_day_value", Advanced::time_of_day_rvalue(time_of_day_value));
     update_options();
 }
 
@@ -1426,15 +1441,7 @@ Wizard::update_basic_options()
     prefs.get("time_of_day", iVal, 0);
     time_of_day->value(iVal);
     prefs.get("time_of_day_value", buf, "noon", buflen-1);
-    time_of_day_value->value(0);
-    for ( i = 0; menu_time_of_day_value[i].text != 0; i++ )
-    {
-	if ( strcmp( buf, menu_time_of_day_value[i].text ) == 0 )
-	{
-	    time_of_day_value->value(i);
-	    break;
-	}
-    }
+    set_choice( time_of_day_value, buf );
     prefs.get("fetch_real_weather", iVal, 0);
     real_weather_fetch->value(iVal);
     prefs.get("auto_coordination", iVal, 0);

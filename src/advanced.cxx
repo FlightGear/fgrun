@@ -198,14 +198,6 @@ void Advanced::cb_time_of_day(Fl_Round_Button* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_time_of_day_i(o,v);
 }
 
-Fl_Menu_Item Advanced::menu_time_of_day_value[] = {
- {_("dawn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("noon"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("dusk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("midnight"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void Advanced::cb_httpd_i(Fl_Check_Button* o, void*) {
   if (o->value()) {
   httpd_port->activate();
@@ -470,15 +462,6 @@ void Advanced::cb_New_i(Fl_Button*, void*) {
 void Advanced::cb_New(Fl_Button* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_New_i(o,v);
 }
-
-Fl_Menu_Item Advanced::menu_log_level[] = {
- {_("bulk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("debug"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("info"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("warn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("alert"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void Advanced::cb_trace_read_list_i(Fl_Browser*, void*) {
   list_select_cb(
@@ -761,113 +744,113 @@ Advanced::Advanced() {
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
-      { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 120, 25, _("Game Mode"));
+      { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 160, 25, _("Game Mode"));
         o->tooltip(_("Enable full screen game mode"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = splash_screen = new Fl_Check_Button(175, 80, 120, 25, _("Splash Screen"));
+      { Fl_Check_Button* o = splash_screen = new Fl_Check_Button(175, 80, 160, 25, _("Splash Screen"));
         o->tooltip(_("Display splash screen at startup"));
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = intro_music = new Fl_Check_Button(175, 110, 120, 25, _("Intro Music"));
+      { Fl_Check_Button* o = intro_music = new Fl_Check_Button(175, 110, 160, 25, _("Intro Music"));
         o->tooltip(_("Enable introduction music during start up"));
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = mouse_pointer = new Fl_Check_Button(175, 140, 120, 25, _("Mouse Pointer"));
+      { Fl_Check_Button* o = mouse_pointer = new Fl_Check_Button(175, 140, 160, 25, _("Mouse Pointer"));
         o->tooltip(_("Enable extra mouse pointer"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = random_objects = new Fl_Check_Button(175, 170, 120, 25, _("Random Objects"));
+      { Fl_Check_Button* o = random_objects = new Fl_Check_Button(175, 170, 160, 25, _("Random Objects"));
         o->tooltip(_("Enable random scenery objects"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = panel = new Fl_Check_Button(345, 50, 120, 25, _("Panel"));
+      { Fl_Check_Button* o = panel = new Fl_Check_Button(345, 50, 140, 25, _("Panel"));
         o->tooltip(_("Enable the instrument panel"));
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = sound = new Fl_Check_Button(345, 80, 120, 25, _("Sound"));
+      { Fl_Check_Button* o = sound = new Fl_Check_Button(345, 80, 140, 25, _("Sound"));
         o->tooltip(_("Enable sound effects"));
         o->down_box(FL_DOWN_BOX);
         o->value(1);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = hud = new Fl_Check_Button(345, 110, 120, 25, _("HUD"));
+      { Fl_Check_Button* o = hud = new Fl_Check_Button(345, 110, 140, 25, _("HUD"));
         o->tooltip(_("Enable Heads Up Display"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_hud);
       }
-      { Fl_Check_Button* o = antialias_hud = new Fl_Check_Button(360, 140, 110, 25, _("Anti-alias HUD"));
+      { Fl_Check_Button* o = antialias_hud = new Fl_Check_Button(360, 140, 130, 25, _("Anti-alias HUD"));
         o->tooltip(_("Enable anti-aliased HUD"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
-      { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(345, 200, 120, 25, _("Auto-coordination"));
+      { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(345, 200, 140, 25, _("Auto-coordination"));
         o->tooltip(_("Enable auto-coordinated turns."));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = horizon_effect = new Fl_Check_Button(175, 200, 120, 25, _("Horizon effect"));
+      { Fl_Check_Button* o = horizon_effect = new Fl_Check_Button(175, 200, 160, 25, _("Horizon effect"));
         o->tooltip(_("Enable celestial body growth illusion near the horizon"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(175, 230, 120, 25, _("Enhanced lighting"));
+      { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(175, 230, 160, 25, _("Enhanced lighting"));
         o->tooltip(_("Enable enhanced runway lighting"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = distance_attenuation = new Fl_Check_Button(175, 260, 120, 25, _("Distance attenuation"));
+      { Fl_Check_Button* o = distance_attenuation = new Fl_Check_Button(175, 260, 160, 25, _("Distance attenuation"));
         o->tooltip(_("Enable runway light distance attenuation"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = hud_3d = new Fl_Check_Button(345, 170, 120, 25, _("Hud-3D"));
+      { Fl_Check_Button* o = hud_3d = new Fl_Check_Button(345, 170, 140, 25, _("Hud-3D"));
         o->tooltip(_("Enable 3D HUD"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = specular_highlight = new Fl_Check_Button(175, 290, 120, 25, _("Specular highlight"));
+      { Fl_Check_Button* o = specular_highlight = new Fl_Check_Button(175, 290, 160, 25, _("Specular highlight"));
         o->tooltip(_("Enable specular reflections on textured objects"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = failure = new Fl_Check_Button(485, 50, 120, 25, _("Failures"));
+      { Fl_Check_Button* o = failure = new Fl_Check_Button(485, 50, 150, 25, _("Failures"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_failure);
       }
-      { Fl_Check_Button* o = failure_pitot = new Fl_Check_Button(505, 75, 100, 25, _("pitot"));
+      { Fl_Check_Button* o = failure_pitot = new Fl_Check_Button(505, 75, 130, 25, _("pitot"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
-      { Fl_Check_Button* o = failure_static = new Fl_Check_Button(505, 100, 100, 25, _("static"));
+      { Fl_Check_Button* o = failure_static = new Fl_Check_Button(505, 100, 130, 25, _("static"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
-      { Fl_Check_Button* o = failure_system = new Fl_Check_Button(505, 125, 100, 25, _("system"));
+      { Fl_Check_Button* o = failure_system = new Fl_Check_Button(505, 125, 130, 25, _("system"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
-      { Fl_Check_Button* o = failure_vacuum = new Fl_Check_Button(505, 150, 100, 25, _("vacuum"));
+      { Fl_Check_Button* o = failure_vacuum = new Fl_Check_Button(505, 150, 130, 25, _("vacuum"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
-      { Fl_Check_Button* o = ai_models = new Fl_Check_Button(345, 230, 120, 25, _("AI Traffic"));
+      { Fl_Check_Button* o = ai_models = new Fl_Check_Button(345, 230, 140, 25, _("AI Traffic"));
         o->tooltip(_("Enable AI traffic"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
@@ -879,7 +862,7 @@ Advanced::Advanced() {
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
-      { Fl_Choice* o = fdm = new Fl_Choice(220, 45, 105, 25, _("FDM:"));
+      { Fl_Choice* o = fdm = new Fl_Choice(270, 45, 105, 25, _("FDM:"));
         o->tooltip(_("Core Flight Dynamics Model"));
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
@@ -887,13 +870,13 @@ Advanced::Advanced() {
         o->callback((Fl_Callback*)cb_fdm);
         o->menu(menu_fdm);
       }
-      { Fl_Check_Button* o = notrim = new Fl_Check_Button(240, 75, 85, 25, _("No Trim"));
+      { Fl_Check_Button* o = notrim = new Fl_Check_Button(290, 75, 85, 25, _("No Trim"));
         o->tooltip(_("Do not attempt to trim the model"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->deactivate();
       }
-      { Fl_Value_Input* o = model_hz = new Fl_Value_Input(220, 105, 105, 25, _("Model Hz:"));
+      { Fl_Value_Input* o = model_hz = new Fl_Value_Input(270, 105, 105, 25, _("Model Hz:"));
         o->tooltip(_("Run the FDM at this rate (iterations per second)"));
         o->labelsize(12);
         o->minimum(1);
@@ -902,7 +885,7 @@ Advanced::Advanced() {
         o->value(120);
         o->textsize(12);
       }
-      { Fl_Value_Input* o = speed = new Fl_Value_Input(220, 135, 105, 25, _("Speed:"));
+      { Fl_Value_Input* o = speed = new Fl_Value_Input(270, 135, 105, 25, _("Speed:"));
         o->tooltip(_("Run FDM faster than real time"));
         o->labelsize(12);
         o->minimum(1);
@@ -911,15 +894,15 @@ Advanced::Advanced() {
         o->value(1);
         o->textsize(12);
       }
-      { Fl_Group* o = new Fl_Group(220, 170, 105, 50);
-        { Fl_Round_Button* o = on_ground = new Fl_Round_Button(220, 170, 105, 25, _("On Ground"));
+      { Fl_Group* o = new Fl_Group(220, 170, 155, 50);
+        { Fl_Round_Button* o = on_ground = new Fl_Round_Button(270, 170, 105, 25, _("On Ground"));
           o->tooltip(_("Start at ground level"));
           o->type(102);
           o->down_box(FL_ROUND_DOWN_BOX);
           o->value(1);
           o->labelsize(12);
         }
-        { Fl_Round_Button* o = in_air = new Fl_Round_Button(220, 195, 105, 25, _("In Air"));
+        { Fl_Round_Button* o = in_air = new Fl_Round_Button(270, 195, 105, 25, _("In Air"));
           o->tooltip(_("Start in the air"));
           o->type(102);
           o->down_box(FL_ROUND_DOWN_BOX);
@@ -934,16 +917,16 @@ Advanced::Advanced() {
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
-      { Fl_Check_Button* o = freeze = new Fl_Check_Button(175, 35, 120, 25, _("Freeze"));
+      { Fl_Check_Button* o = freeze = new Fl_Check_Button(175, 35, 265, 25, _("Freeze"));
         o->tooltip(_("Start paused"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = fuel_freeze = new Fl_Check_Button(175, 65, 120, 25, _("Fuel Freeze"));
+      { Fl_Check_Button* o = fuel_freeze = new Fl_Check_Button(175, 65, 265, 25, _("Fuel Freeze"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = clock_freeze = new Fl_Check_Button(175, 95, 120, 25, _("Clock Freeze"));
+      { Fl_Check_Button* o = clock_freeze = new Fl_Check_Button(175, 95, 265, 25, _("Clock Freeze"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
@@ -953,6 +936,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Input* o = lon = new Fl_Input(225, 35, 150, 25, _("Longitude:"));
         o->tooltip(_("Initial longitude, west is negative"));
         o->labelsize(12);
@@ -1122,26 +1106,26 @@ Advanced::Advanced() {
         }
         o->end();
       }
-      { Fl_Input* o = geometry = new Fl_Input(225, 265, 120, 25, _("Geometry:"));
+      { Fl_Input* o = geometry = new Fl_Input(235, 265, 120, 25, _("Geometry:"));
         o->tooltip(_("Window geometry, WxH"));
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Input* o = visibility = new Fl_Input(225, 295, 120, 25, _("Visibility:"));
+      { Fl_Input* o = visibility = new Fl_Input(235, 295, 120, 25, _("Visibility:"));
         o->tooltip(_("Initial visibility distance"));
         o->type(1);
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Group* o = new Fl_Group(225, 320, 120, 25);
-        { Fl_Round_Button* o = vis_meters = new Fl_Round_Button(225, 320, 60, 25, _("Meters"));
+      { Fl_Group* o = new Fl_Group(225, 320, 120, 50);
+        { Fl_Round_Button* o = vis_meters = new Fl_Round_Button(235, 320, 60, 25, _("Meters"));
           o->tooltip(_("Specify visibilty in meters"));
           o->type(102);
           o->down_box(FL_ROUND_DOWN_BOX);
           o->value(1);
           o->labelsize(12);
         }
-        { Fl_Round_Button* o = vis_miles = new Fl_Round_Button(285, 320, 60, 25, _("Miles"));
+        { Fl_Round_Button* o = vis_miles = new Fl_Round_Button(235, 345, 60, 25, _("Miles"));
           o->tooltip(_("Specify visiblity in miles"));
           o->type(102);
           o->down_box(FL_ROUND_DOWN_BOX);
@@ -1149,18 +1133,18 @@ Advanced::Advanced() {
         }
         o->end();
       }
-      { Fl_Input* o = view_offset = new Fl_Input(450, 265, 120, 25, _("View Offset:"));
+      { Fl_Input* o = view_offset = new Fl_Input(490, 265, 120, 25, _("View Offset:"));
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Choice* o = bpp = new Fl_Choice(450, 295, 120, 25, _("bpp:"));
+      { Fl_Choice* o = bpp = new Fl_Choice(490, 295, 120, 25, _("bpp:"));
         o->tooltip(_("Color depth (bits per pixel)"));
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
         o->textsize(12);
         o->menu(menu_bpp);
       }
-      { Fl_Value_Input* o = fov = new Fl_Value_Input(450, 325, 120, 25, _("FOV:"));
+      { Fl_Value_Input* o = fov = new Fl_Value_Input(490, 325, 120, 25, _("FOV:"));
         o->tooltip(_("Field of View angle"));
         o->labelsize(12);
         o->minimum(1);
@@ -1175,7 +1159,7 @@ Advanced::Advanced() {
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
-      { Fl_Round_Button* o = time_match_real = new Fl_Round_Button(175, 35, 140, 25, _("Time match real"));
+      { Fl_Round_Button* o = time_match_real = new Fl_Round_Button(175, 35, 220, 25, _("Time match real"));
         o->tooltip(_("Synchronize simulation time with real time"));
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
@@ -1183,71 +1167,70 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_time_match_real);
       }
-      { Fl_Round_Button* o = time_match_local = new Fl_Round_Button(175, 65, 140, 25, _("Time match local"));
+      { Fl_Round_Button* o = time_match_local = new Fl_Round_Button(175, 65, 220, 25, _("Time match local"));
         o->tooltip(_("Synchronize simulation time with local time"));
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_time_match_local);
       }
-      { Fl_Round_Button* o = start_date_sys = new Fl_Round_Button(175, 95, 140, 25, _("Start date sys"));
+      { Fl_Round_Button* o = start_date_sys = new Fl_Round_Button(175, 95, 220, 25, _("Start date sys"));
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_start_date_sys);
       }
-      { Fl_Round_Button* o = start_date_gmt = new Fl_Round_Button(175, 125, 140, 25, _("Start date gmt"));
+      { Fl_Round_Button* o = start_date_gmt = new Fl_Round_Button(175, 125, 220, 25, _("Start date gmt"));
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_start_date_gmt);
       }
-      { Fl_Round_Button* o = start_date_lat = new Fl_Round_Button(175, 155, 140, 25, _("Start date lat"));
+      { Fl_Round_Button* o = start_date_lat = new Fl_Round_Button(175, 155, 220, 25, _("Start date lat"));
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_start_date_lat);
       }
-      { Fl_Input* o = time_offset_value = new Fl_Input(315, 35, 140, 25);
+      { Fl_Input* o = time_offset_value = new Fl_Input(400, 35, 140, 25);
         o->tooltip(_("Offset (+/-) from real time"));
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->textsize(12);
         o->when(3);
       }
-      { Fl_Input* o = start_date_sys_value = new Fl_Input(315, 95, 140, 25);
+      { Fl_Input* o = start_date_sys_value = new Fl_Input(400, 95, 140, 25);
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_start_date_sys_value);
         o->when(3);
       }
-      { Fl_Input* o = start_date_gmt_value = new Fl_Input(315, 125, 140, 25);
+      { Fl_Input* o = start_date_gmt_value = new Fl_Input(400, 125, 140, 25);
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_start_date_gmt_value);
         o->when(3);
       }
-      { Fl_Input* o = start_date_lat_value = new Fl_Input(315, 155, 140, 25);
+      { Fl_Input* o = start_date_lat_value = new Fl_Input(400, 155, 140, 25);
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_start_date_lat_value);
         o->when(3);
       }
-      { Fl_Round_Button* o = time_of_day = new Fl_Round_Button(175, 185, 140, 25, _("Time of day"));
+      { Fl_Round_Button* o = time_of_day = new Fl_Round_Button(175, 185, 220, 25, _("Time of day"));
         o->type(102);
         o->down_box(FL_ROUND_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_time_of_day);
       }
-      { Fl_Choice* o = time_of_day_value = new Fl_Choice(315, 185, 140, 25, _("choice:"));
+      { Fl_Choice* o = time_of_day_value = new Fl_Choice(400, 185, 140, 25, _("choice:"));
         o->down_box(FL_BORDER_BOX);
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->textsize(12);
-        o->menu(menu_time_of_day_value);
       }
       o->end();
     }
@@ -1256,13 +1239,13 @@ Advanced::Advanced() {
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
-      { Fl_Check_Button* o = httpd = new Fl_Check_Button(175, 35, 100, 25, _("httpd"));
+      { Fl_Check_Button* o = httpd = new Fl_Check_Button(175, 35, 130, 25, _("httpd"));
         o->tooltip(_("Enable HTTP server"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_httpd);
       }
-      { Fl_Value_Input* o = httpd_port = new Fl_Value_Input(275, 35, 100, 25);
+      { Fl_Value_Input* o = httpd_port = new Fl_Value_Input(305, 35, 100, 25);
         o->tooltip(_("HTTP server port"));
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
@@ -1273,13 +1256,13 @@ Advanced::Advanced() {
         o->when(3);
         o->deactivate();
       }
-      { Fl_Check_Button* o = props = new Fl_Check_Button(175, 65, 100, 25, _("props"));
+      { Fl_Check_Button* o = props = new Fl_Check_Button(175, 65, 130, 25, _("props"));
         o->tooltip(_("Enable property server"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_props);
       }
-      { Fl_Value_Input* o = props_port = new Fl_Value_Input(275, 65, 100, 25);
+      { Fl_Value_Input* o = props_port = new Fl_Value_Input(305, 65, 100, 25);
         o->tooltip(_("Property server port"));
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
@@ -1289,13 +1272,13 @@ Advanced::Advanced() {
         o->textsize(12);
         o->deactivate();
       }
-      { Fl_Check_Button* o = jpg_httpd = new Fl_Check_Button(175, 95, 100, 25, _("jpg-httpd"));
+      { Fl_Check_Button* o = jpg_httpd = new Fl_Check_Button(175, 95, 130, 25, _("jpg-httpd"));
         o->tooltip(_("Enable screen shot HTTP server"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_jpg_httpd);
       }
-      { Fl_Value_Input* o = jpg_httpd_port = new Fl_Value_Input(275, 95, 100, 25);
+      { Fl_Value_Input* o = jpg_httpd_port = new Fl_Value_Input(305, 95, 100, 25);
         o->tooltip(_("Screen shot HTTP server port"));
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
@@ -1343,7 +1326,7 @@ Advanced::Advanced() {
         o->textsize(12);
         o->callback((Fl_Callback*)cb_io_list);
       }
-      { Fl_Button* o = io_new = new Fl_Button(520, 185, 55, 25, _("New"));
+      { Fl_Button* o = io_new = new Fl_Button(500, 185, 75, 25, _("New"));
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_io_new);
       }
@@ -1535,7 +1518,7 @@ Advanced::Advanced() {
         o->callback((Fl_Callback*)cb_prop_delete);
         o->deactivate();
       }
-      { Fl_Input* o = prop_input = new Fl_Input(220, 185, 290, 25, _("Property:"));
+      { Fl_Input* o = prop_input = new Fl_Input(220, 185, 275, 25, _("Property:"));
         o->tooltip(_("prop=value"));
         o->labelsize(12);
         o->textsize(12);
@@ -1543,7 +1526,7 @@ Advanced::Advanced() {
         o->when(FL_WHEN_CHANGED);
         o->deactivate();
       }
-      { Fl_Button* o = new Fl_Button(520, 185, 55, 25, _("New"));
+      { Fl_Button* o = new Fl_Button(500, 185, 75, 25, _("New"));
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_New);
       }
@@ -1553,12 +1536,10 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
-      { Fl_Choice* o = log_level = new Fl_Choice(225, 45, 90, 25, _("Log Level:"));
+      { Fl_Choice* o = log_level = new Fl_Choice(260, 45, 130, 25, _("Log Level:"));
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
         o->textsize(12);
-        o->menu(menu_log_level);
       }
       { Fl_Browser* o = trace_read_list = new Fl_Browser(160, 105, 475, 80, _("Trace Read Properties"));
         o->type(2);
@@ -1567,14 +1548,14 @@ Advanced::Advanced() {
         o->callback((Fl_Callback*)cb_trace_read_list);
         o->align(FL_ALIGN_TOP_LEFT);
       }
-      { Fl_Input* o = trace_read_input = new Fl_Input(200, 195, 320, 25, _("Value:"));
+      { Fl_Input* o = trace_read_input = new Fl_Input(200, 195, 305, 25, _("Value:"));
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_trace_read_input);
         o->when(FL_WHEN_CHANGED);
         o->deactivate();
       }
-      { Fl_Button* o = new Fl_Button(530, 195, 50, 25, _("New"));
+      { Fl_Button* o = new Fl_Button(510, 195, 70, 25, _("New"));
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_New1);
       }
@@ -1590,14 +1571,14 @@ Advanced::Advanced() {
         o->callback((Fl_Callback*)cb_trace_write_list);
         o->align(FL_ALIGN_TOP_LEFT);
       }
-      { Fl_Input* o = trace_write_input = new Fl_Input(200, 355, 320, 25, _("Value:"));
+      { Fl_Input* o = trace_write_input = new Fl_Input(200, 355, 305, 25, _("Value:"));
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_trace_write_input);
         o->when(FL_WHEN_CHANGED);
         o->deactivate();
       }
-      { Fl_Button* o = new Fl_Button(530, 355, 50, 25, _("New"));
+      { Fl_Button* o = new Fl_Button(510, 355, 70, 25, _("New"));
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_New2);
       }
@@ -1619,7 +1600,7 @@ Advanced::Advanced() {
         o->textsize(12);
         o->callback((Fl_Callback*)cb_env_list);
       }
-      { Fl_Button* o = new Fl_Button(520, 185, 55, 25, _("New"));
+      { Fl_Button* o = new Fl_Button(500, 185, 75, 25, _("New"));
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_New3);
       }
@@ -1628,7 +1609,7 @@ Advanced::Advanced() {
         o->callback((Fl_Callback*)cb_env_delete);
         o->deactivate();
       }
-      { Fl_Input* o = env_input = new Fl_Input(220, 185, 295, 25, _("Value:"));
+      { Fl_Input* o = env_input = new Fl_Input(220, 185, 275, 25, _("Value:"));
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_env_input);
@@ -1685,7 +1666,6 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->minimum(1);
         o->maximum(0);
-        o->step(0.01);
       }
       { Fl_Input* o = ceiling = new Fl_Input(235, 335, 80, 25, _("Ceiling:"));
         o->tooltip(_("FT_ASL[:THICKNESS_FT]"));

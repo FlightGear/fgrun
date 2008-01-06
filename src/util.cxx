@@ -26,6 +26,7 @@
 
 #include <FL/Fl_Choice.H>
 #include <cstring>
+#include "i18n.h"
 
 int
 set_choice( Fl_Choice* c, const char* s )
@@ -41,7 +42,7 @@ set_choice( Fl_Choice* c, const char* s )
 	}
 	else if (m[i].label() != 0)
 	{
-	    if (strcmp(s, m[i].label()) == 0)
+	    if (strcmp(_(s), m[i].label()) == 0)
 	    {
 		c->value(i);
 		return 1;
