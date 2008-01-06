@@ -391,7 +391,7 @@ msgstr "Enclencher l'affichage Tête Haute"
 
 #: advanced.cxx:809
 msgid "Anti-alias HUD"
-msgstr "Affichage Tête Haute lissé"
+msgstr "Affichage lissé"
 
 #: advanced.cxx:810
 msgid "Enable anti-aliased HUD"
@@ -455,15 +455,15 @@ msgstr ""
 
 #: advanced.cxx:855
 msgid "static"
-msgstr ""
+msgstr "pression statique"
 
 #: advanced.cxx:860
 msgid "system"
-msgstr ""
+msgstr "système"
 
 #: advanced.cxx:865
 msgid "vacuum"
-msgstr ""
+msgstr "pompe à vide"
 
 #: advanced.cxx:870
 msgid "AI Traffic"
@@ -495,7 +495,9 @@ msgstr "Ne pas ajuster le modèle"
 
 #: advanced.cxx:896
 msgid "Model Hz:"
-msgstr "Fréquence du modèle(Hz):"
+msgstr ""
+"Fréquence\n"
+"du modèle(Hz):"
 
 #: advanced.cxx:897
 msgid "Run the FDM at this rate (iterations per second)"
@@ -602,7 +604,7 @@ msgstr ""
 
 #: advanced.cxx:999
 msgid "Roll:"
-msgstr ""
+msgstr "Roulis:"
 
 #: advanced.cxx:1000
 msgid "Initial roll angle, (Phi)"
@@ -892,7 +894,7 @@ msgstr ""
 #: advanced.cxx:1351 advanced.cxx:1534 advanced.cxx:1582 advanced.cxx:1605
 #: advanced.cxx:1627 wizard.cxx:360 wizard.cxx:375
 msgid "Delete"
-msgstr ""
+msgstr "Effacer"
 
 #: advanced.cxx:1356
 msgid "Protocol:"
@@ -1100,23 +1102,23 @@ msgstr ""
 
 #: wizard.cxx:295
 msgid "FlightGear Wizard"
-msgstr ""
+msgstr "Assistant FlightGear"
 
 #: wizard.cxx:299
 msgid "Select Paths"
-msgstr ""
+msgstr "Choisir les chemins"
 
 #: wizard.cxx:307 wizard.cxx:314
 msgid "Full pathname to FlightGear executable"
-msgstr ""
+msgstr "Chemin complet vers le programme exécutable FlightGear"
 
 #: wizard.cxx:320
 msgid "root data path"
-msgstr ""
+msgstr "Chemin vers le sommet des données"
 
 #: wizard.cxx:332
 msgid "Scenery directories"
-msgstr ""
+msgstr "Répertoires de scènes"
 
 #: wizard.cxx:341
 msgid "@8>"
@@ -1129,110 +1131,112 @@ msgstr ""
 #: wizard.cxx:365
 msgid "Airports Cache:"
 msgstr ""
+"Fichier cache \n"
+"des aéroports:"
 
 #: wizard.cxx:370
 msgid "Add..."
-msgstr ""
+msgstr "Ajouter..."
 
 #: wizard.cxx:371
 msgid "Add a scenery directory"
-msgstr ""
+msgstr "Ajouter un répertoire de scène"
 
 #: wizard.cxx:376
 msgid "Delete a scenery directory"
-msgstr ""
+msgstr "Enlever un répertoire de scène"
 
 #: wizard.cxx:388
 msgid "Select an aircraft"
-msgstr ""
+msgstr "Choisir un aéronef"
 
 #: wizard.cxx:400
 msgid "Preview"
-msgstr ""
+msgstr "Apperçu"
 
 #: wizard.cxx:420
 msgid "Select a location"
-msgstr ""
+msgstr "Choisir une position"
 
 #: wizard.cxx:436
 msgid "Carrier Ops"
-msgstr ""
+msgstr "Porte-avions"
 
 #: wizard.cxx:440
 msgid "Carrier : "
-msgstr ""
+msgstr "Porte-avion : "
 
 #: wizard.cxx:441
 msgid "Park pos :"
-msgstr ""
+msgstr "Position parking :"
 
 #: wizard.cxx:451
 msgid "Advanced..."
-msgstr ""
+msgstr "Avancé..."
 
 #: wizard.cxx:457
 msgid "Show command line"
-msgstr ""
+msgstr "Voir la ligne de commande"
 
 #: wizard.cxx:468
 msgid "Display"
-msgstr ""
+msgstr "Affichage"
 
 #: wizard.cxx:472
 msgid "Resolution :"
-msgstr ""
+msgstr "Résolution :"
 
 #: wizard.cxx:477
 msgid "Game mode ( Fullscreen )"
-msgstr ""
+msgstr "Mode jeu ( plein écran )"
 
 #: wizard.cxx:485
 msgid "Enhanced runway lighting"
-msgstr ""
+msgstr "Eclairage de piste amélioré"
 
 #: wizard.cxx:486
 msgid "Use with caution. It may drop your framerate dramatically"
-msgstr ""
+msgstr "Utiliser avec précautions. Cela peut ralentir significativement le taux de rafraichissement écran"
 
 #: wizard.cxx:497
 msgid "3D clouds (experimental)"
-msgstr ""
+msgstr "Nuages 3D (expérimental)"
 
 #: wizard.cxx:507
 msgid "Random objects"
-msgstr ""
+msgstr "Objets aléatoires"
 
 #: wizard.cxx:511
 msgid "AI models"
-msgstr ""
+msgstr "Modèles d'IA"
 
 #: wizard.cxx:515
 msgid "Time of day :"
-msgstr ""
+msgstr "Heure de la journée :"
 
 #: wizard.cxx:524
 msgid "Real weather fetch"
-msgstr ""
+msgstr "Météo réelle"
 
 #: wizard.cxx:532
 msgid "Scenario :"
-msgstr ""
+msgstr "Scénario :"
 
 #: wizard.cxx:540
 msgid "button"
-msgstr ""
+msgstr "bouton"
 
 #: wizard.cxx:551
 msgid "Atlas"
-msgstr ""
+msgstr "Atlas"
 
 #: wizard.cxx:556 wizard.cxx:578
 msgid "Hostname :"
-msgstr ""
+msgstr "Serveur :"
 
 #: wizard.cxx:557
 msgid "Hostname"
-msgstr ""
+msgstr "Machine hébergeant Atlas"
 
 #: wizard.cxx:562
 msgid ":"
@@ -1240,84 +1244,84 @@ msgstr ""
 
 #: wizard.cxx:569
 msgid "Multiplayer"
-msgstr ""
+msgstr "Multijoueur"
 
 #: wizard.cxx:574
 msgid "Callsign :"
-msgstr ""
+msgstr "Indicatif :"
 
 #: wizard.cxx:579
 msgid "Peer hostname"
-msgstr ""
+msgstr "hôte partenaire"
 
 #: wizard.cxx:583
 msgid "in :"
-msgstr ""
+msgstr "entrée :"
 
 #: wizard.cxx:584
 msgid "Input port number"
-msgstr ""
+msgstr "Numéro de port IP en entrée"
 
 #: wizard.cxx:587
 msgid "out :"
-msgstr ""
+msgstr "sortie :"
 
 #: wizard.cxx:588
 msgid "Output port number"
-msgstr ""
+msgstr "Numéro de port IP en sortie"
 
 #: wizard.cxx:613 wizard_funcs.cxx:217 wizard_funcs.cxx:604
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 #: wizard.cxx:617
 msgid "Prev"
-msgstr ""
+msgstr "Précédent"
 
 #: wizard.cxx:621
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
 #: wizard.cxx:628
 msgid "Defaults"
-msgstr ""
+msgstr "Remise à Zéro"
 
 #: wizard.cxx:639
 msgid "FlightGear running..."
-msgstr ""
+msgstr "FlightGear en exécution..."
 
 #: wizard.cxx:643
 msgid "FlightGear has been started"
-msgstr ""
+msgstr "FlighGear a été démarré"
 
 #: wizard.cxx:648
 msgid "Please wait..."
-msgstr ""
+msgstr "Attendre SVP..."
 
 #: wizard.cxx:651
 msgid "To change aircraft, exit FlightGear and return to this launcher"
-msgstr ""
+msgstr "Pour changer d'aéronef, sortir de FlightGear et revenir à cet assistant"
 
 #: wizard_funcs.cxx:256
 msgid "Log Window"
-msgstr ""
+msgstr "Fenêtre journal"
 
 #: wizard_funcs.cxx:359
 msgid "Failed to load 3D model"
-msgstr ""
+msgstr "Echec lors du chargement du modèle 3D"
 
 #: wizard_funcs.cxx:399
 msgid "Failed to load submodel: "
-msgstr ""
+msgstr "Echec lors du chargement d'un modèle secondaire"
 
 #: wizard_funcs.cxx:453
 #, possible-c-format
 msgid "Model not found: '%s'"
-msgstr ""
+msgstr "Modèle non trouvé : '%s'"
 
 #: wizard_funcs.cxx:485
 msgid "Property '/sim/model/path' not found"
-msgstr ""
+msgstr "Propriété '/sim/model/path' non trouvée"
 
 #: wizard_funcs.cxx:551 AirportBrowser.cxx:332 fgfsrc.cxx:95
 msgid "<default>"
@@ -1325,27 +1329,27 @@ msgstr ""
 
 #: wizard_funcs.cxx:596
 msgid "Run"
-msgstr ""
+msgstr "Lancer"
 
 #: wizard_funcs.cxx:619
 msgid "About to reset current parameters"
-msgstr ""
+msgstr "Prêt à mettre à zéro les paramètres courants"
 
 #: wizard_funcs.cxx:619 fgfsrc.cxx:61
 msgid "Abort"
-msgstr ""
+msgstr "Abandonner"
 
 #: wizard_funcs.cxx:619
 msgid "Reset"
-msgstr ""
+msgstr "Remise à zéro"
 
 #: wizard_funcs.cxx:633
 msgid "Select FlightGear executable"
-msgstr ""
+msgstr "Choisir le fichier exécutable de FlightGear"
 
 #: wizard_funcs.cxx:690
 msgid "Select FG_ROOT directory"
-msgstr ""
+msgstr "Choisir le répertoire FG_ROOT"
 
 #: wizard_funcs.cxx:907
 #, possible-c-format
@@ -1353,79 +1357,81 @@ msgid ""
 "Unable to delete '%s':\n"
 "%s"
 msgstr ""
+"Impossible de supprimer '%s':\n"
+"%s"
 
 #: wizard_funcs.cxx:937
 msgid "Select FG_SCENERY directory"
-msgstr ""
+msgstr "Choisir le répertoire FG_SCENERY"
 
 #: wizard_funcs.cxx:1154
 msgid "Description of "
-msgstr ""
+msgstr "Description de "
 
 #: advanced_funcs.cxx:129
 msgid "Select browser"
-msgstr ""
+msgstr "Choisir un navigateur"
 
 #: advanced_funcs.cxx:184
 msgid "Select a preferences file"
-msgstr ""
+msgstr "Choisir un fichier de préférence"
 
 #: advanced_funcs.cxx:185
 msgid "XML Files(*.xml)"
-msgstr ""
+msgstr "Fichiers XML(*.xml)"
 
 #: AirportBrowser.cxx:79
 msgid "Runways"
-msgstr ""
+msgstr "Pistes"
 
 #: AirportBrowser.cxx:82
 msgid "Refresh"
-msgstr ""
+msgstr "Rafraîchir"
 
 #: AirportBrowser.cxx:85
 msgid "Reload airports"
-msgstr ""
+msgstr "Recharcher les aéroports"
 
 #: AirportBrowser.cxx:394
 msgid "gzopen error"
-msgstr ""
+msgstr "Erreur gzopen"
 
 #: AirportTable.cxx:121
 msgid "ICAO Id"
-msgstr ""
+msgstr "Code OACI"
 
 #: AirportTable.cxx:121
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: fgfsrc.cxx:61
 #, possible-c-format
 msgid "About to overwrite %s."
-msgstr ""
+msgstr "Prêt à écraser %s"
 
 #: fgfsrc.cxx:61
 msgid "Overwrite"
-msgstr ""
+msgstr "Ecraser"
 
 #: logwin.cxx:32
 msgid "&File"
-msgstr ""
+msgstr "&Fichier"
 
 #: logwin.cxx:33
 msgid "&Save"
-msgstr ""
+msgstr "&Sauver"
 
 #: logwin.cxx:34
 msgid "&Close"
-msgstr ""
+msgstr "Fer&mer"
 
 #: logwin.cxx:99
 msgid "Save file as?"
-msgstr ""
+msgstr "Sauver sous ?"
 
 #: io.cxx:258
 msgid "Select protocol file"
-msgstr ""
+msgstr "Choisir un fichier de protocole"
 
 #: main.cxx:103
 #, possible-c-format
@@ -1438,3 +1444,10 @@ msgid ""
 " -f, --fullscreen\n"
 "%s"
 msgstr ""
+"Les options sont:\n"
+" --silent\n"
+" --fg-exe=<PATH>\n"
+" --fg-root=<DIR>\n"
+" --fg-scenery=<DIR>\n"
+" -f, --fullscreen\n"
+"%s"
