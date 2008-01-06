@@ -27,7 +27,7 @@
 #  include "config.h"
 #endif
 
-#if not defined( ENABLE_NLS )
+#if !defined( ENABLE_NLS )
 
 #define _(String) (String)
 #define N_(String) String
