@@ -364,7 +364,7 @@ Advanced::load_settings( Fl_Preferences& prefs )
     freeze->value(iVal);
     prefs.get("fuel_freeze", iVal, 0);
     fuel_freeze->value(iVal);
-    prefs.get("clockfreeze", iVal, 0);
+    prefs.get("clock_freeze", iVal, 0);
     clock_freeze->value(iVal);
 
     prefs.get("lon", buf, "", buflen-1);

@@ -214,7 +214,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--enable-freeze";
     if (prefs.get( "fuel_freeze", iVal, 0 ) && iVal)
 	os << pfx << "--enable-fuel-freeze";
-    if (prefs.get( "clockfreeze", iVal, 0 ) && iVal)
+    if (prefs.get( "clock_freeze", iVal, 0 ) && iVal)
 	os << pfx << "--enable-clock-freeze";
 	
     // Initial position and orientation.
