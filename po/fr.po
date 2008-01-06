@@ -978,7 +978,9 @@ msgstr "Déboguage"
 
 #: advanced.cxx:1548
 msgid "Log Level:"
-msgstr "Niveau de messages"
+msgstr ""
+"Niveau de \n"
+"messages :"
 
 #: advanced.cxx:1554
 msgid "Trace Read Properties"
