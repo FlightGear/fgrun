@@ -109,11 +109,11 @@ Fl_Menu_Item Advanced::menu_time_of_day_value[] = {
 };
 
 Fl_Menu_Item Advanced::menu_log_level[] = {
- {_("bulk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("debug"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("info"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("warn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("alert"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("bulk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("debug"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("info"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("warn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("alert"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

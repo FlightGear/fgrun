@@ -66,10 +66,10 @@ extern string def_fg_root;
 extern string def_fg_scenery;
 
 Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
- {_("noon"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("dusk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("midnight"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("dawn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("noon"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dusk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("midnight"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dawn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
