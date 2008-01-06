@@ -1,8 +1,10 @@
-SUBDIRS = src
+SUBDIRS = src po
 
-EXTRA_DIST = \
+EXTRA_DIST = config.rpath m4/ChangeLog  \
 	fgrun.prefs \
 	autogen.sh \
 	fgrun.dsw fgrun.dsp \
 	fgrun.sln fgrun.vcproj \
 	plib.m4
+
+ACLOCAL_AMFLAGS = -I m4

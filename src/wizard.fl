@@ -504,7 +504,7 @@ class Wizard {open
           private xywh {15 50 425 25} labelfont 1
         }
         Fl_Box {} {
-          label {To change aircraft, exit FlightGear and return to this launcher} selected
+          label {To change aircraft, exit FlightGear and return to this launcher}
           private xywh {95 90 265 50} labelfont 1 align 128
         }
       }

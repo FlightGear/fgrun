@@ -230,7 +230,9 @@ AC_TRY_LINK([
 
 AC_LANG_POP
 
-AC_CONFIG_FILES([
+AM_GNU_GETTEXT([external])
+
+AC_CONFIG_FILES([ po/Makefile.in
 Makefile
 src/Makefile
 ])

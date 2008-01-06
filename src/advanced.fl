@@ -6,7 +6,7 @@ i18n_include "i18n.h"
 i18n_function _ 
 header_name {.h} 
 code_name {.cxx}
-declblock {\#if HAVE_CONFIG_H} {open after {\#endif}
+declblock {\#ifdef HAVE_CONFIG_H} {open after {\#endif}
 } {
   decl {\#include <config.h>} {}
 } 
@@ -329,7 +329,7 @@ else
           private tooltip {Initial altitude in feet} xywh {225 95 150 25} type Float labelsize 12 textsize 12
         }
         Fl_Input vc {
-          label {Airspeed:} selected
+          label {Airspeed:}
           private tooltip {Initial airspeed in knots} xywh {225 215 150 25} type Float labelsize 12 textsize 12
         }
         Fl_Input uBody {
@@ -1111,7 +1111,7 @@ else
         }
         Fl_Value_Slider turbulence {
           label Turbulence
-          private tooltip {calm (0.0) to severe (1.0)} xywh {430 35 25 275} labelsize 12 minimum 1 maximum 0
+          private tooltip {calm (0.0) to severe (1.0)} xywh {430 35 25 275} labelsize 12 minimum 1 maximum 0 step 0.01
         }
         Fl_Input ceiling {
           label {Ceiling:}

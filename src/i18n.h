@@ -23,16 +23,24 @@
 #ifndef i18n_h_included
 #define i18n_h_included
 
-#if 0
+#if defined( HAVE_CONFIG_H ) && !defined( VERSION )
+#  include "config.h"
+#endif
+
+#if not defined( ENABLE_NLS )
+
 #define _(String) (String)
 #define N_(String) String
 #define textdomain(Domain)
 #define bindtextdomain(Package, Directory)
+
 #else
+
 #include <libintl.h>
 #define _(String) gettext (String)
 #define gettext_noop(String) String
 #define N_(String) gettext_noop (String)
+
 #endif
 
 #endif
