@@ -117,6 +117,16 @@ Fl_Menu_Item Advanced::menu_log_level[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+Fl_Menu_Item Advanced::menu_cloud_coverage_[] = {
+ {N_("overcast"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("broken"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("scattered"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("few"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("cirrus"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("clear"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 13, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void
 Advanced::init()
 {
@@ -131,6 +141,12 @@ Advanced::init()
         menu_log_level[i].text = _( menu_log_level[i].text );
     }
     log_level->menu(menu_log_level);
+
+    for ( int i = 0; menu_cloud_coverage_[i].text != 0; ++i )
+    {
+        menu_cloud_coverage_[i].text = _( menu_cloud_coverage_[i].text );
+    }
+    cloud_coverage_->menu(menu_cloud_coverage_);
 
     page_list->add(_("General"));
     page_list->add(_("Features"));

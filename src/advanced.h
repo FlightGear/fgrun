@@ -314,7 +314,6 @@ private:
   Fl_Choice *cloud_coverage_;
   void cb_cloud_coverage__i(Fl_Choice*, void*);
   static void cb_cloud_coverage_(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_cloud_coverage_[];
   Fl_Value_Input *cloud_span_;
   void cb_cloud_span__i(Fl_Value_Input*, void*);
   static void cb_cloud_span_(Fl_Value_Input*, void*);
@@ -354,11 +353,10 @@ private:
   std::string airport_id_;
   void random_wind_cb();
   static Fl_Menu_Item menu_time_of_day_value[];
+  static Fl_Menu_Item menu_log_level[];
+  static Fl_Menu_Item menu_cloud_coverage_[];
 public:
   static const char *time_of_day_rvalue(Fl_Choice *time_of_day_value);
-private:
-  static Fl_Menu_Item menu_log_level[];
-public:
   const char *log_level_rvalue();
 };
 #endif

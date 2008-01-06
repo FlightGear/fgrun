@@ -638,16 +638,6 @@ void Advanced::cb_cloud_coverage_(Fl_Choice* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_cloud_coverage__i(o,v);
 }
 
-Fl_Menu_Item Advanced::menu_cloud_coverage_[] = {
- {_("overcast"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("broken"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("scattered"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("few"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("cirrus"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("clear"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 13, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void Advanced::cb_cloud_span__i(Fl_Value_Input*, void*) {
   cloud_span[ cloud_layer_->value() ] = cloud_span_->value();
 }
@@ -1536,6 +1526,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Choice* o = log_level = new Fl_Choice(260, 45, 130, 25, _("Log Level:"));
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
@@ -1681,7 +1672,6 @@ Advanced::Advanced() {
     { Fl_Group* o = page[14] = new Fl_Group(150, 0, 490, 430, _("Clouds"));
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Choice* o = cloud_layer_ = new Fl_Choice(255, 80, 120, 25, _("Layer:"));
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
@@ -1708,7 +1698,6 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_cloud_coverage_);
-        o->menu(menu_cloud_coverage_);
       }
       { Fl_Value_Input* o = cloud_span_ = new Fl_Value_Input(255, 200, 120, 25, _("Span (m):"));
         o->labelsize(12);
