@@ -132,24 +132,36 @@ class Wizard {open
           }
         }
         Fl_Group {page[1]} {
-          label {Select an aircraft}
-          private xywh {0 0 800 560} labelfont 1 align 21 hide
+          label {Select an aircraft} open
+          private xywh {0 0 800 560} labelfont 1 align 21
         } {
-          Fl_Tile {} {open
-            xywh {0 20 795 535} resizable
+          Fl_Tile {} {
+            xywh {0 20 795 500} resizable
           } {
             Fl_Browser aircraft {
               callback {preview_aircraft();}
-              private xywh {5 20 200 535} type Hold labelsize 12 align 1 textsize 12
+              private xywh {5 20 200 500} type Hold labelsize 12 align 1 textsize 12
             }
             Fl_Box preview {
               label Preview
-              private xywh {205 20 590 535} box THIN_DOWN_BOX labelsize 12
+              private xywh {205 20 590 500} box THIN_DOWN_BOX labelsize 12
               code0 {\#include "Fl_Plib.h"}
               class Fl_Plib
             }
             Fl_Box {} {
               xywh {80 190 265 65} hide resizable
+            }
+          }
+          Fl_Group {} {open
+            xywh {5 520 790 35} box DOWN_BOX
+          } {
+            Fl_Output aircraft_status {
+              label {Status :}
+              xywh {115 525 135 25}
+            }
+            Fl_Output aircraft_author {
+              label {Author(s) :} selected
+              xywh {385 525 405 25} resizable
             }
           }
         }
@@ -179,8 +191,8 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {open
-          private xywh {0 0 800 560}
+        Fl_Group {page[3]} {
+          private xywh {0 0 800 560} hide
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -208,7 +220,7 @@ class Wizard {open
           } {
             Fl_Choice resolution {
               label {Resolution :}
-              callback {resolution_cb();} open selected
+              callback {resolution_cb();} open
               private tooltip {Window geometry, WxH} xywh {100 30 125 25} down_box BORDER_BOX
             } {
               MenuItem {} {

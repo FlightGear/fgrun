@@ -394,16 +394,15 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[1] = new Fl_Group(0, 0, 800, 560, _("Select an aircraft"));
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        o->hide();
-        { Fl_Tile* o = new Fl_Tile(0, 20, 795, 535);
-          { Fl_Browser* o = aircraft = new Fl_Browser(5, 20, 200, 535);
+        { Fl_Tile* o = new Fl_Tile(0, 20, 795, 500);
+          { Fl_Browser* o = aircraft = new Fl_Browser(5, 20, 200, 500);
             o->type(2);
             o->labelsize(12);
             o->textsize(12);
             o->callback((Fl_Callback*)cb_aircraft);
             o->align(FL_ALIGN_TOP);
           }
-          { Fl_Plib* o = preview = new Fl_Plib(205, 20, 590, 535, _("Preview"));
+          { Fl_Plib* o = preview = new Fl_Plib(205, 20, 590, 500, _("Preview"));
             o->box(FL_THIN_DOWN_BOX);
             o->color(FL_BACKGROUND_COLOR);
             o->selection_color(FL_BACKGROUND_COLOR);
@@ -420,6 +419,14 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           }
           o->end();
           Fl_Group::current()->resizable(o);
+        }
+        { Fl_Group* o = new Fl_Group(5, 520, 790, 35);
+          o->box(FL_DOWN_BOX);
+          aircraft_status = new Fl_Output(115, 525, 135, 25, _("Status :"));
+          { Fl_Output* o = aircraft_author = new Fl_Output(385, 525, 405, 25, _("Author(s) :"));
+            Fl_Group::current()->resizable(o);
+          }
+          o->end();
         }
         o->end();
       }
@@ -453,6 +460,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->end();
       }
       { Fl_Group* o = page[3] = new Fl_Group(0, 0, 800, 560);
+        o->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(705, 525, 90, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);

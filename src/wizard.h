@@ -66,6 +66,10 @@ private:
   void cb_aircraft_i(Fl_Browser*, void*);
   static void cb_aircraft(Fl_Browser*, void*);
   Fl_Plib *preview;
+public:
+  Fl_Output *aircraft_status;
+  Fl_Output *aircraft_author;
+private:
   AirportBrowser *airports_;
 public:
   Fl_Input *carrier_;

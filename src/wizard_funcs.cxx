@@ -73,6 +73,19 @@ Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+// This array is not used in the code but is there to put possible status in the translation file
+// Put here all possible variations
+static const char *aircraft_status_[] = {
+    N_("production"),
+    N_("early-production"),
+    N_("early production"),
+    N_("beta"),
+    N_("alpha"),
+    N_("Development"),
+    N_("developement"),
+    0
+};
+
 /**
  * Make an offset matrix from rotations and position offset.
  */
@@ -95,6 +108,8 @@ struct AircraftData
     SGPropertyNode props;
     string name;
     string desc;
+    string status;
+    string author;
 };
 
 static bool
@@ -504,6 +519,9 @@ Wizard::preview_aircraft()
 	return;
     }
 
+    aircraft_status->value( _( data->status.c_str() ) );
+    aircraft_author->value( data->author.c_str() );
+
     next->activate();
 }
 
@@ -858,6 +876,9 @@ Wizard::aircraft_update()
 		//data->props = props;
 		data->name = ss;
                 data->desc = desc;
+                data->status = props.getStringValue( "/sim/status" );
+                if ( data->status.empty() ) data->status = _( "Unknown" );
+                data->author = props.getStringValue( "/sim/author" );
                 am[name].push_back( data );
             }
         }
