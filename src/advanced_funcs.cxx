@@ -101,29 +101,36 @@ Advanced::list_update_cb( Fl_Browser* browser,
 }
 
 Fl_Menu_Item Advanced::menu_time_of_day_value[] = {
- {N_("noon"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("dusk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("midnight"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("dawn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("noon"), 0,  0, "noon", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dusk"), 0,  0, "dusk", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("midnight"), 0,  0, "midnight", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dawn"), 0,  0, "dawn", 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
 Fl_Menu_Item Advanced::menu_log_level[] = {
- {N_("bulk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("debug"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("info"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("warn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("alert"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("bulk"), 0,  0, "bulk", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("debug"), 0,  0, "debug", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("info"), 0,  0, "info", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("warn"), 0,  0, "warn", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("alert"), 0,  0, "alert", 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
 Fl_Menu_Item Advanced::menu_cloud_coverage_[] = {
- {N_("overcast"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("broken"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("scattered"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("few"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("cirrus"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("clear"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 13, 0},
+ {N_("overcast"), 0,  0, "overcast", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("broken"), 0,  0, "broken", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("scattered"), 0,  0, "scattered", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("few"), 0,  0, "few", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("cirrus"), 0,  0, "cirrus", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("clear"), 0,  0, "clear", 0, FL_NORMAL_LABEL, 0, 13, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+Fl_Menu_Item Advanced::menu_control[] = {
+ {N_("joystick"), 0,  0, "joystick", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("keyboard"), 0,  0, "keyboard", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("mouse"), 0,  0, "mouse", 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -147,6 +154,12 @@ Advanced::init()
         menu_cloud_coverage_[i].text = _( menu_cloud_coverage_[i].text );
     }
     cloud_coverage_->menu(menu_cloud_coverage_);
+
+    for ( int i = 0; menu_control[i].text != 0; ++i )
+    {
+        menu_control[i].text = _( menu_control[i].text );
+    }
+    control->menu(menu_control);
 
     page_list->add(_("General"));
     page_list->add(_("Features"));
@@ -248,28 +261,4 @@ Advanced::random_wind_cb()
 	wind_dial->activate();
 	wind_speed->activate();
     }
-}
-
-const char *
-Advanced::time_of_day_rvalue(Fl_Choice *time_of_day_value)
-{
-    static const char *codes[] = { "noon", "dawn", "dusk", "midnight", 0 };
-    for ( int i = 0; codes[i] != 0; ++i )
-    {
-        if ( strcmp( time_of_day_value->text(), _( codes[i] ) ) == 0 )
-            return codes[i];
-    }
-    return codes[0];
-}
-
-const char *
-Advanced::log_level_rvalue()
-{
-    static const char *codes[] = { "bulk", "debug", "info", "warn", "alert", 0 };
-    for ( int i = 0; codes[i] != 0; ++i )
-    {
-        if ( strcmp( log_level->text(), _( codes[i] ) ) == 0 )
-            return codes[i];
-    }
-    return codes[0];
 }

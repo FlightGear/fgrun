@@ -29,7 +29,6 @@ private:
   static void cb_page_list(Fl_Browser*, void*);
   Fl_Button *button[2];
   Fl_Choice *control;
-  static Fl_Menu_Item menu_control[];
   Fl_Input *lang;
   Fl_Input *browser;
   void cb__i(Fl_Button*, void*);
@@ -355,8 +354,6 @@ private:
   static Fl_Menu_Item menu_time_of_day_value[];
   static Fl_Menu_Item menu_log_level[];
   static Fl_Menu_Item menu_cloud_coverage_[];
-public:
-  static const char *time_of_day_rvalue(Fl_Choice *time_of_day_value);
-  const char *log_level_rvalue();
+  static Fl_Menu_Item menu_control[];
 };
 #endif

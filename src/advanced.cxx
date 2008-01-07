@@ -14,13 +14,6 @@ void Advanced::cb_page_list(Fl_Browser* o, void* v) {
   ((Advanced*)(o->parent()->user_data()))->cb_page_list_i(o,v);
 }
 
-Fl_Menu_Item Advanced::menu_control[] = {
- {_("joystick"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("keyboard"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("mouse"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void Advanced::cb__i(Fl_Button*, void*) {
   fg_browser_cb();
 }
@@ -680,7 +673,6 @@ Advanced::Advanced() {
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
         o->textsize(12);
-        o->menu(menu_control);
       }
       { Fl_Input* o = lang = new Fl_Input(250, 220, 80, 25, _("Language:"));
         o->labelsize(12);

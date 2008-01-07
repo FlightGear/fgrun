@@ -71,7 +71,7 @@ void
 Advanced::save_settings( Fl_Preferences& prefs )
 {
     prefs.set( "browser", browser->value() );
-    prefs.set( "control", control->text() );
+    prefs.set( "control", (const char *)control->mvalue()->user_data_ );
     prefs.set( "lang", lang->value());
     prefs.set( "config", config->value() );
 
@@ -161,7 +161,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("start-date-lat", start_date_lat->value());
     prefs.set("start-date-lat-value", start_date_gmt_value->value());
     prefs.set("time_of_day", time_of_day->value());
-    prefs.set("time_of_day_value", time_of_day_rvalue(time_of_day_value));
+    prefs.set("time_of_day_value", (const char *)time_of_day_value->mvalue()->user_data_);
 
     // Network options.
     prefs.set("httpd", httpd->value() ? int(httpd_port->value()) : 0);
@@ -191,7 +191,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     for (i = 1; i <= env_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("env-var-%d", i), env_list->text(i));
 
-    prefs.set( "log-level", log_level_rvalue() );
+    prefs.set( "log-level", (const char *)log_level->mvalue()->user_data_ );
     prefs.set("trace-read-count", trace_read_list->size());
     for (i = 1; i <= trace_read_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("trace-read-%d", i),

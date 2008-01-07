@@ -22,7 +22,7 @@ decl {\#include <string>} {public
 decl {\#define MAX_CLOUD_LAYERS 5} {public
 } 
 
-class Advanced {open selected
+class Advanced {open
 } {
   Function {Advanced()} {open
   } {
@@ -45,26 +45,13 @@ class Advanced {open selected
         private xywh {490 450 70 25} labelsize 12
       }
       Fl_Group {page[0]} {
-        label General
+        label General open
         private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Choice control {
-          label {Control:}
+          label {Control:} open selected
           private tooltip {Primary control mode} xywh {250 175 150 25} down_box BORDER_BOX labelsize 12 textsize 12
-        } {
-          MenuItem {} {
-            label joystick
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label keyboard
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label mouse
-            private xywh {0 0 100 20} labelsize 12
-          }
-        }
+        } {}
         Fl_Input lang {
           label {Language:}
           private xywh {250 220 80 25} labelsize 12 textsize 12
@@ -1085,7 +1072,7 @@ else
         }
       }
       Fl_Group {page[14]} {
-        label Clouds open
+        label Clouds
         private xywh {150 0 490 430} labelfont 1 align 21
       } {
         Fl_Choice cloud_layer_ {
@@ -1178,8 +1165,5 @@ else
   decl {static Fl_Menu_Item menu_time_of_day_value[];} {}
   decl {static Fl_Menu_Item menu_log_level[];} {}
   decl {static Fl_Menu_Item menu_cloud_coverage_[];} {}
-  decl {static const char *time_of_day_rvalue(Fl_Choice *time_of_day_value);} {public
-  }
-  decl {const char *log_level_rvalue();} {public
-  }
+  decl {static Fl_Menu_Item menu_control[];} {}
 } 

@@ -66,10 +66,10 @@ extern string def_fg_root;
 extern string def_fg_scenery;
 
 Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
- {N_("noon"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("dusk"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("midnight"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("dawn"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("noon"), 0,  0, "noon", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dusk"), 0,  0, "dusk", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("midnight"), 0,  0, "midnight", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dawn"), 0,  0, "dawn", 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -1142,7 +1142,7 @@ Wizard::time_of_day_cb()
 void
 Wizard::time_of_day_value_cb()
 {
-    prefs.set("time_of_day_value", Advanced::time_of_day_rvalue(time_of_day_value));
+    prefs.set("time_of_day_value", (const char *)time_of_day_value->mvalue()->user_data_);
     update_options();
 }
 
