@@ -208,8 +208,8 @@ class Wizard {open
           } {
             Fl_Choice resolution {
               label {Resolution :}
-              callback {resolution_cb();} open
-              private xywh {100 30 125 25} down_box BORDER_BOX
+              callback {resolution_cb();} open selected
+              private tooltip {Window geometry, WxH} xywh {100 30 125 25} down_box BORDER_BOX
             } {
               MenuItem {} {
                 label 640x480
@@ -261,8 +261,9 @@ class Wizard {open
               private xywh {470 10 205 20} down_box DOWN_BOX
             }
             Fl_Choice bpp {
-              label {bpp :} open
-              xywh {100 55 125 25} down_box BORDER_BOX
+              label {bpp :}
+              callback {bpp_cb();} open
+              tooltip {Color depth (bits per pixel)} xywh {100 55 125 25} down_box BORDER_BOX
             } {
               MenuItem {} {
                 label 32
@@ -298,7 +299,7 @@ class Wizard {open
               private xywh {180 120 170 25} down_box DOWN_BOX
             }
             Fl_Choice time_of_day_value {
-              callback {time_of_day_value_cb();} open selected
+              callback {time_of_day_value_cb();} open
               private xywh {345 120 120 25} down_box BORDER_BOX
             } {}
             Fl_Check_Button real_weather_fetch {
@@ -458,6 +459,7 @@ class Wizard {open
   decl {Fl_Pixmap folder_open_pixmap} {}
   decl {void update_options();} {}
   decl {void resolution_cb();} {}
+  decl {void bpp_cb();} {}
   decl {void game_mode_cb();} {}
   decl {void horizon_effect_cb();} {}
   decl {void enhanced_lighting_cb();} {}

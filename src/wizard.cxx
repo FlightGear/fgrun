@@ -149,6 +149,13 @@ void Wizard::cb_clouds_3d(Fl_Check_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_clouds_3d_i(o,v);
 }
 
+void Wizard::cb_bpp_i(Fl_Choice*, void*) {
+  bpp_cb();
+}
+void Wizard::cb_bpp(Fl_Choice* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_bpp_i(o,v);
+}
+
 Fl_Menu_Item Wizard::menu_bpp[] = {
  {_("32"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {_("24"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -469,6 +476,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->labelfont(1);
           o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
           { Fl_Choice* o = resolution = new Fl_Choice(100, 30, 125, 25, _("Resolution :"));
+            o->tooltip(_("Window geometry, WxH"));
             o->down_box(FL_BORDER_BOX);
             o->callback((Fl_Callback*)cb_resolution);
             o->menu(menu_resolution);
@@ -498,7 +506,9 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             o->callback((Fl_Callback*)cb_clouds_3d);
           }
           { Fl_Choice* o = bpp = new Fl_Choice(100, 55, 125, 25, _("bpp :"));
+            o->tooltip(_("Color depth (bits per pixel)"));
             o->down_box(FL_BORDER_BOX);
+            o->callback((Fl_Callback*)cb_bpp);
             o->menu(menu_bpp);
           }
           o->end();

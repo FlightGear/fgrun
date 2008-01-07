@@ -98,8 +98,10 @@ private:
   static void cb_clouds_3d(Fl_Check_Button*, void*);
 public:
   Fl_Choice *bpp;
-  static Fl_Menu_Item menu_bpp[];
 private:
+  void cb_bpp_i(Fl_Choice*, void*);
+  static void cb_bpp(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_bpp[];
   Fl_Check_Button *random_objects;
   void cb_random_objects_i(Fl_Check_Button*, void*);
   static void cb_random_objects(Fl_Check_Button*, void*);
@@ -206,6 +208,7 @@ private:
   Fl_Pixmap folder_open_pixmap;
   void update_options();
   void resolution_cb();
+  void bpp_cb();
   void game_mode_cb();
   void horizon_effect_cb();
   void enhanced_lighting_cb();

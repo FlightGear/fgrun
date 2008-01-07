@@ -418,7 +418,7 @@ Advanced::load_settings( Fl_Preferences& prefs )
     visibility->value(buf);
     prefs.get("view-offset", buf, "", buflen-1);
     view_offset->value(buf);
-    prefs.get("bpp", buf, "16", buflen-1);
+    prefs.get("bpp", buf, "32", buflen-1);
     set_choice( bpp, buf );
     prefs.get("fov", dVal, 60.0 );
     fov->value( dVal );

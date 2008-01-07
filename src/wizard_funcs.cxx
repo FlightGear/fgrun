@@ -1062,6 +1062,13 @@ Wizard::resolution_cb()
 }
 
 void
+Wizard::bpp_cb()
+{
+    prefs.set("bpp", bpp->text());
+    update_options();
+}
+
+void
 Wizard::game_mode_cb()
 {
     prefs.set("game_mode", game_mode->value());
@@ -1425,6 +1432,9 @@ Wizard::update_basic_options()
 	}
 	resolution->value(i);
     }
+
+    prefs.get("bpp", buf, "32", buflen-1);
+    set_choice( bpp, buf );
 
     int iVal;
     prefs.get("game_mode", iVal, 0);
