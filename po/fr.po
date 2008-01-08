@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-07 22:34+0100\n"
+"POT-Creation-Date: 2008-01-08 08:51+0100\n"
 "PO-Revision-Date: 2008-01-05 19:05+0100\n"
 "Last-Translator: <fredb@users.sourceforge.net>\n"
 "Language-Team: French\n"
@@ -1214,7 +1214,7 @@ msgstr "Numéro de port IP en sortie"
 msgid "Prev"
 msgstr "Précédent"
 
-#: wizard.cxx:634 wizard_funcs.cxx:241 wizard_funcs.cxx:640
+#: wizard.cxx:634 wizard_funcs.cxx:247 wizard_funcs.cxx:647
 msgid "Next"
 msgstr "Suivant"
 
@@ -1272,22 +1272,47 @@ msgid "early production"
 msgstr "Préproduction"
 
 #: wizard_funcs.cxx:82
-msgid "beta"
-msgstr "Beta"
+msgid "Early production"
+msgstr "Préproduction"
 
 #: wizard_funcs.cxx:83
+msgid "beta"
+msgstr "Béta"
+
+#: wizard_funcs.cxx:84
 msgid "alpha"
 msgstr "Alpha"
 
-#: wizard_funcs.cxx:84
+#: wizard_funcs.cxx:85
+msgid "early alpha"
+msgstr "Pré alpha"
+
+#: wizard_funcs.cxx:86
 msgid "Development"
 msgstr "Développement"
 
-#: wizard_funcs.cxx:85
+#: wizard_funcs.cxx:87
 msgid "developement"
 msgstr "Développement"
 
-#: wizard_funcs.cxx:157
+#: wizard_funcs.cxx:88
+msgid "development"
+msgstr "Développement"
+
+#: wizard_funcs.cxx:89
+msgid "devel"
+msgstr "Développement"
+
+#: wizard_funcs.cxx:90
+#, fuzzy
+msgid "Early development"
+msgstr "Début de développement"
+
+#: wizard_funcs.cxx:91
+msgid "experimental"
+msgstr "Expérimental"
+
+#: wizard_funcs.cxx:163
 #, c-format
 msgid ""
 "<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
@@ -1301,60 +1326,60 @@ msgstr ""
 "<p>Signaler les bogues à http://sourceforge.net/projects/fgrun</p> </body></"
 "html>"
 
-#: wizard_funcs.cxx:286
+#: wizard_funcs.cxx:292
 msgid "Log Window"
 msgstr "Fenêtre journal"
 
-#: wizard_funcs.cxx:392
+#: wizard_funcs.cxx:398
 msgid "Failed to load 3D model"
 msgstr "Echec lors du chargement du modèle 3D"
 
-#: wizard_funcs.cxx:432
+#: wizard_funcs.cxx:438
 msgid "Failed to load submodel: "
 msgstr "Echec lors du chargement d'un modèle secondaire"
 
-#: wizard_funcs.cxx:486
+#: wizard_funcs.cxx:493
 #, c-format
 msgid "Model not found: '%s'"
 msgstr "Modèle non trouvé : '%s'"
 
-#: wizard_funcs.cxx:518
+#: wizard_funcs.cxx:525
 msgid "Property '/sim/model/path' not found"
 msgstr "Propriété '/sim/model/path' non trouvée"
 
-#: wizard_funcs.cxx:587 AirportBrowser.cxx:332 fgfsrc.cxx:95
+#: wizard_funcs.cxx:594 AirportBrowser.cxx:332 fgfsrc.cxx:95
 msgid "<default>"
 msgstr ""
 
-#: wizard_funcs.cxx:632
+#: wizard_funcs.cxx:639
 msgid "Run"
 msgstr "Lancer"
 
-#: wizard_funcs.cxx:655
+#: wizard_funcs.cxx:662
 msgid "About to reset current parameters"
 msgstr "Prêt à mettre à zéro les paramètres courants"
 
-#: wizard_funcs.cxx:655 fgfsrc.cxx:61
+#: wizard_funcs.cxx:662 fgfsrc.cxx:61
 msgid "Abort"
 msgstr "Abandonner"
 
-#: wizard_funcs.cxx:655
+#: wizard_funcs.cxx:662
 msgid "Reset"
 msgstr "Remise à zéro"
 
-#: wizard_funcs.cxx:669
+#: wizard_funcs.cxx:676
 msgid "Select FlightGear executable"
 msgstr "Choisir le fichier exécutable de FlightGear"
 
-#: wizard_funcs.cxx:726
+#: wizard_funcs.cxx:733
 msgid "Select FG_ROOT directory"
 msgstr "Choisir le répertoire FG_ROOT"
 
-#: wizard_funcs.cxx:880
+#: wizard_funcs.cxx:887 wizard_funcs.cxx:889
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: wizard_funcs.cxx:946
+#: wizard_funcs.cxx:954
 #, c-format
 msgid ""
 "Unable to delete '%s':\n"
@@ -1363,11 +1388,11 @@ msgstr ""
 "Impossible de supprimer '%s':\n"
 "%s"
 
-#: wizard_funcs.cxx:976
+#: wizard_funcs.cxx:984
 msgid "Select FG_SCENERY directory"
 msgstr "Choisir le répertoire FG_SCENERY"
 
-#: wizard_funcs.cxx:1200
+#: wizard_funcs.cxx:1208
 msgid "Description of "
 msgstr "Description de "
 
@@ -1510,7 +1535,3 @@ msgstr ""
 " --fg-scenery=<DIR>\n"
 " -f, --fullscreen\n"
 "%s"
-
-#, fuzzy
-#~ msgid "Number of bits per pixel"
-#~ msgstr "Profondeur des couleurs (bits par pixels)"

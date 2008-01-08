@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-07 22:34+0100\n"
+"POT-Creation-Date: 2008-01-08 08:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1202,7 +1202,7 @@ msgstr ""
 msgid "Prev"
 msgstr ""
 
-#: wizard.cxx:634 wizard_funcs.cxx:241 wizard_funcs.cxx:640
+#: wizard.cxx:634 wizard_funcs.cxx:247 wizard_funcs.cxx:647
 msgid "Next"
 msgstr ""
 
@@ -1259,22 +1259,46 @@ msgid "early production"
 msgstr ""
 
 #: wizard_funcs.cxx:82
-msgid "beta"
+msgid "Early production"
 msgstr ""
 
 #: wizard_funcs.cxx:83
-msgid "alpha"
+msgid "beta"
 msgstr ""
 
 #: wizard_funcs.cxx:84
-msgid "Development"
+msgid "alpha"
 msgstr ""
 
 #: wizard_funcs.cxx:85
+msgid "early alpha"
+msgstr ""
+
+#: wizard_funcs.cxx:86
+msgid "Development"
+msgstr ""
+
+#: wizard_funcs.cxx:87
 msgid "developement"
 msgstr ""
 
-#: wizard_funcs.cxx:157
+#: wizard_funcs.cxx:88
+msgid "development"
+msgstr ""
+
+#: wizard_funcs.cxx:89
+msgid "devel"
+msgstr ""
+
+#: wizard_funcs.cxx:90
+msgid "Early development"
+msgstr ""
+
+#: wizard_funcs.cxx:91
+msgid "experimental"
+msgstr ""
+
+#: wizard_funcs.cxx:163
 #, possible-c-format
 msgid ""
 "<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
@@ -1283,71 +1307,71 @@ msgid ""
 "<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
 msgstr ""
 
-#: wizard_funcs.cxx:286
+#: wizard_funcs.cxx:292
 msgid "Log Window"
 msgstr ""
 
-#: wizard_funcs.cxx:392
+#: wizard_funcs.cxx:398
 msgid "Failed to load 3D model"
 msgstr ""
 
-#: wizard_funcs.cxx:432
+#: wizard_funcs.cxx:438
 msgid "Failed to load submodel: "
 msgstr ""
 
-#: wizard_funcs.cxx:486
+#: wizard_funcs.cxx:493
 #, possible-c-format
 msgid "Model not found: '%s'"
 msgstr ""
 
-#: wizard_funcs.cxx:518
+#: wizard_funcs.cxx:525
 msgid "Property '/sim/model/path' not found"
 msgstr ""
 
-#: wizard_funcs.cxx:587 AirportBrowser.cxx:332 fgfsrc.cxx:95
+#: wizard_funcs.cxx:594 AirportBrowser.cxx:332 fgfsrc.cxx:95
 msgid "<default>"
 msgstr ""
 
-#: wizard_funcs.cxx:632
+#: wizard_funcs.cxx:639
 msgid "Run"
 msgstr ""
 
-#: wizard_funcs.cxx:655
+#: wizard_funcs.cxx:662
 msgid "About to reset current parameters"
 msgstr ""
 
-#: wizard_funcs.cxx:655 fgfsrc.cxx:61
+#: wizard_funcs.cxx:662 fgfsrc.cxx:61
 msgid "Abort"
 msgstr ""
 
-#: wizard_funcs.cxx:655
+#: wizard_funcs.cxx:662
 msgid "Reset"
 msgstr ""
 
-#: wizard_funcs.cxx:669
+#: wizard_funcs.cxx:676
 msgid "Select FlightGear executable"
 msgstr ""
 
-#: wizard_funcs.cxx:726
+#: wizard_funcs.cxx:733
 msgid "Select FG_ROOT directory"
 msgstr ""
 
-#: wizard_funcs.cxx:880
+#: wizard_funcs.cxx:887 wizard_funcs.cxx:889
 msgid "Unknown"
 msgstr ""
 
-#: wizard_funcs.cxx:946
+#: wizard_funcs.cxx:954
 #, possible-c-format
 msgid ""
 "Unable to delete '%s':\n"
 "%s"
 msgstr ""
 
-#: wizard_funcs.cxx:976
+#: wizard_funcs.cxx:984
 msgid "Select FG_SCENERY directory"
 msgstr ""
 
-#: wizard_funcs.cxx:1200
+#: wizard_funcs.cxx:1208
 msgid "Description of "
 msgstr ""
 

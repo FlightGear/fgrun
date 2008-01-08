@@ -79,10 +79,16 @@ static const char *aircraft_status_[] = {
     N_("production"),
     N_("early-production"),
     N_("early production"),
+    N_("Early production"),
     N_("beta"),
     N_("alpha"),
+    N_("early alpha"),
     N_("Development"),
     N_("developement"),
+    N_("development"),
+    N_("devel"),
+    N_("Early development"),
+    N_("experimental"),
     0
 };
 
@@ -475,6 +481,7 @@ Wizard::preview_aircraft()
 
     AircraftData* data =
 	reinterpret_cast<AircraftData*>( aircraft->data(n) );
+    prefs.set( "aircraft", n > 0 ? data->name.c_str() : "" );
 
     if (data->props.hasValue( "/sim/model/path" ))
     {
@@ -879,6 +886,7 @@ Wizard::aircraft_update()
                 data->status = props.getStringValue( "/sim/status" );
                 if ( data->status.empty() ) data->status = _( "Unknown" );
                 data->author = props.getStringValue( "/sim/author" );
+                if ( data->author.empty() ) data->author = _( "Unknown" );
                 am[name].push_back( data );
             }
         }
