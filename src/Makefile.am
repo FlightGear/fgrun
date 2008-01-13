@@ -22,7 +22,7 @@ fgrun_SOURCES = \
 	AirportTable.cxx AirportTable.h \
 	Fl_Table.cxx Fl_Table.H \
 	Fl_Table_Row.cxx Fl_Table_Row.H \
-	Fl_Plib.cxx Fl_Plib.h \
+	Fl_OSG.cxx Fl_OSG.h \
 	Fl_Heading_Dial.cxx Fl_Heading_Dial.H \
 	main.cxx \
 	io.cxx \

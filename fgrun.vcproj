@@ -222,7 +222,7 @@
 				RelativePath="src\Fl_Heading_Dial.cxx">
 			</File>
 			<File
-				RelativePath="src\Fl_Plib.cxx">
+				RelativePath=".\src\Fl_OSG.cxx">
 			</File>
 			<File
 				RelativePath="src\Fl_Table.cxx">
@@ -271,7 +271,7 @@
 				RelativePath="src\Fl_Heading_Dial.H">
 			</File>
 			<File
-				RelativePath="src\Fl_Plib.h">
+				RelativePath=".\src\Fl_OSG.h">
 			</File>
 			<File
 				RelativePath=".\src\i18n.h">

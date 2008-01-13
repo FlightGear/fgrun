@@ -20,7 +20,7 @@ class Advanced;
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Output.H>
 #include <FL/Fl_Tile.H>
-#include "Fl_Plib.h"
+#include "Fl_OSG.h"
 #include "AirportBrowser.h"
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Text_Display.H>
@@ -65,7 +65,7 @@ private:
   Fl_Browser *aircraft;
   void cb_aircraft_i(Fl_Browser*, void*);
   static void cb_aircraft(Fl_Browser*, void*);
-  Fl_Plib *preview;
+  Fl_OSG *preview;
 public:
   Fl_Output *aircraft_status;
   Fl_Output *aircraft_author;

@@ -135,7 +135,7 @@ class Wizard {open
           label {Select an aircraft} open
           private xywh {0 0 800 560} labelfont 1 align 21
         } {
-          Fl_Tile {} {
+          Fl_Tile {} {open
             xywh {0 20 795 500} resizable
           } {
             Fl_Browser aircraft {
@@ -143,10 +143,10 @@ class Wizard {open
               private xywh {5 20 200 500} type Hold labelsize 12 align 1 textsize 12
             }
             Fl_Box preview {
-              label Preview
+              label Preview selected
               private xywh {205 20 590 500} box THIN_DOWN_BOX labelsize 12
-              code0 {\#include "Fl_Plib.h"}
-              class Fl_Plib
+              code0 {\#include "Fl_OSG.h"}
+              class Fl_OSG
             }
             Fl_Box {} {
               xywh {80 190 265 65} hide resizable
@@ -160,7 +160,7 @@ class Wizard {open
               xywh {115 525 135 25}
             }
             Fl_Output aircraft_author {
-              label {Author(s) :} selected
+              label {Author(s) :}
               xywh {385 525 405 25} resizable
             }
           }

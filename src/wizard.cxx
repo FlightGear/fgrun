@@ -402,7 +402,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             o->callback((Fl_Callback*)cb_aircraft);
             o->align(FL_ALIGN_TOP);
           }
-          { Fl_Plib* o = preview = new Fl_Plib(205, 20, 590, 500, _("Preview"));
+          { Fl_OSG* o = preview = new Fl_OSG(205, 20, 590, 500, _("Preview"));
             o->box(FL_THIN_DOWN_BOX);
             o->color(FL_BACKGROUND_COLOR);
             o->selection_color(FL_BACKGROUND_COLOR);

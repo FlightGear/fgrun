@@ -1,5 +1,5 @@
-#ifndef Fl_Plib_h
-#define Fl_Plib_h
+#ifndef Fl_OSG_h
+#define Fl_OSG_h
 
 #include <FL/Fl_Gl_Window.H>
 #include <string>
@@ -24,9 +24,9 @@ protected:
     osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> _gw;
 };
 
-class Fl_Plib : public osgViewer::Viewer, public AdapterWidget {
+class Fl_OSG : public osgViewer::Viewer, public AdapterWidget {
 public:
-    Fl_Plib(int x, int y, int w, int h, const char *label=0);
+    Fl_OSG(int x, int y, int w, int h, const char *label=0);
     void set_model( osg::Node *model, osg::Node *bounding = 0 );
     void update();
 

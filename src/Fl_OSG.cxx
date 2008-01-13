@@ -1,11 +1,11 @@
 #include <FL/Fl.H>
 
-#include "Fl_Plib.h"
+#include "Fl_OSG.h"
 
 #include <osgGA/TrackballManipulator>
 #include <osgViewer/ViewerEventHandlers>
 
-Fl_Plib::Fl_Plib( int x, int y, int w, int h, const char *label )
+Fl_OSG::Fl_OSG( int x, int y, int w, int h, const char *label )
 : AdapterWidget(x,y,w,h,label) {
     getCamera()->setViewport( new osg::Viewport( 0, 0, w, h ) );
     getCamera()->setProjectionMatrixAsPerspective( 30.0f, static_cast<double>(w)/static_cast<double>(h), 1.0f, 10000.0f );
@@ -17,15 +17,15 @@ Fl_Plib::Fl_Plib( int x, int y, int w, int h, const char *label )
     setSceneData( new osg::Node );
 }
 
-void Fl_Plib::draw() {
+void Fl_OSG::draw() {
     frame();
 }
 
-void Fl_Plib::set_model( osg::Node *model, osg::Node *bounding ) {
+void Fl_OSG::set_model( osg::Node *model, osg::Node *bounding ) {
     setSceneData( model );
 }
 
-void Fl_Plib::update() {
+void Fl_OSG::update() {
 }
 
 void idle_cb()
