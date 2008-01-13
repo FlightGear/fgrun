@@ -101,36 +101,36 @@ Advanced::list_update_cb( Fl_Browser* browser,
 }
 
 Fl_Menu_Item Advanced::menu_time_of_day_value[] = {
- {N_("noon"), 0,  0, "noon", 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("dusk"), 0,  0, "dusk", 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("midnight"), 0,  0, "midnight", 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("dawn"), 0,  0, "dawn", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("noon"), 0,  0, (void*)"noon", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dusk"), 0,  0, (void*)"dusk", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("midnight"), 0,  0, (void*)"midnight", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dawn"), 0,  0, (void*)"dawn", 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
 Fl_Menu_Item Advanced::menu_log_level[] = {
- {N_("bulk"), 0,  0, "bulk", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("debug"), 0,  0, "debug", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("info"), 0,  0, "info", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("warn"), 0,  0, "warn", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("alert"), 0,  0, "alert", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("bulk"), 0,  0, (void*)"bulk", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("debug"), 0,  0, (void*)"debug", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("info"), 0,  0, (void*)"info", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("warn"), 0,  0, (void*)"warn", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("alert"), 0,  0, (void*)"alert", 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
 Fl_Menu_Item Advanced::menu_cloud_coverage_[] = {
- {N_("overcast"), 0,  0, "overcast", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("broken"), 0,  0, "broken", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("scattered"), 0,  0, "scattered", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("few"), 0,  0, "few", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("cirrus"), 0,  0, "cirrus", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("clear"), 0,  0, "clear", 0, FL_NORMAL_LABEL, 0, 13, 0},
+ {N_("overcast"), 0,  0, (void*)"overcast", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("broken"), 0,  0, (void*)"broken", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("scattered"), 0,  0, (void*)"scattered", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("few"), 0,  0, (void*)"few", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("cirrus"), 0,  0, (void*)"cirrus", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("clear"), 0,  0, (void*)"clear", 0, FL_NORMAL_LABEL, 0, 13, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
 Fl_Menu_Item Advanced::menu_control[] = {
- {N_("joystick"), 0,  0, "joystick", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("keyboard"), 0,  0, "keyboard", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("mouse"), 0,  0, "mouse", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("joystick"), 0,  0, (void*)"joystick", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("keyboard"), 0,  0, (void*)"keyboard", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("mouse"), 0,  0, (void*)"mouse", 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

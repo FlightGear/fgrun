@@ -15,6 +15,7 @@ bin_PROGRAMS = fgrun
 AM_CXXFLAGS = -DLOCALEDIR=\"$(localedir)\"
 
 fgrun_SOURCES = \
+	i18n.h \
 	wizard.cxx wizard.h wizard_funcs.cxx \
 	advanced.cxx advanced.h advanced_funcs.cxx \
 	AirportBrowser.cxx AirportBrowser.h apt_dat.h \
