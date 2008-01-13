@@ -28,6 +28,8 @@
 #include <FL/Fl.H>
 #include <FL/filename.H>
 
+#include <osgDB/Registry>
+
 #include "wizard.h"
 #include "i18n.h"
 
@@ -108,6 +110,12 @@ main( int argc, char* argv[] )
     string localedir = get_locale_directory( argv[0] );
     bindtextdomain( PACKAGE, localedir.c_str() );
     textdomain( PACKAGE );
+
+    osgDB::Registry* registry = osgDB::Registry::instance();
+    osgDB::ReaderWriter::Options* options = new osgDB::ReaderWriter::Options;
+    int cacheOptions = osgDB::ReaderWriter::Options::CACHE_ALL;
+    options->setObjectCacheHint((osgDB::ReaderWriter::Options::CacheHintOptions)cacheOptions);
+    registry->setOptions(options);
 
     Fl::lock(); // initialize multithreading
 

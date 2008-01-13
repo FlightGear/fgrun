@@ -4,39 +4,34 @@
 #include <FL/Fl_Gl_Window.H>
 #include <string>
 
-#include <plib/ssg.h>
+#include <osgViewer/Viewer>
 
-class Fl_Plib : public Fl_Gl_Window
-{
+class AdapterWidget : public Fl_Gl_Window {
 public:
 
-    Fl_Plib( int x, int y, int w, int h, const char *l=0 );
+    AdapterWidget(int x, int y, int w, int h, const char *label=0);
+    virtual ~AdapterWidget() {}
 
-    void init();
-    ssgEntity* load( const std::string& fname, const std::string& tpath );
-    void set_model( ssgEntity* obj, ssgEntity* bounding_obj = 0 );
-    void clear();
+    osgViewer::GraphicsWindow* getGraphicsWindow() { return _gw.get(); }
+    const osgViewer::GraphicsWindow* getGraphicsWindow() const { return _gw.get(); }
 
+    virtual void resize(int x, int y, int w, int h);
+
+protected:
+
+    virtual int handle(int event);
+    
+    osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> _gw;
+};
+
+class Fl_Plib : public osgViewer::Viewer, public AdapterWidget {
+public:
+    Fl_Plib(int x, int y, int w, int h, const char *label=0);
+    void set_model( osg::Node *model, osg::Node *bounding = 0 );
     void update();
 
-private:
-
-    void draw();
-    int handle(int);
-    void make_matrix( sgMat4 );
-
-    int ConstrainEl();
-    void reset();
-
-private:
-
-    ssgRoot* scene;
-    int go;
-    int downx, downy;   
-    GLfloat downDist, downEl, downAz, downEx, downEy, downEz;
-    GLfloat EyeDist, EyeAz, EyeEl, Ex, Ey, Ez;
-    GLfloat EL_SENS, AZ_SENS;
+protected:
+    virtual void draw();
 };
+
 #endif
-
-

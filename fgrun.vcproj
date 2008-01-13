@@ -24,7 +24,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.0.0\&quot; /DVERSION=\&quot;1.0.0\&quot;"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear.plib;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;&quot;..\zlib-1.2.3&quot;;..\gettext\include"
+				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;&quot;..\zlib-1.2.3&quot;;..\gettext\include;..\OpenSceneGraph\include"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -39,10 +39,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib pthreadVC2d.lib intl.lib ssg_d.lib simgear_d.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib pthreadVC2d.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;..\SimGear.plib\Debug;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\lib"
+				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;..\SimGear\Debug;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\lib;..\install\msvc71\OpenSceneGraph\lib"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\Debug/fgrun.pdb"
 				SubSystem="1"/>
@@ -305,7 +305,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generation of French translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -313,7 +314,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generation of French translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -321,7 +323,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generation of French translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>
