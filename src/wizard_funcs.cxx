@@ -453,7 +453,8 @@ loadModel( const string &fg_root, const string &path,
 
     // Load sub-models
     vector<SGPropertyNode_ptr> model_nodes = props.getChildren("model");
-    for (unsigned i = 0; i < model_nodes.size(); i++) {
+    unsigned int i = 0;
+    for (i = 0; i < model_nodes.size(); i++) {
         SGPropertyNode_ptr node = model_nodes[i];
         string submodel = node->getStringValue("path");
 

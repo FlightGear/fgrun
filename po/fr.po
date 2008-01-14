@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.0.0\n"
 "Report-Msgid-Bugs-To: fredb@users.sourceforge.net\n"
-"POT-Creation-Date: 2008-01-13 14:48+0100\n"
+"POT-Creation-Date: 2008-01-14 23:48+0100\n"
 "PO-Revision-Date: 2008-01-05 19:05+0100\n"
 "Last-Translator: <fredb@users.sourceforge.net>\n"
 "Language-Team: French\n"
@@ -1012,19 +1012,19 @@ msgstr "Etendue (m):"
 msgid "Transition (ft):"
 msgstr "Transition (ft):"
 
-#: src/advanced_funcs.cxx:104 src/wizard_funcs.cxx:69
+#: src/advanced_funcs.cxx:104 src/wizard_funcs.cxx:72
 msgid "noon"
 msgstr "midi"
 
-#: src/advanced_funcs.cxx:105 src/wizard_funcs.cxx:70
+#: src/advanced_funcs.cxx:105 src/wizard_funcs.cxx:73
 msgid "dusk"
 msgstr "crépuscule"
 
-#: src/advanced_funcs.cxx:106 src/wizard_funcs.cxx:71
+#: src/advanced_funcs.cxx:106 src/wizard_funcs.cxx:74
 msgid "midnight"
 msgstr "minuit"
 
-#: src/advanced_funcs.cxx:107 src/wizard_funcs.cxx:72
+#: src/advanced_funcs.cxx:107 src/wizard_funcs.cxx:75
 msgid "dawn"
 msgstr "aurore"
 
@@ -1108,7 +1108,7 @@ msgstr "Rafraîchir"
 msgid "Reload airports"
 msgstr "Recharcher les aéroports"
 
-#: src/AirportBrowser.cxx:332 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:594
+#: src/AirportBrowser.cxx:332 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:745
 msgid "<default>"
 msgstr ""
 
@@ -1129,7 +1129,7 @@ msgstr "Nom"
 msgid "About to overwrite %s."
 msgstr "Prêt à écraser %s"
 
-#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:662
+#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:813
 msgid "Abort"
 msgstr "Abandonner"
 
@@ -1157,7 +1157,7 @@ msgstr "Fer&mer"
 msgid "Save file as?"
 msgstr "Sauver sous ?"
 
-#: src/main.cxx:117
+#: src/main.cxx:125
 #, c-format
 msgid ""
 "Options are:\n"
@@ -1380,7 +1380,7 @@ msgstr "Numéro de port IP en sortie"
 msgid "Prev"
 msgstr "Précédent"
 
-#: src/wizard.cxx:634 src/wizard_funcs.cxx:247 src/wizard_funcs.cxx:647
+#: src/wizard.cxx:634 src/wizard_funcs.cxx:250 src/wizard_funcs.cxx:798
 msgid "Next"
 msgstr "Suivant"
 
@@ -1409,60 +1409,60 @@ msgid "To change aircraft, exit FlightGear and return to this launcher"
 msgstr ""
 "Pour changer d'aéronef, sortir de FlightGear et revenir à cet assistant"
 
-#: src/wizard_funcs.cxx:79
+#: src/wizard_funcs.cxx:82
 msgid "production"
 msgstr "Production"
 
-#: src/wizard_funcs.cxx:80
+#: src/wizard_funcs.cxx:83
 msgid "early-production"
 msgstr "Préproduction"
 
-#: src/wizard_funcs.cxx:81
+#: src/wizard_funcs.cxx:84
 msgid "early production"
 msgstr "Préproduction"
 
-#: src/wizard_funcs.cxx:82
+#: src/wizard_funcs.cxx:85
 msgid "Early production"
 msgstr "Préproduction"
 
-#: src/wizard_funcs.cxx:83
+#: src/wizard_funcs.cxx:86
 msgid "beta"
 msgstr "Béta"
 
-#: src/wizard_funcs.cxx:84
+#: src/wizard_funcs.cxx:87
 msgid "alpha"
 msgstr "Alpha"
 
-#: src/wizard_funcs.cxx:85
+#: src/wizard_funcs.cxx:88
 msgid "early alpha"
 msgstr "Pré alpha"
 
-#: src/wizard_funcs.cxx:86
+#: src/wizard_funcs.cxx:89
 msgid "Development"
 msgstr "Développement"
 
-#: src/wizard_funcs.cxx:87
+#: src/wizard_funcs.cxx:90
 msgid "developement"
 msgstr "Développement"
 
-#: src/wizard_funcs.cxx:88
+#: src/wizard_funcs.cxx:91
 msgid "development"
 msgstr "Développement"
 
-#: src/wizard_funcs.cxx:89
+#: src/wizard_funcs.cxx:92
 msgid "devel"
 msgstr "Développement"
 
-#: src/wizard_funcs.cxx:90
+#: src/wizard_funcs.cxx:93
 #, fuzzy
 msgid "Early development"
 msgstr "Début de développement"
 
-#: src/wizard_funcs.cxx:91
+#: src/wizard_funcs.cxx:94
 msgid "experimental"
 msgstr "Expérimental"
 
-#: src/wizard_funcs.cxx:163
+#: src/wizard_funcs.cxx:166
 #, c-format
 msgid ""
 "<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
@@ -1476,52 +1476,44 @@ msgstr ""
 "<p>Signaler les bogues à http://sourceforge.net/projects/fgrun</p> </body></"
 "html>"
 
-#: src/wizard_funcs.cxx:292
+#: src/wizard_funcs.cxx:295
 msgid "Log Window"
 msgstr "Fenêtre journal"
 
-#: src/wizard_funcs.cxx:398
-msgid "Failed to load 3D model"
-msgstr "Echec lors du chargement du modèle 3D"
-
-#: src/wizard_funcs.cxx:438
-msgid "Failed to load submodel: "
-msgstr "Echec lors du chargement d'un modèle secondaire"
-
-#: src/wizard_funcs.cxx:493
+#: src/wizard_funcs.cxx:644
 #, c-format
 msgid "Model not found: '%s'"
 msgstr "Modèle non trouvé : '%s'"
 
-#: src/wizard_funcs.cxx:525
+#: src/wizard_funcs.cxx:676
 msgid "Property '/sim/model/path' not found"
 msgstr "Propriété '/sim/model/path' non trouvée"
 
-#: src/wizard_funcs.cxx:639
+#: src/wizard_funcs.cxx:790
 msgid "Run"
 msgstr "Lancer"
 
-#: src/wizard_funcs.cxx:662
+#: src/wizard_funcs.cxx:813
 msgid "About to reset current parameters"
 msgstr "Prêt à mettre à zéro les paramètres courants"
 
-#: src/wizard_funcs.cxx:662
+#: src/wizard_funcs.cxx:813
 msgid "Reset"
 msgstr "Remise à zéro"
 
-#: src/wizard_funcs.cxx:676
+#: src/wizard_funcs.cxx:827
 msgid "Select FlightGear executable"
 msgstr "Choisir le fichier exécutable de FlightGear"
 
-#: src/wizard_funcs.cxx:733
+#: src/wizard_funcs.cxx:884
 msgid "Select FG_ROOT directory"
 msgstr "Choisir le répertoire FG_ROOT"
 
-#: src/wizard_funcs.cxx:887 src/wizard_funcs.cxx:889
+#: src/wizard_funcs.cxx:1038 src/wizard_funcs.cxx:1040
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: src/wizard_funcs.cxx:954
+#: src/wizard_funcs.cxx:1105
 #, c-format
 msgid ""
 "Unable to delete '%s':\n"
@@ -1530,10 +1522,16 @@ msgstr ""
 "Impossible de supprimer '%s':\n"
 "%s"
 
-#: src/wizard_funcs.cxx:984
+#: src/wizard_funcs.cxx:1135
 msgid "Select FG_SCENERY directory"
 msgstr "Choisir le répertoire FG_SCENERY"
 
-#: src/wizard_funcs.cxx:1208
+#: src/wizard_funcs.cxx:1359
 msgid "Description of "
 msgstr "Description de "
+
+#~ msgid "Failed to load 3D model"
+#~ msgstr "Echec lors du chargement du modèle 3D"
+
+#~ msgid "Failed to load submodel: "
+#~ msgstr "Echec lors du chargement d'un modèle secondaire"

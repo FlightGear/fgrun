@@ -2,7 +2,7 @@ dnl (Process this file with autoconf to produce a configure script.)
 AC_REVISION($Revision$)dnl
 AC_PREREQ(2.54)
 
-AC_INIT([fgrun], [1.0.0], [fredb@users.sourceforge.net])
+AC_INIT
 AC_CONFIG_HEADER(src/config.h)
 AC_CONFIG_SRCDIR(src/main.cxx)
 
@@ -10,7 +10,7 @@ AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE(fgrun, 1.1.0)
 #AM_MAINTAINER_MODE
 
 PACKAGE=$PACKAGE_NAME
@@ -112,13 +112,31 @@ XX_PATH_PLIB(1.8.0)
 
 AC_LANG_PUSH(C++)
 
-AC_ARG_WITH(simgear, [  --with-simgear=DIR      Path to simgear (/usr/local)],
-            simgear_prefix="$withval", simgear_prefix="")
-
-if test x$simgear_prefix != x ; then
-  CPPFLAGS="-I$simgear_prefix/include $CPPFLAGS"
-  LDFLAGS="-L$simgear_prefix/lib $LDFLAGS"
+# specify the osg location
+AC_ARG_WITH(osg, [  --with-osg=PREFIX       Specify the prefix path to osg])
+if test "x$with_osg" != "x" ; then
+  echo "osg prefix is $with_osg"
+  EXTRA_DIRS="${EXTRA_DIRS} $with_osg"
 fi
+
+AC_ARG_WITH(simgear, [  --with-simgear=DIR      Path to simgear (/usr/local)])
+if test "x$with_simgear" != "x" ; then
+  echo "SimGear prefix path is $with_simgear"
+  CPPFLAGS="-I$with_simgear $CPPFLAGS"
+  EXTRA_DIRS="${EXTRA_DIRS} $with_simgear"
+fi
+
+FLUID="fluid"
+AC_ARG_WITH(fltk,    [  --with-fltk=DIR         Path to FLTK v1.1])
+if test "x$with_fltk" != "x" ; then
+  echo "FLTK prefix path is $with_fltk"
+  FLUID="$with_fltk/bin/fluid"
+  CPPFLAGS="-I$with_fltk/include $CPPFLAGS"
+  EXTRA_DIRS="${EXTRA_DIRS} $with_fltk"
+fi
+AC_SUBST(FLUID)
+
+wi_EXTRA_DIRS(no, ${EXTRA_DIRS})
 
 AC_CHECK_HEADER(simgear/props/props_io.hxx)
 if test "x$ac_cv_header_simgear_props_props_io_hxx" != "xyes"; then
@@ -184,20 +202,6 @@ if test "x$ac_cv_header_windows_h" = "xno"; then
   fi
 fi
 
-dnl Check for fltk
-FLUID="fluid"
-
-AC_ARG_WITH(fltk,    [  --with-fltk=DIR         Path to FLTK v1.1],
-	fltk_prefix="$withval", fltk_prefix="")
-
-if test x$fltk_prefix != x ; then
-  FLUID="$fltk_prefix/bin/fluid"
-  CPPFLAGS="-I$fltk_prefix/include $CPPFLAGS"
-  LDFLAGS="-L$fltk_prefix/lib $LDFLAGS"
-fi
-
-AC_SUBST(FLUID)
-
 AC_LANG_PUSH(C++)
 
 dnl Check for FLTK header and library.
@@ -226,7 +230,30 @@ AC_TRY_LINK([
   AC_MSG_RESULT(yes),
   LIBS="$save_LIBS"
   AC_MSG_RESULT(no)
-)
+)  
+
+AC_CHECK_HEADER(osg/Version)
+if test "x$ac_cv_header_osg_Version" != "xyes"; then
+    echo
+    echo "You *must* have the OpenSceneGraph support library installed on your system"
+    echo "to build the FGFS simulator!"
+    echo
+    echo "Please see README.OSG for more details."
+    echo
+    echo "configure aborted."
+    exit
+fi
+
+AC_CHECK_LIB(OpenThreads,OpenThreadsGetVersion)
+AC_CHECK_LIB(osg,osgGetVersion)
+AC_CHECK_LIB(osgUtil,osgUtilGetVersion)
+AC_CHECK_LIB(osgDB,osgDBGetVersion)
+AC_CHECK_LIB(osgText,osgTextGetVersion)
+AC_CHECK_LIB(osgGA,osgGAGetVersion)
+AC_CHECK_LIB(osgViewer,osgViewerGetVersion)
+AC_CHECK_LIB(osgSim,osgSimGetVersion)
+LIBS="$LIBS -losgFX"
+
 
 AC_LANG_POP
 
