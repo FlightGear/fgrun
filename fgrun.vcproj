@@ -39,7 +39,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib pthreadVC2d.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib pthreadVC2d.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib OpenThreadsd.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;..\SimGear\Debug;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\lib;..\install\msvc71\OpenSceneGraph\lib"
@@ -86,11 +86,12 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.0.0\&quot; /DVERSION=\&quot;1.0.0\&quot;"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..\SimGear.plib;&quot;..\zlib-1.2.3&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\include;.."
-				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS,NOMINMAX"
+				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..\SimGear;&quot;..\zlib-1.2.3&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\include;..;..\OpenSceneGraph\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="TRUE"
+				RuntimeTypeInfo="TRUE"
 				PrecompiledHeaderFile=".\Release/fgrun.pch"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
@@ -100,10 +101,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltk.lib fltkgl.lib ws2_32.lib comctl32.lib zlib.lib ssg.lib sg.lib ul.lib opengl32.lib simgear.lib winmm.lib pthreadVC2.lib"
+				AdditionalDependencies="fltk.lib fltkgl.lib ws2_32.lib comctl32.lib zlib.lib sg.lib ul.lib opengl32.lib winmm.lib pthreadVC2.lib osg.lib osgDB.lib osgGA.lib osgViewer.lib osgUtil.lib OpenThreads.lib intl.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;&quot;..\SimGear.plib\Release-nd&quot;;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;"
+				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\install\msvc71\OpenSceneGraph\lib;..\gettext\lib"
 				ProgramDatabaseFile=".\Release/fgrun.pdb"
 				SubSystem="1"/>
 			<Tool
@@ -146,7 +147,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.0.0\&quot; /DVERSION=\&quot;1.0.0\&quot;"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear.plib;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\include"
+				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\include;..\OpenSceneGraph\include"
 				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -304,7 +305,7 @@
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="Generation of French translation"
+						Description="Generating french translation"
 						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
@@ -313,7 +314,7 @@
 					Name="Release|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="Generation of French translation"
+						Description="Generating french translation"
 						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
@@ -322,7 +323,7 @@
 					Name="Release-nodll|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="Generation of French translation"
+						Description="Generating french translation"
 						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>

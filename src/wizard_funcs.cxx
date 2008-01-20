@@ -413,23 +413,9 @@ loadModel( const string &fg_root, const string &path,
             options->getDatabasePathList().push_back(externalTexturePath.str());
 
         model = osgDB::readNodeFile(modelpath.str(), options.get());
-//      model = osgDB::readNodeFile(modelpath.str());
         if ( model == 0 )
             throw sg_io_exception("Failed to load 3D model", 
                                 sg_location(modelpath.str()));
-/*
-        if ( modelpath.extension() == "ac" ) {
-            osg::ref_ptr<osg::MatrixTransform> actrans = new osg::MatrixTransform;
-            osg::Matrix m;
-            m(1,1) = 0.0;
-            m(2,2) = 0.0;
-            m(1,2) = 1.0;
-            m(2,1) = 1.0;
-            actrans->setMatrix( m );
-            actrans->addChild( model.get() );
-            model = actrans.get();
-        }
-*/
     }
 
     // Set up the alignment node
@@ -506,116 +492,7 @@ loadModel( const string &fg_root, const string &path,
 
     return alignmainmodel.release();
 }
-/*
-static ssgBranch *
-loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
-{
-    ssgBranch * model = 0;
-    SGPropertyNode props;
 
-                                  // Load the 3D aircraft object itself
-    SGPath modelpath = path, texturepath = path;
-    if ( !ulIsAbsolutePathName( path.c_str() ) ) {
-        SGPath tmp = fg_root;
-        tmp.append(modelpath.str());
-        modelpath = texturepath = tmp;
-    }
-
-                                  // Check for an XML wrapper
-    if (modelpath.str().substr(modelpath.str().size() - 4, 4) == ".xml") {
-        readProperties(modelpath.str(), &props);
-        if (props.hasValue("/path")) {
-            modelpath = modelpath.dir();
-            modelpath.append(props.getStringValue("/path"));
-            if (props.hasValue("/texture-path")) {
-                texturepath = texturepath.dir();
-                texturepath.append(props.getStringValue("/texture-path"));
-            }
-        } else if (model == 0) {
-            model = new ssgBranch;
-        }
-    }
-
-    vector<SGPropertyNode_ptr> nopreview_nodes = props.getChildren("nopreview");
-    if ( !nopreview_nodes.empty() )
-        return 0;
-
-    if (model == 0) {
-        if (texturepath.extension() != "")
-            texturepath = texturepath.dir();
-
-        ssgTexturePath((char *)texturepath.c_str());
-        model = (ssgBranch *)preview->load( modelpath.c_str(), texturepath.c_str() );
-        if (model == 0)
-            throw sg_io_exception(_("Failed to load 3D model"), 
-			        sg_location(modelpath.str()));
-    }
-                                  // Set up the alignment node
-    ssgTransform * alignmainmodel = new ssgTransform;
-    alignmainmodel->addKid(model);
-    sgMat4 res_matrix;
-    sgMakeOffsetsMatrix(&res_matrix,
-                        props.getFloatValue("/offsets/heading-deg", 0.0),
-                        props.getFloatValue("/offsets/roll-deg", 0.0),
-                        props.getFloatValue("/offsets/pitch-deg", 0.0),
-                        props.getFloatValue("/offsets/x-m", 0.0),
-                        props.getFloatValue("/offsets/y-m", 0.0),
-                        props.getFloatValue("/offsets/z-m", 0.0));
-    alignmainmodel->setTransform(res_matrix);
-
-    unsigned int i;
-
-    vector<SGPropertyNode_ptr> model_nodes = props.getChildren("model");
-    for (i = 0; i < model_nodes.size(); i++) {
-        SGPropertyNode_ptr node = model_nodes[i];
-
-        vector<SGPropertyNode_ptr> nopreview_nodes = node->getChildren("nopreview");
-        if ( nopreview_nodes.empty() ) {
-            ssgTransform * align = new ssgTransform;
-            sgMat4 res_matrix;
-            sgMakeOffsetsMatrix(&res_matrix,
-                                node->getFloatValue("offsets/heading-deg", 0.0),
-                                node->getFloatValue("offsets/roll-deg", 0.0),
-                                node->getFloatValue("offsets/pitch-deg", 0.0),
-                                node->getFloatValue("offsets/x-m", 0.0),
-                                node->getFloatValue("offsets/y-m", 0.0),
-                                node->getFloatValue("offsets/z-m", 0.0));
-            align->setTransform(res_matrix);
-
-            ssgBranch * kid = 0;
-            const char * submodel = node->getStringValue("path");
-            try {
-                kid = loadModel( fg_root, submodel, preview );
-            } catch (const sg_throwable &t) {
-                SG_LOG(SG_INPUT, SG_ALERT, _("Failed to load submodel: ") << t.getFormattedMessage());
-            }
-            if ( kid ) {
-                align->addKid(kid);
-                align->setName(node->getStringValue("name", ""));
-                model->addKid(align);
-            }
-        }
-    }
-
-    vector<SGPropertyNode_ptr> animation_nodes = props.getChildren("animation");
-    for (i = 0; i < animation_nodes.size(); i++) {
-        const char * name = animation_nodes[i]->getStringValue("name", 0);
-        vector<SGPropertyNode_ptr> nopreview_nodes = animation_nodes[i]->getChildren("nopreview");
-        if ( !nopreview_nodes.empty() ) {
-            vector<SGPropertyNode_ptr> name_nodes = animation_nodes[i]->getChildren("object-name");
-            for (size_t j = 0; j < name_nodes.size(); j++ ) {
-                ssgEntity *e = find_named_node( model, name_nodes[j]->getStringValue() );
-                if ( !e )
-                    continue;
-                ssgBranch *b = e->getParent( 0 );
-                b->removeKid( e );
-            }
-        }
-    }
-
-    return alignmainmodel;
-}
-*/
 void
 Wizard::preview_aircraft()
 {
@@ -645,14 +522,13 @@ Wizard::preview_aircraft()
 	    return;
 	}
 
+        setlocale( LC_ALL, "C" );
 	try
 	{
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
 
-            setlocale( LC_ALL, "C" );
             osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), path.str(), SGPath() );
-            setlocale( LC_ALL, "" );
 	    if (model != 0)
 	    {
                 osg::ref_ptr<osg::Node> bounding_obj = find_named_node( model.get(), "Aircraft" );
@@ -670,6 +546,7 @@ Wizard::preview_aircraft()
 	}
 	catch (...)
 	{}
+        setlocale( LC_ALL, "" );
     }
     else
     {
