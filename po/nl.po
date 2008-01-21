@@ -219,7 +219,7 @@ msgstr "" # Geen vertaling nodig
 
 #: src/advanced.cxx:689
 msgid "Config:"
-msgstr "Configuratie"
+msgstr "Configuratie:"
 
 #: src/advanced.cxx:690
 msgid "Path to additional XML properties file"
@@ -227,7 +227,7 @@ msgstr "Pad naar extra XML properties bestanden"
 
 #: src/advanced.cxx:698 src/wizard.cxx:312
 msgid "Executable:"
-msgstr "Programma"
+msgstr "Programma:"
 
 #: src/advanced.cxx:702 src/wizard.cxx:325
 msgid "FG_ROOT:"
@@ -239,15 +239,15 @@ msgstr "" # Geen vertaling nodig -- variabele
 
 #: src/advanced.cxx:710
 msgid "Airport:"
-msgstr "Vliegveld"
+msgstr "Vliegveld:"
 
 #: src/advanced.cxx:714
 msgid "Runway:"
-msgstr "Startbaan"
+msgstr "Startbaan:"
 
 #: src/advanced.cxx:718
 msgid "Aircraft:"
-msgstr "Vliegtuigen"
+msgstr "Vliegtuigen:"
 
 #: src/advanced.cxx:724 src/advanced_funcs.cxx:165 src/wizard.cxx:524
 msgid "Features"
@@ -563,11 +563,11 @@ msgstr ""
 
 #: src/advanced.cxx:1004
 msgid "Glide slope:"
-msgstr "Glijhoek"
+msgstr "Glijhoek:"
 
 #: src/advanced.cxx:1009
 msgid "Climb rate:"
-msgstr "Klimsnelheid"
+msgstr "Klimsnelheid:"
 
 #: src/advanced.cxx:1016 src/advanced_funcs.cxx:169
 msgid "Rendering"
@@ -842,7 +842,7 @@ msgstr "Bestand:"
 
 #: src/advanced.cxx:1369 src/advanced.cxx:1392
 msgid "Port:"
-msgstr "Poort"
+msgstr "Poort:"
 
 #: src/advanced.cxx:1375
 msgid "Baud Rate:"
