@@ -304,7 +304,37 @@
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="Generation of French translation"
+						Description="Generating french translation"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
+						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating french translation"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
+						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-nodll|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating french translation"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
+						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\po\nl.po">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating dutch translation"
 						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -312,7 +342,7 @@
 					Name="Release|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="Generation of French translation"
+						Description="Generating dutch translation"
 						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -320,7 +350,7 @@
 					Name="Release-nodll|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
-						Description="Generation of French translation"
+						Description="Generating dutch translation"
 						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
