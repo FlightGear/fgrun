@@ -453,7 +453,9 @@ msgstr ""
 # geen vertaling nodig -- zelfde in NL --> ü mogelijkheden?
 #: advanced.cxx:835
 msgid "AI Traffic"
-msgstr "Computergestuurd Verkeer"
+msgstr ""
+"Computergestuurd\n"
+"Verkeer"
 
 #: advanced.cxx:836
 msgid "Enable AI traffic"
@@ -1059,7 +1061,9 @@ msgstr "Richting waaruit de wind komt."
 
 #: advanced.cxx:1633
 msgid "Speed (kts):"
-msgstr "Snelheid (knopen):"
+msgstr ""
+"Snelheid  \n"
+"(knopen) :"
 
 #: advanced.cxx:1634
 msgid "Wind speed (kts)"
@@ -1266,7 +1270,9 @@ msgstr "Willekeurige objecten"
 
 #: wizard.cxx:532
 msgid "AI models"
-msgstr "Computergestuurde toestellen"
+msgstr ""
+"Computergestuurde\n"
+"toestellen"
 
 #: wizard.cxx:536
 msgid "Time of day :"
