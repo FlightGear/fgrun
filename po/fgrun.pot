@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-21 23:31+0100\n"
+"POT-Creation-Date: 2008-01-27 21:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -572,7 +572,7 @@ msgstr ""
 msgid "Rendering"
 msgstr ""
 
-#: advanced.cxx:1021 advanced.cxx:1664 advanced_funcs.cxx:178
+#: advanced.cxx:1021 advanced.cxx:1665 advanced_funcs.cxx:178
 msgid "Clouds"
 msgstr ""
 
@@ -966,39 +966,39 @@ msgstr ""
 msgid "calm (0.0) to severe (1.0)"
 msgstr ""
 
-#: advanced.cxx:1653
+#: advanced.cxx:1654
 msgid "Ceiling:"
 msgstr ""
 
-#: advanced.cxx:1654
+#: advanced.cxx:1655
 msgid "FT_ASL[:THICKNESS_FT]"
 msgstr ""
 
-#: advanced.cxx:1658
+#: advanced.cxx:1659
 msgid "Fetch real weather"
 msgstr ""
 
-#: advanced.cxx:1667
+#: advanced.cxx:1669
 msgid "Layer:"
 msgstr ""
 
-#: advanced.cxx:1674
+#: advanced.cxx:1676
 msgid "Elevation(ft):"
 msgstr ""
 
-#: advanced.cxx:1681
+#: advanced.cxx:1683
 msgid "Thickness (ft):"
 msgstr ""
 
-#: advanced.cxx:1688
+#: advanced.cxx:1690
 msgid "Coverage:"
 msgstr ""
 
-#: advanced.cxx:1694
+#: advanced.cxx:1696
 msgid "Span (m):"
 msgstr ""
 
-#: advanced.cxx:1702
+#: advanced.cxx:1704
 msgid "Transition (ft):"
 msgstr ""
 
@@ -1070,31 +1070,31 @@ msgstr ""
 msgid "Select an aircraft"
 msgstr ""
 
-#: wizard.cxx:405
+#: wizard.cxx:406
 msgid "Preview"
 msgstr ""
 
-#: wizard.cxx:425
+#: wizard.cxx:426
 msgid "Status :"
 msgstr ""
 
-#: wizard.cxx:426
+#: wizard.cxx:427
 msgid "Author(s) :"
 msgstr ""
 
-#: wizard.cxx:433
+#: wizard.cxx:434
 msgid "Select a location"
 msgstr ""
 
-#: wizard.cxx:449
+#: wizard.cxx:450
 msgid "Carrier Ops"
 msgstr ""
 
-#: wizard.cxx:453
+#: wizard.cxx:454
 msgid "Carrier : "
 msgstr ""
 
-#: wizard.cxx:454
+#: wizard.cxx:455
 msgid "Park pos :"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-21 23:31+0100\n"
+"POT-Creation-Date: 2008-01-27 21:17+0100\n"
 "PO-Revision-Date: 2008-01-19 17:30+0100\n"
 "Last-Translator: Stefan <fgfs.stefan@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -647,7 +647,7 @@ msgid "Rendering"
 msgstr ""
 
 # geen vertaling nodig -- zelfde in NL
-#: advanced.cxx:1021 advanced.cxx:1664 advanced_funcs.cxx:178
+#: advanced.cxx:1021 advanced.cxx:1665 advanced_funcs.cxx:178
 msgid "Clouds"
 msgstr "Wolken"
 
@@ -1081,40 +1081,40 @@ msgstr "Turbulentie"
 msgid "calm (0.0) to severe (1.0)"
 msgstr "rustig (0.0) tot heftig (1.0)"
 
-#: advanced.cxx:1653
+#: advanced.cxx:1654
 msgid "Ceiling:"
 msgstr "Plafond:"
 
-#: advanced.cxx:1654
+#: advanced.cxx:1655
 msgid "FT_ASL[:THICKNESS_FT]"
 msgstr ""
 
 # suggesties welkom
-#: advanced.cxx:1658
+#: advanced.cxx:1659
 msgid "Fetch real weather"
 msgstr "Kom overeen met het echte weer"
 
-#: advanced.cxx:1667
+#: advanced.cxx:1669
 msgid "Layer:"
 msgstr "Dekking:"
 
-#: advanced.cxx:1674
+#: advanced.cxx:1676
 msgid "Elevation(ft):"
 msgstr "Hoogte (voet):"
 
-#: advanced.cxx:1681
+#: advanced.cxx:1683
 msgid "Thickness (ft):"
 msgstr "Dikte (voet):"
 
-#: advanced.cxx:1688
+#: advanced.cxx:1690
 msgid "Coverage:"
 msgstr "Bedekking:"
 
-#: advanced.cxx:1694
+#: advanced.cxx:1696
 msgid "Span (m):"
 msgstr "Breedte (m):"
 
-#: advanced.cxx:1702
+#: advanced.cxx:1704
 msgid "Transition (ft):"
 msgstr "Overgang (voet):"
 
@@ -1195,34 +1195,34 @@ msgstr "Verwijder een scenery map"
 msgid "Select an aircraft"
 msgstr "Selecteer een vliegtuig"
 
-#: wizard.cxx:405
+#: wizard.cxx:406
 msgid "Preview"
 msgstr "Voorschot"
 
 # betere suggesties welkom
-#: wizard.cxx:425
+#: wizard.cxx:426
 msgid "Status :"
 msgstr ""
 
 # Geen vertaling nodig -- zelfde in NL
-#: wizard.cxx:426
+#: wizard.cxx:427
 msgid "Author(s) :"
 msgstr "Auteur (s):"
 
 # 
-#: wizard.cxx:433
+#: wizard.cxx:434
 msgid "Select a location"
 msgstr "Selecteer een locatie"
 
-#: wizard.cxx:449
+#: wizard.cxx:450
 msgid "Carrier Ops"
 msgstr "Vliegdekschip operaties"
 
-#: wizard.cxx:453
+#: wizard.cxx:454
 msgid "Carrier : "
 msgstr "Vliegdekschip :"
 
-#: wizard.cxx:454
+#: wizard.cxx:455
 msgid "Park pos :"
 msgstr ""
 

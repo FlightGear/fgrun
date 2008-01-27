@@ -2,4 +2,5 @@
 cd po
 ..\..\gettext\bin\msgmerge -U fr.po fgrun.pot
 ..\..\gettext\bin\msgmerge -U nl.po fgrun.pot
+..\..\gettext\bin\msgmerge -U pt.po fgrun.pot
 cd ..
