@@ -22,7 +22,7 @@ fgrun_SOURCES = \
 	AirportTable.cxx AirportTable.h \
 	Fl_Table.cxx Fl_Table.H \
 	Fl_Table_Row.cxx Fl_Table_Row.H \
-	Fl_Plib.cxx Fl_Plib.h \
+	Fl_OSG.cxx Fl_OSG.h \
 	Fl_Heading_Dial.cxx Fl_Heading_Dial.H \
 	main.cxx \
 	io.cxx \
@@ -32,8 +32,8 @@ fgrun_SOURCES = \
 	util.cxx util.h \
 	$(platform_srcs)
 
-simgear_libs = -lsgmodel -lsgmath -lsgscreen -lsgprops -lsgxml -lsgmisc -lsgdebug -lsgstructure 
-plib_libs = -lplibssg -lplibsg -lplibul
+simgear_libs = -lsgmodel -lsgmath -lsgscreen -lsgprops -lsgxml -lsgmisc -lsgdebug -lsgstructure -lsgutil
+plib_libs = -lplibsg -lplibul
 
 fgrun_LDADD = $(simgear_libs) $(plib_libs)
 

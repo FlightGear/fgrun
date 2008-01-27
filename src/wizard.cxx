@@ -394,6 +394,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[1] = new Fl_Group(0, 0, 800, 560, _("Select an aircraft"));
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        o->hide();
         { Fl_Tile* o = new Fl_Tile(0, 20, 795, 500);
           { Fl_Browser* o = aircraft = new Fl_Browser(5, 20, 200, 500);
             o->type(2);
@@ -402,7 +403,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             o->callback((Fl_Callback*)cb_aircraft);
             o->align(FL_ALIGN_TOP);
           }
-          { Fl_Plib* o = preview = new Fl_Plib(205, 20, 590, 500, _("Preview"));
+          { Fl_OSG* o = preview = new Fl_OSG(205, 20, 590, 500, _("Preview"));
             o->box(FL_THIN_DOWN_BOX);
             o->color(FL_BACKGROUND_COLOR);
             o->selection_color(FL_BACKGROUND_COLOR);
@@ -460,12 +461,11 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->end();
       }
       { Fl_Group* o = page[3] = new Fl_Group(0, 0, 800, 560);
-        o->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
-          { Fl_Button* o = new Fl_Button(705, 525, 90, 25, _("Advanced..."));
+          { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
           }
-          { Fl_Box* o = new Fl_Box(250, 525, 455, 25);
+          { Fl_Box* o = new Fl_Box(250, 525, 435, 25);
             Fl_Group::current()->resizable(o);
           }
           { Fl_Check_Button* o = show_cmd_line = new Fl_Check_Button(10, 525, 240, 25, _("Show command line"));
@@ -639,10 +639,10 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_cancel);
       }
-      { Fl_Box* o = new Fl_Box(115, 570, 460, 25);
+      { Fl_Box* o = new Fl_Box(140, 570, 435, 25);
         Fl_Group::current()->resizable(o);
       }
-      { Fl_Button* o = defaults = new Fl_Button(5, 570, 110, 25, _("Defaults"));
+      { Fl_Button* o = defaults = new Fl_Button(5, 570, 135, 25, _("Defaults"));
         o->callback((Fl_Callback*)cb_defaults);
       }
       o->end();

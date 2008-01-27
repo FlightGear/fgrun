@@ -132,10 +132,10 @@ class Wizard {open
           }
         }
         Fl_Group {page[1]} {
-          label {Select an aircraft} open
-          private xywh {0 0 800 560} labelfont 1 align 21
+          label {Select an aircraft}
+          private xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
-          Fl_Tile {} {
+          Fl_Tile {} {open
             xywh {0 20 795 500} resizable
           } {
             Fl_Browser aircraft {
@@ -145,8 +145,8 @@ class Wizard {open
             Fl_Box preview {
               label Preview
               private xywh {205 20 590 500} box THIN_DOWN_BOX labelsize 12
-              code0 {\#include "Fl_Plib.h"}
-              class Fl_Plib
+              code0 {\#include "Fl_OSG.h"}
+              class Fl_OSG
             }
             Fl_Box {} {
               xywh {80 190 265 65} hide resizable
@@ -160,7 +160,7 @@ class Wizard {open
               xywh {115 525 135 25}
             }
             Fl_Output aircraft_author {
-              label {Author(s) :} selected
+              label {Author(s) :}
               xywh {385 525 405 25} resizable
             }
           }
@@ -192,7 +192,7 @@ class Wizard {open
           }
         }
         Fl_Group {page[3]} {
-          private xywh {0 0 800 560} hide
+          private xywh {0 0 800 560}
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -200,10 +200,10 @@ class Wizard {open
             Fl_Button {} {
               label {Advanced...}
               callback {advanced_cb();}
-              private xywh {705 525 90 25}
+              private xywh {685 525 110 25}
             }
-            Fl_Box {} {
-              private xywh {250 525 455 25} resizable
+            Fl_Box {} {selected
+              private xywh {250 525 435 25} resizable
             }
             Fl_Check_Button show_cmd_line {
               label {Show command line}
@@ -415,12 +415,12 @@ class Wizard {open
           private xywh {725 570 70 25} labelsize 12
         }
         Fl_Box {} {
-          xywh {115 570 460 25} resizable
+          xywh {140 570 435 25} resizable
         }
         Fl_Button defaults {
           label Defaults
           callback {defaults_cb();}
-          xywh {5 570 110 25}
+          xywh {5 570 135 25}
         }
       }
     }

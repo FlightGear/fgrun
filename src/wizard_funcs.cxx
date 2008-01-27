@@ -42,6 +42,9 @@
 #include <simgear/structure/exception.hxx>
 #include <simgear/misc/sg_path.hxx>
 
+#include <osg/MatrixTransform>
+#include <osgDB/ReadFile>
+
 #include <plib/ul.h>
 
 #include "wizard.h"
@@ -300,7 +303,11 @@ Wizard::init( bool fullscreen )
     cache_file_->value( cache.c_str() );
 
     char *about_text_buffer = new char[2*strlen(about_text)];
+#if defined( _MSC_VER ) && defined( _DEBUG )
+    sprintf( about_text_buffer, about_text, VERSION, VERSION );
+#else
     sprintf( about_text_buffer, _(about_text), VERSION, VERSION );
+#endif
     about_->value( about_text_buffer );
     delete[] about_text_buffer;
 
@@ -325,6 +332,7 @@ static void
 timeout_handler( void* v )
 {
     ((Wizard*)v)->update_preview();
+    Fl::redraw();
     Fl::repeat_timeout( update_period, timeout_handler, v );
 }
 
@@ -337,31 +345,34 @@ dir_path( const SGPath& p )
 /**
  * Locate a named SSG node in a branch.
  */
-static ssgEntity *
-find_named_node( ssgEntity * node, const char * name )
+static osg::Node *
+find_named_node( osg::Node * node, const string &name )
 {
-  char * node_name = node->getName();
-  if (node_name != 0 && !strcmp(name, node_name))
-    return node;
-  else if (node->isAKindOf(ssgTypeBranch())) {
-    int nKids = node->getNumKids();
-    for (int i = 0; i < nKids; i++) {
-      ssgEntity * result =
-        find_named_node(((ssgBranch*)node)->getKid(i), name);
-      if (result != 0)
-        return result;
-    }
-  } 
-  return 0;
+    string node_name = node->getName();
+    if ( name == node_name ) {
+        return node;
+    } else {
+        osg::ref_ptr<osg::Group> group = node->asGroup();
+        if ( group.valid() ) {
+            int nKids = group->getNumChildren();
+            for (int i = 0; i < nKids; i++) {
+                osg::ref_ptr<osg::Node> result = find_named_node( group->getChild(i), name );
+                if ( result.valid() )
+                    return result.release();
+            }
+        }
+    } 
+    return 0;
 }
 
-static ssgBranch *
-loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
+osg::Node *
+loadModel( const string &fg_root, const string &path,
+               const SGPath& externalTexturePath )
 {
-    ssgBranch * model = 0;
+    osg::ref_ptr<osg::Node> model;
     SGPropertyNode props;
 
-                                  // Load the 3D aircraft object itself
+    // Load the 3D aircraft object itself
     SGPath modelpath = path, texturepath = path;
     if ( !ulIsAbsolutePathName( path.c_str() ) ) {
         SGPath tmp = fg_root;
@@ -369,7 +380,7 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
         modelpath = texturepath = tmp;
     }
 
-                                  // Check for an XML wrapper
+    // Check for an XML wrapper
     if (modelpath.str().substr(modelpath.str().size() - 4, 4) == ".xml") {
         readProperties(modelpath.str(), &props);
         if (props.hasValue("/path")) {
@@ -379,8 +390,8 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
                 texturepath = texturepath.dir();
                 texturepath.append(props.getStringValue("/texture-path"));
             }
-        } else if (model == 0) {
-            model = new ssgBranch;
+        } else if ( !model ) {
+            model = new osg::Switch;
         }
     }
 
@@ -388,61 +399,79 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
     if ( !nopreview_nodes.empty() )
         return 0;
 
-    if (model == 0) {
+    osg::ref_ptr<osgDB::ReaderWriter::Options> options =
+            new osgDB::ReaderWriter::Options(*osgDB::Registry::instance()->getOptions());
+
+    // Assume that textures are in
+    // the same location as the XML file.
+    if (!model) {
         if (texturepath.extension() != "")
             texturepath = texturepath.dir();
 
-        ssgTexturePath((char *)texturepath.c_str());
-        model = (ssgBranch *)preview->load( modelpath.c_str(), texturepath.c_str() );
-        if (model == 0)
-            throw sg_io_exception(_("Failed to load 3D model"), 
-			        sg_location(modelpath.str()));
+        options->setDatabasePath(texturepath.str());
+        if (!externalTexturePath.str().empty())
+            options->getDatabasePathList().push_back(externalTexturePath.str());
+
+        model = osgDB::readNodeFile(modelpath.str(), options.get());
+        if ( model == 0 )
+            throw sg_io_exception("Failed to load 3D model", 
+                                sg_location(modelpath.str()));
     }
-                                  // Set up the alignment node
-    ssgTransform * alignmainmodel = new ssgTransform;
-    alignmainmodel->addKid(model);
-    sgMat4 res_matrix;
-    sgMakeOffsetsMatrix(&res_matrix,
-                        props.getFloatValue("/offsets/heading-deg", 0.0),
-                        props.getFloatValue("/offsets/roll-deg", 0.0),
-                        props.getFloatValue("/offsets/pitch-deg", 0.0),
-                        props.getFloatValue("/offsets/x-m", 0.0),
-                        props.getFloatValue("/offsets/y-m", 0.0),
-                        props.getFloatValue("/offsets/z-m", 0.0));
-    alignmainmodel->setTransform(res_matrix);
 
-    unsigned int i;
+    // Set up the alignment node
+    osg::ref_ptr<osg::MatrixTransform> alignmainmodel = new osg::MatrixTransform;
+    alignmainmodel->addChild(model.get());
+    osg::Matrix res_matrix;
+    double  pitch = props.getDoubleValue("/offsets/pitch-deg", 0.0),
+            roll = props.getDoubleValue("/offsets/roll-deg", 0.0),
+            heading = props.getDoubleValue("/offsets/heading-deg", 0.0);
+    res_matrix.makeRotate(
+            pitch*SG_DEGREES_TO_RADIANS, osg::Vec3(0, 1, 0),
+            roll*SG_DEGREES_TO_RADIANS, osg::Vec3(1, 0, 0),
+            heading*SG_DEGREES_TO_RADIANS, osg::Vec3(0, 0, 1)
+        );
 
+    osg::Matrix tmat;
+    tmat.makeTranslate(props.getFloatValue("/offsets/x-m", 0.0),
+                    props.getFloatValue("/offsets/y-m", 0.0),
+                    props.getFloatValue("/offsets/z-m", 0.0));
+    alignmainmodel->setMatrix(res_matrix*tmat);
+
+    // Load sub-models
     vector<SGPropertyNode_ptr> model_nodes = props.getChildren("model");
+    unsigned int i = 0;
     for (i = 0; i < model_nodes.size(); i++) {
         SGPropertyNode_ptr node = model_nodes[i];
+        string submodel = node->getStringValue("path");
 
-        vector<SGPropertyNode_ptr> nopreview_nodes = node->getChildren("nopreview");
-        if ( nopreview_nodes.empty() ) {
-            ssgTransform * align = new ssgTransform;
-            sgMat4 res_matrix;
-            sgMakeOffsetsMatrix(&res_matrix,
-                                node->getFloatValue("offsets/heading-deg", 0.0),
-                                node->getFloatValue("offsets/roll-deg", 0.0),
-                                node->getFloatValue("offsets/pitch-deg", 0.0),
-                                node->getFloatValue("offsets/x-m", 0.0),
-                                node->getFloatValue("offsets/y-m", 0.0),
-                                node->getFloatValue("offsets/z-m", 0.0));
-            align->setTransform(res_matrix);
-
-            ssgBranch * kid = 0;
-            const char * submodel = node->getStringValue("path");
-            try {
-                kid = loadModel( fg_root, submodel, preview );
-            } catch (const sg_throwable &t) {
-                SG_LOG(SG_INPUT, SG_ALERT, _("Failed to load submodel: ") << t.getFormattedMessage());
-            }
-            if ( kid ) {
-                align->addKid(kid);
-                align->setName(node->getStringValue("name", ""));
-                model->addKid(align);
-            }
+        osg::ref_ptr<osg::Node> kid;
+        try {
+            kid = loadModel( fg_root, submodel, externalTexturePath );
+        } catch (const sg_throwable &t) {
+            SG_LOG(SG_INPUT, SG_ALERT, "Failed to load submodel: " << t.getFormattedMessage());
+            throw;
         }
+
+        osg::ref_ptr<osg::MatrixTransform> align = new osg::MatrixTransform;
+        res_matrix.makeIdentity();
+        pitch = node->getDoubleValue("offsets/pitch-deg", 0.0);
+        roll = node->getDoubleValue("offsets/roll-deg", 0.0);
+        heading = node->getDoubleValue("offsets/heading-deg", 0.0);
+        res_matrix.makeRotate(
+                pitch*SG_DEGREES_TO_RADIANS, osg::Vec3(0, 1, 0),
+                roll*SG_DEGREES_TO_RADIANS, osg::Vec3(1, 0, 0),
+                heading*SG_DEGREES_TO_RADIANS, osg::Vec3(0, 0, 1)
+            );
+
+        tmat.makeIdentity();
+        tmat.makeTranslate(node->getDoubleValue("offsets/x-m", 0),
+                        node->getDoubleValue("offsets/y-m", 0),
+                        node->getDoubleValue("offsets/z-m", 0));
+        align->setMatrix( res_matrix * tmat );
+        align->addChild( kid.get() );
+
+        align->setName( node->getStringValue( "name", "" ) );
+        alignmainmodel->addChild( align.get() );
     }
 
     vector<SGPropertyNode_ptr> animation_nodes = props.getChildren("animation");
@@ -452,16 +481,16 @@ loadModel( const string &fg_root, const string &path, Fl_Plib *preview )
         if ( !nopreview_nodes.empty() ) {
             vector<SGPropertyNode_ptr> name_nodes = animation_nodes[i]->getChildren("object-name");
             for (size_t j = 0; j < name_nodes.size(); j++ ) {
-                ssgEntity *e = find_named_node( model, name_nodes[j]->getStringValue() );
+                osg::Node *e = find_named_node( model.get(), name_nodes[j]->getStringValue() );
                 if ( !e )
                     continue;
-                ssgBranch *b = e->getParent( 0 );
-                b->removeKid( e );
+                osg::Group *b = e->getParent( 0 );
+                b->removeChild( e );
             }
         }
     }
 
-    return alignmainmodel;
+    return alignmainmodel.release();
 }
 
 void
@@ -473,7 +502,6 @@ Wizard::preview_aircraft()
 
     preview->clear();
     preview->redraw();
-    preview->init();
 
     int n = aircraft->value();
     if (n == 0)
@@ -494,18 +522,17 @@ Wizard::preview_aircraft()
 	    return;
 	}
 
+        setlocale( LC_ALL, "C" );
 	try
 	{
             win->cursor( FL_CURSOR_WAIT );
 	    Fl::flush();
 
-            setlocale( LC_ALL, "C" );
-	    ssgEntity* model = loadModel( fg_root_->value(), path.str(), preview );
-            setlocale( LC_ALL, "" );
+            osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), path.str(), SGPath() );
 	    if (model != 0)
 	    {
-                ssgEntity *bounding_obj = find_named_node( model, "Aircraft" );
-                preview->set_model( model, bounding_obj );
+                osg::ref_ptr<osg::Node> bounding_obj = find_named_node( model.get(), "Aircraft" );
+                preview->set_model( model.get(), bounding_obj.get() );
 
 		Fl::add_timeout( update_period, timeout_handler, this );
 	    }
@@ -519,6 +546,7 @@ Wizard::preview_aircraft()
 	}
 	catch (...)
 	{}
+        setlocale( LC_ALL, "" );
     }
     else
     {
@@ -1716,7 +1744,6 @@ Wizard::reset_settings()
     preview->make_current();
     preview->clear();
     preview->redraw();
-    preview->init();
 
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];

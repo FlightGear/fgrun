@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.0.0\n"
-"Report-Msgid-Bugs-To: fredb@users.sourceforge.net\n"
-"POT-Creation-Date: 2008-01-13 14:48+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-01-21 23:31+0100\n"
 "PO-Revision-Date: 2008-01-19 17:30+0100\n"
 "Last-Translator: Stefan <fgfs.stefan@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -16,1140 +16,1639 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/advanced.cxx:70
+#: advanced.cxx:70
 msgid "ada"
-msgstr "" # Geen vertaling nodig -- fdm
+msgstr ""
 
-#: src/advanced.cxx:71
+# Geen vertaling nodig -- fdm
+#: advanced.cxx:71
 msgid "balloon"
-msgstr "" # Geen vertaling nodig -- fdm
+msgstr ""
 
-#: src/advanced.cxx:72
+# Geen vertaling nodig -- fdm
+#: advanced.cxx:72
 msgid "external"
-msgstr "" # Geen vertaling nodig -- fdm
+msgstr ""
 
-#: src/advanced.cxx:73
+# Geen vertaling nodig -- fdm
+#: advanced.cxx:73
 msgid "jsb"
-msgstr "" # Geen vertaling nodig -- fdm
+msgstr ""
 
-#: src/advanced.cxx:74
+# Geen vertaling nodig -- fdm
+#: advanced.cxx:74
 msgid "larcsim"
-msgstr "" # Geen vertaling nodig -- fdm
+msgstr ""
 
-#: src/advanced.cxx:75
+# Geen vertaling nodig -- fdm
+#: advanced.cxx:75
 msgid "magic"
-msgstr "" # Geen vertaling nodig -- fdm
+msgstr ""
 
-#: src/advanced.cxx:76
+# Geen vertaling nodig -- fdm
+#: advanced.cxx:76
 msgid "network"
 msgstr "netwerk"
 
-#: src/advanced.cxx:77
+#: advanced.cxx:77
 msgid "null"
-msgstr "" # Geen vertaling nodig -- fdm
+msgstr ""
 
-#: src/advanced.cxx:78
+# Geen vertaling nodig -- fdm
+#: advanced.cxx:78
 msgid "ufo"
-msgstr "" # Geen vertaling nodig -- fdm
+msgstr ""
 
-#: src/advanced.cxx:79
+# Geen vertaling nodig -- fdm
+#: advanced.cxx:79
 msgid "yasim"
-msgstr "" # Geen vertaling nodig -- fdm
+msgstr ""
 
-#: src/advanced.cxx:84 src/wizard.cxx:162
+# Geen vertaling nodig -- fdm
+#: advanced.cxx:84 wizard.cxx:162
 msgid "16"
-msgstr "" # Geen vertaling nodig
+msgstr ""
 
-#: src/advanced.cxx:85 src/wizard.cxx:161
+# Geen vertaling nodig
+#: advanced.cxx:85 wizard.cxx:161
 msgid "24"
-msgstr "" # Geen vertaling nodig
+msgstr ""
 
-#: src/advanced.cxx:86 src/wizard.cxx:160
+# Geen vertaling nodig
+#: advanced.cxx:86 wizard.cxx:160
 msgid "32"
-msgstr "" # Geen vertaling nodig
+msgstr ""
 
-#: src/advanced.cxx:261
+# Geen vertaling nodig
+#: advanced.cxx:261
 msgid "atc610x"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:262
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:262
 msgid "atlas"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:263
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:263
 msgid "garmin"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:264
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:264
 msgid "AV400"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:265
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:265
 msgid "generic"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:266
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:266
 msgid "joy-client"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:267
+# suggesties welkom
+#: advanced.cxx:267
 msgid "jsclient"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:268
+# suggesties welkom
+#: advanced.cxx:268
 msgid "native"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:269
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:269
 msgid "native-ctrls"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:270
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:270
 msgid "native-fdm"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:271
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:271
 msgid "native-gui"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:272
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:272
 msgid "nmea"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:273
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:273
 msgid "opengc"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:274
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:274
 msgid "pve"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:275 src/advanced.cxx:1241
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:275 advanced.cxx:1241
 msgid "props"
-msgstr "" # Suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:276
+# Suggesties welkom
+#: advanced.cxx:276
 msgid "ray"
-msgstr "" # Suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:277
+# Suggesties welkom
+#: advanced.cxx:277
 msgid "rul"
-msgstr "" # Suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:289
+# Suggesties welkom
+#: advanced.cxx:289
 msgid "file"
 msgstr "bestand"
 
-#: src/advanced.cxx:290
+#: advanced.cxx:290
 msgid "serial"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:291
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:291
 msgid "socket"
-msgstr "" # Geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:303
+# Geen vertaling nodig -- protocol
+#: advanced.cxx:303
 msgid "in"
-msgstr "" # Geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:304
+# Geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:304
 msgid "out"
 msgstr "uit"
 
-#: src/advanced.cxx:305
+#: advanced.cxx:305
 msgid "bi"
-msgstr "" # Geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:605
+# Geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:605
 msgid "0"
-msgstr "" # Geen vertaling nodig
+msgstr ""
 
-#: src/advanced.cxx:606
+# Geen vertaling nodig
+#: advanced.cxx:606
 msgid "1"
-msgstr "" # Geen vertaling nodig
+msgstr ""
 
-#: src/advanced.cxx:607
+# Geen vertaling nodig
+#: advanced.cxx:607
 msgid "2"
-msgstr "" # Geen vertaling nodig
+msgstr ""
 
-#: src/advanced.cxx:608
+# Geen vertaling nodig
+#: advanced.cxx:608
 msgid "3"
-msgstr "" # Geen vertaling nodig
+msgstr ""
 
-#: src/advanced.cxx:609
+# Geen vertaling nodig
+#: advanced.cxx:609
 msgid "4"
-msgstr "" # Geen vertaling nodig
+msgstr ""
 
-#: src/advanced.cxx:650
+# Geen vertaling nodig
+#: advanced.cxx:650
 msgid "Advanced Options"
 msgstr "Geavanceerde Opties"
 
-#: src/advanced.cxx:660
+#: advanced.cxx:660
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: src/advanced.cxx:663
+#: advanced.cxx:663
 msgid "OK"
-msgstr "" # Geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:666 src/advanced_funcs.cxx:164
+# Geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:666 advanced_funcs.cxx:164
 msgid "General"
 msgstr "Algemeen"
 
-#: src/advanced.cxx:671
+#: advanced.cxx:671
 msgid "Control:"
 msgstr "Besturing"
 
-#: src/advanced.cxx:672
+#: advanced.cxx:672
 msgid "Primary control mode"
 msgstr "Hoofdbesturingsmethode"
 
-#: src/advanced.cxx:677
+#: advanced.cxx:677
 msgid "Language:"
 msgstr "Taal:"
 
-#: src/advanced.cxx:681
+#: advanced.cxx:681
 msgid "Browser:"
-msgstr "" # Geen vertaling nodig --  zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:685 src/advanced.cxx:694 src/advanced.cxx:1361
-#: src/advanced.cxx:1423
+# Geen vertaling nodig --  zelfde in NL
+#: advanced.cxx:685 advanced.cxx:694 advanced.cxx:1361 advanced.cxx:1423
 msgid "..."
-msgstr "" # Geen vertaling nodig
+msgstr ""
 
-#: src/advanced.cxx:689
+# Geen vertaling nodig
+#: advanced.cxx:689
 msgid "Config:"
 msgstr "Configuratie:"
 
-#: src/advanced.cxx:690
+#: advanced.cxx:690
 msgid "Path to additional XML properties file"
 msgstr "Pad naar extra XML properties bestanden"
 
-#: src/advanced.cxx:698 src/wizard.cxx:312
+#: advanced.cxx:698 wizard.cxx:312
 msgid "Executable:"
 msgstr "Programma:"
 
-#: src/advanced.cxx:702 src/wizard.cxx:325
+#: advanced.cxx:702 wizard.cxx:325
 msgid "FG_ROOT:"
-msgstr "" # Geen vertaling nodig -- variabele
+msgstr ""
 
-#: src/advanced.cxx:706 src/wizard.cxx:337
+# Geen vertaling nodig -- variabele
+#: advanced.cxx:706 wizard.cxx:337
 msgid "FG_SCENERY:"
-msgstr "" # Geen vertaling nodig -- variabele
+msgstr ""
 
-#: src/advanced.cxx:710
+# Geen vertaling nodig -- variabele
+#: advanced.cxx:710
 msgid "Airport:"
 msgstr "Vliegveld:"
 
-#: src/advanced.cxx:714
+#: advanced.cxx:714
 msgid "Runway:"
 msgstr "Startbaan:"
 
-#: src/advanced.cxx:718
+#: advanced.cxx:718
 msgid "Aircraft:"
 msgstr "Vliegtuigen:"
 
-#: src/advanced.cxx:724 src/advanced_funcs.cxx:165 src/wizard.cxx:524
+#: advanced.cxx:724 wizard.cxx:524 advanced_funcs.cxx:165
 msgid "Features"
-msgstr "" # Suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:729
+# Suggesties welkom
+#: advanced.cxx:729
 msgid "Game Mode"
 msgstr "Volledig Scherm"
 
-#: src/advanced.cxx:730
+#: advanced.cxx:730
 msgid "Enable full screen game mode"
 msgstr "Volledig scherm gebruiken"
 
-#: src/advanced.cxx:734
+#: advanced.cxx:734
 msgid "Splash Screen"
-msgstr ""  # Suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:735
+# Suggesties welkom
+#: advanced.cxx:735
 msgid "Display splash screen at startup"
-msgstr "Laat splash screen zien bij het starten" # Zie hierboven, zelfde vertaling gebruiken
+msgstr "Laat splash screen zien bij het starten"
 
-#: src/advanced.cxx:740
+# Zie hierboven, zelfde vertaling gebruiken
+#: advanced.cxx:740
 msgid "Intro Music"
 msgstr "Intro Muziek"
 
-#: src/advanced.cxx:741
+#: advanced.cxx:741
 msgid "Enable introduction music during start up"
 msgstr "Schakel introductie muziek aan tijdens het opstarten"
 
-#: src/advanced.cxx:746
+#: advanced.cxx:746
 msgid "Mouse Pointer"
 msgstr "Muis Aanwijzer"
 
-#: src/advanced.cxx:747
+#: advanced.cxx:747
 msgid "Enable extra mouse pointer"
 msgstr "Schakel extra muis aanwijzer aan"
 
-#: src/advanced.cxx:751
+#: advanced.cxx:751
 msgid "Random Objects"
 msgstr "Willekeurige Objecten"
 
-#: src/advanced.cxx:752
+#: advanced.cxx:752
 msgid "Enable random scenery objects"
 msgstr "Schakel willekeurige objecten aan"
 
-#: src/advanced.cxx:756
+#: advanced.cxx:756
 msgid "Panel"
 msgstr "Paneel"
 
-#: src/advanced.cxx:757
+#: advanced.cxx:757
 msgid "Enable the instrument panel"
 msgstr "Schakel het instrumenten paneel aan"
 
-#: src/advanced.cxx:762
+#: advanced.cxx:762
 msgid "Sound"
 msgstr "Geluid"
 
-#: src/advanced.cxx:763
+#: advanced.cxx:763
 msgid "Enable sound effects"
 msgstr "Schakel geluidseffecten aan"
 
-#: src/advanced.cxx:768
+#: advanced.cxx:768
 msgid "HUD"
-msgstr ""  # Geen vertaling nodig -- afkorting
+msgstr ""
 
-#: src/advanced.cxx:769
+# Geen vertaling nodig -- afkorting
+#: advanced.cxx:769
 msgid "Enable Heads Up Display"
-msgstr "Schakel Heads Up Display aan"  # Is het nodig om HUD te vertalen? Ik denk het niet (Stefan)
+msgstr "Schakel Heads Up Display aan"
 
-#: src/advanced.cxx:774
+# Is het nodig om HUD te vertalen? Ik denk het niet (Stefan)
+#: advanced.cxx:774
 msgid "Anti-alias HUD"
-msgstr ""  # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:775
+# suggesties welkom
+#: advanced.cxx:775
 msgid "Enable anti-aliased HUD"
-msgstr "Schakel anti-aliased HUD aan" # zie hierboven
+msgstr "Schakel anti-aliased HUD aan"
 
-#: src/advanced.cxx:780 src/wizard.cxx:548
+# zie hierboven
+#: advanced.cxx:780 wizard.cxx:548
 msgid "Auto-coordination"
 msgstr "Automatische richtingroer correctie"
 
-#: src/advanced.cxx:781
+#: advanced.cxx:781
 msgid "Enable auto-coordinated turns."
 msgstr "Schakel automatische richtingroer correctie aan"
 
-#: src/advanced.cxx:785 src/wizard.cxx:496
+#: advanced.cxx:785 wizard.cxx:496
 msgid "Horizon effect"
-msgstr ""  # Geen vertaling nodig -- zelfde als in NL
+msgstr ""
 
-#: src/advanced.cxx:786
+# Geen vertaling nodig -- zelfde als in NL
+#: advanced.cxx:786
 msgid "Enable celestial body growth illusion near the horizon"
-msgstr "Schakel de hemellichaam vergrotende illusie dichtbij de horizon aan" # Betere suggesties welkom
+msgstr "Schakel de hemellichaam vergrotende illusie dichtbij de horizon aan"
 
-#: src/advanced.cxx:790
+# Betere suggesties welkom
+#: advanced.cxx:790
 msgid "Enhanced lighting"
 msgstr "Geavanceerde verlichting"
 
-#: src/advanced.cxx:791
+#: advanced.cxx:791
 msgid "Enable enhanced runway lighting"
 msgstr "Schakel geavanceerde startbaan verlichting aan"
 
-#: src/advanced.cxx:795
+#: advanced.cxx:795
 msgid "Distance attenuation"
-msgstr "Afstandsvermindering" # Betere suggesties welkom
+msgstr "Afstandsvermindering"
 
-#: src/advanced.cxx:796
+# Betere suggesties welkom
+#: advanced.cxx:796
 msgid "Enable runway light distance attenuation"
-msgstr "Schakel afstandsvermindering van startbaanverlichting aan" # Betere suggesties welkom
+msgstr "Schakel afstandsvermindering van startbaanverlichting aan"
 
-#: src/advanced.cxx:800
+# Betere suggesties welkom
+#: advanced.cxx:800
 msgid "Hud-3D"
 msgstr "3D HUD"
 
-#: src/advanced.cxx:801
+#: advanced.cxx:801
 msgid "Enable 3D HUD"
 msgstr "Schakel 3D HUD aan"
 
-#: src/advanced.cxx:805 src/wizard.cxx:505
+#: advanced.cxx:805 wizard.cxx:505
 msgid "Specular highlight"
-msgstr "Glimmende weerspiegelingen" # Betere suggesties welkom
+msgstr "Glimmende weerspiegelingen"
 
-#: src/advanced.cxx:806
+# Betere suggesties welkom
+#: advanced.cxx:806
 msgid "Enable specular reflections on textured objects"
-msgstr "Schakel glimmende weerkaatsingen aan op getextureerde objecten" # Betere suggesties welkom
+msgstr "Schakel glimmende weerkaatsingen aan op getextureerde objecten"
 
-#: src/advanced.cxx:810
+# Betere suggesties welkom
+#: advanced.cxx:810
 msgid "Failures"
-msgstr "Falingen"  # Betere suggesties welkom
+msgstr "Falingen"
 
-#: src/advanced.cxx:815
+# Betere suggesties welkom
+#: advanced.cxx:815
 msgid "pitot"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:820
+# suggesties welkom
+#: advanced.cxx:820
 msgid "static"
 msgstr "statisch"
 
-#: src/advanced.cxx:825
+#: advanced.cxx:825
 msgid "system"
 msgstr "systeem"
 
-#: src/advanced.cxx:830
+#: advanced.cxx:830
 msgid "vacuum"
-msgstr "" # geen vertaling nodig -- zelfde in NL --> ü mogelijkheden?
+msgstr ""
 
-#: src/advanced.cxx:835
+# geen vertaling nodig -- zelfde in NL --> ü mogelijkheden?
+#: advanced.cxx:835
 msgid "AI Traffic"
-msgstr "Computergestuurd Verkeer"
+msgstr ""
+"Computergestuurd\n"
+"Verkeer"
 
-#: src/advanced.cxx:836
+#: advanced.cxx:836
 msgid "Enable AI traffic"
 msgstr "Schakel computergestuurd verkeer aan"
 
-#: src/advanced.cxx:842 src/advanced_funcs.cxx:166
+#: advanced.cxx:842 advanced_funcs.cxx:166
 msgid "Flight Model"
 msgstr "Vluchtmodel"
 
-#: src/advanced.cxx:847
+#: advanced.cxx:847
 msgid "FDM:"
-msgstr "" # geen vertaling nodig -- afkorting
+msgstr ""
 
-#: src/advanced.cxx:848
+# geen vertaling nodig -- afkorting
+#: advanced.cxx:848
 msgid "Core Flight Dynamics Model"
 msgstr "Kern FDM"
 
-#: src/advanced.cxx:855
+#: advanced.cxx:855
 msgid "No Trim"
 msgstr "Geen Trim"
 
-#: src/advanced.cxx:856
+#: advanced.cxx:856
 msgid "Do not attempt to trim the model"
 msgstr "Probeer niet het toestel te trimmen"
 
-#: src/advanced.cxx:861
+#: advanced.cxx:861
 msgid "Model Hz:"
-msgstr ""  # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:862
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:862
 msgid "Run the FDM at this rate (iterations per second)"
-msgstr "Draai de FDM met deze snelheid (herhalingen per seconde)" # betere suggesties voor iterations welkom
+msgstr "Draai de FDM met deze snelheid (herhalingen per seconde)"
 
-#: src/advanced.cxx:870
+# betere suggesties voor iterations welkom
+#: advanced.cxx:870
 msgid "Speed:"
 msgstr "Snelheid:"
 
-#: src/advanced.cxx:871
+#: advanced.cxx:871
 msgid "Run FDM faster than real time"
 msgstr "Draai de FDM sneller dan realistisch is"
 
-#: src/advanced.cxx:880
+#: advanced.cxx:880
 msgid "On Ground"
 msgstr "Op De Grond"
 
-#: src/advanced.cxx:881
+#: advanced.cxx:881
 msgid "Start at ground level"
 msgstr "Start op grondniveau"
 
-#: src/advanced.cxx:887
+#: advanced.cxx:887
 msgid "In Air"
 msgstr "In De Lucht"
 
-#: src/advanced.cxx:888
+#: advanced.cxx:888
 msgid "Start in the air"
 msgstr "Start in de lucht"
 
-#: src/advanced.cxx:897 src/advanced.cxx:902 src/advanced_funcs.cxx:167
+#: advanced.cxx:897 advanced.cxx:902 advanced_funcs.cxx:167
 msgid "Freeze"
 msgstr "Bevries"
 
-#: src/advanced.cxx:903
+#: advanced.cxx:903
 msgid "Start paused"
 msgstr "Start gepauseerd"
 
-#: src/advanced.cxx:907
+#: advanced.cxx:907
 msgid "Fuel Freeze"
-msgstr "Geen Brandstofverbruik" # betere suggesties welkom
+msgstr "Geen Brandstofverbruik"
 
-#: src/advanced.cxx:911
+# betere suggesties welkom
+#: advanced.cxx:911
 msgid "Clock Freeze"
 msgstr "Zet Tijd Stil"
 
-#: src/advanced.cxx:917 src/advanced_funcs.cxx:168
+#: advanced.cxx:917 advanced_funcs.cxx:168
 msgid "Initial Position"
 msgstr "Startpositie"
 
-#: src/advanced.cxx:922
+#: advanced.cxx:922
 msgid "Longitude:"
 msgstr "Lengtegraad:"
 
-#: src/advanced.cxx:923
+#: advanced.cxx:923
 msgid "Initial longitude, west is negative"
 msgstr "De startlengtegraad, het westen is negatief"
 
-#: src/advanced.cxx:927
+#: advanced.cxx:927
 msgid "Latitude:"
 msgstr "Breedtegraad:"
 
-#: src/advanced.cxx:928
+#: advanced.cxx:928
 msgid "Initial latitude, south is negative"
 msgstr "Start breedtegraad, het zuiden is negatief"
 
-#: src/advanced.cxx:932
+#: advanced.cxx:932
 msgid "Altitude:"
 msgstr "Hoogte:"
 
-#: src/advanced.cxx:933
+#: advanced.cxx:933
 msgid "Initial altitude in feet"
 msgstr "Starthoogte in voeten"
 
-#: src/advanced.cxx:938
+#: advanced.cxx:938
 msgid "Airspeed:"
 msgstr "Luchtsnelheid:"
 
-#: src/advanced.cxx:939
+#: advanced.cxx:939
 msgid "Initial airspeed in knots"
 msgstr "Startluchtsnelheid in knopen"
 
-#: src/advanced.cxx:944
+#: advanced.cxx:944
 msgid "uBody:"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:948
+# suggesties welkom
+#: advanced.cxx:948
 msgid "vBody:"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:952
+# suggesties welkom
+#: advanced.cxx:952
 msgid "wBody"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:956 src/advanced.cxx:1625
+# suggesties welkom
+#: advanced.cxx:956 advanced.cxx:1625
 msgid "Heading:"
 msgstr "Richting:"
 
-#: src/advanced.cxx:957
+#: advanced.cxx:957
 msgid "Initial aircraft heading (yaw) angle 0 to 360 degrees"
 msgstr "Startrichting van het vliegtuig, geldig tussen 0 en 360 graden"
 
-#: src/advanced.cxx:963
+#: advanced.cxx:963
 msgid "Roll:"
-msgstr "Rol:" # betere suggesties welkom
+msgstr "Rol:"
 
-#: src/advanced.cxx:964
+# betere suggesties welkom
+#: advanced.cxx:964
 msgid "Initial roll angle, (Phi)"
-msgstr "Start rolhoek, (Pi)" # betere suggesties welkom
+msgstr "Start rolhoek, (Pi)"
 
-#: src/advanced.cxx:971
+# betere suggesties welkom
+#: advanced.cxx:971
 msgid "Pitch:"
 msgstr "Stijghoek:"
 
-#: src/advanced.cxx:972
+#: advanced.cxx:972
 msgid "Initial pitch angle (Theta)"
 msgstr "Startstijghoek (Theta)"
 
-#: src/advanced.cxx:979
+#: advanced.cxx:979
 msgid "VOR:"
-msgstr "" # geen vertaling nodig -- afkorting
+msgstr ""
 
-#: src/advanced.cxx:984
+# geen vertaling nodig -- afkorting
+#: advanced.cxx:984
 msgid "NDB:"
-msgstr "" # geen vertaling nodig -- afkorting
+msgstr ""
 
-#: src/advanced.cxx:989
+# geen vertaling nodig -- afkorting
+#: advanced.cxx:989
 msgid "Fix:"
-msgstr "" # geen vertaling nodig -- afkorting
+msgstr ""
 
-#: src/advanced.cxx:994
+# geen vertaling nodig -- afkorting
+#: advanced.cxx:994
 msgid "offset distance:"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:999
+# suggesties welkom
+#: advanced.cxx:999
 msgid "offset azimuth:"
 msgstr ""
 
-#: src/advanced.cxx:1004
+#: advanced.cxx:1004
 msgid "Glide slope:"
 msgstr "Glijhoek:"
 
-#: src/advanced.cxx:1009
+#: advanced.cxx:1009
 msgid "Climb rate:"
 msgstr "Klimsnelheid:"
 
-#: src/advanced.cxx:1016 src/advanced_funcs.cxx:169
+#: advanced.cxx:1016 advanced_funcs.cxx:169
 msgid "Rendering"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1021 src/advanced.cxx:1664 src/advanced_funcs.cxx:178
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1021 advanced.cxx:1664 advanced_funcs.cxx:178
 msgid "Clouds"
 msgstr "Wolken"
 
-#: src/advanced.cxx:1022
+#: advanced.cxx:1022
 msgid "Enable 2D (flat) cloud layers"
 msgstr "Schakel 2D (platte) wokendekken aan"
 
-#: src/advanced.cxx:1027
+#: advanced.cxx:1027
 msgid "3D Clouds"
 msgstr "3D Wolken"
 
-#: src/advanced.cxx:1028
+#: advanced.cxx:1028
 msgid "Enable 3D (volumetric) cloud layers"
 msgstr "Schakel 3D (met volume) wolkendekken aan"
 
-#: src/advanced.cxx:1032
+#: advanced.cxx:1032
 msgid "Full Screen"
 msgstr "Volledig Scherm"
 
-#: src/advanced.cxx:1033
+#: advanced.cxx:1033
 msgid "Enable full screen mode"
 msgstr "Schakel volledig scherm mode aan"
 
-#: src/advanced.cxx:1037
+#: advanced.cxx:1037
 msgid "Sky Blend"
-msgstr "Geleidelijke Luchtlaagovergang" # betere suggesties welkom
+msgstr "Geleidelijke Luchtlaagovergang"
 
-#: src/advanced.cxx:1038
+# betere suggesties welkom
+#: advanced.cxx:1038
 msgid "Enable sky blending"
 msgstr "Schakel geleidelijke luchtlaagovergangen aan"
 
-#: src/advanced.cxx:1043
+#: advanced.cxx:1043
 msgid "Textures"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:1044
+# suggesties welkom
+#: advanced.cxx:1044
 msgid "Enable textures"
-msgstr "Schakel textures aan" # betere suggesties welkom
+msgstr "Schakel textures aan"
 
-#: src/advanced.cxx:1049
+# betere suggesties welkom
+#: advanced.cxx:1049
 msgid "Wireframe"
 msgstr "Draadframe"
 
-#: src/advanced.cxx:1050
+#: advanced.cxx:1050
 msgid "Enable wireframe drawing mode"
 msgstr "Schakel draadframe tekenmethode aan"
 
-#: src/advanced.cxx:1054
+#: advanced.cxx:1054
 msgid "Shading"
 msgstr "Schaduwen"
 
-#: src/advanced.cxx:1057
+#: advanced.cxx:1057
 msgid "Smooth"
 msgstr "Geleidelijk"
 
-#: src/advanced.cxx:1063
+#: advanced.cxx:1063
 msgid "Flat"
 msgstr "Plat"
 
-#: src/advanced.cxx:1070
+#: advanced.cxx:1070
 msgid "Fog"
 msgstr "Mist"
 
-#: src/advanced.cxx:1073
+#: advanced.cxx:1073
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: src/advanced.cxx:1078
+#: advanced.cxx:1078
 msgid "Fastest"
 msgstr "Snelste"
 
-#: src/advanced.cxx:1083
+#: advanced.cxx:1083
 msgid "Nicest"
 msgstr "Mooiste"
 
-#: src/advanced.cxx:1091
+#: advanced.cxx:1091
 msgid "Geometry:"
 msgstr "Afmeting:"
 
-#: src/advanced.cxx:1092 src/wizard.cxx:487
+#: advanced.cxx:1092 wizard.cxx:487
 msgid "Window geometry, WxH"
 msgstr "Schermafmeting, BxH"
 
-#: src/advanced.cxx:1096
+#: advanced.cxx:1096
 msgid "Visibility:"
 msgstr "Zichtafstand:"
 
-#: src/advanced.cxx:1097
+#: advanced.cxx:1097
 msgid "Initial visibility distance"
 msgstr "Start zichtafstand"
 
-#: src/advanced.cxx:1103
+#: advanced.cxx:1103
 msgid "Meters"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1104
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1104
 msgid "Specify visibilty in meters"
 msgstr "Geef zichtafstand op in meters"
 
-#: src/advanced.cxx:1110
+#: advanced.cxx:1110
 msgid "Miles"
 msgstr "Mijlen"
 
-#: src/advanced.cxx:1111
+#: advanced.cxx:1111
 msgid "Specify visiblity in miles"
 msgstr "Geef zichtafstand op in mijlen"
 
-#: src/advanced.cxx:1118
+#: advanced.cxx:1118
 msgid "View Offset:"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:1122
+# suggesties welkom
+#: advanced.cxx:1122
 msgid "bpp:"
-msgstr "" # geen vertaling nodig -- afkorting
+msgstr ""
 
-#: src/advanced.cxx:1123 src/wizard.cxx:517
+# geen vertaling nodig -- afkorting
+#: advanced.cxx:1123 wizard.cxx:517
 msgid "Color depth (bits per pixel)"
 msgstr "Kleurkwaliteit (bits per pixel)"
 
-#: src/advanced.cxx:1129
+#: advanced.cxx:1129
 msgid "FOV:"
-msgstr "" # geen vertaling nodig -- afkorting
+msgstr ""
 
-#: src/advanced.cxx:1130
+# geen vertaling nodig -- afkorting
+#: advanced.cxx:1130
 msgid "Field of View angle"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:1139 src/advanced_funcs.cxx:170
+# suggesties welkom
+#: advanced.cxx:1139 advanced_funcs.cxx:170
 msgid "Time"
 msgstr "Tijd"
 
-#: src/advanced.cxx:1144
+#: advanced.cxx:1144
 msgid "Time match real"
 msgstr "Echte tijd gebruiken"
 
-#: src/advanced.cxx:1145
+#: advanced.cxx:1145
 msgid "Synchronize simulation time with real time"
 msgstr "Tijd in de simulatie synchroniseren met de echte tijd"
 
-#: src/advanced.cxx:1152
+#: advanced.cxx:1152
 msgid "Time match local"
 msgstr "Locale tijd gebruiken"
 
-#: src/advanced.cxx:1153
+#: advanced.cxx:1153
 msgid "Synchronize simulation time with local time"
 msgstr "Tijd in de simulatie synchroniseren met de locale tijd"
 
-#: src/advanced.cxx:1159
+#: advanced.cxx:1159
 msgid "Start date sys"
-msgstr "Systeemstartdatum" # betere suggesties welkom
+msgstr "Systeemstartdatum"
 
-#: src/advanced.cxx:1165
+# betere suggesties welkom
+#: advanced.cxx:1165
 msgid "Start date gmt"
 msgstr "Startdatum in GMT"
 
-#: src/advanced.cxx:1171
+#: advanced.cxx:1171
 msgid "Start date lat"
-msgstr "Startdatum in breedtegraad" # betere suggesties welkom
+msgstr "Startdatum in breedtegraad"
 
-#: src/advanced.cxx:1178
+# betere suggesties welkom
+#: advanced.cxx:1178
 msgid "Offset (+/-) from real time"
 msgstr "Verschil (+/-) met de echte tijd"
 
-#: src/advanced.cxx:1205
+#: advanced.cxx:1205
 msgid "Time of day"
 msgstr "Tijd van de dag"
 
-#: src/advanced.cxx:1211
+#: advanced.cxx:1211
 msgid "choice:"
 msgstr "keus:"
 
-#: src/advanced.cxx:1219 src/advanced_funcs.cxx:171
+#: advanced.cxx:1219 advanced_funcs.cxx:171
 msgid "Network"
 msgstr "Netwerk"
 
-#: src/advanced.cxx:1224
+#: advanced.cxx:1224
 msgid "httpd"
-msgstr "" # geen vertaling nodig -- afkorting
+msgstr ""
 
-#: src/advanced.cxx:1225
+# geen vertaling nodig -- afkorting
+#: advanced.cxx:1225
 msgid "Enable HTTP server"
 msgstr "Schakel HTTP server aan"
 
-#: src/advanced.cxx:1231
+#: advanced.cxx:1231
 msgid "HTTP server port"
 msgstr "HTTP server poort"
 
-#: src/advanced.cxx:1242
+#: advanced.cxx:1242
 msgid "Enable property server"
-msgstr "Schakel property server aan" # geen vertaling nodig voor property -- niet goed te vertalen
+msgstr "Schakel property server aan"
 
-#: src/advanced.cxx:1248
+# geen vertaling nodig voor property -- niet goed te vertalen
+#: advanced.cxx:1248
 msgid "Property server port"
 msgstr "Property server poort"
 
-#: src/advanced.cxx:1257
+#: advanced.cxx:1257
 msgid "jpg-httpd"
-msgstr ""  # geen vertaling nodig -- niet goed te vertalen
+msgstr ""
 
-#: src/advanced.cxx:1258
+# geen vertaling nodig -- niet goed te vertalen
+#: advanced.cxx:1258
 msgid "Enable screen shot HTTP server"
 msgstr "Schakel HTTP server voor schermafdrukken aan"
 
-#: src/advanced.cxx:1264
+#: advanced.cxx:1264
 msgid "Screen shot HTTP server port"
 msgstr "HTTP server voor schermafdrukken poort"
 
-#: src/advanced.cxx:1273
+#: advanced.cxx:1273
 msgid "Multiplayer Options"
-msgstr "Multiplayer Opties" # geen vertaling nodig voor multiplayer -- niet goed te vertalen
+msgstr "Multiplayer Opties"
 
-#: src/advanced.cxx:1278
+# geen vertaling nodig voor multiplayer -- niet goed te vertalen
+#: advanced.cxx:1278
 msgid "Callsign:"
 msgstr "Naam:"
 
-#: src/advanced.cxx:1282
+#: advanced.cxx:1282
 msgid "Multiplay 1:"
-msgstr "" # geen vertaling nodig -- niet goed te vertalen
+msgstr ""
 
-#: src/advanced.cxx:1283
+# geen vertaling nodig -- niet goed te vertalen
+#: advanced.cxx:1283
 msgid "in|out,hz,address,port"
 msgstr "in|uit,hez,adres,poort"
 
-#: src/advanced.cxx:1287
+#: advanced.cxx:1287
 msgid "Multiplay 2:"
-msgstr "" # geen vertaling nodig -- niet goed te vertalen
+msgstr ""
 
-#: src/advanced.cxx:1293
+# geen vertaling nodig -- niet goed te vertalen
+#: advanced.cxx:1293
 msgid "Proxy:"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1299 src/advanced_funcs.cxx:172
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1299 advanced_funcs.cxx:172
 msgid "Input/Output"
-msgstr ""  # geen vertaling nodig -- niet goed te vertalen
+msgstr ""
 
-#: src/advanced.cxx:1311 src/advanced.cxx:1511 src/advanced.cxx:1541
-#: src/advanced.cxx:1564 src/advanced.cxx:1586
+# geen vertaling nodig -- niet goed te vertalen
+#: advanced.cxx:1311 advanced.cxx:1511 advanced.cxx:1541 advanced.cxx:1564
+#: advanced.cxx:1586
 msgid "New"
 msgstr "Nieuw"
 
-#: src/advanced.cxx:1315 src/advanced.cxx:1498 src/advanced.cxx:1545
-#: src/advanced.cxx:1568 src/advanced.cxx:1590 src/wizard.cxx:366
-#: src/wizard.cxx:381
+#: advanced.cxx:1315 advanced.cxx:1498 advanced.cxx:1545 advanced.cxx:1568
+#: advanced.cxx:1590 wizard.cxx:366 wizard.cxx:381
 msgid "Delete"
 msgstr "Verwijder"
 
-#: src/advanced.cxx:1320
+#: advanced.cxx:1320
 msgid "Protocol:"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1327
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1327
 msgid "Medium:"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1336
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1336
 msgid "Direction:"
 msgstr "Richting:"
 
-#: src/advanced.cxx:1344
+#: advanced.cxx:1344
 msgid "Hz:"
-msgstr "" # geen vertaling nodig -- eenheid
+msgstr ""
 
-#: src/advanced.cxx:1355
+# geen vertaling nodig -- eenheid
+#: advanced.cxx:1355
 msgid "File:"
 msgstr "Bestand:"
 
-#: src/advanced.cxx:1369 src/advanced.cxx:1392
+#: advanced.cxx:1369 advanced.cxx:1392
 msgid "Port:"
 msgstr "Poort:"
 
-#: src/advanced.cxx:1375
+#: advanced.cxx:1375
 msgid "Baud Rate:"
 msgstr "Baud Snelheid:"
 
-#: src/advanced.cxx:1386
+#: advanced.cxx:1386
 msgid "Hostname:"
 msgstr "Hostnaam:"
 
-#: src/advanced.cxx:1401
+#: advanced.cxx:1401
 msgid "TCP"
-msgstr "" # geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:1408
+# geen vertaling nodig -- protocol
+#: advanced.cxx:1408
 msgid "UDP"
-msgstr "" # geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:1418
+# geen vertaling nodig -- protocol
+#: advanced.cxx:1418
 msgid "Generic:"
-msgstr "" # geen vertaling nodig -- protocol
+msgstr ""
 
-#: src/advanced.cxx:1431 src/advanced_funcs.cxx:173
+# geen vertaling nodig -- protocol
+#: advanced.cxx:1431 advanced_funcs.cxx:173
 msgid "Avionics"
 msgstr "Radioinstrumenten"
 
-#: src/advanced.cxx:1436
+#: advanced.cxx:1436
 msgid "Nav1:"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1437
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1437
 msgid "Set the NAV1 radio frequency, optionally preceded by a radial"
-msgstr "Stel de frequentie voor de NAV1 radio in, eventueel vooraan een radiaal invullen"
+msgstr ""
+"Stel de frequentie voor de NAV1 radio in, eventueel vooraan een radiaal "
+"invullen"
 
-#: src/advanced.cxx:1441
+#: advanced.cxx:1441
 msgid "Nav2:"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1445
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1445
 msgid "ADF:"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1453
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1453
 msgid "Nav1"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1459
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1459
 msgid "Nav2"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1465
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1465
 msgid "Internal"
-msgstr "" # geen vertaling nodig -- niet goed te vertalen
+msgstr ""
 
-#: src/advanced.cxx:1478
+# geen vertaling nodig -- niet goed te vertalen
+#: advanced.cxx:1478
 msgid "DME:"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/advanced.cxx:1486 src/advanced_funcs.cxx:174
+# geen vertaling nodig -- zelfde in NL
+#: advanced.cxx:1486 advanced_funcs.cxx:174
 msgid "Properties"
-msgstr "" # geen vertaling nodig -- niet goed te vertalen
+msgstr ""
 
-#: src/advanced.cxx:1503
+# geen vertaling nodig -- niet goed te vertalen
+#: advanced.cxx:1503
 msgid "Property:"
-msgstr "" # geen vertaling nodig -- niet goed te vertalen
+msgstr ""
 
-#: src/advanced.cxx:1504
+# geen vertaling nodig -- niet goed te vertalen
+#: advanced.cxx:1504
 msgid "prop=value"
 msgstr "prop=waarde"
 
-#: src/advanced.cxx:1517 src/advanced_funcs.cxx:175
+#: advanced.cxx:1517 advanced_funcs.cxx:175
 msgid "Debugging"
-msgstr "" # geen vertaling nodig -- niet goed te vertalen
+msgstr ""
 
-#: src/advanced.cxx:1522
+# geen vertaling nodig -- niet goed te vertalen
+#: advanced.cxx:1522
 msgid "Log Level:"
 msgstr "Log Niveau:"
 
-#: src/advanced.cxx:1527
+#: advanced.cxx:1527
 msgid "Trace Read Properties"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:1534 src/advanced.cxx:1557 src/advanced.cxx:1595
+# suggesties welkom
+#: advanced.cxx:1534 advanced.cxx:1557 advanced.cxx:1595
 msgid "Value:"
 msgstr "Waarde:"
 
-#: src/advanced.cxx:1550
+#: advanced.cxx:1550
 msgid "Trace Write Properties"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:1575 src/advanced_funcs.cxx:176
+# suggesties welkom
+#: advanced.cxx:1575 advanced_funcs.cxx:176
 msgid "Environment"
 msgstr "Omgeving"
 
-#: src/advanced.cxx:1604 src/advanced_funcs.cxx:177
+#: advanced.cxx:1604 advanced_funcs.cxx:177
 msgid "Weather"
 msgstr "Weer"
 
-#: src/advanced.cxx:1612
+#: advanced.cxx:1612
 msgid "Wind Direction"
 msgstr "Windrichting"
 
-#: src/advanced.cxx:1626
+#: advanced.cxx:1626
 msgid "Direction wind is coming from."
 msgstr "Richting waaruit de wind komt."
 
-#: src/advanced.cxx:1633
+#: advanced.cxx:1633
 msgid "Speed (kts):"
-msgstr "Snelheid (knopen):"
+msgstr ""
+"Snelheid  \n"
+"(knopen) :"
 
-#: src/advanced.cxx:1634
+#: advanced.cxx:1634
 msgid "Wind speed (kts)"
 msgstr "Windsnelheid (knopen)"
 
-#: src/advanced.cxx:1640
+#: advanced.cxx:1640
 msgid "Random Winds"
 msgstr "Willekeurige Winden"
 
-#: src/advanced.cxx:1647
+#: advanced.cxx:1647
 msgid "Turbulence"
 msgstr "Turbulentie"
 
-#: src/advanced.cxx:1648
+#: advanced.cxx:1648
 msgid "calm (0.0) to severe (1.0)"
 msgstr "rustig (0.0) tot heftig (1.0)"
 
-#: src/advanced.cxx:1653
+#: advanced.cxx:1653
 msgid "Ceiling:"
 msgstr "Plafond:"
 
-#: src/advanced.cxx:1654
+#: advanced.cxx:1654
 msgid "FT_ASL[:THICKNESS_FT]"
-msgstr "" # suggesties welkom
+msgstr ""
 
-#: src/advanced.cxx:1658
+# suggesties welkom
+#: advanced.cxx:1658
 msgid "Fetch real weather"
 msgstr "Kom overeen met het echte weer"
 
-#: src/advanced.cxx:1667
+#: advanced.cxx:1667
 msgid "Layer:"
 msgstr "Dekking:"
 
-#: src/advanced.cxx:1674
+#: advanced.cxx:1674
 msgid "Elevation(ft):"
 msgstr "Hoogte (voet):"
 
-#: src/advanced.cxx:1681
+#: advanced.cxx:1681
 msgid "Thickness (ft):"
 msgstr "Dikte (voet):"
 
-#: src/advanced.cxx:1688
+#: advanced.cxx:1688
 msgid "Coverage:"
 msgstr "Bedekking:"
 
-#: src/advanced.cxx:1694
+#: advanced.cxx:1694
 msgid "Span (m):"
 msgstr "Breedte (m):"
 
-#: src/advanced.cxx:1702
+#: advanced.cxx:1702
 msgid "Transition (ft):"
 msgstr "Overgang (voet):"
 
-#: src/advanced_funcs.cxx:104 src/wizard_funcs.cxx:69
+#: wizard.cxx:109
+msgid "640x480"
+msgstr ""
+
+# Geen vertaling nodig -- getallen
+#: wizard.cxx:110
+msgid "800x600"
+msgstr ""
+
+# Geen vertaling nodig -- getallen
+#: wizard.cxx:111
+msgid "1024x768"
+msgstr ""
+
+# Geen vertaling nodig -- getallen
+#: wizard.cxx:112
+msgid "1280x1024"
+msgstr ""
+
+# Geen vertaling nodig -- getallen
+#: wizard.cxx:113
+msgid "1600x1200"
+msgstr ""
+
+# Geen vertaling nodig -- getallen
+#: wizard.cxx:301
+msgid "FlightGear Wizard"
+msgstr ""
+
+# Geen vertaling nodig -- zelfde in NL
+#: wizard.cxx:305
+msgid "Select Paths"
+msgstr "Selecteer Paden"
+
+#: wizard.cxx:313 wizard.cxx:320
+msgid "Full pathname to FlightGear executable"
+msgstr "Volledig pad naar het FlightGear programma"
+
+#: wizard.cxx:326
+msgid "root data path"
+msgstr "$FG_ROOT pad"
+
+#: wizard.cxx:338
+msgid "Scenery directories"
+msgstr "Scenery mappen"
+
+# betere suggesties welkom
+#: wizard.cxx:347
+msgid "@8>"
+msgstr ""
+
+# Geen vertaling nodig
+#: wizard.cxx:357
+msgid "@2>"
+msgstr ""
+
+# Geen vertaling nodig
+#: wizard.cxx:371
+msgid "Airports Cache:"
+msgstr "Vliegvelden Cache"
+
+#: wizard.cxx:376
+msgid "Add..."
+msgstr "Voeg toe..."
+
+#: wizard.cxx:377
+msgid "Add a scenery directory"
+msgstr "Voeg een scenery map toe"
+
+#: wizard.cxx:382
+msgid "Delete a scenery directory"
+msgstr "Verwijder een scenery map"
+
+#: wizard.cxx:394
+msgid "Select an aircraft"
+msgstr "Selecteer een vliegtuig"
+
+#: wizard.cxx:405
+msgid "Preview"
+msgstr "Voorschot"
+
+# betere suggesties welkom
+#: wizard.cxx:425
+msgid "Status :"
+msgstr ""
+
+# Geen vertaling nodig -- zelfde in NL
+#: wizard.cxx:426
+msgid "Author(s) :"
+msgstr "Auteur (s):"
+
+# 
+#: wizard.cxx:433
+msgid "Select a location"
+msgstr "Selecteer een locatie"
+
+#: wizard.cxx:449
+msgid "Carrier Ops"
+msgstr "Vliegdekschip operaties"
+
+#: wizard.cxx:453
+msgid "Carrier : "
+msgstr "Vliegdekschip :"
+
+#: wizard.cxx:454
+msgid "Park pos :"
+msgstr ""
+
+# geen vertaling nodig -- afkortingen zelfde in NL
+#: wizard.cxx:465
+msgid "Advanced..."
+msgstr "Geavanceerd..."
+
+#: wizard.cxx:471
+msgid "Show command line"
+msgstr "Laat commando zien"
+
+#: wizard.cxx:482
+msgid "Display"
+msgstr "Scherm"
+
+#: wizard.cxx:486
+msgid "Resolution :"
+msgstr "Resolutie :"
+
+#: wizard.cxx:492
+msgid "Game mode ( Fullscreen )"
+msgstr "Spel mode (volledig scherm)"
+
+#: wizard.cxx:500
+msgid "Enhanced runway lighting"
+msgstr "Geavanceerde startbaan verlichting"
+
+#: wizard.cxx:501
+msgid "Use with caution. It may drop your framerate dramatically"
+msgstr "Let op: deze functie kan uw ververssnelheid dramatisch beïnvloeden"
+
+#: wizard.cxx:512
+msgid "3D clouds (experimental)"
+msgstr "3D wolken (experimenteel)"
+
+#: wizard.cxx:516
+msgid "bpp :"
+msgstr ""
+
+# geen vertaling nodig -- afkorting
+#: wizard.cxx:528
+msgid "Random objects"
+msgstr "Willekeurige objecten"
+
+#: wizard.cxx:532
+msgid "AI models"
+msgstr ""
+"Computergestuurde\n"
+"toestellen"
+
+#: wizard.cxx:536
+msgid "Time of day :"
+msgstr "Tijd van de dag:"
+
+#: wizard.cxx:544
+msgid "Real weather fetch"
+msgstr "Gebruik het echte weer"
+
+#: wizard.cxx:552
+msgid "Scenario :"
+msgstr ""
+
+# geen vertaling nodig -- zelfde in NL
+#: wizard.cxx:568
+msgid "Atlas"
+msgstr ""
+
+# geen vertaling nodig -- zelfde in NL + appnaam
+#: wizard.cxx:573 wizard.cxx:595
+msgid "Hostname :"
+msgstr "Hostnaam :"
+
+# betere suggesties welkom
+#: wizard.cxx:574
+msgid "Hostname"
+msgstr "Hostnaam"
+
+# betere suggesties welkom
+#: wizard.cxx:579
+msgid ":"
+msgstr ""
+
+# geen vertaling nodig -- leesteken
+#: wizard.cxx:586
+msgid "Multiplayer"
+msgstr ""
+
+# geen vertaling nodig -- zelfde in NL
+#: wizard.cxx:591
+msgid "Callsign :"
+msgstr "Naam :"
+
+#: wizard.cxx:596
+msgid "Peer hostname"
+msgstr ""
+
+# suggesties welkom
+#: wizard.cxx:600
+msgid "in :"
+msgstr ""
+
+# geen vertaling nodig -- zelfde als NL
+#: wizard.cxx:601
+msgid "Input port number"
+msgstr "Input poort nummer"
+
+#: wizard.cxx:604
+msgid "out :"
+msgstr "uit :"
+
+#: wizard.cxx:605
+msgid "Output port number"
+msgstr "Output poort nummer"
+
+# geen vertaling nodig van output -- ingeburgerd
+#: wizard.cxx:630
+msgid "Prev"
+msgstr "Vorige"
+
+#: wizard.cxx:634 wizard_funcs.cxx:250 wizard_funcs.cxx:675
+msgid "Next"
+msgstr "Volgende"
+
+#: wizard.cxx:638
+msgid "Quit"
+msgstr "Stop"
+
+#: wizard.cxx:645
+msgid "Defaults"
+msgstr "Fabrieksinstellingen"
+
+#: wizard.cxx:656
+msgid "FlightGear running..."
+msgstr "FlightGear draait..."
+
+#: wizard.cxx:660
+msgid "FlightGear has been started"
+msgstr "FlightGear is gestart"
+
+#: wizard.cxx:665
+msgid "Please wait..."
+msgstr "Even geduld AUB"
+
+#: wizard.cxx:668
+msgid "To change aircraft, exit FlightGear and return to this launcher"
+msgstr ""
+"Om van vliegtuig te wisselen, stop FlightGear en keer terug naar deze wizard"
+
+#: wizard_funcs.cxx:72 advanced_funcs.cxx:104
 msgid "noon"
 msgstr "middag"
 
-#: src/advanced_funcs.cxx:105 src/wizard_funcs.cxx:70
+#: wizard_funcs.cxx:73 advanced_funcs.cxx:105
 msgid "dusk"
 msgstr "schemering"
 
-#: src/advanced_funcs.cxx:106 src/wizard_funcs.cxx:71
+#: wizard_funcs.cxx:74 advanced_funcs.cxx:106
 msgid "midnight"
 msgstr "middernacht"
 
-#: src/advanced_funcs.cxx:107 src/wizard_funcs.cxx:72
+#: wizard_funcs.cxx:75 advanced_funcs.cxx:107
 msgid "dawn"
 msgstr "ochtend"
 
-#: src/advanced_funcs.cxx:112
-msgid "bulk"
-msgstr "massa" # betere suggesties welkom
+#: wizard_funcs.cxx:82
+msgid "production"
+msgstr "productie"
 
-#: src/advanced_funcs.cxx:113
-msgid "debug"
-msgstr "" # geen vertaling nodig -- niet goed te vertalen
+#: wizard_funcs.cxx:83
+msgid "early-production"
+msgstr "vroege-productie"
 
-#: src/advanced_funcs.cxx:114
-msgid "info"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+#: wizard_funcs.cxx:84
+msgid "early production"
+msgstr "vroege productie"
 
-#: src/advanced_funcs.cxx:115
-msgid "warn"
-msgstr "waarschuwing"
+#: wizard_funcs.cxx:85
+msgid "Early production"
+msgstr "Vroege productie"
 
-#: src/advanced_funcs.cxx:116
-msgid "alert"
-msgstr "ernstige waarschuwing"
+#: wizard_funcs.cxx:86
+msgid "beta"
+msgstr ""
 
-#: src/advanced_funcs.cxx:121
-msgid "overcast"
-msgstr "geheel bewolkt"
+# geen vertaling nodig -- zelfde in NL
+#: wizard_funcs.cxx:87
+msgid "alpha"
+msgstr "alpha"
 
-#: src/advanced_funcs.cxx:122
-msgid "broken"
-msgstr "gedeeltelijk bewolkt"
+# geen vertaling nodig -- zelfde in NL
+#: wizard_funcs.cxx:88
+msgid "early alpha"
+msgstr "vroege alpha"
 
-#: src/advanced_funcs.cxx:123
-msgid "scattered"
-msgstr "hier een daar een wolk"
+#: wizard_funcs.cxx:89
+msgid "Development"
+msgstr "In ontwikkeling"
 
-#: src/advanced_funcs.cxx:124
-msgid "few"
-msgstr "weinig"
+#: wizard_funcs.cxx:90
+msgid "developement"
+msgstr "In ontwikkeling"
 
-#: src/advanced_funcs.cxx:125
-msgid "cirrus"
-msgstr "schapewolkjes" # betere suggesties welkom
+#: wizard_funcs.cxx:91
+msgid "development"
+msgstr "In ontwikkeling"
 
-#: src/advanced_funcs.cxx:126
-msgid "clear"
-msgstr "wolkenvrij"
+#: wizard_funcs.cxx:92
+msgid "devel"
+msgstr "In ontwikkeling"
 
-#: src/advanced_funcs.cxx:131
-msgid "joystick"
-msgstr ""  # geen vertaling nodig -- zelfde in NL
+#: wizard_funcs.cxx:93
+msgid "Early development"
+msgstr "In vroege ontwikkeling"
 
-#: src/advanced_funcs.cxx:132
-msgid "keyboard"
-msgstr "toetsenbord"
+#: wizard_funcs.cxx:94
+msgid "experimental"
+msgstr "experimenteel"
 
-#: src/advanced_funcs.cxx:133
-msgid "mouse"
-msgstr "muis"
+#: wizard_funcs.cxx:166
+#, c-format
+msgid ""
+"<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
+"<h1>FlightGear Launch Control %s</h1>  <p>This program is released under the "
+"GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>  "
+"<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
+msgstr ""
+"<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
+"<h1>FlightGear Launch Control %s</h1>  <p>Dit programma is gedistrubuteerd "
+"onderhet GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</"
+"p>  <p>Rapporteer bugs aan http://sourceforge.net/projects/fgrun</p> </"
+"body></html>"
 
-#: src/advanced_funcs.cxx:187
-msgid "Select browser"
-msgstr "Selecteer browser"
+#: wizard_funcs.cxx:295
+msgid "Log Window"
+msgstr "Log Scherm"
 
-#: src/advanced_funcs.cxx:242
-msgid "Select a preferences file"
-msgstr "Selecteer een voorkeuren-bestand" # betere suggesties welkom -- preferences vertalen?
+#: wizard_funcs.cxx:521
+#, c-format
+msgid "Model not found: '%s'"
+msgstr "Model niet gevonden: '%s'"
 
-#: src/advanced_funcs.cxx:243
-msgid "XML Files(*.xml)"
-msgstr "XML Bestanden (*.xml)"
+#: wizard_funcs.cxx:553
+msgid "Property '/sim/model/path' not found"
+msgstr "Property '/sim/model/path' niet gevonden"
 
-#: src/AirportBrowser.cxx:79
-msgid "Runways"
-msgstr "Startbanen"
-
-#: src/AirportBrowser.cxx:82
-msgid "Refresh"
-msgstr "Ververs"
-
-#: src/AirportBrowser.cxx:85
-msgid "Reload airports"
-msgstr "Herlaad vliegvelden"
-
-#: src/AirportBrowser.cxx:332 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:594
+#: wizard_funcs.cxx:622 AirportBrowser.cxx:332 fgfsrc.cxx:95
 msgid "<default>"
 msgstr "<standaard>"
 
-#: src/AirportBrowser.cxx:394
+#: wizard_funcs.cxx:667
+msgid "Run"
+msgstr "Start"
+
+#: wizard_funcs.cxx:690
+msgid "About to reset current parameters"
+msgstr "Sta op het punt huidige parameters te resetten"
+
+#: wizard_funcs.cxx:690 fgfsrc.cxx:61
+msgid "Abort"
+msgstr "Stop"
+
+#: wizard_funcs.cxx:690
+msgid "Reset"
+msgstr ""
+
+# geen vertaling nodig -- zelfde in NL
+#: wizard_funcs.cxx:704
+msgid "Select FlightGear executable"
+msgstr "Stel FlightGear programma in"
+
+#: wizard_funcs.cxx:761
+msgid "Select FG_ROOT directory"
+msgstr "Stel FG_ROOT map in"
+
+#: wizard_funcs.cxx:915 wizard_funcs.cxx:917
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: wizard_funcs.cxx:982
+#, c-format
+msgid ""
+"Unable to delete '%s':\n"
+"%s"
+msgstr ""
+"Niet in staat om '%s' te verwijderen:\n"
+"%s"
+
+#: wizard_funcs.cxx:1012
+msgid "Select FG_SCENERY directory"
+msgstr "Stel FG_SCENERY map"
+
+#: wizard_funcs.cxx:1236
+msgid "Description of "
+msgstr "Beschrijving van "
+
+#: advanced_funcs.cxx:112
+msgid "bulk"
+msgstr "massa"
+
+# betere suggesties welkom
+#: advanced_funcs.cxx:113
+msgid "debug"
+msgstr ""
+
+# geen vertaling nodig -- niet goed te vertalen
+#: advanced_funcs.cxx:114
+msgid "info"
+msgstr ""
+
+# geen vertaling nodig -- zelfde in NL
+#: advanced_funcs.cxx:115
+msgid "warn"
+msgstr "waarschuwing"
+
+#: advanced_funcs.cxx:116
+msgid "alert"
+msgstr "ernstige waarschuwing"
+
+#: advanced_funcs.cxx:121
+msgid "overcast"
+msgstr "geheel bewolkt"
+
+#: advanced_funcs.cxx:122
+msgid "broken"
+msgstr "gedeeltelijk bewolkt"
+
+#: advanced_funcs.cxx:123
+msgid "scattered"
+msgstr "hier een daar een wolk"
+
+#: advanced_funcs.cxx:124
+msgid "few"
+msgstr "weinig"
+
+#: advanced_funcs.cxx:125
+msgid "cirrus"
+msgstr "schapewolkjes"
+
+# betere suggesties welkom
+#: advanced_funcs.cxx:126
+msgid "clear"
+msgstr "wolkenvrij"
+
+#: advanced_funcs.cxx:131
+msgid "joystick"
+msgstr ""
+
+# geen vertaling nodig -- zelfde in NL
+#: advanced_funcs.cxx:132
+msgid "keyboard"
+msgstr "toetsenbord"
+
+#: advanced_funcs.cxx:133
+msgid "mouse"
+msgstr "muis"
+
+#: advanced_funcs.cxx:187
+msgid "Select browser"
+msgstr "Selecteer browser"
+
+#: advanced_funcs.cxx:242
+msgid "Select a preferences file"
+msgstr "Selecteer een voorkeuren-bestand"
+
+# betere suggesties welkom -- preferences vertalen?
+#: advanced_funcs.cxx:243
+msgid "XML Files(*.xml)"
+msgstr "XML Bestanden (*.xml)"
+
+#: AirportBrowser.cxx:79
+msgid "Runways"
+msgstr "Startbanen"
+
+#: AirportBrowser.cxx:82
+msgid "Refresh"
+msgstr "Ververs"
+
+#: AirportBrowser.cxx:85
+msgid "Reload airports"
+msgstr "Herlaad vliegvelden"
+
+#: AirportBrowser.cxx:394
 msgid "gzopen error"
-msgstr "" # geen vertaling nodig -- niet goed te vertalen
+msgstr ""
 
-#: src/AirportTable.cxx:121
+# geen vertaling nodig -- niet goed te vertalen
+#: AirportTable.cxx:121
 msgid "ICAO Id"
-msgstr "" # geen vertaling nodig -- zelfde in NL
+msgstr ""
 
-#: src/AirportTable.cxx:121
+# geen vertaling nodig -- zelfde in NL
+#: AirportTable.cxx:121
 msgid "Name"
 msgstr "Naam"
 
-#: src/fgfsrc.cxx:61
+#: fgfsrc.cxx:61
 #, c-format
 msgid "About to overwrite %s."
 msgstr "Ga bijna %s overschrijven"
 
-#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:662
-msgid "Abort"
-msgstr "Stop"
-
-#: src/fgfsrc.cxx:61
+#: fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr "Schrijf overheen"
 
-#: src/io.cxx:258
-msgid "Select protocol file"
-msgstr "Selecter protocol-bestand"
-
-#: src/logwin.cxx:32
+#: logwin.cxx:32
 msgid "&File"
 msgstr "&Bestand"
 
-#: src/logwin.cxx:33
+#: logwin.cxx:33
 msgid "&Save"
 msgstr "&Sla op"
 
-#: src/logwin.cxx:34
+#: logwin.cxx:34
 msgid "&Close"
 msgstr "&Sluit"
 
-#: src/logwin.cxx:99
+#: logwin.cxx:99
 msgid "Save file as?"
 msgstr "Sla bestand op als"
 
-#: src/main.cxx:117
+#: io.cxx:258
+msgid "Select protocol file"
+msgstr "Selecter protocol-bestand"
+
+#: main.cxx:129
 #, c-format
 msgid ""
 "Options are:\n"
@@ -1167,358 +1666,3 @@ msgstr ""
 " --fg-scenery=<MAP>\n"
 " -f, --fullscreen\n"
 "%s"
-
-#: src/wizard.cxx:109
-msgid "640x480"
-msgstr "" # Geen vertaling nodig -- getallen
-
-#: src/wizard.cxx:110
-msgid "800x600"
-msgstr "" # Geen vertaling nodig -- getallen
-
-#: src/wizard.cxx:111
-msgid "1024x768"
-msgstr "" # Geen vertaling nodig -- getallen
-
-#: src/wizard.cxx:112
-msgid "1280x1024"
-msgstr "" # Geen vertaling nodig -- getallen
-
-#: src/wizard.cxx:113
-msgid "1600x1200"
-msgstr "" # Geen vertaling nodig -- getallen
-
-#: src/wizard.cxx:301
-msgid "FlightGear Wizard"
-msgstr "" # Geen vertaling nodig -- zelfde in NL
-
-#: src/wizard.cxx:305
-msgid "Select Paths"
-msgstr "Selecteer Paden"
-
-#: src/wizard.cxx:313 src/wizard.cxx:320
-msgid "Full pathname to FlightGear executable"
-msgstr "Volledig pad naar het FlightGear programma"
-
-#: src/wizard.cxx:326
-msgid "root data path"
-msgstr "$FG_ROOT pad"
-
-#: src/wizard.cxx:338
-msgid "Scenery directories"
-msgstr "Scenery mappen" # betere suggesties welkom
-
-#: src/wizard.cxx:347
-msgid "@8>"
-msgstr ""  # Geen vertaling nodig
-
-#: src/wizard.cxx:357
-msgid "@2>"
-msgstr "" # Geen vertaling nodig
-
-#: src/wizard.cxx:371
-msgid "Airports Cache:"
-msgstr "Vliegvelden Cache"
-
-#: src/wizard.cxx:376
-msgid "Add..."
-msgstr "Voeg toe..."
-
-#: src/wizard.cxx:377
-msgid "Add a scenery directory"
-msgstr "Voeg een scenery map toe"
-
-#: src/wizard.cxx:382
-msgid "Delete a scenery directory"
-msgstr "Verwijder een scenery map"
-
-#: src/wizard.cxx:394
-msgid "Select an aircraft"
-msgstr "Selecteer een vliegtuig"
-
-#: src/wizard.cxx:405
-msgid "Preview"
-msgstr "Voorschot" # betere suggesties welkom
-
-#: src/wizard.cxx:425
-msgid "Status :"
-msgstr "" # Geen vertaling nodig -- zelfde in NL
-
-#: src/wizard.cxx:426
-msgid "Author(s) :"
-msgstr "Auteur (s):" # 
-
-#: src/wizard.cxx:433
-msgid "Select a location"
-msgstr "Selecteer een locatie"
-
-#: src/wizard.cxx:449
-msgid "Carrier Ops"
-msgstr "Vliegdekschip operaties"
-
-#: src/wizard.cxx:453
-msgid "Carrier : "
-msgstr "Vliegdekschip :"
-
-#: src/wizard.cxx:454
-msgid "Park pos :"
-msgstr "" # geen vertaling nodig -- afkortingen zelfde in NL
-
-#: src/wizard.cxx:465
-msgid "Advanced..."
-msgstr "Geavanceerd..."
-
-#: src/wizard.cxx:471
-msgid "Show command line"
-msgstr "Laat commando zien"
-
-#: src/wizard.cxx:482
-msgid "Display"
-msgstr "Scherm"
-
-#: src/wizard.cxx:486
-msgid "Resolution :"
-msgstr "Resolutie :"
-
-#: src/wizard.cxx:492
-msgid "Game mode ( Fullscreen )"
-msgstr "Spel mode (volledig scherm)"
-
-#: src/wizard.cxx:500
-msgid "Enhanced runway lighting"
-msgstr "Geavanceerde startbaan verlichting"
-
-#: src/wizard.cxx:501
-msgid "Use with caution. It may drop your framerate dramatically"
-msgstr "Let op: deze functie kan uw ververssnelheid dramatisch beïnvloeden"
-
-#: src/wizard.cxx:512
-msgid "3D clouds (experimental)"
-msgstr "3D wolken (experimenteel)"
-
-#: src/wizard.cxx:516
-msgid "bpp :"
-msgstr "" # geen vertaling nodig -- afkorting
-
-#: src/wizard.cxx:528
-msgid "Random objects"
-msgstr "Willekeurige objecten"
-
-#: src/wizard.cxx:532
-msgid "AI models"
-msgstr "Computergestuurde toestellen"
-
-#: src/wizard.cxx:536
-msgid "Time of day :"
-msgstr "Tijd van de dag:"
-
-#: src/wizard.cxx:544
-msgid "Real weather fetch"
-msgstr "Gebruik het echte weer"
-
-#: src/wizard.cxx:552
-msgid "Scenario :"
-msgstr "" # geen vertaling nodig -- zelfde in NL
-
-#: src/wizard.cxx:568
-msgid "Atlas"
-msgstr "" # geen vertaling nodig -- zelfde in NL + appnaam
-
-#: src/wizard.cxx:573 src/wizard.cxx:595
-msgid "Hostname :"
-msgstr "Hostnaam :" # betere suggesties welkom
-
-#: src/wizard.cxx:574
-msgid "Hostname"
-msgstr "Hostnaam" # betere suggesties welkom
-
-#: src/wizard.cxx:579
-msgid ":"
-msgstr "" # geen vertaling nodig -- leesteken
-
-#: src/wizard.cxx:586
-msgid "Multiplayer"
-msgstr "" # geen vertaling nodig -- zelfde in NL
-
-#: src/wizard.cxx:591
-msgid "Callsign :"
-msgstr "Naam :"
-
-#: src/wizard.cxx:596
-msgid "Peer hostname"
-msgstr "" # suggesties welkom
-
-#: src/wizard.cxx:600
-msgid "in :"
-msgstr "" # geen vertaling nodig -- zelfde als NL
-
-#: src/wizard.cxx:601
-msgid "Input port number"
-msgstr "Input poort nummer"
-
-#: src/wizard.cxx:604
-msgid "out :"
-msgstr "uit :"
-
-#: src/wizard.cxx:605
-msgid "Output port number"
-msgstr "Output poort nummer" # geen vertaling nodig van output -- ingeburgerd
-
-#: src/wizard.cxx:630
-msgid "Prev"
-msgstr "Vorige"
-
-#: src/wizard.cxx:634 src/wizard_funcs.cxx:247 src/wizard_funcs.cxx:647
-msgid "Next"
-msgstr "Volgende"
-
-#: src/wizard.cxx:638
-msgid "Quit"
-msgstr "Stop"
-
-#: src/wizard.cxx:645
-msgid "Defaults"
-msgstr "Fabrieksinstellingen"
-
-#: src/wizard.cxx:656
-msgid "FlightGear running..."
-msgstr "FlightGear draait..."
-
-#: src/wizard.cxx:660
-msgid "FlightGear has been started"
-msgstr "FlightGear is gestart"
-
-#: src/wizard.cxx:665
-msgid "Please wait..."
-msgstr "Even geduld AUB"
-
-#: src/wizard.cxx:668
-msgid "To change aircraft, exit FlightGear and return to this launcher"
-msgstr "Om van vliegtuig te wisselen, stop FlightGear en keer terug naar deze wizard"
-
-#: src/wizard_funcs.cxx:79
-msgid "production"
-msgstr "productie"
-
-#: src/wizard_funcs.cxx:80
-msgid "early-production"
-msgstr "vroege-productie"
-
-#: src/wizard_funcs.cxx:81
-msgid "early production"
-msgstr "vroege productie"
-
-#: src/wizard_funcs.cxx:82
-msgid "Early production"
-msgstr "Vroege productie"
-
-#: src/wizard_funcs.cxx:83
-msgid "beta"
-msgstr "" # geen vertaling nodig -- zelfde in NL
-
-#: src/wizard_funcs.cxx:84
-msgid "alpha"
-msgstr "alpha" # geen vertaling nodig -- zelfde in NL
-
-#: src/wizard_funcs.cxx:85
-msgid "early alpha"
-msgstr "vroege alpha"
-
-#: src/wizard_funcs.cxx:86
-msgid "Development"
-msgstr "In ontwikkeling"
-
-#: src/wizard_funcs.cxx:87
-msgid "developement"
-msgstr "In ontwikkeling"
-
-#: src/wizard_funcs.cxx:88
-msgid "development"
-msgstr "In ontwikkeling"
-
-#: src/wizard_funcs.cxx:89
-msgid "devel"
-msgstr "In ontwikkeling"
-
-#: src/wizard_funcs.cxx:90
-msgid "Early development"
-msgstr "In vroege ontwikkeling"
-
-#: src/wizard_funcs.cxx:91
-msgid "experimental"
-msgstr "experimenteel"
-
-#: src/wizard_funcs.cxx:163
-#, c-format
-msgid ""
-"<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
-"<h1>FlightGear Launch Control %s</h1>  <p>This program is released under the "
-"GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>  "
-"<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
-msgstr ""
-"<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
-"<h1>FlightGear Launch Control %s</h1>  <p>Dit programma is gedistrubuteerd onderhet "
-"GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>  "
-"<p>Rapporteer bugs aan http://sourceforge.net/projects/fgrun</p> </body></html>"
-
-#: src/wizard_funcs.cxx:292
-msgid "Log Window"
-msgstr "Log Scherm"
-
-#: src/wizard_funcs.cxx:398
-msgid "Failed to load 3D model"
-msgstr "3D model niet geladen"
-
-#: src/wizard_funcs.cxx:438
-msgid "Failed to load submodel: "
-msgstr "Dit submodel is niet geladen: "
-
-#: src/wizard_funcs.cxx:493
-#, c-format
-msgid "Model not found: '%s'"
-msgstr "Model niet gevonden: '%s'"
-
-#: src/wizard_funcs.cxx:525
-msgid "Property '/sim/model/path' not found"
-msgstr "Property '/sim/model/path' niet gevonden"
-
-#: src/wizard_funcs.cxx:639
-msgid "Run"
-msgstr "Start"
-
-#: src/wizard_funcs.cxx:662
-msgid "About to reset current parameters"
-msgstr "Sta op het punt huidige parameters te resetten"
-
-#: src/wizard_funcs.cxx:662
-msgid "Reset"
-msgstr "" # geen vertaling nodig -- zelfde in NL
-
-#: src/wizard_funcs.cxx:676
-msgid "Select FlightGear executable"
-msgstr "Stel FlightGear programma in"
-
-#: src/wizard_funcs.cxx:733
-msgid "Select FG_ROOT directory"
-msgstr "Stel FG_ROOT map in"
-
-#: src/wizard_funcs.cxx:887 src/wizard_funcs.cxx:889
-msgid "Unknown"
-msgstr "Onbekend"
-
-#: src/wizard_funcs.cxx:954
-#, c-format
-msgid ""
-"Unable to delete '%s':\n"
-"%s"
-msgstr ""
-"Niet in staat om '%s' te verwijderen:\n"
-"%s"
-
-#: src/wizard_funcs.cxx:984
-msgid "Select FG_SCENERY directory"
-msgstr "Stel FG_SCENERY map"
-
-#: src/wizard_funcs.cxx:1208
-msgid "Description of "
-msgstr "Beschrijving van "

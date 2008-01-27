@@ -919,48 +919,48 @@ Advanced::Advanced() {
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
-      { Fl_Input* o = lon = new Fl_Input(225, 35, 150, 25, _("Longitude:"));
+      { Fl_Input* o = lon = new Fl_Input(245, 35, 150, 25, _("Longitude:"));
         o->tooltip(_("Initial longitude, west is negative"));
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Input* o = lat = new Fl_Input(225, 65, 150, 25, _("Latitude:"));
+      { Fl_Input* o = lat = new Fl_Input(245, 65, 150, 25, _("Latitude:"));
         o->tooltip(_("Initial latitude, south is negative"));
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Input* o = altitude = new Fl_Input(225, 95, 150, 25, _("Altitude:"));
+      { Fl_Input* o = altitude = new Fl_Input(245, 95, 150, 25, _("Altitude:"));
         o->tooltip(_("Initial altitude in feet"));
         o->type(1);
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Input* o = vc = new Fl_Input(225, 215, 150, 25, _("Airspeed:"));
+      { Fl_Input* o = vc = new Fl_Input(245, 215, 150, 25, _("Airspeed:"));
         o->tooltip(_("Initial airspeed in knots"));
         o->type(1);
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Input* o = uBody = new Fl_Input(225, 265, 150, 25, _("uBody:"));
+      { Fl_Input* o = uBody = new Fl_Input(245, 265, 150, 25, _("uBody:"));
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Input* o = vBody = new Fl_Input(225, 295, 150, 25, _("vBody:"));
+      { Fl_Input* o = vBody = new Fl_Input(245, 295, 150, 25, _("vBody:"));
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Input* o = wBody = new Fl_Input(225, 325, 150, 25, _("wBody"));
+      { Fl_Input* o = wBody = new Fl_Input(245, 325, 150, 25, _("wBody"));
         o->labelsize(12);
         o->textsize(12);
       }
-      { Fl_Value_Input* o = heading = new Fl_Value_Input(225, 125, 150, 25, _("Heading:"));
+      { Fl_Value_Input* o = heading = new Fl_Value_Input(245, 125, 150, 25, _("Heading:"));
         o->tooltip(_("Initial aircraft heading (yaw) angle 0 to 360 degrees"));
         o->labelsize(12);
         o->maximum(360);
         o->step(1);
         o->textsize(12);
       }
-      { Fl_Value_Input* o = roll = new Fl_Value_Input(225, 155, 150, 25, _("Roll:"));
+      { Fl_Value_Input* o = roll = new Fl_Value_Input(245, 155, 150, 25, _("Roll:"));
         o->tooltip(_("Initial roll angle, (Phi)"));
         o->labelsize(12);
         o->minimum(-180);
@@ -968,7 +968,7 @@ Advanced::Advanced() {
         o->step(0.1);
         o->textsize(12);
       }
-      { Fl_Value_Input* o = pitch = new Fl_Value_Input(225, 185, 150, 25, _("Pitch:"));
+      { Fl_Value_Input* o = pitch = new Fl_Value_Input(245, 185, 150, 25, _("Pitch:"));
         o->tooltip(_("Initial pitch angle (Theta)"));
         o->labelsize(12);
         o->minimum(-180);
@@ -1649,6 +1649,7 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->minimum(1);
         o->maximum(0);
+        o->step(0.01);
       }
       { Fl_Input* o = ceiling = new Fl_Input(235, 335, 80, 25, _("Ceiling:"));
         o->tooltip(_("FT_ASL[:THICKNESS_FT]"));
@@ -1664,6 +1665,7 @@ Advanced::Advanced() {
     { Fl_Group* o = page[14] = new Fl_Group(150, 0, 490, 430, _("Clouds"));
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Choice* o = cloud_layer_ = new Fl_Choice(255, 80, 120, 25, _("Layer:"));
         o->down_box(FL_BORDER_BOX);
         o->labelsize(12);
