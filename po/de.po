@@ -1321,7 +1321,7 @@ msgstr ""
 #: src/wizard_funcs.cxx:521
 #, c-format
 msgid "Model not found: '%s'"
-msgstr "Modell nicht gefunden"
+msgstr "Modell nicht gefunden: '%s'"
 
 #: src/wizard_funcs.cxx:553
 msgid "Property '/sim/model/path' not found"
@@ -1469,7 +1469,7 @@ msgstr ""
 #: src/fgfsrc.cxx:61
 #, c-format
 msgid "About to overwrite %s."
-msgstr "Überschreiben..."
+msgstr "Überschreiben %s."
 
 #: src/fgfsrc.cxx:61
 msgid "Overwrite"
