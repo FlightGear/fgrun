@@ -1490,7 +1490,7 @@ msgstr "&Speichern"
 
 #: src/logwin.cxx:34
 msgid "&Close"
-msgstr "&Schliessen"
+msgstr "S&chliessen"
 
 #: src/logwin.cxx:99
 msgid "Save file as?"
