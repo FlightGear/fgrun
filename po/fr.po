@@ -844,7 +844,7 @@ msgstr "Hz:"
 
 #: src/advanced.cxx:1355
 msgid "File:"
-msgstr "Ficher:"
+msgstr "Fichier:"
 
 #: src/advanced.cxx:1369 src/advanced.cxx:1392
 msgid "Port:"
@@ -1084,7 +1084,7 @@ msgstr "Choisir un aéronef"
 
 #: src/wizard.cxx:406
 msgid "Preview"
-msgstr "Apperçu"
+msgstr "Aperçu"
 
 #: src/wizard.cxx:426
 msgid "Status :"
