@@ -22,7 +22,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.0.0\&quot; /DVERSION=\&quot;1.0.0\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.1.0\&quot; /DVERSION=\&quot;1.1.0\&quot;"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;&quot;..\zlib-1.2.3&quot;;..\gettext\include;..\OpenSceneGraph\include"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
@@ -84,7 +84,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.0.0\&quot; /DVERSION=\&quot;1.0.0\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.1.0\&quot; /DVERSION=\&quot;1.1.0\&quot;"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..\SimGear;&quot;..\zlib-1.2.3&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\include;..;..\OpenSceneGraph\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
@@ -145,7 +145,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.0.0\&quot; /DVERSION=\&quot;1.0.0\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.1.0\&quot; /DVERSION=\&quot;1.1.0\&quot;"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\include;..\OpenSceneGraph\include"
 				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
@@ -300,7 +300,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating german translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -308,7 +309,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating german translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -316,7 +318,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating german translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>
@@ -393,7 +396,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating portugese translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						AdditionalDependencies=""
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -402,7 +406,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating portugese translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						AdditionalDependencies=""
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -411,7 +416,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating portugese translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						AdditionalDependencies=""
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>

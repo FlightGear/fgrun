@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: fgrun 1.0.0\n"
+"Project-Id-Version: fgrun 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-28 08:08+0100\n"
 "PO-Revision-Date: 2008-01-30 16:00+0100\n"
