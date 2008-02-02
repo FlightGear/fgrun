@@ -320,7 +320,9 @@ msgstr "Habilitar o Visor Holográfico (HUD)"
 
 #: src/advanced.cxx:774
 msgid "Anti-alias HUD"
-msgstr "Visor holográfico anti-serrilhado"
+msgstr ""
+"Visor holográfico\n"
+"anti-serrilhado"
 
 #: src/advanced.cxx:775
 msgid "Enable anti-aliased HUD"
@@ -502,7 +504,9 @@ msgstr "Altitude inicial em pés"
 
 #: src/advanced.cxx:938
 msgid "Airspeed:"
-msgstr "Velocidade do Ar:"
+msgstr ""
+"Velocidade\n"
+"do Ar:"
 
 #: src/advanced.cxx:939
 msgid "Initial airspeed in knots"
@@ -558,11 +562,15 @@ msgstr "Fixo:"
 
 #: src/advanced.cxx:994
 msgid "offset distance:"
-msgstr "contrabalançar distância:"
+msgstr ""
+"contrabalançar\n"
+"distância:"
 
 #: src/advanced.cxx:999
 msgid "offset azimuth:"
-msgstr "contrabalançar azimute:"
+msgstr ""
+"contrabalançar\n"
+"azimute:"
 
 #: src/advanced.cxx:1004
 msgid "Glide slope:"
@@ -875,7 +883,7 @@ msgstr "Aviônicos"
 
 #: src/advanced.cxx:1436
 msgid "Nav1:"
-msgstr "Rádio Nav1:"
+msgstr "Nav1:"
 
 #: src/advanced.cxx:1437
 msgid "Set the NAV1 radio frequency, optionally preceded by a radial"
@@ -883,7 +891,7 @@ msgstr "Ajuste a frequência de rádio NAV1, opcionalmente precedido por um radial
 
 #: src/advanced.cxx:1441
 msgid "Nav2:"
-msgstr "Rádio Nav2:"
+msgstr "Nav2:"
 
 #: src/advanced.cxx:1445
 msgid "ADF:"
@@ -957,7 +965,9 @@ msgstr "Direção de onde vem o vento"
 
 #: src/advanced.cxx:1633
 msgid "Speed (kts):"
-msgstr "Velocidade (nós):"
+msgstr ""
+"Velocidade\n"
+"(nós):"
 
 #: src/advanced.cxx:1634
 msgid "Wind speed (kts)"
@@ -1067,7 +1077,7 @@ msgstr ""
 
 #: src/wizard.cxx:376
 msgid "Add..."
-msgstr "Adicionar..."
+msgstr "Adicionar"
 
 #: src/wizard.cxx:377
 msgid "Add a scenery directory"
@@ -1127,7 +1137,7 @@ msgstr "Resolução :"
 
 #: src/wizard.cxx:492
 msgid "Game mode ( Fullscreen )"
-msgstr "Modo jogo ( Tela cheia )"
+msgstr "Modo Jogo ( Tela cheia )"
 
 #: src/wizard.cxx:500
 msgid "Enhanced runway lighting"
@@ -1144,7 +1154,7 @@ msgstr "Nuvens 3D (experimental)"
 
 #: src/wizard.cxx:516
 msgid "bpp :"
-msgstr ""
+msgstr "Cores :"
 
 #: src/wizard.cxx:528
 msgid "Random objects"
@@ -1347,11 +1357,11 @@ msgstr "Executar"
 
 #: src/wizard_funcs.cxx:690
 msgid "About to reset current parameters"
-msgstr "Sobre como redefinir parâmetros atuais"
+msgstr "Deseja redefinir os parâmetros para os padrões?"
 
 #: src/wizard_funcs.cxx:690 src/fgfsrc.cxx:61
 msgid "Abort"
-msgstr "Abortar"
+msgstr "Cancelar"
 
 #: src/wizard_funcs.cxx:690
 msgid "Reset"
@@ -1472,7 +1482,7 @@ msgstr "Erro gzopen"
 
 #: src/AirportTable.cxx:121
 msgid "ICAO Id"
-msgstr "Código ICAO"
+msgstr "ICAO"
 
 #: src/AirportTable.cxx:121
 msgid "Name"
