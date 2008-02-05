@@ -1370,7 +1370,7 @@ msgstr "Seleziona la directory FG_SCENERY"
 
 #: src/wizard_funcs.cxx:1236
 msgid "Description of "
-msgstr "Descrizione di"
+msgstr "Descrizione di "
 
 #: src/advanced_funcs.cxx:112
 msgid "bulk"
