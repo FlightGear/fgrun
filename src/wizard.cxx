@@ -142,6 +142,20 @@ void Wizard::cb_specular_highlight(Fl_Check_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_specular_highlight_i(o,v);
 }
 
+void Wizard::cb_frame_rate_limiter_i(Fl_Check_Button*, void*) {
+  frame_rate_limiter_cb();
+}
+void Wizard::cb_frame_rate_limiter(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_frame_rate_limiter_i(o,v);
+}
+
+void Wizard::cb_frame_rate_limiter_value_i(Fl_Value_Input*, void*) {
+  frame_rate_limiter_value_cb();
+}
+void Wizard::cb_frame_rate_limiter_value(Fl_Value_Input* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_frame_rate_limiter_value_i(o,v);
+}
+
 void Wizard::cb_clouds_3d_i(Fl_Check_Button*, void*) {
   clouds_3d_cb();
 }
@@ -167,49 +181,56 @@ void Wizard::cb_random_objects_i(Fl_Check_Button*, void*) {
   random_objects_cb();
 }
 void Wizard::cb_random_objects(Fl_Check_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_random_objects_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_random_objects_i(o,v);
+}
+
+void Wizard::cb_random_trees_i(Fl_Check_Button*, void*) {
+  random_trees_cb();
+}
+void Wizard::cb_random_trees(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_random_trees_i(o,v);
 }
 
 void Wizard::cb_ai_models_i(Fl_Check_Button*, void*) {
   ai_models_cb();
 }
 void Wizard::cb_ai_models(Fl_Check_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_ai_models_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_ai_models_i(o,v);
 }
 
 void Wizard::cb_time_of_day_i(Fl_Check_Button*, void*) {
   time_of_day_cb();
 }
 void Wizard::cb_time_of_day(Fl_Check_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_time_of_day_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_time_of_day_i(o,v);
 }
 
 void Wizard::cb_time_of_day_value_i(Fl_Choice*, void*) {
   time_of_day_value_cb();
 }
 void Wizard::cb_time_of_day_value(Fl_Choice* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_time_of_day_value_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_time_of_day_value_i(o,v);
 }
 
 void Wizard::cb_real_weather_fetch_i(Fl_Check_Button*, void*) {
   real_weather_fetch_cb();
 }
 void Wizard::cb_real_weather_fetch(Fl_Check_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_real_weather_fetch_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_real_weather_fetch_i(o,v);
 }
 
 void Wizard::cb_auto_coordination_i(Fl_Check_Button*, void*) {
   auto_coordination_cb();
 }
 void Wizard::cb_auto_coordination(Fl_Check_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_auto_coordination_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_auto_coordination_i(o,v);
 }
 
 void Wizard::cb_scenarii_i(Fl_Browser*, void*) {
   scenarii_cb();
 }
 void Wizard::cb_scenarii(Fl_Browser* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_scenarii_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_scenarii_i(o,v);
 }
 
 void Wizard::cb_atlas_i(Fl_Check_Button*, void*) {
@@ -479,7 +500,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->align(FL_ALIGN_LEFT);
           o->hide();
         }
-        { Fl_Group* o = new Fl_Group(5, 5, 790, 105, _("Display"));
+        { Fl_Group* o = new Fl_Group(5, 5, 790, 110, _("Display"));
           o->box(FL_ENGRAVED_FRAME);
           o->labelfont(1);
           o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
@@ -489,27 +510,38 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             o->callback((Fl_Callback*)cb_resolution);
             o->menu(menu_resolution);
           }
-          { Fl_Check_Button* o = game_mode = new Fl_Check_Button(25, 85, 210, 20, _("Game mode ( Fullscreen )"));
+          { Fl_Check_Button* o = game_mode = new Fl_Check_Button(25, 85, 210, 25, _("Game mode ( Fullscreen )"));
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_game_mode);
           }
-          { Fl_Check_Button* o = horizon_effect = new Fl_Check_Button(250, 10, 205, 20, _("Horizon effect"));
+          { Fl_Check_Button* o = horizon_effect = new Fl_Check_Button(250, 10, 205, 25, _("Horizon effect"));
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_horizon_effect);
           }
-          { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(250, 35, 205, 20, _("Enhanced runway lighting"));
+          { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(250, 35, 205, 25, _("Enhanced runway lighting"));
             o->tooltip(_("Use with caution. It may drop your framerate dramatically"));
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_enhanced_lighting);
           }
-          { Fl_Check_Button* o = specular_highlight = new Fl_Check_Button(250, 60, 205, 20, _("Specular highlight"));
+          { Fl_Check_Button* o = specular_highlight = new Fl_Check_Button(250, 60, 205, 25, _("Specular highlight"));
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_specular_highlight);
+          }
+          { Fl_Check_Button* o = frame_rate_limiter = new Fl_Check_Button(250, 85, 205, 25, _("Framerate limiter :"));
+            o->tooltip(_("Too much framerate hurts the smoothness of the simulation"));
+            o->down_box(FL_DOWN_BOX);
+            o->callback((Fl_Callback*)cb_frame_rate_limiter);
+          }
+          { Fl_Value_Input* o = frame_rate_limiter_value = new Fl_Value_Input(455, 85, 55, 25);
+            o->minimum(30);
+            o->maximum(100);
+            o->step(1);
+            o->callback((Fl_Callback*)cb_frame_rate_limiter_value);
           }
           { Fl_Box* o = new Fl_Box(610, 80, 25, 10);
             Fl_Group::current()->resizable(o);
           }
-          { Fl_Check_Button* o = clouds_3d = new Fl_Check_Button(470, 10, 205, 20, _("3D clouds (experimental)"));
+          { Fl_Check_Button* o = clouds_3d = new Fl_Check_Button(470, 10, 205, 25, _("3D clouds (experimental)"));
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_clouds_3d);
           }
@@ -521,40 +553,55 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           }
           o->end();
         }
-        { Fl_Group* o = new Fl_Group(5, 115, 790, 85, _("Features"));
-          o->box(FL_ENGRAVED_FRAME);
-          o->labelfont(1);
-          o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-          { Fl_Check_Button* o = random_objects = new Fl_Check_Button(25, 145, 150, 25, _("Random objects"));
-            o->down_box(FL_DOWN_BOX);
-            o->callback((Fl_Callback*)cb_random_objects);
+        { Fl_Group* o = new Fl_Group(5, 120, 790, 180);
+          { Fl_Group* o = new Fl_Group(5, 120, 480, 180, _("Features"));
+            o->box(FL_ENGRAVED_FRAME);
+            o->labelfont(1);
+            o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+            { Fl_Check_Button* o = random_objects = new Fl_Check_Button(25, 135, 150, 25, _("Random objects"));
+              o->down_box(FL_DOWN_BOX);
+              o->callback((Fl_Callback*)cb_random_objects);
+            }
+            { Fl_Check_Button* o = random_trees = new Fl_Check_Button(25, 160, 150, 25, _("Random trees"));
+              o->down_box(FL_DOWN_BOX);
+              o->callback((Fl_Callback*)cb_random_trees);
+            }
+            { Fl_Check_Button* o = ai_models = new Fl_Check_Button(25, 185, 150, 25, _("AI models"));
+              o->down_box(FL_DOWN_BOX);
+              o->callback((Fl_Callback*)cb_ai_models);
+            }
+            { Fl_Check_Button* o = time_of_day = new Fl_Check_Button(180, 135, 160, 25, _("Time of day :"));
+              o->down_box(FL_DOWN_BOX);
+              o->callback((Fl_Callback*)cb_time_of_day);
+            }
+            { Fl_Choice* o = time_of_day_value = new Fl_Choice(345, 135, 120, 25);
+              o->down_box(FL_BORDER_BOX);
+              o->callback((Fl_Callback*)cb_time_of_day_value);
+            }
+            { Fl_Check_Button* o = real_weather_fetch = new Fl_Check_Button(180, 160, 160, 25, _("Real weather fetch"));
+              o->down_box(FL_DOWN_BOX);
+              o->callback((Fl_Callback*)cb_real_weather_fetch);
+            }
+            { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(180, 185, 170, 25, _("Auto-coordination"));
+              o->down_box(FL_DOWN_BOX);
+              o->callback((Fl_Callback*)cb_auto_coordination);
+            }
+            { Fl_Box* o = new Fl_Box(445, 180, 20, 10);
+              Fl_Group::current()->resizable(o);
+            }
+            o->end();
           }
-          { Fl_Check_Button* o = ai_models = new Fl_Check_Button(25, 170, 150, 25, _("AI models"));
-            o->down_box(FL_DOWN_BOX);
-            o->callback((Fl_Callback*)cb_ai_models);
-          }
-          { Fl_Check_Button* o = time_of_day = new Fl_Check_Button(180, 120, 170, 25, _("Time of day :"));
-            o->down_box(FL_DOWN_BOX);
-            o->callback((Fl_Callback*)cb_time_of_day);
-          }
-          { Fl_Choice* o = time_of_day_value = new Fl_Choice(345, 120, 120, 25);
-            o->down_box(FL_BORDER_BOX);
-            o->callback((Fl_Callback*)cb_time_of_day_value);
-          }
-          { Fl_Check_Button* o = real_weather_fetch = new Fl_Check_Button(180, 145, 170, 25, _("Real weather fetch"));
-            o->down_box(FL_DOWN_BOX);
-            o->callback((Fl_Callback*)cb_real_weather_fetch);
-          }
-          { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(180, 170, 170, 25, _("Auto-coordination"));
-            o->down_box(FL_DOWN_BOX);
-            o->callback((Fl_Callback*)cb_auto_coordination);
-          }
-          { Fl_Browser* o = scenarii = new Fl_Browser(480, 137, 190, 52, _("Scenario :"));
-            o->type(3);
-            o->callback((Fl_Callback*)cb_scenarii);
-            o->align(FL_ALIGN_TOP_LEFT);
-          }
-          { Fl_Box* o = new Fl_Box(775, 175, 20, 10);
+          { Fl_Group* o = new Fl_Group(490, 120, 305, 180, _("Scenarios"));
+            o->box(FL_ENGRAVED_FRAME);
+            o->labelfont(1);
+            o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+            { Fl_Browser* o = scenarii = new Fl_Browser(495, 136, 295, 158);
+              o->type(3);
+              o->callback((Fl_Callback*)cb_scenarii);
+              o->align(FL_ALIGN_TOP_LEFT);
+              Fl_Group::current()->resizable(o);
+            }
+            o->end();
             Fl_Group::current()->resizable(o);
           }
           o->end();

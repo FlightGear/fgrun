@@ -1161,9 +1161,39 @@ Wizard::clouds_3d_cb()
 }
 
 void
+Wizard::frame_rate_limiter_cb()
+{
+    int v = frame_rate_limiter->value();
+    if ( v == 0 )
+    {
+	frame_rate_limiter_value->deactivate();
+    }
+    else
+    {
+	frame_rate_limiter_value->activate();
+    }
+    prefs.set("frame_rate_limiter", v);
+    update_options();
+}
+
+void
+Wizard::frame_rate_limiter_value_cb()
+{
+    prefs.set( "frame_rate_limiter_value", frame_rate_limiter_value->value() );
+    update_options();
+}
+
+void
 Wizard::random_objects_cb()
 {
     prefs.set("random_objects", random_objects->value());
+    update_options();
+}
+
+void
+Wizard::random_trees_cb()
+{
+    prefs.set("random_trees", random_trees->value());
     update_options();
 }
 
@@ -1493,7 +1523,7 @@ Wizard::update_basic_options()
     prefs.get("bpp", buf, "32", buflen-1);
     set_choice( bpp, buf );
 
-    int iVal;
+    int iVal, iVal2;
     prefs.get("game_mode", iVal, 0);
     game_mode->value(iVal);
     prefs.get("horizon_effect", iVal, 0);
@@ -1504,8 +1534,19 @@ Wizard::update_basic_options()
     specular_highlight->value(iVal);
     prefs.get("clouds3d", iVal, 0);
     clouds_3d->value(iVal);
+    prefs.get("frame_rate_limiter", iVal, 0);
+    frame_rate_limiter->value(iVal);
+    prefs.get("frame_rate_limiter_value", iVal2, 60);
+    frame_rate_limiter_value->value( iVal2 );
+    if ( iVal )
+        frame_rate_limiter_value->activate();
+    else
+        frame_rate_limiter_value->deactivate();
+
     prefs.get("random_objects", iVal, 0);
     random_objects->value(iVal);
+    prefs.get("random_trees", iVal, 0);
+    random_trees->value(iVal);
     prefs.get("ai_models", iVal, 0);
     ai_models->value(iVal);
     prefs.get("time_of_day", iVal, 0);

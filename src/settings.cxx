@@ -80,6 +80,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("intro_music", intro_music->value());
     prefs.set("mouse_pointer", mouse_pointer->value());
     prefs.set("random_objects", random_objects->value());
+    prefs.set("random_trees", random_trees->value());
     prefs.set("panel", panel->value());
     prefs.set("sound", sound->value());
     prefs.set("hud", hud->value());
@@ -297,6 +298,8 @@ Advanced::load_settings( Fl_Preferences& prefs )
     mouse_pointer->value(iVal);
     prefs.get("random_objects", iVal, 0);
     random_objects->value(iVal);
+    prefs.get("random_trees", iVal, 0);
+    random_trees->value(iVal);
     prefs.get("panel", iVal, 1);
     panel->value(iVal);
     prefs.get("sound", iVal, 1);
@@ -593,6 +596,7 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("intro_music" );
     prefs.deleteEntry("mouse_pointer" );
     prefs.deleteEntry("random_objects" );
+    prefs.deleteEntry("random_trees" );
     prefs.deleteEntry("panel" );
     prefs.deleteEntry("sound" );
     prefs.deleteEntry("hud" );

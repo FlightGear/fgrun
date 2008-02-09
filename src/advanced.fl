@@ -100,7 +100,7 @@ class Advanced {open
         }
       }
       Fl_Group {page[1]} {
-        label Features
+        label Features selected
         private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button game_mode {
@@ -149,15 +149,15 @@ else
         }
         Fl_Check_Button horizon_effect {
           label {Horizon effect}
-          private tooltip {Enable celestial body growth illusion near the horizon} xywh {175 200 160 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable celestial body growth illusion near the horizon} xywh {175 230 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button enhanced_lighting {
           label {Enhanced lighting}
-          private tooltip {Enable enhanced runway lighting} xywh {175 230 160 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable enhanced runway lighting} xywh {175 260 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button distance_attenuation {
           label {Distance attenuation}
-          private tooltip {Enable runway light distance attenuation} xywh {175 260 160 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable runway light distance attenuation} xywh {175 290 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button hud_3d {
           label {Hud-3D}
@@ -165,7 +165,7 @@ else
         }
         Fl_Check_Button specular_highlight {
           label {Specular highlight}
-          private tooltip {Enable specular reflections on textured objects} xywh {175 290 160 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable specular reflections on textured objects} xywh {175 320 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button failure {
           label Failures
@@ -201,6 +201,10 @@ else
         Fl_Check_Button ai_models {
           label {AI Traffic}
           private tooltip {Enable AI traffic} xywh {345 230 140 25} down_box DOWN_BOX labelsize 12
+        }
+        Fl_Check_Button random_trees {
+          label {Random Trees}
+          xywh {170 200 160 25} down_box DOWN_BOX
         }
       }
       Fl_Group {page[2]} {
@@ -300,7 +304,7 @@ else
         }
       }
       Fl_Group {page[4]} {
-        label {Initial Position} selected
+        label {Initial Position}
         private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Input lon {
@@ -1060,7 +1064,7 @@ else
         }
         Fl_Value_Slider turbulence {
           label Turbulence
-          private tooltip {calm (0.0) to severe (1.0)} xywh {430 35 25 275} labelsize 12 minimum 1 maximum 0 step 0.01
+          private tooltip {calm (0.0) to severe (1.0)} xywh {430 35 25 275} labelsize 12 minimum 1 maximum 0
         }
         Fl_Input ceiling {
           label {Ceiling:}

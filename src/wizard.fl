@@ -191,7 +191,7 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {
+        Fl_Group {page[3]} {open
           private xywh {0 0 800 560}
         } {
           Fl_Group {} {
@@ -202,7 +202,7 @@ class Wizard {open
               callback {advanced_cb();}
               private xywh {685 525 110 25}
             }
-            Fl_Box {} {selected
+            Fl_Box {} {
               private xywh {250 525 435 25} resizable
             }
             Fl_Check_Button show_cmd_line {
@@ -216,7 +216,7 @@ class Wizard {open
           }
           Fl_Group {} {
             label Display open
-            private xywh {5 5 790 105} box ENGRAVED_FRAME labelfont 1 align 21
+            private xywh {5 5 790 110} box ENGRAVED_FRAME labelfont 1 align 21
           } {
             Fl_Choice resolution {
               label {Resolution :}
@@ -247,22 +247,31 @@ class Wizard {open
             Fl_Check_Button game_mode {
               label {Game mode ( Fullscreen )}
               callback {game_mode_cb();}
-              private xywh {25 85 210 20} down_box DOWN_BOX
+              private xywh {25 85 210 25} down_box DOWN_BOX
             }
             Fl_Check_Button horizon_effect {
               label {Horizon effect}
               callback {horizon_effect_cb();}
-              private xywh {250 10 205 20} down_box DOWN_BOX
+              private xywh {250 10 205 25} down_box DOWN_BOX
             }
             Fl_Check_Button enhanced_lighting {
               label {Enhanced runway lighting}
               callback {enhanced_lighting_cb();}
-              private tooltip {Use with caution. It may drop your framerate dramatically} xywh {250 35 205 20} down_box DOWN_BOX
+              private tooltip {Use with caution. It may drop your framerate dramatically} xywh {250 35 205 25} down_box DOWN_BOX
             }
             Fl_Check_Button specular_highlight {
               label {Specular highlight}
               callback {specular_highlight_cb();}
-              private xywh {250 60 205 20} down_box DOWN_BOX
+              private xywh {250 60 205 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button frame_rate_limiter {
+              label {Framerate limiter :}
+              callback {frame_rate_limiter_cb();}
+              private tooltip {Too much framerate hurts the smoothness of the simulation} xywh {250 85 205 25} down_box DOWN_BOX
+            }
+            Fl_Value_Input frame_rate_limiter_value {
+              callback {frame_rate_limiter_value_cb();}
+              private xywh {455 85 55 25} minimum 30 maximum 100 step 1
             }
             Fl_Box {} {
               private xywh {610 80 25 10} resizable
@@ -270,7 +279,7 @@ class Wizard {open
             Fl_Check_Button clouds_3d {
               label {3D clouds (experimental)}
               callback {clouds_3d_cb();}
-              private xywh {470 10 205 20} down_box DOWN_BOX
+              private xywh {470 10 205 25} down_box DOWN_BOX
             }
             Fl_Choice bpp {
               label {bpp :}
@@ -291,52 +300,65 @@ class Wizard {open
               }
             }
           }
-          Fl_Group {} {
-            label Features open
-            private xywh {5 115 790 85} box ENGRAVED_FRAME labelfont 1 align 21
+          Fl_Group {} {open
+            xywh {5 120 790 180}
           } {
-            Fl_Check_Button random_objects {
-              label {Random objects}
-              callback {random_objects_cb();}
-              private xywh {25 145 150 25} down_box DOWN_BOX
+            Fl_Group {} {
+              label Features open selected
+              private xywh {5 120 480 180} box ENGRAVED_FRAME labelfont 1 align 21
+            } {
+              Fl_Check_Button random_objects {
+                label {Random objects}
+                callback {random_objects_cb();}
+                private xywh {25 135 150 25} down_box DOWN_BOX
+              }
+              Fl_Check_Button random_trees {
+                label {Random trees}
+                callback {random_trees_cb();}
+                private xywh {25 160 150 25} down_box DOWN_BOX
+              }
+              Fl_Check_Button ai_models {
+                label {AI models}
+                callback {ai_models_cb();}
+                private xywh {25 185 150 25} down_box DOWN_BOX
+              }
+              Fl_Check_Button time_of_day {
+                label {Time of day :}
+                callback {time_of_day_cb();}
+                private xywh {180 135 160 25} down_box DOWN_BOX
+              }
+              Fl_Choice time_of_day_value {
+                callback {time_of_day_value_cb();} open
+                private xywh {345 135 120 25} down_box BORDER_BOX
+              } {}
+              Fl_Check_Button real_weather_fetch {
+                label {Real weather fetch}
+                callback {real_weather_fetch_cb();}
+                private xywh {180 160 160 25} down_box DOWN_BOX
+              }
+              Fl_Check_Button auto_coordination {
+                label {Auto-coordination}
+                callback {auto_coordination_cb();}
+                private xywh {180 185 170 25} down_box DOWN_BOX
+              }
+              Fl_Box {} {
+                private xywh {445 180 20 10} resizable
+              }
             }
-            Fl_Check_Button ai_models {
-              label {AI models}
-              callback {ai_models_cb();}
-              private xywh {25 170 150 25} down_box DOWN_BOX
-            }
-            Fl_Check_Button time_of_day {
-              label {Time of day :}
-              callback {time_of_day_cb();}
-              private xywh {180 120 170 25} down_box DOWN_BOX
-            }
-            Fl_Choice time_of_day_value {
-              callback {time_of_day_value_cb();} open
-              private xywh {345 120 120 25} down_box BORDER_BOX
-            } {}
-            Fl_Check_Button real_weather_fetch {
-              label {Real weather fetch}
-              callback {real_weather_fetch_cb();}
-              private xywh {180 145 170 25} down_box DOWN_BOX
-            }
-            Fl_Check_Button auto_coordination {
-              label {Auto-coordination}
-              callback {auto_coordination_cb();}
-              private xywh {180 170 170 25} down_box DOWN_BOX
-            }
-            Fl_Browser scenarii {
-              label {Scenario :}
-              callback {scenarii_cb();}
-              private xywh {480 137 190 52} type Multi align 5
-            }
-            Fl_Box {} {
-              private xywh {775 175 20 10} resizable
+            Fl_Group {} {
+              label Scenarios open
+              xywh {490 120 305 180} box ENGRAVED_FRAME labelfont 1 align 21 resizable
+            } {
+              Fl_Browser scenarii {
+                callback {scenarii_cb();}
+                private xywh {495 136 295 158} type Multi align 5 resizable
+              }
             }
           }
           Fl_Group {} {open
             private xywh {5 305 790 60}
           } {
-            Fl_Group atlas_group {
+            Fl_Group atlas_group {open
               private xywh {5 305 245 60} box ENGRAVED_FRAME labeltype SHADOW_LABEL labelfont 1 align 21
             } {
               Fl_Check_Button atlas {
@@ -476,8 +498,11 @@ class Wizard {open
   decl {void horizon_effect_cb();} {}
   decl {void enhanced_lighting_cb();} {}
   decl {void specular_highlight_cb();} {}
+  decl {void frame_rate_limiter_cb();} {}
+  decl {void frame_rate_limiter_value_cb();} {}
   decl {void clouds_3d_cb();} {}
   decl {void random_objects_cb();} {}
+  decl {void random_trees_cb();} {}
   decl {void ai_models_cb();} {}
   decl {void time_of_day_cb();} {}
   decl {void time_of_day_value_cb();} {}

@@ -97,6 +97,12 @@ private:
   Fl_Check_Button *specular_highlight;
   void cb_specular_highlight_i(Fl_Check_Button*, void*);
   static void cb_specular_highlight(Fl_Check_Button*, void*);
+  Fl_Check_Button *frame_rate_limiter;
+  void cb_frame_rate_limiter_i(Fl_Check_Button*, void*);
+  static void cb_frame_rate_limiter(Fl_Check_Button*, void*);
+  Fl_Value_Input *frame_rate_limiter_value;
+  void cb_frame_rate_limiter_value_i(Fl_Value_Input*, void*);
+  static void cb_frame_rate_limiter_value(Fl_Value_Input*, void*);
   Fl_Check_Button *clouds_3d;
   void cb_clouds_3d_i(Fl_Check_Button*, void*);
   static void cb_clouds_3d(Fl_Check_Button*, void*);
@@ -109,6 +115,9 @@ private:
   Fl_Check_Button *random_objects;
   void cb_random_objects_i(Fl_Check_Button*, void*);
   static void cb_random_objects(Fl_Check_Button*, void*);
+  Fl_Check_Button *random_trees;
+  void cb_random_trees_i(Fl_Check_Button*, void*);
+  static void cb_random_trees(Fl_Check_Button*, void*);
   Fl_Check_Button *ai_models;
   void cb_ai_models_i(Fl_Check_Button*, void*);
   static void cb_ai_models(Fl_Check_Button*, void*);
@@ -217,8 +226,11 @@ private:
   void horizon_effect_cb();
   void enhanced_lighting_cb();
   void specular_highlight_cb();
+  void frame_rate_limiter_cb();
+  void frame_rate_limiter_value_cb();
   void clouds_3d_cb();
   void random_objects_cb();
+  void random_trees_cb();
   void ai_models_cb();
   void time_of_day_cb();
   void time_of_day_value_cb();

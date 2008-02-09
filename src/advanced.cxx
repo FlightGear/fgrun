@@ -782,17 +782,17 @@ Advanced::Advanced() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = horizon_effect = new Fl_Check_Button(175, 200, 160, 25, _("Horizon effect"));
+      { Fl_Check_Button* o = horizon_effect = new Fl_Check_Button(175, 230, 160, 25, _("Horizon effect"));
         o->tooltip(_("Enable celestial body growth illusion near the horizon"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(175, 230, 160, 25, _("Enhanced lighting"));
+      { Fl_Check_Button* o = enhanced_lighting = new Fl_Check_Button(175, 260, 160, 25, _("Enhanced lighting"));
         o->tooltip(_("Enable enhanced runway lighting"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = distance_attenuation = new Fl_Check_Button(175, 260, 160, 25, _("Distance attenuation"));
+      { Fl_Check_Button* o = distance_attenuation = new Fl_Check_Button(175, 290, 160, 25, _("Distance attenuation"));
         o->tooltip(_("Enable runway light distance attenuation"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
@@ -802,7 +802,7 @@ Advanced::Advanced() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = specular_highlight = new Fl_Check_Button(175, 290, 160, 25, _("Specular highlight"));
+      { Fl_Check_Button* o = specular_highlight = new Fl_Check_Button(175, 320, 160, 25, _("Specular highlight"));
         o->tooltip(_("Enable specular reflections on textured objects"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
@@ -836,6 +836,9 @@ Advanced::Advanced() {
         o->tooltip(_("Enable AI traffic"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
+      }
+      { Fl_Check_Button* o = random_trees = new Fl_Check_Button(170, 200, 160, 25, _("Random Trees"));
+        o->down_box(FL_DOWN_BOX);
       }
       o->end();
     }
@@ -1649,7 +1652,6 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->minimum(1);
         o->maximum(0);
-        o->step(0.01);
       }
       { Fl_Input* o = ceiling = new Fl_Input(235, 335, 80, 25, _("Ceiling:"));
         o->tooltip(_("FT_ASL[:THICKNESS_FT]"));

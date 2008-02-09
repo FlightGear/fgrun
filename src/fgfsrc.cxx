@@ -112,7 +112,7 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     if (prefs.get( "config", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--config=" << buf;
   
-    int iVal;
+    int iVal, iVal2;
     double dVal;
 
     // Features - only set non-default values.
@@ -128,6 +128,8 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--enable-random-objects";
     else
 	os << pfx << "--disable-random-objects";
+    if (prefs.get( "random_trees", iVal, 1 ) && !iVal)
+        os << pfx << "--prop:/sim/rendering/random-vegetation=false";
 
     if (prefs.get( "panel", iVal, 1 ) && !iVal)
 	os << pfx << "--disable-panel";
@@ -255,6 +257,9 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
     if (prefs.get( "shading", buf, "", buflen-1 ) &&
 	strcmp( "flat", buf ) == 0)
 	os << pfx << "--shading-flat";
+    if (prefs.get( "frame_rate_limiter", iVal, 0 ) && iVal &&
+	     prefs.get( "frame_rate_limiter_value", iVal2, 60 ))
+        os << pfx << "--prop:/sim/frame-rate-throttle-hz=" << iVal2;
 
     if (prefs.get( "fog", buf, "", buflen-1 ))
     {
