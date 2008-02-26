@@ -122,6 +122,7 @@ private:
   Fl_Choice *bpp;
   static Fl_Menu_Item menu_bpp[];
   Fl_Value_Input *fov;
+  Fl_Choice *texture_filtering;
   Fl_Round_Button *time_match_real;
   void cb_time_match_real_i(Fl_Round_Button*, void*);
   static void cb_time_match_real(Fl_Round_Button*, void*);
@@ -358,5 +359,6 @@ private:
   static Fl_Menu_Item menu_log_level[];
   static Fl_Menu_Item menu_cloud_coverage_[];
   static Fl_Menu_Item menu_control[];
+  static Fl_Menu_Item menu_texture_filtering[];
 };
 #endif

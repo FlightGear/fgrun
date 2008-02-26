@@ -1137,6 +1137,12 @@ Advanced::Advanced() {
         o->value(60);
         o->textsize(12);
       }
+      { Fl_Choice* o = texture_filtering = new Fl_Choice(490, 355, 120, 25, _("Texture filtering:"));
+        o->tooltip(_("Set the maximum degree of anisotropy in texture filtering"));
+        o->down_box(FL_BORDER_BOX);
+        o->labelsize(12);
+        o->textsize(12);
+      }
       o->end();
     }
     { Fl_Group* o = page[6] = new Fl_Group(150, 0, 490, 430, _("Time"));

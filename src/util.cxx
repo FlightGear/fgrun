@@ -55,3 +55,31 @@ set_choice( Fl_Choice* c, const char* s )
     }
     return 0;
 }
+
+int
+set_choice_from_data( Fl_Choice* c, const char* s )
+{
+    const Fl_Menu_Item* m = c->menu();
+    int i = 0;
+    int nest = 0;
+    for (i = 0; i < m->size(); ++i)
+    {
+	if (m[i].submenu())
+	{
+	    ++nest;
+	}
+	else if (m[i].user_data() != 0)
+	{
+	    if (strcmp(s, (const char *)m[i].user_data()) == 0)
+	    {
+		c->value(i);
+		return 1;
+	    }
+	}
+	else
+	{
+	    --nest;
+	}
+    }
+    return 0;
+}

@@ -287,6 +287,9 @@
 				RelativePath=".\resource.h">
 			</File>
 			<File
+				RelativePath=".\src\util.h">
+			</File>
+			<File
 				RelativePath="src\wizard.h">
 			</File>
 		</Filter>
@@ -366,7 +369,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating italian translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -374,7 +378,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating italian translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -382,7 +387,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating italian translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>

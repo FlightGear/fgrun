@@ -101,10 +101,10 @@ Advanced::list_update_cb( Fl_Browser* browser,
 }
 
 Fl_Menu_Item Advanced::menu_time_of_day_value[] = {
- {N_("noon"), 0,  0, (void*)"noon", 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("dusk"), 0,  0, (void*)"dusk", 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("midnight"), 0,  0, (void*)"midnight", 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("dawn"), 0,  0, (void*)"dawn", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("noon"), 0,  0, (void*)"noon", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("dusk"), 0,  0, (void*)"dusk", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("midnight"), 0,  0, (void*)"midnight", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("dawn"), 0,  0, (void*)"dawn", 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -134,6 +134,15 @@ Fl_Menu_Item Advanced::menu_control[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+Fl_Menu_Item Advanced::menu_texture_filtering[] = {
+ {_("no filtering"), 0,  0, (void*)"1", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("2.0"), 0,  0, (void*)"2", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("4.0"), 0,  0, (void*)"4", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("8.0"), 0,  0, (void*)"8", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("highest filtering"), 0,  0, (void*)"16", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void
 Advanced::init()
 {
@@ -160,6 +169,12 @@ Advanced::init()
         menu_control[i].text = _( menu_control[i].text );
     }
     control->menu(menu_control);
+
+    for ( int i = 0; menu_texture_filtering[i].text != 0; ++i )
+    {
+        menu_texture_filtering[i].text = _( menu_texture_filtering[i].text );
+    }
+    texture_filtering->menu(menu_texture_filtering);
 
     page_list->add(_("General"));
     page_list->add(_("Features"));

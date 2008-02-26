@@ -71,7 +71,7 @@ void
 Advanced::save_settings( Fl_Preferences& prefs )
 {
     prefs.set( "browser", browser->value() );
-    prefs.set( "control", (const char *)control->mvalue()->user_data_ );
+    prefs.set( "control", (const char *)control->mvalue()->user_data() );
     prefs.set( "lang", lang->value());
     prefs.set( "config", config->value() );
 
@@ -151,6 +151,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("view-offset", view_offset->value());
     prefs.set("bpp", bpp->text());
     prefs.set("fov", fov->value());
+    prefs.set("texture-filtering", (const char *)texture_filtering->mvalue()->user_data());
 
     prefs.set("time-match-real", time_match_real->value());
     prefs.set("time-offset", time_offset_value->value());
@@ -162,7 +163,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("start-date-lat", start_date_lat->value());
     prefs.set("start-date-lat-value", start_date_gmt_value->value());
     prefs.set("time_of_day", time_of_day->value());
-    prefs.set("time_of_day_value", (const char *)time_of_day_value->mvalue()->user_data_);
+    prefs.set("time_of_day_value", (const char *)time_of_day_value->mvalue()->user_data());
 
     // Network options.
     prefs.set("httpd", httpd->value() ? int(httpd_port->value()) : 0);
@@ -192,7 +193,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     for (i = 1; i <= env_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("env-var-%d", i), env_list->text(i));
 
-    prefs.set( "log-level", (const char *)log_level->mvalue()->user_data_ );
+    prefs.set( "log-level", (const char *)log_level->mvalue()->user_data() );
     prefs.set("trace-read-count", trace_read_list->size());
     for (i = 1; i <= trace_read_list->size(); ++i)
 	prefs.set( Fl_Preferences::Name("trace-read-%d", i),
@@ -430,6 +431,8 @@ Advanced::load_settings( Fl_Preferences& prefs )
 	vis_meters->setonly();
     else if (strcmp(buf,"miles") == 0)
 	vis_miles->setonly();
+    prefs.get( "texture-filtering", buf, "1", buflen-1 );
+    set_choice_from_data( texture_filtering, buf );
 
     prefs.get( "time-match-real", iVal, 1 );
     if (iVal) time_match_real->setonly();
@@ -656,6 +659,7 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("view-offset" );
     prefs.deleteEntry("bpp" );
     prefs.deleteEntry("fov" );
+    prefs.deleteEntry("texture-filtering" );
 
     prefs.deleteEntry("time-match-real" );
     prefs.deleteEntry("time-offset" );

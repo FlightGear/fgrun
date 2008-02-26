@@ -29,5 +29,6 @@ class Fl_Choice;
  * 
  */
 int set_choice( Fl_Choice*, const char* );
+int set_choice_from_data( Fl_Choice*, const char* );
 
 #endif // UTIL_H_INCLUDED

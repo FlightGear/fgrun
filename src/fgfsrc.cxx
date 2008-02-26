@@ -288,6 +288,8 @@ Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
 	os << pfx << "--bpp=" << iVal;
     if (prefs.get( "fov", dVal, 60.0 ) && dVal != 60.)
 	os << pfx << "--fov=" << dVal;
+    if (prefs.get( "texture-filtering", buf, "1", buflen-1 ) && strcmp(buf,"1")!=0)
+	os << pfx << "--texture-filtering=" << buf;
 
     // Time
     if (prefs.get( "time-match-real", iVal, 1 ) && iVal &&

@@ -100,7 +100,7 @@ class Advanced {open
         }
       }
       Fl_Group {page[1]} {
-        label Features selected
+        label Features
         private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button game_mode {
@@ -459,7 +459,7 @@ else
           private xywh {490 265 120 25} labelsize 12 textsize 12
         }
         Fl_Choice bpp {
-          label {bpp:}
+          label {bpp:} open
           private tooltip {Color depth (bits per pixel)} xywh {490 295 120 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           MenuItem {} {
@@ -479,10 +479,14 @@ else
           label {FOV:}
           private tooltip {Field of View angle} xywh {490 325 120 25} labelsize 12 minimum 1 maximum 360 value 60 textsize 12
         }
+        Fl_Choice texture_filtering {
+          label {Texture filtering:} open
+          private tooltip {Set the maximum degree of anisotropy in texture filtering} xywh {490 355 120 25} down_box BORDER_BOX labelsize 12 textsize 12
+        } {}
       }
       Fl_Group {page[6]} {
-        label Time
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label Time open
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Round_Button time_match_real {
           label {Time match real}
@@ -571,7 +575,7 @@ else
           private xywh {175 185 220 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
         }
         Fl_Choice time_of_day_value {
-          label {choice:} open
+          label {choice:} open selected
           private xywh {400 185 140 25} down_box BORDER_BOX labeltype NO_LABEL labelsize 12 textsize 12
         } {}
       }
@@ -1076,7 +1080,7 @@ else
         }
       }
       Fl_Group {page[14]} {
-        label Clouds
+        label Clouds open
         private xywh {150 0 490 430} labelfont 1 align 21 hide
       } {
         Fl_Choice cloud_layer_ {
@@ -1170,4 +1174,5 @@ else
   decl {static Fl_Menu_Item menu_log_level[];} {}
   decl {static Fl_Menu_Item menu_cloud_coverage_[];} {}
   decl {static Fl_Menu_Item menu_control[];} {}
+  decl {static Fl_Menu_Item menu_texture_filtering[];} {}
 } 
