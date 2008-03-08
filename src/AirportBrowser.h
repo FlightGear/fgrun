@@ -24,6 +24,8 @@
 #define AirportBrowser_h_included
 
 #include <vector>
+#include <set>
+#include <map>
 #include <deque>
 #include <string>
 #include <zlib.h>
@@ -155,12 +157,18 @@ private:
     /**
      * Names of all airports located in the scenery directories.
      */
-    std::vector< std::string > installed_airports_;
+    std::set< std::string > installed_airports_;
+
+    /**
+     * Names of all individual scenery directories.
+     */
+    std::set< std::string > installed_dirs_;
 
     /**
      * Names of airports and runways loaded from runways.dat.
      */
     std::vector< apt_dat_t > airports_;
+    std::map< std::string, std::vector< std::string > > airports_by_tiles_;
 
     /**
      * True once runways.dat has been loaded.

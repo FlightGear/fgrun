@@ -269,6 +269,9 @@
 				RelativePath="src\AirportTable.h">
 			</File>
 			<File
+				RelativePath=".\src\apt_dat.h">
+			</File>
+			<File
 				RelativePath="src\Fl_Heading_Dial.H">
 			</File>
 			<File

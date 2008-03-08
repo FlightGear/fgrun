@@ -161,6 +161,22 @@ Wizard::airports_cb()
 	    airports_->select_id( buf );
 	}
     }
+    else
+    {
+        vector<string> v;
+        for (int i = 1; i <= scenery_dir_list_->size(); ++i)
+        {
+	    SGPath dir( scenery_dir_list_->text(i) );
+	    dir.append( "Terrain" );
+	    if (fl_filename_isdir( dir.c_str() ))
+	        v.push_back( dir.str() );
+	    else
+	        v.push_back( scenery_dir_list_->text(i) );
+        }
+
+        string cache( cache_file_->value() );
+        airports_->load_airports( v, cache, airports_cb, this );
+    }
 }
 
 static const char* about_text = N_("\
@@ -1082,23 +1098,9 @@ Wizard::refresh_airports()
 {
 //     win->cursor( FL_CURSOR_WAIT );
 
-    vector<string> v;
-    for (int i = 1; i <= scenery_dir_list_->size(); ++i)
-    {
-	SGPath dir( scenery_dir_list_->text(i) );
-	dir.append( "Terrain" );
-	if (fl_filename_isdir( dir.c_str() ))
-	    v.push_back( dir.str() );
-	else
-	    v.push_back( scenery_dir_list_->text(i) );
-    }
-
     SGPath path( fg_root_->value() );
     path.append( "/Airports/apt.dat.gz" );
     airports_->load_runways( path.str(), airports_cb, this );
-
-    string cache( cache_file_->value() );
-    airports_->load_airports( v, cache, airports_cb, this );
 }
 
 void

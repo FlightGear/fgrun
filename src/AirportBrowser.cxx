@@ -23,6 +23,8 @@
 #include <algorithm>
 #include <iterator>
 #include <fstream>
+#include <sstream>
+#include <iomanip>
 
 #include <FL/filename.H>
 #include <FL/Fl_Round_Button.H>
@@ -182,6 +184,9 @@ AirportBrowser::runways_idle_proc( )
     int count = 200;
     char line[128];
     char *token;
+    string location;
+
+    setlocale( LC_ALL, "C" );
 
     while (count-- > 0 && gzgets( gzf_, line, sizeof line ) != 0)
     {
@@ -195,8 +200,10 @@ AirportBrowser::runways_idle_proc( )
         }
 
         int type_num = atoi(token);
-        if ((type_num == 1)  || (type_num == 17))  // Its an airport
+        if ( type_num == 1 || type_num == 16 || type_num == 17 )  // Its an airport or a seabase
         {
+            location = "";
+
             token = strtok(NULL, space);
             token = strtok(NULL, space);
             token = strtok(NULL, space);
@@ -206,6 +213,7 @@ AirportBrowser::runways_idle_proc( )
             apt_dat_t apt;
             apt.id_ = token;
             apt.name_ = strtok(NULL, junk);
+            apt.type_ = type_num;
             if (apt.name_[0] == ' ')
                 apt.name_.erase( 0, 1);
             if (apt.name_.find( "[H] " ) == 0)
@@ -213,12 +221,32 @@ AirportBrowser::runways_idle_proc( )
                 apt.name_.erase(0, 4);
                 apt.name_ += " [H]";
             }
+            else if (apt.name_.find( "[S] " ) == 0)
+            {
+                apt.name_.erase(0, 4);
+                apt.name_ += " [S]";
+            }
             airports_.push_back( apt );
         }
         else if (type_num == 10)	// Now read in the runways and taxiways
         {
-            strtok(NULL, space);
-            strtok(NULL, space);
+            if ( location.empty() )
+            {
+                token = strtok(NULL, space);
+                double lat = strtod( token, 0 );
+                token = strtok(NULL, space);
+                double lon = strtod( token, 0 );
+                std::ostringstream os;
+                os << ( lon < 0 ? 'w' : 'e' ) << std::setfill('0') << std::setw( 3 ) << (int)fabs( floor( lon ) ) << ( lat < 0 ? 's' : 'n' ) << std::setfill( '0' ) << std::setw( 2 ) << (int)fabs( floor( lat ) );
+                location = os.str();
+
+                airports_by_tiles_[ location ].push_back( airports_.back().id_ );
+            }
+            else
+            {
+                strtok(NULL, space);
+                strtok(NULL, space);
+            }
             string rwy( strtok(NULL, space) );
             if (rwy != "xxx")
             {
@@ -238,6 +266,8 @@ AirportBrowser::runways_idle_proc( )
 	if (runways_loaded_cb_ != 0)
 	    runways_loaded_cb_( this, runways_loaded_cb_data_ );
     }
+
+    setlocale( LC_ALL, "" );
 }
 
 const apt_dat_t*
@@ -264,9 +294,9 @@ AirportBrowser::show_installed( bool refresh )
     {
 	size_type count = installed_airports_.size();
 	apts.reserve( count );
-	for (size_type i = 0; i < count; ++i)
+        for (std::set<std::string>::iterator i = installed_airports_.begin(); i != installed_airports_.end(); ++i)
 	{
-	    const apt_dat_t* apt = find( installed_airports_[i] );
+	    const apt_dat_t* apt = find( *i );
 	    if (apt != 0)
 	    {
 		apts.push_back( apt );
@@ -400,6 +430,7 @@ AirportBrowser::load_runways( const string& path, Fl_Callback* cb, void* v )
         ;
 
     runways_loaded_ = false;
+    airports_loaded_ = false;
     id_->deactivate();
     name_->deactivate();
 
@@ -418,6 +449,7 @@ AirportBrowser::load_airports( const vector<string>& dirs,
     table_->clear();
     runways_->clear();
     installed_airports_.clear();
+    installed_dirs_.clear();
     airports_loaded_cb_ = cb;
     airports_loaded_cb_data_ = v;
     airports_cache_ = cache;
@@ -425,10 +457,20 @@ AirportBrowser::load_airports( const vector<string>& dirs,
 
     if (cache.exists())
     {
+        bool airports = true;
 	std::ifstream ifs( cache.str().c_str() );
-	std::copy( std::istream_iterator<string>( ifs ),
-		   std::istream_iterator<string>(),
-		   std::back_inserter( installed_airports_ ) );
+        while ( ifs.good() ) {
+            string s;
+            ifs >> s;
+            if ( s == "--dirs--" ) {
+                airports = false;
+                continue;
+            }
+            if ( airports )
+                installed_airports_.insert( s );
+            else
+                installed_dirs_.insert( s );
+        }
 	airports_loaded_ = true;
 	if (airports_loaded_cb_ != 0)
 	    airports_loaded_cb_( this, airports_loaded_cb_data_ );
@@ -460,11 +502,19 @@ AirportBrowser::airports_idle_proc()
     if (airports_dirs.empty())
     {
 	Fl::remove_idle( airports_idle_proc, this );
-	// Sort and remove duplicate airports.
-	std::sort( installed_airports_.begin(), installed_airports_.end() );
-	installed_airports_.erase( std::unique( installed_airports_.begin(),
-						installed_airports_.end() ),
-				   installed_airports_.end() );
+
+        for (std::set<string>::iterator i = installed_dirs_.begin(); i != installed_dirs_.end(); ++i)
+        {
+            for (size_t j = 0; j < airports_by_tiles_[ *i ].size(); ++j)
+            {
+                string s = airports_by_tiles_[ *i ][ j ];
+	        const apt_dat_t* apt = find( airports_by_tiles_[ *i ][ j ] );
+	        if ( apt != 0 && ( apt->type_ == 16 || apt->type_ == 17 ) )
+	        {
+		    installed_airports_.insert( apt->id_ );
+	        }
+            }
+        }
 
 	// Save airports ids to the cache file.
 	if (!airports_cache_.str().empty())
@@ -474,6 +524,10 @@ AirportBrowser::airports_idle_proc()
 	    {
 		std::copy( installed_airports_.begin(),
 			   installed_airports_.end(),
+			   std::ostream_iterator<string>( ofs, "\n" ) );
+                ofs << "--dirs--" << std::endl;
+		std::copy( installed_dirs_.begin(),
+			   installed_dirs_.end(),
 			   std::ostream_iterator<string>( ofs, "\n" ) );
 	    }
 	}
@@ -495,6 +549,7 @@ AirportBrowser::airports_idle_proc()
     int n = fl_filename_list( cwd.c_str(), &files, fl_numericsort );
     if (n > 0)
     {
+        bool dir_added = false;
 	for (int i = 0; i < n; ++i)
 	{
 	    if (fl_filename_match( files[i]->d_name,
@@ -518,7 +573,18 @@ AirportBrowser::airports_idle_proc()
 		char* p = strstr( files[i]->d_name, ".btg" );
 		if (p != 0)
 		    *p = 0;
-		installed_airports_.push_back( string( files[i]->d_name ) );
+		installed_airports_.insert( string( files[i]->d_name ) );
+
+                if ( !dir_added )
+                {
+                    string d( cwd );
+                    if (d[ d.length() - 1 ] == '/')
+	                d.erase( d.length() - 1 );
+                    string::size_type p = d.rfind( "/" );
+                    if ( p != string::npos )
+                        installed_dirs_.insert( d.substr( p + 1 ) );
+                    dir_added = true;
+                }
 	    }
 
 	    free( files[i] );
