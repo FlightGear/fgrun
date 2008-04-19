@@ -29,6 +29,7 @@
 
 #include "advanced.h"
 #include "i18n.h"
+#include "util.h"
 
 Advanced::~Advanced()
 {
@@ -146,6 +147,15 @@ Fl_Menu_Item Advanced::menu_texture_filtering[] = {
 void
 Advanced::init()
 {
+    for( int i = 0; i < MAX_CLOUD_LAYERS; ++i)
+    {
+	cloud_elevation[i] = 0;
+	cloud_thickness[i] = 0;
+	cloud_coverage[i] = 0;
+	cloud_transition[i] = 0;
+	cloud_span[i] = 0;
+    }
+
     for ( int i = 0; menu_time_of_day_value[i].text != 0; ++i )
     {
         menu_time_of_day_value[i].text = _( menu_time_of_day_value[i].text );
@@ -175,6 +185,9 @@ Advanced::init()
         menu_texture_filtering[i].text = _( menu_texture_filtering[i].text );
     }
     texture_filtering->menu(menu_texture_filtering);
+
+    set_choice( fdm, "jsb" );
+    set_choice( log_level, "alert" );
 
     page_list->add(_("General"));
     page_list->add(_("Features"));
