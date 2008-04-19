@@ -1118,7 +1118,9 @@ msgstr "Carrier : "
 
 #: src/wizard.cxx:490
 msgid "Park pos :"
-msgstr "Posizione di Parcheggio:"
+msgstr ""
+"Posizione di \n"
+"Parcheggio:"
 
 #: src/wizard.cxx:500
 msgid "Advanced..."
