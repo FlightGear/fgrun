@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-14 22:40+0200\n"
+"POT-Creation-Date: 2008-04-19 18:25+0200\n"
 "PO-Revision-Date: 2008-01-05 19:05+0100\n"
 "Last-Translator: <fredb@users.sourceforge.net>\n"
 "Language-Team: French\n"
@@ -892,7 +892,7 @@ msgstr ""
 
 #: src/advanced.cxx:1445
 msgid "Set the NAV1 radio frequency, optionally preceded by a radial"
-msgstr ""
+msgstr "Positionne la fréquence NAV1, optionnellement précédée par une radiale"
 
 #: src/advanced.cxx:1449
 msgid "Nav2:"
@@ -912,7 +912,7 @@ msgstr ""
 
 #: src/advanced.cxx:1473
 msgid "Internal"
-msgstr ""
+msgstr "Interne"
 
 #: src/advanced.cxx:1486
 msgid "DME:"
@@ -1256,11 +1256,11 @@ msgstr "Remise à Zéro"
 
 #: src/wizard.cxx:710
 msgid "Save As..."
-msgstr ""
+msgstr "Sauver sous..."
 
 #: src/wizard.cxx:714
 msgid "Load"
-msgstr ""
+msgstr "Charger"
 
 #: src/wizard.cxx:726
 msgid "FlightGear running..."
@@ -1374,7 +1374,7 @@ msgstr "Modèle non trouvé : '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Propriété '/sim/model/path' non trouvée"
 
-#: src/wizard_funcs.cxx:640 src/wizard_funcs.cxx:1851
+#: src/wizard_funcs.cxx:640 src/wizard_funcs.cxx:1856
 #: src/AirportBrowser.cxx:362 src/fgfsrc.cxx:95
 msgid "<default>"
 msgstr ""
@@ -1403,11 +1403,11 @@ msgstr "Choisir le fichier exécutable de FlightGear"
 msgid "Select FG_ROOT directory"
 msgstr "Choisir le répertoire FG_ROOT"
 
-#: src/wizard_funcs.cxx:933 src/wizard_funcs.cxx:935
+#: src/wizard_funcs.cxx:938 src/wizard_funcs.cxx:940
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: src/wizard_funcs.cxx:1000
+#: src/wizard_funcs.cxx:1005
 #, c-format
 msgid ""
 "Unable to delete '%s':\n"
@@ -1416,31 +1416,34 @@ msgstr ""
 "Impossible de supprimer '%s':\n"
 "%s"
 
-#: src/wizard_funcs.cxx:1030
+#: src/wizard_funcs.cxx:1035
 msgid "Select FG_SCENERY directory"
 msgstr "Choisir le répertoire FG_SCENERY"
 
-#: src/wizard_funcs.cxx:1270
+#: src/wizard_funcs.cxx:1275
 msgid "Description of "
 msgstr "Description de "
 
-#: src/wizard_funcs.cxx:2001
-msgid "Save settings as ..."
-msgstr ""
+#: src/wizard_funcs.cxx:1998
+msgid "Load settings from..."
+msgstr "Charger les paramètres..."
 
-#: src/wizard_funcs.cxx:2005
+#: src/wizard_funcs.cxx:2075
+msgid "Save settings as..."
+msgstr "Sauver les paramètres sous..."
+
+#: src/wizard_funcs.cxx:2079
 #, c-format
 msgid "Filename \"%s\" already exists."
-msgstr ""
+msgstr "Le fichier \"%s\" existe déjà"
 
-#: src/wizard_funcs.cxx:2005 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:2079 src/fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr "Ecraser"
 
-#: src/wizard_funcs.cxx:2005
-#, fuzzy
+#: src/wizard_funcs.cxx:2079
 msgid "Don't overwrite"
-msgstr "Ecraser"
+msgstr "Ne pas écraser"
 
 #: src/advanced_funcs.cxx:112
 msgid "bulk"
@@ -1542,7 +1545,7 @@ msgstr "Rafraîchir"
 msgid "Reload airports"
 msgstr "Recharcher les aéroports"
 
-#: src/AirportBrowser.cxx:424
+#: src/AirportBrowser.cxx:437
 msgid "gzopen error"
 msgstr "Erreur gzopen"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-14 22:40+0200\n"
+"POT-Creation-Date: 2008-04-19 18:25+0200\n"
 "PO-Revision-Date: 2008-02-05 00:02+0100\n"
 "Last-Translator: Andrea Vezzali <vezza@inwind.it>\n"
 "Language-Team: Italian\n"
@@ -1372,7 +1372,7 @@ msgstr "Modello non trovato: '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Proprietà '/sim/model/path' non trovata"
 
-#: src/wizard_funcs.cxx:640 src/wizard_funcs.cxx:1851
+#: src/wizard_funcs.cxx:640 src/wizard_funcs.cxx:1856
 #: src/AirportBrowser.cxx:362 src/fgfsrc.cxx:95
 msgid "<default>"
 msgstr "<default>"
@@ -1401,11 +1401,11 @@ msgstr "Seleziona l'eseguibile di FlightGear"
 msgid "Select FG_ROOT directory"
 msgstr "Seleziona la directory FG_ROOT"
 
-#: src/wizard_funcs.cxx:933 src/wizard_funcs.cxx:935
+#: src/wizard_funcs.cxx:938 src/wizard_funcs.cxx:940
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: src/wizard_funcs.cxx:1000
+#: src/wizard_funcs.cxx:1005
 #, c-format
 msgid ""
 "Unable to delete '%s':\n"
@@ -1414,28 +1414,32 @@ msgstr ""
 "Impossibile eliminare·'%s':\n"
 "%s"
 
-#: src/wizard_funcs.cxx:1030
+#: src/wizard_funcs.cxx:1035
 msgid "Select FG_SCENERY directory"
 msgstr "Seleziona la directory FG_SCENERY"
 
-#: src/wizard_funcs.cxx:1270
+#: src/wizard_funcs.cxx:1275
 msgid "Description of "
 msgstr "Descrizione di "
 
-#: src/wizard_funcs.cxx:2001
-msgid "Save settings as ..."
+#: src/wizard_funcs.cxx:1998
+msgid "Load settings from..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2005
+#: src/wizard_funcs.cxx:2075
+msgid "Save settings as..."
+msgstr ""
+
+#: src/wizard_funcs.cxx:2079
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2005 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:2079 src/fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr "Sovrascrivi"
 
-#: src/wizard_funcs.cxx:2005
+#: src/wizard_funcs.cxx:2079
 #, fuzzy
 msgid "Don't overwrite"
 msgstr "Sovrascrivi"
@@ -1540,7 +1544,7 @@ msgstr "Aggiorna"
 msgid "Reload airports"
 msgstr "Ricarica Aeroporti"
 
-#: src/AirportBrowser.cxx:424
+#: src/AirportBrowser.cxx:437
 msgid "gzopen error"
 msgstr "gzopen·error"
 

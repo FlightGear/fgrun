@@ -317,6 +317,20 @@ void Wizard::cb_defaults(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->user_data()))->cb_defaults_i(o,v);
 }
 
+void Wizard::cb_Save_i(Fl_Button*, void*) {
+  save_preferences_cb();
+}
+void Wizard::cb_Save(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->user_data()))->cb_Save_i(o,v);
+}
+
+void Wizard::cb_Load_i(Fl_Button*, void*) {
+  load_preferences_cb();
+}
+void Wizard::cb_Load(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->user_data()))->cb_Load_i(o,v);
+}
+
 Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0) {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = win = new Fl_Double_Window(800, 600, _("FlightGear Wizard"));
@@ -686,11 +700,20 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_cancel);
       }
-      { Fl_Box* o = new Fl_Box(140, 570, 435, 25);
+      { Fl_Box* o = new Fl_Box(380, 570, 195, 25);
         Fl_Group::current()->resizable(o);
       }
-      { Fl_Button* o = defaults = new Fl_Button(5, 570, 135, 25, _("Defaults"));
+      { Fl_Button* o = defaults = new Fl_Button(5, 570, 125, 25, _("Defaults"));
+        o->labelsize(12);
         o->callback((Fl_Callback*)cb_defaults);
+      }
+      { Fl_Button* o = new Fl_Button(260, 570, 120, 25, _("Save As..."));
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_Save);
+      }
+      { Fl_Button* o = new Fl_Button(135, 570, 120, 25, _("Load"));
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_Load);
       }
       o->end();
     }

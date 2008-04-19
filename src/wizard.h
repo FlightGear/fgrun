@@ -179,6 +179,10 @@ public:
 private:
   void cb_defaults_i(Fl_Button*, void*);
   static void cb_defaults(Fl_Button*, void*);
+  void cb_Save_i(Fl_Button*, void*);
+  static void cb_Save(Fl_Button*, void*);
+  void cb_Load_i(Fl_Button*, void*);
+  static void cb_Load(Fl_Button*, void*);
 public:
   ~Wizard();
   void show();
@@ -189,6 +193,7 @@ public:
 private:
   void reset();
   void aircraft_update();
+  void aircraft_update( const char *aft );
   void next_cb();
   void prev_cb();
   void defaults_cb();
@@ -199,7 +204,7 @@ private:
   void fg_root_select_cb();
   void advanced_cb();
   int write_fgfsrc();
-  int write_fgfsrc( std::ostream&, const char* pfx = "\n");
+  static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\n");
   void run_fgfs( const std::string & );
   static void stdout_cb( int, void* );
   void stdout_cb( int );
@@ -242,10 +247,13 @@ private:
   void atlas_port_cb();
   void multiplay_cb();
   void multiplay_field_cb();
-  void update_basic_options();
+  void update_basic_options( Fl_Preferences &p );
+  void save_basic_options( Fl_Preferences &p );
   void display_scenarii();
   void show_cmd_line_cb();
   void reset_settings();
+  void load_preferences_cb();
+  void save_preferences_cb();
   pthread_t th;
   static void *startFlightGear_cb( void *d );
   void startFlightGear_cb();

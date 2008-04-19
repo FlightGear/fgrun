@@ -326,6 +326,8 @@ private:
 public:
   ~Advanced();
   int exec(Fl_Preferences&);
+  void load_settings(Fl_Preferences&);
+  void save_settings(Fl_Preferences&);
   void reset_settings(Fl_Preferences&);
 private:
   void init();
@@ -342,8 +344,6 @@ private:
   void io_file_cb();
   void io_generic_file_cb();
   void fg_browser_cb();
-  void load_settings(Fl_Preferences&);
-  void save_settings(Fl_Preferences&);
   void wind_dial_cb();
   void wind_hdg_cb();
   void cloud_layer_cb();

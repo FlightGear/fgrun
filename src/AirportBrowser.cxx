@@ -410,6 +410,19 @@ AirportBrowser::select_id( const string& id )
 }
 
 void
+AirportBrowser::select_rwy( const string& id )
+{
+    for ( int i = 1; i < runways_->size(); ++i )
+    {
+        if ( id == runways_->text(i) )
+        {
+            runways_->select( i );
+            break;
+        }
+    }
+}
+
+void
 AirportBrowser::load_runways( const string& path, Fl_Callback* cb, void* v )
 {
     runways_loaded_cb_ = cb;

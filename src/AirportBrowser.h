@@ -101,6 +101,11 @@ public:
     /**
      * 
      */
+    void select_rwy( const std::string& id );
+
+    /**
+     * 
+     */
     void show_installed( bool refresh = false );
 
     int handle( int e );

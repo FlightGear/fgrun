@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-14 22:40+0200\n"
+"POT-Creation-Date: 2008-04-19 18:25+0200\n"
 "PO-Revision-Date: 2008-01-31 22:12+0100\n"
 "Last-Translator:  <pl.flightgear@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -19,168 +19,167 @@ msgstr ""
 
 #: src/advanced.cxx:70
 msgid "ada"
-msgstr "ada"
+msgstr ""
 
 #: src/advanced.cxx:71
 msgid "balloon"
-msgstr "balloon"
+msgstr ""
 
 #: src/advanced.cxx:72
 msgid "external"
-msgstr "external"
+msgstr ""
 
 #: src/advanced.cxx:73
 msgid "jsb"
-msgstr "jsb"
+msgstr ""
 
 #: src/advanced.cxx:74
 msgid "larcsim"
-msgstr "larcsim"
+msgstr ""
 
 #: src/advanced.cxx:75
 msgid "magic"
-msgstr "magic"
+msgstr ""
 
 #: src/advanced.cxx:76
 msgid "network"
-msgstr "network"
+msgstr ""
 
 #: src/advanced.cxx:77
 msgid "null"
-msgstr "null"
+msgstr ""
 
 #: src/advanced.cxx:78
 msgid "ufo"
-msgstr "ufo"
+msgstr ""
 
 #: src/advanced.cxx:79
 msgid "yasim"
-msgstr "yasim"
+msgstr ""
 
 #: src/advanced.cxx:84 src/wizard.cxx:176
 msgid "16"
-msgstr "16"
+msgstr ""
 
 #: src/advanced.cxx:85 src/wizard.cxx:175
 msgid "24"
-msgstr "24"
+msgstr ""
 
 #: src/advanced.cxx:86 src/wizard.cxx:174
 msgid "32"
-msgstr "32"
+msgstr ""
 
 #: src/advanced.cxx:261
 msgid "atc610x"
-msgstr "atc610x"
+msgstr ""
 
 #: src/advanced.cxx:262
 msgid "atlas"
-msgstr "atlas"
+msgstr ""
 
 #: src/advanced.cxx:263
 msgid "garmin"
-msgstr "garmin"
+msgstr ""
 
 #: src/advanced.cxx:264
 msgid "AV400"
-msgstr "AV400"
+msgstr ""
 
 #: src/advanced.cxx:265
 msgid "generic"
-msgstr "generic"
+msgstr ""
 
 #: src/advanced.cxx:266
 msgid "joy-client"
-msgstr "joy-client"
+msgstr ""
 
 #: src/advanced.cxx:267
 msgid "jsclient"
-msgstr "jsclient"
+msgstr ""
 
 #: src/advanced.cxx:268
 msgid "native"
-msgstr "native"
+msgstr ""
 
 #: src/advanced.cxx:269
 msgid "native-ctrls"
-msgstr "native-ctrls"
+msgstr ""
 
 #: src/advanced.cxx:270
 msgid "native-fdm"
-msgstr "native-fdm"
+msgstr ""
 
 #: src/advanced.cxx:271
 msgid "native-gui"
-msgstr "native-gui"
+msgstr ""
 
 #: src/advanced.cxx:272
 msgid "nmea"
-msgstr "nmea"
+msgstr ""
 
 #: src/advanced.cxx:273
 msgid "opengc"
-msgstr "opengc"
+msgstr ""
 
 #: src/advanced.cxx:274
 msgid "pve"
-msgstr "pve"
+msgstr ""
 
 #: src/advanced.cxx:275 src/advanced.cxx:1249
 msgid "props"
-msgstr "props"
+msgstr ""
 
 #: src/advanced.cxx:276
 msgid "ray"
-msgstr "ray"
+msgstr ""
 
 #: src/advanced.cxx:277
 msgid "rul"
-msgstr "rul"
+msgstr ""
 
 #: src/advanced.cxx:289
 msgid "file"
-msgstr "plik"
+msgstr ""
 
 #: src/advanced.cxx:290
 msgid "serial"
-msgstr "szeregowo"
+msgstr ""
 
-# ??
 #: src/advanced.cxx:291
 msgid "socket"
-msgstr "gniazdo"
+msgstr ""
 
 #: src/advanced.cxx:303
 msgid "in"
-msgstr "wejście"
+msgstr ""
 
 #: src/advanced.cxx:304
 msgid "out"
-msgstr "wyjście"
+msgstr ""
 
 #: src/advanced.cxx:305
 msgid "bi"
-msgstr "oba"
+msgstr ""
 
 #: src/advanced.cxx:605
 msgid "0"
-msgstr "0"
+msgstr ""
 
 #: src/advanced.cxx:606
 msgid "1"
-msgstr "1"
+msgstr ""
 
 #: src/advanced.cxx:607
 msgid "2"
-msgstr "2"
+msgstr ""
 
 #: src/advanced.cxx:608
 msgid "3"
-msgstr "3"
+msgstr ""
 
 #: src/advanced.cxx:609
 msgid "4"
-msgstr "4"
+msgstr ""
 
 #: src/advanced.cxx:650
 msgid "Advanced Options"
@@ -398,7 +397,6 @@ msgstr "układu"
 msgid "vacuum"
 msgstr "pompy próżniowej"
 
-# pompy prózniowej???!!!!
 #: src/advanced.cxx:835
 msgid "AI Traffic"
 msgstr "Sztuczny ruch"
@@ -419,7 +417,7 @@ msgstr "Model lotu"
 
 #: src/advanced.cxx:850
 msgid "FDM:"
-msgstr "MDL"
+msgstr "MDL:"
 
 # nie wiem czy dobrym pomysłem jest wprowadzenie skrótu MDL, choć już pojawiał się on w tłumaczeniu dokumentacji dokonanym chyba przez Michała Maciejewskiego
 #: src/advanced.cxx:851
@@ -1400,7 +1398,7 @@ msgstr "Nie znaleziono modelu: '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Nie znaleziono własności '/sim/model/path'"
 
-#: src/wizard_funcs.cxx:640 src/wizard_funcs.cxx:1851
+#: src/wizard_funcs.cxx:640 src/wizard_funcs.cxx:1856
 #: src/AirportBrowser.cxx:362 src/fgfsrc.cxx:95
 msgid "<default>"
 msgstr "<domyślny>"
@@ -1429,11 +1427,11 @@ msgstr "Wskaż plik wykonywalny FlightGear"
 msgid "Select FG_ROOT directory"
 msgstr "Wskaż katalog główny FlightGear"
 
-#: src/wizard_funcs.cxx:933 src/wizard_funcs.cxx:935
+#: src/wizard_funcs.cxx:938 src/wizard_funcs.cxx:940
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: src/wizard_funcs.cxx:1000
+#: src/wizard_funcs.cxx:1005
 #, c-format
 msgid ""
 "Unable to delete '%s':\n"
@@ -1442,28 +1440,32 @@ msgstr ""
 "Nie można usunąć '%s':\n"
 "%s"
 
-#: src/wizard_funcs.cxx:1030
+#: src/wizard_funcs.cxx:1035
 msgid "Select FG_SCENERY directory"
 msgstr "Wskaż katalog scenerii"
 
-#: src/wizard_funcs.cxx:1270
+#: src/wizard_funcs.cxx:1275
 msgid "Description of "
 msgstr "Opis"
 
-#: src/wizard_funcs.cxx:2001
-msgid "Save settings as ..."
+#: src/wizard_funcs.cxx:1998
+msgid "Load settings from..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2005
+#: src/wizard_funcs.cxx:2075
+msgid "Save settings as..."
+msgstr ""
+
+#: src/wizard_funcs.cxx:2079
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2005 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:2079 src/fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr "Nadpisz"
 
-#: src/wizard_funcs.cxx:2005
+#: src/wizard_funcs.cxx:2079
 #, fuzzy
 msgid "Don't overwrite"
 msgstr "Nadpisz"
@@ -1568,7 +1570,7 @@ msgstr "Odśwież"
 msgid "Reload airports"
 msgstr "Załaduj ponownie lotniska"
 
-#: src/AirportBrowser.cxx:424
+#: src/AirportBrowser.cxx:437
 msgid "gzopen error"
 msgstr "błąd gzopen"
 

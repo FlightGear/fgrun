@@ -66,7 +66,7 @@ Wizard::write_fgfsrc()
     ofstream ofs( buf );
     if (ofs)
     {
-	int rc = write_fgfsrc( ofs );
+	int rc = write_fgfsrc( prefs, ofs );
 	ofs << "\n";
 	ofs.close();
 	return rc;
@@ -76,7 +76,7 @@ Wizard::write_fgfsrc()
 }
 
 int
-Wizard::write_fgfsrc( std::ostream& os, const char* pfx )
+Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
 {
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];

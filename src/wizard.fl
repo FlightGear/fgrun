@@ -42,7 +42,7 @@ class Wizard {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
-      private xywh {619 204 800 600} type Double visible
+      private xywh {579 307 800 600} type Double visible
     } {
       Fl_Wizard wiz {open
         private xywh {0 0 800 560}
@@ -191,7 +191,7 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {open
+        Fl_Group {page[3]} {
           private xywh {0 0 800 560}
         } {
           Fl_Group {} {
@@ -304,7 +304,7 @@ class Wizard {open
             xywh {5 120 790 180}
           } {
             Fl_Group {} {
-              label Features open selected
+              label Features open
               private xywh {5 120 480 180} box ENGRAVED_FRAME labelfont 1 align 21
             } {
               Fl_Check_Button random_objects {
@@ -437,12 +437,22 @@ class Wizard {open
           private xywh {725 570 70 25} labelsize 12
         }
         Fl_Box {} {
-          xywh {140 570 435 25} resizable
+          xywh {380 570 195 25} resizable
         }
         Fl_Button defaults {
           label Defaults
           callback {defaults_cb();}
-          xywh {5 570 135 25}
+          xywh {5 570 125 25} labelsize 12
+        }
+        Fl_Button {} {
+          label {Save As...}
+          callback {save_preferences_cb();}
+          xywh {260 570 120 25} labelsize 12
+        }
+        Fl_Button {} {
+          label Load
+          callback {load_preferences_cb();}
+          xywh {135 570 120 25} labelsize 12
         }
       }
     }
@@ -460,7 +470,9 @@ class Wizard {open
   decl {void preview_aircraft();} {public
   }
   decl {void reset();} {}
-  decl {void aircraft_update();} {}
+  decl {void aircraft_update();} {selected
+  }
+  decl {void aircraft_update( const char *aft );} {}
   decl {void next_cb();} {}
   decl {void prev_cb();} {}
   decl {void defaults_cb();} {}
@@ -471,7 +483,7 @@ class Wizard {open
   decl {void fg_root_select_cb();} {}
   decl {void advanced_cb();} {}
   decl {int write_fgfsrc();} {}
-  decl {int write_fgfsrc( std::ostream&, const char* pfx = "\\n");} {}
+  decl {static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\\n");} {}
   decl {void run_fgfs( const std::string & );} {}
   decl {static void stdout_cb( int, void* );} {}
   decl {void stdout_cb( int );} {}
@@ -514,18 +526,21 @@ class Wizard {open
   decl {void atlas_port_cb();} {}
   decl {void multiplay_cb();} {}
   decl {void multiplay_field_cb();} {}
-  decl {void update_basic_options();} {}
+  decl {void update_basic_options( Fl_Preferences &p );} {}
+  decl {void save_basic_options( Fl_Preferences &p );} {}
   decl {void display_scenarii();} {}
   decl {void show_cmd_line_cb();} {}
   decl {void reset_settings();} {}
+  decl {void load_preferences_cb();} {}
+  decl {void save_preferences_cb();} {}
   decl {pthread_t th;} {}
   decl {static void *startFlightGear_cb( void *d );} {}
   decl {void startFlightGear_cb();} {}
-  Function {make_launch_window()} {private
+  Function {make_launch_window()} {open private
   } {
     Fl_Window launch_window {
-      label {FlightGear running...} open
-      private xywh {580 456 455 155} type Double visible
+      label {FlightGear running...}
+      private xywh {595 462 455 155} type Double visible
     } {
       Fl_Group {} {open
         private xywh {15 25 425 120}

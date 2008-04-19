@@ -575,7 +575,7 @@ else
           private xywh {175 185 220 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
         }
         Fl_Choice time_of_day_value {
-          label {choice:} open selected
+          label {choice:} open
           private xywh {400 185 140 25} down_box BORDER_BOX labeltype NO_LABEL labelsize 12 textsize 12
         } {}
       }
@@ -1141,6 +1141,10 @@ else
   }
   decl {int exec(Fl_Preferences&);} {public
   }
+  decl {void load_settings(Fl_Preferences&);} {public
+  }
+  decl {void save_settings(Fl_Preferences&);} {selected public
+  }
   decl {void reset_settings(Fl_Preferences&);} {public
   }
   decl {void init();} {}
@@ -1157,8 +1161,6 @@ else
   decl {void io_file_cb();} {}
   decl {void io_generic_file_cb();} {}
   decl {void fg_browser_cb();} {}
-  decl {void load_settings(Fl_Preferences&);} {}
-  decl {void save_settings(Fl_Preferences&);} {}
   decl {void wind_dial_cb();} {}
   decl {void wind_hdg_cb();} {}
   decl {void cloud_layer_cb();} {}

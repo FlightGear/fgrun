@@ -1149,7 +1149,6 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Round_Button* o = time_match_real = new Fl_Round_Button(175, 35, 220, 25, _("Time match real"));
         o->tooltip(_("Synchronize simulation time with real time"));
         o->type(102);
