@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-19 18:25+0200\n"
+"POT-Creation-Date: 2008-04-21 21:44+0200\n"
 "PO-Revision-Date: 2008-02-05 00:02+0100\n"
 "Last-Translator: Andrea Vezzali <vezza@inwind.it>\n"
 "Language-Team: Italian\n"
@@ -192,7 +192,7 @@ msgstr "Annulla"
 msgid "OK"
 msgstr "Ok"
 
-#: src/advanced.cxx:666 src/advanced_funcs.cxx:179
+#: src/advanced.cxx:666 src/advanced_funcs.cxx:192
 msgid "General"
 msgstr "Generale"
 
@@ -249,7 +249,7 @@ msgstr "Pista:"
 msgid "Aircraft:"
 msgstr "Aeromobile:"
 
-#: src/advanced.cxx:724 src/wizard.cxx:571 src/advanced_funcs.cxx:180
+#: src/advanced.cxx:724 src/wizard.cxx:571 src/advanced_funcs.cxx:193
 msgid "Features"
 msgstr "Caratteristiche"
 
@@ -407,7 +407,7 @@ msgstr "Abilita Traffico AI"
 msgid "Random Trees"
 msgstr "Oggetti casuali"
 
-#: src/advanced.cxx:845 src/advanced_funcs.cxx:181
+#: src/advanced.cxx:845 src/advanced_funcs.cxx:194
 msgid "Flight Model"
 msgstr "Modello di volo"
 
@@ -462,7 +462,7 @@ msgstr "In Volo"
 msgid "Start in the air"
 msgstr "Inizia in volo"
 
-#: src/advanced.cxx:900 src/advanced.cxx:905 src/advanced_funcs.cxx:182
+#: src/advanced.cxx:900 src/advanced.cxx:905 src/advanced_funcs.cxx:195
 msgid "Freeze"
 msgstr "Congela"
 
@@ -478,7 +478,7 @@ msgstr "Congela Carburante"
 msgid "Clock Freeze"
 msgstr "Congela orologio"
 
-#: src/advanced.cxx:920 src/advanced_funcs.cxx:183
+#: src/advanced.cxx:920 src/advanced_funcs.cxx:196
 msgid "Initial Position"
 msgstr "Posizione iniziale"
 
@@ -580,11 +580,11 @@ msgstr "Percorso di discesa:"
 msgid "Climb rate:"
 msgstr "Rateo di Salita:"
 
-#: src/advanced.cxx:1019 src/advanced_funcs.cxx:184
+#: src/advanced.cxx:1019 src/advanced_funcs.cxx:197
 msgid "Rendering"
 msgstr "Rendering"
 
-#: src/advanced.cxx:1024 src/advanced.cxx:1672 src/advanced_funcs.cxx:193
+#: src/advanced.cxx:1024 src/advanced.cxx:1672 src/advanced_funcs.cxx:206
 msgid "Clouds"
 msgstr "Nuvole"
 
@@ -720,7 +720,7 @@ msgstr ""
 msgid "Set the maximum degree of anisotropy in texture filtering"
 msgstr ""
 
-#: src/advanced.cxx:1148 src/advanced_funcs.cxx:185
+#: src/advanced.cxx:1148 src/advanced_funcs.cxx:198
 msgid "Time"
 msgstr "Tempo"
 
@@ -764,7 +764,7 @@ msgstr "Ora del giorno"
 msgid "choice:"
 msgstr "Scelta:"
 
-#: src/advanced.cxx:1227 src/advanced_funcs.cxx:186
+#: src/advanced.cxx:1227 src/advanced_funcs.cxx:199
 msgid "Network"
 msgstr "Network"
 
@@ -824,7 +824,7 @@ msgstr "Multiplay 2:"
 msgid "Proxy:"
 msgstr "Proxy:"
 
-#: src/advanced.cxx:1307 src/advanced_funcs.cxx:187
+#: src/advanced.cxx:1307 src/advanced_funcs.cxx:200
 msgid "Input/Output"
 msgstr "Input/Output"
 
@@ -883,7 +883,7 @@ msgstr "UDP"
 msgid "Generic:"
 msgstr "Generic:"
 
-#: src/advanced.cxx:1439 src/advanced_funcs.cxx:188
+#: src/advanced.cxx:1439 src/advanced_funcs.cxx:201
 msgid "Avionics"
 msgstr "Avionica"
 
@@ -920,7 +920,7 @@ msgstr "Interno"
 msgid "DME:"
 msgstr "DME:"
 
-#: src/advanced.cxx:1494 src/advanced_funcs.cxx:189
+#: src/advanced.cxx:1494 src/advanced_funcs.cxx:202
 msgid "Properties"
 msgstr "Proprietà"
 
@@ -932,7 +932,7 @@ msgstr "Proprietà:"
 msgid "prop=value"
 msgstr "prop=valore"
 
-#: src/advanced.cxx:1525 src/advanced_funcs.cxx:190
+#: src/advanced.cxx:1525 src/advanced_funcs.cxx:203
 msgid "Debugging"
 msgstr "Debugging"
 
@@ -952,11 +952,11 @@ msgstr "Valore:"
 msgid "Trace Write Properties"
 msgstr "Proprietà di scrittura della traccia"
 
-#: src/advanced.cxx:1583 src/advanced_funcs.cxx:191
+#: src/advanced.cxx:1583 src/advanced_funcs.cxx:204
 msgid "Environment"
 msgstr "Ambiente"
 
-#: src/advanced.cxx:1612 src/advanced_funcs.cxx:192
+#: src/advanced.cxx:1612 src/advanced_funcs.cxx:205
 msgid "Weather"
 msgstr "Meteo"
 
@@ -1277,19 +1277,19 @@ msgid "To change aircraft, exit FlightGear and return to this launcher"
 msgstr ""
 "Per cambiare aeromobile, uscire da FlightGear e ritornare a questo programma"
 
-#: src/wizard_funcs.cxx:74 src/advanced_funcs.cxx:104
+#: src/wizard_funcs.cxx:74 src/advanced_funcs.cxx:105
 msgid "noon"
 msgstr "Giorno"
 
-#: src/wizard_funcs.cxx:75 src/advanced_funcs.cxx:105
+#: src/wizard_funcs.cxx:75 src/advanced_funcs.cxx:106
 msgid "dusk"
 msgstr "Tramonto"
 
-#: src/wizard_funcs.cxx:76 src/advanced_funcs.cxx:106
+#: src/wizard_funcs.cxx:76 src/advanced_funcs.cxx:107
 msgid "midnight"
 msgstr "Mezzanotte"
 
-#: src/wizard_funcs.cxx:77 src/advanced_funcs.cxx:107
+#: src/wizard_funcs.cxx:77 src/advanced_funcs.cxx:108
 msgid "dawn"
 msgstr "Alba"
 
@@ -1444,91 +1444,91 @@ msgstr "Sovrascrivi"
 msgid "Don't overwrite"
 msgstr "Sovrascrivi"
 
-#: src/advanced_funcs.cxx:112
+#: src/advanced_funcs.cxx:113
 msgid "bulk"
 msgstr "bulk"
 
-#: src/advanced_funcs.cxx:113
+#: src/advanced_funcs.cxx:114
 msgid "debug"
 msgstr "debug"
 
-#: src/advanced_funcs.cxx:114
+#: src/advanced_funcs.cxx:115
 msgid "info"
 msgstr "info"
 
-#: src/advanced_funcs.cxx:115
+#: src/advanced_funcs.cxx:116
 msgid "warn"
 msgstr "warn"
 
-#: src/advanced_funcs.cxx:116
+#: src/advanced_funcs.cxx:117
 msgid "alert"
 msgstr "alert"
 
-#: src/advanced_funcs.cxx:121
+#: src/advanced_funcs.cxx:122
 msgid "overcast"
 msgstr "Coperto"
 
-#: src/advanced_funcs.cxx:122
+#: src/advanced_funcs.cxx:123
 msgid "broken"
 msgstr "Nuvoloso"
 
-#: src/advanced_funcs.cxx:123
+#: src/advanced_funcs.cxx:124
 msgid "scattered"
 msgstr "Poco nuvoloso"
 
-#: src/advanced_funcs.cxx:124
+#: src/advanced_funcs.cxx:125
 msgid "few"
 msgstr "Velato"
 
-#: src/advanced_funcs.cxx:125
+#: src/advanced_funcs.cxx:126
 msgid "cirrus"
 msgstr "Temporali"
 
-#: src/advanced_funcs.cxx:126
+#: src/advanced_funcs.cxx:127
 msgid "clear"
 msgstr "Sereno"
 
-#: src/advanced_funcs.cxx:131
+#: src/advanced_funcs.cxx:132
 msgid "joystick"
 msgstr "joystick"
 
-#: src/advanced_funcs.cxx:132
+#: src/advanced_funcs.cxx:133
 msgid "keyboard"
 msgstr "Tastiera"
 
-#: src/advanced_funcs.cxx:133
+#: src/advanced_funcs.cxx:134
 msgid "mouse"
 msgstr "mouse"
 
-#: src/advanced_funcs.cxx:138
+#: src/advanced_funcs.cxx:139
 msgid "no filtering"
 msgstr ""
 
-#: src/advanced_funcs.cxx:139
+#: src/advanced_funcs.cxx:140
 msgid "2.0"
 msgstr ""
 
-#: src/advanced_funcs.cxx:140
+#: src/advanced_funcs.cxx:141
 msgid "4.0"
 msgstr ""
 
-#: src/advanced_funcs.cxx:141
+#: src/advanced_funcs.cxx:142
 msgid "8.0"
 msgstr ""
 
-#: src/advanced_funcs.cxx:142
+#: src/advanced_funcs.cxx:143
 msgid "highest filtering"
 msgstr ""
 
-#: src/advanced_funcs.cxx:202
+#: src/advanced_funcs.cxx:215
 msgid "Select browser"
 msgstr "Seleziona browser"
 
-#: src/advanced_funcs.cxx:257
+#: src/advanced_funcs.cxx:270
 msgid "Select a preferences file"
 msgstr "Seleziona file delle preferenze"
 
-#: src/advanced_funcs.cxx:258
+#: src/advanced_funcs.cxx:271
 msgid "XML Files(*.xml)"
 msgstr "XML Files(*.xml)"
 
