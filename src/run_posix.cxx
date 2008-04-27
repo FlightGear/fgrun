@@ -77,7 +77,7 @@ Wizard::run_fgfs( const std::string &args )
 	// parent
 
 	if (master < 0)
-	    return;
+	    return 0;
 
 	Fl::lock();
 	logwin->clear();
