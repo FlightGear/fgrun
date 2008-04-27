@@ -26,7 +26,10 @@
 
 #include "wizard.h"
 #include <windows.h>
+#include <dbghelp.h>
 #include <FL/filename.h>
+#include <sstream>
+#include <time.h>
 
 using std::string;
 
@@ -51,7 +54,7 @@ int encase_arg( string & line, string arg ) {
   return iret;
 }
 
-void
+int
 Wizard::run_fgfs(const string &args)
 {
     const int buflen = FL_PATH_MAX;
@@ -82,9 +85,10 @@ Wizard::run_fgfs(const string &args)
     //SECURITY_ATTRIBUTES procAttrs;
     //SECURITY_ATTRIBUTES threadAttrs;
     BOOL inheritHandles = TRUE;
-    DWORD creationFlags = 0;
+    DWORD creationFlags = DEBUG_PROCESS | DEBUG_ONLY_THIS_PROCESS;
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
+    int exit_code = 0;
 
     memset( &si, 0, sizeof(si) );
     si.cb = sizeof(si);
@@ -120,10 +124,98 @@ Wizard::run_fgfs(const string &args)
     }
     else
     {
-        WaitForSingleObject( pi.hProcess, INFINITE );
+        DWORD dwContinueStatus = DBG_CONTINUE; // exception continuation 
+        bool end = false, dump = false;
 
-        DWORD exitCode;
-        GetExitCodeProcess( pi.hProcess, &exitCode );
+        while ( !end )
+        {
+            DEBUG_EVENT DebugEv;
+
+            // Wait for a debugging event to occur. The second parameter indicates
+            // that the function does not return until a debugging event occurs. 
+            WaitForDebugEvent( &DebugEv, INFINITE ); 
+
+            switch ( DebugEv.dwDebugEventCode ) 
+            {
+            case EXCEPTION_DEBUG_EVENT:
+                switch( DebugEv.u.Exception.ExceptionRecord.ExceptionCode )
+                {
+                case EXCEPTION_BREAKPOINT:
+                    break;
+                case EXCEPTION_ACCESS_VIOLATION:
+                case EXCEPTION_DATATYPE_MISALIGNMENT:
+                case EXCEPTION_ARRAY_BOUNDS_EXCEEDED:
+                case EXCEPTION_FLT_DENORMAL_OPERAND:
+                case EXCEPTION_FLT_DIVIDE_BY_ZERO:
+                case EXCEPTION_FLT_INEXACT_RESULT:
+                case EXCEPTION_FLT_INVALID_OPERATION:
+                case EXCEPTION_FLT_OVERFLOW:
+                case EXCEPTION_FLT_STACK_CHECK:
+                case EXCEPTION_FLT_UNDERFLOW:
+                case EXCEPTION_INT_DIVIDE_BY_ZERO:
+                case EXCEPTION_INT_OVERFLOW:
+                case EXCEPTION_PRIV_INSTRUCTION:
+                case EXCEPTION_IN_PAGE_ERROR:
+                case EXCEPTION_ILLEGAL_INSTRUCTION:
+                case EXCEPTION_NONCONTINUABLE_EXCEPTION:
+                case EXCEPTION_STACK_OVERFLOW:
+                case EXCEPTION_INVALID_DISPOSITION:
+                case EXCEPTION_GUARD_PAGE:
+                case EXCEPTION_INVALID_HANDLE:
+                    std::cout << "Exception detected (0x" << std::hex << DebugEv.u.Exception.ExceptionRecord.ExceptionCode << std::dec << ") : " << DebugEv.dwThreadId << std::endl;
+
+                    if ( !dump )
+                    {
+                        std::cout << "Creating dump file" << std::endl;
+                        time_t now = time(0);
+                        ::tm *stm = gmtime( &now );
+
+                        const int buflen = FL_PATH_MAX;
+                        char buf[ buflen ];
+                        prefs.getUserdataPath( buf, sizeof(buf) );
+
+                        std::ostringstream os;
+                        os << buf << "fgfs-dump-" << DebugEv.dwProcessId
+                            << "-" << ( 1900 + stm->tm_year )
+                            << "-" << stm->tm_mon 
+                            << "-" << stm->tm_mday 
+                            << "-" << stm->tm_hour 
+                            << "-" << stm->tm_min
+                            << "-" << stm->tm_sec
+                            << ".dmp";
+                        dump_file_name = os.str();
+
+                        HANDLE hFile = CreateFile( dump_file_name.c_str(), GENERIC_READ | GENERIC_WRITE,
+                                                    0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0 );
+                        if ( hFile != INVALID_HANDLE_VALUE )
+                        {
+                            MiniDumpWriteDump( pi.hProcess, DebugEv.dwProcessId, hFile,
+                                                MiniDumpNormal, 0, 0, 0 ); 
+                            CloseHandle( hFile );
+                            char *pbuf = new char[ dump_file_name.size() * 2 + 1 ];
+                            CharToOem( dump_file_name.c_str(), pbuf );
+                            std::cout << "Dump file created (" << pbuf << ")" << std::endl;
+                            delete pbuf;
+                            dump = true;
+                        }
+                    }
+
+                    dwContinueStatus = DBG_EXCEPTION_NOT_HANDLED;
+                    exit_code = 1;
+                    break;
+                }
+                break;
+            case EXIT_PROCESS_DEBUG_EVENT:
+                std::cout << "Exit process detected" << std::endl;
+                end = true;
+                break;
+            default:
+                break;
+            }
+
+            // Resume executing the thread that reported the debugging event. 
+            ContinueDebugEvent( DebugEv.dwProcessId, DebugEv.dwThreadId, dwContinueStatus );
+        }
 
         // Close process and thread handles. 
         CloseHandle( pi.hProcess );
@@ -131,5 +223,7 @@ Wizard::run_fgfs(const string &args)
     }
 
     delete[] cmd;
+
+    return exit_code;
 }
 

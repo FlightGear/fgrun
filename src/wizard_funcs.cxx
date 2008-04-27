@@ -288,6 +288,7 @@ Wizard::init( bool fullscreen )
     static const int npages = 5;
 
     make_launch_window();
+    make_crash_window();
 
     for (int i = 0; i < npages; ++i)
         page[i]->hide();
@@ -1753,8 +1754,7 @@ Wizard::startFlightGear_cb()
     std::ostringstream ostr;
     if (write_fgfsrc( prefs, ostr, " " ))
     {
-	run_fgfs(ostr.str());
-	launch_result = 0;
+	launch_result = run_fgfs(ostr.str());
     }
 }
 
@@ -1777,6 +1777,11 @@ Wizard::exec_launch_window()
     }
     launch_window->set_non_modal();
     launch_window->hide();
+
+    if ( launch_result != 0 )
+    {
+        exec_crash_window( dump_file_name.c_str() );
+    }
 }
 
 void
@@ -2097,4 +2102,26 @@ Wizard::save_preferences_cb()
         unlink( filename );
         rename( settings.c_str(), filename );
     }
+}
+
+void
+Wizard::crash_ok_cb()
+{
+    crash_window->set_non_modal();
+    crash_window->hide();
+}
+
+void
+Wizard::exec_crash_window( const char *fname )
+{
+    int X = win->x(),
+        Y = win->y(),
+        W = win->w(),
+        H = win->h(),
+        w = crash_window->w(),
+        h = crash_window->h();
+    file_box->copy_label( fname );
+    crash_window->position( X + ( W - w ) / 2, Y + ( H - h ) / 2 );
+    crash_window->set_modal();
+    crash_window->show();
 }

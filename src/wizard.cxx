@@ -331,6 +331,13 @@ void Wizard::cb_Load(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->user_data()))->cb_Load_i(o,v);
 }
 
+void Wizard::cb_OK_i(Fl_Button*, void*) {
+  crash_ok_cb();
+}
+void Wizard::cb_OK(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->user_data()))->cb_OK_i(o,v);
+}
+
 Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0) {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = win = new Fl_Double_Window(800, 600, _("FlightGear Wizard"));
@@ -740,6 +747,38 @@ Fl_Double_Window* Wizard::make_launch_window() {
         o->align(FL_ALIGN_WRAP);
       }
       o->end();
+    }
+    o->end();
+  }
+  return w;
+}
+
+Fl_Double_Window* Wizard::make_crash_window() {
+  Fl_Double_Window* w;
+  { Fl_Double_Window* o = crash_window = new Fl_Double_Window(455, 240, _("Flightgear crashed..."));
+    w = o;
+    o->user_data((void*)(this));
+    { Fl_Box* o = new Fl_Box(5, 15, 445, 25, _("Flightgear encountered an unexpected failure"));
+      o->labelfont(1);
+      o->labelsize(18);
+    }
+    { Fl_Box* o = new Fl_Box(5, 40, 445, 25, _("We are sorry for this inconvenience."));
+      o->labelfont(1);
+    }
+    { Fl_Box* o = file_box = new Fl_Box(5, 90, 445, 55);
+      o->align(132|FL_ALIGN_INSIDE);
+    }
+    { Fl_Button* o = new Fl_Button(350, 205, 100, 30, _("OK"));
+      o->labelsize(12);
+      o->callback((Fl_Callback*)cb_OK);
+    }
+    { Fl_Box* o = new Fl_Box(5, 65, 445, 25, _("An error report has been generated in the file below :"));
+      o->labelsize(12);
+      o->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
+    }
+    { Fl_Box* o = new Fl_Box(5, 145, 445, 50, _("Please send this error report to the Flightgear development team"));
+      o->labelsize(12);
+      o->align(133|FL_ALIGN_INSIDE);
     }
     o->end();
   }

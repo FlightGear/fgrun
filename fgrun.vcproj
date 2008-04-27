@@ -39,7 +39,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib pthreadVC2d.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib OpenThreadsd.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib pthreadVC2d.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib OpenThreadsd.lib dbghelp.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;..\SimGear\Debug;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\lib;..\install\msvc71\OpenSceneGraph\lib"
@@ -101,7 +101,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltk.lib fltkgl.lib ws2_32.lib comctl32.lib zlib.lib sg.lib ul.lib opengl32.lib winmm.lib pthreadVC2.lib osg.lib osgDB.lib osgGA.lib osgViewer.lib osgUtil.lib OpenThreads.lib intl.lib"
+				AdditionalDependencies="fltk.lib fltkgl.lib ws2_32.lib comctl32.lib zlib.lib sg.lib ul.lib opengl32.lib winmm.lib pthreadVC2.lib osg.lib osgDB.lib osgGA.lib osgViewer.lib osgUtil.lib OpenThreads.lib intl.lib dbghelp.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\install\msvc71\OpenSceneGraph\lib;..\gettext\lib"
@@ -432,7 +432,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating polish translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -440,7 +441,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating polish translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -448,7 +450,8 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating polish translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)"
+						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>

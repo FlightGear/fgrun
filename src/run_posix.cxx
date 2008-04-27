@@ -49,7 +49,7 @@
 
 using std::string;
 
-void
+int
 Wizard::run_fgfs( const std::string &args )
 {
     pid_t pid;
@@ -69,7 +69,7 @@ Wizard::run_fgfs( const std::string &args )
     {
 	perror( "fork error" );
 	(void) close( master );
-	return;
+	return 0;
     }
 
     if (pid > 0)
@@ -89,7 +89,7 @@ Wizard::run_fgfs( const std::string &args )
 	int status;
 	waitpid( pid, &status, 0 );
 
-	return;
+	return 0;
     }
     else
     {
@@ -158,6 +158,8 @@ Wizard::run_fgfs( const std::string &args )
 	execv( path.c_str(), pt );
 	perror("execv :");
     }
+
+    return 0;
 }
 
 void

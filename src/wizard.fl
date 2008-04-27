@@ -470,8 +470,7 @@ class Wizard {open
   decl {void preview_aircraft();} {public
   }
   decl {void reset();} {}
-  decl {void aircraft_update();} {selected
-  }
+  decl {void aircraft_update();} {}
   decl {void aircraft_update( const char *aft );} {}
   decl {void next_cb();} {}
   decl {void prev_cb();} {}
@@ -484,7 +483,7 @@ class Wizard {open
   decl {void advanced_cb();} {}
   decl {int write_fgfsrc();} {}
   decl {static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\\n");} {}
-  decl {void run_fgfs( const std::string & );} {}
+  decl {int run_fgfs( const std::string & );} {}
   decl {static void stdout_cb( int, void* );} {}
   decl {void stdout_cb( int );} {}
   decl {void cancel_cb();} {}
@@ -539,7 +538,7 @@ class Wizard {open
   Function {make_launch_window()} {open private
   } {
     Fl_Window launch_window {
-      label {FlightGear running...}
+      label {FlightGear running...} open
       private xywh {595 462 455 155} type Double visible
     } {
       Fl_Group {} {open
@@ -564,4 +563,39 @@ class Wizard {open
   decl {void exec_launch_window();} {}
   decl {Advanced *adv;} {}
   decl {static Fl_Menu_Item menu_time_of_day_value[];} {}
+  Function {make_crash_window()} {open private
+  } {
+    Fl_Window crash_window {
+      label {Flightgear crashed...} open
+      private xywh {644 608 455 240} type Double visible
+    } {
+      Fl_Box {} {
+        label {Flightgear encountered an unexpected failure}
+        private xywh {5 15 445 25} labelfont 1 labelsize 18
+      }
+      Fl_Box {} {
+        label {We are sorry for this inconvenience.}
+        private xywh {5 40 445 25} labelfont 1
+      }
+      Fl_Box file_box {
+        private xywh {5 90 445 55} align 148
+      }
+      Fl_Button {} {
+        label OK
+        callback {crash_ok_cb();}
+        xywh {350 205 100 30} labelsize 12
+      }
+      Fl_Box {} {
+        label {An error report has been generated in the file below :}
+        xywh {5 65 445 25} labelsize 12 align 20
+      }
+      Fl_Box {} {
+        label {Please send this error report to the Flightgear development team} selected
+        xywh {5 145 445 50} labelsize 12 align 149
+      }
+    }
+  }
+  decl {void crash_ok_cb();} {}
+  decl {void exec_crash_window( const char *fname );} {}
+  decl {string dump_file_name;} {}
 } 

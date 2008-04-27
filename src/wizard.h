@@ -205,7 +205,7 @@ private:
   void advanced_cb();
   int write_fgfsrc();
   static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\n");
-  void run_fgfs( const std::string & );
+  int run_fgfs( const std::string & );
   static void stdout_cb( int, void* );
   void stdout_cb( int );
   void cancel_cb();
@@ -263,5 +263,13 @@ private:
   void exec_launch_window();
   Advanced *adv;
   static Fl_Menu_Item menu_time_of_day_value[];
+  Fl_Double_Window* make_crash_window();
+  Fl_Double_Window *crash_window;
+  Fl_Box *file_box;
+  void cb_OK_i(Fl_Button*, void*);
+  static void cb_OK(Fl_Button*, void*);
+  void crash_ok_cb();
+  void exec_crash_window( const char *fname );
+  string dump_file_name;
 };
 #endif
