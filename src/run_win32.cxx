@@ -177,9 +177,9 @@ Wizard::run_fgfs(const string &args)
                         std::ostringstream os;
                         os << buf << "fgfs-dump-" << DebugEv.dwProcessId
                             << "-" << ( 1900 + stm->tm_year )
-                            << "-" << stm->tm_mon 
-                            << "-" << stm->tm_mday 
-                            << "-" << stm->tm_hour 
+                            << "-" << ( 1 + stm->tm_mon )
+                            << "-" << stm->tm_mday
+                            << "-" << stm->tm_hour
                             << "-" << stm->tm_min
                             << "-" << stm->tm_sec
                             << ".dmp";
