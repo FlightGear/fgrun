@@ -205,6 +205,7 @@ Advanced::init()
     page_list->add(_("Weather"));
     page_list->add(_("Clouds"));
 
+    main_window->size_range( 640, 480 );
     page_list->select(1);
     show_page(0);
 }

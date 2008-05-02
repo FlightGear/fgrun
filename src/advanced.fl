@@ -28,7 +28,7 @@ class Advanced {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
-      private xywh {701 306 640 480} type Double labelsize 12
+      private xywh {701 306 640 480} type Double labelsize 12 resizable
       code0 {init();} modal visible
     } {
       Fl_Browser page_list {
@@ -36,13 +36,23 @@ class Advanced {open
   show_page(o->value()-1);}
         private xywh {0 0 150 430} type Hold labelsize 12 textsize 12
       }
-      Fl_Button {button[1]} {
-        label Cancel
-        private xywh {565 450 70 25} labelsize 12
+      Fl_Box {} {
+        xywh {150 0 485 430} resizable
       }
-      Fl_Button {button[0]} {
-        label OK
-        private xywh {490 450 70 25} labelsize 12
+      Fl_Group {} {
+        xywh {0 435 640 45}
+      } {
+        Fl_Button {button[1]} {
+          label Cancel
+          private xywh {565 450 70 25} labelsize 12
+        }
+        Fl_Button {button[0]} {
+          label OK
+          private xywh {490 450 70 25} labelsize 12
+        }
+        Fl_Box {} {
+          xywh {20 435 460 15} resizable
+        }
       }
       Fl_Group {page[0]} {
         label General
@@ -97,6 +107,9 @@ class Advanced {open
         Fl_Output aircraft_ {
           label {Aircraft:}
           xywh {250 145 240 25} labelsize 12 textsize 12
+        }
+        Fl_Box {} {
+          xywh {255 405 25 25} resizable
         }
       }
       Fl_Group {page[1]} {
@@ -206,6 +219,9 @@ else
           label {Random Trees}
           xywh {170 200 160 25} down_box DOWN_BOX
         }
+        Fl_Box {} {
+          xywh {615 405 25 25} resizable
+        }
       }
       Fl_Group {page[2]} {
         label {Flight Model}
@@ -285,10 +301,13 @@ else
             private tooltip {Start in the air} xywh {270 195 105 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
           }
         }
+        Fl_Box {} {
+          xywh {615 405 25 25} resizable
+        }
       }
       Fl_Group {page[3]} {
         label Freeze
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button freeze {
           label Freeze
@@ -301,6 +320,9 @@ else
         Fl_Check_Button clock_freeze {
           label {Clock Freeze}
           private xywh {175 95 265 25} down_box DOWN_BOX labelsize 12
+        }
+        Fl_Box {} {
+          xywh {615 410 25 25} resizable
         }
       }
       Fl_Group {page[4]} {
@@ -375,10 +397,13 @@ else
           label {Climb rate:}
           private xywh {520 215 80 25} labelsize 12 textsize 12 deactivate
         }
+        Fl_Box {} {
+          xywh {245 405 25 25} resizable
+        }
       }
       Fl_Group {page[5]} {
         label Rendering
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 0 490 440} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button clouds {
           label Clouds
@@ -483,10 +508,13 @@ else
           label {Texture filtering:} open
           private tooltip {Set the maximum degree of anisotropy in texture filtering} xywh {490 355 120 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {}
+        Fl_Box {} {
+          xywh {615 415 25 25} resizable
+        }
       }
       Fl_Group {page[6]} {
-        label Time open
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        label Time
+        private xywh {150 0 490 440} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Round_Button time_match_real {
           label {Time match real}
@@ -578,10 +606,13 @@ else
           label {choice:} open
           private xywh {400 185 140 25} down_box BORDER_BOX labeltype NO_LABEL labelsize 12 textsize 12
         } {}
+        Fl_Box {} {
+          xywh {615 415 25 25} resizable
+        }
       }
       Fl_Group {page[7]} {
         label Network
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 0 490 440} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button httpd {
           label httpd
@@ -628,227 +659,240 @@ else
         } {
           Fl_Input callsign {
             label {Callsign:}
-            private xywh {240 165 135 25} labelsize 12 textsize 12
+            private xywh {240 160 135 25} labelsize 12 textsize 12
           }
           Fl_Input multiplay1 {
             label {Multiplay 1:}
-            private tooltip {in|out,hz,address,port} xywh {240 195 295 25} labelsize 12 textsize 12
+            private tooltip {in|out,hz,address,port} xywh {240 190 295 25} labelsize 12 textsize 12
           }
           Fl_Input multiplay2 {
             label {Multiplay 2:}
-            private xywh {240 225 295 25} labelsize 12 textsize 12
+            private xywh {240 220 295 25} labelsize 12 textsize 12
+          }
+          Fl_Box {} {
+            xywh {590 245 40 10} resizable
           }
         }
         Fl_Input proxy {
           label {Proxy:}
           private xywh {240 275 230 25} labelsize 12 textsize 12
         }
+        Fl_Box {} {
+          xywh {610 415 25 25} resizable
+        }
       }
       Fl_Group {page[8]} {
-        label {Input/Output}
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label {Input/Output} open
+        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
-          private xywh {155 40 480 125} type Hold labeltype NO_LABEL labelsize 12 textsize 12
+          private xywh {155 40 480 125} type Hold labeltype NO_LABEL labelsize 12 textsize 12 resizable
         }
-        Fl_Button io_new {
-          label New
-          callback {io_list_new_cb();}
-          private xywh {500 185 75 25} labelsize 12
-        }
-        Fl_Button io_delete {
-          label Delete
-          callback {if (io_list->value() > 0) {
+        Fl_Group {} {open
+          xywh {150 170 485 265}
+        } {
+          Fl_Button io_new {
+            label New
+            callback {io_list_new_cb();}
+            private xywh {500 185 75 25} labelsize 12
+          }
+          Fl_Button io_delete {
+            label Delete
+            callback {if (io_list->value() > 0) {
   io_list->remove( io_list->value() );
 }}
-          private xywh {580 185 55 25} labelsize 12 deactivate
-        }
-        Fl_Choice io_protocol {
-          label {Protocol:}
-          callback {io_protocol_update_cb();} open
-          private xywh {220 185 125 25} down_box BORDER_BOX labelsize 12 textsize 12
-        } {
-          MenuItem {} {
-            label atc610x
-            private xywh {0 0 100 20} labelsize 12
+            private xywh {580 185 55 25} labelsize 12 deactivate
           }
-          MenuItem {} {
-            label atlas
-            private xywh {0 0 100 20} labelsize 12
+          Fl_Choice io_protocol {
+            label {Protocol:}
+            callback {io_protocol_update_cb();}
+            private xywh {260 185 125 25} down_box BORDER_BOX labelsize 12 textsize 12
+          } {
+            MenuItem {} {
+              label atc610x
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label atlas
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label garmin
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label AV400
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label generic
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label {joy-client}
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label jsclient
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label native
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label {native-ctrls}
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label {native-fdm}
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label {native-gui}
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label nmea
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label opengc
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label pve
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label props
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label ray
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label rul
+              private xywh {5 5 100 20} labelsize 12
+            }
           }
-          MenuItem {} {
-            label garmin
-            private xywh {0 0 100 20} labelsize 12
+          Fl_Choice io_medium {
+            label {Medium:}
+            callback {io_medium_update_cb( o );}
+            private xywh {260 215 125 25} down_box BORDER_BOX labelsize 12 when 6 textsize 12 deactivate
+          } {
+            MenuItem {} {
+              label file
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label serial
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label socket
+              private xywh {5 5 100 20} labelsize 12
+            }
           }
-          MenuItem {} {
-            label AV400
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label generic
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label {joy-client}
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label jsclient
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label native
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label {native-ctrls}
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label {native-fdm}
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label {native-gui}
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label nmea
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label opengc
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label pve
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label props
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label ray
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label rul
-            private xywh {0 0 100 20} labelsize 12
-          }
-        }
-        Fl_Choice io_medium {
-          label {Medium:}
-          callback {io_medium_update_cb( o );}
-          private xywh {220 215 125 25} down_box BORDER_BOX labelsize 12 when 6 textsize 12 deactivate
-        } {
-          MenuItem {} {
-            label file
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label serial
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label socket
-            private xywh {0 0 100 20} labelsize 12
-          }
-        }
-        Fl_Choice io_dir {
-          label {Direction:}
-          callback {io_list_update_cb();}
-          private xywh {220 245 125 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
-        } {
-          MenuItem {} {
-            label in
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label out
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label bi
-            private xywh {0 0 100 20} labelsize 12
-          }
-        }
-        Fl_Value_Input io_hz {
-          label {Hz:}
-          callback {io_list_update_cb();}
-          private xywh {220 275 125 25} labelsize 12 minimum 1 maximum 1000 value 5 textsize 12 deactivate
-        }
-        Fl_Group file_group {open
-          private xywh {150 305 225 25} hide
-        } {
-          Fl_Input io_file_name {
-            label {File:}
+          Fl_Choice io_dir {
+            label {Direction:}
             callback {io_list_update_cb();}
-            private xywh {220 305 125 25} labelsize 12 when 1 textsize 12
+            private xywh {260 245 125 25} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
+          } {
+            MenuItem {} {
+              label in
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label out
+              private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label bi
+              private xywh {5 5 100 20} labelsize 12
+            }
           }
-          Fl_Button {} {
-            label {...}
-            callback {io_file_cb();}
-            private xywh {350 305 25 25} labelsize 12
-          }
-        }
-        Fl_Group serial_group {
-          private xywh {150 305 225 55} hide
-        } {
-          Fl_Input serial_port {
-            label {Port:}
+          Fl_Value_Input io_hz {
+            label {Hz:}
             callback {io_list_update_cb();}
-            private xywh {220 305 125 25} labelsize 12 when 1 textsize 12
+            private xywh {260 275 125 25} labelsize 12 minimum 1 maximum 1000 value 5 textsize 12 deactivate
           }
-          Fl_Input serial_baud_rate {
-            label {Baud Rate:}
-            callback {io_list_update_cb();}
-            private xywh {220 335 125 25} type Int labelsize 12 when 1 textsize 12
+          Fl_Group file_group {open
+            private xywh {165 305 250 25} hide
+          } {
+            Fl_Input io_file_name {
+              label {File:}
+              callback {io_list_update_cb();}
+              private xywh {260 305 125 25} labelsize 12 when 1 textsize 12
+            }
+            Fl_Button {} {
+              label {...}
+              callback {io_file_cb();}
+              private xywh {390 305 25 25} labelsize 12
+            }
           }
-        }
-        Fl_Group socket_group {
-          private xywh {150 305 225 85} hide
-        } {
-          Fl_Input socket_host {
-            label {Hostname:}
-            callback {io_list_update_cb();}
-            private xywh {220 305 125 25} labelsize 12 when 1 textsize 12
+          Fl_Group serial_group {open
+            private xywh {165 305 250 55} hide
+          } {
+            Fl_Input serial_port {
+              label {Port:}
+              callback {io_list_update_cb();}
+              private xywh {260 305 125 25} labelsize 12 when 1 textsize 12
+            }
+            Fl_Input serial_baud_rate {
+              label {Baud Rate:}
+              callback {io_list_update_cb();}
+              private xywh {260 335 125 25} type Int labelsize 12 when 1 textsize 12
+            }
           }
-          Fl_Value_Input socket_port {
-            label {Port:}
-            callback {io_list_update_cb();}
-            private xywh {220 335 125 25} labelsize 12 minimum 1024 maximum 65535 step 1 value 5500 textsize 12
+          Fl_Group socket_group {open
+            private xywh {165 305 250 85} hide
+          } {
+            Fl_Input socket_host {
+              label {Hostname:}
+              callback {io_list_update_cb();}
+              private xywh {260 305 125 25} labelsize 12 when 1 textsize 12
+            }
+            Fl_Value_Input socket_port {
+              label {Port:}
+              callback {io_list_update_cb();}
+              private xywh {260 335 125 25} labelsize 12 minimum 1024 maximum 65535 step 1 value 5500 textsize 12
+            }
+            Fl_Round_Button socket_tcp {
+              label TCP
+              callback {io_list_update_cb();}
+              private xywh {260 365 55 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
+            }
+            Fl_Round_Button socket_udp {
+              label UDP
+              callback {io_list_update_cb();}
+              private xywh {330 365 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
+            }
           }
-          Fl_Round_Button socket_tcp {
-            label TCP
-            callback {io_list_update_cb();}
-            private xywh {220 365 55 25} type Radio down_box ROUND_DOWN_BOX value 1 labelsize 12
+          Fl_Group generic_group {selected
+            private xywh {165 365 250 25} hide
+          } {
+            Fl_Input io_generic_file {
+              label {Generic:}
+              callback {io_list_update_cb();}
+              private xywh {260 365 125 25} labelsize 12 textsize 12
+            }
+            Fl_Button {} {
+              label {...}
+              callback {io_generic_file_cb();}
+              private xywh {390 365 25 25} labelsize 12
+            }
           }
-          Fl_Round_Button socket_udp {
-            label UDP
-            callback {io_list_update_cb();}
-            private xywh {290 365 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
-          }
-        }
-        Fl_Group generic_group {
-          private xywh {150 365 225 25} hide
-        } {
-          Fl_Input io_generic_file {
-            label {Generic:}
-            callback {io_list_update_cb();}
-            private xywh {220 365 125 25} labelsize 12 textsize 12
-          }
-          Fl_Button {} {
-            label {...}
-            callback {io_generic_file_cb();}
-            private xywh {350 365 25 25} labelsize 12
+          Fl_Box {} {
+            xywh {460 410 25 25} resizable
           }
         }
       }
       Fl_Group {page[9]} {
         label Avionics
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Input nav1 {
           label {Nav1:}
@@ -862,7 +906,7 @@ else
           label {ADF:}
           private xywh {205 100 150 25} labelsize 12 textsize 12
         }
-        Fl_Group dme_group {open
+        Fl_Group dme_group {
           private xywh {205 170 165 85} labelsize 12 align 21 deactivate
         } {
           Fl_Round_Button dme_nav1 {
@@ -895,11 +939,17 @@ else
   dme_group->deactivate();}
           private xywh {205 140 20 25} down_box DOWN_BOX labelsize 12 align 4
         }
+        Fl_Box {} {
+          xywh {615 410 25 25} resizable
+        }
       }
       Fl_Group {page[10]} {
         label Properties
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        private xywh {150 0 550 430} labelfont 1 labelsize 16 align 21 hide
       } {
+        Fl_Box {} {
+          xywh {220 40 275 125} resizable
+        }
         Fl_Browser prop_list {
           callback {list_select_cb(
   prop_list,
@@ -907,105 +957,145 @@ else
   prop_delete );}
           private xywh {155 40 480 125} type Hold labeltype NO_LABEL labelsize 12 textsize 12
         }
-        Fl_Button prop_delete {
-          label Delete
-          callback {list_delete_cb(
+        Fl_Group {} {open
+          xywh {220 185 415 25}
+        } {
+          Fl_Button prop_delete {
+            label Delete
+            callback {list_delete_cb(
   prop_list,
   prop_input,
   prop_delete );}
-          private xywh {580 185 55 25} labelsize 12 deactivate
-        }
-        Fl_Input prop_input {
-          label {Property:}
-          callback {list_update_cb(
+            private xywh {580 185 55 25} labelsize 12 deactivate
+          }
+          Fl_Input prop_input {
+            label {Property:}
+            callback {list_update_cb(
   prop_list,
   prop_input );}
-          private tooltip {prop=value} xywh {220 185 275 25} labelsize 12 when 1 textsize 12 deactivate
-        }
-        Fl_Button {} {
-          label New
-          callback {list_new_cb(
+            private tooltip {prop=value} xywh {220 185 275 25} labelsize 12 when 1 textsize 12 deactivate resizable
+          }
+          Fl_Button {} {
+            label New
+            callback {list_new_cb(
   prop_list,
   prop_input,
   prop_delete );}
-          private xywh {500 185 75 25} labelsize 12
+            private xywh {500 185 75 25} labelsize 12
+          }
         }
       }
       Fl_Group {page[11]} {
         label Debugging
         private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
-        Fl_Choice log_level {
-          label {Log Level:} open
-          private xywh {260 45 130 25} down_box BORDER_BOX labelsize 12 textsize 12
-        } {}
-        Fl_Browser trace_read_list {
-          label {Trace Read Properties}
-          callback {list_select_cb(
+        Fl_Group {} {open
+          xywh {160 45 475 35}
+        } {
+          Fl_Choice log_level {
+            label {Log Level:} open
+            private xywh {260 45 130 25} down_box BORDER_BOX labelsize 12 textsize 12
+          } {}
+          Fl_Box {} {
+            xywh {390 70 125 10} resizable
+          }
+        }
+        Fl_Group {} {open
+          xywh {160 105 475 275} resizable
+        } {
+          Fl_Group {} {open
+            xywh {160 105 475 125}
+          } {
+            Fl_Box {} {
+              xywh {210 105 295 80} resizable
+            }
+            Fl_Browser trace_read_list {
+              label {Trace Read Properties}
+              callback {list_select_cb(
   trace_read_list,
   trace_read_input,
   trace_read_delete );}
-          private xywh {160 105 475 80} type Hold labelfont 1 align 5 textsize 12
-        }
-        Fl_Input trace_read_input {
-          label {Value:}
-          callback {list_update_cb(
+              private xywh {160 105 475 80} type Hold labelfont 1 align 5 textsize 12
+            }
+            Fl_Group {} {open
+              xywh {200 195 435 25}
+            } {
+              Fl_Input trace_read_input {
+                label {Value:}
+                callback {list_update_cb(
   trace_read_list,
   trace_read_input );}
-          private xywh {200 195 305 25} labelsize 12 when 1 textsize 12 deactivate
-        }
-        Fl_Button {} {
-          label New
-          callback {list_new_cb(
+                private xywh {200 195 305 25} labelsize 12 when 1 textsize 12 deactivate resizable
+              }
+              Fl_Button {} {
+                label New
+                callback {list_new_cb(
   trace_read_list,
   trace_read_input,
   trace_read_delete );}
-          private xywh {510 195 70 25} labelsize 12
-        }
-        Fl_Button trace_read_delete {
-          label Delete
-          callback {list_delete_cb(
+                private xywh {510 195 70 25} labelsize 12
+              }
+              Fl_Button trace_read_delete {
+                label Delete
+                callback {list_delete_cb(
   trace_read_list,
   trace_read_input,
   trace_read_delete );}
-          private xywh {585 195 50 25} labelsize 12 deactivate
-        }
-        Fl_Browser trace_write_list {
-          label {Trace Write Properties}
-          callback {list_select_cb(
+                private xywh {585 195 50 25} labelsize 12 deactivate
+              }
+            }
+          }
+          Fl_Group {} {open
+            xywh {160 230 475 150}
+          } {
+            Fl_Box {} {
+              xywh {200 265 305 80} resizable
+            }
+            Fl_Browser trace_write_list {
+              label {Trace Write Properties}
+              callback {list_select_cb(
   trace_write_list,
   trace_write_input,
   trace_write_delete );}
-          private xywh {160 265 475 80} type Hold labelfont 1 align 5 textsize 12
-        }
-        Fl_Input trace_write_input {
-          label {Value:}
-          callback {list_update_cb(
+              private xywh {160 265 475 80} type Hold labelfont 1 align 5 textsize 12
+            }
+            Fl_Group {} {open
+              xywh {200 355 435 25}
+            } {
+              Fl_Input trace_write_input {
+                label {Value:}
+                callback {list_update_cb(
   trace_write_list,
   trace_write_input );}
-          private xywh {200 355 305 25} labelsize 12 when 1 textsize 12 deactivate
-        }
-        Fl_Button {} {
-          label New
-          callback {list_new_cb(
+                private xywh {200 355 305 25} labelsize 12 when 1 textsize 12 deactivate resizable
+              }
+              Fl_Button {} {
+                label New
+                callback {list_new_cb(
   trace_write_list,
   trace_write_input,
   trace_write_delete );}
-          private xywh {510 355 70 25} labelsize 12
-        }
-        Fl_Button trace_write_delete {
-          label Delete
-          callback {list_delete_cb(
+                private xywh {510 355 70 25} labelsize 12
+              }
+              Fl_Button trace_write_delete {
+                label Delete
+                callback {list_delete_cb(
   trace_write_list,
   trace_write_input,
   trace_write_delete );}
-          private xywh {585 355 50 25} labelsize 12 deactivate
+                private xywh {585 355 50 25} labelsize 12 deactivate
+              }
+            }
+          }
         }
       }
       Fl_Group {page[12]} {
         label Environment
         private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
+        Fl_Box {} {
+          xywh {220 40 275 125} resizable
+        }
         Fl_Browser env_list {
           callback {list_select_cb(
   env_list,
@@ -1039,7 +1129,7 @@ else
       }
       Fl_Group {page[13]} {
         label Weather
-        private xywh {150 0 490 430} labelfont 1 align 21 hide
+        private xywh {150 0 490 440} labelfont 1 align 21 hide
       } {
         Fl_Group {} {open
           xywh {155 35 230 280} box ENGRAVED_FRAME labeltype NO_LABEL align 17
@@ -1078,10 +1168,13 @@ else
           label {Fetch real weather}
           xywh {235 370 155 25} down_box DOWN_BOX labelsize 12
         }
+        Fl_Box {} {
+          xywh {615 415 25 25} resizable
+        }
       }
       Fl_Group {page[14]} {
-        label Clouds open
-        private xywh {150 0 490 430} labelfont 1 align 21 hide
+        label Clouds
+        private xywh {150 0 490 440} labelfont 1 align 21 hide
       } {
         Fl_Choice cloud_layer_ {
           label {Layer:}
@@ -1134,6 +1227,9 @@ else
           callback {cloud_transition[ cloud_layer_->value() ] = cloud_transition_->value();}
           private xywh {255 230 120 25} labelsize 12 maximum 100000 step 1 textsize 12 deactivate
         }
+        Fl_Box {} {
+          xywh {615 415 25 25} resizable
+        }
       }
     }
   }
@@ -1143,7 +1239,7 @@ else
   }
   decl {void load_settings(Fl_Preferences&);} {public
   }
-  decl {void save_settings(Fl_Preferences&);} {selected public
+  decl {void save_settings(Fl_Preferences&);} {public
   }
   decl {void reset_settings(Fl_Preferences&);} {public
   }

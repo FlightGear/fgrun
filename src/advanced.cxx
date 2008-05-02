@@ -238,7 +238,7 @@ void Advanced::cb_io_new_i(Fl_Button*, void*) {
   io_list_new_cb();
 }
 void Advanced::cb_io_new(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_io_new_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_new_i(o,v);
 }
 
 void Advanced::cb_io_delete_i(Fl_Button*, void*) {
@@ -247,14 +247,14 @@ void Advanced::cb_io_delete_i(Fl_Button*, void*) {
 };
 }
 void Advanced::cb_io_delete(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_io_delete_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_delete_i(o,v);
 }
 
 void Advanced::cb_io_protocol_i(Fl_Choice*, void*) {
   io_protocol_update_cb();
 }
 void Advanced::cb_io_protocol(Fl_Choice* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_io_protocol_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_protocol_i(o,v);
 }
 
 Fl_Menu_Item Advanced::menu_io_protocol[] = {
@@ -282,7 +282,7 @@ void Advanced::cb_io_medium_i(Fl_Choice* o, void*) {
   io_medium_update_cb( o );
 }
 void Advanced::cb_io_medium(Fl_Choice* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_io_medium_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_medium_i(o,v);
 }
 
 Fl_Menu_Item Advanced::menu_io_medium[] = {
@@ -296,7 +296,7 @@ void Advanced::cb_io_dir_i(Fl_Choice*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_io_dir(Fl_Choice* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_io_dir_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_dir_i(o,v);
 }
 
 Fl_Menu_Item Advanced::menu_io_dir[] = {
@@ -310,77 +310,77 @@ void Advanced::cb_io_hz_i(Fl_Value_Input*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_io_hz(Fl_Value_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_io_hz_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_hz_i(o,v);
 }
 
 void Advanced::cb_io_file_name_i(Fl_Input*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_io_file_name(Fl_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_file_name_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_io_file_name_i(o,v);
 }
 
 void Advanced::cb_2_i(Fl_Button*, void*) {
   io_file_cb();
 }
 void Advanced::cb_2(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_2_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_2_i(o,v);
 }
 
 void Advanced::cb_serial_port_i(Fl_Input*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_serial_port(Fl_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_serial_port_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_serial_port_i(o,v);
 }
 
 void Advanced::cb_serial_baud_rate_i(Fl_Input*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_serial_baud_rate(Fl_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_serial_baud_rate_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_serial_baud_rate_i(o,v);
 }
 
 void Advanced::cb_socket_host_i(Fl_Input*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_socket_host(Fl_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_socket_host_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_socket_host_i(o,v);
 }
 
 void Advanced::cb_socket_port_i(Fl_Value_Input*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_socket_port(Fl_Value_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_socket_port_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_socket_port_i(o,v);
 }
 
 void Advanced::cb_socket_tcp_i(Fl_Round_Button*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_socket_tcp(Fl_Round_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_socket_tcp_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_socket_tcp_i(o,v);
 }
 
 void Advanced::cb_socket_udp_i(Fl_Round_Button*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_socket_udp(Fl_Round_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_socket_udp_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_socket_udp_i(o,v);
 }
 
 void Advanced::cb_io_generic_file_i(Fl_Input*, void*) {
   io_list_update_cb();
 }
 void Advanced::cb_io_generic_file(Fl_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_generic_file_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_io_generic_file_i(o,v);
 }
 
 void Advanced::cb_3_i(Fl_Button*, void*) {
   io_generic_file_cb();
 }
 void Advanced::cb_3(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_3_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_3_i(o,v);
 }
 
 void Advanced::cb_dme_nav1_i(Fl_Round_Button* o, void*) {
@@ -434,7 +434,7 @@ void Advanced::cb_prop_delete_i(Fl_Button*, void*) {
   prop_delete );
 }
 void Advanced::cb_prop_delete(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_prop_delete_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_prop_delete_i(o,v);
 }
 
 void Advanced::cb_prop_input_i(Fl_Input*, void*) {
@@ -443,7 +443,7 @@ void Advanced::cb_prop_input_i(Fl_Input*, void*) {
   prop_input );
 }
 void Advanced::cb_prop_input(Fl_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_prop_input_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_prop_input_i(o,v);
 }
 
 void Advanced::cb_New_i(Fl_Button*, void*) {
@@ -453,7 +453,7 @@ void Advanced::cb_New_i(Fl_Button*, void*) {
   prop_delete );
 }
 void Advanced::cb_New(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_New_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_New_i(o,v);
 }
 
 void Advanced::cb_trace_read_list_i(Fl_Browser*, void*) {
@@ -463,7 +463,7 @@ void Advanced::cb_trace_read_list_i(Fl_Browser*, void*) {
   trace_read_delete );
 }
 void Advanced::cb_trace_read_list(Fl_Browser* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_trace_read_list_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_trace_read_list_i(o,v);
 }
 
 void Advanced::cb_trace_read_input_i(Fl_Input*, void*) {
@@ -472,7 +472,7 @@ void Advanced::cb_trace_read_input_i(Fl_Input*, void*) {
   trace_read_input );
 }
 void Advanced::cb_trace_read_input(Fl_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_trace_read_input_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_trace_read_input_i(o,v);
 }
 
 void Advanced::cb_New1_i(Fl_Button*, void*) {
@@ -482,7 +482,7 @@ void Advanced::cb_New1_i(Fl_Button*, void*) {
   trace_read_delete );
 }
 void Advanced::cb_New1(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_New1_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_New1_i(o,v);
 }
 
 void Advanced::cb_trace_read_delete_i(Fl_Button*, void*) {
@@ -492,7 +492,7 @@ void Advanced::cb_trace_read_delete_i(Fl_Button*, void*) {
   trace_read_delete );
 }
 void Advanced::cb_trace_read_delete(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_trace_read_delete_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_trace_read_delete_i(o,v);
 }
 
 void Advanced::cb_trace_write_list_i(Fl_Browser*, void*) {
@@ -502,7 +502,7 @@ void Advanced::cb_trace_write_list_i(Fl_Browser*, void*) {
   trace_write_delete );
 }
 void Advanced::cb_trace_write_list(Fl_Browser* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_trace_write_list_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_trace_write_list_i(o,v);
 }
 
 void Advanced::cb_trace_write_input_i(Fl_Input*, void*) {
@@ -511,7 +511,7 @@ void Advanced::cb_trace_write_input_i(Fl_Input*, void*) {
   trace_write_input );
 }
 void Advanced::cb_trace_write_input(Fl_Input* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_trace_write_input_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_trace_write_input_i(o,v);
 }
 
 void Advanced::cb_New2_i(Fl_Button*, void*) {
@@ -521,7 +521,7 @@ void Advanced::cb_New2_i(Fl_Button*, void*) {
   trace_write_delete );
 }
 void Advanced::cb_New2(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_New2_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_New2_i(o,v);
 }
 
 void Advanced::cb_trace_write_delete_i(Fl_Button*, void*) {
@@ -531,7 +531,7 @@ void Advanced::cb_trace_write_delete_i(Fl_Button*, void*) {
   trace_write_delete );
 }
 void Advanced::cb_trace_write_delete(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->user_data()))->cb_trace_write_delete_i(o,v);
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_trace_write_delete_i(o,v);
 }
 
 void Advanced::cb_env_list_i(Fl_Browser*, void*) {
@@ -657,11 +657,20 @@ Advanced::Advanced() {
       o->textsize(12);
       o->callback((Fl_Callback*)cb_page_list);
     }
-    { Fl_Button* o = button[1] = new Fl_Button(565, 450, 70, 25, _("Cancel"));
-      o->labelsize(12);
+    { Fl_Box* o = new Fl_Box(150, 0, 485, 430);
+      Fl_Group::current()->resizable(o);
     }
-    { Fl_Button* o = button[0] = new Fl_Button(490, 450, 70, 25, _("OK"));
-      o->labelsize(12);
+    { Fl_Group* o = new Fl_Group(0, 435, 640, 45);
+      { Fl_Button* o = button[1] = new Fl_Button(565, 450, 70, 25, _("Cancel"));
+        o->labelsize(12);
+      }
+      { Fl_Button* o = button[0] = new Fl_Button(490, 450, 70, 25, _("OK"));
+        o->labelsize(12);
+      }
+      { Fl_Box* o = new Fl_Box(20, 435, 460, 15);
+        Fl_Group::current()->resizable(o);
+      }
+      o->end();
     }
     { Fl_Group* o = page[0] = new Fl_Group(150, 0, 490, 430, _("General"));
       o->labelfont(1);
@@ -718,6 +727,9 @@ Advanced::Advanced() {
       { Fl_Output* o = aircraft_ = new Fl_Output(250, 145, 240, 25, _("Aircraft:"));
         o->labelsize(12);
         o->textsize(12);
+      }
+      { Fl_Box* o = new Fl_Box(255, 405, 25, 25);
+        Fl_Group::current()->resizable(o);
       }
       o->end();
     }
@@ -840,6 +852,9 @@ Advanced::Advanced() {
       { Fl_Check_Button* o = random_trees = new Fl_Check_Button(170, 200, 160, 25, _("Random Trees"));
         o->down_box(FL_DOWN_BOX);
       }
+      { Fl_Box* o = new Fl_Box(615, 405, 25, 25);
+        Fl_Group::current()->resizable(o);
+      }
       o->end();
     }
     { Fl_Group* o = page[2] = new Fl_Group(150, 0, 490, 430, _("Flight Model"));
@@ -895,9 +910,12 @@ Advanced::Advanced() {
         }
         o->end();
       }
+      { Fl_Box* o = new Fl_Box(615, 405, 25, 25);
+        Fl_Group::current()->resizable(o);
+      }
       o->end();
     }
-    { Fl_Group* o = page[3] = new Fl_Group(150, 0, 490, 430, _("Freeze"));
+    { Fl_Group* o = page[3] = new Fl_Group(150, 0, 490, 435, _("Freeze"));
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
@@ -914,6 +932,9 @@ Advanced::Advanced() {
       { Fl_Check_Button* o = clock_freeze = new Fl_Check_Button(175, 95, 265, 25, _("Clock Freeze"));
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
+      }
+      { Fl_Box* o = new Fl_Box(615, 410, 25, 25);
+        Fl_Group::current()->resizable(o);
       }
       o->end();
     }
@@ -1014,9 +1035,12 @@ Advanced::Advanced() {
         o->textsize(12);
         o->deactivate();
       }
+      { Fl_Box* o = new Fl_Box(245, 405, 25, 25);
+        Fl_Group::current()->resizable(o);
+      }
       o->end();
     }
-    { Fl_Group* o = page[5] = new Fl_Group(150, 0, 490, 430, _("Rendering"));
+    { Fl_Group* o = page[5] = new Fl_Group(150, 0, 490, 440, _("Rendering"));
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
@@ -1143,12 +1167,16 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->textsize(12);
       }
+      { Fl_Box* o = new Fl_Box(615, 415, 25, 25);
+        Fl_Group::current()->resizable(o);
+      }
       o->end();
     }
-    { Fl_Group* o = page[6] = new Fl_Group(150, 0, 490, 430, _("Time"));
+    { Fl_Group* o = page[6] = new Fl_Group(150, 0, 490, 440, _("Time"));
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Round_Button* o = time_match_real = new Fl_Round_Button(175, 35, 220, 25, _("Time match real"));
         o->tooltip(_("Synchronize simulation time with real time"));
         o->type(102);
@@ -1222,9 +1250,12 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->textsize(12);
       }
+      { Fl_Box* o = new Fl_Box(615, 415, 25, 25);
+        Fl_Group::current()->resizable(o);
+      }
       o->end();
     }
-    { Fl_Group* o = page[7] = new Fl_Group(150, 0, 490, 430, _("Network"));
+    { Fl_Group* o = page[7] = new Fl_Group(150, 0, 490, 440, _("Network"));
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
@@ -1283,18 +1314,21 @@ Advanced::Advanced() {
         o->labelfont(1);
         o->labelsize(12);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        { Fl_Input* o = callsign = new Fl_Input(240, 165, 135, 25, _("Callsign:"));
+        { Fl_Input* o = callsign = new Fl_Input(240, 160, 135, 25, _("Callsign:"));
           o->labelsize(12);
           o->textsize(12);
         }
-        { Fl_Input* o = multiplay1 = new Fl_Input(240, 195, 295, 25, _("Multiplay 1:"));
+        { Fl_Input* o = multiplay1 = new Fl_Input(240, 190, 295, 25, _("Multiplay 1:"));
           o->tooltip(_("in|out,hz,address,port"));
           o->labelsize(12);
           o->textsize(12);
         }
-        { Fl_Input* o = multiplay2 = new Fl_Input(240, 225, 295, 25, _("Multiplay 2:"));
+        { Fl_Input* o = multiplay2 = new Fl_Input(240, 220, 295, 25, _("Multiplay 2:"));
           o->labelsize(12);
           o->textsize(12);
+        }
+        { Fl_Box* o = new Fl_Box(590, 245, 40, 10);
+          Fl_Group::current()->resizable(o);
         }
         o->end();
       }
@@ -1302,141 +1336,150 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->textsize(12);
       }
+      { Fl_Box* o = new Fl_Box(610, 415, 25, 25);
+        Fl_Group::current()->resizable(o);
+      }
       o->end();
     }
-    { Fl_Group* o = page[8] = new Fl_Group(150, 0, 490, 430, _("Input/Output"));
+    { Fl_Group* o = page[8] = new Fl_Group(150, 0, 490, 435, _("Input/Output"));
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
         o->labelsize(12);
         o->textsize(12);
         o->callback((Fl_Callback*)cb_io_list);
+        Fl_Group::current()->resizable(o);
       }
-      { Fl_Button* o = io_new = new Fl_Button(500, 185, 75, 25, _("New"));
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_io_new);
-      }
-      { Fl_Button* o = io_delete = new Fl_Button(580, 185, 55, 25, _("Delete"));
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_io_delete);
-        o->deactivate();
-      }
-      { Fl_Choice* o = io_protocol = new Fl_Choice(220, 185, 125, 25, _("Protocol:"));
-        o->down_box(FL_BORDER_BOX);
-        o->labelsize(12);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_io_protocol);
-        o->menu(menu_io_protocol);
-      }
-      { Fl_Choice* o = io_medium = new Fl_Choice(220, 215, 125, 25, _("Medium:"));
-        o->down_box(FL_BORDER_BOX);
-        o->labelsize(12);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_io_medium);
-        o->when(FL_WHEN_RELEASE_ALWAYS);
-        o->deactivate();
-        o->menu(menu_io_medium);
-      }
-      { Fl_Choice* o = io_dir = new Fl_Choice(220, 245, 125, 25, _("Direction:"));
-        o->down_box(FL_BORDER_BOX);
-        o->labelsize(12);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_io_dir);
-        o->deactivate();
-        o->menu(menu_io_dir);
-      }
-      { Fl_Value_Input* o = io_hz = new Fl_Value_Input(220, 275, 125, 25, _("Hz:"));
-        o->labelsize(12);
-        o->minimum(1);
-        o->maximum(1000);
-        o->value(5);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_io_hz);
-        o->deactivate();
-      }
-      { Fl_Group* o = file_group = new Fl_Group(150, 305, 225, 25);
-        o->hide();
-        { Fl_Input* o = io_file_name = new Fl_Input(220, 305, 125, 25, _("File:"));
+      { Fl_Group* o = new Fl_Group(150, 170, 485, 265);
+        { Fl_Button* o = io_new = new Fl_Button(500, 185, 75, 25, _("New"));
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_io_new);
+        }
+        { Fl_Button* o = io_delete = new Fl_Button(580, 185, 55, 25, _("Delete"));
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_io_delete);
+          o->deactivate();
+        }
+        { Fl_Choice* o = io_protocol = new Fl_Choice(260, 185, 125, 25, _("Protocol:"));
+          o->down_box(FL_BORDER_BOX);
           o->labelsize(12);
           o->textsize(12);
-          o->callback((Fl_Callback*)cb_io_file_name);
-          o->when(FL_WHEN_CHANGED);
+          o->callback((Fl_Callback*)cb_io_protocol);
+          o->menu(menu_io_protocol);
         }
-        { Fl_Button* o = new Fl_Button(350, 305, 25, 25, _("..."));
-          o->labelsize(12);
-          o->callback((Fl_Callback*)cb_2);
-        }
-        o->end();
-      }
-      { Fl_Group* o = serial_group = new Fl_Group(150, 305, 225, 55);
-        o->hide();
-        { Fl_Input* o = serial_port = new Fl_Input(220, 305, 125, 25, _("Port:"));
+        { Fl_Choice* o = io_medium = new Fl_Choice(260, 215, 125, 25, _("Medium:"));
+          o->down_box(FL_BORDER_BOX);
           o->labelsize(12);
           o->textsize(12);
-          o->callback((Fl_Callback*)cb_serial_port);
-          o->when(FL_WHEN_CHANGED);
+          o->callback((Fl_Callback*)cb_io_medium);
+          o->when(FL_WHEN_RELEASE_ALWAYS);
+          o->deactivate();
+          o->menu(menu_io_medium);
         }
-        { Fl_Input* o = serial_baud_rate = new Fl_Input(220, 335, 125, 25, _("Baud Rate:"));
-          o->type(2);
+        { Fl_Choice* o = io_dir = new Fl_Choice(260, 245, 125, 25, _("Direction:"));
+          o->down_box(FL_BORDER_BOX);
           o->labelsize(12);
           o->textsize(12);
-          o->callback((Fl_Callback*)cb_serial_baud_rate);
-          o->when(FL_WHEN_CHANGED);
+          o->callback((Fl_Callback*)cb_io_dir);
+          o->deactivate();
+          o->menu(menu_io_dir);
         }
-        o->end();
-      }
-      { Fl_Group* o = socket_group = new Fl_Group(150, 305, 225, 85);
-        o->hide();
-        { Fl_Input* o = socket_host = new Fl_Input(220, 305, 125, 25, _("Hostname:"));
+        { Fl_Value_Input* o = io_hz = new Fl_Value_Input(260, 275, 125, 25, _("Hz:"));
           o->labelsize(12);
+          o->minimum(1);
+          o->maximum(1000);
+          o->value(5);
           o->textsize(12);
-          o->callback((Fl_Callback*)cb_socket_host);
-          o->when(FL_WHEN_CHANGED);
+          o->callback((Fl_Callback*)cb_io_hz);
+          o->deactivate();
         }
-        { Fl_Value_Input* o = socket_port = new Fl_Value_Input(220, 335, 125, 25, _("Port:"));
-          o->labelsize(12);
-          o->minimum(1024);
-          o->maximum(65535);
-          o->step(1);
-          o->value(5500);
-          o->textsize(12);
-          o->callback((Fl_Callback*)cb_socket_port);
+        { Fl_Group* o = file_group = new Fl_Group(165, 305, 250, 25);
+          o->hide();
+          { Fl_Input* o = io_file_name = new Fl_Input(260, 305, 125, 25, _("File:"));
+            o->labelsize(12);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_io_file_name);
+            o->when(FL_WHEN_CHANGED);
+          }
+          { Fl_Button* o = new Fl_Button(390, 305, 25, 25, _("..."));
+            o->labelsize(12);
+            o->callback((Fl_Callback*)cb_2);
+          }
+          o->end();
         }
-        { Fl_Round_Button* o = socket_tcp = new Fl_Round_Button(220, 365, 55, 25, _("TCP"));
-          o->type(102);
-          o->down_box(FL_ROUND_DOWN_BOX);
-          o->value(1);
-          o->labelsize(12);
-          o->callback((Fl_Callback*)cb_socket_tcp);
+        { Fl_Group* o = serial_group = new Fl_Group(165, 305, 250, 55);
+          o->hide();
+          { Fl_Input* o = serial_port = new Fl_Input(260, 305, 125, 25, _("Port:"));
+            o->labelsize(12);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_serial_port);
+            o->when(FL_WHEN_CHANGED);
+          }
+          { Fl_Input* o = serial_baud_rate = new Fl_Input(260, 335, 125, 25, _("Baud Rate:"));
+            o->type(2);
+            o->labelsize(12);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_serial_baud_rate);
+            o->when(FL_WHEN_CHANGED);
+          }
+          o->end();
         }
-        { Fl_Round_Button* o = socket_udp = new Fl_Round_Button(290, 365, 85, 25, _("UDP"));
-          o->type(102);
-          o->down_box(FL_ROUND_DOWN_BOX);
-          o->labelsize(12);
-          o->callback((Fl_Callback*)cb_socket_udp);
+        { Fl_Group* o = socket_group = new Fl_Group(165, 305, 250, 85);
+          o->hide();
+          { Fl_Input* o = socket_host = new Fl_Input(260, 305, 125, 25, _("Hostname:"));
+            o->labelsize(12);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_socket_host);
+            o->when(FL_WHEN_CHANGED);
+          }
+          { Fl_Value_Input* o = socket_port = new Fl_Value_Input(260, 335, 125, 25, _("Port:"));
+            o->labelsize(12);
+            o->minimum(1024);
+            o->maximum(65535);
+            o->step(1);
+            o->value(5500);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_socket_port);
+          }
+          { Fl_Round_Button* o = socket_tcp = new Fl_Round_Button(260, 365, 55, 25, _("TCP"));
+            o->type(102);
+            o->down_box(FL_ROUND_DOWN_BOX);
+            o->value(1);
+            o->labelsize(12);
+            o->callback((Fl_Callback*)cb_socket_tcp);
+          }
+          { Fl_Round_Button* o = socket_udp = new Fl_Round_Button(330, 365, 85, 25, _("UDP"));
+            o->type(102);
+            o->down_box(FL_ROUND_DOWN_BOX);
+            o->labelsize(12);
+            o->callback((Fl_Callback*)cb_socket_udp);
+          }
+          o->end();
         }
-        o->end();
-      }
-      { Fl_Group* o = generic_group = new Fl_Group(150, 365, 225, 25);
-        o->hide();
-        { Fl_Input* o = io_generic_file = new Fl_Input(220, 365, 125, 25, _("Generic:"));
-          o->labelsize(12);
-          o->textsize(12);
-          o->callback((Fl_Callback*)cb_io_generic_file);
+        { Fl_Group* o = generic_group = new Fl_Group(165, 365, 250, 25);
+          o->hide();
+          { Fl_Input* o = io_generic_file = new Fl_Input(260, 365, 125, 25, _("Generic:"));
+            o->labelsize(12);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_io_generic_file);
+          }
+          { Fl_Button* o = new Fl_Button(390, 365, 25, 25, _("..."));
+            o->labelsize(12);
+            o->callback((Fl_Callback*)cb_3);
+          }
+          o->end();
         }
-        { Fl_Button* o = new Fl_Button(350, 365, 25, 25, _("..."));
-          o->labelsize(12);
-          o->callback((Fl_Callback*)cb_3);
+        { Fl_Box* o = new Fl_Box(460, 410, 25, 25);
+          Fl_Group::current()->resizable(o);
         }
         o->end();
       }
       o->end();
     }
-    { Fl_Group* o = page[9] = new Fl_Group(150, 0, 490, 430, _("Avionics"));
+    { Fl_Group* o = page[9] = new Fl_Group(150, 0, 490, 435, _("Avionics"));
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
@@ -1489,13 +1532,19 @@ Advanced::Advanced() {
         o->callback((Fl_Callback*)cb_dme);
         o->align(FL_ALIGN_LEFT);
       }
+      { Fl_Box* o = new Fl_Box(615, 410, 25, 25);
+        Fl_Group::current()->resizable(o);
+      }
       o->end();
     }
-    { Fl_Group* o = page[10] = new Fl_Group(150, 0, 490, 430, _("Properties"));
+    { Fl_Group* o = page[10] = new Fl_Group(150, 0, 550, 430, _("Properties"));
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
+      { Fl_Box* o = new Fl_Box(220, 40, 275, 125);
+        Fl_Group::current()->resizable(o);
+      }
       { Fl_Browser* o = prop_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
@@ -1503,22 +1552,26 @@ Advanced::Advanced() {
         o->textsize(12);
         o->callback((Fl_Callback*)cb_prop_list);
       }
-      { Fl_Button* o = prop_delete = new Fl_Button(580, 185, 55, 25, _("Delete"));
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_prop_delete);
-        o->deactivate();
-      }
-      { Fl_Input* o = prop_input = new Fl_Input(220, 185, 275, 25, _("Property:"));
-        o->tooltip(_("prop=value"));
-        o->labelsize(12);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_prop_input);
-        o->when(FL_WHEN_CHANGED);
-        o->deactivate();
-      }
-      { Fl_Button* o = new Fl_Button(500, 185, 75, 25, _("New"));
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_New);
+      { Fl_Group* o = new Fl_Group(220, 185, 415, 25);
+        { Fl_Button* o = prop_delete = new Fl_Button(580, 185, 55, 25, _("Delete"));
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_prop_delete);
+          o->deactivate();
+        }
+        { Fl_Input* o = prop_input = new Fl_Input(220, 185, 275, 25, _("Property:"));
+          o->tooltip(_("prop=value"));
+          o->labelsize(12);
+          o->textsize(12);
+          o->callback((Fl_Callback*)cb_prop_input);
+          o->when(FL_WHEN_CHANGED);
+          o->deactivate();
+          Fl_Group::current()->resizable(o);
+        }
+        { Fl_Button* o = new Fl_Button(500, 185, 75, 25, _("New"));
+          o->labelsize(12);
+          o->callback((Fl_Callback*)cb_New);
+        }
+        o->end();
       }
       o->end();
     }
@@ -1527,56 +1580,86 @@ Advanced::Advanced() {
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
-      { Fl_Choice* o = log_level = new Fl_Choice(260, 45, 130, 25, _("Log Level:"));
-        o->down_box(FL_BORDER_BOX);
-        o->labelsize(12);
-        o->textsize(12);
+      { Fl_Group* o = new Fl_Group(160, 45, 475, 35);
+        { Fl_Choice* o = log_level = new Fl_Choice(260, 45, 130, 25, _("Log Level:"));
+          o->down_box(FL_BORDER_BOX);
+          o->labelsize(12);
+          o->textsize(12);
+        }
+        { Fl_Box* o = new Fl_Box(390, 70, 125, 10);
+          Fl_Group::current()->resizable(o);
+        }
+        o->end();
       }
-      { Fl_Browser* o = trace_read_list = new Fl_Browser(160, 105, 475, 80, _("Trace Read Properties"));
-        o->type(2);
-        o->labelfont(1);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_trace_read_list);
-        o->align(FL_ALIGN_TOP_LEFT);
-      }
-      { Fl_Input* o = trace_read_input = new Fl_Input(200, 195, 305, 25, _("Value:"));
-        o->labelsize(12);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_trace_read_input);
-        o->when(FL_WHEN_CHANGED);
-        o->deactivate();
-      }
-      { Fl_Button* o = new Fl_Button(510, 195, 70, 25, _("New"));
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_New1);
-      }
-      { Fl_Button* o = trace_read_delete = new Fl_Button(585, 195, 50, 25, _("Delete"));
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_trace_read_delete);
-        o->deactivate();
-      }
-      { Fl_Browser* o = trace_write_list = new Fl_Browser(160, 265, 475, 80, _("Trace Write Properties"));
-        o->type(2);
-        o->labelfont(1);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_trace_write_list);
-        o->align(FL_ALIGN_TOP_LEFT);
-      }
-      { Fl_Input* o = trace_write_input = new Fl_Input(200, 355, 305, 25, _("Value:"));
-        o->labelsize(12);
-        o->textsize(12);
-        o->callback((Fl_Callback*)cb_trace_write_input);
-        o->when(FL_WHEN_CHANGED);
-        o->deactivate();
-      }
-      { Fl_Button* o = new Fl_Button(510, 355, 70, 25, _("New"));
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_New2);
-      }
-      { Fl_Button* o = trace_write_delete = new Fl_Button(585, 355, 50, 25, _("Delete"));
-        o->labelsize(12);
-        o->callback((Fl_Callback*)cb_trace_write_delete);
-        o->deactivate();
+      { Fl_Group* o = new Fl_Group(160, 105, 475, 275);
+        { Fl_Group* o = new Fl_Group(160, 105, 475, 125);
+          { Fl_Box* o = new Fl_Box(210, 105, 295, 80);
+            Fl_Group::current()->resizable(o);
+          }
+          { Fl_Browser* o = trace_read_list = new Fl_Browser(160, 105, 475, 80, _("Trace Read Properties"));
+            o->type(2);
+            o->labelfont(1);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_trace_read_list);
+            o->align(FL_ALIGN_TOP_LEFT);
+          }
+          { Fl_Group* o = new Fl_Group(200, 195, 435, 25);
+            { Fl_Input* o = trace_read_input = new Fl_Input(200, 195, 305, 25, _("Value:"));
+              o->labelsize(12);
+              o->textsize(12);
+              o->callback((Fl_Callback*)cb_trace_read_input);
+              o->when(FL_WHEN_CHANGED);
+              o->deactivate();
+              Fl_Group::current()->resizable(o);
+            }
+            { Fl_Button* o = new Fl_Button(510, 195, 70, 25, _("New"));
+              o->labelsize(12);
+              o->callback((Fl_Callback*)cb_New1);
+            }
+            { Fl_Button* o = trace_read_delete = new Fl_Button(585, 195, 50, 25, _("Delete"));
+              o->labelsize(12);
+              o->callback((Fl_Callback*)cb_trace_read_delete);
+              o->deactivate();
+            }
+            o->end();
+          }
+          o->end();
+        }
+        { Fl_Group* o = new Fl_Group(160, 230, 475, 150);
+          { Fl_Box* o = new Fl_Box(200, 265, 305, 80);
+            Fl_Group::current()->resizable(o);
+          }
+          { Fl_Browser* o = trace_write_list = new Fl_Browser(160, 265, 475, 80, _("Trace Write Properties"));
+            o->type(2);
+            o->labelfont(1);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_trace_write_list);
+            o->align(FL_ALIGN_TOP_LEFT);
+          }
+          { Fl_Group* o = new Fl_Group(200, 355, 435, 25);
+            { Fl_Input* o = trace_write_input = new Fl_Input(200, 355, 305, 25, _("Value:"));
+              o->labelsize(12);
+              o->textsize(12);
+              o->callback((Fl_Callback*)cb_trace_write_input);
+              o->when(FL_WHEN_CHANGED);
+              o->deactivate();
+              Fl_Group::current()->resizable(o);
+            }
+            { Fl_Button* o = new Fl_Button(510, 355, 70, 25, _("New"));
+              o->labelsize(12);
+              o->callback((Fl_Callback*)cb_New2);
+            }
+            { Fl_Button* o = trace_write_delete = new Fl_Button(585, 355, 50, 25, _("Delete"));
+              o->labelsize(12);
+              o->callback((Fl_Callback*)cb_trace_write_delete);
+              o->deactivate();
+            }
+            o->end();
+          }
+          o->end();
+        }
+        o->end();
+        Fl_Group::current()->resizable(o);
       }
       o->end();
     }
@@ -1585,6 +1668,9 @@ Advanced::Advanced() {
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
+      { Fl_Box* o = new Fl_Box(220, 40, 275, 125);
+        Fl_Group::current()->resizable(o);
+      }
       { Fl_Browser* o = env_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labelsize(12);
@@ -1609,7 +1695,7 @@ Advanced::Advanced() {
       }
       o->end();
     }
-    { Fl_Group* o = page[13] = new Fl_Group(150, 0, 490, 430, _("Weather"));
+    { Fl_Group* o = page[13] = new Fl_Group(150, 0, 490, 440, _("Weather"));
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
@@ -1667,9 +1753,12 @@ Advanced::Advanced() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
+      { Fl_Box* o = new Fl_Box(615, 415, 25, 25);
+        Fl_Group::current()->resizable(o);
+      }
       o->end();
     }
-    { Fl_Group* o = page[14] = new Fl_Group(150, 0, 490, 430, _("Clouds"));
+    { Fl_Group* o = page[14] = new Fl_Group(150, 0, 490, 440, _("Clouds"));
       o->labelfont(1);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
       o->hide();
@@ -1715,6 +1804,9 @@ Advanced::Advanced() {
         o->textsize(12);
         o->callback((Fl_Callback*)cb_cloud_transition_);
         o->deactivate();
+      }
+      { Fl_Box* o = new Fl_Box(615, 415, 25, 25);
+        Fl_Group::current()->resizable(o);
       }
       o->end();
     }

@@ -8,8 +8,9 @@
 #define MAX_CLOUD_LAYERS 5
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Browser.H>
-#include <FL/Fl_Button.H>
+#include <FL/Fl_Box.H>
 #include <FL/Fl_Group.H>
+#include <FL/Fl_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Output.H>
