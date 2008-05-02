@@ -92,6 +92,7 @@ public:
     std::string get_selected_id() const;
     std::string get_selected_name() const;
     std::string get_selected_runway() const;
+    std::string get_selected_parking() const;
 
     /**
      * 
@@ -102,6 +103,11 @@ public:
      * 
      */
     void select_rwy( const std::string& id );
+
+    /**
+     * 
+     */
+    void select_parking( const std::string& id );
 
     /**
      * 
@@ -145,9 +151,18 @@ private:
 
     void show_runways( const apt_dat_t* apt );
 
+    void load_parking( const SGPath &path, apt_dat_t &data );
+    void show_parking( const apt_dat_t* apt );
+
+    static void cb_runways_(Fl_Widget* o, void* v);
+    static void cb_parking_(Fl_Widget* o, void* v);
+    void cb_runways(Fl_Widget* o);
+    void cb_parking(Fl_Widget* o);
+
 private:
     AirportTable* table_;
     Fl_Hold_Browser* runways_;
+    Fl_Hold_Browser* parking_;
     Fl_Input* id_;
     Fl_Input* name_;
     Fl_Button* refresh_;
@@ -200,6 +215,8 @@ private:
 
     Fl_Callback* refresh_cb_;
     void* refresh_cb_data_;
+
+    SGPath fg_root_;
 };
 
 #endif // AirportBrowser_h_included

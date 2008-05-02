@@ -72,6 +72,7 @@ public:
 private:
   AirportBrowser *airports_;
 public:
+  Fl_Group *carrier_group;
   Fl_Input *carrier_;
   Fl_Input *parkpos_;
 private:

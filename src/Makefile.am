@@ -28,6 +28,7 @@ fgrun_SOURCES = \
 	io.cxx \
 	fgfsrc.cxx \
 	logwin.cxx logwin.h \
+	parkingloader.cxx parkingloader.h \
 	settings.cxx \
 	util.cxx util.h \
 	$(platform_srcs)

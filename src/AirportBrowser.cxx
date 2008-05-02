@@ -31,6 +31,7 @@
 
 #include "AirportBrowser.h"
 #include "AirportTable.h"
+#include "parkingloader.h"
 #include "i18n.h"
 
 #include <FL/Fl_Button.H>
@@ -78,8 +79,18 @@ AirportBrowser::AirportBrowser( int X, int Y, int W, int H,
     g->end();
     g->resizable(name_);
 
-    runways_ = new Fl_Hold_Browser( X+tw+5, Y, 120, th, _("Runways") );
+    int rh = ( th - 30 ) / 2;
+    runways_ = new Fl_Hold_Browser( X+tw+5, Y, 120, rh, _("Runways") );
     runways_->align( FL_ALIGN_TOP );
+    runways_->callback( &AirportBrowser::cb_runways_ );
+
+    {   Fl_Group *o = new Fl_Group( X+tw+5, Y+rh, 120, th-rh );
+        parking_ = new Fl_Hold_Browser( X+tw+5, Y+rh+30, 120, th-rh-30, _("Parking") );
+        parking_->align( FL_ALIGN_TOP );
+        parking_->callback( &AirportBrowser::cb_parking_ );
+        o->end();
+        o->resizable( parking_ );
+    }
 
     refresh_ = new Fl_Button( X+tw+5, Y+th+5, 120, 25, _("Refresh") );
     refresh_->labelsize(12);
@@ -135,6 +146,7 @@ AirportBrowser::id_cb()
 
     const apt_dat_t* apt = table_->select_id( s );
     show_runways( apt );
+    show_parking( apt );
 }
 
 void
@@ -226,6 +238,13 @@ AirportBrowser::runways_idle_proc( )
                 apt.name_.erase(0, 4);
                 apt.name_ += " [S]";
             }
+
+            SGPath path = fg_root_;
+            path.append( "AI/Airports" );
+            path.append( apt.id_ );
+            path.append( "parking.xml" );
+            load_parking( path, apt );
+
             airports_.push_back( apt );
         }
         else if (type_num == 10)	// Now read in the runways and taxiways
@@ -379,6 +398,7 @@ AirportBrowser::browser_cb()
 {
     table_->browser_cb();
     show_runways( table_->get_selected() );
+    show_parking( table_->get_selected() );
 }
 
 string
@@ -402,11 +422,19 @@ AirportBrowser::get_selected_runway() const
     return n > 1 ? string( runways_->text(n) ) : string("");
 }
 
+string
+AirportBrowser::get_selected_parking() const
+{
+    int n = parking_->value();
+    return n > 0 ? string( parking_->text(n) ) : string("");
+}
+
 void
 AirportBrowser::select_id( const string& id )
 {
     const apt_dat_t* apt = table_->select_id( id.c_str() );
     show_runways( apt );
+    show_parking( apt );
 }
 
 void
@@ -417,21 +445,38 @@ AirportBrowser::select_rwy( const string& id )
         if ( id == runways_->text(i) )
         {
             runways_->select( i );
+            parking_->deselect();
             break;
         }
     }
 }
 
 void
-AirportBrowser::load_runways( const string& path, Fl_Callback* cb, void* v )
+AirportBrowser::select_parking( const string& id )
 {
+    for ( int i = 1; i < parking_->size(); ++i )
+    {
+        if ( id == parking_->text(i) )
+        {
+            parking_->select( i );
+            runways_->deselect();
+            break;
+        }
+    }
+}
+
+void
+AirportBrowser::load_runways( const string& fg_root, Fl_Callback* cb, void* v )
+{
+    this->fg_root_ = fg_root;
+
     runways_loaded_cb_ = cb;
     runways_loaded_cb_data_ = v;
 
     airports_.clear();
     airports_.reserve( 27000 );
 
-    gzf_ = gzopen( path.c_str(), "rb" );
+    gzf_ = gzopen( ( fg_root + "/Airports/apt.dat.gz" ).c_str(), "rb" );
     if (gzf_ == 0)
     {
         throw _("gzopen error");
@@ -633,4 +678,55 @@ bool
 AirportBrowser::loaded() const
 {
     return runways_loaded_ && airports_loaded_;
+}
+
+void
+AirportBrowser::load_parking( const SGPath &path, apt_dat_t &data )
+{
+    ParkingLoader visitor( data );
+    if ( path.exists() )
+    {
+        try {
+            readXML( path.str(), visitor );
+        } catch (const sg_exception &e) {
+            //cerr << "unable to read " << parkpath.str() << endl;
+        }
+    }
+}
+
+void
+AirportBrowser::show_parking( const apt_dat_t* apt )
+{
+    if (apt == 0)
+	return;
+
+    parking_->clear();
+    for ( std::set<std::string>::const_iterator ii = apt->parking_.begin(); ii != apt->parking_.end(); ++ii )
+    {
+	parking_->add( ii->c_str() );
+    }
+}
+
+void
+AirportBrowser::cb_runways_(Fl_Widget* o, void* v)
+{
+    static_cast<AirportBrowser*>( o->parent() )->cb_runways(o);
+}
+
+void
+AirportBrowser::cb_parking_(Fl_Widget* o, void* v)
+{
+    static_cast<AirportBrowser*>( o->parent()->parent() )->cb_parking(o);
+}
+
+void
+AirportBrowser::cb_runways(Fl_Widget* o)
+{
+    parking_->deselect();
+}
+
+void
+AirportBrowser::cb_parking(Fl_Widget* o)
+{
+    runways_->deselect();
 }

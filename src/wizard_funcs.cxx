@@ -160,7 +160,12 @@ Wizard::airports_cb()
 
   	if (prefs.get( "airport", buf, "", buflen-1) && buf[0] != 0)
 	    airports_->select_id( buf );
-  	if (prefs.get( "runway", buf, "", buflen-1) && buf[0] != 0)
+  	if (prefs.get( "carrier", buf, "", buflen-1) && buf[0] == 0 &&
+  	    prefs.get( "parkpos", buf, "", buflen-1) && buf[0] != 0)
+        {
+            airports_->select_parking( buf );
+        }
+        else if (prefs.get( "runway", buf, "", buflen-1) && buf[0] != 0)
             airports_->select_rwy( buf );
     }
     else
@@ -634,7 +639,10 @@ Wizard::next_cb()
 	prefs.set( "airport-name",
 		   airports_->get_selected_name().c_str() );
 	prefs.set( "carrier", carrier_->value() );
-	prefs.set( "parkpos", parkpos_->value() );
+        if ( carrier_->value() != string() )
+	    prefs.set( "parkpos", parkpos_->value() );
+        else
+            prefs.set( "parkpos", airports_->get_selected_parking().c_str() );
 
 	string rwy( airports_->get_selected_runway() );
 	if (rwy.empty())
@@ -668,7 +676,10 @@ Wizard::next_cb()
 	prefs.get( "carrier", buf, "", sizeof buf - 1 );
 	carrier_->value( buf );
 	prefs.get( "parkpos", buf, "", sizeof buf - 1 );
-	parkpos_->value( buf );
+        if ( carrier_->value() != string() )
+	    parkpos_->value( buf );
+        else
+            airports_->select_parking( buf );
 
 	// "Select location" page
 	if (!airports_->loaded())
@@ -1107,7 +1118,6 @@ Wizard::refresh_airports()
 //     win->cursor( FL_CURSOR_WAIT );
 
     SGPath path( fg_root_->value() );
-    path.append( "/Airports/apt.dat.gz" );
     airports_->load_runways( path.str(), airports_cb, this );
 }
 
@@ -1854,7 +1864,10 @@ Wizard::save_basic_options( Fl_Preferences &p )
     p.set( "airport-name",
 		airports_->get_selected_name().c_str() );
     p.set( "carrier", carrier_->value() );
-    p.set( "parkpos", parkpos_->value() );
+    if ( carrier_->value() != string() )
+	p.set( "parkpos", parkpos_->value() );
+    else
+        p.set( "parkpos", airports_->get_selected_parking().c_str() );
 
     string rwy( airports_->get_selected_runway() );
     if (rwy.empty())
@@ -2043,8 +2056,11 @@ Wizard::load_preferences_cb()
 
   	prefs_tmp.get( "carrier", buf, "", buflen-1);
         carrier_->value( buf );
-  	prefs_tmp.get( "parkpos", buf, "", buflen-1);
-        parkpos_->value( buf );
+	prefs_tmp.get( "parkpos", buf, "", sizeof buf - 1 );
+        if ( carrier_->value() != string() )
+	    parkpos_->value( buf );
+        else
+            airports_->select_parking( buf );
   	if (prefs_tmp.get( "runway", buf, "", buflen-1) && buf[0] != 0)
             airports_->select_rwy( buf );
 

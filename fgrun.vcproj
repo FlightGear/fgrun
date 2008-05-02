@@ -241,6 +241,9 @@
 				RelativePath=".\src\main.cxx">
 			</File>
 			<File
+				RelativePath=".\src\parkingloader.cxx">
+			</File>
+			<File
 				RelativePath="src\run_win32.cxx">
 			</File>
 			<File
@@ -285,6 +288,9 @@
 			</File>
 			<File
 				RelativePath="src\os_win32.h">
+			</File>
+			<File
+				RelativePath=".\src\parkingloader.h">
 			</File>
 			<File
 				RelativePath=".\resource.h">

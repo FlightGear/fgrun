@@ -476,7 +476,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[2] = new Fl_Group(0, 0, 800, 560, _("Select a location"));
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        o->hide();
         { AirportBrowser* o = airports_ = new AirportBrowser(5, 25, 790, 480);
           o->box(FL_NO_BOX);
           o->color(FL_BACKGROUND_COLOR);
@@ -489,13 +488,15 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->when(FL_WHEN_RELEASE);
           Fl_Group::current()->resizable(o);
         }
-        { Fl_Group* o = new Fl_Group(5, 510, 790, 45, _("Carrier Ops"));
+        { Fl_Group* o = carrier_group = new Fl_Group(5, 510, 790, 45, _("Carrier Ops"));
           o->box(FL_ENGRAVED_FRAME);
           o->labelfont(1);
           o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-          carrier_ = new Fl_Input(200, 525, 100, 25, _("Carrier : "));
-          parkpos_ = new Fl_Input(440, 525, 100, 25, _("Park pos :"));
-          { Fl_Box* o = new Fl_Box(660, 510, 135, 10);
+          carrier_ = new Fl_Input(200, 525, 175, 25, _("Carrier : "));
+          { Fl_Input* o = parkpos_ = new Fl_Input(540, 525, 175, 25, _("Park pos :"));
+            o->tooltip(_("Only valid if carrier is set. For airport parking, use the list above."));
+          }
+          { Fl_Box* o = new Fl_Box(720, 510, 75, 0);
             Fl_Group::current()->resizable(o);
           }
           o->end();
@@ -503,6 +504,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->end();
       }
       { Fl_Group* o = page[3] = new Fl_Group(0, 0, 800, 560);
+        o->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
