@@ -24,6 +24,7 @@
 #  include "config.h"
 #endif
 
+#include <string.h>
 #include <string>
 
 #include <FL/filename.H>

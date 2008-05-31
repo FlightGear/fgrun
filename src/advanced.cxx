@@ -5,6 +5,7 @@
 #include <config.h>
 #endif
 #include "advanced.h"
+#include <string.h>
 
 void Advanced::cb_page_list_i(Fl_Browser* o, void*) {
   if (o->value() > 0)

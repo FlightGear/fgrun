@@ -13,6 +13,9 @@ declblock {\#ifdef HAVE_CONFIG_H} {open after {\#endif}
 
 decl {\#include "advanced.h"} {} 
 
+decl {\#include <string.h>} {selected
+} 
+
 decl {\#include <FL/Fl_Preferences.H>} {public
 } 
 
@@ -871,7 +874,7 @@ else
               private xywh {330 365 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
             }
           }
-          Fl_Group generic_group {selected
+          Fl_Group generic_group {
             private xywh {165 365 250 25} hide
           } {
             Fl_Input io_generic_file {
