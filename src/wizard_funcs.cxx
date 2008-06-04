@@ -28,6 +28,7 @@
 #include <cstdio>
 #include <vector>
 #include <set>
+#include <map>
 #include <sstream>
 #include <string.h>
 #include <sys/stat.h>
