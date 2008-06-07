@@ -66,6 +66,7 @@
 using std::string;
 using std::vector;
 using std::set;
+using std::map;
 
 extern string def_fg_exe;
 extern string def_fg_root;
