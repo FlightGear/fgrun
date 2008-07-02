@@ -6,4 +6,5 @@ cd po
 ..\..\gettext\bin\msgmerge -U de.po fgrun.pot
 ..\..\gettext\bin\msgmerge -U it.po fgrun.pot
 ..\..\gettext\bin\msgmerge -U pl.po fgrun.pot
+..\..\gettext\bin\msgmerge -U es.po fgrun.pot
 cd ..
