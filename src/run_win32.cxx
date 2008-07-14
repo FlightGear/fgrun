@@ -85,7 +85,11 @@ Wizard::run_fgfs(const string &args)
     //SECURITY_ATTRIBUTES procAttrs;
     //SECURITY_ATTRIBUTES threadAttrs;
     BOOL inheritHandles = TRUE;
+#ifdef MINIDUMP
     DWORD creationFlags = DEBUG_PROCESS | DEBUG_ONLY_THIS_PROCESS;
+#else
+    DWORD creationFlags = 0;
+#endif
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
     int exit_code = 0;
@@ -124,6 +128,7 @@ Wizard::run_fgfs(const string &args)
     }
     else
     {
+#ifdef MINIDUMP
         DWORD dwContinueStatus = DBG_CONTINUE; // exception continuation 
         bool end = false, dump = false;
 
@@ -216,6 +221,12 @@ Wizard::run_fgfs(const string &args)
             // Resume executing the thread that reported the debugging event. 
             ContinueDebugEvent( DebugEv.dwProcessId, DebugEv.dwThreadId, dwContinueStatus );
         }
+#else
+        WaitForSingleObject( pi.hProcess, INFINITE );
+
+        DWORD exitCode;
+        GetExitCodeProcess( pi.hProcess, &exitCode );
+#endif
 
         // Close process and thread handles. 
         CloseHandle( pi.hProcess );
