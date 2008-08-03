@@ -24,7 +24,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.1.0\&quot; /DVERSION=\&quot;1.1.0\&quot;"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;&quot;..\zlib-1.2.3&quot;;..\gettext\include;..\install\msvc71\OpenSceneGraph\include"
+				AdditionalIncludeDirectories="&quot;..\..\..\fltk-1.1.7&quot;;..\..\..;..\..\..\SimGear;..\..\..\zlib;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;;&quot;..\..\..\zlib-1.2.3&quot;;..\..\..\gettext\include;..\..\..\install\msvc71\OpenSceneGraph\include"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -42,7 +42,7 @@
 				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib pthreadVC2d.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib OpenThreadsd.lib dbghelp.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;..\SimGear\Debug;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\lib;..\install\msvc71\OpenSceneGraph\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\fltk-1.1.7\lib&quot;;..\..\..\SimGear\Debug;&quot;..\..\..\zlib-1.2.3&quot;;..\..\..\plib;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;;..\..\..\gettext\lib;..\..\..\install\msvc71\OpenSceneGraph\lib"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\Debug/fgrun.pdb"
 				SubSystem="1"/>
@@ -86,7 +86,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.1.0\&quot; /DVERSION=\&quot;1.1.0\&quot;"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..\SimGear;&quot;..\zlib-1.2.3&quot;;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\include;..;..\install\msvc71\OpenSceneGraph\include"
+				AdditionalIncludeDirectories="&quot;..\..\..\fltk-1.1.7&quot;;..\..\..\SimGear;&quot;..\..\..\zlib-1.2.3&quot;;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;;..\..\..\gettext\include;..\..\..;..\..\..\install\msvc71\OpenSceneGraph\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
@@ -104,7 +104,7 @@
 				AdditionalDependencies="fltk.lib fltkgl.lib ws2_32.lib comctl32.lib zlib.lib sg.lib ul.lib opengl32.lib winmm.lib pthreadVC2.lib osg.lib osgDB.lib osgGA.lib osgViewer.lib osgUtil.lib OpenThreads.lib intl.lib dbghelp.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;&quot;..\zlib-1.2.3&quot;;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\install\msvc71\OpenSceneGraph\lib;..\gettext\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\fltk-1.1.7\lib&quot;;&quot;..\..\..\zlib-1.2.3&quot;;..\..\..\plib;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;;..\..\..\install\msvc71\OpenSceneGraph\lib;..\..\..\gettext\lib"
 				ProgramDatabaseFile=".\Release/fgrun.pdb"
 				SubSystem="1"/>
 			<Tool
@@ -147,7 +147,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.1.0\&quot; /DVERSION=\&quot;1.1.0\&quot;"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;..\fltk-1.1.7&quot;;..;..\SimGear;..\zlib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\include;..\OpenSceneGraph\include"
+				AdditionalIncludeDirectories="&quot;..\..\..\fltk-1.1.7&quot;;..\..\..;..\..\..\SimGear;..\..\..\zlib;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;;..\..\..\gettext\include;..\..\..\OpenSceneGraph\include"
 				PreprocessorDefinitions="WIN32,NDEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -166,7 +166,7 @@
 				AdditionalDependencies="fltk-nd.lib fltkgl-nd.lib ws2_32.lib comctl32.lib zlib-nd.lib ssg-nd.lib sg-nd.lib ul-nd.lib opengl32.lib simgear-nd.lib winmm.lib pthreadVC2-nd.lib intl.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;..\fltk-1.1.7\lib&quot;;&quot;..\SimGear.plib\release-nd&quot;;..\zlib;..\plib;&quot;..\pthreads-w32-2-7-0-release&quot;;..\gettext\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\fltk-1.1.7\lib&quot;;&quot;..\..\..\SimGear.plib\release-nd&quot;;..\..\..\zlib;..\plib;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;;..\..\..\gettext\lib"
 				ProgramDatabaseFile=".\Release/fgrun.pdb"
 				SubSystem="1"/>
 			<Tool
@@ -205,114 +205,114 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
-				RelativePath="src\advanced.cxx">
+				RelativePath="..\..\src\advanced.cxx">
 			</File>
 			<File
-				RelativePath="src\advanced_funcs.cxx">
+				RelativePath="..\..\src\advanced_funcs.cxx">
 			</File>
 			<File
-				RelativePath="src\AirportBrowser.cxx">
+				RelativePath="..\..\src\AirportBrowser.cxx">
 			</File>
 			<File
-				RelativePath="src\AirportTable.cxx">
+				RelativePath="..\..\src\AirportTable.cxx">
 			</File>
 			<File
-				RelativePath=".\src\fgfsrc.cxx">
+				RelativePath="..\..\src\fgfsrc.cxx">
 			</File>
 			<File
-				RelativePath="src\Fl_Heading_Dial.cxx">
+				RelativePath="..\..\src\Fl_Heading_Dial.cxx">
 			</File>
 			<File
-				RelativePath=".\src\Fl_OSG.cxx">
+				RelativePath="..\..\src\Fl_OSG.cxx">
 			</File>
 			<File
-				RelativePath="src\Fl_Table.cxx">
+				RelativePath="..\..\src\Fl_Table.cxx">
 			</File>
 			<File
-				RelativePath="src\Fl_Table_Row.cxx">
+				RelativePath="..\..\src\Fl_Table_Row.cxx">
 			</File>
 			<File
-				RelativePath=".\src\io.cxx">
+				RelativePath="..\..\src\io.cxx">
 			</File>
 			<File
-				RelativePath="src\logwin.cxx">
+				RelativePath="..\..\src\logwin.cxx">
 			</File>
 			<File
-				RelativePath=".\src\main.cxx">
+				RelativePath="..\..\src\main.cxx">
 			</File>
 			<File
-				RelativePath=".\src\parkingloader.cxx">
+				RelativePath="..\..\src\parkingloader.cxx">
 			</File>
 			<File
-				RelativePath="src\run_win32.cxx">
+				RelativePath="..\..\src\run_win32.cxx">
 			</File>
 			<File
-				RelativePath=".\src\settings.cxx">
+				RelativePath="..\..\src\settings.cxx">
 			</File>
 			<File
-				RelativePath=".\src\util.cxx">
+				RelativePath="..\..\src\util.cxx">
 			</File>
 			<File
-				RelativePath="src\wizard.cxx">
+				RelativePath="..\..\src\wizard.cxx">
 			</File>
 			<File
-				RelativePath="src\wizard_funcs.cxx">
+				RelativePath="..\..\src\wizard_funcs.cxx">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl">
 			<File
-				RelativePath="src\advanced.h">
+				RelativePath="..\..\src\advanced.h">
 			</File>
 			<File
-				RelativePath="src\AirportBrowser.h">
+				RelativePath="..\..\src\AirportBrowser.h">
 			</File>
 			<File
-				RelativePath="src\AirportTable.h">
+				RelativePath="..\..\src\AirportTable.h">
 			</File>
 			<File
-				RelativePath=".\src\apt_dat.h">
+				RelativePath="..\..\src\apt_dat.h">
 			</File>
 			<File
-				RelativePath="src\Fl_Heading_Dial.H">
+				RelativePath="..\..\src\Fl_Heading_Dial.H">
 			</File>
 			<File
-				RelativePath=".\src\Fl_OSG.h">
+				RelativePath="..\..\src\Fl_OSG.h">
 			</File>
 			<File
-				RelativePath=".\src\i18n.h">
+				RelativePath="..\..\src\i18n.h">
 			</File>
 			<File
-				RelativePath="src\logwin.h">
+				RelativePath="..\..\src\logwin.h">
 			</File>
 			<File
-				RelativePath="src\os_win32.h">
+				RelativePath="..\..\src\os_win32.h">
 			</File>
 			<File
-				RelativePath=".\src\parkingloader.h">
+				RelativePath="..\..\src\parkingloader.h">
 			</File>
 			<File
-				RelativePath=".\resource.h">
+				RelativePath="..\..\resource.h">
 			</File>
 			<File
-				RelativePath=".\src\util.h">
+				RelativePath="..\..\src\util.h">
 			</File>
 			<File
-				RelativePath="src\wizard.h">
+				RelativePath="..\..\src\wizard.h">
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
 			<File
-				RelativePath=".\po\de.po">
+				RelativePath="..\..\po\de.po">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating german translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -321,7 +321,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating german translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -330,19 +330,19 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating german translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\po\es.po">
+				RelativePath="..\..\po\es.po">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating spanish translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -351,7 +351,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating spanish translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -360,25 +360,25 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating spanish translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\fgrun.rc">
+				RelativePath="..\..\fgrun.rc">
 			</File>
 			<File
-				RelativePath=".\flightgear.ico">
+				RelativePath="..\..\flightgear.ico">
 			</File>
 			<File
-				RelativePath=".\po\fr.po">
+				RelativePath="..\..\po\fr.po">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating french translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -387,7 +387,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating french translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -396,19 +396,19 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating french translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\po\it.po">
+				RelativePath="..\..\po\it.po">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating italian translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -417,7 +417,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating italian translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -426,19 +426,19 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating italian translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\po\nl.po">
+				RelativePath="..\..\po\nl.po">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating dutch translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -447,7 +447,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating dutch translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -456,19 +456,19 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating dutch translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\po\pl.po">
+				RelativePath="..\..\po\pl.po">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating polish translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -477,7 +477,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating polish translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
@@ -486,19 +486,19 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating polish translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\po\pt.po">
+				RelativePath="..\..\po\pt.po">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating portugese translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						AdditionalDependencies=""
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
@@ -508,7 +508,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating portugese translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						AdditionalDependencies=""
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>
@@ -518,7 +518,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating portugese translation"
-						CommandLine="..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
+						CommandLine="..\..\..\gettext\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)
 "
 						AdditionalDependencies=""
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"/>

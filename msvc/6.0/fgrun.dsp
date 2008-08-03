@@ -93,59 +93,59 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=.\src\aircraft.cxx
+SOURCE=..\..\src\aircraft.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\airport.cxx
+SOURCE=..\..\src\airport.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\AirportBrowser.cxx
+SOURCE=..\..\src\AirportBrowser.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\airportdb.cxx
+SOURCE=..\..\src\airportdb.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\fgfsrc.cxx
+SOURCE=..\..\src\fgfsrc.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\FGRun_Win32.cxx
+SOURCE=..\..\src\FGRun_Win32.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\Fl_Table.cxx
+SOURCE=..\..\src\Fl_Table.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\Fl_Table_Row.cxx
+SOURCE=..\..\src\Fl_Table_Row.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\init.cxx
+SOURCE=..\..\src\init.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\io.cxx
+SOURCE=..\..\src\io.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\main.cxx
+SOURCE=..\..\src\main.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\settings.cxx
+SOURCE=..\..\src\settings.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\UserInterface.cxx
+SOURCE=..\..\src\UserInterface.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\util.cxx
+SOURCE=..\..\src\util.cxx
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -153,11 +153,11 @@ SOURCE=.\src\util.cxx
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=.\src\FGRun_Win32.h
+SOURCE=..\..\src\FGRun_Win32.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\UserInterface.h
+SOURCE=..\..\src\UserInterface.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
