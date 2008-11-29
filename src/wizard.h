@@ -134,6 +134,9 @@ private:
   Fl_Check_Button *auto_coordination;
   void cb_auto_coordination_i(Fl_Check_Button*, void*);
   static void cb_auto_coordination(Fl_Check_Button*, void*);
+  Fl_Choice *season;
+  void cb_season_i(Fl_Choice*, void*);
+  static void cb_season(Fl_Choice*, void*);
   Fl_Browser *scenarii;
   void cb_scenarii_i(Fl_Browser*, void*);
   static void cb_scenarii(Fl_Browser*, void*);
@@ -240,6 +243,7 @@ private:
   void ai_models_cb();
   void time_of_day_cb();
   void time_of_day_value_cb();
+  void season_cb();
   void real_weather_fetch_cb();
   void auto_coordination_cb();
   void scenarii_cb();
@@ -264,6 +268,7 @@ private:
   void exec_launch_window();
   Advanced *adv;
   static Fl_Menu_Item menu_time_of_day_value[];
+  static Fl_Menu_Item menu_season[];
   Fl_Double_Window* make_crash_window();
   Fl_Double_Window *crash_window;
   Fl_Box *file_box;

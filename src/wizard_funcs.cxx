@@ -80,6 +80,12 @@ Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+Fl_Menu_Item Wizard::menu_season[] = {
+ {N_("summer"), 0,  0, (void*)"summer", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("winter"), 0,  0, (void*)"winter", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 // This array is not used in the code but is there to put possible status in the translation file
 // Put here all possible variations
 static const char *aircraft_status_[] = {
@@ -291,6 +297,12 @@ Wizard::init( bool fullscreen )
         menu_time_of_day_value[i].text = _( menu_time_of_day_value[i].text );
     }
     time_of_day_value->menu( menu_time_of_day_value );
+
+    for ( int i = 0; menu_season[i].text != 0; ++i )
+    {
+        menu_season[i].text = _( menu_season[i].text );
+    }
+    season->menu( menu_season );
 
     static const int npages = 5;
 
@@ -1256,6 +1268,13 @@ Wizard::time_of_day_value_cb()
 }
 
 void
+Wizard::season_cb()
+{
+    prefs.set("season", (const char *)season->mvalue()->user_data_);
+    update_options();
+}
+
+void
 Wizard::real_weather_fetch_cb()
 {
     prefs.set("fetch_real_weather", real_weather_fetch->value());
@@ -1575,6 +1594,8 @@ Wizard::update_basic_options( Fl_Preferences &p )
     time_of_day->value(iVal);
     p.get("time_of_day_value", buf, "noon", buflen-1);
     set_choice( time_of_day_value, buf );
+    p.get("season", buf, "summer", buflen-1);
+    set_choice( season, buf );
     p.get("fetch_real_weather", iVal, 0);
     real_weather_fetch->value(iVal);
     p.get("auto_coordination", iVal, 0);
@@ -1916,6 +1937,7 @@ Wizard::save_basic_options( Fl_Preferences &p )
     p.set("time_of_day", v);
 
     p.set("time_of_day_value", (const char *)time_of_day_value->mvalue()->user_data_);
+    p.set("season", (const char *)season->mvalue()->user_data_);
     p.set("fetch_real_weather", real_weather_fetch->value());
     p.set("auto_coordination", auto_coordination->value());
 

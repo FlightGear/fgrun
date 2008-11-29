@@ -314,6 +314,9 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
 	     buf[0] != 0)
 	os << pfx << "--timeofday=" << buf;
 
+    if ( prefs.get( "season", buf, "", buflen-1 ) && strcmp(buf,"summer")!=0 )
+	os << pfx << "--season=" << buf;
+
     // Network.
     if (prefs.get( "httpd", iVal, 0 ) && iVal)
 	os << pfx << "--httpd=" << iVal;

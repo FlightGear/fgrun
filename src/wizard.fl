@@ -166,8 +166,8 @@ class Wizard {open
           }
         }
         Fl_Group {page[2]} {
-          label {Select a location} open
-          private xywh {0 0 800 560} labelfont 1 align 21
+          label {Select a location}
+          private xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
           Fl_Box airports_ {
             private xywh {5 25 790 480} resizable
@@ -183,7 +183,7 @@ class Wizard {open
               xywh {200 525 175 25}
             }
             Fl_Input parkpos_ {
-              label {Park pos :} selected
+              label {Park pos :}
               tooltip {Only valid if carrier is set. For airport parking, use the list above.} xywh {540 525 175 25}
             }
             Fl_Box {} {
@@ -192,7 +192,7 @@ class Wizard {open
           }
         }
         Fl_Group {page[3]} {
-          private xywh {0 0 800 560} hide
+          private xywh {0 0 800 560}
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -220,13 +220,9 @@ class Wizard {open
           } {
             Fl_Choice resolution {
               label {Resolution :}
-              callback {resolution_cb();} open
+              callback {resolution_cb();}
               private tooltip {Window geometry, WxH} xywh {100 30 125 25} down_box BORDER_BOX
             } {
-              MenuItem {} {
-                label 640x480
-                private xywh {0 0 100 20}
-              }
               MenuItem {} {
                 label 800x600
                 private xywh {0 0 100 20}
@@ -241,6 +237,18 @@ class Wizard {open
               }
               MenuItem {} {
                 label 1600x1200
+                private xywh {0 0 100 20}
+              }
+              MenuItem {} {
+                label 1280x800
+                private xywh {0 0 100 20}
+              }
+              MenuItem {} {
+                label 1680x1050
+                private xywh {0 0 100 20}
+              }
+              MenuItem {} {
+                label 1920x1200
                 private xywh {0 0 100 20}
               }
             }
@@ -334,15 +342,20 @@ class Wizard {open
               Fl_Check_Button real_weather_fetch {
                 label {Real weather fetch}
                 callback {real_weather_fetch_cb();}
-                private xywh {180 160 160 25} down_box DOWN_BOX
+                private xywh {180 185 160 25} down_box DOWN_BOX
               }
               Fl_Check_Button auto_coordination {
                 label {Auto-coordination}
                 callback {auto_coordination_cb();}
-                private xywh {180 185 170 25} down_box DOWN_BOX
+                private xywh {180 210 170 25} down_box DOWN_BOX
               }
+              Fl_Choice season {
+                label {Season :}
+                callback {season_cb();} open
+                private xywh {345 160 120 25} down_box BORDER_BOX
+              } {}
               Fl_Box {} {
-                private xywh {445 180 20 10} resizable
+                private xywh {445 205 20 10} resizable
               }
             }
             Fl_Group {} {
@@ -517,6 +530,7 @@ class Wizard {open
   decl {void ai_models_cb();} {}
   decl {void time_of_day_cb();} {}
   decl {void time_of_day_value_cb();} {}
+  decl {void season_cb();} {}
   decl {void real_weather_fetch_cb();} {}
   decl {void auto_coordination_cb();} {}
   decl {void scenarii_cb();} {}
@@ -563,6 +577,8 @@ class Wizard {open
   decl {void exec_launch_window();} {}
   decl {Advanced *adv;} {}
   decl {static Fl_Menu_Item menu_time_of_day_value[];} {}
+  decl {static Fl_Menu_Item menu_season[];} {selected
+  }
   Function {make_crash_window()} {open private
   } {
     Fl_Window crash_window {

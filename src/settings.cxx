@@ -165,6 +165,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("start-date-lat-value", start_date_gmt_value->value());
     prefs.set("time_of_day", time_of_day->value());
     prefs.set("time_of_day_value", (const char *)time_of_day_value->mvalue()->user_data());
+//    prefs.set("season", (const char *)season->mvalue()->user_data());
 
     // Network options.
     prefs.set("httpd", httpd->value() ? int(httpd_port->value()) : 0);
@@ -457,7 +458,9 @@ Advanced::load_settings( Fl_Preferences& prefs )
     if (iVal) time_of_day->setonly();
     prefs.get( "time_of_day_value", buf, "dawn", buflen-1 );
     set_choice( time_of_day_value, buf );
-
+/*    prefs.get( "season", buf, "summer", buflen-1 );
+    set_choice( season, buf );
+*/
     prefs.get( "httpd", iVal, 0 );
     if (iVal)
     {
@@ -673,6 +676,7 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("start-date-lat-value" );
     prefs.deleteEntry("time_of_day" );
     prefs.deleteEntry("time_of_day_value" );
+    prefs.deleteEntry("season" );
 
     // Network options.
     prefs.deleteEntry("httpd" );

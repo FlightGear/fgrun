@@ -106,11 +106,13 @@ void Wizard::cb_resolution(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item Wizard::menu_resolution[] = {
- {_("640x480"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {_("800x600"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {_("1024x768"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {_("1280x1024"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {_("1600x1200"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {_("1280x800"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {_("1680x1050"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {_("1920x1200"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -224,6 +226,13 @@ void Wizard::cb_auto_coordination_i(Fl_Check_Button*, void*) {
 }
 void Wizard::cb_auto_coordination(Fl_Check_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_auto_coordination_i(o,v);
+}
+
+void Wizard::cb_season_i(Fl_Choice*, void*) {
+  season_cb();
+}
+void Wizard::cb_season(Fl_Choice* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_season_i(o,v);
 }
 
 void Wizard::cb_scenarii_i(Fl_Browser*, void*) {
@@ -476,6 +485,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[2] = new Fl_Group(0, 0, 800, 560, _("Select a location"));
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        o->hide();
         { AirportBrowser* o = airports_ = new AirportBrowser(5, 25, 790, 480);
           o->box(FL_NO_BOX);
           o->color(FL_BACKGROUND_COLOR);
@@ -504,7 +514,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->end();
       }
       { Fl_Group* o = page[3] = new Fl_Group(0, 0, 800, 560);
-        o->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
@@ -601,15 +610,19 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
               o->down_box(FL_BORDER_BOX);
               o->callback((Fl_Callback*)cb_time_of_day_value);
             }
-            { Fl_Check_Button* o = real_weather_fetch = new Fl_Check_Button(180, 160, 160, 25, _("Real weather fetch"));
+            { Fl_Check_Button* o = real_weather_fetch = new Fl_Check_Button(180, 185, 160, 25, _("Real weather fetch"));
               o->down_box(FL_DOWN_BOX);
               o->callback((Fl_Callback*)cb_real_weather_fetch);
             }
-            { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(180, 185, 170, 25, _("Auto-coordination"));
+            { Fl_Check_Button* o = auto_coordination = new Fl_Check_Button(180, 210, 170, 25, _("Auto-coordination"));
               o->down_box(FL_DOWN_BOX);
               o->callback((Fl_Callback*)cb_auto_coordination);
             }
-            { Fl_Box* o = new Fl_Box(445, 180, 20, 10);
+            { Fl_Choice* o = season = new Fl_Choice(345, 160, 120, 25, _("Season :"));
+              o->down_box(FL_BORDER_BOX);
+              o->callback((Fl_Callback*)cb_season);
+            }
+            { Fl_Box* o = new Fl_Box(445, 205, 20, 10);
               Fl_Group::current()->resizable(o);
             }
             o->end();
