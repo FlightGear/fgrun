@@ -119,7 +119,7 @@ main( int argc, char* argv[] )
     registry->setOptions(options);
 
     // Link with the ModelRegistry class to install the AC replacement loader
-    simgear::ModelRegistry::getInstance();
+    simgear::ModelRegistry::instance();
 
     Fl::lock(); // initialize multithreading
 
