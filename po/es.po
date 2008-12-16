@@ -1035,19 +1035,16 @@ msgid "1600x1200"
 msgstr "1600x1200"
 
 #: src/wizard.cxx:113
-#, fuzzy
 msgid "1280x800"
-msgstr "1280x1024"
+msgstr "1280x800"
 
 #: src/wizard.cxx:114
-#, fuzzy
 msgid "1680x1050"
-msgstr "1600x1200"
+msgstr "1680x1050"
 
 #: src/wizard.cxx:115
-#, fuzzy
 msgid "1920x1200"
-msgstr "1600x1200"
+msgstr "1920x1200"
 
 #: src/wizard.cxx:352
 msgid "FlightGear Wizard"

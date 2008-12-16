@@ -404,9 +404,8 @@ msgid "Enable AI traffic"
 msgstr "Computergesteuerter Verkehr An"
 
 #: src/advanced.cxx:853
-#, fuzzy
 msgid "Random Trees"
-msgstr "Zufällige Objekte"
+msgstr "3D-Wälder darstellen"
 
 #: src/advanced.cxx:861 src/advanced_funcs.cxx:194
 msgid "Flight Model"
@@ -1177,9 +1176,8 @@ msgid "Random objects"
 msgstr "Zufällige Objekte"
 
 #: src/wizard.cxx:597
-#, fuzzy
 msgid "Random trees"
-msgstr "Zufällige Objekte"
+msgstr "3D-Wälder darstellen"
 
 #: src/wizard.cxx:601
 msgid "AI models"
@@ -1286,9 +1284,8 @@ msgid "To change aircraft, exit FlightGear and return to this launcher"
 msgstr "Um das Flugzeug zu wechseln, FG beenden und hierhin zurückkehren"
 
 #: src/wizard.cxx:773
-#, fuzzy
 msgid "Flightgear crashed..."
-msgstr "FlightGear läuft..."
+msgstr "FlightGear abgestürzt..."
 
 #: src/wizard.cxx:776
 msgid "Flightgear encountered an unexpected failure"
@@ -1477,9 +1474,8 @@ msgid "Overwrite"
 msgstr "Überschreiben"
 
 #: src/wizard_funcs.cxx:2124
-#, fuzzy
 msgid "Don't overwrite"
-msgstr "Überschreiben"
+msgstr "Nicht Überschreiben"
 
 #: src/advanced_funcs.cxx:113
 msgid "bulk"
@@ -1640,7 +1636,3 @@ msgstr ""
 " --fg-scenery=<DIR>\n"
 " -f, --fullscreen\n"
 "%s"
-
-#, fuzzy
-#~ msgid "Send"
-#~ msgstr "Farbübergänge"
