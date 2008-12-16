@@ -3,6 +3,7 @@
 # Copyright (C) 2008 Frederic Bouvier
 # This file is distributed under the same license as the fgrun package.
 # Adrian <adrian.sprick@arcor.de>, 2008.
+#HHS <Heiko.H.Schulz@gmx.net>, 2008
 #
 msgid ""
 msgstr ""
@@ -252,7 +253,7 @@ msgstr "Flugzeug:"
 
 #: src/advanced.cxx:737 src/wizard.cxx:589 src/advanced_funcs.cxx:193
 msgid "Features"
-msgstr ""
+msgstr "Funktionen"
 
 #: src/advanced.cxx:742
 msgid "Game Mode"
@@ -264,11 +265,11 @@ msgstr "Vollbildmodus An"
 
 #: src/advanced.cxx:747
 msgid "Splash Screen"
-msgstr ""
+msgstr "Startbild"
 
 #: src/advanced.cxx:748
 msgid "Display splash screen at startup"
-msgstr "Splash Screen bei Programmstart anzeigen"
+msgstr "Startbild bei Programmstart anzeigen"
 
 #: src/advanced.cxx:753
 msgid "Intro Music"
@@ -288,11 +289,11 @@ msgstr "Extra-Mauszeiger An"
 
 #: src/advanced.cxx:764
 msgid "Random Objects"
-msgstr "Zufällige Objekte"
+msgstr "automatisch generierte Objekte"
 
 #: src/advanced.cxx:765
 msgid "Enable random scenery objects"
-msgstr "Zufällige Scenery-Objekte An"
+msgstr "automatisch generierte Scenery-Objekte An"
 
 #: src/advanced.cxx:769
 msgid "Panel"
@@ -368,11 +369,11 @@ msgstr "3D-HUD An"
 
 #: src/advanced.cxx:818 src/wizard.cxx:558
 msgid "Specular highlight"
-msgstr "Leuchtreflektionen"
+msgstr "Glanz"
 
 #: src/advanced.cxx:819
 msgid "Enable specular reflections on textured objects"
-msgstr "Leuchtreflektionen auf texturierten Objekten An"
+msgstr "Glanz auf texturierten Objekten An"
 
 #: src/advanced.cxx:823
 msgid "Failures"
@@ -577,7 +578,7 @@ msgstr "Steigrate:"
 
 #: src/advanced.cxx:1044 src/advanced_funcs.cxx:197
 msgid "Rendering"
-msgstr "Renderung"
+msgstr "Rendering"
 
 #: src/advanced.cxx:1049 src/advanced.cxx:1762 src/advanced_funcs.cxx:206
 msgid "Clouds"
@@ -593,7 +594,7 @@ msgstr "3D-Wolken"
 
 #: src/advanced.cxx:1056
 msgid "Enable 3D (volumetric) cloud layers"
-msgstr "3D-Wolken (ausgedehnt) An"
+msgstr "3D-Wolken (volumetrisch) An"
 
 #: src/advanced.cxx:1060
 msgid "Full Screen"
@@ -710,11 +711,11 @@ msgstr "Winkel des Gesichtsfeldes"
 
 #: src/advanced.cxx:1165
 msgid "Texture filtering:"
-msgstr ""
+msgstr "Textur-Filterung"
 
 #: src/advanced.cxx:1166
 msgid "Set the maximum degree of anisotropy in texture filtering"
-msgstr ""
+msgstr "Maximaler Grad der Anisotropie der Textur-Filterung"
 
 #: src/advanced.cxx:1176 src/advanced_funcs.cxx:198
 msgid "Time"
@@ -889,7 +890,7 @@ msgstr ""
 
 #: src/advanced.cxx:1489
 msgid "Set the NAV1 radio frequency, optionally preceded by a radial"
-msgstr "Funkfrequenz von NAV1, vorangestelltes Radial ist optional"
+msgstr "Funkfrequenz von NAV1, voreingestelltes Radial ist optional"
 
 #: src/advanced.cxx:1493
 msgid "Nav2:"
@@ -989,7 +990,7 @@ msgstr "Wolkendecke:"
 
 #: src/advanced.cxx:1749
 msgid "FT_ASL[:THICKNESS_FT]"
-msgstr ""
+msgstr "Fuß über Meereshöhe"
 
 #: src/advanced.cxx:1753
 msgid "Fetch real weather"
@@ -1125,7 +1126,7 @@ msgstr "Parkposition :"
 
 #: src/wizard.cxx:507
 msgid "Only valid if carrier is set. For airport parking, use the list above."
-msgstr ""
+msgstr "Funktioniert nur, wenn der Flugzeugträger gewählt ist. Für Flughafen-Parkpositionen benutze die Liste darüber"
 
 #: src/wizard.cxx:518
 msgid "Advanced..."
@@ -1157,15 +1158,15 @@ msgstr "Vorsicht, kann die Framerate stark verringern"
 
 #: src/wizard.cxx:562
 msgid "Framerate limiter :"
-msgstr ""
+msgstr "Bildfrequenzbegrenzer"
 
 #: src/wizard.cxx:563
 msgid "Too much framerate hurts the smoothness of the simulation"
-msgstr ""
+msgstr "Zu hohe Bildfrequenz beeinträchtigt eine ruhige Simulation"
 
 #: src/wizard.cxx:576
 msgid "3D clouds (experimental)"
-msgstr "3D-Wolken (experimentell)"
+msgstr "3D-Wolken "
 
 #: src/wizard.cxx:580
 msgid "bpp :"
@@ -1177,7 +1178,7 @@ msgstr "Zufällige Objekte"
 
 #: src/wizard.cxx:597
 msgid "Random trees"
-msgstr "3D-Wälder darstellen"
+msgstr "automatisch generierte Bäume"
 
 #: src/wizard.cxx:601
 msgid "AI models"
@@ -1193,11 +1194,11 @@ msgstr "Echtes Wetter"
 
 #: src/wizard.cxx:621
 msgid "Season :"
-msgstr ""
+msgstr "Jahreszeit"
 
 #: src/wizard.cxx:630
 msgid "Scenarios"
-msgstr ""
+msgstr "Szenario"
 
 #: src/wizard.cxx:651
 msgid "Atlas"
@@ -1261,11 +1262,11 @@ msgstr "Standard"
 
 #: src/wizard.cxx:732
 msgid "Save As..."
-msgstr ""
+msgstr "Speichern als"
 
 #: src/wizard.cxx:736
 msgid "Load"
-msgstr ""
+msgstr "Laden"
 
 #: src/wizard.cxx:748
 msgid "FlightGear running..."
@@ -1285,23 +1286,23 @@ msgstr "Um das Flugzeug zu wechseln, FG beenden und hierhin zurückkehren"
 
 #: src/wizard.cxx:773
 msgid "Flightgear crashed..."
-msgstr "FlightGear abgestürzt..."
+msgstr "FlightGear ist abgestürzt..."
 
 #: src/wizard.cxx:776
 msgid "Flightgear encountered an unexpected failure"
-msgstr ""
+msgstr "FlightGear ist auf eine unerwartete Fehlfunktion gestoßen"
 
 #: src/wizard.cxx:780
 msgid "We are sorry for this inconvenience."
-msgstr ""
+msgstr "Wir entschuldigen uns für die Unanehmlichkeit"
 
 #: src/wizard.cxx:790
 msgid "An error report has been generated in the file below :"
-msgstr ""
+msgstr "Ein Fehlerbericht wurde in der Datei darunter erstellt"
 
 #: src/wizard.cxx:794
 msgid "Please send this error report to the Flightgear development team"
-msgstr ""
+msgstr "Bitte sende diesen Fehlerbericht an das FlightGear-Entwicklerteam"
 
 #: src/wizard_funcs.cxx:76 src/advanced_funcs.cxx:105
 msgid "noon"
@@ -1417,7 +1418,7 @@ msgstr "Starten"
 
 #: src/wizard_funcs.cxx:734
 msgid "About to reset current parameters"
-msgstr "Resette Parameter"
+msgstr Starte mit den aktuellen Parameter neu "
 
 #: src/wizard_funcs.cxx:734 src/fgfsrc.cxx:61
 msgid "Abort"
@@ -1425,7 +1426,7 @@ msgstr "Abbruch"
 
 #: src/wizard_funcs.cxx:734
 msgid "Reset"
-msgstr ""
+msgstr "Neustart"
 
 #: src/wizard_funcs.cxx:748
 msgid "Select FlightGear executable"
@@ -1458,16 +1459,16 @@ msgstr "Beschreibung von "
 
 #: src/wizard_funcs.cxx:2040
 msgid "Load settings from..."
-msgstr ""
+msgstr "Lade Enstellungen von..."
 
 #: src/wizard_funcs.cxx:2120
 msgid "Save settings as..."
-msgstr ""
+msgstr "Speichere Einstellungen als..."
 
 #: src/wizard_funcs.cxx:2124
 #, c-format
 msgid "Filename \"%s\" already exists."
-msgstr ""
+msgstr "Dateiname \"%s\" existiert bereits"
 
 #: src/wizard_funcs.cxx:2124 src/fgfsrc.cxx:61
 msgid "Overwrite"
@@ -1515,7 +1516,7 @@ msgstr "Vereinzelt"
 
 #: src/advanced_funcs.cxx:126
 msgid "cirrus"
-msgstr "Zirrus"
+msgstr "cirrus"
 
 #: src/advanced_funcs.cxx:127
 msgid "clear"
@@ -1535,7 +1536,7 @@ msgstr "Maus"
 
 #: src/advanced_funcs.cxx:139
 msgid "no filtering"
-msgstr ""
+msgstr "keine Filterung"
 
 #: src/advanced_funcs.cxx:140
 msgid "2.0"
@@ -1551,7 +1552,7 @@ msgstr ""
 
 #: src/advanced_funcs.cxx:143
 msgid "highest filtering"
-msgstr ""
+msgstr "Höchste Filterung"
 
 #: src/advanced_funcs.cxx:216
 msgid "Select browser"
@@ -1567,11 +1568,11 @@ msgstr "XML-Dateien(*.xml)"
 
 #: src/AirportBrowser.cxx:83
 msgid "Runways"
-msgstr "Landeplätze"
+msgstr "Rollbahn"
 
 #: src/AirportBrowser.cxx:88
 msgid "Parking"
-msgstr ""
+msgstr "Parkpositionen"
 
 #: src/AirportBrowser.cxx:95
 msgid "Refresh"
