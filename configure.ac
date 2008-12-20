@@ -267,6 +267,9 @@ AM_GNU_GETTEXT([external])
 AC_CONFIG_FILES([ po/Makefile.in
 Makefile
 src/Makefile
+msvc/Makefile
+msvc/6.0/Makefile
+msvc/7.1/Makefile
 ])
 
 AC_OUTPUT
