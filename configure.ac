@@ -2,7 +2,7 @@ dnl (Process this file with autoconf to produce a configure script.)
 AC_REVISION($Revision$)dnl
 AC_PREREQ(2.54)
 
-AC_INIT([fgrun], [1.1.0], [fredb@users.sourceforge.net])
+AC_INIT([fgrun], [1.5.0], [fredb@users.sourceforge.net])
 AC_CONFIG_HEADER(src/config.h)
 AC_CONFIG_SRCDIR(src/main.cxx)
 
@@ -37,6 +37,11 @@ AC_PROG_CXXCPP
 AC_PROG_RANLIB
 AC_PROG_INSTALL
 AC_PROG_LN_S
+AX_BOOST_BASE([1.34.0])
+
+if test "x$BOOST_CPPFLAGS" != "x-I/usr/include" ; then
+   CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
+fi
 
 dnl
 dnl Checks for compiler features

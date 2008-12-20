@@ -1745,6 +1745,7 @@ Advanced::Advanced() {
         o->labelsize(12);
         o->minimum(1);
         o->maximum(0);
+        o->step(0.01);
       }
       { Fl_Input* o = ceiling = new Fl_Input(235, 335, 80, 25, _("Ceiling:"));
         o->tooltip(_("FT_ASL[:THICKNESS_FT]"));
