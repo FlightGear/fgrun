@@ -191,7 +191,7 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {
+        Fl_Group {page[3]} {open
           private xywh {0 0 800 560}
         } {
           Fl_Group {} {
@@ -253,8 +253,8 @@ class Wizard {open
               }
             }
             Fl_Check_Button game_mode {
-              label {Game mode ( Fullscreen )}
-              callback {game_mode_cb();}
+              label {Full Screen}
+              callback {game_mode_cb();} selected
               private xywh {25 85 210 25} down_box DOWN_BOX
             }
             Fl_Check_Button horizon_effect {
@@ -312,7 +312,7 @@ class Wizard {open
             xywh {5 120 790 180}
           } {
             Fl_Group {} {
-              label Features open
+              label Features
               private xywh {5 120 480 180} box ENGRAVED_FRAME labelfont 1 align 21
             } {
               Fl_Check_Button random_objects {
@@ -359,12 +359,28 @@ class Wizard {open
               }
             }
             Fl_Group {} {
-              label Scenarios open
-              xywh {490 120 305 180} box ENGRAVED_FRAME labelfont 1 align 21 resizable
+              label Scenarios
+              xywh {490 120 305 139} box ENGRAVED_FRAME labelfont 1 align 21 resizable
             } {
               Fl_Browser scenarii {
                 callback {scenarii_cb();}
-                private xywh {495 136 295 158} type Multi align 5 resizable
+                private xywh {495 136 295 116} type Multi align 5 resizable
+              }
+            }
+            Fl_Group {} {open
+              xywh {490 265 305 35} box ENGRAVED_FRAME labelfont 1 align 21
+            } {
+              Fl_Check_Button terrasync {
+                label TerraSync
+                callback {terrasync_cb();}
+                xywh {495 270 100 25} down_box DOWN_BOX labelfont 1
+              }
+              Fl_Value_Input terrasync_port {
+                callback {terrasync_port_cb();}
+                xywh {595 270 50 25}
+              }
+              Fl_Box {} {
+                xywh {680 270 45 25} resizable
               }
             }
           }
@@ -534,6 +550,8 @@ class Wizard {open
   decl {void real_weather_fetch_cb();} {}
   decl {void auto_coordination_cb();} {}
   decl {void scenarii_cb();} {}
+  decl {void terrasync_cb();} {}
+  decl {void terrasync_port_cb();} {}
   decl {void atlas_cb();} {}
   decl {void atlas_host_cb();} {}
   decl {void atlas_port_cb();} {}
@@ -577,8 +595,7 @@ class Wizard {open
   decl {void exec_launch_window();} {}
   decl {Advanced *adv;} {}
   decl {static Fl_Menu_Item menu_time_of_day_value[];} {}
-  decl {static Fl_Menu_Item menu_season[];} {selected
-  }
+  decl {static Fl_Menu_Item menu_season[];} {}
   Function {make_crash_window()} {open private
   } {
     Fl_Window crash_window {

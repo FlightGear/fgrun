@@ -13,8 +13,7 @@ declblock {\#ifdef HAVE_CONFIG_H} {open after {\#endif}
 
 decl {\#include "advanced.h"} {} 
 
-decl {\#include <string.h>} {selected
-} 
+decl {\#include <string.h>} {} 
 
 decl {\#include <FL/Fl_Preferences.H>} {public
 } 
@@ -116,8 +115,8 @@ class Advanced {open
         }
       }
       Fl_Group {page[1]} {
-        label Features
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label Features selected
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Check_Button game_mode {
           label {Game Mode}
@@ -220,7 +219,7 @@ else
         }
         Fl_Check_Button random_trees {
           label {Random Trees}
-          xywh {170 200 160 25} down_box DOWN_BOX
+          xywh {175 200 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Box {} {
           xywh {615 405 25 25} resizable
@@ -685,8 +684,8 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output} open
-        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21
+        label {Input/Output}
+        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}

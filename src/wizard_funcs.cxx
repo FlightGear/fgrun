@@ -1162,7 +1162,7 @@ Wizard::bpp_cb()
 void
 Wizard::game_mode_cb()
 {
-    prefs.set("game_mode", game_mode->value());
+    prefs.set("fullscreen", game_mode->value());
     update_options();
 }
 
@@ -1336,6 +1336,34 @@ Wizard::scenarii_cb()
 	}
     }
     prefs.set("scenario-count", nb);
+    update_options();
+}
+
+void
+Wizard::terrasync_cb()
+{
+    int v = terrasync->value();
+    if ( v == 0 )
+    {
+	terrasync_port->deactivate();
+        prefs.set("terrasync",0);
+    }
+    else
+    {
+	terrasync_port->activate();
+        prefs.set("terrasync",1);
+    }
+    update_options();
+}
+
+void
+Wizard::terrasync_port_cb()
+{
+    int port = (int)terrasync_port->value();
+    if ( port == 0 )
+	port = 5505;
+    std::ostringstream opt;
+    prefs.set("terrasync_port",port);
     update_options();
 }
 
@@ -1565,7 +1593,7 @@ Wizard::update_basic_options( Fl_Preferences &p )
     set_choice( bpp, buf );
 
     int iVal, iVal2;
-    p.get("game_mode", iVal, 0);
+    p.get("fullscreen", iVal, 0);
     game_mode->value(iVal);
     p.get("horizon_effect", iVal, 0);
     horizon_effect->value(iVal);
@@ -1600,6 +1628,15 @@ Wizard::update_basic_options( Fl_Preferences &p )
     real_weather_fetch->value(iVal);
     p.get("auto_coordination", iVal, 0);
     auto_coordination->value(iVal);
+
+    p.get("terrasync", iVal, 0);
+    terrasync->value(iVal);
+    if ( iVal )
+        terrasync_port->activate();
+    else
+        terrasync_port->deactivate();
+    p.get("terrasync_port", iVal, 5505);
+    terrasync_port->value(iVal);
 
     atlas->value(0);
     atlas_host->value("");
@@ -1899,7 +1936,7 @@ Wizard::save_basic_options( Fl_Preferences &p )
 
     p.set("geometry", resolution->text());
     p.set("bpp", bpp->text());
-    p.set("game_mode", game_mode->value());
+    p.set("fullscreen", game_mode->value());
     p.set("horizon_effect", horizon_effect->value());
     p.set("enhanced_lighting", enhanced_lighting->value());
     p.set("specular_highlight", specular_highlight->value());

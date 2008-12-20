@@ -140,6 +140,16 @@ private:
   Fl_Browser *scenarii;
   void cb_scenarii_i(Fl_Browser*, void*);
   static void cb_scenarii(Fl_Browser*, void*);
+public:
+  Fl_Check_Button *terrasync;
+private:
+  void cb_terrasync_i(Fl_Check_Button*, void*);
+  static void cb_terrasync(Fl_Check_Button*, void*);
+public:
+  Fl_Value_Input *terrasync_port;
+private:
+  void cb_terrasync_port_i(Fl_Value_Input*, void*);
+  static void cb_terrasync_port(Fl_Value_Input*, void*);
   Fl_Group *atlas_group;
   Fl_Check_Button *atlas;
   void cb_atlas_i(Fl_Check_Button*, void*);
@@ -247,6 +257,8 @@ private:
   void real_weather_fetch_cb();
   void auto_coordination_cb();
   void scenarii_cb();
+  void terrasync_cb();
+  void terrasync_port_cb();
   void atlas_cb();
   void atlas_host_cb();
   void atlas_port_cb();

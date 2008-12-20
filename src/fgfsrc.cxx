@@ -317,6 +317,12 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     if ( prefs.get( "season", buf, "", buflen-1 ) && strcmp(buf,"summer")!=0 )
 	os << pfx << "--season=" << buf;
 
+    if ( prefs.get( "terrasync", iVal, 0 ) && iVal )
+    {
+        prefs.get( "terrasync_port", iVal, 5505 );
+	os << pfx << "--atlas=socket,out,5,localhost," << iVal << ",udp";
+    }
+
     // Network.
     if (prefs.get( "httpd", iVal, 0 ) && iVal)
 	os << pfx << "--httpd=" << iVal;

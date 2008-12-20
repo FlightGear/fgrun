@@ -242,6 +242,20 @@ void Wizard::cb_scenarii(Fl_Browser* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_scenarii_i(o,v);
 }
 
+void Wizard::cb_terrasync_i(Fl_Check_Button*, void*) {
+  terrasync_cb();
+}
+void Wizard::cb_terrasync(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_terrasync_i(o,v);
+}
+
+void Wizard::cb_terrasync_port_i(Fl_Value_Input*, void*) {
+  terrasync_port_cb();
+}
+void Wizard::cb_terrasync_port(Fl_Value_Input* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_terrasync_port_i(o,v);
+}
+
 void Wizard::cb_atlas_i(Fl_Check_Button*, void*) {
   atlas_cb();
 }
@@ -542,7 +556,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             o->callback((Fl_Callback*)cb_resolution);
             o->menu(menu_resolution);
           }
-          { Fl_Check_Button* o = game_mode = new Fl_Check_Button(25, 85, 210, 25, _("Game mode ( Fullscreen )"));
+          { Fl_Check_Button* o = game_mode = new Fl_Check_Button(25, 85, 210, 25, _("Full Screen"));
             o->down_box(FL_DOWN_BOX);
             o->callback((Fl_Callback*)cb_game_mode);
           }
@@ -627,11 +641,11 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             }
             o->end();
           }
-          { Fl_Group* o = new Fl_Group(490, 120, 305, 180, _("Scenarios"));
+          { Fl_Group* o = new Fl_Group(490, 120, 305, 139, _("Scenarios"));
             o->box(FL_ENGRAVED_FRAME);
             o->labelfont(1);
             o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-            { Fl_Browser* o = scenarii = new Fl_Browser(495, 136, 295, 158);
+            { Fl_Browser* o = scenarii = new Fl_Browser(495, 136, 295, 116);
               o->type(3);
               o->callback((Fl_Callback*)cb_scenarii);
               o->align(FL_ALIGN_TOP_LEFT);
@@ -639,6 +653,23 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             }
             o->end();
             Fl_Group::current()->resizable(o);
+          }
+          { Fl_Group* o = new Fl_Group(490, 265, 305, 35);
+            o->box(FL_ENGRAVED_FRAME);
+            o->labelfont(1);
+            o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+            { Fl_Check_Button* o = terrasync = new Fl_Check_Button(495, 270, 100, 25, _("TerraSync"));
+              o->down_box(FL_DOWN_BOX);
+              o->labelfont(1);
+              o->callback((Fl_Callback*)cb_terrasync);
+            }
+            { Fl_Value_Input* o = terrasync_port = new Fl_Value_Input(595, 270, 50, 25);
+              o->callback((Fl_Callback*)cb_terrasync_port);
+            }
+            { Fl_Box* o = new Fl_Box(680, 270, 45, 25);
+              Fl_Group::current()->resizable(o);
+            }
+            o->end();
           }
           o->end();
         }

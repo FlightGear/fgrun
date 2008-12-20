@@ -738,7 +738,6 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-      o->hide();
       { Fl_Check_Button* o = game_mode = new Fl_Check_Button(175, 50, 160, 25, _("Game Mode"));
         o->tooltip(_("Enable full screen game mode"));
         o->down_box(FL_DOWN_BOX);
@@ -850,8 +849,9 @@ Advanced::Advanced() {
         o->down_box(FL_DOWN_BOX);
         o->labelsize(12);
       }
-      { Fl_Check_Button* o = random_trees = new Fl_Check_Button(170, 200, 160, 25, _("Random Trees"));
+      { Fl_Check_Button* o = random_trees = new Fl_Check_Button(175, 200, 160, 25, _("Random Trees"));
         o->down_box(FL_DOWN_BOX);
+        o->labelsize(12);
       }
       { Fl_Box* o = new Fl_Box(615, 405, 25, 25);
         Fl_Group::current()->resizable(o);
@@ -1346,6 +1346,7 @@ Advanced::Advanced() {
       o->labelfont(1);
       o->labelsize(16);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->hide();
       { Fl_Browser* o = io_list = new Fl_Browser(155, 40, 480, 125);
         o->type(2);
         o->labeltype(FL_NO_LABEL);
