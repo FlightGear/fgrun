@@ -6,10 +6,10 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: fgrun 1.1.0\n"
+"Project-Id-Version: fgrun 1.5.0\n"
 "Report-Msgid-Bugs-To: fredb@users.sourceforge.net\n"
 "POT-Creation-Date: 2008-12-20 22:09+0100\n"
-"PO-Revision-Date: 2008-01-05 19:05+0100\n"
+"PO-Revision-Date: 2008-12-23 19:05+0100\n"
 "Last-Translator: <lizandrof@gmail.com>\n"
 "Language-Team: Portuguese\n"
 "MIME-Version: 1.0\n"
@@ -405,9 +405,8 @@ msgid "Enable AI traffic"
 msgstr "Habilitar Tráfego Interativo"
 
 #: src/advanced.cxx:852
-#, fuzzy
 msgid "Random Trees"
-msgstr "Objetos Aleatórios"
+msgstr "Árvores Aleatórias"
 
 #: src/advanced.cxx:861 src/advanced_funcs.cxx:194
 msgid "Flight Model"
@@ -719,11 +718,11 @@ msgstr "Ângulo do campo de visão"
 
 #: src/advanced.cxx:1165
 msgid "Texture filtering:"
-msgstr ""
+msgstr "Filtragem da textura:"
 
 #: src/advanced.cxx:1166
 msgid "Set the maximum degree of anisotropy in texture filtering"
-msgstr ""
+msgstr "Defina o máximo grau de anisotropia na filtragem da textura"
 
 #: src/advanced.cxx:1176 src/advanced_funcs.cxx:198
 msgid "Time"
@@ -876,7 +875,7 @@ msgstr "Taxa Baud:"
 
 #: src/advanced.cxx:1434
 msgid "Hostname:"
-msgstr "Servidor:"
+msgstr "Nome do Host:"
 
 #: src/advanced.cxx:1449
 msgid "TCP"
@@ -1109,7 +1108,7 @@ msgstr ""
 
 #: src/advanced_funcs.cxx:139
 msgid "no filtering"
-msgstr ""
+msgstr "sem filtragem"
 
 #: src/advanced_funcs.cxx:140
 msgid "2.0"
@@ -1125,7 +1124,7 @@ msgstr ""
 
 #: src/advanced_funcs.cxx:143
 msgid "highest filtering"
-msgstr ""
+msgstr "maior filtragem"
 
 #: src/advanced_funcs.cxx:216
 msgid "Select browser"
@@ -1145,7 +1144,7 @@ msgstr "Pistas"
 
 #: src/AirportBrowser.cxx:88
 msgid "Parking"
-msgstr ""
+msgstr "Estacionamento"
 
 #: src/AirportBrowser.cxx:95
 msgid "Refresh"
@@ -1158,7 +1157,7 @@ msgstr "Recarregar aeroportos"
 #: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:663
 #: src/wizard_funcs.cxx:1934
 msgid "<default>"
-msgstr ""
+msgstr "<padrões>"
 
 #: src/AirportBrowser.cxx:482
 msgid "gzopen error"
@@ -1166,7 +1165,7 @@ msgstr "Erro gzopen"
 
 #: src/AirportTable.cxx:121
 msgid "ICAO Id"
-msgstr "ICAO"
+msgstr "Cod ICAO"
 
 #: src/AirportTable.cxx:121
 msgid "Name"
@@ -1308,7 +1307,7 @@ msgstr "Previsualizar"
 
 #: src/wizard.cxx:491
 msgid "Status :"
-msgstr ""
+msgstr "Estado :"
 
 #: src/wizard.cxx:492
 msgid "Author(s) :"
@@ -1320,7 +1319,7 @@ msgstr "Selecione uma localização"
 
 #: src/wizard.cxx:515
 msgid "Carrier Ops"
-msgstr "Porta-Aviões"
+msgstr "Operação de Porta-Aviões"
 
 #: src/wizard.cxx:519
 msgid "Carrier : "
@@ -1332,7 +1331,7 @@ msgstr "Posição de estac. :"
 
 #: src/wizard.cxx:521
 msgid "Only valid if carrier is set. For airport parking, use the list above."
-msgstr ""
+msgstr "Só é válido se porta-aviões estiver definido. Para estacionamento do aeroporto, utilize a lista acima."
 
 #: src/wizard.cxx:532
 msgid "Advanced..."
@@ -1360,11 +1359,11 @@ msgstr "Use com cuidado. Isto pode baixar sua taxa de frames dramaticamente"
 
 #: src/wizard.cxx:576
 msgid "Framerate limiter :"
-msgstr ""
+msgstr "Limitar taxa de frames :"
 
 #: src/wizard.cxx:577
 msgid "Too much framerate hurts the smoothness of the simulation"
-msgstr ""
+msgstr "Uma taxa de frames muita alta diminui a suavidade da simulação"
 
 #: src/wizard.cxx:590
 msgid "3D clouds (experimental)"
@@ -1379,9 +1378,8 @@ msgid "Random objects"
 msgstr "Objetos aleatórios"
 
 #: src/wizard.cxx:611
-#, fuzzy
 msgid "Random trees"
-msgstr "Objetos Aleatórios"
+msgstr "Árvores Aleatórias"
 
 #: src/wizard.cxx:615
 msgid "AI models"
@@ -1397,16 +1395,15 @@ msgstr "Meteorologia real"
 
 #: src/wizard.cxx:635
 msgid "Season :"
-msgstr ""
+msgstr "Estação do ano :"
 
 #: src/wizard.cxx:644
-#, fuzzy
 msgid "Scenarios"
-msgstr "Cenário :"
+msgstr "Cenários"
 
 #: src/wizard.cxx:661
 msgid "TerraSync"
-msgstr ""
+msgstr "Servidor TerraSync"
 
 #: src/wizard.cxx:682
 msgid "Atlas"
@@ -1414,15 +1411,15 @@ msgstr "Atlas"
 
 #: src/wizard.cxx:687 src/wizard.cxx:709
 msgid "Hostname :"
-msgstr "Servidor :"
+msgstr "Nome do Host :"
 
 #: src/wizard.cxx:688
 msgid "Hostname"
-msgstr "Máquina executando o Atlas"
+msgstr "Nome do Host"
 
 #: src/wizard.cxx:693
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: src/wizard.cxx:700
 msgid "Multiplayer"
@@ -1470,11 +1467,11 @@ msgstr "Padrões"
 
 #: src/wizard.cxx:763
 msgid "Save As..."
-msgstr ""
+msgstr "Salvar Como..."
 
 #: src/wizard.cxx:767
 msgid "Load"
-msgstr ""
+msgstr "Carregar"
 
 #: src/wizard.cxx:779
 msgid "FlightGear running..."
@@ -1494,33 +1491,32 @@ msgstr ""
 "Para trocar de aeronave, saia do FlightGear e retorne a este assistente"
 
 #: src/wizard.cxx:804
-#, fuzzy
 msgid "Flightgear crashed..."
-msgstr "FlightGear em execução..."
+msgstr "FlightGear travou..."
 
 #: src/wizard.cxx:807
 msgid "Flightgear encountered an unexpected failure"
-msgstr ""
+msgstr "Flightgear encontrou um falha inesperada"
 
 #: src/wizard.cxx:811
 msgid "We are sorry for this inconvenience."
-msgstr ""
+msgstr "Pedimos desculpas pelo inconveniente."
 
 #: src/wizard.cxx:821
 msgid "An error report has been generated in the file below :"
-msgstr ""
+msgstr "Um relatório de erros foi gerado no arquivo abaixo :"
 
 #: src/wizard.cxx:825
 msgid "Please send this error report to the Flightgear development team"
-msgstr ""
+msgstr "Por favor envie este relatório de erro para o time de desenvolvimento do FlightGear"
 
 #: src/wizard_funcs.cxx:84
 msgid "summer"
-msgstr ""
+msgstr "verão"
 
 #: src/wizard_funcs.cxx:85
 msgid "winter"
-msgstr ""
+msgstr "inverno"
 
 #: src/wizard_funcs.cxx:92
 msgid "production"
@@ -1635,7 +1631,7 @@ msgstr ""
 
 #: src/wizard_funcs.cxx:1061
 msgid "Select FG_SCENERY directory"
-msgstr "Selecione o diretório FG_CENARIO"
+msgstr "Selecione o diretório FG_CENÁRIO"
 
 #: src/wizard_funcs.cxx:1307
 msgid "Description of "
@@ -1643,25 +1639,17 @@ msgstr "Descrição de "
 
 #: src/wizard_funcs.cxx:2077
 msgid "Load settings from..."
-msgstr ""
+msgstr "Carregar configurações de..."
 
 #: src/wizard_funcs.cxx:2157
 msgid "Save settings as..."
-msgstr ""
+msgstr "Salvar configurações como..."
 
 #: src/wizard_funcs.cxx:2161
 #, c-format
 msgid "Filename \"%s\" already exists."
-msgstr ""
+msgstr "O Arquivo \"%s\" já existe."
 
 #: src/wizard_funcs.cxx:2161
-#, fuzzy
 msgid "Don't overwrite"
-msgstr "Sobrescrever"
-
-#~ msgid "Game mode ( Fullscreen )"
-#~ msgstr "Modo Jogo ( Tela cheia )"
-
-#, fuzzy
-#~ msgid "Send"
-#~ msgstr "Som"
+msgstr "Não Sobrescrever"
