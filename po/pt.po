@@ -875,7 +875,7 @@ msgstr "Taxa Baud:"
 
 #: src/advanced.cxx:1434
 msgid "Hostname:"
-msgstr "Nome do Host:"
+msgstr "Servidor:"
 
 #: src/advanced.cxx:1449
 msgid "TCP"
@@ -1157,7 +1157,7 @@ msgstr "Recarregar aeroportos"
 #: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:663
 #: src/wizard_funcs.cxx:1934
 msgid "<default>"
-msgstr "<padrões>"
+msgstr "<padrão>"
 
 #: src/AirportBrowser.cxx:482
 msgid "gzopen error"
@@ -1165,11 +1165,11 @@ msgstr "Erro gzopen"
 
 #: src/AirportTable.cxx:121
 msgid "ICAO Id"
-msgstr "Cod ICAO"
+msgstr "Cod. ICAO"
 
 #: src/AirportTable.cxx:121
 msgid "Name"
-msgstr "Nome"
+msgstr "Nome do Aeroporto"
 
 #: src/fgfsrc.cxx:61
 #, c-format
@@ -1403,7 +1403,7 @@ msgstr "Cenários"
 
 #: src/wizard.cxx:661
 msgid "TerraSync"
-msgstr "Servidor TerraSync"
+msgstr "TerraSync"
 
 #: src/wizard.cxx:682
 msgid "Atlas"
@@ -1411,11 +1411,11 @@ msgstr "Atlas"
 
 #: src/wizard.cxx:687 src/wizard.cxx:709
 msgid "Hostname :"
-msgstr "Nome do Host :"
+msgstr "Servidor:"
 
 #: src/wizard.cxx:688
 msgid "Hostname"
-msgstr "Nome do Host"
+msgstr "Servidor"
 
 #: src/wizard.cxx:693
 msgid ":"
