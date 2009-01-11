@@ -2,8 +2,8 @@
 # Copyright (C) YEAR Frederic Bouvier
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Daniel Jorge Hernández Rivero, daniel.hernandez104@estudiantes.ulpgc.es, 2008.
-# Xavier Del Campo Romero, nitusdarkthief@hotmail.com, 2008.
+# Daniel Jorge Hernandez Rivero, daniel.hernandez104@estudiantes.ulpgc.es, 2008-09.
+# Xavier Del Campo Romero, nitusdarkthief@hotmail.com, 2008-09.
 #, fuzzy
 msgid ""
 msgstr ""
@@ -224,7 +224,7 @@ msgstr "Configuración:"
 
 #: src/advanced.cxx:700
 msgid "Path to additional XML properties file"
-msgstr "Ruta hacia archivos adiciones XML de propiedades"
+msgstr "Ruta hacia el archivo adicional XML de las propiedades"
 
 #: src/advanced.cxx:708 src/wizard.cxx:377
 msgid "Executable:"
@@ -256,23 +256,23 @@ msgstr "Opciones adicionales:"
 
 #: src/advanced.cxx:741
 msgid "Game Mode"
-msgstr "Modo de Juego"
+msgstr "Pantalla Completa"
 
 #: src/advanced.cxx:742
 msgid "Enable full screen game mode"
-msgstr "Activar pantalla completa"
+msgstr "Ejecuta el simulador a pantalla completa"
 
 #: src/advanced.cxx:746
 msgid "Splash Screen"
-msgstr "Dibujo de Inicio"
+msgstr "Dibujo de Portada"
 
 #: src/advanced.cxx:747
 msgid "Display splash screen at startup"
-msgstr "Mostrar dibujar al comenzar"
+msgstr "Muestra un dibujo del avión o del simulador mientras FlightGear carga"
 
 #: src/advanced.cxx:752
 msgid "Intro Music"
-msgstr "Música de Entrada"
+msgstr "Música de Introducción"
 
 #: src/advanced.cxx:753
 msgid "Enable introduction music during start up"
@@ -280,7 +280,7 @@ msgstr "Activar música al comenzar"
 
 #: src/advanced.cxx:758
 msgid "Mouse Pointer"
-msgstr "Puntero del ratón"
+msgstr "Puntero del Ratón"
 
 #: src/advanced.cxx:759
 msgid "Enable extra mouse pointer"
@@ -288,19 +288,19 @@ msgstr "Activar puntero de ratón extra"
 
 #: src/advanced.cxx:763
 msgid "Random Objects"
-msgstr "Objetos Aleatorios"
+msgstr "Generador de Objetos Aleatorios"
 
 #: src/advanced.cxx:764
 msgid "Enable random scenery objects"
-msgstr "Activar objetos aleatorios"
+msgstr "Activa objetos aleatorios como edificios o animales"
 
 #: src/advanced.cxx:768
 msgid "Panel"
-msgstr "Panel"
+msgstr "Panel 2D"
 
 #: src/advanced.cxx:769
 msgid "Enable the instrument panel"
-msgstr "Activar panel"
+msgstr "Activa el panel 2D"
 
 #: src/advanced.cxx:774
 msgid "Sound"
@@ -324,7 +324,7 @@ msgstr "Eliminar bordes HUD"
 
 #: src/advanced.cxx:787
 msgid "Enable anti-aliased HUD"
-msgstr "Activar HUD eliminando bordes"
+msgstr "Activar HUD eliminando bordes serrados"
 
 #: src/advanced.cxx:792 src/wizard.cxx:631
 msgid "Auto-coordination"
@@ -336,19 +336,19 @@ msgstr "Activar coordinación entre mando y pedales"
 
 #: src/advanced.cxx:797 src/wizard.cxx:563
 msgid "Horizon effect"
-msgstr "Efecto del horizonte"
+msgstr "Efecto en el horizonte"
 
 #: src/advanced.cxx:798
 msgid "Enable celestial body growth illusion near the horizon"
-msgstr "Activar cuerpos celestes cerca del horizonte"
+msgstr "Crea un efecto de horizonte en el cielo"
 
 #: src/advanced.cxx:802
 msgid "Enhanced lighting"
-msgstr "Activar luces"
+msgstr "Activar iluminación"
 
 #: src/advanced.cxx:803
 msgid "Enable enhanced runway lighting"
-msgstr "Activar luces de pista"
+msgstr "Activa las luces en las pistas"
 
 #: src/advanced.cxx:807
 msgid "Distance attenuation"
@@ -356,7 +356,7 @@ msgstr "Atenuación de la vista"
 
 #: src/advanced.cxx:808
 msgid "Enable runway light distance attenuation"
-msgstr "Activar vista borrosa con la distancia de las luces de pista"
+msgstr "Crea un efecto borroso en las luces de las pistas con la distancia"
 
 #: src/advanced.cxx:812
 msgid "Hud-3D"
@@ -372,7 +372,7 @@ msgstr "Brillo especular"
 
 #: src/advanced.cxx:818
 msgid "Enable specular reflections on textured objects"
-msgstr "Activar brillo especular sobre objetos"
+msgstr "Activa un brillo especular sobre el suelo y otros objetos"
 
 #: src/advanced.cxx:822
 msgid "Failures"
@@ -384,7 +384,7 @@ msgstr "pitot"
 
 #: src/advanced.cxx:832
 msgid "static"
-msgstr "static"
+msgstr "estático"
 
 #: src/advanced.cxx:837
 msgid "system"
@@ -392,7 +392,7 @@ msgstr "sistema"
 
 #: src/advanced.cxx:842
 msgid "vacuum"
-msgstr "vacuum"
+msgstr "bomba"
 
 #: src/advanced.cxx:847
 msgid "AI Traffic"
@@ -404,7 +404,7 @@ msgstr "Activar tráfico IA"
 
 #: src/advanced.cxx:852
 msgid "Random Trees"
-msgstr "Bosques aleatorios"
+msgstr "Generador de bosques aleatorios"
 
 #: src/advanced.cxx:861 src/advanced_funcs.cxx:194
 msgid "Flight Model"
@@ -420,11 +420,11 @@ msgstr "Core Flight Dynamics Model"
 
 #: src/advanced.cxx:874
 msgid "No Trim"
-msgstr ""
+msgstr "No Nivelar"
 
 #: src/advanced.cxx:875
 msgid "Do not attempt to trim the model"
-msgstr ""
+msgstr "No intente nivelar el modelo"
 
 #: src/advanced.cxx:880
 msgid "Model Hz:"
@@ -432,7 +432,7 @@ msgstr "Hz en Modelo:"
 
 #: src/advanced.cxx:881
 msgid "Run the FDM at this rate (iterations per second)"
-msgstr "Arrancar el FDM en esto rendimiento (Ips)"
+msgstr "Arrancar el FDM en este rendimiento (Ips)"
 
 #: src/advanced.cxx:889
 msgid "Speed:"
@@ -444,7 +444,7 @@ msgstr "Arrancar FDM más rápido de lo normal"
 
 #: src/advanced.cxx:899
 msgid "On Ground"
-msgstr "En tierra"
+msgstr "En Tierra"
 
 #: src/advanced.cxx:900
 msgid "Start at ground level"
@@ -460,19 +460,19 @@ msgstr "Comenzar en el aire"
 
 #: src/advanced.cxx:919 src/advanced.cxx:924 src/advanced_funcs.cxx:195
 msgid "Freeze"
-msgstr "Congelar"
+msgstr "Pausar"
 
 #: src/advanced.cxx:925
 msgid "Start paused"
-msgstr "Empezar pausado"
+msgstr "Comenzar el juego en pausa"
 
 #: src/advanced.cxx:929
 msgid "Fuel Freeze"
-msgstr "Congelar Combustible"
+msgstr "Combustible Ilimitado"
 
 #: src/advanced.cxx:933
 msgid "Clock Freeze"
-msgstr "Congelar Reloj"
+msgstr "Pausar el Reloj"
 
 #: src/advanced.cxx:942 src/advanced_funcs.cxx:196
 msgid "Initial Position"
@@ -484,7 +484,7 @@ msgstr "Longitud:"
 
 #: src/advanced.cxx:948
 msgid "Initial longitude, west is negative"
-msgstr "Longitud inicial, el oeste es negativo"
+msgstr "Longitud inicial. El oeste es negativo"
 
 #: src/advanced.cxx:952
 msgid "Latitude:"
@@ -492,7 +492,7 @@ msgstr "Latitud:"
 
 #: src/advanced.cxx:953
 msgid "Initial latitude, south is negative"
-msgstr "Latitud inicial, el sur es negativo"
+msgstr "Latitud inicial. El hemisferio sur es negativo"
 
 #: src/advanced.cxx:957
 msgid "Altitude:"
@@ -500,15 +500,15 @@ msgstr "Altitud:"
 
 #: src/advanced.cxx:958
 msgid "Initial altitude in feet"
-msgstr "Altura inicial en pies"
+msgstr "Altitud inicial en pies"
 
 #: src/advanced.cxx:963
 msgid "Airspeed:"
-msgstr "Velocidad aérea:"
+msgstr "Velocidad:"
 
 #: src/advanced.cxx:964
 msgid "Initial airspeed in knots"
-msgstr "Velocidad aérea inicial en nudos"
+msgstr "Escoge la velocidad aérea inicial en nudos"
 
 #: src/advanced.cxx:969
 msgid "uBody:"
@@ -524,11 +524,11 @@ msgstr "wBody"
 
 #: src/advanced.cxx:981 src/advanced.cxx:1721
 msgid "Heading:"
-msgstr "Rumbo magnético:"
+msgstr "Rumbo:"
 
 #: src/advanced.cxx:982
 msgid "Initial aircraft heading (yaw) angle 0 to 360 degrees"
-msgstr "Rumbo magnético inicial del avión, de 0 a 360 grados"
+msgstr "Escoge el rumbo inicial del avión de 0 a 360 grados"
 
 #: src/advanced.cxx:988
 msgid "Roll:"
@@ -536,7 +536,7 @@ msgstr "Roll:"
 
 #: src/advanced.cxx:989
 msgid "Initial roll angle, (Phi)"
-msgstr "Ángulo de roll inicial, (Phi)"
+msgstr "Angulo de roll inicial, (Phi)"
 
 #: src/advanced.cxx:996
 msgid "Pitch:"
@@ -564,7 +564,7 @@ msgstr "desplazamiento de la distancia:"
 
 #: src/advanced.cxx:1024
 msgid "offset azimuth:"
-msgstr "Desplazamiento del azimuth:"
+msgstr "desplazamiento del azimut:"
 
 #: src/advanced.cxx:1029
 msgid "Glide slope:"
@@ -584,7 +584,7 @@ msgstr "Nubes"
 
 #: src/advanced.cxx:1050
 msgid "Enable 2D (flat) cloud layers"
-msgstr "Activar nubes 2D"
+msgstr "Activar nubes 2D planas"
 
 #: src/advanced.cxx:1055
 msgid "3D Clouds"
@@ -592,7 +592,7 @@ msgstr "Nubes en 3D"
 
 #: src/advanced.cxx:1056
 msgid "Enable 3D (volumetric) cloud layers"
-msgstr "Activar nubes en 3D (volumétricas)"
+msgstr "Activar nubes en 3D con volumen"
 
 #: src/advanced.cxx:1060 src/wizard.cxx:559
 msgid "Full Screen"
@@ -600,7 +600,7 @@ msgstr "Pantalla completa"
 
 #: src/advanced.cxx:1061
 msgid "Enable full screen mode"
-msgstr "Activar pantalla completa"
+msgstr "Arranca FlightGear en pantalla completa"
 
 #: src/advanced.cxx:1065
 msgid "Sky Blend"
@@ -608,7 +608,7 @@ msgstr "Gradiente en el Cielo"
 
 #: src/advanced.cxx:1066
 msgid "Enable sky blending"
-msgstr "Activar gradiente del cielo"
+msgstr "Crea un gradiente del cielo para dar mayor realismo"
 
 #: src/advanced.cxx:1071
 msgid "Textures"
@@ -620,11 +620,11 @@ msgstr "Activar texturas"
 
 #: src/advanced.cxx:1077
 msgid "Wireframe"
-msgstr "Silueta"
+msgstr "Wireframe"
 
 #: src/advanced.cxx:1078
 msgid "Enable wireframe drawing mode"
-msgstr "Activar silueta"
+msgstr "Activa el modo Wireframe (modo de alambre)"
 
 #: src/advanced.cxx:1082
 msgid "Shading"
@@ -704,15 +704,15 @@ msgstr "FOV:"
 
 #: src/advanced.cxx:1158
 msgid "Field of View angle"
-msgstr "Ajuste del ángulo de vista"
+msgstr "Ajuste del ángulo de la vista"
 
 #: src/advanced.cxx:1165
 msgid "Texture filtering:"
-msgstr "Filtro de texturas:"
+msgstr "Filtraje de texturas:"
 
 #: src/advanced.cxx:1166
 msgid "Set the maximum degree of anisotropy in texture filtering"
-msgstr "Set the maximum degree of anisotropy in texture filtering"
+msgstr "Ajusta el máximo grado de anisotropía en el filtraje de texturas"
 
 #: src/advanced.cxx:1176 src/advanced_funcs.cxx:198
 msgid "Time"
@@ -720,7 +720,7 @@ msgstr "Tiempo"
 
 #: src/advanced.cxx:1181
 msgid "Time match real"
-msgstr "Encajar con el real"
+msgstr "Encajar con el horario real"
 
 #: src/advanced.cxx:1182
 msgid "Synchronize simulation time with real time"
@@ -728,7 +728,7 @@ msgstr "Sincronizar tiempo de simulación con el real"
 
 #: src/advanced.cxx:1189
 msgid "Time match local"
-msgstr "Encajar con el real"
+msgstr "Encajar con el horario local"
 
 #: src/advanced.cxx:1190
 msgid "Synchronize simulation time with local time"
@@ -752,7 +752,7 @@ msgstr "Desplazamiento (+/-) sobre la hora real"
 
 #: src/advanced.cxx:1242
 msgid "Time of day"
-msgstr "Hora del Día"
+msgstr "Hora del día"
 
 #: src/advanced.cxx:1248
 msgid "choice:"
@@ -776,7 +776,7 @@ msgstr "Puerto del servidor HTTP"
 
 #: src/advanced.cxx:1282
 msgid "Enable property server"
-msgstr "Permitir propiedad de servidor"
+msgstr "Activar el servidor de propiedad"
 
 #: src/advanced.cxx:1288
 msgid "Property server port"
@@ -796,7 +796,7 @@ msgstr "Capturar el puerto del servidor HTTP"
 
 #: src/advanced.cxx:1313
 msgid "Multiplayer Options"
-msgstr "Opciones de Multijugador"
+msgstr "Opciones del Modo Multijugador"
 
 #: src/advanced.cxx:1318
 msgid "Callsign:"
@@ -863,7 +863,7 @@ msgstr "Ratio de Baudios:"
 
 #: src/advanced.cxx:1434
 msgid "Hostname:"
-msgstr "Nombre de equipo:"
+msgstr "Dirección del servidor:"
 
 #: src/advanced.cxx:1449
 msgid "TCP"
@@ -944,7 +944,7 @@ msgstr "Valor:"
 
 #: src/advanced.cxx:1634
 msgid "Trace Write Properties"
-msgstr "Localizar propiedades de escritura"
+msgstr "Trazar propiedades de escritura"
 
 #: src/advanced.cxx:1668 src/advanced_funcs.cxx:204
 msgid "Environment"
@@ -972,11 +972,11 @@ msgstr "Velocidad del viento (nudos)"
 
 #: src/advanced.cxx:1736
 msgid "Random Winds"
-msgstr "Vientos Aleatorios"
+msgstr "Vientos al Azar"
 
 #: src/advanced.cxx:1743
 msgid "Turbulence"
-msgstr "Turbulencia"
+msgstr "Turbulencias"
 
 #: src/advanced.cxx:1744
 msgid "calm (0.0) to severe (1.0)"
@@ -992,7 +992,7 @@ msgstr "FT_ASL[:THICKNESS_FT]"
 
 #: src/advanced.cxx:1755
 msgid "Fetch real weather"
-msgstr "Buscar tiempo real"
+msgstr "Utilizar meteorología real"
 
 #: src/advanced.cxx:1768
 msgid "Layer:"
@@ -1016,7 +1016,7 @@ msgstr "Envergadura (m):"
 
 #: src/advanced.cxx:1803
 msgid "Transition (ft):"
-msgstr "Transición (pies):"
+msgstr "Transicion (pies):"
 
 #: src/advanced_funcs.cxx:105 src/wizard_funcs.cxx:76
 msgid "noon"
@@ -1044,7 +1044,7 @@ msgstr "debug"
 
 #: src/advanced_funcs.cxx:115
 msgid "info"
-msgstr "info"
+msgstr "información"
 
 #: src/advanced_funcs.cxx:116
 msgid "warn"
@@ -1127,9 +1127,8 @@ msgid "Runways"
 msgstr "Pistas"
 
 #: src/AirportBrowser.cxx:88
-#, fuzzy
 msgid "Parking"
-msgstr "garmin"
+msgstr "Parking"
 
 #: src/AirportBrowser.cxx:95
 msgid "Refresh"
@@ -1137,7 +1136,7 @@ msgstr "Actualizar"
 
 #: src/AirportBrowser.cxx:98
 msgid "Reload airports"
-msgstr "Recargar aeropuertos"
+msgstr "Actualizar base de datos de aeropuertos"
 
 #: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:663
 #: src/wizard_funcs.cxx:1934
@@ -1146,11 +1145,11 @@ msgstr "<por defecto>"
 
 #: src/AirportBrowser.cxx:482
 msgid "gzopen error"
-msgstr "gzopen error"
+msgstr "error gzopen"
 
 #: src/AirportTable.cxx:121
 msgid "ICAO Id"
-msgstr "ICAO Id"
+msgstr "ID ICAO"
 
 #: src/AirportTable.cxx:121
 msgid "Name"
@@ -1187,7 +1186,7 @@ msgstr "&Cerrar"
 
 #: src/logwin.cxx:99
 msgid "Save file as?"
-msgstr "¿Guardar como?"
+msgstr "Guardar como..."
 
 #: src/main.cxx:129
 #, c-format
@@ -1246,11 +1245,11 @@ msgstr "Seleccionar Rutas"
 
 #: src/wizard.cxx:378 src/wizard.cxx:385
 msgid "Full pathname to FlightGear executable"
-msgstr "Ruta completa del ejecutable FlightGear"
+msgstr "Ruta completa hacia el programa FlightGear"
 
 #: src/wizard.cxx:391
 msgid "root data path"
-msgstr "Ruta de los datos de raíz (root)"
+msgstr "Ruta de los datos de raiz (root)"
 
 #: src/wizard.cxx:403
 msgid "Scenery directories"
@@ -1274,11 +1273,11 @@ msgstr "Añadir..."
 
 #: src/wizard.cxx:442
 msgid "Add a scenery directory"
-msgstr "Añadir un directorio de escenario"
+msgstr "Añadir un directorio de escenarios"
 
 #: src/wizard.cxx:447
 msgid "Delete a scenery directory"
-msgstr "Borrar un directorio de escenario"
+msgstr "Borrar un directorio de escenarios"
 
 #: src/wizard.cxx:459
 msgid "Select an aircraft"
@@ -1294,7 +1293,7 @@ msgstr "Estado :"
 
 #: src/wizard.cxx:492
 msgid "Author(s) :"
-msgstr "Autor(s) :"
+msgstr "Autor(es) :"
 
 #: src/wizard.cxx:499
 msgid "Select a location"
@@ -1302,19 +1301,19 @@ msgstr "Seleccionar un lugar"
 
 #: src/wizard.cxx:515
 msgid "Carrier Ops"
-msgstr "Portaviones Ops"
+msgstr "Portaaviones Ops"
 
 #: src/wizard.cxx:519
 msgid "Carrier : "
-msgstr "Portaviones : "
+msgstr "Portaaviones : "
 
 #: src/wizard.cxx:520
 msgid "Park pos :"
-msgstr "Park pos :"
+msgstr "Parking :"
 
 #: src/wizard.cxx:521
 msgid "Only valid if carrier is set. For airport parking, use the list above."
-msgstr ""
+msgstr "Sólo válido si el portaaviones está activado. Para seleccionar el parking en un aeropuerto, por favor, utilice la lista de arriba."
 
 #: src/wizard.cxx:532
 msgid "Advanced..."
@@ -1334,19 +1333,19 @@ msgstr "Resolución :"
 
 #: src/wizard.cxx:567
 msgid "Enhanced runway lighting"
-msgstr "Luz de pista mejorada"
+msgstr "Reforzar la iluminación de la pista"
 
 #: src/wizard.cxx:568
 msgid "Use with caution. It may drop your framerate dramatically"
-msgstr "Usar con cuidado. Podría disminuir tu framerate drásticamente"
+msgstr "Utilizar con precaución. Podría disminuir el rendimiento del juego drásticamente"
 
 #: src/wizard.cxx:576
 msgid "Framerate limiter :"
-msgstr "Limitador de framerate :"
+msgstr "Limitador de fotogramas por segundo :"
 
 #: src/wizard.cxx:577
 msgid "Too much framerate hurts the smoothness of the simulation"
-msgstr "Demasiado framerate daña la suavidad de la simulación"
+msgstr "Demasiados fotogramas por segundo dañan la suavidad de la simulación"
 
 #: src/wizard.cxx:590
 msgid "3D clouds (experimental)"
@@ -1358,15 +1357,15 @@ msgstr "bpp :"
 
 #: src/wizard.cxx:607
 msgid "Random objects"
-msgstr "Objetos aleatorios"
+msgstr "Generador de objetos aleatorios"
 
 #: src/wizard.cxx:611
 msgid "Random trees"
-msgstr "Árboles aleatorios"
+msgstr "Generador de bosques aleatorios"
 
 #: src/wizard.cxx:615
 msgid "AI models"
-msgstr "modelos IA"
+msgstr "Modelos IA"
 
 #: src/wizard.cxx:619
 msgid "Time of day :"
@@ -1374,12 +1373,12 @@ msgstr "Hora del día :"
 
 #: src/wizard.cxx:627
 msgid "Real weather fetch"
-msgstr "Buscar tiempo real"
+msgstr "Utilizar meteorología real"
 
 #: src/wizard.cxx:635
 #, fuzzy
 msgid "Season :"
-msgstr "Estado :"
+msgstr "Estación del año :"
 
 #: src/wizard.cxx:644
 msgid "Scenarios"
@@ -1387,7 +1386,7 @@ msgstr "Escenarios"
 
 #: src/wizard.cxx:661
 msgid "TerraSync"
-msgstr ""
+msgstr "TerraSync"
 
 #: src/wizard.cxx:682
 msgid "Atlas"
@@ -1395,11 +1394,11 @@ msgstr "Atlas"
 
 #: src/wizard.cxx:687 src/wizard.cxx:709
 msgid "Hostname :"
-msgstr "Nombre de equipo :"
+msgstr "Dirección del servidor :"
 
 #: src/wizard.cxx:688
 msgid "Hostname"
-msgstr "Nombre de equipo"
+msgstr "Dirección del servidor"
 
 #: src/wizard.cxx:693
 msgid ":"
@@ -1415,7 +1414,7 @@ msgstr "Matrícula :"
 
 #: src/wizard.cxx:710
 msgid "Peer hostname"
-msgstr "Buscar nombre de equipo"
+msgstr "Buscar la dirección del servidor"
 
 #: src/wizard.cxx:714
 msgid "in :"
@@ -1423,7 +1422,7 @@ msgstr "entrada :"
 
 #: src/wizard.cxx:715
 msgid "Input port number"
-msgstr "Número de puerto de entrada"
+msgstr "Número del puerto de entrada"
 
 #: src/wizard.cxx:718
 msgid "out :"
@@ -1431,11 +1430,11 @@ msgstr "salida :"
 
 #: src/wizard.cxx:719
 msgid "Output port number"
-msgstr "Número de puerto de salida"
+msgstr "Número del puerto de salida"
 
 #: src/wizard.cxx:744
 msgid "Prev"
-msgstr "Previo"
+msgstr "Anterior"
 
 #: src/wizard.cxx:748 src/wizard_funcs.cxx:281 src/wizard_funcs.cxx:719
 msgid "Next"
@@ -1451,11 +1450,11 @@ msgstr "Por defecto"
 
 #: src/wizard.cxx:763
 msgid "Save As..."
-msgstr ""
+msgstr "Guardar como..."
 
 #: src/wizard.cxx:767
 msgid "Load"
-msgstr ""
+msgstr "Cargar"
 
 #: src/wizard.cxx:779
 msgid "FlightGear running..."
@@ -1463,60 +1462,59 @@ msgstr "FlightGear ejecutándose..."
 
 #: src/wizard.cxx:783
 msgid "FlightGear has been started"
-msgstr "FlightGear ha sido inicializado"
+msgstr "FlightGear está en marcha"
 
 #: src/wizard.cxx:788
 msgid "Please wait..."
-msgstr "Espera por favor..."
+msgstr "Espera, por favor..."
 
 #: src/wizard.cxx:791
 msgid "To change aircraft, exit FlightGear and return to this launcher"
-msgstr "Para cambiar de avión, salir de FlightGear y regresar a este lanzador"
+msgstr "Si quieres cambiar de avión, cierra FlightGear y vuelve a este programa"
 
 #: src/wizard.cxx:804
-#, fuzzy
 msgid "Flightgear crashed..."
-msgstr "FlightGear ejecutándose..."
+msgstr "FlightGear se ha cerrado..."
 
 #: src/wizard.cxx:807
 msgid "Flightgear encountered an unexpected failure"
-msgstr ""
+msgstr "FlightGear ha encontrado un error inesperado"
 
 #: src/wizard.cxx:811
 msgid "We are sorry for this inconvenience."
-msgstr ""
+msgstr "Disculpa las molestias."
 
 #: src/wizard.cxx:821
 msgid "An error report has been generated in the file below :"
-msgstr ""
+msgstr "Un informe de error ha sido creado en el siguiente archivo:"
 
 #: src/wizard.cxx:825
 msgid "Please send this error report to the Flightgear development team"
-msgstr ""
+msgstr "Por favor, envía este informe de error al equipo técnico de Flightgear"
 
 #: src/wizard_funcs.cxx:84
 msgid "summer"
-msgstr ""
+msgstr "verano"
 
 #: src/wizard_funcs.cxx:85
 msgid "winter"
-msgstr ""
+msgstr "invierno"
 
 #: src/wizard_funcs.cxx:92
 msgid "production"
-msgstr "realización"
+msgstr "realizacion"
 
 #: src/wizard_funcs.cxx:93
 msgid "early-production"
-msgstr "realización-temprana"
+msgstr "versión primeriza"
 
 #: src/wizard_funcs.cxx:94
 msgid "early production"
-msgstr "realización temprana"
+msgstr "versión primeriza"
 
 #: src/wizard_funcs.cxx:95
 msgid "Early production"
-msgstr "Realización temprana"
+msgstr "Realizacion primeriza"
 
 #: src/wizard_funcs.cxx:96
 msgid "beta"
@@ -1528,7 +1526,7 @@ msgstr "alfa"
 
 #: src/wizard_funcs.cxx:98
 msgid "early alpha"
-msgstr "alfa temprana"
+msgstr "alfa primeriza"
 
 #: src/wizard_funcs.cxx:99
 msgid "Development"
@@ -1548,7 +1546,7 @@ msgstr "devel"
 
 #: src/wizard_funcs.cxx:103
 msgid "Early development"
-msgstr "Desarrollo temprano"
+msgstr "Desarrollo primerizo"
 
 #: src/wizard_funcs.cxx:104
 msgid "experimental"
@@ -1563,14 +1561,14 @@ msgid ""
 "<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
 msgstr ""
 "<html> <head>  <title>Control de lanzamiento FlightGear %s</title> </head> "
-"<body>  <h1>Control de lanzamiento FlightGear %s</h1>  <p>Esté programa está "
-"publicado bajo la Licencia Pública General de GNU (http://www.gnu.org/"
-"copyleft/gpl.html).</p>  <p>Informar sobre bugs en http://sourceforge.net/"
+"<body>  <h1>Consola FlightGear %s</h1>  <p>Este programa está "
+"publicado bajo la Licencia Pública General GNU (http://www.gnu.org/"
+"copyleft/gpl.html).</p>  <p>Informadnos sobre bugs en http://sourceforge.net/"
 "projects/fgrun</p> </body></html>"
 
 #: src/wizard_funcs.cxx:333
 msgid "Log Window"
-msgstr "Ventana de Log"
+msgstr "Ventana de Informes"
 
 #: src/wizard_funcs.cxx:559
 #, c-format
@@ -1587,19 +1585,19 @@ msgstr "Ejecutar"
 
 #: src/wizard_funcs.cxx:734
 msgid "About to reset current parameters"
-msgstr "A punto de restaurar los parámetros actuales"
+msgstr "A punto de restaurar los parametros actuales"
 
 #: src/wizard_funcs.cxx:734
 msgid "Reset"
-msgstr "Restaurar"
+msgstr "Reiniciar"
 
 #: src/wizard_funcs.cxx:748
 msgid "Select FlightGear executable"
-msgstr "Seleccionar ejecutable de FlightGear"
+msgstr "Selecciona el programa ejecutable de FlightGear"
 
 #: src/wizard_funcs.cxx:805
 msgid "Select FG_ROOT directory"
-msgstr "Seleccionar directorio FG_ROOT"
+msgstr "Selecciona el directorio FG_INICIO"
 
 #: src/wizard_funcs.cxx:964 src/wizard_funcs.cxx:966
 msgid "Unknown"
@@ -1616,32 +1614,32 @@ msgstr ""
 
 #: src/wizard_funcs.cxx:1061
 msgid "Select FG_SCENERY directory"
-msgstr "Seleccionar directorio FG_SCENERY"
+msgstr "Seleccionar directorio FG_ESCENARIOS"
 
 #: src/wizard_funcs.cxx:1307
 msgid "Description of "
-msgstr "Descripción de"
+msgstr "Descripcion de"
 
 #: src/wizard_funcs.cxx:2077
 msgid "Load settings from..."
-msgstr ""
+msgstr "Cargar datos de..."
 
 #: src/wizard_funcs.cxx:2157
 msgid "Save settings as..."
-msgstr ""
+msgstr "Guardar datos como..."
 
 #: src/wizard_funcs.cxx:2161
 #, c-format
 msgid "Filename \"%s\" already exists."
-msgstr ""
+msgstr "El archivo \"%s\" ya existe."
 
 #: src/wizard_funcs.cxx:2161
 #, fuzzy
 msgid "Don't overwrite"
-msgstr "Sobrescribir"
+msgstr "No sobrescribir"
 
 #~ msgid "Game mode ( Fullscreen )"
-#~ msgstr "Modo de juego (Pantalla completa)"
+#~ msgstr "Modo de juego ( Pantalla completa )"
 
 #~ msgid "640x480"
 #~ msgstr "640x480"
