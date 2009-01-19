@@ -42,10 +42,7 @@ void  ParkingLoader::startElement( const char * name, const XMLAttributes &atts 
 	    else if ( attname == "number" )
 	        gateNumber = atts.getValue( i );
 	}
-        if ( type == "gate" )
-        {
-            apt_data.parking_.insert( gateName + gateNumber );
-        }
+        apt_data.parking_.insert( gateName + gateNumber );
     }
 }
 
