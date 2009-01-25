@@ -325,6 +325,8 @@ Wizard::run_ts()
     }
     char *p = strrchr( exe, '/' );
     if ( p == 0 )
+	p = strrchr( exe, '\\' );
+    if ( p == 0 )
 	return 1;
 
     strcpy( p + 1, "terrasync.exe" );
