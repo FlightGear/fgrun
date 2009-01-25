@@ -1,3 +1,12 @@
+* 1.5.1
+
+  * start TerraSync automatically
+  * drop pthreads dependency
+  * set configured environment variables under Windows ( was already working under Unix )
+  * update tooltips
+  * update translations
+  * show all types of parking positions
+
 * 1.5.0
 
   * use OpenSceneGraph to display aircrafts
