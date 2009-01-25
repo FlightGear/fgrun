@@ -25,7 +25,7 @@ decl {\#include <FL/Fl_Preferences.H>} {public
 decl {\#include <FL/Fl_Pixmap.H>} {public
 } 
 
-decl {\#include <pthread.h>} {public
+decl {\#include <OpenThreads/Thread>} {public
 } 
 
 decl {\#include "folder_open.xpm"} {} 
@@ -38,8 +38,29 @@ decl {class Advanced;} {public
 
 class Wizard {open
 } {
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0)} {open
+  class FlightGearThread {open : {public OpenThreads::Thread}
   } {
+    decl {FlightGearThread( Wizard *w );} {public
+    }
+    decl {void run();} {public
+    }
+    decl {Wizard *wizard;} {}
+    decl {FlightGearThread();} {}
+    decl {FlightGearThread( const FlightGearThread &);} {}
+    decl {FlightGearThread &operator=( const FlightGearThread &);} {}
+  }
+  class TerraSyncThread {open : {public OpenThreads::Thread}
+  } {
+    decl {TerraSyncThread( Wizard *w );} {public
+    }
+    decl {void run();} {public
+    }
+    decl {Wizard *wizard;} {}
+    decl {TerraSyncThread();} {}
+    decl {TerraSyncThread( const TerraSyncThread & );} {}
+    decl {TerraSyncThread &operator=( const TerraSyncThread & );} {}
+  }
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0)} {} {
     Fl_Window win {
       label {FlightGear Wizard} open
       private xywh {579 307 800 600} type Double visible
@@ -49,8 +70,8 @@ class Wizard {open
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths}
-          xywh {0 0 800 560} labelfont 1 align 21 hide
+          label {Select Paths} open
+          xywh {0 0 800 560} labelfont 1 align 21
         } {
           Fl_Help_View about_ {
             private xywh {5 25 790 130} labeltype NO_LABEL
@@ -72,7 +93,7 @@ class Wizard {open
           }
           Fl_Button {} {
             callback {fg_root_select_cb();}
-            private xywh {630 205 25 25} labelsize 12
+            private tooltip {root data path} xywh {630 205 25 25} labelsize 12
             code0 {o->image(folder_open_pixmap);}
           }
           Fl_Browser scenery_dir_list_ {
@@ -107,11 +128,11 @@ class Wizard {open
           Fl_Button cache_delete_ {
             label Delete
             callback {delete_cache_file_cb();}
-            private xywh {630 490 60 25} labelsize 12 deactivate
+            private tooltip {Clear the content of the airport cache} xywh {630 490 60 25} labelsize 12 deactivate
           }
           Fl_Output cache_file_ {
             label {Airports Cache:}
-            private xywh {130 490 495 25} labelsize 12 textsize 12
+            private tooltip {Full path to the airport cache} xywh {130 490 495 25} labelsize 12 textsize 12
           }
           Fl_Group {} {open
             xywh {130 245 495 25}
@@ -127,7 +148,12 @@ class Wizard {open
               private tooltip {Delete a scenery directory} xywh {195 245 60 25} labelsize 12 deactivate
             }
             Fl_Box {} {
-              xywh {260 245 365 25} resizable
+              xywh {260 245 50 25} resizable
+            }
+            Fl_Spinner ts_dir {
+              label {TerraSync directory}
+              callback {ts_dir_cb()}
+              tooltip {Select the line in the FG_SCENERY list that is the TerraSync directory. 0 means that TerraSync is not used.} xywh {580 245 45 25} labelsize 12 textsize 12
             }
           }
         }
@@ -191,8 +217,8 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {open
-          private xywh {0 0 800 560}
+        Fl_Group {page[3]} {
+          private xywh {0 0 800 560} hide
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -254,7 +280,7 @@ class Wizard {open
             }
             Fl_Check_Button game_mode {
               label {Full Screen}
-              callback {game_mode_cb();} selected
+              callback {game_mode_cb();}
               private xywh {25 85 210 25} down_box DOWN_BOX
             }
             Fl_Check_Button horizon_effect {
@@ -470,18 +496,18 @@ class Wizard {open
         }
         Fl_Button defaults {
           label Defaults
-          callback {defaults_cb();}
-          xywh {5 570 125 25} labelsize 12
+          callback {defaults_cb();} selected
+          tooltip {Clear all selected options and return to the install situation. Useful if FGFS don't start anymore.} xywh {5 570 125 25} labelsize 12
         }
         Fl_Button {} {
           label {Save As...}
           callback {save_preferences_cb();}
-          xywh {260 570 120 25} labelsize 12
+          tooltip {Save current configuration to a file} xywh {260 570 120 25} labelsize 12
         }
         Fl_Button {} {
           label Load
           callback {load_preferences_cb();}
-          xywh {135 570 120 25} labelsize 12
+          tooltip {Load a previously saved configuration} xywh {135 570 120 25} labelsize 12
         }
       }
     }
@@ -513,17 +539,20 @@ class Wizard {open
   decl {int write_fgfsrc();} {}
   decl {static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\\n");} {}
   decl {int run_fgfs( const std::string & );} {}
+  decl {int run_ts();} {}
   decl {static void stdout_cb( int, void* );} {}
   decl {void stdout_cb( int );} {}
   decl {void cancel_cb();} {}
   decl {void delete_cache_file_cb();} {}
   decl {static void airports_cb( Fl_Widget*, void* )} {}
   decl {void airports_cb();} {}
+  decl {void update_scenery_up_down();} {}
   decl {void scenery_dir_select_cb();} {}
   decl {void scenery_dir_add_cb();} {}
   decl {void scenery_dir_delete_cb();} {}
   decl {void scenery_dir_up_cb();} {}
   decl {void scenery_dir_down_cb();} {}
+  decl {void ts_dir_cb();} {}
   decl {void refresh_airports();} {public
   }
   decl {static void refresh_airports( Fl_Widget*, void* );} {public
@@ -564,14 +593,11 @@ class Wizard {open
   decl {void reset_settings();} {}
   decl {void load_preferences_cb();} {}
   decl {void save_preferences_cb();} {}
-  decl {pthread_t th;} {}
-  decl {static void *startFlightGear_cb( void *d );} {}
-  decl {void startFlightGear_cb();} {}
   Function {make_launch_window()} {open private
   } {
     Fl_Window launch_window {
       label {FlightGear running...} open
-      private xywh {595 462 455 155} type Double visible
+      private xywh {-32000 -32000 455 155} type Double hide
     } {
       Fl_Group {} {open
         private xywh {15 25 425 120}
@@ -600,7 +626,7 @@ class Wizard {open
   } {
     Fl_Window crash_window {
       label {Flightgear crashed...} open
-      private xywh {644 608 455 240} type Double visible
+      private xywh {-32000 -32000 455 240} type Double hide
     } {
       Fl_Box {} {
         label {Flightgear encountered an unexpected failure}
@@ -631,4 +657,11 @@ class Wizard {open
   decl {void crash_ok_cb();} {}
   decl {void exec_crash_window( const char *fname );} {}
   decl {string dump_file_name;} {}
+  decl {FlightGearThread *fgThread;} {}
+  decl {TerraSyncThread *tsThread;} {}
+  decl {friend class FlightGearThread;} {}
+  decl {friend class TerraGearThread;} {}
+  decl {long fgPid;} {}
+  decl {long tsPid;} {}
+  decl {void stopProcess( long pid );} {}
 } 

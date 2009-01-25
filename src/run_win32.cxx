@@ -54,41 +54,15 @@ int encase_arg( string & line, string arg ) {
   return iret;
 }
 
-int
-Wizard::run_fgfs(const string &args)
+static
+int run_program( char *cmd, long &pid, char *env = 0 )
 {
-    const int buflen = FL_PATH_MAX;
-    char exe[ buflen ];
-    char buf[ buflen ];
-
-    prefs.get( "fg_exe", buf, "", buflen-1 );
-    fl_filename_absolute( exe, buf );
-    // Convert cygwin path ( if any ) into real windows path
-    if ( strncmp( exe, "/cygdrive", 9 ) == 0 ) {
-        memmove( exe, exe+9, strlen(exe)-8 );
-        exe[0] = exe[1];
-        exe[1] = ':';
-    }
-
-    string line = args;
-    encase_arg( line, "fg-root" );
-    encase_arg( line, "fg-scenery" );
-    encase_arg( line, "config" );
-    encase_arg( line, "browser-app" );
-
-    char* cmd = new char[ strlen(exe) +
-                          line.size() + 2 ];
-    strcpy( cmd, exe );
-    strcat( cmd, " " );
-    strcat( cmd, line.c_str() );
-
     //SECURITY_ATTRIBUTES procAttrs;
     //SECURITY_ATTRIBUTES threadAttrs;
     BOOL inheritHandles = TRUE;
+    DWORD creationFlags = CREATE_NEW_PROCESS_GROUP;
 #ifdef MINIDUMP
-    DWORD creationFlags = DEBUG_PROCESS | DEBUG_ONLY_THIS_PROCESS;
-#else
-    DWORD creationFlags = 0;
+    creationFlags = creationFlags | DEBUG_PROCESS | DEBUG_ONLY_THIS_PROCESS;
 #endif
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
@@ -103,7 +77,7 @@ Wizard::run_fgfs(const string &args)
         NULL, // lpThreadAttributes
         inheritHandles,
         creationFlags,
-        NULL, // lpEnvironment
+        env, // lpEnvironment
         NULL, // lpCurrentDirectory
         &si,
         &pi
@@ -128,6 +102,8 @@ Wizard::run_fgfs(const string &args)
     }
     else
     {
+	pid = pi.dwProcessId;
+
 #ifdef MINIDUMP
         DWORD dwContinueStatus = DBG_CONTINUE; // exception continuation 
         bool end = false, dump = false;
@@ -238,3 +214,148 @@ Wizard::run_fgfs(const string &args)
     return exit_code;
 }
 
+int
+Wizard::run_fgfs(const string &args)
+{
+    const int buflen = FL_PATH_MAX;
+    char exe[ buflen ];
+    char buf[ buflen ];
+
+    prefs.get( "fg_exe", buf, "", buflen-1 );
+    fl_filename_absolute( exe, buf );
+    // Convert cygwin path ( if any ) into real windows path
+    if ( strncmp( exe, "/cygdrive", 9 ) == 0 ) {
+        memmove( exe, exe+9, strlen(exe)-8 );
+        exe[0] = exe[1];
+        exe[1] = ':';
+    }
+
+    string line = args;
+    encase_arg( line, "fg-root" );
+    encase_arg( line, "fg-scenery" );
+    encase_arg( line, "config" );
+    encase_arg( line, "browser-app" );
+
+    char* cmd = new char[ strlen(exe) +
+                          line.size() + 2 ];
+    strcpy( cmd, exe );
+    strcat( cmd, " " );
+    strcat( cmd, line.c_str() );
+
+    std::auto_ptr<char> childenv;
+    int iVal;
+    prefs.get( "env-count", iVal, 0 );
+    if ( iVal > 0 )
+    {
+	LPTCH env = GetEnvironmentStrings();
+	char *p = env;
+	std::vector<std::string> strangevars;
+	std::map<std::string,std::string> vars;
+	while ( *p != '\0' )
+	{
+	    std::string var = p;
+	    size_t pos = var.find( '=' );
+	    if (pos == std::string::npos || pos == 0)
+		strangevars.push_back( var );
+	    else
+		vars[ var.substr( 0, pos ) ] = var.substr( pos + 1 );
+	    p += strlen( p ) + 1;
+	}
+	FreeEnvironmentStrings( env );
+
+	const int buflen = FL_PATH_MAX;
+	char buf[ buflen ];
+	for (int i = 1; i <= iVal; ++i)
+	{
+	    buf[0] = 0;
+	    prefs.get( Fl_Preferences::Name("env-var-%d", i),
+			buf, "", buflen-1 );
+	    std::string var = buf;
+	    size_t pos = var.find( '=' );
+	    if ( pos != std::string::npos && pos > 0 && pos < var.size() - 1 )
+		vars[ var.substr( 0, pos ) ] = var.substr( pos + 1 );
+	}
+	size_t len = 1;
+	for ( std::vector<std::string>::iterator ii = strangevars.begin(); ii != strangevars.end(); ++ii )
+	{
+	    len += ii->size();
+	    len += 1;
+	}
+	for ( std::map<std::string,std::string>::iterator ii = vars.begin(); ii != vars.end(); ++ii )
+	{
+	    len += ii->first.size();
+	    len += ii->second.size();
+	    len += 2;
+	}
+
+	childenv.reset( new char[ len ] );
+	p = childenv.get();
+	for ( std::vector<std::string>::iterator ii = strangevars.begin(); ii != strangevars.end(); ++ii )
+	{
+	    strcpy( p, ii->c_str() );
+	    p += strlen( p ) + 1;
+	}
+	for ( std::map<std::string,std::string>::iterator ii = vars.begin(); ii != vars.end(); ++ii )
+	{
+	    strcpy( p, ii->first.c_str() );
+	    strcat( p, "=" );
+	    strcat( p, ii->second.c_str() );
+	    p += strlen( p ) + 1;
+	}
+	*p = '\0';
+    }
+
+    return run_program( cmd, fgPid, childenv.get() );
+}
+
+int
+Wizard::run_ts()
+{
+    const int buflen = FL_PATH_MAX;
+    char exe[ buflen ];
+    char buf[ buflen ];
+
+    prefs.get( "fg_exe", buf, "", buflen-1 );
+    fl_filename_absolute( exe, buf );
+    // Convert cygwin path ( if any ) into real windows path
+    if ( strncmp( exe, "/cygdrive", 9 ) == 0 ) {
+        memmove( exe, exe+9, strlen(exe)-8 );
+        exe[0] = exe[1];
+        exe[1] = ':';
+    }
+    char *p = strrchr( exe, '/' );
+    if ( p == 0 )
+	return 1;
+
+    strcpy( p + 1, "terrasync.exe" );
+
+    int iVal;
+    prefs.get( "ts_dir", iVal, 0 );
+    if ( iVal == 0 )
+	return 1;
+
+    prefs.get( "fg_scenery", buf, "", buflen-1 );
+    string_list dirlist = sgPathSplit( buf );
+    if ( dirlist.empty() )
+        return 1;
+
+    std::cout << iVal << " - '" << dirlist[iVal-1] << "'" << std::endl;
+
+    int port;
+    prefs.get( "terrasync_port", port, 5505 );
+    std::ostringstream oss;
+    oss << exe << " -S -d \"" << dirlist[iVal-1] << "\" -p " << port;
+
+    char* cmd = new char[ oss.str().length() + 1 ];
+    strcpy( cmd, oss.str().c_str() );
+    std::cout << cmd << std::endl;
+
+    return run_program( cmd, tsPid );
+}
+
+void
+Wizard::stopProcess( long pid )
+{
+    if (pid != 0)
+	GenerateConsoleCtrlEvent( CTRL_BREAK_EVENT, pid );
+}

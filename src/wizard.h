@@ -7,7 +7,7 @@
 #include <iostream>
 #include <FL/Fl_Preferences.H>
 #include <FL/Fl_Pixmap.H>
-#include <pthread.h>
+#include <OpenThreads/Thread>
 class LogWindow;
 class Advanced;
 #include <FL/Fl_Double_Window.H>
@@ -19,6 +19,7 @@ class Advanced;
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Output.H>
+#include <FL/Fl_Spinner.H>
 #include <FL/Fl_Tile.H>
 #include "Fl_OSG.h"
 #include "AirportBrowser.h"
@@ -28,6 +29,28 @@ class Advanced;
 #include <FL/Fl_Value_Input.H>
 
 class Wizard {
+
+class FlightGearThread : public OpenThreads::Thread {
+public:
+  FlightGearThread( Wizard *w );
+  void run();
+private:
+  Wizard *wizard;
+  FlightGearThread();
+  FlightGearThread( const FlightGearThread &);
+  FlightGearThread &operator=( const FlightGearThread &);
+};
+
+class TerraSyncThread : public OpenThreads::Thread {
+public:
+  TerraSyncThread( Wizard *w );
+  void run();
+private:
+  Wizard *wizard;
+  TerraSyncThread();
+  TerraSyncThread( const TerraSyncThread & );
+  TerraSyncThread &operator=( const TerraSyncThread & );
+};
 public:
   Wizard() ;
 private:
@@ -62,6 +85,11 @@ private:
   Fl_Button *scenery_dir_delete_;
   void cb_scenery_dir_delete__i(Fl_Button*, void*);
   static void cb_scenery_dir_delete_(Fl_Button*, void*);
+public:
+  Fl_Spinner *ts_dir;
+private:
+  void cb_ts_dir_i(Fl_Spinner*, void*);
+  static void cb_ts_dir(Fl_Spinner*, void*);
   Fl_Browser *aircraft;
   void cb_aircraft_i(Fl_Browser*, void*);
   static void cb_aircraft(Fl_Browser*, void*);
@@ -220,17 +248,20 @@ private:
   int write_fgfsrc();
   static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\n");
   int run_fgfs( const std::string & );
+  int run_ts();
   static void stdout_cb( int, void* );
   void stdout_cb( int );
   void cancel_cb();
   void delete_cache_file_cb();
   static void airports_cb( Fl_Widget*, void* );
   void airports_cb();
+  void update_scenery_up_down();
   void scenery_dir_select_cb();
   void scenery_dir_add_cb();
   void scenery_dir_delete_cb();
   void scenery_dir_up_cb();
   void scenery_dir_down_cb();
+  void ts_dir_cb();
 public:
   void refresh_airports();
   static void refresh_airports( Fl_Widget*, void* );
@@ -271,9 +302,6 @@ private:
   void reset_settings();
   void load_preferences_cb();
   void save_preferences_cb();
-  pthread_t th;
-  static void *startFlightGear_cb( void *d );
-  void startFlightGear_cb();
   Fl_Double_Window* make_launch_window();
   Fl_Double_Window *launch_window;
   int launch_result;
@@ -289,5 +317,12 @@ private:
   void crash_ok_cb();
   void exec_crash_window( const char *fname );
   string dump_file_name;
+  FlightGearThread *fgThread;
+  TerraSyncThread *tsThread;
+  friend class FlightGearThread;
+  friend class TerraGearThread;
+  long fgPid;
+  long tsPid;
+  void stopProcess( long pid );
 };
 #endif

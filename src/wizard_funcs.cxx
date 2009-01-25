@@ -256,6 +256,11 @@ Wizard::reset()
     vs_t v( sgPathSplit( fg_scenery ) );
     for (vs_t::size_type i = 0; i < v.size(); ++i)
 	scenery_dir_list_->add( v[i].c_str() );
+    ts_dir->minimum( 0 );
+    ts_dir->maximum( scenery_dir_list_->size() );
+    int iVal;
+    prefs.get("ts_dir", iVal, 0);
+    ts_dir->value( iVal );
 
     if (fg_exe_->size() == 0 ||
 	fg_root_->size() == 0 ||
@@ -280,7 +285,6 @@ Wizard::reset()
     }
     next->label( _("Next") );
 
-    int iVal;
     prefs.get("show_cmd_line", iVal, 0);
     show_cmd_line->value(iVal);
     if ( iVal )
@@ -668,9 +672,17 @@ Wizard::next_cb()
     }
     else if (wiz->value() == page[3])
     {
-	prefs.flush();
+	if (terrasync->value())
+	{
+	    if (tsThread == 0)
+		tsThread = new TerraSyncThread( this );
+	    tsThread->start();
+	}
 
-	int err = pthread_create( &th, 0, &Wizard::startFlightGear_cb, (void *)this );
+	prefs.flush();
+	if (fgThread == 0)
+	    fgThread = new FlightGearThread( this );
+	fgThread->start();
 
 	exec_launch_window();
 	return;
@@ -1002,6 +1014,8 @@ Wizard::~Wizard()
 void
 Wizard::cancel_cb()
 {
+    stopProcess( tsPid );
+
     logwin->hide();
 
     // Save main window size and position.
@@ -1056,6 +1070,24 @@ Wizard::scenery_dir_select_cb()
 }
 
 void
+Wizard::update_scenery_up_down()
+{
+    int n = scenery_dir_list_->value();
+    if (n <= 0)
+	scenery_dir_up_->deactivate();
+    else
+	scenery_dir_up_->activate();
+    if (n == 0 || n == scenery_dir_list_->size())
+	scenery_dir_down_->deactivate();
+    else
+	scenery_dir_down_->activate();
+    if (n == 0)
+	scenery_dir_delete_->deactivate();
+    else
+	scenery_dir_delete_->activate();
+}
+
+void
 Wizard::scenery_dir_add_cb()
 {
     char* p = fl_dir_chooser( _("Select FG_SCENERY directory"), 0, 0);
@@ -1063,20 +1095,31 @@ Wizard::scenery_dir_add_cb()
     {
 	scenery_dir_list_->add( p );
 	scenery_dir_list_->value( scenery_dir_list_->size() );
-	scenery_dir_delete_->activate();
 	scenery_dir_list_->select( scenery_dir_list_->size() );
+	ts_dir->maximum( scenery_dir_list_->size() );
+	update_scenery_up_down();
     }
 }
 
 void
 Wizard::scenery_dir_delete_cb()
 {
+    int ts = ts_dir->value();
     int n = scenery_dir_list_->value();
     if (n > 0)
+    {
 	scenery_dir_list_->remove( n );
+	if (n == ts)
+	    ts_dir->value(0);
+	else if (ts > n )
+	    ts_dir->value(ts-1);
+    }
 
     if (scenery_dir_list_->size() == 0)
 	scenery_dir_delete_->deactivate();
+
+    ts_dir->maximum( scenery_dir_list_->size() );
+    update_scenery_up_down();
 }
 
 /**
@@ -1085,12 +1128,19 @@ Wizard::scenery_dir_delete_cb()
 void
 Wizard::scenery_dir_up_cb()
 {
+    int ts = ts_dir->value();
     int from = scenery_dir_list_->value();
     int to = from - 1;
     scenery_dir_list_->move( to, from );
 
     scenery_dir_list_->deselect();
     scenery_dir_list_->select( to );
+
+    if (ts == from)
+	ts = to;
+    else if (ts == to)
+	ts = from;
+    ts_dir->value( ts );
 
     scenery_dir_down_->activate();
     if (to == 1)
@@ -1103,6 +1153,7 @@ Wizard::scenery_dir_up_cb()
 void
 Wizard::scenery_dir_down_cb()
 {
+    int ts = ts_dir->value();
     int n = scenery_dir_list_->value();
     scenery_dir_list_->insert( n+2, scenery_dir_list_->text(n) );
     scenery_dir_list_->remove( n );
@@ -1110,9 +1161,30 @@ Wizard::scenery_dir_down_cb()
     scenery_dir_list_->deselect();
     scenery_dir_list_->select( n+1 );
 
+    if (ts == n)
+	ts = n+1;
+    else if (ts == n+1)
+	ts = n;
+    ts_dir->value( ts );
+
     scenery_dir_up_->activate();
     if (n+1 == scenery_dir_list_->size())
 	scenery_dir_down_->deactivate();
+}
+
+/**
+ * Tell which scenery line is managed by TerraSync.
+ */
+void
+Wizard::ts_dir_cb()
+{
+    if (ts_dir->value() == 0)
+    {
+	terrasync->value(0);
+	terrasync_port->deactivate();
+        prefs.set("terrasync",0);
+    }
+    prefs.set("ts_dir",(int)ts_dir->value());
 }
 
 /**
@@ -1347,6 +1419,16 @@ Wizard::terrasync_cb()
     {
 	terrasync_port->deactivate();
         prefs.set("terrasync",0);
+    }
+    else if (ts_dir->value() == 0)
+    {
+	terrasync->value(0);
+	fl_alert( _("TerraSync directory not set") );
+	page[3]->hide();
+	page[0]->show();
+	next->label( _("Next") );
+	prev->deactivate();
+	ts_dir->take_focus();
     }
     else
     {
@@ -1811,21 +1893,31 @@ Wizard::show_cmd_line_cb()
     prefs.set("show_cmd_line", show_cmd_line->value());
 }
 
-void *
-Wizard::startFlightGear_cb( void *d )
+Wizard::FlightGearThread::FlightGearThread( Wizard *w )
+: wizard( w )
 {
-    static_cast<Wizard *>( d )->startFlightGear_cb();
-    return 0;
 }
 
 void
-Wizard::startFlightGear_cb()
+Wizard::FlightGearThread::run()
 {
     std::ostringstream ostr;
-    if (write_fgfsrc( prefs, ostr, " " ))
+    if (wizard->write_fgfsrc( wizard->prefs, ostr, " " ))
     {
-	launch_result = run_fgfs(ostr.str());
+	wizard->launch_result = wizard->run_fgfs(ostr.str());
     }
+}
+
+
+Wizard::TerraSyncThread::TerraSyncThread( Wizard *w )
+: wizard( w )
+{
+}
+
+void
+Wizard::TerraSyncThread::run()
+{
+    wizard->run_ts();
 }
 
 void
@@ -1862,6 +1954,7 @@ Wizard::reset_settings()
     prefs.deleteEntry( "fg_scenery" );
     prefs.deleteEntry( "aircraft" );
  
+    prefs.set( "ts_dir", 0 );
     prefs.set( "time_of_day", 1 );
     prefs.set( "time_of_day_value", "noon" );
 
@@ -2107,6 +2200,8 @@ Wizard::load_preferences_cb()
             vs_t v( sgPathSplit( buf ) );
             for (vs_t::size_type i = 0; i < v.size(); ++i)
 	        scenery_dir_list_->add( v[i].c_str() );
+	    ts_dir->minimum( 0 );
+	    ts_dir->maximum( scenery_dir_list_->size() );
         }
 
         prefs_tmp.get( "aircraft", buf, "", buflen-1);

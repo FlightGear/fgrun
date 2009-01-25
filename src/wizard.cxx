@@ -77,6 +77,13 @@ void Wizard::cb_scenery_dir_delete_(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_delete__i(o,v);
 }
 
+void Wizard::cb_ts_dir_i(Fl_Spinner*, void*) {
+  ts_dir_cb();
+}
+void Wizard::cb_ts_dir(Fl_Spinner* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_ts_dir_i(o,v);
+}
+
 void Wizard::cb_aircraft_i(Fl_Browser*, void*) {
   preview_aircraft();
 }
@@ -361,7 +368,7 @@ void Wizard::cb_OK(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->user_data()))->cb_OK_i(o,v);
 }
 
-Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0) {
+Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0) {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = win = new Fl_Double_Window(800, 600, _("FlightGear Wizard"));
     w = o;
@@ -370,7 +377,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[0] = new Fl_Group(0, 0, 800, 560, _("Select Paths"));
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        o->hide();
         { Fl_Help_View* o = about_ = new Fl_Help_View(5, 25, 790, 130);
           o->labeltype(FL_NO_LABEL);
         }
@@ -395,6 +401,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->when(FL_WHEN_CHANGED);
         }
         { Fl_Button* o = new Fl_Button(630, 205, 25, 25);
+          o->tooltip(_("root data path"));
           o->labelsize(12);
           o->callback((Fl_Callback*)cb_1);
           o->image(folder_open_pixmap);
@@ -429,11 +436,13 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->end();
         }
         { Fl_Button* o = cache_delete_ = new Fl_Button(630, 490, 60, 25, _("Delete"));
+          o->tooltip(_("Clear the content of the airport cache"));
           o->labelsize(12);
           o->callback((Fl_Callback*)cb_cache_delete_);
           o->deactivate();
         }
         { Fl_Output* o = cache_file_ = new Fl_Output(130, 490, 495, 25, _("Airports Cache:"));
+          o->tooltip(_("Full path to the airport cache"));
           o->labelsize(12);
           o->textsize(12);
         }
@@ -449,8 +458,15 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             o->callback((Fl_Callback*)cb_scenery_dir_delete_);
             o->deactivate();
           }
-          { Fl_Box* o = new Fl_Box(260, 245, 365, 25);
+          { Fl_Box* o = new Fl_Box(260, 245, 50, 25);
             Fl_Group::current()->resizable(o);
+          }
+          { Fl_Spinner* o = ts_dir = new Fl_Spinner(580, 245, 45, 25, _("TerraSync directory"));
+            o->tooltip(_("Select the line in the FG_SCENERY list that is the TerraSync directory. 0 mea\
+ns that TerraSync is not used."));
+            o->labelsize(12);
+            o->textsize(12);
+            o->callback((Fl_Callback*)cb_ts_dir);
           }
           o->end();
         }
@@ -528,6 +544,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         o->end();
       }
       { Fl_Group* o = page[3] = new Fl_Group(0, 0, 800, 560);
+        o->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
@@ -757,14 +774,18 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         Fl_Group::current()->resizable(o);
       }
       { Fl_Button* o = defaults = new Fl_Button(5, 570, 125, 25, _("Defaults"));
+        o->tooltip(_("Clear all selected options and return to the install situation. Useful if FGF\
+S don\'t start anymore."));
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_defaults);
       }
       { Fl_Button* o = new Fl_Button(260, 570, 120, 25, _("Save As..."));
+        o->tooltip(_("Save current configuration to a file"));
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_Save);
       }
       { Fl_Button* o = new Fl_Button(135, 570, 120, 25, _("Load"));
+        o->tooltip(_("Load a previously saved configuration"));
         o->labelsize(12);
         o->callback((Fl_Callback*)cb_Load);
       }
