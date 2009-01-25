@@ -162,6 +162,18 @@ Wizard::run_fgfs( const std::string &args )
     return 0;
 }
 
+int
+Wizard::run_ts()
+{
+    std::cout << "Sorry, Starting TerraSync is not yet supported." << std::endl;
+    return 1;
+}
+
+void
+Wizard::stopProcess( long pid )
+{
+}
+
 void
 Wizard::stdout_cb( int fd, void* p )
 {
