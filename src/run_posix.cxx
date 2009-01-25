@@ -41,6 +41,7 @@
 #endif
 
 #include <string>
+#include <sstream>
 #include <FL/filename.H>
 
 #include "wizard.h"
@@ -165,8 +166,110 @@ Wizard::run_fgfs( const std::string &args )
 int
 Wizard::run_ts()
 {
-    std::cout << "Sorry, Starting TerraSync is not yet supported." << std::endl;
-    return 1;
+    int master = -1;
+
+#if defined(HAVE_TERMIOS_H)
+    struct termios term;
+    tcgetattr( STDOUT_FILENO, &term );
+    term.c_oflag &= ~( OLCUC | ONLCR );
+
+    tsPid = pty_fork( &master, 0, &term, 0 );
+#else
+    tsPid = pty_fork( &master, 0, 0, 0 );
+#endif
+
+    if (tsPid < 0)
+    {
+	perror( "fork error" );
+	(void) close( master );
+	return 0;
+    }
+
+    if (tsPid > 0)
+    {
+	// parent
+
+	if (master < 0)
+	    return 0;
+
+	Fl::lock();
+	logwin->clear();
+	logwin->show();
+
+	Fl::add_fd( master, stdout_cb, this );
+	Fl::unlock();
+
+	int status;
+	waitpid( tsPid, &status, 0 );
+
+	return 0;
+    }
+    else
+    {
+	// child
+
+	if (master >= 0)
+	    close( master );
+
+	const int buflen = FL_PATH_MAX;
+	char buf[ buflen ];
+	prefs.get( "fg_exe", buf, "", buflen-1);
+
+	char *p = strrchr( buf, '/' );
+	if ( p == 0 )
+	    strcpy( buf, "terrasync" );
+	else
+	    strcpy( p + 1, "terrasync" );
+
+	string path = buf;
+	string arg0;
+	string::size_type idx = path.find_last_of( "/\\" );
+	if (idx != string::npos)
+	{
+	    arg0 = path.substr( idx+1 );
+	}
+	else
+	{
+	    arg0 = path;
+	}
+	vector<string> argv;
+	argv.push_back( arg0 );
+
+	int iVal;
+	prefs.get( "ts_dir", iVal, 0 );
+	if ( iVal == 0 )
+	    return 1;
+
+	prefs.get( "fg_scenery", buf, "", buflen-1 );
+	string_list dirlist = sgPathSplit( buf );
+	if ( dirlist.empty() )
+	    return 1;
+
+	std::cout << iVal << " - '" << dirlist[iVal-1] << "'" << std::endl;
+
+	int port;
+	prefs.get( "terrasync_port", port, 5505 );
+	std::ostringstream oss;
+	oss << port;
+
+	argv.push_back( "-S" );
+	argv.push_back( "-d" );
+	argv.push_back( dirlist[iVal-1] );
+	argv.push_back( "-p" );
+	argv.push_back( oss.str() );
+
+	char **pt = new char *[argv.size() + 1];
+	for ( vector<string>::size_type i = 0; i < argv.size(); i++ )
+	{
+	    pt[i] = new char[ argv[i].size()+1 ];
+	    strcpy( pt[i], argv[i].c_str() );
+	}
+	pt[argv.size()] = NULL;
+	execv( path.c_str(), pt );
+	perror("execv :");
+    }
+
+    return 0;
 }
 
 void
@@ -194,9 +297,6 @@ Wizard::stdout_cb( int fd )
     {
 	Fl::remove_fd( fd );
 	close( fd );
-
-	int status;
-	int pid = wait( &status );
     }
 }
 
