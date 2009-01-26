@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 11:13+0100\n"
+"Report-Msgid-Bugs-To: fredb@users.sourceforge.net\n"
+"POT-Creation-Date: 2009-01-26 08:21+0100\n"
 "PO-Revision-Date: 2008-01-19 17:30+0100\n"
 "Last-Translator: Stefan <fgfs.stefan@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -292,7 +292,7 @@ msgstr "Startbaan:"
 msgid "Aircraft:"
 msgstr "Vliegtuigen:"
 
-#: src/advanced.cxx:737 src/wizard.cxx:620 src/advanced_funcs.cxx:193
+#: src/advanced.cxx:737 src/advanced_funcs.cxx:193 src/wizard.cxx:620
 msgid "Features"
 msgstr ""
 
@@ -1133,6 +1133,203 @@ msgstr "Breedte (m):"
 msgid "Transition (ft):"
 msgstr "Overgang (voet):"
 
+#: src/advanced_funcs.cxx:105 src/wizard_funcs.cxx:76
+msgid "noon"
+msgstr "middag"
+
+#: src/advanced_funcs.cxx:106 src/wizard_funcs.cxx:77
+msgid "dusk"
+msgstr "schemering"
+
+#: src/advanced_funcs.cxx:107 src/wizard_funcs.cxx:78
+msgid "midnight"
+msgstr "middernacht"
+
+#: src/advanced_funcs.cxx:108 src/wizard_funcs.cxx:79
+msgid "dawn"
+msgstr "ochtend"
+
+#: src/advanced_funcs.cxx:113
+msgid "bulk"
+msgstr "massa"
+
+# betere suggesties welkom
+#: src/advanced_funcs.cxx:114
+msgid "debug"
+msgstr ""
+
+# geen vertaling nodig -- niet goed te vertalen
+#: src/advanced_funcs.cxx:115
+msgid "info"
+msgstr ""
+
+# geen vertaling nodig -- zelfde in NL
+#: src/advanced_funcs.cxx:116
+msgid "warn"
+msgstr "waarschuwing"
+
+#: src/advanced_funcs.cxx:117
+msgid "alert"
+msgstr "ernstige waarschuwing"
+
+#: src/advanced_funcs.cxx:122
+msgid "overcast"
+msgstr "geheel bewolkt"
+
+#: src/advanced_funcs.cxx:123
+msgid "broken"
+msgstr "gedeeltelijk bewolkt"
+
+#: src/advanced_funcs.cxx:124
+msgid "scattered"
+msgstr "hier een daar een wolk"
+
+#: src/advanced_funcs.cxx:125
+msgid "few"
+msgstr "weinig"
+
+#: src/advanced_funcs.cxx:126
+msgid "cirrus"
+msgstr "schapewolkjes"
+
+# betere suggesties welkom
+#: src/advanced_funcs.cxx:127
+msgid "clear"
+msgstr "wolkenvrij"
+
+#: src/advanced_funcs.cxx:132
+msgid "joystick"
+msgstr ""
+
+# geen vertaling nodig -- zelfde in NL
+#: src/advanced_funcs.cxx:133
+msgid "keyboard"
+msgstr "toetsenbord"
+
+#: src/advanced_funcs.cxx:134
+msgid "mouse"
+msgstr "muis"
+
+#: src/advanced_funcs.cxx:139
+msgid "no filtering"
+msgstr ""
+
+#: src/advanced_funcs.cxx:140
+msgid "2.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:141
+msgid "4.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:142
+msgid "8.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:143
+msgid "highest filtering"
+msgstr ""
+
+#: src/advanced_funcs.cxx:216
+msgid "Select browser"
+msgstr "Selecteer browser"
+
+#: src/advanced_funcs.cxx:271
+msgid "Select a preferences file"
+msgstr "Selecteer een voorkeuren-bestand"
+
+# betere suggesties welkom -- preferences vertalen?
+#: src/advanced_funcs.cxx:272
+msgid "XML Files(*.xml)"
+msgstr "XML Bestanden (*.xml)"
+
+#: src/AirportBrowser.cxx:83
+msgid "Runways"
+msgstr "Startbanen"
+
+#: src/AirportBrowser.cxx:88
+msgid "Parking"
+msgstr ""
+
+#: src/AirportBrowser.cxx:95
+msgid "Refresh"
+msgstr "Ververs"
+
+#: src/AirportBrowser.cxx:98
+msgid "Reload airports"
+msgstr "Herlaad vliegvelden"
+
+#: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:667
+#: src/wizard_funcs.cxx:2027
+msgid "<default>"
+msgstr "<standaard>"
+
+#: src/AirportBrowser.cxx:482
+msgid "gzopen error"
+msgstr ""
+
+# geen vertaling nodig -- niet goed te vertalen
+#: src/AirportTable.cxx:121
+msgid "ICAO Id"
+msgstr ""
+
+# geen vertaling nodig -- zelfde in NL
+#: src/AirportTable.cxx:121
+msgid "Name"
+msgstr "Naam"
+
+#: src/fgfsrc.cxx:61
+#, c-format
+msgid "About to overwrite %s."
+msgstr "Ga bijna %s overschrijven"
+
+#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:746
+msgid "Abort"
+msgstr "Stop"
+
+#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:2256
+msgid "Overwrite"
+msgstr "Schrijf overheen"
+
+#: src/io.cxx:258
+msgid "Select protocol file"
+msgstr "Selecter protocol-bestand"
+
+#: src/logwin.cxx:32
+msgid "&File"
+msgstr "&Bestand"
+
+#: src/logwin.cxx:33
+msgid "&Save"
+msgstr "&Sla op"
+
+#: src/logwin.cxx:34
+msgid "&Close"
+msgstr "&Sluit"
+
+#: src/logwin.cxx:99
+msgid "Save file as?"
+msgstr "Sla bestand op als"
+
+#: src/main.cxx:129
+#, c-format
+msgid ""
+"Options are:\n"
+" --silent\n"
+" --fg-exe=<PATH>\n"
+" --fg-root=<DIR>\n"
+" --fg-scenery=<DIR>\n"
+" -f, --fullscreen\n"
+"%s"
+msgstr ""
+"Mogelijke opties:\n"
+" --silent\n"
+" --fg-exe=<PAD>\n"
+" --fg-root=<MAP>\n"
+" --fg-scenery=<MAP>\n"
+" -f, --fullscreen\n"
+"%s"
+
 # Geen vertaling nodig -- getallen
 #: src/wizard.cxx:116
 msgid "800x600"
@@ -1480,22 +1677,6 @@ msgstr ""
 msgid "Please send this error report to the Flightgear development team"
 msgstr ""
 
-#: src/wizard_funcs.cxx:76 src/advanced_funcs.cxx:105
-msgid "noon"
-msgstr "middag"
-
-#: src/wizard_funcs.cxx:77 src/advanced_funcs.cxx:106
-msgid "dusk"
-msgstr "schemering"
-
-#: src/wizard_funcs.cxx:78 src/advanced_funcs.cxx:107
-msgid "midnight"
-msgstr "middernacht"
-
-#: src/wizard_funcs.cxx:79 src/advanced_funcs.cxx:108
-msgid "dawn"
-msgstr "ochtend"
-
 #: src/wizard_funcs.cxx:84
 msgid "summer"
 msgstr ""
@@ -1585,11 +1766,6 @@ msgstr "Model niet gevonden: '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Property '/sim/model/path' niet gevonden"
 
-#: src/wizard_funcs.cxx:667 src/wizard_funcs.cxx:2026
-#: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95
-msgid "<default>"
-msgstr "<standaard>"
-
 #: src/wizard_funcs.cxx:723
 msgid "Run"
 msgstr "Start"
@@ -1597,10 +1773,6 @@ msgstr "Start"
 #: src/wizard_funcs.cxx:746
 msgid "About to reset current parameters"
 msgstr "Sta op het punt huidige parameters te resetten"
-
-#: src/wizard_funcs.cxx:746 src/fgfsrc.cxx:61
-msgid "Abort"
-msgstr "Stop"
 
 #: src/wizard_funcs.cxx:746
 msgid "Reset"
@@ -1640,195 +1812,23 @@ msgstr "Beschrijving van "
 msgid "TerraSync directory not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2169
+#: src/wizard_funcs.cxx:2170
 msgid "Load settings from..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2251
+#: src/wizard_funcs.cxx:2252
 msgid "Save settings as..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2255
+#: src/wizard_funcs.cxx:2256
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2255 src/fgfsrc.cxx:61
-msgid "Overwrite"
-msgstr "Schrijf overheen"
-
-#: src/wizard_funcs.cxx:2255
+#: src/wizard_funcs.cxx:2256
 #, fuzzy
 msgid "Don't overwrite"
 msgstr "Schrijf overheen"
-
-#: src/advanced_funcs.cxx:113
-msgid "bulk"
-msgstr "massa"
-
-# betere suggesties welkom
-#: src/advanced_funcs.cxx:114
-msgid "debug"
-msgstr ""
-
-# geen vertaling nodig -- niet goed te vertalen
-#: src/advanced_funcs.cxx:115
-msgid "info"
-msgstr ""
-
-# geen vertaling nodig -- zelfde in NL
-#: src/advanced_funcs.cxx:116
-msgid "warn"
-msgstr "waarschuwing"
-
-#: src/advanced_funcs.cxx:117
-msgid "alert"
-msgstr "ernstige waarschuwing"
-
-#: src/advanced_funcs.cxx:122
-msgid "overcast"
-msgstr "geheel bewolkt"
-
-#: src/advanced_funcs.cxx:123
-msgid "broken"
-msgstr "gedeeltelijk bewolkt"
-
-#: src/advanced_funcs.cxx:124
-msgid "scattered"
-msgstr "hier een daar een wolk"
-
-#: src/advanced_funcs.cxx:125
-msgid "few"
-msgstr "weinig"
-
-#: src/advanced_funcs.cxx:126
-msgid "cirrus"
-msgstr "schapewolkjes"
-
-# betere suggesties welkom
-#: src/advanced_funcs.cxx:127
-msgid "clear"
-msgstr "wolkenvrij"
-
-#: src/advanced_funcs.cxx:132
-msgid "joystick"
-msgstr ""
-
-# geen vertaling nodig -- zelfde in NL
-#: src/advanced_funcs.cxx:133
-msgid "keyboard"
-msgstr "toetsenbord"
-
-#: src/advanced_funcs.cxx:134
-msgid "mouse"
-msgstr "muis"
-
-#: src/advanced_funcs.cxx:139
-msgid "no filtering"
-msgstr ""
-
-#: src/advanced_funcs.cxx:140
-msgid "2.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:141
-msgid "4.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:142
-msgid "8.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:143
-msgid "highest filtering"
-msgstr ""
-
-#: src/advanced_funcs.cxx:216
-msgid "Select browser"
-msgstr "Selecteer browser"
-
-#: src/advanced_funcs.cxx:271
-msgid "Select a preferences file"
-msgstr "Selecteer een voorkeuren-bestand"
-
-# betere suggesties welkom -- preferences vertalen?
-#: src/advanced_funcs.cxx:272
-msgid "XML Files(*.xml)"
-msgstr "XML Bestanden (*.xml)"
-
-#: src/AirportBrowser.cxx:83
-msgid "Runways"
-msgstr "Startbanen"
-
-#: src/AirportBrowser.cxx:88
-msgid "Parking"
-msgstr ""
-
-#: src/AirportBrowser.cxx:95
-msgid "Refresh"
-msgstr "Ververs"
-
-#: src/AirportBrowser.cxx:98
-msgid "Reload airports"
-msgstr "Herlaad vliegvelden"
-
-#: src/AirportBrowser.cxx:482
-msgid "gzopen error"
-msgstr ""
-
-# geen vertaling nodig -- niet goed te vertalen
-#: src/AirportTable.cxx:121
-msgid "ICAO Id"
-msgstr ""
-
-# geen vertaling nodig -- zelfde in NL
-#: src/AirportTable.cxx:121
-msgid "Name"
-msgstr "Naam"
-
-#: src/fgfsrc.cxx:61
-#, c-format
-msgid "About to overwrite %s."
-msgstr "Ga bijna %s overschrijven"
-
-#: src/logwin.cxx:32
-msgid "&File"
-msgstr "&Bestand"
-
-#: src/logwin.cxx:33
-msgid "&Save"
-msgstr "&Sla op"
-
-#: src/logwin.cxx:34
-msgid "&Close"
-msgstr "&Sluit"
-
-#: src/logwin.cxx:99
-msgid "Save file as?"
-msgstr "Sla bestand op als"
-
-#: src/io.cxx:258
-msgid "Select protocol file"
-msgstr "Selecter protocol-bestand"
-
-#: src/main.cxx:129
-#, c-format
-msgid ""
-"Options are:\n"
-" --silent\n"
-" --fg-exe=<PATH>\n"
-" --fg-root=<DIR>\n"
-" --fg-scenery=<DIR>\n"
-" -f, --fullscreen\n"
-"%s"
-msgstr ""
-"Mogelijke opties:\n"
-" --silent\n"
-" --fg-exe=<PAD>\n"
-" --fg-root=<MAP>\n"
-" --fg-scenery=<MAP>\n"
-" -f, --fullscreen\n"
-"%s"
 
 #~ msgid "Game mode ( Fullscreen )"
 #~ msgstr "Spel mode (volledig scherm)"

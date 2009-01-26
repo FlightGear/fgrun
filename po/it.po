@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 11:13+0100\n"
+"Report-Msgid-Bugs-To: fredb@users.sourceforge.net\n"
+"POT-Creation-Date: 2009-01-26 08:21+0100\n"
 "PO-Revision-Date: 2008-02-05 00:02+0100\n"
 "Last-Translator: Andrea Vezzali <vezza@inwind.it>\n"
 "Language-Team: Italian\n"
@@ -249,7 +249,7 @@ msgstr "Pista:"
 msgid "Aircraft:"
 msgstr "Aeromobile:"
 
-#: src/advanced.cxx:737 src/wizard.cxx:620 src/advanced_funcs.cxx:193
+#: src/advanced.cxx:737 src/advanced_funcs.cxx:193 src/wizard.cxx:620
 msgid "Features"
 msgstr "Caratteristiche"
 
@@ -1024,6 +1024,196 @@ msgstr "Larghezza (m):"
 msgid "Transition (ft):"
 msgstr "Transizione (ft):"
 
+#: src/advanced_funcs.cxx:105 src/wizard_funcs.cxx:76
+msgid "noon"
+msgstr "Giorno"
+
+#: src/advanced_funcs.cxx:106 src/wizard_funcs.cxx:77
+msgid "dusk"
+msgstr "Tramonto"
+
+#: src/advanced_funcs.cxx:107 src/wizard_funcs.cxx:78
+msgid "midnight"
+msgstr "Mezzanotte"
+
+#: src/advanced_funcs.cxx:108 src/wizard_funcs.cxx:79
+msgid "dawn"
+msgstr "Alba"
+
+#: src/advanced_funcs.cxx:113
+msgid "bulk"
+msgstr "bulk"
+
+#: src/advanced_funcs.cxx:114
+msgid "debug"
+msgstr "debug"
+
+#: src/advanced_funcs.cxx:115
+msgid "info"
+msgstr "info"
+
+#: src/advanced_funcs.cxx:116
+msgid "warn"
+msgstr "warn"
+
+#: src/advanced_funcs.cxx:117
+msgid "alert"
+msgstr "alert"
+
+#: src/advanced_funcs.cxx:122
+msgid "overcast"
+msgstr "Coperto"
+
+#: src/advanced_funcs.cxx:123
+msgid "broken"
+msgstr "Nuvoloso"
+
+#: src/advanced_funcs.cxx:124
+msgid "scattered"
+msgstr "Poco nuvoloso"
+
+#: src/advanced_funcs.cxx:125
+msgid "few"
+msgstr "Velato"
+
+#: src/advanced_funcs.cxx:126
+msgid "cirrus"
+msgstr "Temporali"
+
+#: src/advanced_funcs.cxx:127
+msgid "clear"
+msgstr "Sereno"
+
+#: src/advanced_funcs.cxx:132
+msgid "joystick"
+msgstr "joystick"
+
+#: src/advanced_funcs.cxx:133
+msgid "keyboard"
+msgstr "Tastiera"
+
+#: src/advanced_funcs.cxx:134
+msgid "mouse"
+msgstr "mouse"
+
+#: src/advanced_funcs.cxx:139
+msgid "no filtering"
+msgstr ""
+
+#: src/advanced_funcs.cxx:140
+msgid "2.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:141
+msgid "4.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:142
+msgid "8.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:143
+msgid "highest filtering"
+msgstr ""
+
+#: src/advanced_funcs.cxx:216
+msgid "Select browser"
+msgstr "Seleziona browser"
+
+#: src/advanced_funcs.cxx:271
+msgid "Select a preferences file"
+msgstr "Seleziona file delle preferenze"
+
+#: src/advanced_funcs.cxx:272
+msgid "XML Files(*.xml)"
+msgstr "XML Files(*.xml)"
+
+#: src/AirportBrowser.cxx:83
+msgid "Runways"
+msgstr "Piste"
+
+#: src/AirportBrowser.cxx:88
+#, fuzzy
+msgid "Parking"
+msgstr "garmin"
+
+#: src/AirportBrowser.cxx:95
+msgid "Refresh"
+msgstr "Aggiorna"
+
+#: src/AirportBrowser.cxx:98
+msgid "Reload airports"
+msgstr "Ricarica Aeroporti"
+
+#: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:667
+#: src/wizard_funcs.cxx:2027
+msgid "<default>"
+msgstr "<default>"
+
+#: src/AirportBrowser.cxx:482
+msgid "gzopen error"
+msgstr "gzopen·error"
+
+#: src/AirportTable.cxx:121
+msgid "ICAO Id"
+msgstr "ICAO·Id"
+
+#: src/AirportTable.cxx:121
+msgid "Name"
+msgstr "Nome"
+
+#: src/fgfsrc.cxx:61
+#, c-format
+msgid "About to overwrite %s."
+msgstr "Sto per sovrascrivere·%s."
+
+#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:746
+msgid "Abort"
+msgstr "Annulla"
+
+#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:2256
+msgid "Overwrite"
+msgstr "Sovrascrivi"
+
+#: src/io.cxx:258
+msgid "Select protocol file"
+msgstr "Seleziona file del protocollo"
+
+#: src/logwin.cxx:32
+msgid "&File"
+msgstr "&File"
+
+#: src/logwin.cxx:33
+msgid "&Save"
+msgstr "&Salva"
+
+#: src/logwin.cxx:34
+msgid "&Close"
+msgstr "&Chiudi"
+
+#: src/logwin.cxx:99
+msgid "Save file as?"
+msgstr "Salva con nome..."
+
+#: src/main.cxx:129
+#, c-format
+msgid ""
+"Options are:\n"
+" --silent\n"
+" --fg-exe=<PATH>\n"
+" --fg-root=<DIR>\n"
+" --fg-scenery=<DIR>\n"
+" -f, --fullscreen\n"
+"%s"
+msgstr ""
+"Le opzioni sono:\n"
+"·--silent\n"
+"·--fg-exe=<PATH>\n"
+"·--fg-root=<DIR>\n"
+"·--fg-scenery=<DIR>\n"
+"·-f,·--fullscreen\n"
+"%s"
+
 #: src/wizard.cxx:116
 msgid "800x600"
 msgstr "800x600"
@@ -1353,22 +1543,6 @@ msgstr ""
 msgid "Please send this error report to the Flightgear development team"
 msgstr ""
 
-#: src/wizard_funcs.cxx:76 src/advanced_funcs.cxx:105
-msgid "noon"
-msgstr "Giorno"
-
-#: src/wizard_funcs.cxx:77 src/advanced_funcs.cxx:106
-msgid "dusk"
-msgstr "Tramonto"
-
-#: src/wizard_funcs.cxx:78 src/advanced_funcs.cxx:107
-msgid "midnight"
-msgstr "Mezzanotte"
-
-#: src/wizard_funcs.cxx:79 src/advanced_funcs.cxx:108
-msgid "dawn"
-msgstr "Alba"
-
 #: src/wizard_funcs.cxx:84
 msgid "summer"
 msgstr ""
@@ -1456,11 +1630,6 @@ msgstr "Modello non trovato: '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Proprietà '/sim/model/path' non trovata"
 
-#: src/wizard_funcs.cxx:667 src/wizard_funcs.cxx:2026
-#: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95
-msgid "<default>"
-msgstr "<default>"
-
 #: src/wizard_funcs.cxx:723
 msgid "Run"
 msgstr "Avvia"
@@ -1468,10 +1637,6 @@ msgstr "Avvia"
 #: src/wizard_funcs.cxx:746
 msgid "About to reset current parameters"
 msgstr "Sto per resettare i parametri correnti"
-
-#: src/wizard_funcs.cxx:746 src/fgfsrc.cxx:61
-msgid "Abort"
-msgstr "Annulla"
 
 #: src/wizard_funcs.cxx:746
 msgid "Reset"
@@ -1510,188 +1675,23 @@ msgstr "Descrizione di "
 msgid "TerraSync directory not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2169
+#: src/wizard_funcs.cxx:2170
 msgid "Load settings from..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2251
+#: src/wizard_funcs.cxx:2252
 msgid "Save settings as..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2255
+#: src/wizard_funcs.cxx:2256
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2255 src/fgfsrc.cxx:61
-msgid "Overwrite"
-msgstr "Sovrascrivi"
-
-#: src/wizard_funcs.cxx:2255
+#: src/wizard_funcs.cxx:2256
 #, fuzzy
 msgid "Don't overwrite"
 msgstr "Sovrascrivi"
-
-#: src/advanced_funcs.cxx:113
-msgid "bulk"
-msgstr "bulk"
-
-#: src/advanced_funcs.cxx:114
-msgid "debug"
-msgstr "debug"
-
-#: src/advanced_funcs.cxx:115
-msgid "info"
-msgstr "info"
-
-#: src/advanced_funcs.cxx:116
-msgid "warn"
-msgstr "warn"
-
-#: src/advanced_funcs.cxx:117
-msgid "alert"
-msgstr "alert"
-
-#: src/advanced_funcs.cxx:122
-msgid "overcast"
-msgstr "Coperto"
-
-#: src/advanced_funcs.cxx:123
-msgid "broken"
-msgstr "Nuvoloso"
-
-#: src/advanced_funcs.cxx:124
-msgid "scattered"
-msgstr "Poco nuvoloso"
-
-#: src/advanced_funcs.cxx:125
-msgid "few"
-msgstr "Velato"
-
-#: src/advanced_funcs.cxx:126
-msgid "cirrus"
-msgstr "Temporali"
-
-#: src/advanced_funcs.cxx:127
-msgid "clear"
-msgstr "Sereno"
-
-#: src/advanced_funcs.cxx:132
-msgid "joystick"
-msgstr "joystick"
-
-#: src/advanced_funcs.cxx:133
-msgid "keyboard"
-msgstr "Tastiera"
-
-#: src/advanced_funcs.cxx:134
-msgid "mouse"
-msgstr "mouse"
-
-#: src/advanced_funcs.cxx:139
-msgid "no filtering"
-msgstr ""
-
-#: src/advanced_funcs.cxx:140
-msgid "2.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:141
-msgid "4.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:142
-msgid "8.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:143
-msgid "highest filtering"
-msgstr ""
-
-#: src/advanced_funcs.cxx:216
-msgid "Select browser"
-msgstr "Seleziona browser"
-
-#: src/advanced_funcs.cxx:271
-msgid "Select a preferences file"
-msgstr "Seleziona file delle preferenze"
-
-#: src/advanced_funcs.cxx:272
-msgid "XML Files(*.xml)"
-msgstr "XML Files(*.xml)"
-
-#: src/AirportBrowser.cxx:83
-msgid "Runways"
-msgstr "Piste"
-
-#: src/AirportBrowser.cxx:88
-#, fuzzy
-msgid "Parking"
-msgstr "garmin"
-
-#: src/AirportBrowser.cxx:95
-msgid "Refresh"
-msgstr "Aggiorna"
-
-#: src/AirportBrowser.cxx:98
-msgid "Reload airports"
-msgstr "Ricarica Aeroporti"
-
-#: src/AirportBrowser.cxx:482
-msgid "gzopen error"
-msgstr "gzopen·error"
-
-#: src/AirportTable.cxx:121
-msgid "ICAO Id"
-msgstr "ICAO·Id"
-
-#: src/AirportTable.cxx:121
-msgid "Name"
-msgstr "Nome"
-
-#: src/fgfsrc.cxx:61
-#, c-format
-msgid "About to overwrite %s."
-msgstr "Sto per sovrascrivere·%s."
-
-#: src/logwin.cxx:32
-msgid "&File"
-msgstr "&File"
-
-#: src/logwin.cxx:33
-msgid "&Save"
-msgstr "&Salva"
-
-#: src/logwin.cxx:34
-msgid "&Close"
-msgstr "&Chiudi"
-
-#: src/logwin.cxx:99
-msgid "Save file as?"
-msgstr "Salva con nome..."
-
-#: src/io.cxx:258
-msgid "Select protocol file"
-msgstr "Seleziona file del protocollo"
-
-#: src/main.cxx:129
-#, c-format
-msgid ""
-"Options are:\n"
-" --silent\n"
-" --fg-exe=<PATH>\n"
-" --fg-root=<DIR>\n"
-" --fg-scenery=<DIR>\n"
-" -f, --fullscreen\n"
-"%s"
-msgstr ""
-"Le opzioni sono:\n"
-"·--silent\n"
-"·--fg-exe=<PATH>\n"
-"·--fg-root=<DIR>\n"
-"·--fg-scenery=<DIR>\n"
-"·-f,·--fullscreen\n"
-"%s"
 
 #~ msgid "Game mode ( Fullscreen )"
 #~ msgstr "Game mode (Tutto Schermo)"

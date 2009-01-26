@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 11:13+0100\n"
+"Report-Msgid-Bugs-To: fredb@users.sourceforge.net\n"
+"POT-Creation-Date: 2009-01-26 08:21+0100\n"
 "PO-Revision-Date: 2008-01-05 19:05+0100\n"
 "Last-Translator: <fredb@users.sourceforge.net>\n"
 "Language-Team: French\n"
@@ -250,7 +250,7 @@ msgstr "Piste:"
 msgid "Aircraft:"
 msgstr "Aéronef:"
 
-#: src/advanced.cxx:737 src/wizard.cxx:620 src/advanced_funcs.cxx:193
+#: src/advanced.cxx:737 src/advanced_funcs.cxx:193 src/wizard.cxx:620
 msgid "Features"
 msgstr "Caractéristiques"
 
@@ -1024,6 +1024,195 @@ msgstr "Etendue (m):"
 msgid "Transition (ft):"
 msgstr "Transition (ft):"
 
+#: src/advanced_funcs.cxx:105 src/wizard_funcs.cxx:76
+msgid "noon"
+msgstr "midi"
+
+#: src/advanced_funcs.cxx:106 src/wizard_funcs.cxx:77
+msgid "dusk"
+msgstr "crépuscule"
+
+#: src/advanced_funcs.cxx:107 src/wizard_funcs.cxx:78
+msgid "midnight"
+msgstr "minuit"
+
+#: src/advanced_funcs.cxx:108 src/wizard_funcs.cxx:79
+msgid "dawn"
+msgstr "aurore"
+
+#: src/advanced_funcs.cxx:113
+msgid "bulk"
+msgstr "tout-venant"
+
+#: src/advanced_funcs.cxx:114
+msgid "debug"
+msgstr "déboguage"
+
+#: src/advanced_funcs.cxx:115
+msgid "info"
+msgstr "information"
+
+#: src/advanced_funcs.cxx:116
+msgid "warn"
+msgstr "avertissement"
+
+#: src/advanced_funcs.cxx:117
+msgid "alert"
+msgstr "alerte"
+
+#: src/advanced_funcs.cxx:122
+msgid "overcast"
+msgstr "couvert"
+
+#: src/advanced_funcs.cxx:123
+msgid "broken"
+msgstr "fragmenté"
+
+#: src/advanced_funcs.cxx:124
+msgid "scattered"
+msgstr "épars"
+
+#: src/advanced_funcs.cxx:125
+msgid "few"
+msgstr "peu"
+
+#: src/advanced_funcs.cxx:126
+msgid "cirrus"
+msgstr "cirrus"
+
+#: src/advanced_funcs.cxx:127
+msgid "clear"
+msgstr "ciel clair"
+
+#: src/advanced_funcs.cxx:132
+msgid "joystick"
+msgstr "manette"
+
+#: src/advanced_funcs.cxx:133
+msgid "keyboard"
+msgstr "clavier"
+
+#: src/advanced_funcs.cxx:134
+msgid "mouse"
+msgstr "souris"
+
+#: src/advanced_funcs.cxx:139
+msgid "no filtering"
+msgstr "pas de filtrage"
+
+#: src/advanced_funcs.cxx:140
+msgid "2.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:141
+msgid "4.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:142
+msgid "8.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:143
+msgid "highest filtering"
+msgstr "filtrage maxi"
+
+#: src/advanced_funcs.cxx:216
+msgid "Select browser"
+msgstr "Choisir un navigateur"
+
+#: src/advanced_funcs.cxx:271
+msgid "Select a preferences file"
+msgstr "Choisir un fichier de préférence"
+
+#: src/advanced_funcs.cxx:272
+msgid "XML Files(*.xml)"
+msgstr "Fichiers XML(*.xml)"
+
+#: src/AirportBrowser.cxx:83
+msgid "Runways"
+msgstr "Pistes"
+
+#: src/AirportBrowser.cxx:88
+msgid "Parking"
+msgstr "Parking"
+
+#: src/AirportBrowser.cxx:95
+msgid "Refresh"
+msgstr "Rafraîchir"
+
+#: src/AirportBrowser.cxx:98
+msgid "Reload airports"
+msgstr "Recharcher les aéroports"
+
+#: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:667
+#: src/wizard_funcs.cxx:2027
+msgid "<default>"
+msgstr ""
+
+#: src/AirportBrowser.cxx:482
+msgid "gzopen error"
+msgstr "Erreur gzopen"
+
+#: src/AirportTable.cxx:121
+msgid "ICAO Id"
+msgstr "Code OACI"
+
+#: src/AirportTable.cxx:121
+msgid "Name"
+msgstr "Nom"
+
+#: src/fgfsrc.cxx:61
+#, c-format
+msgid "About to overwrite %s."
+msgstr "Prêt à écraser %s"
+
+#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:746
+msgid "Abort"
+msgstr "Abandonner"
+
+#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:2256
+msgid "Overwrite"
+msgstr "Ecraser"
+
+#: src/io.cxx:258
+msgid "Select protocol file"
+msgstr "Choisir un fichier de protocole"
+
+#: src/logwin.cxx:32
+msgid "&File"
+msgstr "&Fichier"
+
+#: src/logwin.cxx:33
+msgid "&Save"
+msgstr "&Sauver"
+
+#: src/logwin.cxx:34
+msgid "&Close"
+msgstr "Fer&mer"
+
+#: src/logwin.cxx:99
+msgid "Save file as?"
+msgstr "Sauver sous ?"
+
+#: src/main.cxx:129
+#, c-format
+msgid ""
+"Options are:\n"
+" --silent\n"
+" --fg-exe=<PATH>\n"
+" --fg-root=<DIR>\n"
+" --fg-scenery=<DIR>\n"
+" -f, --fullscreen\n"
+"%s"
+msgstr ""
+"Les options sont:\n"
+" --silent\n"
+" --fg-exe=<PATH>\n"
+" --fg-root=<DIR>\n"
+" --fg-scenery=<DIR>\n"
+" -f, --fullscreen\n"
+"%s"
+
 #: src/wizard.cxx:116
 msgid "800x600"
 msgstr ""
@@ -1108,7 +1297,7 @@ msgstr "Enlever un répertoire de scène"
 
 #: src/wizard.cxx:464
 msgid "TerraSync directory"
-msgstr "Répertoires TerraSync"
+msgstr "Répertoire TerraSync"
 
 #: src/wizard.cxx:465
 msgid ""
@@ -1297,7 +1486,9 @@ msgstr "Remise à Zéro"
 msgid ""
 "Clear all selected options and return to the install situation. Useful if "
 "FGFS don't start anymore."
-msgstr "Efface toutes les options sélectionnées et revient à la situation de l'installation. Utile si FGFS ne démarre plus."
+msgstr ""
+"Efface toutes les options sélectionnées et revient à la situation de "
+"l'installation. Utile si FGFS ne démarre plus."
 
 #: src/wizard.cxx:782
 msgid "Save As..."
@@ -1352,22 +1543,6 @@ msgstr "Un rapport d'erreur a été généré dans le fichier suivant :"
 msgid "Please send this error report to the Flightgear development team"
 msgstr ""
 "Merci d'envoyer ce rapport d'erreur à l'équipe de développement de Flightgear"
-
-#: src/wizard_funcs.cxx:76 src/advanced_funcs.cxx:105
-msgid "noon"
-msgstr "midi"
-
-#: src/wizard_funcs.cxx:77 src/advanced_funcs.cxx:106
-msgid "dusk"
-msgstr "crépuscule"
-
-#: src/wizard_funcs.cxx:78 src/advanced_funcs.cxx:107
-msgid "midnight"
-msgstr "minuit"
-
-#: src/wizard_funcs.cxx:79 src/advanced_funcs.cxx:108
-msgid "dawn"
-msgstr "aurore"
 
 #: src/wizard_funcs.cxx:84
 msgid "summer"
@@ -1456,11 +1631,6 @@ msgstr "Modèle non trouvé : '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Propriété '/sim/model/path' non trouvée"
 
-#: src/wizard_funcs.cxx:667 src/wizard_funcs.cxx:2026
-#: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95
-msgid "<default>"
-msgstr ""
-
 #: src/wizard_funcs.cxx:723
 msgid "Run"
 msgstr "Lancer"
@@ -1468,10 +1638,6 @@ msgstr "Lancer"
 #: src/wizard_funcs.cxx:746
 msgid "About to reset current parameters"
 msgstr "Prêt à mettre à zéro les paramètres courants"
-
-#: src/wizard_funcs.cxx:746 src/fgfsrc.cxx:61
-msgid "Abort"
-msgstr "Abandonner"
 
 #: src/wizard_funcs.cxx:746
 msgid "Reset"
@@ -1510,186 +1676,22 @@ msgstr "Description de "
 msgid "TerraSync directory not set"
 msgstr "Répertoire TerraSync non positionné"
 
-#: src/wizard_funcs.cxx:2169
+#: src/wizard_funcs.cxx:2170
 msgid "Load settings from..."
 msgstr "Charger les paramètres..."
 
-#: src/wizard_funcs.cxx:2251
+#: src/wizard_funcs.cxx:2252
 msgid "Save settings as..."
 msgstr "Sauver les paramètres sous..."
 
-#: src/wizard_funcs.cxx:2255
+#: src/wizard_funcs.cxx:2256
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr "Le fichier \"%s\" existe déjà"
 
-#: src/wizard_funcs.cxx:2255 src/fgfsrc.cxx:61
-msgid "Overwrite"
-msgstr "Ecraser"
-
-#: src/wizard_funcs.cxx:2255
+#: src/wizard_funcs.cxx:2256
 msgid "Don't overwrite"
 msgstr "Ne pas écraser"
-
-#: src/advanced_funcs.cxx:113
-msgid "bulk"
-msgstr "tout-venant"
-
-#: src/advanced_funcs.cxx:114
-msgid "debug"
-msgstr "déboguage"
-
-#: src/advanced_funcs.cxx:115
-msgid "info"
-msgstr "information"
-
-#: src/advanced_funcs.cxx:116
-msgid "warn"
-msgstr "avertissement"
-
-#: src/advanced_funcs.cxx:117
-msgid "alert"
-msgstr "alerte"
-
-#: src/advanced_funcs.cxx:122
-msgid "overcast"
-msgstr "couvert"
-
-#: src/advanced_funcs.cxx:123
-msgid "broken"
-msgstr "fragmenté"
-
-#: src/advanced_funcs.cxx:124
-msgid "scattered"
-msgstr "épars"
-
-#: src/advanced_funcs.cxx:125
-msgid "few"
-msgstr "peu"
-
-#: src/advanced_funcs.cxx:126
-msgid "cirrus"
-msgstr "cirrus"
-
-#: src/advanced_funcs.cxx:127
-msgid "clear"
-msgstr "ciel clair"
-
-#: src/advanced_funcs.cxx:132
-msgid "joystick"
-msgstr "manette"
-
-#: src/advanced_funcs.cxx:133
-msgid "keyboard"
-msgstr "clavier"
-
-#: src/advanced_funcs.cxx:134
-msgid "mouse"
-msgstr "souris"
-
-#: src/advanced_funcs.cxx:139
-msgid "no filtering"
-msgstr "pas de filtrage"
-
-#: src/advanced_funcs.cxx:140
-msgid "2.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:141
-msgid "4.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:142
-msgid "8.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:143
-msgid "highest filtering"
-msgstr "filtrage maxi"
-
-#: src/advanced_funcs.cxx:216
-msgid "Select browser"
-msgstr "Choisir un navigateur"
-
-#: src/advanced_funcs.cxx:271
-msgid "Select a preferences file"
-msgstr "Choisir un fichier de préférence"
-
-#: src/advanced_funcs.cxx:272
-msgid "XML Files(*.xml)"
-msgstr "Fichiers XML(*.xml)"
-
-#: src/AirportBrowser.cxx:83
-msgid "Runways"
-msgstr "Pistes"
-
-#: src/AirportBrowser.cxx:88
-msgid "Parking"
-msgstr "Parking"
-
-#: src/AirportBrowser.cxx:95
-msgid "Refresh"
-msgstr "Rafraîchir"
-
-#: src/AirportBrowser.cxx:98
-msgid "Reload airports"
-msgstr "Recharcher les aéroports"
-
-#: src/AirportBrowser.cxx:482
-msgid "gzopen error"
-msgstr "Erreur gzopen"
-
-#: src/AirportTable.cxx:121
-msgid "ICAO Id"
-msgstr "Code OACI"
-
-#: src/AirportTable.cxx:121
-msgid "Name"
-msgstr "Nom"
-
-#: src/fgfsrc.cxx:61
-#, c-format
-msgid "About to overwrite %s."
-msgstr "Prêt à écraser %s"
-
-#: src/logwin.cxx:32
-msgid "&File"
-msgstr "&Fichier"
-
-#: src/logwin.cxx:33
-msgid "&Save"
-msgstr "&Sauver"
-
-#: src/logwin.cxx:34
-msgid "&Close"
-msgstr "Fer&mer"
-
-#: src/logwin.cxx:99
-msgid "Save file as?"
-msgstr "Sauver sous ?"
-
-#: src/io.cxx:258
-msgid "Select protocol file"
-msgstr "Choisir un fichier de protocole"
-
-#: src/main.cxx:129
-#, c-format
-msgid ""
-"Options are:\n"
-" --silent\n"
-" --fg-exe=<PATH>\n"
-" --fg-root=<DIR>\n"
-" --fg-scenery=<DIR>\n"
-" -f, --fullscreen\n"
-"%s"
-msgstr ""
-"Les options sont:\n"
-" --silent\n"
-" --fg-exe=<PATH>\n"
-" --fg-root=<DIR>\n"
-" --fg-scenery=<DIR>\n"
-" -f, --fullscreen\n"
-"%s"
 
 #~ msgid "Game mode ( Fullscreen )"
 #~ msgstr "Mode jeu ( plein écran )"

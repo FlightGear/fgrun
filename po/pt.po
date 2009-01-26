@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.5.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 11:13+0100\n"
+"Report-Msgid-Bugs-To: fredb@users.sourceforge.net\n"
+"POT-Creation-Date: 2009-01-26 08:21+0100\n"
 "PO-Revision-Date: 2008-12-23 19:05+0100\n"
 "Last-Translator: <lizandrof@gmail.com>\n"
 "Language-Team: Portuguese\n"
@@ -250,7 +250,7 @@ msgstr "Pista:"
 msgid "Aircraft:"
 msgstr "Aeronave:"
 
-#: src/advanced.cxx:737 src/wizard.cxx:620 src/advanced_funcs.cxx:193
+#: src/advanced.cxx:737 src/advanced_funcs.cxx:193 src/wizard.cxx:620
 msgid "Features"
 msgstr "Características"
 
@@ -1034,6 +1034,195 @@ msgstr "Estensão (m):"
 msgid "Transition (ft):"
 msgstr "Transição (pés):"
 
+#: src/advanced_funcs.cxx:105 src/wizard_funcs.cxx:76
+msgid "noon"
+msgstr "meio-dia"
+
+#: src/advanced_funcs.cxx:106 src/wizard_funcs.cxx:77
+msgid "dusk"
+msgstr "crepúsculo"
+
+#: src/advanced_funcs.cxx:107 src/wizard_funcs.cxx:78
+msgid "midnight"
+msgstr "meia-noite"
+
+#: src/advanced_funcs.cxx:108 src/wizard_funcs.cxx:79
+msgid "dawn"
+msgstr "amanhecer"
+
+#: src/advanced_funcs.cxx:113
+msgid "bulk"
+msgstr "volume"
+
+#: src/advanced_funcs.cxx:114
+msgid "debug"
+msgstr "depurar"
+
+#: src/advanced_funcs.cxx:115
+msgid "info"
+msgstr "informação"
+
+#: src/advanced_funcs.cxx:116
+msgid "warn"
+msgstr "aviso"
+
+#: src/advanced_funcs.cxx:117
+msgid "alert"
+msgstr "alerta"
+
+#: src/advanced_funcs.cxx:122
+msgid "overcast"
+msgstr "nublado"
+
+#: src/advanced_funcs.cxx:123
+msgid "broken"
+msgstr "fragmentado"
+
+#: src/advanced_funcs.cxx:124
+msgid "scattered"
+msgstr "espalhado"
+
+#: src/advanced_funcs.cxx:125
+msgid "few"
+msgstr "pouca"
+
+#: src/advanced_funcs.cxx:126
+msgid "cirrus"
+msgstr "cirros"
+
+#: src/advanced_funcs.cxx:127
+msgid "clear"
+msgstr "limpo"
+
+#: src/advanced_funcs.cxx:132
+msgid "joystick"
+msgstr ""
+
+#: src/advanced_funcs.cxx:133
+msgid "keyboard"
+msgstr "teclado"
+
+#: src/advanced_funcs.cxx:134
+msgid "mouse"
+msgstr ""
+
+#: src/advanced_funcs.cxx:139
+msgid "no filtering"
+msgstr "sem filtragem"
+
+#: src/advanced_funcs.cxx:140
+msgid "2.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:141
+msgid "4.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:142
+msgid "8.0"
+msgstr ""
+
+#: src/advanced_funcs.cxx:143
+msgid "highest filtering"
+msgstr "maior filtragem"
+
+#: src/advanced_funcs.cxx:216
+msgid "Select browser"
+msgstr "Selecione um navegador"
+
+#: src/advanced_funcs.cxx:271
+msgid "Select a preferences file"
+msgstr "Selecione um arquivo de preferências"
+
+#: src/advanced_funcs.cxx:272
+msgid "XML Files(*.xml)"
+msgstr "Arquivos XML(*.xml)"
+
+#: src/AirportBrowser.cxx:83
+msgid "Runways"
+msgstr "Pistas"
+
+#: src/AirportBrowser.cxx:88
+msgid "Parking"
+msgstr "Estacionamento"
+
+#: src/AirportBrowser.cxx:95
+msgid "Refresh"
+msgstr "Recarregar"
+
+#: src/AirportBrowser.cxx:98
+msgid "Reload airports"
+msgstr "Recarregar aeroportos"
+
+#: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95 src/wizard_funcs.cxx:667
+#: src/wizard_funcs.cxx:2027
+msgid "<default>"
+msgstr "<padrão>"
+
+#: src/AirportBrowser.cxx:482
+msgid "gzopen error"
+msgstr "Erro gzopen"
+
+#: src/AirportTable.cxx:121
+msgid "ICAO Id"
+msgstr "Cod. ICAO"
+
+#: src/AirportTable.cxx:121
+msgid "Name"
+msgstr "Nome do Aeroporto"
+
+#: src/fgfsrc.cxx:61
+#, c-format
+msgid "About to overwrite %s."
+msgstr "Sobrescrever sob %s"
+
+#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:746
+msgid "Abort"
+msgstr "Cancelar"
+
+#: src/fgfsrc.cxx:61 src/wizard_funcs.cxx:2256
+msgid "Overwrite"
+msgstr "Sobrescrever"
+
+#: src/io.cxx:258
+msgid "Select protocol file"
+msgstr "Selecione um arquivo de protocolo"
+
+#: src/logwin.cxx:32
+msgid "&File"
+msgstr "&Arquivo"
+
+#: src/logwin.cxx:33
+msgid "&Save"
+msgstr "&Salvar"
+
+#: src/logwin.cxx:34
+msgid "&Close"
+msgstr "&Fechar"
+
+#: src/logwin.cxx:99
+msgid "Save file as?"
+msgstr "Salvar arquivo como ?"
+
+#: src/main.cxx:129
+#, c-format
+msgid ""
+"Options are:\n"
+" --silent\n"
+" --fg-exe=<PATH>\n"
+" --fg-root=<DIR>\n"
+" --fg-scenery=<DIR>\n"
+" -f, --fullscreen\n"
+"%s"
+msgstr ""
+"As opções são:\n"
+" --silent\n"
+" --fg-exe=<PATH>\n"
+" --fg-root=<DIR>\n"
+" --fg-scenery=<DIR>\n"
+" -f, --fullscreen\n"
+"%s"
+
 #: src/wizard.cxx:116
 msgid "800x600"
 msgstr ""
@@ -1360,22 +1549,6 @@ msgstr ""
 "Por favor envie este relatório de erro para o time de desenvolvimento do "
 "FlightGear"
 
-#: src/wizard_funcs.cxx:76 src/advanced_funcs.cxx:105
-msgid "noon"
-msgstr "meio-dia"
-
-#: src/wizard_funcs.cxx:77 src/advanced_funcs.cxx:106
-msgid "dusk"
-msgstr "crepúsculo"
-
-#: src/wizard_funcs.cxx:78 src/advanced_funcs.cxx:107
-msgid "midnight"
-msgstr "meia-noite"
-
-#: src/wizard_funcs.cxx:79 src/advanced_funcs.cxx:108
-msgid "dawn"
-msgstr "amanhecer"
-
 #: src/wizard_funcs.cxx:84
 msgid "summer"
 msgstr "verão"
@@ -1462,11 +1635,6 @@ msgstr "Modelo não encontrado : '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Propriedade '/sim/model/path' não encontrada"
 
-#: src/wizard_funcs.cxx:667 src/wizard_funcs.cxx:2026
-#: src/AirportBrowser.cxx:381 src/fgfsrc.cxx:95
-msgid "<default>"
-msgstr "<padrão>"
-
 #: src/wizard_funcs.cxx:723
 msgid "Run"
 msgstr "Executar"
@@ -1474,10 +1642,6 @@ msgstr "Executar"
 #: src/wizard_funcs.cxx:746
 msgid "About to reset current parameters"
 msgstr "Deseja redefinir os parâmetros para os padrões?"
-
-#: src/wizard_funcs.cxx:746 src/fgfsrc.cxx:61
-msgid "Abort"
-msgstr "Cancelar"
 
 #: src/wizard_funcs.cxx:746
 msgid "Reset"
@@ -1516,183 +1680,19 @@ msgstr "Descrição de "
 msgid "TerraSync directory not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2169
+#: src/wizard_funcs.cxx:2170
 msgid "Load settings from..."
 msgstr "Carregar configurações de..."
 
-#: src/wizard_funcs.cxx:2251
+#: src/wizard_funcs.cxx:2252
 msgid "Save settings as..."
 msgstr "Salvar configurações como..."
 
-#: src/wizard_funcs.cxx:2255
+#: src/wizard_funcs.cxx:2256
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr "O Arquivo \"%s\" já existe."
 
-#: src/wizard_funcs.cxx:2255 src/fgfsrc.cxx:61
-msgid "Overwrite"
-msgstr "Sobrescrever"
-
-#: src/wizard_funcs.cxx:2255
+#: src/wizard_funcs.cxx:2256
 msgid "Don't overwrite"
 msgstr "Não Sobrescrever"
-
-#: src/advanced_funcs.cxx:113
-msgid "bulk"
-msgstr "volume"
-
-#: src/advanced_funcs.cxx:114
-msgid "debug"
-msgstr "depurar"
-
-#: src/advanced_funcs.cxx:115
-msgid "info"
-msgstr "informação"
-
-#: src/advanced_funcs.cxx:116
-msgid "warn"
-msgstr "aviso"
-
-#: src/advanced_funcs.cxx:117
-msgid "alert"
-msgstr "alerta"
-
-#: src/advanced_funcs.cxx:122
-msgid "overcast"
-msgstr "nublado"
-
-#: src/advanced_funcs.cxx:123
-msgid "broken"
-msgstr "fragmentado"
-
-#: src/advanced_funcs.cxx:124
-msgid "scattered"
-msgstr "espalhado"
-
-#: src/advanced_funcs.cxx:125
-msgid "few"
-msgstr "pouca"
-
-#: src/advanced_funcs.cxx:126
-msgid "cirrus"
-msgstr "cirros"
-
-#: src/advanced_funcs.cxx:127
-msgid "clear"
-msgstr "limpo"
-
-#: src/advanced_funcs.cxx:132
-msgid "joystick"
-msgstr ""
-
-#: src/advanced_funcs.cxx:133
-msgid "keyboard"
-msgstr "teclado"
-
-#: src/advanced_funcs.cxx:134
-msgid "mouse"
-msgstr ""
-
-#: src/advanced_funcs.cxx:139
-msgid "no filtering"
-msgstr "sem filtragem"
-
-#: src/advanced_funcs.cxx:140
-msgid "2.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:141
-msgid "4.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:142
-msgid "8.0"
-msgstr ""
-
-#: src/advanced_funcs.cxx:143
-msgid "highest filtering"
-msgstr "maior filtragem"
-
-#: src/advanced_funcs.cxx:216
-msgid "Select browser"
-msgstr "Selecione um navegador"
-
-#: src/advanced_funcs.cxx:271
-msgid "Select a preferences file"
-msgstr "Selecione um arquivo de preferências"
-
-#: src/advanced_funcs.cxx:272
-msgid "XML Files(*.xml)"
-msgstr "Arquivos XML(*.xml)"
-
-#: src/AirportBrowser.cxx:83
-msgid "Runways"
-msgstr "Pistas"
-
-#: src/AirportBrowser.cxx:88
-msgid "Parking"
-msgstr "Estacionamento"
-
-#: src/AirportBrowser.cxx:95
-msgid "Refresh"
-msgstr "Recarregar"
-
-#: src/AirportBrowser.cxx:98
-msgid "Reload airports"
-msgstr "Recarregar aeroportos"
-
-#: src/AirportBrowser.cxx:482
-msgid "gzopen error"
-msgstr "Erro gzopen"
-
-#: src/AirportTable.cxx:121
-msgid "ICAO Id"
-msgstr "Cod. ICAO"
-
-#: src/AirportTable.cxx:121
-msgid "Name"
-msgstr "Nome do Aeroporto"
-
-#: src/fgfsrc.cxx:61
-#, c-format
-msgid "About to overwrite %s."
-msgstr "Sobrescrever sob %s"
-
-#: src/logwin.cxx:32
-msgid "&File"
-msgstr "&Arquivo"
-
-#: src/logwin.cxx:33
-msgid "&Save"
-msgstr "&Salvar"
-
-#: src/logwin.cxx:34
-msgid "&Close"
-msgstr "&Fechar"
-
-#: src/logwin.cxx:99
-msgid "Save file as?"
-msgstr "Salvar arquivo como ?"
-
-#: src/io.cxx:258
-msgid "Select protocol file"
-msgstr "Selecione um arquivo de protocolo"
-
-#: src/main.cxx:129
-#, c-format
-msgid ""
-"Options are:\n"
-" --silent\n"
-" --fg-exe=<PATH>\n"
-" --fg-root=<DIR>\n"
-" --fg-scenery=<DIR>\n"
-" -f, --fullscreen\n"
-"%s"
-msgstr ""
-"As opções são:\n"
-" --silent\n"
-" --fg-exe=<PATH>\n"
-" --fg-root=<DIR>\n"
-" --fg-scenery=<DIR>\n"
-" -f, --fullscreen\n"
-"%s"
