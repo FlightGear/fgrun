@@ -31,6 +31,7 @@
 #include <map>
 #include <sstream>
 #include <string.h>
+#include <cctype>
 #include <sys/stat.h>
 
 #include <FL/Fl.H>
@@ -49,6 +50,7 @@
 #include <osgDB/ReadFile>
 
 #include <plib/ul.h>
+#include <plib/netSocket.h>
 
 #include "wizard.h"
 #include "advanced.h"
@@ -312,6 +314,7 @@ Wizard::init( bool fullscreen )
 
     make_launch_window();
     make_crash_window();
+	make_prefetch_window();
 
     for (int i = 0; i < npages; ++i)
         page[i]->hide();
@@ -2296,4 +2299,89 @@ Wizard::exec_crash_window( const char *fname )
     crash_window->position( X + ( W - w ) / 2, Y + ( H - h ) / 2 );
     crash_window->set_modal();
     crash_window->show();
+}
+
+void
+Wizard::scenery_prefetch_cb()
+{
+    update_basic_options( prefs );
+    if ( terrasync->value() )
+    {
+	if ( exec_prefetch_window() )
+	{
+	    std::string apt_id = prefetch_apt->value();
+	    std::transform( apt_id.begin(), apt_id.end(), apt_id.begin(), (int(*)(int)) std::toupper );
+	    const apt_dat_t *apt = airports_->find( apt_id );
+	    if ( apt && stricmp( apt->id_.c_str(), prefetch_apt->value() ) == 0 )
+	    {
+		if (tsThread == 0)
+		    tsThread = new TerraSyncThread( this );
+		tsThread->start();
+		OpenThreads::Thread::microSleep( 500000 );
+
+		netSocket s;
+		if ( s.open( false ) )
+		{
+		    float lat = apt->lat_ * 100.0;
+		    char lats = 'N';
+		    if ( lat < 0.0 )
+		    {
+			lat = -lat;
+			lats = 'S';
+		    }
+		    float lon = apt->lon_ * 100.0;
+		    char lons = 'E';
+		    if ( lon < 0.0 )
+		    {
+			lon = -lon;
+			lons = 'W';
+		    }
+		    netAddress tsAddress( "localhost", (int)terrasync_port->value() );
+		    std::ostringstream oss;
+		    oss << "$GPGGA,," << lat << "," << lats << "," << lon << "," << lons << ",,,,,,,,,";
+		    s.sendto( oss.str().c_str(), oss.str().length(), 0, &tsAddress );
+		}
+	    }
+	    else
+	    {
+		fl_alert( _("Unknown airport : '%s'"), prefetch_apt->value() );
+	    }
+	}
+    }
+    else
+    {
+	fl_alert( _("TerraSync must be configured") );
+    }
+}
+
+bool
+Wizard::exec_prefetch_window()
+{
+    prefetch_result = -1;
+    int X = win->x(),
+        Y = win->y(),
+        W = win->w(),
+        H = win->h(),
+        w = prefetch_window->w(),
+        h = prefetch_window->h();
+    prefetch_window->position( X + ( W - w ) / 2, Y + ( H - h ) / 2 );
+    prefetch_window->set_modal();
+    prefetch_window->show();
+    while ( prefetch_result == -1 )
+	Fl::wait();
+    prefetch_window->set_non_modal();
+    prefetch_window->hide();
+    return prefetch_result != 0;
+}
+
+void
+Wizard::prefetch_ok_cb()
+{
+    prefetch_result = 1;
+}
+
+void
+Wizard::prefetch_cancel_cb()
+{
+    prefetch_result = 0;
 }

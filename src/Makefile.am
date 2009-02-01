@@ -34,7 +34,7 @@ fgrun_SOURCES = \
 	$(platform_srcs)
 
 simgear_libs = -lsgmodel -lsgmath -lsgscreen -lsgprops -lsgxml -lsgmisc -lsgdebug -lsgstructure -lsgutil
-plib_libs = -lplibsg -lplibul
+plib_libs = -lplibsg -lplibul -lplibnet
 
 fgrun_LDADD = $(simgear_libs) $(plib_libs)
 

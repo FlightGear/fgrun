@@ -22,7 +22,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.5.1\&quot; /DVERSION=\&quot;1.5.1\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.5.2\&quot; /DVERSION=\&quot;1.5.2\&quot;"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;..\..\..\fltk-1.1.7&quot;;..\..\..;..\..\..\SimGear;..\..\..\zlib;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;;&quot;..\..\..\zlib-1.2.3&quot;;..\..\..\gettext\include;..\..\..\install\msvc71\OpenSceneGraph\include;..\..\..\boost_1_36_0"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
@@ -39,7 +39,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib OpenThreadsd.lib dbghelp.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib net_d.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib OpenThreadsd.lib dbghelp.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="&quot;..\..\..\fltk-1.1.7\lib&quot;;..\..\..\SimGear\Debug;&quot;..\..\..\zlib-1.2.3&quot;;..\..\..\plib;..\..\..\gettext\lib;..\..\..\install\msvc71\OpenSceneGraph\lib"
@@ -84,7 +84,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.5.1\&quot; /DVERSION=\&quot;1.5.1\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.5.2\&quot; /DVERSION=\&quot;1.5.2\&quot;"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="&quot;..\..\..\fltk-1.1.7&quot;;..\..\..\SimGear;&quot;..\..\..\zlib-1.2.3&quot;;&quot;..\..\..\pthreads-w32-2-7-0-release&quot;;..\..\..\gettext\include;..\..\..;..\..\..\install\msvc71\OpenSceneGraph\include;..\..\..\boost_1_36_0"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS"
@@ -102,7 +102,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltk.lib fltkgl.lib ws2_32.lib comctl32.lib zlib.lib sg.lib ul.lib opengl32.lib winmm.lib osg.lib osgDB.lib osgGA.lib osgViewer.lib osgUtil.lib OpenThreads.lib intl.lib dbghelp.lib"
+				AdditionalDependencies="fltk.lib fltkgl.lib ws2_32.lib comctl32.lib zlib.lib sg.lib ul.lib net.lib opengl32.lib winmm.lib osg.lib osgDB.lib osgGA.lib osgViewer.lib osgUtil.lib OpenThreads.lib intl.lib dbghelp.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="&quot;..\..\..\fltk-1.1.7\lib&quot;;&quot;..\..\..\zlib-1.2.3&quot;;..\..\..\plib;..\..\..\install\msvc71\OpenSceneGraph\lib;..\..\..\gettext\lib"

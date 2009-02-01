@@ -104,6 +104,8 @@ public:
   Fl_Input *carrier_;
   Fl_Input *parkpos_;
 private:
+  void cb_Scenery_i(Fl_Button*, void*);
+  static void cb_Scenery(Fl_Button*, void*);
   void cb_Advanced_i(Fl_Button*, void*);
   static void cb_Advanced(Fl_Button*, void*);
   Fl_Check_Button *show_cmd_line;
@@ -324,5 +326,21 @@ private:
   long fgPid;
   long tsPid;
   void stopProcess( long pid );
+  Fl_Double_Window* make_prefetch_window();
+public:
+  Fl_Double_Window *prefetch_window;
+private:
+  void cb_Cancel_i(Fl_Button*, void*);
+  static void cb_Cancel(Fl_Button*, void*);
+  void cb_OK1_i(Fl_Button*, void*);
+  static void cb_OK1(Fl_Button*, void*);
+public:
+  Fl_Input *prefetch_apt;
+private:
+  int prefetch_result;
+  void scenery_prefetch_cb();
+  bool exec_prefetch_window();
+  void prefetch_ok_cb();
+  void prefetch_cancel_cb();
 };
 #endif

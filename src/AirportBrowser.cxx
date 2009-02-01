@@ -212,7 +212,7 @@ AirportBrowser::runways_idle_proc( )
         }
 
         int type_num = atoi(token);
-        if ( type_num == 1 || type_num == 16 || type_num == 17 )  // Its an airport or a seabase
+        if ( type_num == 1 || type_num == 16 || type_num == 17 )  // It's an airport, an heliport or a seabase
         {
             location = "";
 
@@ -252,14 +252,17 @@ AirportBrowser::runways_idle_proc( )
             if ( location.empty() )
             {
                 token = strtok(NULL, space);
-                double lat = strtod( token, 0 );
+                float lat = strtod( token, 0 );
                 token = strtok(NULL, space);
-                double lon = strtod( token, 0 );
+                float lon = strtod( token, 0 );
                 std::ostringstream os;
                 os << ( lon < 0 ? 'w' : 'e' ) << std::setfill('0') << std::setw( 3 ) << (int)fabs( floor( lon ) ) << ( lat < 0 ? 's' : 'n' ) << std::setfill( '0' ) << std::setw( 2 ) << (int)fabs( floor( lat ) );
                 location = os.str();
 
-                airports_by_tiles_[ location ].push_back( airports_.back().id_ );
+		apt_dat_t &apt = airports_.back();
+                airports_by_tiles_[ location ].push_back( apt.id_ );
+		apt.lon_ = lon;
+		apt.lat_ = lat;
             }
             else
             {

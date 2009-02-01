@@ -38,7 +38,7 @@ decl {class Advanced;} {public
 
 class Wizard {open
 } {
-  class FlightGearThread {open : {public OpenThreads::Thread}
+  class FlightGearThread {: {public OpenThreads::Thread}
   } {
     decl {FlightGearThread( Wizard *w );} {public
     }
@@ -49,7 +49,7 @@ class Wizard {open
     decl {FlightGearThread( const FlightGearThread &);} {}
     decl {FlightGearThread &operator=( const FlightGearThread &);} {}
   }
-  class TerraSyncThread {open : {public OpenThreads::Thread}
+  class TerraSyncThread {: {public OpenThreads::Thread}
   } {
     decl {TerraSyncThread( Wizard *w );} {public
     }
@@ -60,7 +60,8 @@ class Wizard {open
     decl {TerraSyncThread( const TerraSyncThread & );} {}
     decl {TerraSyncThread &operator=( const TerraSyncThread & );} {}
   }
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0)} {} {
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0)} {open
+  } {
     Fl_Window win {
       label {FlightGear Wizard} open
       private xywh {579 307 800 600} type Double visible
@@ -70,8 +71,8 @@ class Wizard {open
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths} open
-          xywh {0 0 800 560} labelfont 1 align 21
+          label {Select Paths}
+          xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
           Fl_Help_View about_ {
             private xywh {5 25 790 130} labeltype NO_LABEL
@@ -192,28 +193,37 @@ class Wizard {open
           }
         }
         Fl_Group {page[2]} {
-          label {Select a location}
-          private xywh {0 0 800 560} labelfont 1 align 21 hide
+          label {Select a location} open
+          private xywh {0 0 800 560} labelfont 1 align 21
         } {
           Fl_Box airports_ {
-            private xywh {5 25 790 480} resizable
+            private xywh {5 25 790 475} resizable
             code0 {\#include "AirportBrowser.h"}
             class AirportBrowser
           }
-          Fl_Group carrier_group {
-            label {Carrier Ops} open
-            xywh {5 510 790 45} box ENGRAVED_FRAME labelfont 1 align 21
+          Fl_Group {} {open
+            xywh {5 505 790 50}
           } {
-            Fl_Input carrier_ {
-              label {Carrier : }
-              xywh {200 525 175 25}
+            Fl_Group carrier_group {
+              label {Carrier Ops} open
+              xywh {5 505 635 50} box ENGRAVED_FRAME labelfont 1 align 21 resizable
+            } {
+              Fl_Input carrier_ {
+                label {Carrier : }
+                xywh {145 520 175 25}
+              }
+              Fl_Input parkpos_ {
+                label {Park pos :}
+                tooltip {Only valid if carrier is set. For airport parking, use the list above.} xywh {460 520 175 25}
+              }
+              Fl_Box {} {
+                xywh {640 505 0 5} resizable
+              }
             }
-            Fl_Input parkpos_ {
-              label {Park pos :}
-              tooltip {Only valid if carrier is set. For airport parking, use the list above.} xywh {540 525 175 25}
-            }
-            Fl_Box {} {
-              xywh {720 510 75 0} resizable
+            Fl_Button {} {
+              label {Scenery Prefetch}
+              callback {scenery_prefetch_cb();} selected
+              xywh {645 505 150 50} labelsize 12
             }
           }
         }
@@ -496,7 +506,7 @@ class Wizard {open
         }
         Fl_Button defaults {
           label Defaults
-          callback {defaults_cb();} selected
+          callback {defaults_cb();}
           tooltip {Clear all selected options and return to the install situation. Useful if FGFS don't start anymore.} xywh {5 570 125 25} labelsize 12
         }
         Fl_Button {} {
@@ -626,7 +636,7 @@ class Wizard {open
   } {
     Fl_Window crash_window {
       label {Flightgear crashed...} open
-      private xywh {-32000 -32000 455 240} type Double hide
+      private xywh {826 351 455 240} type Double visible
     } {
       Fl_Box {} {
         label {Flightgear encountered an unexpected failure}
@@ -664,4 +674,38 @@ class Wizard {open
   decl {long fgPid;} {}
   decl {long tsPid;} {}
   decl {void stopProcess( long pid );} {}
+  Function {make_prefetch_window()} {open private
+  } {
+    Fl_Window prefetch_window {
+      label {Prefetch Scenery} open
+      xywh {668 245 350 130} type Double visible
+    } {
+      Fl_Group {} {open
+        xywh {0 90 350 35}
+      } {
+        Fl_Button {} {
+          label Cancel
+          callback {prefetch_cancel_cb();}
+          xywh {265 95 80 25} labelsize 12
+        }
+        Fl_Button {} {
+          label OK
+          callback {prefetch_ok_cb();}
+          xywh {180 95 80 25}
+        }
+        Fl_Box {} {
+          xywh {10 95 165 25} resizable
+        }
+      }
+      Fl_Input prefetch_apt {
+        label {Airport to fetch : }
+        xywh {180 40 60 25}
+      }
+    }
+  }
+  decl {int prefetch_result;} {}
+  decl {void scenery_prefetch_cb();} {}
+  decl {bool exec_prefetch_window();} {}
+  decl {void prefetch_ok_cb();} {}
+  decl {void prefetch_cancel_cb();} {}
 } 

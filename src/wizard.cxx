@@ -91,6 +91,13 @@ void Wizard::cb_aircraft(Fl_Browser* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_aircraft_i(o,v);
 }
 
+void Wizard::cb_Scenery_i(Fl_Button*, void*) {
+  scenery_prefetch_cb();
+}
+void Wizard::cb_Scenery(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_Scenery_i(o,v);
+}
+
 void Wizard::cb_Advanced_i(Fl_Button*, void*) {
   advanced_cb();
 }
@@ -368,6 +375,20 @@ void Wizard::cb_OK(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->user_data()))->cb_OK_i(o,v);
 }
 
+void Wizard::cb_Cancel_i(Fl_Button*, void*) {
+  prefetch_cancel_cb();
+}
+void Wizard::cb_Cancel(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->user_data()))->cb_Cancel_i(o,v);
+}
+
+void Wizard::cb_OK1_i(Fl_Button*, void*) {
+  prefetch_ok_cb();
+}
+void Wizard::cb_OK1(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->user_data()))->cb_OK1_i(o,v);
+}
+
 Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0) {
   Fl_Double_Window* w;
   { Fl_Double_Window* o = win = new Fl_Double_Window(800, 600, _("FlightGear Wizard"));
@@ -377,6 +398,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { Fl_Group* o = page[0] = new Fl_Group(0, 0, 800, 560, _("Select Paths"));
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        o->hide();
         { Fl_Help_View* o = about_ = new Fl_Help_View(5, 25, 790, 130);
           o->labeltype(FL_NO_LABEL);
         }
@@ -515,8 +537,7 @@ ns that TerraSync is not used."));
       { Fl_Group* o = page[2] = new Fl_Group(0, 0, 800, 560, _("Select a location"));
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-        o->hide();
-        { AirportBrowser* o = airports_ = new AirportBrowser(5, 25, 790, 480);
+        { AirportBrowser* o = airports_ = new AirportBrowser(5, 25, 790, 475);
           o->box(FL_NO_BOX);
           o->color(FL_BACKGROUND_COLOR);
           o->selection_color(FL_BACKGROUND_COLOR);
@@ -528,16 +549,24 @@ ns that TerraSync is not used."));
           o->when(FL_WHEN_RELEASE);
           Fl_Group::current()->resizable(o);
         }
-        { Fl_Group* o = carrier_group = new Fl_Group(5, 510, 790, 45, _("Carrier Ops"));
-          o->box(FL_ENGRAVED_FRAME);
-          o->labelfont(1);
-          o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-          carrier_ = new Fl_Input(200, 525, 175, 25, _("Carrier : "));
-          { Fl_Input* o = parkpos_ = new Fl_Input(540, 525, 175, 25, _("Park pos :"));
-            o->tooltip(_("Only valid if carrier is set. For airport parking, use the list above."));
-          }
-          { Fl_Box* o = new Fl_Box(720, 510, 75, 0);
+        { Fl_Group* o = new Fl_Group(5, 505, 790, 50);
+          { Fl_Group* o = carrier_group = new Fl_Group(5, 505, 635, 50, _("Carrier Ops"));
+            o->box(FL_ENGRAVED_FRAME);
+            o->labelfont(1);
+            o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+            carrier_ = new Fl_Input(145, 520, 175, 25, _("Carrier : "));
+            { Fl_Input* o = parkpos_ = new Fl_Input(460, 520, 175, 25, _("Park pos :"));
+              o->tooltip(_("Only valid if carrier is set. For airport parking, use the list above."));
+            }
+            { Fl_Box* o = new Fl_Box(640, 505, 0, 5);
+              Fl_Group::current()->resizable(o);
+            }
+            o->end();
             Fl_Group::current()->resizable(o);
+          }
+          { Fl_Button* o = new Fl_Button(645, 505, 150, 50, _("Scenery Prefetch"));
+            o->labelsize(12);
+            o->callback((Fl_Callback*)cb_Scenery);
           }
           o->end();
         }
@@ -847,6 +876,30 @@ Fl_Double_Window* Wizard::make_crash_window() {
       o->labelsize(12);
       o->align(133|FL_ALIGN_INSIDE);
     }
+    o->end();
+  }
+  return w;
+}
+
+Fl_Double_Window* Wizard::make_prefetch_window() {
+  Fl_Double_Window* w;
+  { Fl_Double_Window* o = prefetch_window = new Fl_Double_Window(350, 130, _("Prefetch Scenery"));
+    w = o;
+    o->user_data((void*)(this));
+    { Fl_Group* o = new Fl_Group(0, 90, 350, 35);
+      { Fl_Button* o = new Fl_Button(265, 95, 80, 25, _("Cancel"));
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_Cancel);
+      }
+      { Fl_Button* o = new Fl_Button(180, 95, 80, 25, _("OK"));
+        o->callback((Fl_Callback*)cb_OK1);
+      }
+      { Fl_Box* o = new Fl_Box(10, 95, 165, 25);
+        Fl_Group::current()->resizable(o);
+      }
+      o->end();
+    }
+    prefetch_apt = new Fl_Input(180, 40, 60, 25, _("Airport to fetch : "));
     o->end();
   }
   return w;

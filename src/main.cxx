@@ -30,6 +30,7 @@
 
 #include <osgDB/Registry>
 #include <simgear/scene/model/ModelRegistry.hxx>
+#include <plib/netSocket.h>
 
 #include "wizard.h"
 #include "i18n.h"
@@ -101,12 +102,7 @@ get_locale_directory( const char *argv0 )
 int
 main( int argc, char* argv[] )
 {
-#ifdef _MSC_VER
-    WORD wVersionRequested;
-    WSADATA wsaData;
-    wVersionRequested = MAKEWORD( 2, 2 );
-    WSAStartup( wVersionRequested, &wsaData );
-#endif
+    netInit( &argc,argv );
     setlocale( LC_ALL, "" );
     string localedir = get_locale_directory( argv[0] );
     bindtextdomain( PACKAGE, localedir.c_str() );

@@ -15,6 +15,8 @@ struct apt_dat_t
     std::vector< std::string > runways_;
     std::set< std::string > parking_;
     int type_;
+    float lon_;
+    float lat_;
 };
 
 #endif // apt_dat_h_included

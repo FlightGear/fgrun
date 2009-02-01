@@ -123,6 +123,8 @@ public:
 
     void set_refresh_callback( Fl_Callback* cbp, void* v );
 
+    const apt_dat_t* find( const std::string& id ) const;
+
 protected:
 
     void draw();
@@ -138,7 +140,6 @@ private:
     static void refresh_cb( Fl_Widget*, void* );
     void refresh_cb();
 
-    const apt_dat_t* find( const std::string& id ) const;
 
     static void runways_idle_proc( void* );
     void runways_idle_proc();
