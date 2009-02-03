@@ -2312,7 +2312,7 @@ Wizard::scenery_prefetch_cb()
 	    std::string apt_id = prefetch_apt->value();
 	    std::transform( apt_id.begin(), apt_id.end(), apt_id.begin(), (int(*)(int)) std::toupper );
 	    const apt_dat_t *apt = airports_->find( apt_id );
-	    if ( apt && stricmp( apt->id_.c_str(), prefetch_apt->value() ) == 0 )
+	    if ( apt && strcasecmp( apt->id_.c_str(), prefetch_apt->value() ) == 0 )
 	    {
 		if (tsThread == 0)
 		    tsThread = new TerraSyncThread( this );
