@@ -1887,6 +1887,14 @@ Wizard::display_scenarii()
 }
 
 void
+Wizard::deselect_all_scenarii_cb()
+{
+    scenarii->deselect();
+    prefs.set("scenario-count", 0);
+    update_options();
+}
+
+void
 Wizard::show_cmd_line_cb()
 {
     if ( show_cmd_line->value() )

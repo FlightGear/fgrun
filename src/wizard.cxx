@@ -256,6 +256,13 @@ void Wizard::cb_scenarii(Fl_Browser* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_scenarii_i(o,v);
 }
 
+void Wizard::cb_Deselect_i(Fl_Button*, void*) {
+  deselect_all_scenarii_cb();
+}
+void Wizard::cb_Deselect(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_Deselect_i(o,v);
+}
+
 void Wizard::cb_terrasync_i(Fl_Check_Button*, void*) {
   terrasync_cb();
 }
@@ -537,6 +544,7 @@ ns that TerraSync is not used."));
       { Fl_Group* o = page[2] = new Fl_Group(0, 0, 800, 560, _("Select a location"));
         o->labelfont(1);
         o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+        o->hide();
         { AirportBrowser* o = airports_ = new AirportBrowser(5, 25, 790, 475);
           o->box(FL_NO_BOX);
           o->color(FL_BACKGROUND_COLOR);
@@ -573,7 +581,6 @@ ns that TerraSync is not used."));
         o->end();
       }
       { Fl_Group* o = page[3] = new Fl_Group(0, 0, 800, 560);
-        o->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
@@ -691,11 +698,14 @@ ns that TerraSync is not used."));
             o->box(FL_ENGRAVED_FRAME);
             o->labelfont(1);
             o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
-            { Fl_Browser* o = scenarii = new Fl_Browser(495, 136, 295, 116);
+            { Fl_Browser* o = scenarii = new Fl_Browser(495, 136, 295, 88);
               o->type(3);
               o->callback((Fl_Callback*)cb_scenarii);
               o->align(FL_ALIGN_TOP_LEFT);
               Fl_Group::current()->resizable(o);
+            }
+            { Fl_Button* o = new Fl_Button(495, 230, 295, 25, _("Deselect all"));
+              o->callback((Fl_Callback*)cb_Deselect);
             }
             o->end();
             Fl_Group::current()->resizable(o);

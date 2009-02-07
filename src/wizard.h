@@ -170,6 +170,8 @@ private:
   Fl_Browser *scenarii;
   void cb_scenarii_i(Fl_Browser*, void*);
   static void cb_scenarii(Fl_Browser*, void*);
+  void cb_Deselect_i(Fl_Button*, void*);
+  static void cb_Deselect(Fl_Button*, void*);
 public:
   Fl_Check_Button *terrasync;
 private:
@@ -300,6 +302,7 @@ private:
   void update_basic_options( Fl_Preferences &p );
   void save_basic_options( Fl_Preferences &p );
   void display_scenarii();
+  void deselect_all_scenarii_cb();
   void show_cmd_line_cb();
   void reset_settings();
   void load_preferences_cb();

@@ -194,14 +194,14 @@ class Wizard {open
         }
         Fl_Group {page[2]} {
           label {Select a location} open
-          private xywh {0 0 800 560} labelfont 1 align 21
+          private xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
           Fl_Box airports_ {
             private xywh {5 25 790 475} resizable
             code0 {\#include "AirportBrowser.h"}
             class AirportBrowser
           }
-          Fl_Group {} {open
+          Fl_Group {} {
             xywh {5 505 790 50}
           } {
             Fl_Group carrier_group {
@@ -222,13 +222,13 @@ class Wizard {open
             }
             Fl_Button {} {
               label {Scenery Prefetch}
-              callback {scenery_prefetch_cb();} selected
+              callback {scenery_prefetch_cb();}
               xywh {645 505 150 50} labelsize 12
             }
           }
         }
-        Fl_Group {page[3]} {
-          private xywh {0 0 800 560} hide
+        Fl_Group {page[3]} {open
+          private xywh {0 0 800 560}
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -395,12 +395,17 @@ class Wizard {open
               }
             }
             Fl_Group {} {
-              label Scenarios
+              label Scenarios open
               xywh {490 120 305 139} box ENGRAVED_FRAME labelfont 1 align 21 resizable
             } {
               Fl_Browser scenarii {
                 callback {scenarii_cb();}
-                private xywh {495 136 295 116} type Multi align 5 resizable
+                private xywh {495 136 295 88} type Multi align 5 resizable
+              }
+              Fl_Button {} {
+                label {Deselect all}
+                callback {deselect_all_scenarii_cb();}
+                xywh {495 230 295 25}
               }
             }
             Fl_Group {} {open
@@ -599,6 +604,8 @@ class Wizard {open
   decl {void update_basic_options( Fl_Preferences &p );} {}
   decl {void save_basic_options( Fl_Preferences &p );} {}
   decl {void display_scenarii();} {}
+  decl {void deselect_all_scenarii_cb();} {selected
+  }
   decl {void show_cmd_line_cb();} {}
   decl {void reset_settings();} {}
   decl {void load_preferences_cb();} {}
