@@ -210,6 +210,7 @@ int run_program( char *cmd, long &pid, char *env = 0 )
     }
 
     delete[] cmd;
+    pid = 0;
 
     return exit_code;
 }
@@ -311,6 +312,9 @@ Wizard::run_fgfs(const string &args)
 int
 Wizard::run_ts()
 {
+    if ( tsPid != 0 )
+	return -1;
+
     const int buflen = FL_PATH_MAX;
     char exe[ buflen ];
     char buf[ buflen ];
