@@ -257,6 +257,7 @@ AC_CHECK_LIB(osgText,osgTextGetVersion)
 AC_CHECK_LIB(osgGA,osgGAGetVersion)
 AC_CHECK_LIB(osgViewer,osgViewerGetVersion)
 AC_CHECK_LIB(osgSim,osgSimGetVersion)
+AC_CHECK_LIB(osgParticle,osgParticleGetVersion)
 LIBS="$LIBS -losgFX"
 
 
