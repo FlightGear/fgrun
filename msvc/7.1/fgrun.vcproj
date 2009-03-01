@@ -39,7 +39,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib net_d.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib OpenThreadsd.lib dbghelp.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib sg_d.lib ul_d.lib net_d.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib osgParticled.lib OpenThreadsd.lib dbghelp.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="&quot;..\..\..\fltk-1.1.7\lib&quot;;..\..\..\SimGear\Debug;&quot;..\..\..\zlib-1.2.3&quot;;..\..\..\plib;..\..\..\gettext\lib;..\..\..\install\msvc71\OpenSceneGraph\lib"
@@ -102,7 +102,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltk.lib fltkgl.lib ws2_32.lib comctl32.lib zlib.lib sg.lib ul.lib net.lib opengl32.lib winmm.lib osg.lib osgDB.lib osgGA.lib osgViewer.lib osgUtil.lib OpenThreads.lib intl.lib dbghelp.lib"
+				AdditionalDependencies="fltk.lib fltkgl.lib ws2_32.lib comctl32.lib zlib.lib sg.lib ul.lib net.lib opengl32.lib winmm.lib osg.lib osgDB.lib osgGA.lib osgViewer.lib osgUtil.lib osgParticle.lib OpenThreads.lib intl.lib dbghelp.lib"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="&quot;..\..\..\fltk-1.1.7\lib&quot;;&quot;..\..\..\zlib-1.2.3&quot;;..\..\..\plib;..\..\..\install\msvc71\OpenSceneGraph\lib;..\..\..\gettext\lib"
