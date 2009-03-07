@@ -1,4 +1,4 @@
-char * folder_open_xpm[] = {
+const char * folder_open_xpm[] = {
 "20 16 34 1",
 " 	c None",
 ".	c #A68A5E",
