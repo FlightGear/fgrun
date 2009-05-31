@@ -1660,7 +1660,7 @@ msgstr "Rafraîchir"
 
 #: src/AirportBrowser.cxx:98
 msgid "Reload airports"
-msgstr "Recharcher les aéroports"
+msgstr "Recharger les aéroports"
 
 #: src/AirportBrowser.cxx:485
 msgid "gzopen error"
