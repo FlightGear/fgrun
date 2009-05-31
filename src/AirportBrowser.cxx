@@ -188,13 +188,39 @@ AirportBrowser::runways_idle_proc( void* v )
     ((AirportBrowser*)v)->runways_idle_proc();
 }
 
+/**
+ * 
+ */
+static string
+reverse_runway( const string& rwy )
+{
+    if (!isdigit( rwy[0] ))
+        return string("");
+
+    int heading = atoi( rwy.c_str() );
+    heading += 18;
+    if (heading > 36)
+        heading -= 36;
+    char c = rwy[ rwy.length() - 1 ];
+    if (c == 'L')
+        c = 'R';
+    else if (c == 'R')
+        c = 'L';
+    else if (c != 'C')
+        c = 0;
+
+    char buf[10];
+    sprintf( buf, "%02d%c", heading, c );
+    return string(buf);
+}
+
 void
 AirportBrowser::runways_idle_proc( )
 {
     static const char space[] = " \t\n\r";
     static const char junk[] = "?\n\r";
     int count = 200;
-    char line[128];
+    char line[512];
     char *token;
     string location;
 
@@ -259,10 +285,10 @@ AirportBrowser::runways_idle_proc( )
                 os << ( lon < 0 ? 'w' : 'e' ) << std::setfill('0') << std::setw( 3 ) << (int)fabs( floor( lon ) ) << ( lat < 0 ? 's' : 'n' ) << std::setfill( '0' ) << std::setw( 2 ) << (int)fabs( floor( lat ) );
                 location = os.str();
 
-		apt_dat_t &apt = airports_.back();
+                apt_dat_t &apt = airports_.back();
                 airports_by_tiles_[ location ].push_back( apt.id_ );
-		apt.lon_ = lon;
-		apt.lat_ = lat;
+                apt.lon_ = lon;
+                apt.lat_ = lat;
             }
             else
             {
@@ -275,6 +301,100 @@ AirportBrowser::runways_idle_proc( )
                 if ( rwy.length() > 1 && rwy[ rwy.length() - 1 ] == 'x' )
                     rwy.erase( rwy.length() - 1 );
                 airports_.back().runways_.push_back( rwy );
+	        string rev = reverse_runway( rwy );
+	        if (!rev.empty())
+	            airports_.back().runways_.push_back( rev );
+            }
+        }
+        else if (type_num == 100)	// Runways (850)
+        {
+            strtok(NULL, space);
+            strtok(NULL, space);
+            strtok(NULL, space);
+            strtok(NULL, space);
+            strtok(NULL, space);
+            strtok(NULL, space);
+            strtok(NULL, space);
+            string rwy( strtok(NULL, space) );
+            airports_.back().runways_.push_back( rwy );
+            if ( location.empty() )
+            {
+                token = strtok(NULL, space);
+                float lat = strtod( token, 0 );
+                token = strtok(NULL, space);
+                float lon = strtod( token, 0 );
+                std::ostringstream os;
+                os << ( lon < 0 ? 'w' : 'e' ) << std::setfill('0') << std::setw( 3 ) << (int)fabs( floor( lon ) ) << ( lat < 0 ? 's' : 'n' ) << std::setfill( '0' ) << std::setw( 2 ) << (int)fabs( floor( lat ) );
+                location = os.str();
+
+                apt_dat_t &apt = airports_.back();
+                airports_by_tiles_[ location ].push_back( apt.id_ );
+                apt.lon_ = lon;
+                apt.lat_ = lat;
+            }
+            else
+            {
+                strtok(NULL, space);
+                strtok(NULL, space);
+            }
+            strtok(NULL, space);
+            strtok(NULL, space);
+            strtok(NULL, space);
+            strtok(NULL, space);
+            strtok(NULL, space);
+            strtok(NULL, space);
+            rwy = strtok(NULL, space);
+            airports_.back().runways_.push_back( rwy );
+        }
+        else if (type_num == 101)	// Water runways (850)
+        {
+            strtok(NULL, space);
+            strtok(NULL, space);
+            string rwy( strtok(NULL, space) );
+            airports_.back().runways_.push_back( rwy );
+            if ( location.empty() )
+            {
+                token = strtok(NULL, space);
+                float lat = strtod( token, 0 );
+                token = strtok(NULL, space);
+                float lon = strtod( token, 0 );
+                std::ostringstream os;
+                os << ( lon < 0 ? 'w' : 'e' ) << std::setfill('0') << std::setw( 3 ) << (int)fabs( floor( lon ) ) << ( lat < 0 ? 's' : 'n' ) << std::setfill( '0' ) << std::setw( 2 ) << (int)fabs( floor( lat ) );
+                location = os.str();
+
+                apt_dat_t &apt = airports_.back();
+                airports_by_tiles_[ location ].push_back( apt.id_ );
+                apt.lon_ = lon;
+                apt.lat_ = lat;
+            }
+            else
+            {
+                strtok(NULL, space);
+                strtok(NULL, space);
+            }
+            rwy = strtok(NULL, space);
+            airports_.back().runways_.push_back( rwy );
+        }
+        else if (type_num == 102)	// Helipads (850)
+        {
+            string rwy( strtok(NULL, space) );
+            if ( rwy.length() > 1 && rwy[ rwy.length() - 1 ] == 'x' )
+                rwy.erase( rwy.length() - 1 );
+            airports_.back().runways_.push_back( rwy );
+            if ( location.empty() )
+            {
+                token = strtok(NULL, space);
+                float lat = strtod( token, 0 );
+                token = strtok(NULL, space);
+                float lon = strtod( token, 0 );
+                std::ostringstream os;
+                os << ( lon < 0 ? 'w' : 'e' ) << std::setfill('0') << std::setw( 3 ) << (int)fabs( floor( lon ) ) << ( lat < 0 ? 's' : 'n' ) << std::setfill( '0' ) << std::setw( 2 ) << (int)fabs( floor( lat ) );
+                location = os.str();
+
+                apt_dat_t &apt = airports_.back();
+                airports_by_tiles_[ location ].push_back( apt.id_ );
+                apt.lon_ = lon;
+                apt.lat_ = lat;
             }
         }
     }
@@ -331,32 +451,6 @@ AirportBrowser::show_installed( bool refresh )
     name_->activate();
 }
 
-/**
- * 
- */
-static string
-reverse_runway( const string& rwy )
-{
-    if (!isdigit( rwy[0] ))
-        return string("");
-
-    int heading = atoi( rwy.c_str() );
-    heading += 18;
-    if (heading > 36)
-        heading -= 36;
-    char c = rwy[ rwy.length() - 1 ];
-    if (c == 'L')
-        c = 'R';
-    else if (c == 'R')
-        c = 'L';
-    else if (c != 'C')
-        c = 0;
-
-    char buf[10];
-    sprintf( buf, "%02d%c", heading, c );
-    return string(buf);
-}
-
 bool rwy_comp( const string& a, const string& b )
 {
     return a.substr(0,2) < b.substr(0,2);
@@ -374,9 +468,6 @@ AirportBrowser::show_runways( const apt_dat_t* apt )
     for (i = 0; i < apt->runways_.size(); ++i)
     {
 	rwys.push_back( apt->runways_[i] );
-	string rev = reverse_runway( apt->runways_[i] );
-	if (!rev.empty())
-	    rwys.push_back( rev );
     }
     std::sort( rwys.begin(), rwys.end() );
 
@@ -691,7 +782,7 @@ AirportBrowser::load_parking( const SGPath &path, apt_dat_t &data )
     {
         try {
             readXML( path.str(), visitor );
-        } catch (const sg_exception &e) {
+        } catch (const sg_exception &) {
             //cerr << "unable to read " << parkpath.str() << endl;
         }
     }
