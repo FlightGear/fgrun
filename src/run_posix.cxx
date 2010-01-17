@@ -40,7 +40,7 @@
 #  include <termios.h>
 #endif
 
-#include <string>
+#include <cstring>
 #include <sstream>
 #include <FL/filename.H>
 
