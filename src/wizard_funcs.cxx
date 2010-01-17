@@ -42,6 +42,7 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_File_Chooser.H>
 
+#include <simgear/math/SGMath.hxx>
 #include <simgear/props/props_io.hxx>
 #include <simgear/structure/exception.hxx>
 #include <simgear/misc/sg_path.hxx>
@@ -50,6 +51,7 @@
 #include <osgDB/ReadFile>
 
 #include <plib/ul.h>
+#include <plib/sg.h>
 #include <plib/netSocket.h>
 
 #include "wizard.h"
@@ -61,6 +63,7 @@
 #if defined(WIN32) || defined(__EMX__) && !defined(__CYGWIN__)
 # include "os_win32.h"
 # define strcasecmp stricmp
+# include <Winsock2.h>
 #else
 # include "os_posix.h"
 #endif

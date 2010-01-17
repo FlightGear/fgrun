@@ -25,6 +25,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <math.h>
 
 #include <FL/filename.H>
 #include <FL/Fl_Round_Button.H>
