@@ -644,6 +644,8 @@ Wizard::next_cb()
 
  	prefs.set( "fg_scenery", fg_scenery.c_str() );
 
+	ts_dir_cb();
+
 	refresh_airports();
     }
     else if (wiz->value() == page[1])
