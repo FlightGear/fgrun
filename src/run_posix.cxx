@@ -213,13 +213,7 @@ Wizard::run_ts()
 
 	const int buflen = FL_PATH_MAX;
 	char buf[ buflen ];
-	prefs.get( "fg_exe", buf, "", buflen-1);
-
-	char *p = strrchr( buf, '/' );
-	if ( p == 0 )
-	    strcpy( buf, "terrasync" );
-	else
-	    strcpy( p + 1, "terrasync" );
+	prefs.get( "ts_exe", buf, "", buflen-1);
 
 	string path = buf;
 	string arg0;

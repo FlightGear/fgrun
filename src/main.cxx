@@ -38,6 +38,7 @@
 std::string def_fg_exe = "";
 std::string def_fg_root = "";
 std::string def_fg_scenery = "";
+std::string def_ts_exe = "";
 static bool silent = false;
 static bool fullscreen = false;
 
@@ -80,6 +81,12 @@ parse_args( int, char** argv, int& i )
 	     strcmp( argv[i], "-f" ) == 0)
     {
 	fullscreen = true;
+	++i;
+	return 1;
+    }
+    else if (strncmp( argv[i], "--ts-exe=", 9 ) == 0)
+    {
+	def_ts_exe.assign( &argv[i][9] );
 	++i;
 	return 1;
     }

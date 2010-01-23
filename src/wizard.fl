@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0107 
+version 1.0300 
 do_not_include_H_from_C 
 i18n_type 1 
 i18n_include "i18n.h" 
@@ -71,8 +71,8 @@ class Wizard {open
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths}
-          xywh {0 0 800 560} labelfont 1 align 21 hide
+          label {Select Paths} open
+          xywh {0 0 800 560} labelfont 1 align 21
         } {
           Fl_Help_View about_ {
             private xywh {5 25 790 130} labeltype NO_LABEL
@@ -129,11 +129,11 @@ class Wizard {open
           Fl_Button cache_delete_ {
             label Delete
             callback {delete_cache_file_cb();}
-            private tooltip {Clear the content of the airport cache} xywh {630 490 60 25} labelsize 12 deactivate
+            private tooltip {Clear the content of the airport cache} xywh {630 505 60 25} labelsize 12 deactivate
           }
           Fl_Output cache_file_ {
             label {Airports Cache:}
-            private tooltip {Full path to the airport cache} xywh {130 490 495 25} labelsize 12 textsize 12
+            private tooltip {Full path to the airport cache} xywh {130 505 495 25} labelsize 12 textsize 12
           }
           Fl_Group {} {open
             xywh {130 245 495 25}
@@ -156,6 +156,16 @@ class Wizard {open
               callback {ts_dir_cb()}
               tooltip {Select the line in the FG_SCENERY list that is the TerraSync directory. 0 means that TerraSync is not used.} xywh {580 245 45 25} labelsize 12 textsize 12
             }
+          }
+          Fl_Input ts_exe_ {
+            label {Terrasync exe:}
+            callback {ts_exe_update_cb();}
+            private tooltip {Full pathname to Terrasync executable} xywh {130 470 495 25} labelsize 12 when 8 textsize 12
+          }
+          Fl_Button {} {
+            callback {ts_exe_select_cb();}
+            private tooltip {Full pathname to Terrasync executable} xywh {630 470 25 25} labelsize 12
+            code0 {o->image(folder_open_pixmap);}
           }
         }
         Fl_Group {page[1]} {
@@ -193,7 +203,7 @@ class Wizard {open
           }
         }
         Fl_Group {page[2]} {
-          label {Select a location} open
+          label {Select a location}
           private xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
           Fl_Box airports_ {
@@ -227,8 +237,8 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {open
-          private xywh {0 0 800 560}
+        Fl_Group {page[3]} {
+          private xywh {0 0 800 560} hide
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -568,6 +578,9 @@ class Wizard {open
   decl {void scenery_dir_up_cb();} {}
   decl {void scenery_dir_down_cb();} {}
   decl {void ts_dir_cb();} {}
+  decl {void ts_exe_update_cb();} {}
+  decl {void ts_exe_select_cb();} {selected
+  }
   decl {void refresh_airports();} {public
   }
   decl {static void refresh_airports( Fl_Widget*, void* );} {public
@@ -604,8 +617,7 @@ class Wizard {open
   decl {void update_basic_options( Fl_Preferences &p );} {}
   decl {void save_basic_options( Fl_Preferences &p );} {}
   decl {void display_scenarii();} {}
-  decl {void deselect_all_scenarii_cb();} {selected
-  }
+  decl {void deselect_all_scenarii_cb();} {}
   decl {void show_cmd_line_cb();} {}
   decl {void reset_settings();} {}
   decl {void load_preferences_cb();} {}

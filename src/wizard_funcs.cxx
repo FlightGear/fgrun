@@ -76,6 +76,7 @@ using std::map;
 extern string def_fg_exe;
 extern string def_fg_root;
 extern string def_fg_scenery;
+extern string def_ts_exe;
 
 Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
  {N_("noon"), 0,  0, (void*)"noon", 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -266,6 +267,9 @@ Wizard::reset()
     int iVal;
     prefs.get("ts_dir", iVal, 0);
     ts_dir->value( iVal );
+
+    prefs.get( "ts_exe", buf, def_ts_exe.c_str(), buflen-1);
+    ts_exe_->value( buf );
 
     if (fg_exe_->size() == 0 ||
 	fg_root_->size() == 0 ||
@@ -645,6 +649,12 @@ Wizard::next_cb()
  	prefs.set( "fg_scenery", fg_scenery.c_str() );
 
 	ts_dir_cb();
+
+	if ( strlen(ts_exe_->value()) != 0 )
+	{
+	    fl_filename_absolute( abs_name, ts_exe_->value() );
+	    prefs.set( "ts_exe", abs_name );
+	}
 
 	refresh_airports();
     }
@@ -1195,6 +1205,22 @@ Wizard::ts_dir_cb()
     prefs.set("ts_dir",(int)ts_dir->value());
 }
 
+void
+Wizard::ts_exe_select_cb()
+{
+    char* p = fl_file_chooser( _("Select Terrasync executable"),
+                              ts_exe_->value(), 0);
+    if (p != 0)
+        ts_exe_->value( p );
+
+    ts_exe_update_cb();
+}
+
+void
+Wizard::ts_exe_update_cb()
+{
+}
+
 /**
  * Force a re-scan of the scenery directories for new airports.
  */
@@ -1438,10 +1464,20 @@ Wizard::terrasync_cb()
 	prev->deactivate();
 	ts_dir->take_focus();
     }
+    else if ( strlen(ts_exe_->value()) == 0 )
+    {
+	terrasync->value(0);
+	fl_alert( _("TerraSync executable not set") );
+	page[3]->hide();
+	page[0]->show();
+	next->label( _("Next") );
+	prev->deactivate();
+	ts_exe_->take_focus();
+    }
     else
     {
 	terrasync_port->activate();
-        prefs.set("terrasync",1);
+	prefs.set("terrasync",1);
     }
     update_options();
 }

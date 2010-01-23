@@ -319,7 +319,7 @@ Wizard::run_ts()
     char exe[ buflen ];
     char buf[ buflen ];
 
-    prefs.get( "fg_exe", buf, "", buflen-1 );
+    prefs.get( "ts_exe", buf, "", buflen-1 );
     fl_filename_absolute( exe, buf );
     // Convert cygwin path ( if any ) into real windows path
     if ( strncmp( exe, "/cygdrive", 9 ) == 0 ) {
@@ -327,13 +327,6 @@ Wizard::run_ts()
         exe[0] = exe[1];
         exe[1] = ':';
     }
-    char *p = strrchr( exe, '/' );
-    if ( p == 0 )
-	p = strrchr( exe, '\\' );
-    if ( p == 0 )
-	return 1;
-
-    strcpy( p + 1, "terrasync.exe" );
 
     int iVal;
     prefs.get( "ts_dir", iVal, 0 );

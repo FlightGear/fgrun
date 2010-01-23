@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-07 12:36+0100\n"
+"POT-Creation-Date: 2010-01-23 18:58+0100\n"
 "PO-Revision-Date: 2008-01-31 22:12+0100\n"
 "Last-Translator:  <pl.flightgear@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -57,15 +57,15 @@ msgstr "ufo"
 msgid "yasim"
 msgstr "yasim"
 
-#: src/advanced.cxx:85 src/wizard.cxx:192
+#: src/advanced.cxx:85 src/wizard.cxx:206
 msgid "16"
 msgstr "16"
 
-#: src/advanced.cxx:86 src/wizard.cxx:191
+#: src/advanced.cxx:86 src/wizard.cxx:205
 msgid "24"
 msgstr "24"
 
-#: src/advanced.cxx:87 src/wizard.cxx:190
+#: src/advanced.cxx:87 src/wizard.cxx:204
 msgid "32"
 msgstr "32"
 
@@ -186,11 +186,11 @@ msgstr "4"
 msgid "Advanced Options"
 msgstr "Zaawans..."
 
-#: src/advanced.cxx:665 src/wizard.cxx:900
+#: src/advanced.cxx:665 src/wizard.cxx:921
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/advanced.cxx:668 src/wizard.cxx:877 src/wizard.cxx:904
+#: src/advanced.cxx:668 src/wizard.cxx:900 src/wizard.cxx:925
 msgid "OK"
 msgstr "OK"
 
@@ -227,15 +227,15 @@ msgstr "Plik konf:"
 msgid "Path to additional XML properties file"
 msgstr "Sciezka do dodatkowego pliku konfiguracyjnego XML"
 
-#: src/advanced.cxx:708 src/wizard.cxx:412
+#: src/advanced.cxx:708 src/wizard.cxx:423
 msgid "Executable:"
 msgstr "Plik wykonywalny:"
 
-#: src/advanced.cxx:712 src/wizard.cxx:425
+#: src/advanced.cxx:712 src/wizard.cxx:436
 msgid "FG_ROOT:"
 msgstr "FG_ROOT:"
 
-#: src/advanced.cxx:716 src/wizard.cxx:438
+#: src/advanced.cxx:716 src/wizard.cxx:449
 msgid "FG_SCENERY:"
 msgstr "FG_SCENERY:"
 
@@ -251,7 +251,7 @@ msgstr "Pas start.:"
 msgid "Aircraft:"
 msgstr "Samolot:"
 
-#: src/advanced.cxx:737 src/wizard.cxx:656 src/advanced_funcs.cxx:193
+#: src/advanced.cxx:737 src/wizard.cxx:683 src/advanced_funcs.cxx:193
 msgid "Features"
 msgstr "Opcje"
 
@@ -328,7 +328,7 @@ msgstr "HUD z antyaliasingiem"
 msgid "Enable anti-aliased HUD"
 msgstr "Wlacz HUD z antyaliasingiem"
 
-#: src/advanced.cxx:792 src/wizard.cxx:684
+#: src/advanced.cxx:792 src/wizard.cxx:711
 msgid "Auto-coordination"
 msgstr "Autokoordynacja"
 
@@ -336,7 +336,7 @@ msgstr "Autokoordynacja"
 msgid "Enable auto-coordinated turns."
 msgstr "Wlacz autokoordynacje podczas skretu"
 
-#: src/advanced.cxx:797 src/wizard.cxx:616
+#: src/advanced.cxx:797 src/wizard.cxx:643
 msgid "Horizon effect"
 msgstr "Efekt horyzontu"
 
@@ -369,7 +369,7 @@ msgstr "HUD-3D"
 msgid "Enable 3D HUD"
 msgstr "Wlacz HUD 3D"
 
-#: src/advanced.cxx:817 src/wizard.cxx:625
+#: src/advanced.cxx:817 src/wizard.cxx:652
 msgid "Specular highlight"
 msgstr "Refleksy na materialach"
 
@@ -610,7 +610,7 @@ msgstr "Chmury 3D"
 msgid "Enable 3D (volumetric) cloud layers"
 msgstr "Wlacz chmury 3D"
 
-#: src/advanced.cxx:1060 src/wizard.cxx:612
+#: src/advanced.cxx:1060 src/wizard.cxx:639
 msgid "Full Screen"
 msgstr "Pelny ekran"
 
@@ -675,7 +675,7 @@ msgstr "Najladniej"
 msgid "Geometry:"
 msgstr "Rozdzielczosc:"
 
-#: src/advanced.cxx:1120 src/wizard.cxx:607
+#: src/advanced.cxx:1120 src/wizard.cxx:634
 msgid "Window geometry, WxH"
 msgstr "Rozdzielczosc okna, SxW"
 
@@ -712,7 +712,7 @@ msgstr "Kierunek patrzenia"
 msgid "bpp:"
 msgstr "bpp"
 
-#: src/advanced.cxx:1151 src/wizard.cxx:648
+#: src/advanced.cxx:1151 src/wizard.cxx:675
 msgid "Color depth (bits per pixel)"
 msgstr "Glebia kolorow (bitow na piksel)"
 
@@ -849,8 +849,8 @@ msgstr "Nowe"
 
 # czy nowy?
 #: src/advanced.cxx:1363 src/advanced.cxx:1558 src/advanced.cxx:1621
-#: src/advanced.cxx:1654 src/advanced.cxx:1686 src/wizard.cxx:467
-#: src/wizard.cxx:484
+#: src/advanced.cxx:1654 src/advanced.cxx:1686 src/wizard.cxx:478
+#: src/wizard.cxx:495
 msgid "Delete"
 msgstr "Usun"
 
@@ -1047,430 +1047,440 @@ msgid "Transition (ft):"
 msgstr "Przemiana (stopy):"
 
 # to co wyzej
-#: src/wizard.cxx:123
+#: src/wizard.cxx:137
 msgid "800x600"
 msgstr "800x600"
 
-#: src/wizard.cxx:124
+#: src/wizard.cxx:138
 msgid "1024x768"
 msgstr "1024x768"
 
-#: src/wizard.cxx:125
+#: src/wizard.cxx:139
 msgid "1280x1024"
 msgstr "1280x1024"
 
-#: src/wizard.cxx:126
+#: src/wizard.cxx:140
 msgid "1600x1200"
 msgstr "1600x1200"
 
-#: src/wizard.cxx:127
+#: src/wizard.cxx:141
 msgid "1280x800"
 msgstr "1280x800"
 
-#: src/wizard.cxx:128
+#: src/wizard.cxx:142
 msgid "1680x1050"
 msgstr "1680x1050"
 
-#: src/wizard.cxx:129
+#: src/wizard.cxx:143
 msgid "1920x1200"
 msgstr "1920x1200"
 
-#: src/wizard.cxx:401
+#: src/wizard.cxx:414
 msgid "FlightGear Wizard"
 msgstr "FlightGear Wizard"
 
-#: src/wizard.cxx:405
+#: src/wizard.cxx:417
 msgid "Select Paths"
 msgstr "Okresl sciezki dostepu"
 
-#: src/wizard.cxx:413 src/wizard.cxx:420
+#: src/wizard.cxx:424 src/wizard.cxx:431
 msgid "Full pathname to FlightGear executable"
 msgstr "Pelna sciezka dostepu do pliku wykonywalnego FlightGear"
 
-#: src/wizard.cxx:426 src/wizard.cxx:433
+#: src/wizard.cxx:437 src/wizard.cxx:444
 msgid "root data path"
 msgstr "sciezka glownego katalogu danych"
 
-#: src/wizard.cxx:439
+#: src/wizard.cxx:450
 msgid "Scenery directories"
 msgstr "Katalogi scenerii"
 
-#: src/wizard.cxx:448
+#: src/wizard.cxx:459
 msgid "@8>"
 msgstr "@8>"
 
-#: src/wizard.cxx:458
+#: src/wizard.cxx:469
 msgid "@2>"
 msgstr "@2>"
 
-#: src/wizard.cxx:468
+#: src/wizard.cxx:479
 msgid "Clear the content of the airport cache"
 msgstr ""
 
-#: src/wizard.cxx:473
+#: src/wizard.cxx:484
 msgid "Airports Cache:"
 msgstr "Lista lotnisk:"
 
-#: src/wizard.cxx:474
+#: src/wizard.cxx:485
 #, fuzzy
 msgid "Full path to the airport cache"
 msgstr "Pelna sciezka dostepu do pliku wykonywalnego FlightGear"
 
-#: src/wizard.cxx:479
+#: src/wizard.cxx:490
 msgid "Add..."
 msgstr "Dodaj..."
 
-#: src/wizard.cxx:480
+#: src/wizard.cxx:491
 msgid "Add a scenery directory"
 msgstr "Dodaj katalog zawierajacy scenerie"
 
-#: src/wizard.cxx:485
+#: src/wizard.cxx:496
 msgid "Delete a scenery directory"
 msgstr "Usun katalog scenerii"
 
-#: src/wizard.cxx:493
+#: src/wizard.cxx:504
 #, fuzzy
 msgid "TerraSync directory"
 msgstr "Katalogi scenerii"
 
-#: src/wizard.cxx:494
+#: src/wizard.cxx:505
 msgid ""
 "Select the line in the FG_SCENERY list that is the TerraSync directory. 0 "
 "means that TerraSync is not used."
 msgstr ""
 
-#: src/wizard.cxx:504
+#: src/wizard.cxx:513
+#, fuzzy
+msgid "Terrasync exe:"
+msgstr "Katalogi scenerii"
+
+#: src/wizard.cxx:514 src/wizard.cxx:521
+#, fuzzy
+msgid "Full pathname to Terrasync executable"
+msgstr "Pelna sciezka dostepu do pliku wykonywalnego FlightGear"
+
+#: src/wizard.cxx:528
 msgid "Select an aircraft"
 msgstr "Wybierz samolot"
 
-#: src/wizard.cxx:516
+#: src/wizard.cxx:540
 msgid "Preview"
 msgstr "Podglad"
 
-#: src/wizard.cxx:536
+#: src/wizard.cxx:560
 msgid "Status :"
 msgstr "Status:"
 
 # sprawdz
-#: src/wizard.cxx:537
+#: src/wizard.cxx:562
 msgid "Author(s) :"
 msgstr "Autorzy:"
 
-#: src/wizard.cxx:544
+#: src/wizard.cxx:569
 msgid "Select a location"
 msgstr "Wybierz lokalizacje"
 
 # miejsce startu, lotnisko
-#: src/wizard.cxx:561
+#: src/wizard.cxx:586
 msgid "Carrier Ops"
 msgstr "Opcje lotniskowca"
 
-#: src/wizard.cxx:565
+#: src/wizard.cxx:590
 msgid "Carrier : "
 msgstr "Lotniskowiec:"
 
-#: src/wizard.cxx:566
+#: src/wizard.cxx:592
 msgid "Park pos :"
 msgstr "Pozycja parkingowa:"
 
-#: src/wizard.cxx:567
+#: src/wizard.cxx:593
 msgid "Only valid if carrier is set. For airport parking, use the list above."
 msgstr ""
 
-#: src/wizard.cxx:575
+#: src/wizard.cxx:601
 #, fuzzy
 msgid "Scenery Prefetch"
 msgstr "Katalogi scenerii"
 
 # tak to sie nazywa?
-#: src/wizard.cxx:585
+#: src/wizard.cxx:612
 msgid "Advanced..."
 msgstr "Zaawansowane..."
 
-#: src/wizard.cxx:591
+#: src/wizard.cxx:618
 msgid "Show command line"
 msgstr "Wyswietl linie polecen"
 
-#: src/wizard.cxx:602
+#: src/wizard.cxx:629
 msgid "Display"
 msgstr "Wyswietlanie"
 
-#: src/wizard.cxx:606
+#: src/wizard.cxx:633
 msgid "Resolution :"
 msgstr "Rozdzielczosc:"
 
-#: src/wizard.cxx:620
+#: src/wizard.cxx:647
 msgid "Enhanced runway lighting"
 msgstr "Wzmacnianie oswietlenia pasa start. "
 
-#: src/wizard.cxx:621
+#: src/wizard.cxx:648
 msgid "Use with caution. It may drop your framerate dramatically"
 msgstr "Uzywac ostroznie. Bardzo spowalnia dzialanie symulatora"
 
-#: src/wizard.cxx:629
+#: src/wizard.cxx:656
 msgid "Framerate limiter :"
 msgstr "Ograniczenie fps:"
 
-#: src/wizard.cxx:630
+#: src/wizard.cxx:657
 msgid "Too much framerate hurts the smoothness of the simulation"
 msgstr ""
 "Zbyt duza liczba klatek na sekunde negatywnie wplywa na plynnosc symulacji"
 
-#: src/wizard.cxx:643
+#: src/wizard.cxx:670
 msgid "3D clouds (experimental)"
 msgstr "Chmury 3D (eksperymentalnie)"
 
-#: src/wizard.cxx:647
+#: src/wizard.cxx:674
 msgid "bpp :"
 msgstr "bpp"
 
-#: src/wizard.cxx:660
+#: src/wizard.cxx:687
 msgid "Random objects"
 msgstr "Obiekty losowe"
 
-#: src/wizard.cxx:664
+#: src/wizard.cxx:691
 msgid "Random trees"
 msgstr "Losowe drzewa"
 
-#: src/wizard.cxx:668
+#: src/wizard.cxx:695
 msgid "AI models"
 msgstr "Inne samoloty"
 
 # nie wiem na 100%
-#: src/wizard.cxx:672
+#: src/wizard.cxx:699
 msgid "Time of day :"
 msgstr "Pora dnia"
 
-#: src/wizard.cxx:680
+#: src/wizard.cxx:707
 msgid "Real weather fetch"
 msgstr "Pobierz informacje o pogodzie"
 
-#: src/wizard.cxx:688
+#: src/wizard.cxx:715
 msgid "Season :"
 msgstr "Pora roku:"
 
-#: src/wizard.cxx:697
+#: src/wizard.cxx:724
 msgid "Scenarios"
 msgstr "Scenariusze"
 
-#: src/wizard.cxx:707
+#: src/wizard.cxx:734
 msgid "Deselect all"
 msgstr ""
 
-#: src/wizard.cxx:717
+#: src/wizard.cxx:744
 msgid "TerraSync"
 msgstr ""
 
-#: src/wizard.cxx:738
+#: src/wizard.cxx:765
 msgid "Atlas"
 msgstr "Atlas"
 
-#: src/wizard.cxx:743 src/wizard.cxx:765
+#: src/wizard.cxx:770 src/wizard.cxx:792
 msgid "Hostname :"
 msgstr "Host:"
 
-#: src/wizard.cxx:744
+#: src/wizard.cxx:771
 msgid "Hostname"
 msgstr "Host"
 
-#: src/wizard.cxx:749
+#: src/wizard.cxx:776
 msgid ":"
 msgstr ":"
 
-#: src/wizard.cxx:756
+#: src/wizard.cxx:783
 msgid "Multiplayer"
 msgstr "Multiplayer"
 
-#: src/wizard.cxx:761
+#: src/wizard.cxx:788
 msgid "Callsign :"
 msgstr "Callsign :"
 
 # znak wywolawczy? jak myslicie
-#: src/wizard.cxx:766
+#: src/wizard.cxx:793
 msgid "Peer hostname"
 msgstr "Nazwa lub adres hosta"
 
-#: src/wizard.cxx:770
+#: src/wizard.cxx:797
 msgid "in :"
 msgstr "wej:"
 
-#: src/wizard.cxx:771
+#: src/wizard.cxx:798
 msgid "Input port number"
 msgstr "Numer portu wejsciowego"
 
-#: src/wizard.cxx:774
+#: src/wizard.cxx:801
 msgid "out :"
 msgstr "wyj:"
 
-#: src/wizard.cxx:775
+#: src/wizard.cxx:802
 msgid "Output port number"
 msgstr "Numer portu wyjsciowego"
 
-#: src/wizard.cxx:800
+#: src/wizard.cxx:827
 msgid "Prev"
 msgstr "Wstecz"
 
-#: src/wizard.cxx:804 src/wizard_funcs.cxx:288 src/wizard_funcs.cxx:734
-#: src/wizard_funcs.cxx:1432
+#: src/wizard.cxx:831 src/wizard_funcs.cxx:295 src/wizard_funcs.cxx:749
+#: src/wizard_funcs.cxx:1463 src/wizard_funcs.cxx:1473
 msgid "Next"
 msgstr "Dalej"
 
-#: src/wizard.cxx:808
+#: src/wizard.cxx:835
 msgid "Quit"
 msgstr "Wyjscie"
 
-#: src/wizard.cxx:815
+#: src/wizard.cxx:842
 msgid "Defaults"
 msgstr "Domyslne"
 
-#: src/wizard.cxx:816
+#: src/wizard.cxx:843
 msgid ""
 "Clear all selected options and return to the install situation. Useful if "
 "FGFS don't start anymore."
 msgstr ""
 
-#: src/wizard.cxx:821
+#: src/wizard.cxx:848
 msgid "Save As..."
 msgstr "Zapisz"
 
-#: src/wizard.cxx:822
+#: src/wizard.cxx:849
 msgid "Save current configuration to a file"
 msgstr ""
 
-#: src/wizard.cxx:826
+#: src/wizard.cxx:853
 msgid "Load"
 msgstr "Wczytaj"
 
-#: src/wizard.cxx:827
+#: src/wizard.cxx:854
 msgid "Load a previously saved configuration"
 msgstr ""
 
-#: src/wizard.cxx:839
+#: src/wizard.cxx:865
 msgid "FlightGear running..."
 msgstr "FlightGear pracuje..."
 
-#: src/wizard.cxx:843
+#: src/wizard.cxx:868
 msgid "FlightGear has been started"
 msgstr "Uruchomiono FlightGear"
 
-#: src/wizard.cxx:848
+#: src/wizard.cxx:873
 msgid "Please wait..."
 msgstr "Prosze czekac..."
 
-#: src/wizard.cxx:851
+#: src/wizard.cxx:876
 msgid "To change aircraft, exit FlightGear and return to this launcher"
 msgstr "Aby zmienic somolot, zamknij FlightGear i powroc do tego okna"
 
 # jak to nazwac
 # ############################################
 # ###############
-#: src/wizard.cxx:864
+#: src/wizard.cxx:888
 msgid "Flightgear crashed..."
 msgstr "Blad FLightGear..."
 
-#: src/wizard.cxx:867
+#: src/wizard.cxx:890
 msgid "Flightgear encountered an unexpected failure"
 msgstr "FlightGear napotkalo niespodziewany blad."
 
-#: src/wizard.cxx:871
+#: src/wizard.cxx:894
 msgid "We are sorry for this inconvenience."
 msgstr "Przepraszamy za niedogodnosci."
 
-#: src/wizard.cxx:881
+#: src/wizard.cxx:904
 msgid "An error report has been generated in the file below :"
 msgstr "Wygenerowano raport o bledzie do pliku ponizej :"
 
-#: src/wizard.cxx:885
+#: src/wizard.cxx:908
 msgid "Please send this error report to the Flightgear development team"
 msgstr ""
 "Prosimy o wyslanie tego raportu o bledzie do zespolu tworzacego FlightGear"
 
-#: src/wizard.cxx:896
+#: src/wizard.cxx:918
 msgid "Prefetch Scenery"
 msgstr ""
 
-#: src/wizard.cxx:912
+#: src/wizard.cxx:933
 #, fuzzy
 msgid "Airport to fetch : "
 msgstr "Lista lotnisk:"
 
-#: src/wizard_funcs.cxx:78 src/advanced_funcs.cxx:105
+#: src/wizard_funcs.cxx:82 src/advanced_funcs.cxx:105
 msgid "noon"
 msgstr "poludnie"
 
-#: src/wizard_funcs.cxx:79 src/advanced_funcs.cxx:106
+#: src/wizard_funcs.cxx:83 src/advanced_funcs.cxx:106
 msgid "dusk"
 msgstr "zmierzch"
 
-#: src/wizard_funcs.cxx:80 src/advanced_funcs.cxx:107
+#: src/wizard_funcs.cxx:84 src/advanced_funcs.cxx:107
 msgid "midnight"
 msgstr "polnoc"
 
-#: src/wizard_funcs.cxx:81 src/advanced_funcs.cxx:108
+#: src/wizard_funcs.cxx:85 src/advanced_funcs.cxx:108
 msgid "dawn"
 msgstr "swit"
 
-#: src/wizard_funcs.cxx:86
+#: src/wizard_funcs.cxx:90
 msgid "summer"
 msgstr "lato"
 
-#: src/wizard_funcs.cxx:87
+#: src/wizard_funcs.cxx:91
 msgid "winter"
 msgstr "zima"
 
-#: src/wizard_funcs.cxx:94
+#: src/wizard_funcs.cxx:98
 msgid "production"
 msgstr "W fazie tworzenia"
 
-#: src/wizard_funcs.cxx:95
+#: src/wizard_funcs.cxx:99
 msgid "early-production"
 msgstr "wczesny rozwoj"
 
-#: src/wizard_funcs.cxx:96
+#: src/wizard_funcs.cxx:100
 msgid "early production"
 msgstr "Wczesny rozwoj"
 
-#: src/wizard_funcs.cxx:97
+#: src/wizard_funcs.cxx:101
 msgid "Early production"
 msgstr "Wczesny rozwoj"
 
-#: src/wizard_funcs.cxx:98
+#: src/wizard_funcs.cxx:102
 msgid "beta"
 msgstr "beta"
 
-#: src/wizard_funcs.cxx:99
+#: src/wizard_funcs.cxx:103
 msgid "alpha"
 msgstr "alpha"
 
-#: src/wizard_funcs.cxx:100
+#: src/wizard_funcs.cxx:104
 msgid "early alpha"
 msgstr "wczesna wersja alpha"
 
-#: src/wizard_funcs.cxx:101
+#: src/wizard_funcs.cxx:105
 msgid "Development"
 msgstr "Rozwoj"
 
-#: src/wizard_funcs.cxx:102
+#: src/wizard_funcs.cxx:106
 msgid "developement"
 msgstr "rozwoj"
 
-#: src/wizard_funcs.cxx:103
+#: src/wizard_funcs.cxx:107
 msgid "development"
 msgstr "rozwoj"
 
-#: src/wizard_funcs.cxx:104
+#: src/wizard_funcs.cxx:108
 msgid "devel"
 msgstr "rozwoj"
 
-#: src/wizard_funcs.cxx:105
+#: src/wizard_funcs.cxx:109
 msgid "Early development"
 msgstr "Wczesny rozwoj"
 
-#: src/wizard_funcs.cxx:106
+#: src/wizard_funcs.cxx:110
 msgid "experimental"
 msgstr "eksperymentalnie"
 
-#: src/wizard_funcs.cxx:199
+#: src/wizard_funcs.cxx:203
 #, c-format
 msgid ""
 "<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
@@ -1484,53 +1494,53 @@ msgstr ""
 "gpl.html).</p>  <p>Poinformuj o bledach na: http://sourceforge.net/projects/"
 "fgrun</p> </body></html>"
 
-#: src/wizard_funcs.cxx:340
+#: src/wizard_funcs.cxx:347
 msgid "Log Window"
 msgstr "Okno logow"
 
-#: src/wizard_funcs.cxx:566
+#: src/wizard_funcs.cxx:573
 #, c-format
 msgid "Model not found: '%s'"
 msgstr "Nie znaleziono modelu: '%s'"
 
-#: src/wizard_funcs.cxx:598
+#: src/wizard_funcs.cxx:605
 msgid "Property '/sim/model/path' not found"
 msgstr "Nie znaleziono wlasnosci '/sim/model/path'"
 
-#: src/wizard_funcs.cxx:670 src/wizard_funcs.cxx:2038
-#: src/AirportBrowser.cxx:384 src/fgfsrc.cxx:95
+#: src/wizard_funcs.cxx:685 src/wizard_funcs.cxx:2079
+#: src/AirportBrowser.cxx:476 src/fgfsrc.cxx:95
 msgid "<default>"
 msgstr "<domyslny>"
 
-#: src/wizard_funcs.cxx:726
+#: src/wizard_funcs.cxx:741
 msgid "Run"
 msgstr "Uruchom"
 
-#: src/wizard_funcs.cxx:749
+#: src/wizard_funcs.cxx:764
 msgid "About to reset current parameters"
 msgstr "Zresetowac aktualne ustawienia"
 
-#: src/wizard_funcs.cxx:749 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:764 src/fgfsrc.cxx:61
 msgid "Abort"
 msgstr "Anuluj"
 
-#: src/wizard_funcs.cxx:749
+#: src/wizard_funcs.cxx:764
 msgid "Reset"
 msgstr "Resetuj"
 
-#: src/wizard_funcs.cxx:763
+#: src/wizard_funcs.cxx:778
 msgid "Select FlightGear executable"
 msgstr "Wskaz plik wykonywalny FlightGear"
 
-#: src/wizard_funcs.cxx:820
+#: src/wizard_funcs.cxx:835
 msgid "Select FG_ROOT directory"
 msgstr "Wskaz katalog glowny FlightGear"
 
-#: src/wizard_funcs.cxx:979 src/wizard_funcs.cxx:981
+#: src/wizard_funcs.cxx:994 src/wizard_funcs.cxx:996
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: src/wizard_funcs.cxx:1048
+#: src/wizard_funcs.cxx:1063
 #, c-format
 msgid ""
 "Unable to delete '%s':\n"
@@ -1539,45 +1549,54 @@ msgstr ""
 "Nie mozna usunac '%s':\n"
 "%s"
 
-#: src/wizard_funcs.cxx:1096
+#: src/wizard_funcs.cxx:1111
 msgid "Select FG_SCENERY directory"
 msgstr "Wskaz katalog scenerii"
 
-#: src/wizard_funcs.cxx:1382
+#: src/wizard_funcs.cxx:1211
+#, fuzzy
+msgid "Select Terrasync executable"
+msgstr "Wskaz plik wykonywalny FlightGear"
+
+#: src/wizard_funcs.cxx:1413
 msgid "Description of "
 msgstr "Opis"
 
-#: src/wizard_funcs.cxx:1429
+#: src/wizard_funcs.cxx:1460
 msgid "TerraSync directory not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2181
+#: src/wizard_funcs.cxx:1470
+msgid "TerraSync executable not set"
+msgstr ""
+
+#: src/wizard_funcs.cxx:2222
 msgid "Load settings from..."
 msgstr "Wczytaj ustawienia z..."
 
-#: src/wizard_funcs.cxx:2263
+#: src/wizard_funcs.cxx:2304
 msgid "Save settings as..."
 msgstr "Zapisz ustawienia"
 
-#: src/wizard_funcs.cxx:2267
+#: src/wizard_funcs.cxx:2308
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr "Plik \"%s\" juz istnieje."
 
-#: src/wizard_funcs.cxx:2267 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:2308 src/fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr "Nadpisz"
 
-#: src/wizard_funcs.cxx:2267
+#: src/wizard_funcs.cxx:2308
 msgid "Don't overwrite"
 msgstr "Nie nadpisuj"
 
-#: src/wizard_funcs.cxx:2355
+#: src/wizard_funcs.cxx:2396
 #, c-format
 msgid "Unknown airport : '%s'"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2361
+#: src/wizard_funcs.cxx:2402
 msgid "TerraSync must be configured"
 msgstr ""
 
@@ -1669,23 +1688,23 @@ msgstr "Wskaz plik preferencji"
 msgid "XML Files(*.xml)"
 msgstr "Pliki XML (*.xml)"
 
-#: src/AirportBrowser.cxx:83
+#: src/AirportBrowser.cxx:84
 msgid "Runways"
 msgstr "Pasy startowe"
 
-#: src/AirportBrowser.cxx:88
+#: src/AirportBrowser.cxx:89
 msgid "Parking"
 msgstr "Parking"
 
-#: src/AirportBrowser.cxx:95
+#: src/AirportBrowser.cxx:96
 msgid "Refresh"
 msgstr "Odswiez"
 
-#: src/AirportBrowser.cxx:98
+#: src/AirportBrowser.cxx:99
 msgid "Reload airports"
 msgstr "Zaladuj ponownie lotniska"
 
-#: src/AirportBrowser.cxx:485
+#: src/AirportBrowser.cxx:577
 msgid "gzopen error"
 msgstr "blad gzopen"
 
@@ -1722,7 +1741,7 @@ msgstr "Zapisz jako?"
 msgid "Select protocol file"
 msgstr "Wskaz plik protokolu"
 
-#: src/main.cxx:125
+#: src/main.cxx:132
 #, c-format
 msgid ""
 "Options are:\n"
