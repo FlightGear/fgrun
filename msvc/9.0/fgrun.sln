@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fgrun", "fgrun.vcproj", "{B
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimGear", "..\..\..\Simgear\projects\VC90\SimGear.vcproj", "{22540CD3-D3CA-4C86-A773-80AEEE3ACDED}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gettext", "gettext.vcproj", "{8DC0319B-169D-4547-9CFA-0AC37B8B7829}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -33,10 +31,6 @@ Global
 		{22540CD3-D3CA-4C86-A773-80AEEE3ACDED}.Release|Win32.Build.0 = Release|Win32
 		{22540CD3-D3CA-4C86-A773-80AEEE3ACDED}.Release|x64.ActiveCfg = Release|x64
 		{22540CD3-D3CA-4C86-A773-80AEEE3ACDED}.Release|x64.Build.0 = Release|x64
-		{8DC0319B-169D-4547-9CFA-0AC37B8B7829}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8DC0319B-169D-4547-9CFA-0AC37B8B7829}.Debug|x64.ActiveCfg = Debug|Win32
-		{8DC0319B-169D-4547-9CFA-0AC37B8B7829}.Release|Win32.ActiveCfg = Release|Win32
-		{8DC0319B-169D-4547-9CFA-0AC37B8B7829}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
