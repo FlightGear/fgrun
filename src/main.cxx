@@ -129,7 +129,7 @@ main( int argc, char* argv[] )
     int i = 0;
     if (Fl::args( argc, argv, i, parse_args ) < argc)
     {
-        Fl::fatal(_("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n -f, --fullscreen\n%s"), Fl::help );
+        Fl::fatal(_("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n --ts-exe=<PATH>\n -f, --fullscreen\n%s"), Fl::help );
     }
 
     if ( silent )
@@ -137,17 +137,26 @@ main( int argc, char* argv[] )
         Fl_Preferences prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" );
 	char abs_name[ FL_PATH_MAX ];
 
-	fl_filename_absolute( abs_name, def_fg_exe.c_str() );
-	prefs.set( "fg_exe_init", abs_name );
-	prefs.set( "fg_exe", abs_name );
+	if ( !def_fg_exe.empty() )
+	{
+	    fl_filename_absolute( abs_name, def_fg_exe.c_str() );
+	    prefs.set( "fg_exe_init", abs_name );
+	    prefs.set( "fg_exe", abs_name );
+	}
 
-	fl_filename_absolute( abs_name, def_fg_root.c_str() );
-        prefs.set( "fg_root_init", abs_name );
-        prefs.set( "fg_root", abs_name );
+	if ( !def_fg_root.empty() )
+	{
+	    fl_filename_absolute( abs_name, def_fg_root.c_str() );
+	    prefs.set( "fg_root_init", abs_name );
+	    prefs.set( "fg_root", abs_name );
+	}
 
-	fl_filename_absolute( abs_name, def_fg_scenery.c_str() );
-        prefs.set( "fg_scenery_init", abs_name );
-        prefs.set( "fg_scenery", abs_name );
+	if ( !def_fg_scenery.empty() )
+	{
+	    fl_filename_absolute( abs_name, def_fg_scenery.c_str() );
+	    prefs.set( "fg_scenery_init", abs_name );
+	    prefs.set( "fg_scenery", abs_name );
+	}
 
 	if ( !def_ts_exe.empty() )
 	{
