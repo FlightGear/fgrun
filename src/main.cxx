@@ -149,6 +149,13 @@ main( int argc, char* argv[] )
         prefs.set( "fg_scenery_init", abs_name );
         prefs.set( "fg_scenery", abs_name );
 
+	if ( !def_ts_exe.empty() )
+	{
+	    fl_filename_absolute( abs_name, def_ts_exe.c_str() );
+	    prefs.set( "ts_exe_init", abs_name );
+	    prefs.set( "ts_exe", abs_name );
+	}
+
 	return 0;
     }
 

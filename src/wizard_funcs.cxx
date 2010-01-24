@@ -2037,6 +2037,12 @@ Wizard::reset_settings()
         prefs.set( "fg_scenery", buf );
     }
 
+    prefs.get( "ts_exe_init", buf, not_set, buflen-1);
+    if ( strcmp( buf, not_set ) != 0 )
+    {
+        prefs.set( "ts_exe", buf );
+    }
+
     reset();
 }
 
@@ -2255,6 +2261,9 @@ Wizard::load_preferences_cb()
 	    ts_dir->minimum( 0 );
 	    ts_dir->maximum( scenery_dir_list_->size() );
         }
+
+        prefs_tmp.get( "ts_exe", buf, def_ts_exe.c_str(), buflen-1);
+        ts_exe_->value( buf );
 
         prefs_tmp.get( "aircraft", buf, "", buflen-1);
         aircraft_update( buf );
