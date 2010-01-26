@@ -792,7 +792,7 @@ AirportBrowser::load_parking( const SGPath &path, apt_dat_t &data )
 void
 AirportBrowser::show_parking( const apt_dat_t* apt )
 {
-    if (apt == 0)
+    if (apt == 0 || apt->id_.empty())
 	return;
 
     parking_->clear();
