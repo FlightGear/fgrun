@@ -1341,7 +1341,13 @@ void
 Wizard::ai_models_cb()
 {
     prefs.set("ai_models", ai_models->value());
-    update_options();
+    if ( ai_models->value() == 0 )
+    {
+	multiplay->value(0);
+	multiplay_cb();
+    }
+    else
+	update_options();
 }
 
 void
@@ -1658,6 +1664,9 @@ Wizard::multiplay_cb()
 	gethostname( hostname, 256 );
 	str << "in,10," << hostname << "," << in;
 	prefs.set("multiplay2",str.str().c_str());
+
+	ai_models->value(1);
+	ai_models_cb();
     }
     update_options();
 }
