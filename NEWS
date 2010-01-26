@@ -1,3 +1,13 @@
+* 1.5.2
+
+  * compile under Win64
+  * add a field to configure a specific path for the terrasync executable ( which is only Win32 )
+  * --enable-ai-models is a prerequisite for --multiplay
+  * allow spaces in --props: options
+  * support XPlane 850 apt.dat format
+  * add a button to deselect all selected scenarii. This should be an hint that many scenarii are selectable at once
+  * add a prefetch button in the airport page to get scenery around a specific airport via terrasync before starting the simulator
+
 * 1.5.1
 
   * start TerraSync automatically
