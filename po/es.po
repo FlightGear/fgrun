@@ -288,7 +288,7 @@ msgstr "Activar puntero de ratón extra"
 
 #: src/advanced.cxx:763
 msgid "Random Objects"
-msgstr "Generador de Objetos Aleatorios"
+msgstr "Objetos Aleatorios"
 
 #: src/advanced.cxx:764
 msgid "Enable random scenery objects"
@@ -404,7 +404,7 @@ msgstr "Activar tráfico IA"
 
 #: src/advanced.cxx:852
 msgid "Random Trees"
-msgstr "Generador de bosques aleatorios"
+msgstr "Bosques aleatorios"
 
 #: src/advanced.cxx:861 src/advanced_funcs.cxx:194
 msgid "Flight Model"
