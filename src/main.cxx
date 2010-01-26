@@ -156,6 +156,7 @@ main( int argc, char* argv[] )
 	    fl_filename_absolute( abs_name, def_fg_scenery.c_str() );
 	    prefs.set( "fg_scenery_init", abs_name );
 	    prefs.set( "fg_scenery", abs_name );
+	    prefs.set( "ts_dir", 0 );
 	}
 
 	if ( !def_ts_exe.empty() )
