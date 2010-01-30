@@ -39,6 +39,7 @@ std::string def_fg_exe = "";
 std::string def_fg_root = "";
 std::string def_fg_scenery = "";
 std::string def_ts_exe = "";
+int def_ts_dir = -1;
 static bool silent = false;
 static bool fullscreen = false;
 
@@ -90,6 +91,12 @@ parse_args( int, char** argv, int& i )
 	++i;
 	return 1;
     }
+    else if (strncmp( argv[i], "--ts-dir=", 9 ) == 0)
+    {
+	def_ts_dir = atoi( &argv[i][9] );
+	++i;
+	return 1;
+    }
     return 0;
 }
 
@@ -129,7 +136,7 @@ main( int argc, char* argv[] )
     int i = 0;
     if (Fl::args( argc, argv, i, parse_args ) < argc)
     {
-        Fl::fatal(_("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n --ts-exe=<PATH>\n -f, --fullscreen\n%s"), Fl::help );
+	Fl::fatal(_("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n --ts-exe=<PATH>\n --ts-dir=#\n -f, --fullscreen\n%s"), Fl::help );
     }
 
     if ( silent )
@@ -164,6 +171,12 @@ main( int argc, char* argv[] )
 	    fl_filename_absolute( abs_name, def_ts_exe.c_str() );
 	    prefs.set( "ts_exe_init", abs_name );
 	    prefs.set( "ts_exe", abs_name );
+	}
+
+	if ( def_ts_dir != -1 )
+	{
+	    prefs.set( "ts_dir_init", def_ts_dir );
+	    prefs.set( "ts_dir", def_ts_dir );
 	}
 
 	return 0;

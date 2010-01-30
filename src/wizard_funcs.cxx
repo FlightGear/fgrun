@@ -2052,6 +2052,13 @@ Wizard::reset_settings()
         prefs.set( "ts_exe", buf );
     }
 
+    int iVal = -1;
+    prefs.get( "ts_dir_init", iVal, -1);
+    if ( iVal != -1 )
+    {
+        prefs.set( "ts_dir", buf );
+    }
+
     reset();
 }
 
