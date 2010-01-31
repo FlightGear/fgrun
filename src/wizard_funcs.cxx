@@ -1362,6 +1362,7 @@ Wizard::time_of_day_cb()
     else
     {
 	time_of_day_value->activate();
+	prefs.set("time_of_day_value", (const char *)time_of_day_value->mvalue()->user_data_);
 	prefs.set("time-match-real", 0);
 	prefs.set("time-match-local", 0);
 	prefs.set("start-date-sys", 0);
