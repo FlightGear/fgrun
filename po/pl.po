@@ -1,14 +1,14 @@
-# Polish translations for PACKAGE package.
+# Polish translations for fgrun package.
 # Copyright (C) 2008 Frederic Bouvier
-# This file is distributed under the same license as the PACKAGE package.
-# Michal Stawski i Pawel Fronczyk <pl.flightgear@gmail.com>, 2008.
-# 
+# This file is distributed under the same license as the fgrun package.
+# Michal Stawski i Pawel Fronczyk <pl.flightgear@gmail.com>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-23 18:58+0100\n"
-"PO-Revision-Date: 2008-01-31 22:12+0100\n"
+"POT-Creation-Date: 2010-02-17 23:23+0100\n"
+"PO-Revision-Date: 2008-12-15 22:12+0100\n"
 "Last-Translator:  <pl.flightgear@gmail.com>\n"
 "Language-Team: Polish\n"
 "MIME-Version: 1.0\n"
@@ -862,6 +862,7 @@ msgstr "Protokol"
 msgid "Medium:"
 msgstr "Nosnik:"
 
+# src/advanced.cxx:1336 #forma, srodek, jak to nazwac?!
 #: src/advanced.cxx:1384
 msgid "Direction:"
 msgstr "Kierunek"
@@ -1105,16 +1106,15 @@ msgstr "@2>"
 
 #: src/wizard.cxx:479
 msgid "Clear the content of the airport cache"
-msgstr ""
+msgstr "Wyczysc liste lotnisk"
 
 #: src/wizard.cxx:484
 msgid "Airports Cache:"
 msgstr "Lista lotnisk:"
 
 #: src/wizard.cxx:485
-#, fuzzy
 msgid "Full path to the airport cache"
-msgstr "Pelna sciezka dostepu do pliku wykonywalnego FlightGear"
+msgstr "Pelna sciezka do listy lotnisk"
 
 #: src/wizard.cxx:490
 msgid "Add..."
@@ -1129,25 +1129,22 @@ msgid "Delete a scenery directory"
 msgstr "Usun katalog scenerii"
 
 #: src/wizard.cxx:504
-#, fuzzy
 msgid "TerraSync directory"
-msgstr "Katalogi scenerii"
+msgstr "Katalog TerraSync"
 
 #: src/wizard.cxx:505
 msgid ""
 "Select the line in the FG_SCENERY list that is the TerraSync directory. 0 "
 "means that TerraSync is not used."
-msgstr ""
+msgstr "Wybierz z listy katalog TerraSync. 0 jesli nie korzystasz z TerraSync"
 
 #: src/wizard.cxx:513
-#, fuzzy
 msgid "Terrasync exe:"
-msgstr "Katalogi scenerii"
+msgstr "Terrasync exe:"
 
 #: src/wizard.cxx:514 src/wizard.cxx:521
-#, fuzzy
 msgid "Full pathname to Terrasync executable"
-msgstr "Pelna sciezka dostepu do pliku wykonywalnego FlightGear"
+msgstr "Sciezka do pliku wykonywalnego TerraSync"
 
 #: src/wizard.cxx:528
 msgid "Select an aircraft"
@@ -1183,16 +1180,15 @@ msgstr "Lotniskowiec:"
 msgid "Park pos :"
 msgstr "Pozycja parkingowa:"
 
+# tak to sie nazywa?
 #: src/wizard.cxx:593
 msgid "Only valid if carrier is set. For airport parking, use the list above."
-msgstr ""
+msgstr "Tylko dla lotniskowca. Dla lotniska wybirz z listy powyzej"
 
 #: src/wizard.cxx:601
-#, fuzzy
 msgid "Scenery Prefetch"
-msgstr "Katalogi scenerii"
+msgstr "Pobieraj scenerie"
 
-# tak to sie nazywa?
 #: src/wizard.cxx:612
 msgid "Advanced..."
 msgstr "Zaawansowane..."
@@ -1265,11 +1261,11 @@ msgstr "Scenariusze"
 
 #: src/wizard.cxx:734
 msgid "Deselect all"
-msgstr ""
+msgstr "Odznacz wszystko"
 
 #: src/wizard.cxx:744
 msgid "TerraSync"
-msgstr ""
+msgstr "TerraSync"
 
 #: src/wizard.cxx:765
 msgid "Atlas"
@@ -1321,7 +1317,7 @@ msgid "Prev"
 msgstr "Wstecz"
 
 #: src/wizard.cxx:831 src/wizard_funcs.cxx:295 src/wizard_funcs.cxx:749
-#: src/wizard_funcs.cxx:1463 src/wizard_funcs.cxx:1473
+#: src/wizard_funcs.cxx:1470 src/wizard_funcs.cxx:1480
 msgid "Next"
 msgstr "Dalej"
 
@@ -1338,6 +1334,8 @@ msgid ""
 "Clear all selected options and return to the install situation. Useful if "
 "FGFS don't start anymore."
 msgstr ""
+"Wyczysc ustawienia i przywroc sytuacje po instalacjiKliknij jesli FGFS nie "
+"dziala"
 
 #: src/wizard.cxx:848
 msgid "Save As..."
@@ -1345,7 +1343,7 @@ msgstr "Zapisz"
 
 #: src/wizard.cxx:849
 msgid "Save current configuration to a file"
-msgstr ""
+msgstr "Zapisz aktualne ustawienia do pliku"
 
 #: src/wizard.cxx:853
 msgid "Load"
@@ -1353,7 +1351,7 @@ msgstr "Wczytaj"
 
 #: src/wizard.cxx:854
 msgid "Load a previously saved configuration"
-msgstr ""
+msgstr "Wczytaj poprzednio ustawienia z pliku"
 
 #: src/wizard.cxx:865
 msgid "FlightGear running..."
@@ -1395,14 +1393,14 @@ msgid "Please send this error report to the Flightgear development team"
 msgstr ""
 "Prosimy o wyslanie tego raportu o bledzie do zespolu tworzacego FlightGear"
 
+# nie wiem co to robi!!!!!!
 #: src/wizard.cxx:918
 msgid "Prefetch Scenery"
-msgstr ""
+msgstr "Pobieraj scenerie"
 
 #: src/wizard.cxx:933
-#, fuzzy
 msgid "Airport to fetch : "
-msgstr "Lista lotnisk:"
+msgstr "Lotnisko do pobrania"
 
 #: src/wizard_funcs.cxx:82 src/advanced_funcs.cxx:105
 msgid "noon"
@@ -1507,7 +1505,7 @@ msgstr "Nie znaleziono modelu: '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Nie znaleziono wlasnosci '/sim/model/path'"
 
-#: src/wizard_funcs.cxx:685 src/wizard_funcs.cxx:2079
+#: src/wizard_funcs.cxx:685 src/wizard_funcs.cxx:2102
 #: src/AirportBrowser.cxx:476 src/fgfsrc.cxx:95
 msgid "<default>"
 msgstr "<domyslny>"
@@ -1554,51 +1552,68 @@ msgid "Select FG_SCENERY directory"
 msgstr "Wskaz katalog scenerii"
 
 #: src/wizard_funcs.cxx:1211
-#, fuzzy
 msgid "Select Terrasync executable"
-msgstr "Wskaz plik wykonywalny FlightGear"
+msgstr "Wybierz plik wykonywalny TerraSync"
 
-#: src/wizard_funcs.cxx:1413
+#: src/wizard_funcs.cxx:1420
 msgid "Description of "
 msgstr "Opis"
 
-#: src/wizard_funcs.cxx:1460
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#: src/wizard_funcs.cxx:1467
 msgid "TerraSync directory not set"
-msgstr ""
+msgstr "Nie wybrano katalogu TerraSync"
 
-#: src/wizard_funcs.cxx:1470
+#: src/wizard_funcs.cxx:1477
 msgid "TerraSync executable not set"
-msgstr ""
+msgstr "Nie wybierano pliku wykonywalnego TerraSync"
 
-#: src/wizard_funcs.cxx:2222
+#: src/wizard_funcs.cxx:2245
 msgid "Load settings from..."
 msgstr "Wczytaj ustawienia z..."
 
-#: src/wizard_funcs.cxx:2304
+#: src/wizard_funcs.cxx:2330
 msgid "Save settings as..."
 msgstr "Zapisz ustawienia"
 
-#: src/wizard_funcs.cxx:2308
+#: src/wizard_funcs.cxx:2334
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr "Plik \"%s\" juz istnieje."
 
-#: src/wizard_funcs.cxx:2308 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:2334 src/fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr "Nadpisz"
 
-#: src/wizard_funcs.cxx:2308
+#: src/wizard_funcs.cxx:2334
 msgid "Don't overwrite"
 msgstr "Nie nadpisuj"
 
-#: src/wizard_funcs.cxx:2396
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#: src/wizard_funcs.cxx:2422
 #, c-format
 msgid "Unknown airport : '%s'"
-msgstr ""
+msgstr "Nieznane lotnisko: '%s'"
 
-#: src/wizard_funcs.cxx:2402
+#: src/wizard_funcs.cxx:2428
 msgid "TerraSync must be configured"
-msgstr ""
+msgstr "TerraSync musi byc skonfigurowany"
 
 #: src/advanced_funcs.cxx:113
 msgid "bulk"
@@ -1741,7 +1756,7 @@ msgstr "Zapisz jako?"
 msgid "Select protocol file"
 msgstr "Wskaz plik protokolu"
 
-#: src/main.cxx:132
+#: src/main.cxx:139
 #, c-format
 msgid ""
 "Options are:\n"
@@ -1749,6 +1764,8 @@ msgid ""
 " --fg-exe=<PATH>\n"
 " --fg-root=<DIR>\n"
 " --fg-scenery=<DIR>\n"
+" --ts-exe=<PATH>\n"
+" --ts-dir=#\n"
 " -f, --fullscreen\n"
 "%s"
 msgstr ""
@@ -1757,6 +1774,8 @@ msgstr ""
 " --fg-exe=<PATH>\n"
 " --fg-root=<DIR>\n"
 " --fg-scenery=<DIR>\n"
+" --ts-exe=<PATH>\n"
+" --ts-dir=#\n"
 " -f, --fullscreen\n"
 "%s"
 

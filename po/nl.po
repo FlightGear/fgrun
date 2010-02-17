@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-23 18:58+0100\n"
+"POT-Creation-Date: 2010-02-17 23:23+0100\n"
 "PO-Revision-Date: 2008-01-19 17:30+0100\n"
 "Last-Translator: Stefan <fgfs.stefan@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -1427,7 +1427,7 @@ msgid "Prev"
 msgstr "Vorige"
 
 #: src/wizard.cxx:831 src/wizard_funcs.cxx:295 src/wizard_funcs.cxx:749
-#: src/wizard_funcs.cxx:1463 src/wizard_funcs.cxx:1473
+#: src/wizard_funcs.cxx:1470 src/wizard_funcs.cxx:1480
 msgid "Next"
 msgstr "Volgende"
 
@@ -1614,7 +1614,7 @@ msgstr "Model niet gevonden: '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Property '/sim/model/path' niet gevonden"
 
-#: src/wizard_funcs.cxx:685 src/wizard_funcs.cxx:2079
+#: src/wizard_funcs.cxx:685 src/wizard_funcs.cxx:2102
 #: src/AirportBrowser.cxx:476 src/fgfsrc.cxx:95
 msgid "<default>"
 msgstr "<standaard>"
@@ -1667,46 +1667,46 @@ msgstr "Stel FG_SCENERY map"
 msgid "Select Terrasync executable"
 msgstr "Stel FlightGear programma in"
 
-#: src/wizard_funcs.cxx:1413
+#: src/wizard_funcs.cxx:1420
 msgid "Description of "
 msgstr "Beschrijving van "
 
-#: src/wizard_funcs.cxx:1460
+#: src/wizard_funcs.cxx:1467
 msgid "TerraSync directory not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1470
+#: src/wizard_funcs.cxx:1477
 msgid "TerraSync executable not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2222
+#: src/wizard_funcs.cxx:2245
 msgid "Load settings from..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2304
+#: src/wizard_funcs.cxx:2330
 msgid "Save settings as..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2308
+#: src/wizard_funcs.cxx:2334
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2308 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:2334 src/fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr "Schrijf overheen"
 
-#: src/wizard_funcs.cxx:2308
+#: src/wizard_funcs.cxx:2334
 #, fuzzy
 msgid "Don't overwrite"
 msgstr "Schrijf overheen"
 
-#: src/wizard_funcs.cxx:2396
+#: src/wizard_funcs.cxx:2422
 #, c-format
 msgid "Unknown airport : '%s'"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2402
+#: src/wizard_funcs.cxx:2428
 msgid "TerraSync must be configured"
 msgstr ""
 
@@ -1859,7 +1859,7 @@ msgstr "Sla bestand op als"
 msgid "Select protocol file"
 msgstr "Selecter protocol-bestand"
 
-#: src/main.cxx:132
+#: src/main.cxx:139
 #, c-format
 msgid ""
 "Options are:\n"
@@ -1867,6 +1867,8 @@ msgid ""
 " --fg-exe=<PATH>\n"
 " --fg-root=<DIR>\n"
 " --fg-scenery=<DIR>\n"
+" --ts-exe=<PATH>\n"
+" --ts-dir=#\n"
 " -f, --fullscreen\n"
 "%s"
 msgstr ""
@@ -1875,6 +1877,8 @@ msgstr ""
 " --fg-exe=<PAD>\n"
 " --fg-root=<MAP>\n"
 " --fg-scenery=<MAP>\n"
+" --ts-exe=<PATH>\n"
+" --ts-dir=#\n"
 " -f, --fullscreen\n"
 "%s"
 

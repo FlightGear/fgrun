@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-23 18:58+0100\n"
+"POT-Creation-Date: 2010-02-17 23:23+0100\n"
 "PO-Revision-Date: 2008-12-23 19:05+0100\n"
 "Last-Translator: <lizandrof@gmail.com>\n"
 "Language-Team: Portuguese\n"
@@ -1306,7 +1306,7 @@ msgid "Prev"
 msgstr "Voltar"
 
 #: src/wizard.cxx:831 src/wizard_funcs.cxx:295 src/wizard_funcs.cxx:749
-#: src/wizard_funcs.cxx:1463 src/wizard_funcs.cxx:1473
+#: src/wizard_funcs.cxx:1470 src/wizard_funcs.cxx:1480
 msgid "Next"
 msgstr "Avançar"
 
@@ -1492,7 +1492,7 @@ msgstr "Modelo não encontrado : '%s'"
 msgid "Property '/sim/model/path' not found"
 msgstr "Propriedade '/sim/model/path' não encontrada"
 
-#: src/wizard_funcs.cxx:685 src/wizard_funcs.cxx:2079
+#: src/wizard_funcs.cxx:685 src/wizard_funcs.cxx:2102
 #: src/AirportBrowser.cxx:476 src/fgfsrc.cxx:95
 msgid "<default>"
 msgstr "<padrão>"
@@ -1543,45 +1543,45 @@ msgstr "Selecione o diretório FG_CENÁRIO"
 msgid "Select Terrasync executable"
 msgstr "Selecione o executável do FlightGear"
 
-#: src/wizard_funcs.cxx:1413
+#: src/wizard_funcs.cxx:1420
 msgid "Description of "
 msgstr "Descrição de "
 
-#: src/wizard_funcs.cxx:1460
+#: src/wizard_funcs.cxx:1467
 msgid "TerraSync directory not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1470
+#: src/wizard_funcs.cxx:1477
 msgid "TerraSync executable not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2222
+#: src/wizard_funcs.cxx:2245
 msgid "Load settings from..."
 msgstr "Carregar configurações de..."
 
-#: src/wizard_funcs.cxx:2304
+#: src/wizard_funcs.cxx:2330
 msgid "Save settings as..."
 msgstr "Salvar configurações como..."
 
-#: src/wizard_funcs.cxx:2308
+#: src/wizard_funcs.cxx:2334
 #, c-format
 msgid "Filename \"%s\" already exists."
 msgstr "O Arquivo \"%s\" já existe."
 
-#: src/wizard_funcs.cxx:2308 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:2334 src/fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr "Sobrescrever"
 
-#: src/wizard_funcs.cxx:2308
+#: src/wizard_funcs.cxx:2334
 msgid "Don't overwrite"
 msgstr "Não Sobrescrever"
 
-#: src/wizard_funcs.cxx:2396
+#: src/wizard_funcs.cxx:2422
 #, c-format
 msgid "Unknown airport : '%s'"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2402
+#: src/wizard_funcs.cxx:2428
 msgid "TerraSync must be configured"
 msgstr ""
 
@@ -1726,7 +1726,7 @@ msgstr "Salvar arquivo como ?"
 msgid "Select protocol file"
 msgstr "Selecione um arquivo de protocolo"
 
-#: src/main.cxx:132
+#: src/main.cxx:139
 #, c-format
 msgid ""
 "Options are:\n"
@@ -1734,6 +1734,8 @@ msgid ""
 " --fg-exe=<PATH>\n"
 " --fg-root=<DIR>\n"
 " --fg-scenery=<DIR>\n"
+" --ts-exe=<PATH>\n"
+" --ts-dir=#\n"
 " -f, --fullscreen\n"
 "%s"
 msgstr ""
@@ -1742,5 +1744,7 @@ msgstr ""
 " --fg-exe=<PATH>\n"
 " --fg-root=<DIR>\n"
 " --fg-scenery=<DIR>\n"
+" --ts-exe=<PATH>\n"
+" --ts-dir=#\n"
 " -f, --fullscreen\n"
 "%s"
