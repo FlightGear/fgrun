@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-17 23:23+0100\n"
+"POT-Creation-Date: 2010-02-18 08:12+0100\n"
 "PO-Revision-Date: 2008-12-15 22:12+0100\n"
 "Last-Translator:  <pl.flightgear@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -1183,11 +1183,11 @@ msgstr "Pozycja parkingowa:"
 # tak to sie nazywa?
 #: src/wizard.cxx:593
 msgid "Only valid if carrier is set. For airport parking, use the list above."
-msgstr "Tylko dla lotniskowca. Dla lotniska wybirz z listy powyzej"
+msgstr "Tylko dla lotniskowca. Dla lotniska wybierz z listy powyzej"
 
 #: src/wizard.cxx:601
 msgid "Scenery Prefetch"
-msgstr "Pobieraj scenerie"
+msgstr "Pobierz scenerie"
 
 #: src/wizard.cxx:612
 msgid "Advanced..."
@@ -1334,8 +1334,8 @@ msgid ""
 "Clear all selected options and return to the install situation. Useful if "
 "FGFS don't start anymore."
 msgstr ""
-"Wyczysc ustawienia i przywroc sytuacje po instalacjiKliknij jesli FGFS nie "
-"dziala"
+"Wyczysc ustawienia i przywroc sytuacje po instalacji. Kliknij jesli FGFS nie "
+"dziala."
 
 #: src/wizard.cxx:848
 msgid "Save As..."
@@ -1351,7 +1351,7 @@ msgstr "Wczytaj"
 
 #: src/wizard.cxx:854
 msgid "Load a previously saved configuration"
-msgstr "Wczytaj poprzednio ustawienia z pliku"
+msgstr "Wczytaj ustawienia z pliku"
 
 #: src/wizard.cxx:865
 msgid "FlightGear running..."
