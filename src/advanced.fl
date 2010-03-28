@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0107 
+version 1.0300 
 do_not_include_H_from_C 
 i18n_type 1 
 i18n_include "i18n.h" 
@@ -115,8 +115,8 @@ class Advanced {open
         }
       }
       Fl_Group {page[1]} {
-        label Features selected
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        label Features
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Check_Button game_mode {
           label {Game Mode}
@@ -684,8 +684,8 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output}
-        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21 hide
+        label {Input/Output} open
+        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -708,11 +708,11 @@ else
           }
           Fl_Choice io_protocol {
             label {Protocol:}
-            callback {io_protocol_update_cb();}
+            callback {io_protocol_update_cb();} open
             private xywh {260 185 125 25} down_box BORDER_BOX labelsize 12 textsize 12
           } {
             MenuItem {} {
-              label atc610x
+              label atcsim
               private xywh {5 5 100 20} labelsize 12
             }
             MenuItem {} {
@@ -728,11 +728,15 @@ else
               private xywh {5 5 100 20} labelsize 12
             }
             MenuItem {} {
+              label AV400Sim
+              xywh {0 0 100 20} labelsize 12
+            }
+            MenuItem {} {
               label generic
               private xywh {5 5 100 20} labelsize 12
             }
             MenuItem {} {
-              label {joy-client}
+              label joyclient
               private xywh {5 5 100 20} labelsize 12
             }
             MenuItem {} {
@@ -778,6 +782,10 @@ else
             MenuItem {} {
               label rul
               private xywh {5 5 100 20} labelsize 12
+            }
+            MenuItem {} {
+              label telnet selected
+              private xywh {0 0 100 20} labelsize 12
             }
           }
           Fl_Choice io_medium {
