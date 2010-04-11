@@ -550,6 +550,8 @@ Wizard::preview_aircraft()
 {
     Fl::remove_timeout( timeout_handler, this );
 
+    current_aircraft_model_path = "";
+
     preview->make_current();
 
     preview->clear();
@@ -583,6 +585,7 @@ Wizard::preview_aircraft()
             osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), path.str(), SGPath() );
 	    if (model != 0)
 	    {
+                current_aircraft_model_path = path.str();
                 osg::ref_ptr<osg::Node> bounding_obj = find_named_node( model.get(), "Aircraft" );
                 preview->set_model( model.get(), bounding_obj.get() );
 
@@ -700,6 +703,7 @@ Wizard::next_cb()
 	prefs.flush();
 	if (fgThread == 0)
 	    fgThread = new FlightGearThread( this );
+        fgThread->setViewer(false);
 	fgThread->start();
 
 	exec_launch_window();
@@ -1956,15 +1960,21 @@ Wizard::show_cmd_line_cb()
 }
 
 Wizard::FlightGearThread::FlightGearThread( Wizard *w )
-: wizard( w )
+: wizard( w ), viewer( false )
 {
+}
+
+void
+Wizard::FlightGearThread::setViewer(bool v)
+{
+    viewer = v;
 }
 
 void
 Wizard::FlightGearThread::run()
 {
     std::ostringstream ostr;
-    if (wizard->write_fgfsrc( wizard->prefs, ostr, " " ))
+    if ((viewer && write_fgviewerrc( wizard->prefs, ostr, " ", wizard->current_aircraft_model_path )) || wizard->write_fgfsrc( wizard->prefs, ostr, " " ))
     {
 	wizard->launch_result = wizard->run_fgfs(ostr.str());
     }
@@ -2459,4 +2469,23 @@ void
 Wizard::prefetch_cancel_cb()
 {
     prefetch_result = 0;
+}
+
+void
+Wizard::start_viewer_cb()
+{
+    prefs.flush();
+    if (fgThread == 0)
+        fgThread = new FlightGearThread( this );
+    fgThread->setViewer(true);
+    fgThread->start();
+
+    exec_launch_window();
+}
+
+void 
+Wizard::auto_visibility_cb()
+{
+    prefs.set("autovisibility", auto_visibility->value());
+    update_options();
 }

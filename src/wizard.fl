@@ -38,13 +38,16 @@ decl {class Advanced;} {public
 
 class Wizard {open
 } {
-  class FlightGearThread {: {public OpenThreads::Thread}
+  class FlightGearThread {open : {public OpenThreads::Thread}
   } {
     decl {FlightGearThread( Wizard *w );} {public
+    }
+    decl {void setViewer(bool v);} {public
     }
     decl {void run();} {public
     }
     decl {Wizard *wizard;} {}
+    decl {bool viewer;} {}
     decl {FlightGearThread();} {}
     decl {FlightGearThread( const FlightGearThread &);} {}
     decl {FlightGearThread &operator=( const FlightGearThread &);} {}
@@ -71,8 +74,8 @@ class Wizard {open
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths} open
-          xywh {0 0 800 560} labelfont 1 align 21
+          label {Select Paths}
+          xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
           Fl_Help_View about_ {
             private xywh {5 25 790 130} labeltype NO_LABEL
@@ -172,7 +175,7 @@ class Wizard {open
           label {Select an aircraft}
           private xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
-          Fl_Tile {} {open
+          Fl_Tile {} {
             xywh {0 20 795 500} resizable
           } {
             Fl_Browser aircraft {
@@ -198,7 +201,12 @@ class Wizard {open
             }
             Fl_Output aircraft_author {
               label {Author(s) :}
-              xywh {385 525 405 25} resizable
+              xywh {385 525 305 25} resizable
+            }
+            Fl_Button start_viewer {
+              label Viewer
+              callback {start_viewer_cb();}
+              xywh {695 525 95 25}
             }
           }
         }
@@ -237,8 +245,8 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {
-          private xywh {0 0 800 560} hide
+        Fl_Group {page[3]} {open
+          private xywh {0 0 800 560}
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -331,7 +339,7 @@ class Wizard {open
               private xywh {610 80 25 10} resizable
             }
             Fl_Check_Button clouds_3d {
-              label {3D clouds (experimental)}
+              label {3D Clouds}
               callback {clouds_3d_cb();}
               private xywh {470 10 205 25} down_box DOWN_BOX
             }
@@ -402,6 +410,11 @@ class Wizard {open
               } {}
               Fl_Box {} {
                 private xywh {445 205 20 10} resizable
+              }
+              Fl_Check_Button auto_visibility {
+                label {Menu auto-visibility}
+                callback {auto_visibility_cb();}
+                xywh {180 235 170 25} down_box DOWN_BOX
               }
             }
             Fl_Group {} {
@@ -563,6 +576,8 @@ class Wizard {open
   decl {void advanced_cb();} {}
   decl {int write_fgfsrc();} {}
   decl {static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\\n");} {}
+  decl {static int write_fgviewerrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx, const string &path );} {selected
+  }
   decl {int run_fgfs( const std::string & );} {}
   decl {int run_ts();} {}
   decl {static void stdout_cb( int, void* );} {}
@@ -579,8 +594,7 @@ class Wizard {open
   decl {void scenery_dir_down_cb();} {}
   decl {void ts_dir_cb();} {}
   decl {void ts_exe_update_cb();} {}
-  decl {void ts_exe_select_cb();} {selected
-  }
+  decl {void ts_exe_select_cb();} {}
   decl {void refresh_airports();} {public
   }
   decl {static void refresh_airports( Fl_Widget*, void* );} {public
@@ -727,4 +741,7 @@ class Wizard {open
   decl {bool exec_prefetch_window();} {}
   decl {void prefetch_ok_cb();} {}
   decl {void prefetch_cancel_cb();} {}
+  decl {void start_viewer_cb();} {}
+  decl {void auto_visibility_cb();} {}
+  decl {string current_aircraft_model_path;} {}
 } 

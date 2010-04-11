@@ -105,6 +105,13 @@ void Wizard::cb_aircraft(Fl_Browser* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_aircraft_i(o,v);
 }
 
+void Wizard::cb_start_viewer_i(Fl_Button*, void*) {
+  start_viewer_cb();
+}
+void Wizard::cb_start_viewer(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_start_viewer_i(o,v);
+}
+
 void Wizard::cb_Scenery_i(Fl_Button*, void*) {
   scenery_prefetch_cb();
 }
@@ -263,6 +270,13 @@ void Wizard::cb_season(Fl_Choice* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_season_i(o,v);
 }
 
+void Wizard::cb_auto_visibility_i(Fl_Check_Button*, void*) {
+  auto_visibility_cb();
+}
+void Wizard::cb_auto_visibility(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_auto_visibility_i(o,v);
+}
+
 void Wizard::cb_scenarii_i(Fl_Browser*, void*) {
   scenarii_cb();
 }
@@ -417,6 +431,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { page[0] = new Fl_Group(0, 0, 800, 560, _("Select Paths"));
         page[0]->labelfont(1);
         page[0]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+        page[0]->hide();
         { about_ = new Fl_Help_View(5, 25, 790, 130);
           about_->labeltype(FL_NO_LABEL);
         } // Fl_Help_View* about_
@@ -559,9 +574,12 @@ ns that TerraSync is not used."));
           o->box(FL_DOWN_BOX);
           { aircraft_status = new Fl_Output(115, 525, 135, 25, _("Status :"));
           } // Fl_Output* aircraft_status
-          { aircraft_author = new Fl_Output(385, 525, 405, 25, _("Author(s) :"));
+          { aircraft_author = new Fl_Output(385, 525, 305, 25, _("Author(s) :"));
             Fl_Group::current()->resizable(aircraft_author);
           } // Fl_Output* aircraft_author
+          { start_viewer = new Fl_Button(695, 525, 95, 25, _("Viewer"));
+            start_viewer->callback((Fl_Callback*)cb_start_viewer);
+          } // Fl_Button* start_viewer
           o->end();
         } // Fl_Group* o
         page[1]->end();
@@ -607,7 +625,6 @@ ns that TerraSync is not used."));
         page[2]->end();
       } // Fl_Group* page[2]
       { page[3] = new Fl_Group(0, 0, 800, 560);
-        page[3]->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
@@ -667,7 +684,7 @@ ns that TerraSync is not used."));
           { Fl_Box* o = new Fl_Box(610, 80, 25, 10);
             Fl_Group::current()->resizable(o);
           } // Fl_Box* o
-          { clouds_3d = new Fl_Check_Button(470, 10, 205, 25, _("3D clouds (experimental)"));
+          { clouds_3d = new Fl_Check_Button(470, 10, 205, 25, _("3D Clouds"));
             clouds_3d->down_box(FL_DOWN_BOX);
             clouds_3d->callback((Fl_Callback*)cb_clouds_3d);
           } // Fl_Check_Button* clouds_3d
@@ -719,6 +736,10 @@ ns that TerraSync is not used."));
             { Fl_Box* o = new Fl_Box(445, 205, 20, 10);
               Fl_Group::current()->resizable(o);
             } // Fl_Box* o
+            { auto_visibility = new Fl_Check_Button(180, 235, 170, 25, _("Menu auto-visibility"));
+              auto_visibility->down_box(FL_DOWN_BOX);
+              auto_visibility->callback((Fl_Callback*)cb_auto_visibility);
+            } // Fl_Check_Button* auto_visibility
             o->end();
           } // Fl_Group* o
           { Fl_Group* o = new Fl_Group(490, 120, 305, 139, _("Scenarios"));

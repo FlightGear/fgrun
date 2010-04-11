@@ -33,9 +33,11 @@ class Wizard {
 class FlightGearThread : public OpenThreads::Thread {
 public:
   FlightGearThread( Wizard *w ); 
+  void setViewer(bool v); 
   void run(); 
 private:
   Wizard *wizard; 
+  bool viewer; 
   FlightGearThread(); 
   FlightGearThread( const FlightGearThread &); 
   FlightGearThread &operator=( const FlightGearThread &); 
@@ -102,7 +104,10 @@ private:
 public:
   Fl_Output *aircraft_status;
   Fl_Output *aircraft_author;
+  Fl_Button *start_viewer;
 private:
+  void cb_start_viewer_i(Fl_Button*, void*);
+  static void cb_start_viewer(Fl_Button*, void*);
   AirportBrowser *airports_;
 public:
   Fl_Group *carrier_group;
@@ -172,6 +177,11 @@ private:
   Fl_Choice *season;
   void cb_season_i(Fl_Choice*, void*);
   static void cb_season(Fl_Choice*, void*);
+public:
+  Fl_Check_Button *auto_visibility;
+private:
+  void cb_auto_visibility_i(Fl_Check_Button*, void*);
+  static void cb_auto_visibility(Fl_Check_Button*, void*);
   Fl_Browser *scenarii;
   void cb_scenarii_i(Fl_Browser*, void*);
   static void cb_scenarii(Fl_Browser*, void*);
@@ -256,6 +266,7 @@ private:
   void advanced_cb(); 
   int write_fgfsrc(); 
   static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\n"); 
+  static int write_fgviewerrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx, const string &path ); 
   int run_fgfs( const std::string & ); 
   int run_ts(); 
   static void stdout_cb( int, void* ); 
@@ -352,5 +363,8 @@ private:
   bool exec_prefetch_window(); 
   void prefetch_ok_cb(); 
   void prefetch_cancel_cb(); 
+  void start_viewer_cb(); 
+  void auto_visibility_cb(); 
+  string current_aircraft_model_path; 
 };
 #endif

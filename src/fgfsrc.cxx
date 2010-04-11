@@ -261,6 +261,9 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
 	     prefs.get( "frame_rate_limiter_value", iVal2, 60 ))
         os << pfx << "--prop:/sim/frame-rate-throttle-hz=" << iVal2;
 
+    if (prefs.get( "autovisibility", iVal, 0 ) && iVal)
+	os << pfx << "--prop:/sim/menubar/autovisibility/enabled=1";
+
     if (prefs.get( "fog", buf, "", buflen-1 ))
     {
 	if (strcmp( "disabled", buf ) == 0)
@@ -443,6 +446,21 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
 		   << "]/span-m=" << dVal;
 	}
     }
+
+    return 1;
+}
+
+int
+Wizard::write_fgviewerrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx, const std::string &path )
+{
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+
+    prefs.get( "fg_root", buf, "", buflen-1 );
+    os << "--fg-root=" << buf;
+
+    os << pfx << "--fgviewer";
+    os << pfx << path;
 
     return 1;
 }
