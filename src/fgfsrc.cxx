@@ -106,7 +106,7 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     if (prefs.get( "control", buf, "", buflen-1 ))
 	os << pfx << "--control=" << buf;
     if (prefs.get( "lang", buf, "", buflen-1 ) && buf[0] != 0)
-	os << pfx << "--lang=" << buf;
+	os << pfx << "--language=" << buf;
     if (prefs.get( "browser", buf, "", buflen-1 ) && buf[0] != 0)
 	os << pfx << "--browser-app=" << buf;
     if (prefs.get( "config", buf, "", buflen-1 ) && buf[0] != 0)
