@@ -1316,8 +1316,8 @@ Wizard::frame_rate_limiter_cb()
     {
 	frame_rate_limiter_value->activate();
     }
-    prefs.set("frame_rate_limiter", v);
-    update_options();
+    prefs.set( "frame_rate_limiter", v );
+    frame_rate_limiter_value_cb();
 }
 
 void
