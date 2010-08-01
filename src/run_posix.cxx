@@ -49,6 +49,7 @@
 #include "logwin.h"
 
 using std::string;
+using std::vector;
 
 int
 Wizard::run_fgfs( const std::string &args )
