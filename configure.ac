@@ -131,7 +131,7 @@ if test "x$ac_cv_header_plib_ul_h" != "xyes" \
   -o "x$ac_cv_lib_plibul_ulInit" != "xyes" ; then
     echo
     echo "You *must* have the plib library installed on your system to build"
-    echo "SimGear!"
+    echo "fgrun!"
     echo
     echo "     LIBS: '$LIBS'"
     echo "  LDFLAGS: '$LDFLAGS'"
