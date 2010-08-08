@@ -34,9 +34,8 @@ fgrun_SOURCES = \
 	$(platform_srcs)
 
 simgear_libs = -lsgmodel -lsgscreen -lsgprops -lsgxml -lsgdebug -lsgbvh -lsgmaterial -lsgmodel -lsgutil -lsgstructure -lsgprops -lsgtgdb -lsgmath -lsgmisc -lsgbvh -lsgio -lsgbucket -lsgmodel -lsgutil
-plib_libs = -lplibsg -lplibul -lplibnet
 
-fgrun_LDADD = $(simgear_libs) $(plib_libs)
+fgrun_LDADD = $(simgear_libs)
 
 FLUID = @FLUID@
 

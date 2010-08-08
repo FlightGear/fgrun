@@ -46,12 +46,11 @@
 #include <simgear/props/props_io.hxx>
 #include <simgear/structure/exception.hxx>
 #include <simgear/misc/sg_path.hxx>
+#include <simgear/misc/sg_dir.hxx>
 #include <simgear/io/raw_socket.hxx>
 
 #include <osg/MatrixTransform>
 #include <osgDB/ReadFile>
-
-#include <plib/ul.h>
 
 #include "wizard.h"
 #include "advanced.h"
@@ -410,7 +409,9 @@ loadModel( const string &fg_root, const string &path,
 
     // Load the 3D aircraft object itself
     SGPath modelpath = path, texturepath = path;
-    if ( !ulIsAbsolutePathName( path.c_str() ) ) {
+    if ( path.find_first_of( "\\/" ) != 0 && 
+            ( path.length() < 2 || !isalpha(path[0]) || path[1] != ':' ) )
+    {
         SGPath tmp = fg_root;
         tmp.append(modelpath.str());
         modelpath = texturepath = tmp;
@@ -872,30 +873,23 @@ search_aircraft_dir( const SGPath& dir,
         s.append( "/" );
 #endif
 
-    ulDir *dh = ulOpenDir( s.c_str() );
-    ulDirEnt *ent;
-    while (dh != 0 && (ent = ulReadDir( dh )))
+    simgear::Dir directory( dir );
+    simgear::PathList files = directory.children( simgear::Dir::TYPE_FILE | simgear::Dir::NO_DOT_OR_DOTDOT );
+    for ( simgear::PathList::iterator ii = files.begin(); ii != files.end(); ++ii )
     {
-        if (fl_filename_match(ent->d_name, "*-set.xml"))
+        if (fl_filename_match(ii->c_str(), "*-set.xml"))
         {
-            SGPath d( dir );
-            d.append( ent->d_name );
-            ac.push_back( d );
-        }
-        else if (recursive &&
-                 strcmp( ent->d_name, "CVS" ) != 0 &&
-                 strcmp( ent->d_name, ".." ) != 0 &&
-                 strcmp( ent->d_name, "." ) != 0 )
-        {
-            SGPath d( dir );
-            d.append( ent->d_name );
-            if (fl_filename_isdir( d.c_str() ))
-            {
-                search_aircraft_dir( d, false, ac );
-            }
+            ac.push_back( *ii );
         }
     }
-    ulCloseDir( dh );
+    if ( recursive )
+    {
+        simgear::PathList subdirs = directory.children( simgear::Dir::TYPE_DIR | simgear::Dir::NO_DOT_OR_DOTDOT );
+        for ( simgear::PathList::const_iterator ii = subdirs.begin(); ii != subdirs.end(); ++ii )
+        {
+            search_aircraft_dir( *ii, false, ac );
+        }
+    }
 }
 
 static void
@@ -1900,29 +1894,20 @@ Wizard::display_scenarii()
     path.append( "AI" );
 
     i = 1;
-    ulDir *dh = ulOpenDir( path.c_str() );
-    ulDirEnt *ent;
-    while (dh != 0 && (ent = ulReadDir( dh )))
+    simgear::Dir directory( path );
+    simgear::PathList files = directory.children( simgear::Dir::TYPE_FILE | simgear::Dir::NO_DOT_OR_DOTDOT );
+    for ( simgear::PathList::iterator ii = files.begin(); ii != files.end(); ++ii )
     {
-        if ( strcmp( ent->d_name, "CVS" ) != 0 &&
-             strcmp( ent->d_name, ".." ) != 0 &&
-             strcmp( ent->d_name, "." ) != 0 )
+        if (fl_filename_match(ii->c_str(), "*.xml"))
         {
-            SGPath d( path );
-            d.append( ent->d_name );
-            if (!fl_filename_isdir( d.c_str() ) &&
-                 fl_filename_match(ent->d_name, "*.xml"))
-            {
-                string n( ent->d_name );
-                n.erase(n.size()-4);
-                scenarii->add( n.c_str() );
-                if ( selected.find( n ) != selected.end() )
-                    scenarii->select(i);
-                i += 1;
-            }
+            string n = ii->file();
+            n.erase(n.size()-4);
+            scenarii->add( n.c_str() );
+            if ( selected.find( n ) != selected.end() )
+                scenarii->select(i);
+            i += 1;
         }
     }
-    ulCloseDir( dh );
 }
 
 void
