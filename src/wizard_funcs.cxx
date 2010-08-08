@@ -46,13 +46,13 @@
 #include <simgear/props/props_io.hxx>
 #include <simgear/structure/exception.hxx>
 #include <simgear/misc/sg_path.hxx>
+#include <simgear/io/raw_socket.hxx>
 
 #include <osg/MatrixTransform>
 #include <osgDB/ReadFile>
 
 #include <plib/ul.h>
 #include <plib/sg.h>
-#include <plib/netSocket.h>
 
 #include "wizard.h"
 #include "advanced.h"
@@ -147,8 +147,8 @@ is_valid_fg_root( const string& dir )
     FILE* fp = fopen( fname.c_str(), "r" );
     if (fp != 0)
     {
-	fclose(fp);
-	return true;
+        fclose(fp);
+        return true;
     }
 
     return false;
@@ -165,16 +165,16 @@ Wizard::airports_cb()
 {
     if (airports_->loaded())
     {
-	airports_->show_installed( true );
-	cache_delete_->activate();
+        airports_->show_installed( true );
+        cache_delete_->activate();
 
-	const int buflen = FL_PATH_MAX;
-	char buf[ buflen ];
+        const int buflen = FL_PATH_MAX;
+        char buf[ buflen ];
 
-  	if (prefs.get( "airport", buf, "", buflen-1) && buf[0] != 0)
-	    airports_->select_id( buf );
-  	if (prefs.get( "carrier", buf, "", buflen-1) && buf[0] == 0 &&
-  	    prefs.get( "parkpos", buf, "", buflen-1) && buf[0] != 0)
+          if (prefs.get( "airport", buf, "", buflen-1) && buf[0] != 0)
+            airports_->select_id( buf );
+          if (prefs.get( "carrier", buf, "", buflen-1) && buf[0] == 0 &&
+              prefs.get( "parkpos", buf, "", buflen-1) && buf[0] != 0)
         {
             airports_->select_parking( buf );
         }
@@ -186,12 +186,12 @@ Wizard::airports_cb()
         vector<string> v;
         for (int i = 1; i <= scenery_dir_list_->size(); ++i)
         {
-	    SGPath dir( scenery_dir_list_->text(i) );
-	    dir.append( "Terrain" );
-	    if (fl_filename_isdir( dir.c_str() ))
-	        v.push_back( dir.str() );
-	    else
-	        v.push_back( scenery_dir_list_->text(i) );
+            SGPath dir( scenery_dir_list_->text(i) );
+            dir.append( "Terrain" );
+            if (fl_filename_isdir( dir.c_str() ))
+                v.push_back( dir.str() );
+            else
+                v.push_back( scenery_dir_list_->text(i) );
         }
 
         string cache( cache_file_->value() );
@@ -235,11 +235,11 @@ Wizard::reset()
     string fg_scenery;
     if (!def_fg_scenery.empty())
     {
-	fg_scenery = def_fg_scenery;
+        fg_scenery = def_fg_scenery;
     }
     else if (prefs.get( "fg_scenery", buf, "", buflen-1))
     {
-	fg_scenery = buf;
+        fg_scenery = buf;
     }
     else if (fg_root_->size() > 0)
     {
@@ -251,8 +251,8 @@ Wizard::reset()
         }
         else
         {
-	    fg_scenery = fg_root_->value();
-	    fg_scenery += "/Scenery";
+            fg_scenery = fg_root_->value();
+            fg_scenery += "/Scenery";
         }
     }
 
@@ -260,7 +260,7 @@ Wizard::reset()
     typedef vector<string> vs_t;
     vs_t v( sgPathSplit( fg_scenery ) );
     for (vs_t::size_type i = 0; i < v.size(); ++i)
-	scenery_dir_list_->add( v[i].c_str() );
+        scenery_dir_list_->add( v[i].c_str() );
     ts_dir->minimum( 0 );
     ts_dir->maximum( scenery_dir_list_->size() );
     int iVal;
@@ -271,24 +271,24 @@ Wizard::reset()
     ts_exe_->value( buf );
 
     if (fg_exe_->size() == 0 ||
-	fg_root_->size() == 0 ||
+        fg_root_->size() == 0 ||
         !is_valid_fg_root( fg_root_->value() ) ||
-	fg_scenery.empty() )
+        fg_scenery.empty() )
     {
         // First time through or FG_ROOT is not valid.
         page[0]->activate();
         page[0]->show();
         prev->deactivate();
-	next->deactivate();
+        next->deactivate();
     }
     else
     {
-	airports_->set_refresh_callback( refresh_airports, this );
-	refresh_airports();
+        airports_->set_refresh_callback( refresh_airports, this );
+        refresh_airports();
         aircraft_update();
 
         prev->activate();
-	next->activate();
+        next->activate();
         page[1]->show();
     }
     next->label( _("Next") );
@@ -296,9 +296,9 @@ Wizard::reset()
     prefs.get("show_cmd_line", iVal, 0);
     show_cmd_line->value(iVal);
     if ( iVal )
-	text->show();
+        text->show();
     else
-	text->hide();
+        text->hide();
 }
 
 void
@@ -320,24 +320,24 @@ Wizard::init( bool fullscreen )
 
     make_launch_window();
     make_crash_window();
-	make_prefetch_window();
+        make_prefetch_window();
 
     for (int i = 0; i < npages; ++i)
         page[i]->hide();
 
     if (fullscreen)
     {
-	win->resize( 0, 0, Fl::w(), Fl::h() );
+        win->resize( 0, 0, Fl::w(), Fl::h() );
     }
     else
     {
-	int X, Y, W, H;
-	prefs.get( "x", X, 0 );
-	prefs.get( "y", Y, 0 );
-	prefs.get( "width", W, 0 );
-	prefs.get( "height", H, 0 );
-	if (W > 0 && H > 0)
-	    win->resize( X, Y, W, H );
+        int X, Y, W, H;
+        prefs.get( "x", X, 0 );
+        prefs.get( "y", Y, 0 );
+        prefs.get( "width", W, 0 );
+        prefs.get( "height", H, 0 );
+        if (W > 0 && H > 0)
+            win->resize( X, Y, W, H );
     }
 
     win->size_range( 800, 600 );
@@ -561,51 +561,51 @@ Wizard::preview_aircraft()
         return;
 
     AircraftData* data =
-	reinterpret_cast<AircraftData*>( aircraft->data(n) );
+        reinterpret_cast<AircraftData*>( aircraft->data(n) );
     prefs.set( "aircraft", n > 0 ? data->name.c_str() : "" );
 
     if (data->props.hasValue( "/sim/model/path" ))
     {
-	SGPath path( fg_root_->value() ), tpath;
-	path.append( data->props.getStringValue( "/sim/model/path" ) );
+        SGPath path( fg_root_->value() ), tpath;
+        path.append( data->props.getStringValue( "/sim/model/path" ) );
 
-	if (!path.exists())
-	{
-	    fl_alert( _("Model not found: '%s'"), path.c_str() );
-	    return;
-	}
+        if (!path.exists())
+        {
+            fl_alert( _("Model not found: '%s'"), path.c_str() );
+            return;
+        }
 
         setlocale( LC_ALL, "C" );
-	try
-	{
+        try
+        {
             win->cursor( FL_CURSOR_WAIT );
-	    Fl::flush();
+            Fl::flush();
 
             osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), path.str(), SGPath() );
-	    if (model != 0)
-	    {
+            if (model != 0)
+            {
                 current_aircraft_model_path = path.str();
                 osg::ref_ptr<osg::Node> bounding_obj = find_named_node( model.get(), "Aircraft" );
                 preview->set_model( model.get(), bounding_obj.get() );
 
-		Fl::add_timeout( update_period, timeout_handler, this );
-	    }
+                Fl::add_timeout( update_period, timeout_handler, this );
+            }
             win->cursor( FL_CURSOR_DEFAULT );
             preview->redraw();
-	}
-	catch (const sg_exception& exc )
-	{
-	    fl_alert( exc.getFormattedMessage().c_str() );
-	    return;
-	}
-	catch (...)
-	{}
+        }
+        catch (const sg_exception& exc )
+        {
+            fl_alert( exc.getFormattedMessage().c_str() );
+            return;
+        }
+        catch (...)
+        {}
         setlocale( LC_ALL, "" );
     }
     else
     {
-	fl_alert( _("Property '/sim/model/path' not found") );
-	return;
+        fl_alert( _("Property '/sim/model/path' not found") );
+        return;
     }
 
     aircraft_status->value( _( data->status.c_str() ) );
@@ -621,12 +621,12 @@ Wizard::next_cb()
 
     if (wiz->value() == page[0])
     {
-	char abs_name[ FL_PATH_MAX ];
+        char abs_name[ FL_PATH_MAX ];
 
-	fl_filename_absolute( abs_name, fg_exe_->value() );
-	prefs.set( "fg_exe", abs_name );
+        fl_filename_absolute( abs_name, fg_exe_->value() );
+        prefs.set( "fg_exe", abs_name );
 
-	fl_filename_absolute( abs_name, fg_root_->value() );
+        fl_filename_absolute( abs_name, fg_root_->value() );
 
         const int buflen = FL_PATH_MAX;
         char buf[ buflen ];
@@ -634,114 +634,114 @@ Wizard::next_cb()
         prefs.get( "fg_root", buf, not_set, buflen-1);
         if ( strcmp( buf, abs_name ) != 0 )
         {
-	    prefs.set( "fg_root", abs_name );
- 	    win->cursor( FL_CURSOR_WAIT );
-	    Fl::flush();
+            prefs.set( "fg_root", abs_name );
+             win->cursor( FL_CURSOR_WAIT );
+            Fl::flush();
             aircraft_update();
- 	    win->cursor( FL_CURSOR_DEFAULT );
+             win->cursor( FL_CURSOR_DEFAULT );
         }
 
-	string fg_scenery = scenery_dir_list_->text(1);
-	for (int i = 2; i <= scenery_dir_list_->size(); ++i)
-	{
-	    fg_scenery += os::searchPathSep;
-	    fg_scenery += scenery_dir_list_->text(i);
-	}
+        string fg_scenery = scenery_dir_list_->text(1);
+        for (int i = 2; i <= scenery_dir_list_->size(); ++i)
+        {
+            fg_scenery += os::searchPathSep;
+            fg_scenery += scenery_dir_list_->text(i);
+        }
 
- 	prefs.set( "fg_scenery", fg_scenery.c_str() );
+         prefs.set( "fg_scenery", fg_scenery.c_str() );
 
-	ts_dir_cb();
+        ts_dir_cb();
 
-	if ( strlen(ts_exe_->value()) != 0 )
-	{
-	    fl_filename_absolute( abs_name, ts_exe_->value() );
-	    prefs.set( "ts_exe", abs_name );
-	}
+        if ( strlen(ts_exe_->value()) != 0 )
+        {
+            fl_filename_absolute( abs_name, ts_exe_->value() );
+            prefs.set( "ts_exe", abs_name );
+        }
 
-	refresh_airports();
+        refresh_airports();
     }
     else if (wiz->value() == page[1])
     {
-	int n = aircraft->value();
-	if (n > 0)
-	{
-	    AircraftData* data =
-		reinterpret_cast<AircraftData*>( aircraft->data(n) );
-	    prefs.set( "aircraft", n > 0 ? data->name.c_str() : "" );
-	}
-	Fl::remove_timeout( timeout_handler, this );
+        int n = aircraft->value();
+        if (n > 0)
+        {
+            AircraftData* data =
+                reinterpret_cast<AircraftData*>( aircraft->data(n) );
+            prefs.set( "aircraft", n > 0 ? data->name.c_str() : "" );
+        }
+        Fl::remove_timeout( timeout_handler, this );
     }
     else if (wiz->value() == page[2])
     {
-	prefs.set( "airport", airports_->get_selected_id().c_str() );
-	prefs.set( "airport-name",
-		   airports_->get_selected_name().c_str() );
-	prefs.set( "carrier", carrier_->value() );
+        prefs.set( "airport", airports_->get_selected_id().c_str() );
+        prefs.set( "airport-name",
+                   airports_->get_selected_name().c_str() );
+        prefs.set( "carrier", carrier_->value() );
         if ( carrier_->value() != string() )
-	    prefs.set( "parkpos", parkpos_->value() );
+            prefs.set( "parkpos", parkpos_->value() );
         else
             prefs.set( "parkpos", airports_->get_selected_parking().c_str() );
 
-	string rwy( airports_->get_selected_runway() );
-	if (rwy.empty())
-	    rwy = _("<default>");
-	prefs.set( "runway", rwy.c_str() );
+        string rwy( airports_->get_selected_runway() );
+        if (rwy.empty())
+            rwy = _("<default>");
+        prefs.set( "runway", rwy.c_str() );
 
-	update_basic_options( prefs );
-	display_scenarii();
+        update_basic_options( prefs );
+        display_scenarii();
     }
     else if (wiz->value() == page[3])
     {
-	if (terrasync->value())
-	{
-	    if (tsThread == 0)
-		tsThread = new TerraSyncThread( this );
-	    tsThread->start();
-	}
+        if (terrasync->value())
+        {
+            if (tsThread == 0)
+                tsThread = new TerraSyncThread( this );
+            tsThread->start();
+        }
 
-	prefs.flush();
-	if (fgThread == 0)
-	    fgThread = new FlightGearThread( this );
+        prefs.flush();
+        if (fgThread == 0)
+            fgThread = new FlightGearThread( this );
         fgThread->setViewer(false);
-	fgThread->start();
+        fgThread->start();
 
-	exec_launch_window();
-	return;
+        exec_launch_window();
+        return;
     }
 
     wiz->next();
 
     if (wiz->value() == page[1])
     {
-	// "Select aircraft" page
+        // "Select aircraft" page
         if (aircraft->size() == 0)
             aircraft_update();
     }
     else if (wiz->value() == page[2])
     {
-	char buf[256];
-	prefs.get( "carrier", buf, "", sizeof buf - 1 );
-	carrier_->value( buf );
-	prefs.get( "parkpos", buf, "", sizeof buf - 1 );
+        char buf[256];
+        prefs.get( "carrier", buf, "", sizeof buf - 1 );
+        carrier_->value( buf );
+        prefs.get( "parkpos", buf, "", sizeof buf - 1 );
         if ( carrier_->value() != string() )
-	    parkpos_->value( buf );
+            parkpos_->value( buf );
         else
             airports_->select_parking( buf );
 
-	// "Select location" page
-	if (!airports_->loaded())
-	{
- 	    win->cursor( FL_CURSOR_WAIT );
-	    Fl::flush();
-	}
+        // "Select location" page
+        if (!airports_->loaded())
+        {
+             win->cursor( FL_CURSOR_WAIT );
+            Fl::flush();
+        }
     }
     else if (wiz->value() == page[3])
     {
-	std::ostringstream ostr;
-	ostr << fg_exe_->value() << "\n  ";
-	write_fgfsrc( prefs, ostr, "\n  " );
-	text->buffer()->text( ostr.str().c_str() );
-	next->label( _("Run") );
+        std::ostringstream ostr;
+        ostr << fg_exe_->value() << "\n  ";
+        write_fgfsrc( prefs, ostr, "\n  " );
+        text->buffer()->text( ostr.str().c_str() );
+        next->label( _("Run") );
     }
 }
 
@@ -757,7 +757,7 @@ Wizard::prev_cb()
     }
     else if (wiz->value() == page[1])
     {
-	Fl::add_timeout( update_period, timeout_handler, this );
+        Fl::add_timeout( update_period, timeout_handler, this );
     }
 }
 
@@ -766,10 +766,10 @@ Wizard::defaults_cb()
 {
     int r = fl_choice( _("About to reset current parameters"), _("Abort"), _("Reset"), 0 );
     if (!r)
-	return;
+        return;
     if (adv == 0)
     {
-	adv = new Advanced;
+        adv = new Advanced;
     }
     adv->reset_settings( prefs );
     reset_settings();
@@ -790,7 +790,7 @@ void
 Wizard::fg_exe_update_cb()
 {
 //     if (fg_exe_->size() == 0)
-// 	return;
+//         return;
 }
 
 void
@@ -820,13 +820,13 @@ Wizard::fg_root_update_cb()
 
     if (scenery_dir_list_->size() == 0)
     {
-	// Derive FG_SCENERY from FG_ROOT. 
-	string d( dir );
-	d.append( "/Scenery" );
-	if (!fl_filename_isdir( d.c_str() ))
-	    return;
+        // Derive FG_SCENERY from FG_ROOT. 
+        string d( dir );
+        d.append( "/Scenery" );
+        if (!fl_filename_isdir( d.c_str() ))
+            return;
 
-	scenery_dir_list_->add( d.c_str() );
+        scenery_dir_list_->add( d.c_str() );
     }
 
     next->activate();
@@ -848,7 +848,7 @@ Wizard::advanced_cb()
 {
     if (adv == 0)
     {
-	adv = new Advanced;
+        adv = new Advanced;
     }
 
     prefs.set( "airport", airports_->get_selected_id().c_str() );
@@ -884,7 +884,7 @@ search_aircraft_dir( const SGPath& dir,
 #ifdef WIN32
     // Ensure there is a trailing slash.
     if (*s.rbegin() != '/')
-	s.append( "/" );
+        s.append( "/" );
 #endif
 
     ulDir *dh = ulOpenDir( s.c_str() );
@@ -947,9 +947,9 @@ Wizard::aircraft_update( const char *aft )
     {
         if ( aircraft->text(i)[0] != ' ' )
         {
-	    AircraftData* data =
-	        reinterpret_cast<AircraftData*>( aircraft->data(i) );
-	    delete data;
+            AircraftData* data =
+                reinterpret_cast<AircraftData*>( aircraft->data(i) );
+            delete data;
         }
     }
     aircraft->clear();
@@ -959,7 +959,7 @@ Wizard::aircraft_update( const char *aft )
     // Populate the aircraft browser list.
     for (vector<SGPath>::size_type vi = 0; vi < ac.size(); ++vi)
     {
-	string s( ac[vi].str() ), name( s );
+        string s( ac[vi].str() ), name( s );
         name.erase( 0, path.str().size() );
         if ( name[0] == '/' )
             name.erase( 0, 1 );
@@ -967,15 +967,15 @@ Wizard::aircraft_update( const char *aft )
         if ( p != string::npos )
             name.erase( p );
 
-	SGPropertyNode props;
-	try
-	{
-	    readProperties( s.c_str(), &props );
-	}
-	catch (const sg_exception&)
-	{
-	    continue;
-	}
+        SGPropertyNode props;
+        try
+        {
+            readProperties( s.c_str(), &props );
+        }
+        catch (const sg_exception&)
+        {
+            continue;
+        }
 
         if (props.hasValue( "/sim/description" ))
         {
@@ -983,15 +983,15 @@ Wizard::aircraft_update( const char *aft )
 
             if ( desc.find( "Alias " ) == string::npos )
             {
-		// Extract aircraft name from filename.
+                // Extract aircraft name from filename.
                 string::size_type pos = s.rfind( "/" );
                 string::size_type epos = s.find( "-set.xml", pos );
-	        string ss( s.substr( pos+1, epos-pos-1 ) );
+                string ss( s.substr( pos+1, epos-pos-1 ) );
 
-		AircraftData* data = new AircraftData;
-		copyProperties( &props, &data->props );
-		//data->props = props;
-		data->name = ss;
+                AircraftData* data = new AircraftData;
+                copyProperties( &props, &data->props );
+                //data->props = props;
+                data->name = ss;
                 data->desc = desc;
                 data->status = props.getStringValue( "/sim/status" );
                 if ( data->status.empty() ) data->status = _( "Unknown" );
@@ -1013,11 +1013,11 @@ Wizard::aircraft_update( const char *aft )
             desc.insert( 0, "    " );
             aircraft->add( desc.c_str(), data );
 
-	    if (aft[0] != 0 && strcmp( aft, data->name.c_str() ) == 0)
-	    {
-	        aircraft->select( aircraft->size() );
+            if (aft[0] != 0 && strcmp( aft, data->name.c_str() ) == 0)
+            {
+                aircraft->select( aircraft->size() );
                 selected = true;
-	    }
+            }
         }
     }
 
@@ -1057,14 +1057,14 @@ Wizard::delete_cache_file_cb()
     path.append( "/airports.txt" );
 
     if (!path.exists())
-	return;
+        return;
 
     //TODO: win32 support.
     if (unlink( path.c_str() ) == 0)
-	return;
+        return;
 
     fl_alert( _("Unable to delete '%s':\n%s"),
-	      path.c_str(), strerror(errno) );
+              path.c_str(), strerror(errno) );
 }
 
 void
@@ -1075,18 +1075,18 @@ Wizard::scenery_dir_select_cb()
     int n = scenery_dir_list_->value();
     if (n > 0)
     {
-	scenery_dir_delete_->activate();
-	if (n > 1)
-	    scenery_dir_up_->activate();
-	if (n < scenery_dir_list_->size())
-	    scenery_dir_down_->activate();
+        scenery_dir_delete_->activate();
+        if (n > 1)
+            scenery_dir_up_->activate();
+        if (n < scenery_dir_list_->size())
+            scenery_dir_down_->activate();
 
-	scenery_dir_list_->deselect();
-	scenery_dir_list_->select( n );
+        scenery_dir_list_->deselect();
+        scenery_dir_list_->select( n );
     }
     else
     {
-	scenery_dir_delete_->deactivate();
+        scenery_dir_delete_->deactivate();
     }
 }
 
@@ -1095,17 +1095,17 @@ Wizard::update_scenery_up_down()
 {
     int n = scenery_dir_list_->value();
     if (n <= 0)
-	scenery_dir_up_->deactivate();
+        scenery_dir_up_->deactivate();
     else
-	scenery_dir_up_->activate();
+        scenery_dir_up_->activate();
     if (n == 0 || n == scenery_dir_list_->size())
-	scenery_dir_down_->deactivate();
+        scenery_dir_down_->deactivate();
     else
-	scenery_dir_down_->activate();
+        scenery_dir_down_->activate();
     if (n == 0)
-	scenery_dir_delete_->deactivate();
+        scenery_dir_delete_->deactivate();
     else
-	scenery_dir_delete_->activate();
+        scenery_dir_delete_->activate();
 }
 
 void
@@ -1114,11 +1114,11 @@ Wizard::scenery_dir_add_cb()
     char* p = fl_dir_chooser( _("Select FG_SCENERY directory"), 0, 0);
     if (p != 0)
     {
-	scenery_dir_list_->add( p );
-	scenery_dir_list_->value( scenery_dir_list_->size() );
-	scenery_dir_list_->select( scenery_dir_list_->size() );
-	ts_dir->maximum( scenery_dir_list_->size() );
-	update_scenery_up_down();
+        scenery_dir_list_->add( p );
+        scenery_dir_list_->value( scenery_dir_list_->size() );
+        scenery_dir_list_->select( scenery_dir_list_->size() );
+        ts_dir->maximum( scenery_dir_list_->size() );
+        update_scenery_up_down();
     }
 }
 
@@ -1129,15 +1129,15 @@ Wizard::scenery_dir_delete_cb()
     int n = scenery_dir_list_->value();
     if (n > 0)
     {
-	scenery_dir_list_->remove( n );
-	if (n == ts)
-	    ts_dir->value(0);
-	else if (ts > n )
-	    ts_dir->value(ts-1);
+        scenery_dir_list_->remove( n );
+        if (n == ts)
+            ts_dir->value(0);
+        else if (ts > n )
+            ts_dir->value(ts-1);
     }
 
     if (scenery_dir_list_->size() == 0)
-	scenery_dir_delete_->deactivate();
+        scenery_dir_delete_->deactivate();
 
     ts_dir->maximum( scenery_dir_list_->size() );
     update_scenery_up_down();
@@ -1158,14 +1158,14 @@ Wizard::scenery_dir_up_cb()
     scenery_dir_list_->select( to );
 
     if (ts == from)
-	ts = to;
+        ts = to;
     else if (ts == to)
-	ts = from;
+        ts = from;
     ts_dir->value( ts );
 
     scenery_dir_down_->activate();
     if (to == 1)
-	scenery_dir_up_->deactivate();
+        scenery_dir_up_->deactivate();
 }
 
 /**
@@ -1183,14 +1183,14 @@ Wizard::scenery_dir_down_cb()
     scenery_dir_list_->select( n+1 );
 
     if (ts == n)
-	ts = n+1;
+        ts = n+1;
     else if (ts == n+1)
-	ts = n;
+        ts = n;
     ts_dir->value( ts );
 
     scenery_dir_up_->activate();
     if (n+1 == scenery_dir_list_->size())
-	scenery_dir_down_->deactivate();
+        scenery_dir_down_->deactivate();
 }
 
 /**
@@ -1201,8 +1201,8 @@ Wizard::ts_dir_cb()
 {
     if (ts_dir->value() == 0)
     {
-	terrasync->value(0);
-	terrasync_port->deactivate();
+        terrasync->value(0);
+        terrasync_port->deactivate();
         prefs.set("terrasync",0);
     }
     prefs.set("ts_dir",(int)ts_dir->value());
@@ -1309,11 +1309,11 @@ Wizard::frame_rate_limiter_cb()
     int v = frame_rate_limiter->value();
     if ( v == 0 )
     {
-	frame_rate_limiter_value->deactivate();
+        frame_rate_limiter_value->deactivate();
     }
     else
     {
-	frame_rate_limiter_value->activate();
+        frame_rate_limiter_value->activate();
     }
     prefs.set( "frame_rate_limiter", v );
     frame_rate_limiter_value_cb();
@@ -1346,11 +1346,11 @@ Wizard::ai_models_cb()
     prefs.set("ai_models", ai_models->value());
     if ( ai_models->value() == 0 )
     {
-	multiplay->value(0);
-	multiplay_cb();
+        multiplay->value(0);
+        multiplay_cb();
     }
     else
-	update_options();
+        update_options();
 }
 
 void
@@ -1359,18 +1359,18 @@ Wizard::time_of_day_cb()
     int v = time_of_day->value();
     if ( v == 0 )
     {
-	time_of_day_value->deactivate();
-	prefs.set("time-match-real", 1);
+        time_of_day_value->deactivate();
+        prefs.set("time-match-real", 1);
     }
     else
     {
-	time_of_day_value->activate();
-	prefs.set("time_of_day_value", (const char *)time_of_day_value->mvalue()->user_data_);
-	prefs.set("time-match-real", 0);
-	prefs.set("time-match-local", 0);
-	prefs.set("start-date-sys", 0);
-	prefs.set("start-date-gmt", 0);
-	prefs.set("start-date-lat", 0);
+        time_of_day_value->activate();
+        prefs.set("time_of_day_value", (const char *)time_of_day_value->mvalue()->user_data_);
+        prefs.set("time-match-real", 0);
+        prefs.set("time-match-local", 0);
+        prefs.set("start-date-sys", 0);
+        prefs.set("start-date-gmt", 0);
+        prefs.set("start-date-lat", 0);
     }
     prefs.set("time_of_day", v);
     update_options();
@@ -1410,46 +1410,46 @@ Wizard::scenarii_cb()
     static string tooltip;
     if ( scenarii->value() )
     {
-	SGPath path( fg_root_->value() );
-	path.append( "AI" );
-	path.append( scenarii->text( scenarii->value() ) );
-	path.concat( ".xml" );
+        SGPath path( fg_root_->value() );
+        path.append( "AI" );
+        path.append( scenarii->text( scenarii->value() ) );
+        path.concat( ".xml" );
 
-	try
-	{
-	    SGPropertyNode scenario;
-	    readProperties( path.str(), &scenario );
+        try
+        {
+            SGPropertyNode scenario;
+            readProperties( path.str(), &scenario );
 
-	    tooltip = _("Description of ");
-	    tooltip += scenarii->text( scenarii->value() );
-	    tooltip += "\n";
-	    tooltip += scenario.getStringValue( "scenario/description" );
+            tooltip = _("Description of ");
+            tooltip += scenarii->text( scenarii->value() );
+            tooltip += "\n";
+            tooltip += scenario.getStringValue( "scenario/description" );
 
-	    size_t p = 0;
-	    while ( ( p = tooltip.find( '@', p ) ) != string::npos )
-	    {
-		tooltip.insert( p, "@" );
-		p += 2;
-	    }
-	}
-	catch ( const sg_exception& )
-	{
-	    tooltip = "";
-	}
+            size_t p = 0;
+            while ( ( p = tooltip.find( '@', p ) ) != string::npos )
+            {
+                tooltip.insert( p, "@" );
+                p += 2;
+            }
+        }
+        catch ( const sg_exception& )
+        {
+            tooltip = "";
+        }
     }
     else
-	tooltip = "";
+        tooltip = "";
 
     scenarii->tooltip( tooltip.c_str() );
 
     int nb = 0;
     for (int i = 1; i <= scenarii->size(); ++i)
     {
-	if ( scenarii->selected(i) )
-	{
-	    nb += 1;
-	    prefs.set( Fl_Preferences::Name("scenario-item-%d", nb), scenarii->text(i));
-	}
+        if ( scenarii->selected(i) )
+        {
+            nb += 1;
+            prefs.set( Fl_Preferences::Name("scenario-item-%d", nb), scenarii->text(i));
+        }
     }
     prefs.set("scenario-count", nb);
     update_options();
@@ -1461,33 +1461,33 @@ Wizard::terrasync_cb()
     int v = terrasync->value();
     if ( v == 0 )
     {
-	terrasync_port->deactivate();
+        terrasync_port->deactivate();
         prefs.set("terrasync",0);
     }
     else if (ts_dir->value() == 0)
     {
-	terrasync->value(0);
-	fl_alert( _("TerraSync directory not set") );
-	page[3]->hide();
-	page[0]->show();
-	next->label( _("Next") );
-	prev->deactivate();
-	ts_dir->take_focus();
+        terrasync->value(0);
+        fl_alert( _("TerraSync directory not set") );
+        page[3]->hide();
+        page[0]->show();
+        next->label( _("Next") );
+        prev->deactivate();
+        ts_dir->take_focus();
     }
     else if ( strlen(ts_exe_->value()) == 0 )
     {
-	terrasync->value(0);
-	fl_alert( _("TerraSync executable not set") );
-	page[3]->hide();
-	page[0]->show();
-	next->label( _("Next") );
-	prev->deactivate();
-	ts_exe_->take_focus();
+        terrasync->value(0);
+        fl_alert( _("TerraSync executable not set") );
+        page[3]->hide();
+        page[0]->show();
+        next->label( _("Next") );
+        prev->deactivate();
+        ts_exe_->take_focus();
     }
     else
     {
-	terrasync_port->activate();
-	prefs.set("terrasync",1);
+        terrasync_port->activate();
+        prefs.set("terrasync",1);
     }
     update_options();
 }
@@ -1497,7 +1497,7 @@ Wizard::terrasync_port_cb()
 {
     int port = (int)terrasync_port->value();
     if ( port == 0 )
-	port = 5505;
+        port = 5505;
     std::ostringstream opt;
     prefs.set("terrasync_port",port);
     update_options();
@@ -1509,59 +1509,59 @@ Wizard::atlas_cb()
     int v = atlas->value();
     if ( v == 0 )
     {
-	atlas_host->deactivate();
-	atlas_port->deactivate();
-	std::vector<string> io_list;
-	int i, iVal;
-	prefs.get("io-count", iVal, 0);
-	for ( i = 1; i <= iVal; ++i )
-	{
-	    char buf[256];
-	    prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
-	    string item( buf );
-	    if ( item.length() < 8 || item.substr( 0, 8 ) != "--atlas=" )
-	    {
-		io_list.push_back(buf);
-	    }
-	}
-	prefs.set("io-count",(int)io_list.size());
-	for ( i = 0; i < (int)io_list.size(); ++i )
-	{
-	    prefs.set( Fl_Preferences::Name( "io-item-%d", i+1 ), io_list[i].c_str());
-	}
+        atlas_host->deactivate();
+        atlas_port->deactivate();
+        std::vector<string> io_list;
+        int i, iVal;
+        prefs.get("io-count", iVal, 0);
+        for ( i = 1; i <= iVal; ++i )
+        {
+            char buf[256];
+            prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+            string item( buf );
+            if ( item.length() < 8 || item.substr( 0, 8 ) != "--atlas=" )
+            {
+                io_list.push_back(buf);
+            }
+        }
+        prefs.set("io-count",(int)io_list.size());
+        for ( i = 0; i < (int)io_list.size(); ++i )
+        {
+            prefs.set( Fl_Preferences::Name( "io-item-%d", i+1 ), io_list[i].c_str());
+        }
     }
     else
     {
-	atlas_host->activate();
-	atlas_port->activate();
-	int i, iVal, loc = 0;
-	prefs.get("io-count", iVal, 0);
-	for ( i = 1; i <= iVal; ++i )
-	{
-	    char buf[256];
-	    prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
-	    string item( buf );
-	    if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
-	    {
-		loc = i;
-		break;
-	    }
-	}
-	string host = atlas_host->value();
-	if ( host.empty() )
-	    host = "localhost";
-	int port = (int)atlas_port->value();
-	if ( port == 0 )
-	    port = 5500;
-	atlas_port->value(port);
-	std::ostringstream opt;
-	opt << "--atlas=socket,out,5," << host << "," << port << ",udp";
-	if ( loc == 0 )
-	{
-	    loc = iVal + 1;
-	    prefs.set("io-count",loc);
-	}
-	prefs.set( Fl_Preferences::Name( "io-item-%d", loc ), opt.str().c_str() );
+        atlas_host->activate();
+        atlas_port->activate();
+        int i, iVal, loc = 0;
+        prefs.get("io-count", iVal, 0);
+        for ( i = 1; i <= iVal; ++i )
+        {
+            char buf[256];
+            prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+            string item( buf );
+            if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
+            {
+                loc = i;
+                break;
+            }
+        }
+        string host = atlas_host->value();
+        if ( host.empty() )
+            host = "localhost";
+        int port = (int)atlas_port->value();
+        if ( port == 0 )
+            port = 5500;
+        atlas_port->value(port);
+        std::ostringstream opt;
+        opt << "--atlas=socket,out,5," << host << "," << port << ",udp";
+        if ( loc == 0 )
+        {
+            loc = iVal + 1;
+            prefs.set("io-count",loc);
+        }
+        prefs.set( Fl_Preferences::Name( "io-item-%d", loc ), opt.str().c_str() );
     }
     update_options();
 }
@@ -1573,28 +1573,28 @@ Wizard::atlas_host_cb()
     prefs.get("io-count", iVal, 0);
     for ( i = 1; i <= iVal; ++i )
     {
-	char buf[256];
-	prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
-	string item( buf );
-	if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
-	{
-	    loc = i;
-	    break;
-	}
+        char buf[256];
+        prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+        string item( buf );
+        if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
+        {
+            loc = i;
+            break;
+        }
     }
     string host = atlas_host->value();
     if ( host.empty() )
-	host = "localhost";
+        host = "localhost";
     int port = (int)atlas_port->value();
     if ( port == 0 )
-	port = 5500;
+        port = 5500;
     atlas_port->value(port);
     std::ostringstream opt;
     opt << "--atlas=socket,out,5," << host << "," << port << ",udp";
     if ( loc == 0 )
     {
-	loc = iVal + 1;
-	prefs.set("io-count",loc);
+        loc = iVal + 1;
+        prefs.set("io-count",loc);
     }
     prefs.set( Fl_Preferences::Name( "io-item-%d", loc ), opt.str().c_str() );
     update_options();
@@ -1607,27 +1607,27 @@ Wizard::atlas_port_cb()
     prefs.get("io-count", iVal, 0);
     for ( i = 1; i <= iVal; ++i )
     {
-	char buf[256];
-	prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
-	string item( buf );
-	if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
-	{
-	    loc = i;
-	    break;
-	}
+        char buf[256];
+        prefs.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+        string item( buf );
+        if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
+        {
+            loc = i;
+            break;
+        }
     }
     string host = atlas_host->value();
     if ( host.empty() )
-	host = "localhost";
+        host = "localhost";
     int port = (int)atlas_port->value();
     if ( port == 0 )
-	port = 5500;
+        port = 5500;
     std::ostringstream opt;
     opt << "--atlas=socket,out,5," << host << "," << port << ",udp";
     if ( loc == 0 )
     {
-	loc = iVal + 1;
-	prefs.set("io-count",loc);
+        loc = iVal + 1;
+        prefs.set("io-count",loc);
     }
     prefs.set( Fl_Preferences::Name( "io-item-%d", loc ), opt.str().c_str() );
     update_options();
@@ -1639,38 +1639,38 @@ Wizard::multiplay_cb()
     int v = multiplay->value();
     if ( v == 0 )
     {
-	multiplay_callsign->deactivate();
-	multiplay_host->deactivate();
-	multiplay_in->deactivate();
-	multiplay_out->deactivate();
-	prefs.set("callsign","");
-	prefs.set("multiplay1","");
-	prefs.set("multiplay2","");
+        multiplay_callsign->deactivate();
+        multiplay_host->deactivate();
+        multiplay_in->deactivate();
+        multiplay_out->deactivate();
+        prefs.set("callsign","");
+        prefs.set("multiplay1","");
+        prefs.set("multiplay2","");
     }
     else
     {
-	multiplay_callsign->activate();
-	multiplay_host->activate();
-	multiplay_in->activate();
-	multiplay_out->activate();
+        multiplay_callsign->activate();
+        multiplay_host->activate();
+        multiplay_in->activate();
+        multiplay_out->activate();
 
-	string callsign = multiplay_callsign->value();
-	string host = multiplay_host->value();
-	int in = (int)multiplay_in->value();
-	int out = (int)multiplay_out->value();
+        string callsign = multiplay_callsign->value();
+        string host = multiplay_host->value();
+        int in = (int)multiplay_in->value();
+        int out = (int)multiplay_out->value();
 
-	prefs.set("callsign",callsign.c_str());
-	std::ostringstream str;
-	str << "out,10," << host << "," << out;
-	prefs.set("multiplay1",str.str().c_str());
-	str.str("");
-	char hostname[256];
-	gethostname( hostname, 256 );
-	str << "in,10," << hostname << "," << in;
-	prefs.set("multiplay2",str.str().c_str());
+        prefs.set("callsign",callsign.c_str());
+        std::ostringstream str;
+        str << "out,10," << host << "," << out;
+        prefs.set("multiplay1",str.str().c_str());
+        str.str("");
+        char hostname[256];
+        gethostname( hostname, 256 );
+        str << "in,10," << hostname << "," << in;
+        prefs.set("multiplay2",str.str().c_str());
 
-	ai_models->value(1);
-	ai_models_cb();
+        ai_models->value(1);
+        ai_models_cb();
     }
     update_options();
 }
@@ -1704,28 +1704,28 @@ Wizard::update_basic_options( Fl_Preferences &p )
     p.get("geometry", buf, "", buflen-1);
     if ( buf[0] == '\0' )
     {
-	strcpy( buf, "800x600" );
+        strcpy( buf, "800x600" );
     }
     int i;
     for ( i = 0; menu_resolution[i].text != 0; i++ )
     {
-	if ( strcmp( buf, menu_resolution[i].text ) == 0 )
-	{
-	    resolution->value(i);
-	    break;
-	}
+        if ( strcmp( buf, menu_resolution[i].text ) == 0 )
+        {
+            resolution->value(i);
+            break;
+        }
     }
     if ( menu_resolution[i].text == 0 )
     {
-	const char *t = resolution->text(i);
-	if ( t == 0 )
-	    resolution->add( buf );
-	else if ( strcmp( t, buf ) != 0 )
-	{
-	    resolution->remove(i);
-	    resolution->add( buf );
-	}
-	resolution->value(i);
+        const char *t = resolution->text(i);
+        if ( t == 0 )
+            resolution->add( buf );
+        else if ( strcmp( t, buf ) != 0 )
+        {
+            resolution->remove(i);
+            resolution->add( buf );
+        }
+        resolution->value(i);
     }
 
     p.get("bpp", buf, "32", buflen-1);
@@ -1785,38 +1785,38 @@ Wizard::update_basic_options( Fl_Preferences &p )
     p.get("io-count", iVal, 0);
     for ( i = 1; i <= iVal; ++i )
     {
-	buf[0] = 0;
-	p.get( Fl_Preferences::Name("io-item-%d", i), buf, "", buflen-1 );
-	string item( buf );
-	if ( item.length() > 19 && item.substr( 0, 19 ) == "--atlas=socket,out," )
-	{
-	    item.erase( 0, 19 );
-	    string::size_type p = item.find( ',' );
-	    if ( p != string::npos )
-	    {
-		item.erase( 0, p+1 );
-		p = item.find( ',' );
-		if ( p != string::npos )
-		{
-		    string host = item.substr(0, p);
-		    item.erase( 0, p+1 );
-		    p = item.find( ',' );
-		    if ( p != string::npos )
-		    {
-			string port = item.substr(0, p);
-			item.erase(0, p+1);
-			if ( item == "udp" )
-			{
-			    atlas->value(1);
-			    atlas_host->value( host.c_str() );
-			    atlas_port->value( atoi( port.c_str() ) );
-			    atlas_host->activate();
-			    atlas_port->activate();
-			}
-		    }
-		}
-	    }
-	}
+        buf[0] = 0;
+        p.get( Fl_Preferences::Name("io-item-%d", i), buf, "", buflen-1 );
+        string item( buf );
+        if ( item.length() > 19 && item.substr( 0, 19 ) == "--atlas=socket,out," )
+        {
+            item.erase( 0, 19 );
+            string::size_type p = item.find( ',' );
+            if ( p != string::npos )
+            {
+                item.erase( 0, p+1 );
+                p = item.find( ',' );
+                if ( p != string::npos )
+                {
+                    string host = item.substr(0, p);
+                    item.erase( 0, p+1 );
+                    p = item.find( ',' );
+                    if ( p != string::npos )
+                    {
+                        string port = item.substr(0, p);
+                        item.erase(0, p+1);
+                        if ( item == "udp" )
+                        {
+                            atlas->value(1);
+                            atlas_host->value( host.c_str() );
+                            atlas_port->value( atoi( port.c_str() ) );
+                            atlas_host->activate();
+                            atlas_port->activate();
+                        }
+                    }
+                }
+            }
+        }
     }
 
     multiplay->value(0);
@@ -1838,57 +1838,57 @@ Wizard::update_basic_options( Fl_Preferences &p )
 
     if ( callsign.size() && multiplay1.size() && multiplay2.size() )
     {
-	if ( multiplay1.size() >= 3 && multiplay2.size() >= 3 )
-	{
-	    if ( multiplay1.substr(0,3) != "out" || multiplay2.substr(0,3) != "in," )
-	    {
-		string tmp = multiplay1;
-		multiplay1 = multiplay2;
-		multiplay2 = tmp;
-	    }
-	    if ( multiplay1.substr(0,3) == "out" && multiplay2.substr(0,3) == "in," )
-	    {
-		if ( multiplay1.size() >= 4 )
-		{
-		    multiplay1.erase(0, 4);
-		    multiplay2.erase(0, 3);
+        if ( multiplay1.size() >= 3 && multiplay2.size() >= 3 )
+        {
+            if ( multiplay1.substr(0,3) != "out" || multiplay2.substr(0,3) != "in," )
+            {
+                string tmp = multiplay1;
+                multiplay1 = multiplay2;
+                multiplay2 = tmp;
+            }
+            if ( multiplay1.substr(0,3) == "out" && multiplay2.substr(0,3) == "in," )
+            {
+                if ( multiplay1.size() >= 4 )
+                {
+                    multiplay1.erase(0, 4);
+                    multiplay2.erase(0, 3);
 
-		    string::size_type p = multiplay1.find(',');
-		    if ( p != string::npos )
-		    {
-			multiplay1.erase(0, p+1);
-			p = multiplay2.find(',');
-			if ( p != string::npos )
-			{
-			    multiplay2.erase(0, p+1);
-			    p = multiplay1.find(',');
-			    if ( p != string::npos )
-			    {
-				string host = multiplay1.substr(0, p);
-				multiplay1.erase(0, p+1);
-				p = multiplay2.find(',');
-				if ( p != string::npos )
-				{
-				    multiplay2.erase(0, p+1);
-				    int out = atoi(multiplay1.c_str());
-				    int in = atoi(multiplay2.c_str());
+                    string::size_type p = multiplay1.find(',');
+                    if ( p != string::npos )
+                    {
+                        multiplay1.erase(0, p+1);
+                        p = multiplay2.find(',');
+                        if ( p != string::npos )
+                        {
+                            multiplay2.erase(0, p+1);
+                            p = multiplay1.find(',');
+                            if ( p != string::npos )
+                            {
+                                string host = multiplay1.substr(0, p);
+                                multiplay1.erase(0, p+1);
+                                p = multiplay2.find(',');
+                                if ( p != string::npos )
+                                {
+                                    multiplay2.erase(0, p+1);
+                                    int out = atoi(multiplay1.c_str());
+                                    int in = atoi(multiplay2.c_str());
 
-				    multiplay->value(1);
-				    multiplay_callsign->value(callsign.c_str());
-				    multiplay_callsign->activate();
-				    multiplay_host->value(host.c_str());
-				    multiplay_host->activate();
-				    multiplay_in->value(in);
-				    multiplay_in->activate();
-				    multiplay_out->value(out);
-				    multiplay_out->activate();
-				}
-			    }
-			}
-		    }
-		}
-	    }
-	}
+                                    multiplay->value(1);
+                                    multiplay_callsign->value(callsign.c_str());
+                                    multiplay_callsign->activate();
+                                    multiplay_host->value(host.c_str());
+                                    multiplay_host->activate();
+                                    multiplay_in->value(in);
+                                    multiplay_in->activate();
+                                    multiplay_out->value(out);
+                                    multiplay_out->activate();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -1903,10 +1903,10 @@ Wizard::display_scenarii()
     int i;
     for (i = 1; i <= iVal; ++i)
     {
-	buf[0] = 0;
-	prefs.get( Fl_Preferences::Name("scenario-item-%d", i), buf, "", buflen-1 );
-	if ( strlen( buf ) > 0 )
-	    selected.insert( buf );
+        buf[0] = 0;
+        prefs.get( Fl_Preferences::Name("scenario-item-%d", i), buf, "", buflen-1 );
+        if ( strlen( buf ) > 0 )
+            selected.insert( buf );
     }
 
     scenarii->clear();
@@ -1920,20 +1920,20 @@ Wizard::display_scenarii()
     while (dh != 0 && (ent = ulReadDir( dh )))
     {
         if ( strcmp( ent->d_name, "CVS" ) != 0 &&
-	     strcmp( ent->d_name, ".." ) != 0 &&
-	     strcmp( ent->d_name, "." ) != 0 )
+             strcmp( ent->d_name, ".." ) != 0 &&
+             strcmp( ent->d_name, "." ) != 0 )
         {
             SGPath d( path );
             d.append( ent->d_name );
             if (!fl_filename_isdir( d.c_str() ) &&
-		 fl_filename_match(ent->d_name, "*.xml"))
-	    {
-		string n( ent->d_name );
-		n.erase(n.size()-4);
-		scenarii->add( n.c_str() );
-		if ( selected.find( n ) != selected.end() )
-		    scenarii->select(i);
-		i += 1;
+                 fl_filename_match(ent->d_name, "*.xml"))
+            {
+                string n( ent->d_name );
+                n.erase(n.size()-4);
+                scenarii->add( n.c_str() );
+                if ( selected.find( n ) != selected.end() )
+                    scenarii->select(i);
+                i += 1;
             }
         }
     }
@@ -1952,9 +1952,9 @@ void
 Wizard::show_cmd_line_cb()
 {
     if ( show_cmd_line->value() )
-	text->show();
+        text->show();
     else
-	text->hide();
+        text->hide();
     prefs.set("show_cmd_line", show_cmd_line->value());
 }
 
@@ -1975,7 +1975,7 @@ Wizard::FlightGearThread::run()
     std::ostringstream ostr;
     if ((viewer && write_fgviewerrc( wizard->prefs, ostr, " ", wizard->current_aircraft_model_path )) || wizard->write_fgfsrc( wizard->prefs, ostr, " " ))
     {
-	wizard->launch_result = wizard->run_fgfs(ostr.str());
+        wizard->launch_result = wizard->run_fgfs(ostr.str());
     }
 }
 
@@ -2006,7 +2006,7 @@ Wizard::exec_launch_window()
     launch_window->show();
     while ( launch_result == -1 )
     {
-	Fl::wait();
+        Fl::wait();
     }
     launch_window->set_non_modal();
     launch_window->hide();
@@ -2085,30 +2085,30 @@ Wizard::save_basic_options( Fl_Preferences &p )
     string fg_scenery = scenery_dir_list_->text(1);
     for (int i = 2; i <= scenery_dir_list_->size(); ++i)
     {
-	fg_scenery += os::searchPathSep;
-	fg_scenery += scenery_dir_list_->text(i);
+        fg_scenery += os::searchPathSep;
+        fg_scenery += scenery_dir_list_->text(i);
     }
 
     p.set( "fg_scenery", fg_scenery.c_str() );
     int n = aircraft->value();
     if (n > 0)
     {
-	AircraftData* data =
-	    reinterpret_cast<AircraftData*>( aircraft->data(n) );
-	p.set( "aircraft", n > 0 ? data->name.c_str() : "" );
+        AircraftData* data =
+            reinterpret_cast<AircraftData*>( aircraft->data(n) );
+        p.set( "aircraft", n > 0 ? data->name.c_str() : "" );
     }
     p.set( "airport", airports_->get_selected_id().c_str() );
     p.set( "airport-name",
-		airports_->get_selected_name().c_str() );
+                airports_->get_selected_name().c_str() );
     p.set( "carrier", carrier_->value() );
     if ( carrier_->value() != string() )
-	p.set( "parkpos", parkpos_->value() );
+        p.set( "parkpos", parkpos_->value() );
     else
         p.set( "parkpos", airports_->get_selected_parking().c_str() );
 
     string rwy( airports_->get_selected_runway() );
     if (rwy.empty())
-	rwy = _("<default>");
+        rwy = _("<default>");
     p.set( "runway", rwy.c_str() );
 
     p.set("geometry", resolution->text());
@@ -2121,11 +2121,11 @@ Wizard::save_basic_options( Fl_Preferences &p )
     int v = frame_rate_limiter->value();
     if ( v == 0 )
     {
-	frame_rate_limiter_value->deactivate();
+        frame_rate_limiter_value->deactivate();
     }
     else
     {
-	frame_rate_limiter_value->activate();
+        frame_rate_limiter_value->activate();
     }
     p.set("frame_rate_limiter", v);
     p.set("frame_rate_limiter_value", frame_rate_limiter_value->value() );
@@ -2136,17 +2136,17 @@ Wizard::save_basic_options( Fl_Preferences &p )
     v = time_of_day->value();
     if ( v == 0 )
     {
-	time_of_day_value->deactivate();
-	p.set("time-match-real", 1);
+        time_of_day_value->deactivate();
+        p.set("time-match-real", 1);
     }
     else
     {
-	time_of_day_value->activate();
-	p.set("time-match-real", 0);
-	p.set("time-match-local", 0);
-	p.set("start-date-sys", 0);
-	p.set("start-date-gmt", 0);
-	p.set("start-date-lat", 0);
+        time_of_day_value->activate();
+        p.set("time-match-real", 0);
+        p.set("time-match-local", 0);
+        p.set("start-date-sys", 0);
+        p.set("start-date-gmt", 0);
+        p.set("start-date-lat", 0);
     }
     p.set("time_of_day", v);
 
@@ -2158,91 +2158,91 @@ Wizard::save_basic_options( Fl_Preferences &p )
     int nb = 0;
     for (int i = 1; i <= scenarii->size(); ++i)
     {
-	if ( scenarii->selected(i) )
-	{
-	    nb += 1;
-	    p.set( Fl_Preferences::Name("scenario-item-%d", nb), scenarii->text(i));
-	}
+        if ( scenarii->selected(i) )
+        {
+            nb += 1;
+            p.set( Fl_Preferences::Name("scenario-item-%d", nb), scenarii->text(i));
+        }
     }
     p.set("scenario-count", nb);
 
     v = atlas->value();
     if ( v == 0 )
     {
-	std::vector<string> io_list;
-	int i, iVal;
-	p.get("io-count", iVal, 0);
-	for ( i = 1; i <= iVal; ++i )
-	{
-	    char buf[256];
-	    p.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
-	    string item( buf );
-	    if ( item.length() < 8 || item.substr( 0, 8 ) != "--atlas=" )
-	    {
-		io_list.push_back(buf);
-	    }
-	}
-	p.set("io-count",(int)io_list.size());
-	for ( i = 0; i < (int)io_list.size(); ++i )
-	{
-	    p.set( Fl_Preferences::Name( "io-item-%d", i+1 ), io_list[i].c_str());
-	}
+        std::vector<string> io_list;
+        int i, iVal;
+        p.get("io-count", iVal, 0);
+        for ( i = 1; i <= iVal; ++i )
+        {
+            char buf[256];
+            p.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+            string item( buf );
+            if ( item.length() < 8 || item.substr( 0, 8 ) != "--atlas=" )
+            {
+                io_list.push_back(buf);
+            }
+        }
+        p.set("io-count",(int)io_list.size());
+        for ( i = 0; i < (int)io_list.size(); ++i )
+        {
+            p.set( Fl_Preferences::Name( "io-item-%d", i+1 ), io_list[i].c_str());
+        }
     }
     else
     {
-	int i, iVal, loc = 0;
-	p.get("io-count", iVal, 0);
-	for ( i = 1; i <= iVal; ++i )
-	{
-	    char buf[256];
-	    p.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
-	    string item( buf );
-	    if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
-	    {
-		loc = i;
-		break;
-	    }
-	}
-	string host = atlas_host->value();
-	if ( host.empty() )
-	    host = "localhost";
-	int port = (int)atlas_port->value();
-	if ( port == 0 )
-	    port = 5500;
-	atlas_port->value(port);
-	std::ostringstream opt;
-	opt << "--atlas=socket,out,5," << host << "," << port << ",udp";
-	if ( loc == 0 )
-	{
-	    loc = iVal + 1;
-	    p.set("io-count",loc);
-	}
-	p.set( Fl_Preferences::Name( "io-item-%d", loc ), opt.str().c_str() );
+        int i, iVal, loc = 0;
+        p.get("io-count", iVal, 0);
+        for ( i = 1; i <= iVal; ++i )
+        {
+            char buf[256];
+            p.get( Fl_Preferences::Name( "io-item-%d", i ), buf, "", sizeof buf - 1 );
+            string item( buf );
+            if ( item.length() > 8 && item.substr( 0, 8 ) == "--atlas=" )
+            {
+                loc = i;
+                break;
+            }
+        }
+        string host = atlas_host->value();
+        if ( host.empty() )
+            host = "localhost";
+        int port = (int)atlas_port->value();
+        if ( port == 0 )
+            port = 5500;
+        atlas_port->value(port);
+        std::ostringstream opt;
+        opt << "--atlas=socket,out,5," << host << "," << port << ",udp";
+        if ( loc == 0 )
+        {
+            loc = iVal + 1;
+            p.set("io-count",loc);
+        }
+        p.set( Fl_Preferences::Name( "io-item-%d", loc ), opt.str().c_str() );
     }
 
     v = multiplay->value();
     if ( v == 0 )
     {
-	p.set("callsign","");
-	p.set("multiplay1","");
-	p.set("multiplay2","");
+        p.set("callsign","");
+        p.set("multiplay1","");
+        p.set("multiplay2","");
     }
     else
     {
-	string callsign = multiplay_callsign->value();
-	string host = multiplay_host->value();
-	int in = (int)multiplay_in->value();
-	int out = (int)multiplay_out->value();
+        string callsign = multiplay_callsign->value();
+        string host = multiplay_host->value();
+        int in = (int)multiplay_in->value();
+        int out = (int)multiplay_out->value();
 
-	p.set("callsign",callsign.c_str());
-	std::ostringstream str;
-	str << "out,10," << host << "," << out;
-	p.set("multiplay1",str.str().c_str());
-	str.str("");
-	char hostname[256];
-	gethostname( hostname, 256 );
-	str << "in,10," << hostname << "," << in;
-	p.set("multiplay2",str.str().c_str());
+        p.set("callsign",callsign.c_str());
+        std::ostringstream str;
+        str << "out,10," << host << "," << out;
+        p.set("multiplay1",str.str().c_str());
+        str.str("");
+        char hostname[256];
+        gethostname( hostname, 256 );
+        str << "in,10," << hostname << "," << in;
+        p.set("multiplay2",str.str().c_str());
     }
 
 
@@ -2264,7 +2264,7 @@ Wizard::load_preferences_cb()
         Fl_Preferences prefs_tmp( set1.dir().c_str(), "flightgear.org", set1.file().c_str() );
 
         if (adv == 0)
-	    adv = new Advanced;
+            adv = new Advanced;
 
         adv->load_settings( prefs_tmp );
         update_basic_options( prefs_tmp );
@@ -2283,9 +2283,9 @@ Wizard::load_preferences_cb()
             typedef vector<string> vs_t;
             vs_t v( sgPathSplit( buf ) );
             for (vs_t::size_type i = 0; i < v.size(); ++i)
-	        scenery_dir_list_->add( v[i].c_str() );
-	    ts_dir->minimum( 0 );
-	    ts_dir->maximum( scenery_dir_list_->size() );
+                scenery_dir_list_->add( v[i].c_str() );
+            ts_dir->minimum( 0 );
+            ts_dir->maximum( scenery_dir_list_->size() );
         }
 
         prefs_tmp.get( "ts_exe", buf, def_ts_exe.c_str(), buflen-1);
@@ -2294,17 +2294,17 @@ Wizard::load_preferences_cb()
         prefs_tmp.get( "aircraft", buf, "", buflen-1);
         aircraft_update( buf );
 
-  	if (prefs_tmp.get( "airport", buf, "", buflen-1) && buf[0] != 0)
-	    airports_->select_id( buf );
+          if (prefs_tmp.get( "airport", buf, "", buflen-1) && buf[0] != 0)
+            airports_->select_id( buf );
 
-  	prefs_tmp.get( "carrier", buf, "", buflen-1);
+          prefs_tmp.get( "carrier", buf, "", buflen-1);
         carrier_->value( buf );
-	prefs_tmp.get( "parkpos", buf, "", sizeof buf - 1 );
+        prefs_tmp.get( "parkpos", buf, "", sizeof buf - 1 );
         if ( carrier_->value() != string() )
-	    parkpos_->value( buf );
+            parkpos_->value( buf );
         else
             airports_->select_parking( buf );
-  	if (prefs_tmp.get( "runway", buf, "", buflen-1) && buf[0] != 0)
+          if (prefs_tmp.get( "runway", buf, "", buflen-1) && buf[0] != 0)
             airports_->select_rwy( buf );
 
         int iVal;
@@ -2313,9 +2313,9 @@ Wizard::load_preferences_cb()
         int i;
         for (i = 1; i <= iVal; ++i)
         {
-	    buf[0] = 0;
-	    prefs_tmp.get( Fl_Preferences::Name("scenario-item-%d", i), buf, "", buflen-1 );
-	    prefs.set( Fl_Preferences::Name("scenario-item-%d", i), buf );
+            buf[0] = 0;
+            prefs_tmp.get( Fl_Preferences::Name("scenario-item-%d", i), buf, "", buflen-1 );
+            prefs.set( Fl_Preferences::Name("scenario-item-%d", i), buf );
         }
 
         adv->save_settings( prefs );
@@ -2352,7 +2352,7 @@ Wizard::save_preferences_cb()
         Fl_Preferences prefs_tmp( settings.dir().c_str(), "flightgear.org", settings.file().c_str() );
 
         if (adv == 0)
-	    adv = new Advanced;
+            adv = new Advanced;
 
         adv->save_settings( prefs_tmp );
         save_basic_options( prefs_tmp );
@@ -2391,50 +2391,50 @@ Wizard::scenery_prefetch_cb()
     update_basic_options( prefs );
     if ( terrasync->value() )
     {
-	if ( exec_prefetch_window() )
-	{
-	    std::string apt_id = prefetch_apt->value();
-	    std::transform( apt_id.begin(), apt_id.end(), apt_id.begin(), (int(*)(int)) std::toupper );
-	    const apt_dat_t *apt = airports_->find( apt_id );
-	    if ( apt && strcasecmp( apt->id_.c_str(), prefetch_apt->value() ) == 0 )
-	    {
-		if (tsThread == 0)
-		    tsThread = new TerraSyncThread( this );
-		tsThread->start();
-		OpenThreads::Thread::microSleep( 500000 );
+        if ( exec_prefetch_window() )
+        {
+            std::string apt_id = prefetch_apt->value();
+            std::transform( apt_id.begin(), apt_id.end(), apt_id.begin(), (int(*)(int)) std::toupper );
+            const apt_dat_t *apt = airports_->find( apt_id );
+            if ( apt && strcasecmp( apt->id_.c_str(), prefetch_apt->value() ) == 0 )
+            {
+                if (tsThread == 0)
+                    tsThread = new TerraSyncThread( this );
+                tsThread->start();
+                OpenThreads::Thread::microSleep( 500000 );
 
-		netSocket s;
-		if ( s.open( false ) )
-		{
-		    float lat = apt->lat_ * 100.0;
-		    char lats = 'N';
-		    if ( lat < 0.0 )
-		    {
-			lat = -lat;
-			lats = 'S';
-		    }
-		    float lon = apt->lon_ * 100.0;
-		    char lons = 'E';
-		    if ( lon < 0.0 )
-		    {
-			lon = -lon;
-			lons = 'W';
-		    }
-		    netAddress tsAddress( "localhost", (int)terrasync_port->value() );
-		    std::ostringstream oss;
-		    oss << "$GPGGA,," << lat << "," << lats << "," << lon << "," << lons << ",,,,,,,,,";
-		    s.sendto( oss.str().c_str(), oss.str().length(), 0, &tsAddress );
-		}
-	    }
-	    else
-	    {
-		fl_alert( _("Unknown airport : '%s'"), prefetch_apt->value() );
-	    }
-	}
+                simgear::Socket s;
+                if ( s.open( false ) )
+                {
+                    float lat = apt->lat_ * 100.0;
+                    char lats = 'N';
+                    if ( lat < 0.0 )
+                    {
+                        lat = -lat;
+                        lats = 'S';
+                    }
+                    float lon = apt->lon_ * 100.0;
+                    char lons = 'E';
+                    if ( lon < 0.0 )
+                    {
+                        lon = -lon;
+                        lons = 'W';
+                    }
+                    simgear::IPAddress tsAddress( "localhost", (int)terrasync_port->value() );
+                    std::ostringstream oss;
+                    oss << "$GPGGA,," << lat << "," << lats << "," << lon << "," << lons << ",,,,,,,,,";
+                    s.sendto( oss.str().c_str(), oss.str().length(), 0, &tsAddress );
+                }
+            }
+            else
+            {
+                fl_alert( _("Unknown airport : '%s'"), prefetch_apt->value() );
+            }
+        }
     }
     else
     {
-	fl_alert( _("TerraSync must be configured") );
+        fl_alert( _("TerraSync must be configured") );
     }
 }
 
@@ -2452,7 +2452,7 @@ Wizard::exec_prefetch_window()
     prefetch_window->set_modal();
     prefetch_window->show();
     while ( prefetch_result == -1 )
-	Fl::wait();
+        Fl::wait();
     prefetch_window->set_non_modal();
     prefetch_window->hide();
     return prefetch_result != 0;
