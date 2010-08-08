@@ -63,7 +63,6 @@
 #if defined(WIN32) || defined(__EMX__) && !defined(__CYGWIN__)
 # include "os_win32.h"
 # define strcasecmp stricmp
-# include <Winsock2.h>
 #else
 # include "os_posix.h"
 #endif
