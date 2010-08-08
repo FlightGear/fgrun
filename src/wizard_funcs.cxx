@@ -52,7 +52,6 @@
 #include <osgDB/ReadFile>
 
 #include <plib/ul.h>
-#include <plib/sg.h>
 
 #include "wizard.h"
 #include "advanced.h"
@@ -109,20 +108,6 @@ static const char *aircraft_status_[] = {
     N_("experimental"),
     0
 };
-
-/**
- * Make an offset matrix from rotations and position offset.
- */
-void
-sgMakeOffsetsMatrix( sgMat4 * result, double h_rot, double p_rot, double r_rot,
-                     double x_off, double y_off, double z_off )
-{
-  sgMat4 rot_matrix;
-  sgMat4 pos_matrix;
-  sgMakeRotMat4(rot_matrix, h_rot, p_rot, r_rot);
-  sgMakeTransMat4(pos_matrix, x_off, y_off, z_off);
-  sgMultMat4(*result, pos_matrix, rot_matrix);
-}
 
 /**
  * Data associated with each entry in the aircraft browser.
