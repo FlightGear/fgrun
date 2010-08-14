@@ -10,6 +10,7 @@
 #include <OpenThreads/Thread>
 class LogWindow;
 class Advanced;
+using std::string;
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Wizard.H>
 #include <FL/Fl_Group.H>
