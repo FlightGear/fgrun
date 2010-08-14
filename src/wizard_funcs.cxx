@@ -874,18 +874,14 @@ search_aircraft_dir( const SGPath& dir,
 #endif
 
     simgear::Dir directory( dir );
-    simgear::PathList files = directory.children( simgear::Dir::TYPE_FILE | simgear::Dir::NO_DOT_OR_DOTDOT );
+    simgear::PathList files = directory.children();
     for ( simgear::PathList::iterator ii = files.begin(); ii != files.end(); ++ii )
     {
         if (fl_filename_match(ii->c_str(), "*-set.xml"))
         {
             ac.push_back( *ii );
         }
-    }
-    if ( recursive )
-    {
-        simgear::PathList subdirs = directory.children( simgear::Dir::TYPE_DIR | simgear::Dir::NO_DOT_OR_DOTDOT );
-        for ( simgear::PathList::const_iterator ii = subdirs.begin(); ii != subdirs.end(); ++ii )
+        else if ( recursive && ii->isDir() )
         {
             search_aircraft_dir( *ii, false, ac );
         }
