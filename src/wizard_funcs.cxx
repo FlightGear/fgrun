@@ -409,8 +409,7 @@ loadModel( const string &fg_root, const string &path,
 
     // Load the 3D aircraft object itself
     SGPath modelpath = path, texturepath = path;
-    if ( path.find_first_of( "\\/" ) != 0 && 
-            ( path.length() < 2 || !isalpha(path[0]) || path[1] != ':' ) )
+    if ( modelpath.isRelative() )
     {
         SGPath tmp = fg_root;
         tmp.append(modelpath.str());
