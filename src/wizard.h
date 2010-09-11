@@ -70,6 +70,14 @@ private:
   static void cb_fg_root_(Fl_Input*, void*);
   void cb_1_i(Fl_Button*, void*);
   static void cb_1(Fl_Button*, void*);
+  Fl_Browser *aircraft_dir_list_;
+  void cb_aircraft_dir_list__i(Fl_Browser*, void*);
+  static void cb_aircraft_dir_list_(Fl_Browser*, void*);
+  void cb_Add_i(Fl_Button*, void*);
+  static void cb_Add(Fl_Button*, void*);
+  Fl_Button *aircraft_dir_delete_;
+  void cb_aircraft_dir_delete__i(Fl_Button*, void*);
+  static void cb_aircraft_dir_delete_(Fl_Button*, void*);
   Fl_Browser *scenery_dir_list_;
   void cb_scenery_dir_list__i(Fl_Browser*, void*);
   static void cb_scenery_dir_list_(Fl_Browser*, void*);
@@ -83,8 +91,8 @@ private:
   void cb_cache_delete__i(Fl_Button*, void*);
   static void cb_cache_delete_(Fl_Button*, void*);
   Fl_Output *cache_file_;
-  void cb_Add_i(Fl_Button*, void*);
-  static void cb_Add(Fl_Button*, void*);
+  void cb_Add1_i(Fl_Button*, void*);
+  static void cb_Add1(Fl_Button*, void*);
   Fl_Button *scenery_dir_delete_;
   void cb_scenery_dir_delete__i(Fl_Button*, void*);
   static void cb_scenery_dir_delete_(Fl_Button*, void*);
@@ -277,6 +285,9 @@ private:
   static void airports_cb( Fl_Widget*, void* ); 
   void airports_cb(); 
   void update_scenery_up_down(); 
+  void aircraft_dir_select_cb(); 
+  void aircraft_dir_add_cb(); 
+  void aircraft_dir_delete_cb(); 
   void scenery_dir_select_cb(); 
   void scenery_dir_add_cb(); 
   void scenery_dir_delete_cb(); 

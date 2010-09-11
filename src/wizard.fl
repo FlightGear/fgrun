@@ -36,7 +36,7 @@ decl {class LogWindow;} {public
 decl {class Advanced;} {public
 } 
 
-decl {using std::string;} {selected public global
+decl {using std::string;} {public global
 } 
 
 class Wizard {open
@@ -77,8 +77,8 @@ class Wizard {open
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths}
-          xywh {0 0 800 560} labelfont 1 align 21 hide
+          label {Select Paths} open
+          xywh {0 0 800 560} labelfont 1 align 21
         } {
           Fl_Help_View about_ {
             private xywh {5 25 790 130} labeltype NO_LABEL
@@ -103,33 +103,55 @@ class Wizard {open
             private tooltip {root data path} xywh {630 205 25 25} labelsize 12
             code0 {o->image(folder_open_pixmap);}
           }
+          Fl_Browser aircraft_dir_list_ {
+            label {FG_AIRCRAFT:}
+            callback {aircraft_dir_select_cb();}
+            private tooltip {Aircraft directories} xywh {130 235 495 80} type Hold labelsize 12 align 4 textsize 12 resizable
+          }
+          Fl_Group {} {open
+            xywh {130 320 495 25}
+          } {
+            Fl_Button {} {
+              label {Add...}
+              callback {aircraft_dir_add_cb();}
+              private tooltip {Add an aircraft directory} xywh {130 320 60 25} labelsize 12
+            }
+            Fl_Button aircraft_dir_delete_ {
+              label Delete
+              callback {aircraft_dir_delete_cb();}
+              private tooltip {Delete an aircraft directory} xywh {195 320 60 25} labelsize 12 deactivate
+            }
+            Fl_Box {} {
+              xywh {260 320 365 25} resizable
+            }
+          }
           Fl_Browser scenery_dir_list_ {
             label {FG_SCENERY:}
             callback {scenery_dir_select_cb();}
-            private tooltip {Scenery directories} xywh {130 275 495 185} type Hold labelsize 12 align 4 textsize 12 resizable
+            private tooltip {Scenery directories} xywh {130 350 495 80} type Hold labelsize 12 align 4 textsize 12
           }
           Fl_Group {} {open
-            xywh {630 275 25 90}
+            xywh {630 350 25 40}
           } {
             Fl_Button scenery_dir_up_ {
               label {@8>}
-              callback {scenery_dir_up_cb();}
-              private xywh {630 340 25 25} deactivate
+              callback {scenery_dir_up_cb();} selected
+              private tooltip {Move scenery directory up} xywh {630 365 25 25} deactivate
             }
             Fl_Box {} {
-              xywh {630 275 25 65} resizable
+              xywh {630 350 25 15} resizable
             }
           }
           Fl_Group {} {open
-            xywh {630 365 25 95}
+            xywh {630 390 25 40}
           } {
             Fl_Button scenery_dir_down_ {
               label {@2>}
               callback {scenery_dir_down_cb();}
-              private xywh {630 370 25 25} deactivate
+              private tooltip {Move scenery directory down} xywh {630 395 25 25} deactivate
             }
             Fl_Box {} {
-              xywh {630 395 25 65} resizable
+              xywh {630 420 25 10} resizable
             }
           }
           Fl_Button cache_delete_ {
@@ -142,25 +164,25 @@ class Wizard {open
             private tooltip {Full path to the airport cache} xywh {130 505 495 25} labelsize 12 textsize 12
           }
           Fl_Group {} {open
-            xywh {130 245 495 25}
+            xywh {130 435 495 25}
           } {
             Fl_Button {} {
               label {Add...}
               callback {scenery_dir_add_cb();}
-              private tooltip {Add a scenery directory} xywh {130 245 60 25} labelsize 12
+              private tooltip {Add a scenery directory} xywh {130 435 60 25} labelsize 12
             }
             Fl_Button scenery_dir_delete_ {
               label Delete
               callback {scenery_dir_delete_cb();}
-              private tooltip {Delete a scenery directory} xywh {195 245 60 25} labelsize 12 deactivate
+              private tooltip {Delete a scenery directory} xywh {195 435 60 25} labelsize 12 deactivate
             }
             Fl_Box {} {
-              xywh {260 245 50 25} resizable
+              xywh {260 435 50 25} resizable
             }
             Fl_Spinner ts_dir {
               label {TerraSync directory}
               callback {ts_dir_cb()}
-              tooltip {Select the line in the FG_SCENERY list that is the TerraSync directory. 0 means that TerraSync is not used.} xywh {580 245 45 25} labelsize 12 textsize 12
+              tooltip {Select the line in the FG_SCENERY list that is the TerraSync directory. 0 means that TerraSync is not used.} xywh {580 435 45 25} labelsize 12 textsize 12
             }
           }
           Fl_Input ts_exe_ {
@@ -249,7 +271,7 @@ class Wizard {open
           }
         }
         Fl_Group {page[3]} {open
-          private xywh {0 0 800 560}
+          private xywh {0 0 800 560} hide
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -589,6 +611,9 @@ class Wizard {open
   decl {static void airports_cb( Fl_Widget*, void* )} {}
   decl {void airports_cb();} {}
   decl {void update_scenery_up_down();} {}
+  decl {void aircraft_dir_select_cb();} {}
+  decl {void aircraft_dir_add_cb();} {}
+  decl {void aircraft_dir_delete_cb();} {}
   decl {void scenery_dir_select_cb();} {}
   decl {void scenery_dir_add_cb();} {}
   decl {void scenery_dir_delete_cb();} {}

@@ -216,6 +216,18 @@ Wizard::reset()
         }
     }
 
+    string fg_aircraft;
+    if (prefs.get( "fg_aircraft", buf, "", buflen-1))
+    {
+        fg_aircraft = buf;
+    }
+
+    aircraft_dir_list_->clear();
+    typedef vector<string> vs_t;
+    vs_t va( sgPathSplit( fg_aircraft ) );
+    for (vs_t::size_type i = 0; i < va.size(); ++i)
+        aircraft_dir_list_->add( va[i].c_str() );
+
     string fg_scenery;
     if (!def_fg_scenery.empty())
     {
@@ -241,10 +253,9 @@ Wizard::reset()
     }
 
     scenery_dir_list_->clear();
-    typedef vector<string> vs_t;
-    vs_t v( sgPathSplit( fg_scenery ) );
-    for (vs_t::size_type i = 0; i < v.size(); ++i)
-        scenery_dir_list_->add( v[i].c_str() );
+    vs_t vs( sgPathSplit( fg_scenery ) );
+    for (vs_t::size_type i = 0; i < vs.size(); ++i)
+        scenery_dir_list_->add( vs[i].c_str() );
     ts_dir->minimum( 0 );
     ts_dir->maximum( scenery_dir_list_->size() );
     int iVal;
@@ -626,14 +637,25 @@ Wizard::next_cb()
              win->cursor( FL_CURSOR_DEFAULT );
         }
 
+        string fg_aircraft;
+        if ( aircraft_dir_list_->size() > 0 )
+        {
+            fg_aircraft = aircraft_dir_list_->text(1);
+            for (int i = 2; i <= aircraft_dir_list_->size(); ++i)
+            {
+                fg_aircraft += os::searchPathSep;
+                fg_aircraft += aircraft_dir_list_->text(i);
+            }
+        }
+        prefs.set( "fg_aircraft", fg_aircraft.c_str() );
+
         string fg_scenery = scenery_dir_list_->text(1);
         for (int i = 2; i <= scenery_dir_list_->size(); ++i)
         {
             fg_scenery += os::searchPathSep;
             fg_scenery += scenery_dir_list_->text(i);
         }
-
-         prefs.set( "fg_scenery", fg_scenery.c_str() );
+        prefs.set( "fg_scenery", fg_scenery.c_str() );
 
         ts_dir_cb();
 
@@ -1039,6 +1061,49 @@ Wizard::delete_cache_file_cb()
 
     fl_alert( _("Unable to delete '%s':\n%s"),
               path.c_str(), strerror(errno) );
+}
+
+void
+Wizard::aircraft_dir_select_cb()
+{
+    int n = aircraft_dir_list_->value();
+    if (n > 0)
+    {
+        aircraft_dir_delete_->activate();
+
+        aircraft_dir_list_->deselect();
+        aircraft_dir_list_->select( n );
+    }
+    else
+    {
+        aircraft_dir_delete_->deactivate();
+    }
+}
+
+void
+Wizard::aircraft_dir_add_cb()
+{
+    char* p = fl_dir_chooser( _("Select FG_AIRCRAFT directory"), 0, 0);
+    if (p != 0)
+    {
+        aircraft_dir_list_->add( p );
+        aircraft_dir_list_->value( aircraft_dir_list_->size() );
+        aircraft_dir_list_->select( aircraft_dir_list_->size() );
+        aircraft_dir_delete_->activate();
+    }
+}
+
+void
+Wizard::aircraft_dir_delete_cb()
+{
+    int n = aircraft_dir_list_->value();
+    if (n > 0)
+    {
+        aircraft_dir_list_->remove( n );
+    }
+
+    if (aircraft_dir_list_->value() == 0)
+        aircraft_dir_delete_->deactivate();
 }
 
 void
