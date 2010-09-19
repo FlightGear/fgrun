@@ -1004,32 +1004,26 @@ Advanced::Advanced() {
       { vor = new Fl_Input(530, 35, 80, 25, _("VOR:"));
         vor->labelsize(12);
         vor->textsize(12);
-        vor->deactivate();
       } // Fl_Input* vor
       { ndb = new Fl_Input(530, 65, 80, 25, _("NDB:"));
         ndb->labelsize(12);
         ndb->textsize(12);
-        ndb->deactivate();
       } // Fl_Input* ndb
       { fix = new Fl_Input(530, 95, 80, 25, _("Fix:"));
         fix->labelsize(12);
         fix->textsize(12);
-        fix->deactivate();
       } // Fl_Input* fix
       { offset_distance = new Fl_Input(530, 125, 80, 25, _("offset distance:"));
         offset_distance->labelsize(12);
         offset_distance->textsize(12);
-        offset_distance->deactivate();
       } // Fl_Input* offset_distance
       { offset_azimuth = new Fl_Input(530, 155, 80, 25, _("offset azimuth:"));
         offset_azimuth->labelsize(12);
         offset_azimuth->textsize(12);
-        offset_azimuth->deactivate();
       } // Fl_Input* offset_azimuth
       { glideslope = new Fl_Input(530, 185, 80, 25, _("Glide slope:"));
         glideslope->labelsize(12);
         glideslope->textsize(12);
-        glideslope->deactivate();
       } // Fl_Input* glideslope
       { roc = new Fl_Input(530, 215, 80, 25, _("Climb rate:"));
         roc->labelsize(12);

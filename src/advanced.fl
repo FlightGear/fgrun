@@ -373,27 +373,27 @@ else
         }
         Fl_Input vor {
           label {VOR:}
-          private xywh {530 35 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 35 80 25} labelsize 12 textsize 12
         }
         Fl_Input ndb {
           label {NDB:}
-          private xywh {530 65 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 65 80 25} labelsize 12 textsize 12
         }
         Fl_Input fix {
           label {Fix:}
-          private xywh {530 95 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 95 80 25} labelsize 12 textsize 12
         }
         Fl_Input offset_distance {
           label {offset distance:}
-          private xywh {530 125 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 125 80 25} labelsize 12 textsize 12
         }
         Fl_Input offset_azimuth {
           label {offset azimuth:}
-          private xywh {530 155 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 155 80 25} labelsize 12 textsize 12
         }
         Fl_Input glideslope {
           label {Glide slope:}
-          private xywh {530 185 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 185 80 25} labelsize 12 textsize 12
         }
         Fl_Input roc {
           label {Climb rate:} selected

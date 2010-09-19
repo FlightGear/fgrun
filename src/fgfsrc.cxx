@@ -244,6 +244,18 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--vBody=" << buf;
     if (prefs.get( "wBody", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--wBody=" << buf;
+    if (prefs.get( "vor", buf, "", buflen-1 ) && buf[0] != 0)
+        os << pfx << "--vor=" << buf;
+    if (prefs.get( "ndb", buf, "", buflen-1 ) && buf[0] != 0)
+        os << pfx << "--ndb=" << buf;
+    if (prefs.get( "fix", buf, "", buflen-1 ) && buf[0] != 0)
+        os << pfx << "--fix=" << buf;
+    if (prefs.get( "offset_distance", buf, "", buflen-1 ) && buf[0] != 0)
+        os << pfx << "--offset-distance=" << buf;
+    if (prefs.get( "offset_azimuth", buf, "", buflen-1 ) && buf[0] != 0)
+        os << pfx << "--offset-azimuth=" << buf;
+    if (prefs.get( "glideslope", buf, "", buflen-1 ) && buf[0] != 0)
+        os << pfx << "--glideslope=" << buf;
 
     // Rendering.
     if (prefs.get( "clouds", iVal, 1 ) && !iVal)

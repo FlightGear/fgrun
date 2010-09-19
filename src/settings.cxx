@@ -126,6 +126,12 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("uBody", uBody->value());
     prefs.set("vBody", vBody->value());
     prefs.set("wBody", wBody->value());
+    prefs.set("vor", vor->value());
+    prefs.set("ndb", ndb->value());
+    prefs.set("fix", fix->value());
+    prefs.set("offset_distance", offset_distance->value());
+    prefs.set("offset_azimuth", offset_azimuth->value());
+    prefs.set("glideslope", glideslope->value());
 
     prefs.set("clouds", clouds->value());
     prefs.set("clouds3d", clouds3d->value());
@@ -393,6 +399,18 @@ Advanced::load_settings( Fl_Preferences& prefs )
     vBody->value(buf);
     prefs.get("wBody", buf, "", buflen-1);
     wBody->value(buf);
+    prefs.get("vor", buf, "", buflen-1);
+    vor->value(buf);
+    prefs.get("ndb", buf, "", buflen-1);
+    ndb->value(buf);
+    prefs.get("fix", buf, "", buflen-1);
+    fix->value(buf);
+    prefs.get("offset_distance", buf, "", buflen-1);
+    offset_distance->value(buf);
+    prefs.get("offset_azimuth", buf, "", buflen-1);
+    offset_azimuth->value(buf);
+    prefs.get("glideslope", buf, "", buflen-1);
+    glideslope->value(buf);
 
     prefs.get("clouds", iVal, 1);
     clouds->value(iVal);
@@ -648,6 +666,12 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("uBody" );
     prefs.deleteEntry("vBody" );
     prefs.deleteEntry("wBody" );
+    prefs.deleteEntry("vor" );
+    prefs.deleteEntry("ndb" );
+    prefs.deleteEntry("fix" );
+    prefs.deleteEntry("offset_distance" );
+    prefs.deleteEntry("offset_azimuth" );
+    prefs.deleteEntry("glideslope" );
 
     prefs.deleteEntry("clouds" );
     prefs.deleteEntry("clouds3d" );
