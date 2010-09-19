@@ -328,8 +328,8 @@ else
         }
       }
       Fl_Group {page[4]} {
-        label {Initial Position}
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
+        label {Initial Position} open
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
         Fl_Input lon {
           label {Longitude:}
@@ -373,31 +373,31 @@ else
         }
         Fl_Input vor {
           label {VOR:}
-          private xywh {520 35 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 35 80 25} labelsize 12 textsize 12 deactivate
         }
         Fl_Input ndb {
           label {NDB:}
-          private xywh {520 65 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 65 80 25} labelsize 12 textsize 12 deactivate
         }
         Fl_Input fix {
           label {Fix:}
-          private xywh {520 95 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 95 80 25} labelsize 12 textsize 12 deactivate
         }
         Fl_Input offset_distance {
           label {offset distance:}
-          private xywh {520 125 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 125 80 25} labelsize 12 textsize 12 deactivate
         }
         Fl_Input offset_azimuth {
           label {offset azimuth:}
-          private xywh {520 155 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 155 80 25} labelsize 12 textsize 12 deactivate
         }
         Fl_Input glideslope {
           label {Glide slope:}
-          private xywh {520 185 80 25} labelsize 12 textsize 12 deactivate
+          private xywh {530 185 80 25} labelsize 12 textsize 12 deactivate
         }
         Fl_Input roc {
-          label {Climb rate:}
-          private xywh {520 215 80 25} labelsize 12 textsize 12 deactivate
+          label {Climb rate:} selected
+          private xywh {530 215 80 25} labelsize 12 textsize 12 deactivate
         }
         Fl_Box {} {
           xywh {245 405 25 25} resizable
@@ -684,14 +684,14 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output} open
-        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21
+        label {Input/Output}
+        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
           private xywh {155 40 480 125} type Hold labeltype NO_LABEL labelsize 12 textsize 12 resizable
         }
-        Fl_Group {} {open
+        Fl_Group {} {
           xywh {150 170 485 265}
         } {
           Fl_Button io_new {
@@ -708,7 +708,7 @@ else
           }
           Fl_Choice io_protocol {
             label {Protocol:}
-            callback {io_protocol_update_cb();} open
+            callback {io_protocol_update_cb();}
             private xywh {260 185 125 25} down_box BORDER_BOX labelsize 12 textsize 12
           } {
             MenuItem {} {
@@ -784,7 +784,7 @@ else
               private xywh {5 5 100 20} labelsize 12
             }
             MenuItem {} {
-              label telnet selected
+              label telnet
               private xywh {0 0 100 20} labelsize 12
             }
           }

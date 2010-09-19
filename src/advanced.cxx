@@ -944,7 +944,6 @@ Advanced::Advanced() {
       page[4]->labelfont(1);
       page[4]->labelsize(16);
       page[4]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
-      page[4]->hide();
       { lon = new Fl_Input(245, 35, 150, 25, _("Longitude:"));
         lon->tooltip(_("Initial longitude, west is negative"));
         lon->labelsize(12);
@@ -1002,37 +1001,37 @@ Advanced::Advanced() {
         pitch->step(0.1);
         pitch->textsize(12);
       } // Fl_Value_Input* pitch
-      { vor = new Fl_Input(520, 35, 80, 25, _("VOR:"));
+      { vor = new Fl_Input(530, 35, 80, 25, _("VOR:"));
         vor->labelsize(12);
         vor->textsize(12);
         vor->deactivate();
       } // Fl_Input* vor
-      { ndb = new Fl_Input(520, 65, 80, 25, _("NDB:"));
+      { ndb = new Fl_Input(530, 65, 80, 25, _("NDB:"));
         ndb->labelsize(12);
         ndb->textsize(12);
         ndb->deactivate();
       } // Fl_Input* ndb
-      { fix = new Fl_Input(520, 95, 80, 25, _("Fix:"));
+      { fix = new Fl_Input(530, 95, 80, 25, _("Fix:"));
         fix->labelsize(12);
         fix->textsize(12);
         fix->deactivate();
       } // Fl_Input* fix
-      { offset_distance = new Fl_Input(520, 125, 80, 25, _("offset distance:"));
+      { offset_distance = new Fl_Input(530, 125, 80, 25, _("offset distance:"));
         offset_distance->labelsize(12);
         offset_distance->textsize(12);
         offset_distance->deactivate();
       } // Fl_Input* offset_distance
-      { offset_azimuth = new Fl_Input(520, 155, 80, 25, _("offset azimuth:"));
+      { offset_azimuth = new Fl_Input(530, 155, 80, 25, _("offset azimuth:"));
         offset_azimuth->labelsize(12);
         offset_azimuth->textsize(12);
         offset_azimuth->deactivate();
       } // Fl_Input* offset_azimuth
-      { glideslope = new Fl_Input(520, 185, 80, 25, _("Glide slope:"));
+      { glideslope = new Fl_Input(530, 185, 80, 25, _("Glide slope:"));
         glideslope->labelsize(12);
         glideslope->textsize(12);
         glideslope->deactivate();
       } // Fl_Input* glideslope
-      { roc = new Fl_Input(520, 215, 80, 25, _("Climb rate:"));
+      { roc = new Fl_Input(530, 215, 80, 25, _("Climb rate:"));
         roc->labelsize(12);
         roc->textsize(12);
         roc->deactivate();
@@ -1347,6 +1346,7 @@ Advanced::Advanced() {
       page[8]->labelfont(1);
       page[8]->labelsize(16);
       page[8]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+      page[8]->hide();
       { io_list = new Fl_Browser(155, 40, 480, 125);
         io_list->type(2);
         io_list->labeltype(FL_NO_LABEL);
