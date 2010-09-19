@@ -452,6 +452,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { page[0] = new Fl_Group(0, 0, 800, 560, _("Select Paths"));
         page[0]->labelfont(1);
         page[0]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+        page[0]->hide();
         { about_ = new Fl_Help_View(5, 25, 790, 130);
           about_->labeltype(FL_NO_LABEL);
         } // Fl_Help_View* about_
@@ -672,7 +673,6 @@ ns that TerraSync is not used."));
         page[2]->end();
       } // Fl_Group* page[2]
       { page[3] = new Fl_Group(0, 0, 800, 560);
-        page[3]->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
@@ -862,6 +862,7 @@ ns that TerraSync is not used."));
               multiplay_host->tooltip(_("Peer hostname"));
               multiplay_host->callback((Fl_Callback*)cb_multiplay_host);
               multiplay_host->when(FL_WHEN_CHANGED);
+              Fl_Group::current()->resizable(multiplay_host);
             } // Fl_Input* multiplay_host
             { multiplay_in = new Fl_Value_Input(545, 335, 50, 25, _("in :"));
               multiplay_in->tooltip(_("Input port number"));
@@ -871,9 +872,6 @@ ns that TerraSync is not used."));
               multiplay_out->tooltip(_("Output port number"));
               multiplay_out->callback((Fl_Callback*)cb_multiplay_out);
             } // Fl_Value_Input* multiplay_out
-            { Fl_Box* o = new Fl_Box(625, 305, 10, 0);
-              Fl_Group::current()->resizable(o);
-            } // Fl_Box* o
             multiplay_group->end();
             Fl_Group::current()->resizable(multiplay_group);
           } // Fl_Group* multiplay_group
