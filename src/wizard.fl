@@ -77,8 +77,8 @@ class Wizard {open
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths}
-          xywh {0 0 800 560} labelfont 1 align 21 hide
+          label {Select Paths} open
+          xywh {0 0 800 560} labelfont 1 align 21
         } {
           Fl_Help_View about_ {
             private xywh {5 25 790 130} labeltype NO_LABEL
@@ -114,12 +114,12 @@ class Wizard {open
             Fl_Button {} {
               label {Add...}
               callback {aircraft_dir_add_cb();}
-              private tooltip {Add an aircraft directory} xywh {130 320 60 25} labelsize 12
+              private tooltip {Add an aircraft directory} xywh {130 320 100 25} labelsize 12
             }
             Fl_Button aircraft_dir_delete_ {
               label Delete
               callback {aircraft_dir_delete_cb();}
-              private tooltip {Delete an aircraft directory} xywh {195 320 60 25} labelsize 12 deactivate
+              private tooltip {Delete an aircraft directory} xywh {235 320 100 25} labelsize 12 deactivate
             }
             Fl_Box {} {
               xywh {260 320 365 25} resizable
@@ -168,13 +168,13 @@ class Wizard {open
           } {
             Fl_Button {} {
               label {Add...}
-              callback {scenery_dir_add_cb();}
-              private tooltip {Add a scenery directory} xywh {130 435 60 25} labelsize 12
+              callback {scenery_dir_add_cb();} selected
+              private tooltip {Add a scenery directory} xywh {130 435 100 25} labelsize 12
             }
             Fl_Button scenery_dir_delete_ {
               label Delete
               callback {scenery_dir_delete_cb();}
-              private tooltip {Delete a scenery directory} xywh {195 435 60 25} labelsize 12 deactivate
+              private tooltip {Delete a scenery directory} xywh {235 435 100 25} labelsize 12 deactivate
             }
             Fl_Box {} {
               xywh {260 435 50 25} resizable
@@ -270,8 +270,8 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {open
-          private xywh {0 0 800 560}
+        Fl_Group {page[3]} {
+          private xywh {0 0 800 560} hide
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -510,7 +510,7 @@ class Wizard {open
               }
               Fl_Input multiplay_host {
                 label {Hostname :}
-                callback {multiplay_field_cb();} selected
+                callback {multiplay_field_cb();}
                 private tooltip {Peer hostname} xywh {355 335 120 25} when 1 resizable
               }
               Fl_Value_Input multiplay_in {

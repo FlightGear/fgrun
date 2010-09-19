@@ -452,7 +452,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { page[0] = new Fl_Group(0, 0, 800, 560, _("Select Paths"));
         page[0]->labelfont(1);
         page[0]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
-        page[0]->hide();
         { about_ = new Fl_Help_View(5, 25, 790, 130);
           about_->labeltype(FL_NO_LABEL);
         } // Fl_Help_View* about_
@@ -492,12 +491,12 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           Fl_Group::current()->resizable(aircraft_dir_list_);
         } // Fl_Browser* aircraft_dir_list_
         { Fl_Group* o = new Fl_Group(130, 320, 495, 25);
-          { Fl_Button* o = new Fl_Button(130, 320, 60, 25, _("Add..."));
+          { Fl_Button* o = new Fl_Button(130, 320, 100, 25, _("Add..."));
             o->tooltip(_("Add an aircraft directory"));
             o->labelsize(12);
             o->callback((Fl_Callback*)cb_Add);
           } // Fl_Button* o
-          { aircraft_dir_delete_ = new Fl_Button(195, 320, 60, 25, _("Delete"));
+          { aircraft_dir_delete_ = new Fl_Button(235, 320, 100, 25, _("Delete"));
             aircraft_dir_delete_->tooltip(_("Delete an aircraft directory"));
             aircraft_dir_delete_->labelsize(12);
             aircraft_dir_delete_->callback((Fl_Callback*)cb_aircraft_dir_delete_);
@@ -550,12 +549,12 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           cache_file_->textsize(12);
         } // Fl_Output* cache_file_
         { Fl_Group* o = new Fl_Group(130, 435, 495, 25);
-          { Fl_Button* o = new Fl_Button(130, 435, 60, 25, _("Add..."));
+          { Fl_Button* o = new Fl_Button(130, 435, 100, 25, _("Add..."));
             o->tooltip(_("Add a scenery directory"));
             o->labelsize(12);
             o->callback((Fl_Callback*)cb_Add1);
           } // Fl_Button* o
-          { scenery_dir_delete_ = new Fl_Button(195, 435, 60, 25, _("Delete"));
+          { scenery_dir_delete_ = new Fl_Button(235, 435, 100, 25, _("Delete"));
             scenery_dir_delete_->tooltip(_("Delete a scenery directory"));
             scenery_dir_delete_->labelsize(12);
             scenery_dir_delete_->callback((Fl_Callback*)cb_scenery_dir_delete_);
@@ -673,6 +672,7 @@ ns that TerraSync is not used."));
         page[2]->end();
       } // Fl_Group* page[2]
       { page[3] = new Fl_Group(0, 0, 800, 560);
+        page[3]->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
