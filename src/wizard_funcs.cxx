@@ -315,7 +315,7 @@ Wizard::init( bool fullscreen )
 
     make_launch_window();
     make_crash_window();
-        make_prefetch_window();
+    make_prefetch_window();
 
     for (int i = 0; i < npages; ++i)
         page[i]->hide();
@@ -337,6 +337,8 @@ Wizard::init( bool fullscreen )
 
     win->size_range( 800, 600 );
     text->buffer( new Fl_Text_Buffer );
+
+    multiplay_callsign->maximum_size( 7 );
 
     logwin = new LogWindow( 640, 480, _("Log Window") );
 
