@@ -39,16 +39,16 @@ void
 Advanced::show_page( unsigned int n )
 {
     for (unsigned int i = 0; i < sizeof(page)/sizeof(page[0]); ++i)
-	if (i == n)
-	    page[i]->show();
-	else
-	    page[i]->hide();
+        if (i == n)
+            page[i]->show();
+        else
+            page[i]->hide();
 }
 
 void
 Advanced::list_new_cb( Fl_Browser* browser,
-			    Fl_Input* input,
-			    Fl_Button* del )
+                            Fl_Input* input,
+                            Fl_Button* del )
 {
     browser->add( "" );
     browser->value( browser->size() );
@@ -60,44 +60,44 @@ Advanced::list_new_cb( Fl_Browser* browser,
 
 void
 Advanced::list_delete_cb( Fl_Browser* browser,
-			       Fl_Input* input,
-			       Fl_Button* del )
+                               Fl_Input* input,
+                               Fl_Button* del )
 {
     int n = browser->value();
     if (n > 0)
     {
-	browser->remove( n );
-	input->value( "" );
-	input->take_focus();
+        browser->remove( n );
+        input->value( "" );
+        input->take_focus();
     }
 
     if (browser->size() == 0)
-	del->deactivate();
+        del->deactivate();
 }
 
 void
 Advanced::list_select_cb( Fl_Browser* browser,
-			       Fl_Input* input,
-			       Fl_Button* del )
+                               Fl_Input* input,
+                               Fl_Button* del )
 {
     int n = browser->value();
     if (n > 0)
     {
-	input->activate();
-	input->value( browser->text( n ) );
-	input->take_focus();
-	del->activate();
+        input->activate();
+        input->value( browser->text( n ) );
+        input->take_focus();
+        del->activate();
     }
 }
 
 void
 Advanced::list_update_cb( Fl_Browser* browser,
-			       Fl_Input* input )
+                               Fl_Input* input )
 {
     int n = browser->value();
     if (n > 0)
     {
-	browser->text( n, input->value() );
+        browser->text( n, input->value() );
     }
 }
 
@@ -149,11 +149,11 @@ Advanced::init()
 {
     for( int i = 0; i < MAX_CLOUD_LAYERS; ++i)
     {
-	cloud_elevation[i] = 0;
-	cloud_thickness[i] = 0;
-	cloud_coverage[i] = 0;
-	cloud_transition[i] = 0;
-	cloud_span[i] = 0;
+        cloud_elevation[i] = 0;
+        cloud_thickness[i] = 0;
+        cloud_coverage[i] = 0;
+        cloud_transition[i] = 0;
+        cloud_span[i] = 0;
     }
 
     for ( int i = 0; menu_time_of_day_value[i].text != 0; ++i )
@@ -215,7 +215,7 @@ Advanced::fg_browser_cb()
 {
     char* p = fl_file_chooser(_("Select browser"), 0, browser->value(), 0);
     if (p != 0)
-	browser->value( p );
+        browser->value( p );
 }
 
 int
@@ -227,16 +227,16 @@ Advanced::exec( Fl_Preferences& prefs )
     int r;
     for (;;)
     {
-	Fl_Widget* o = Fl::readqueue();
-	if (o == 0) Fl::wait();
-	else if (o == button[0]) { r = 0; break; }
-	else if (o == button[1]) { r = 1; break; }
-	else if (o == main_window) { r = 1; break; }
+        Fl_Widget* o = Fl::readqueue();
+        if (o == 0) Fl::wait();
+        else if (o == button[0]) { r = 0; break; }
+        else if (o == button[1]) { r = 1; break; }
+        else if (o == main_window) { r = 1; break; }
     }
 
     main_window->hide();
     if (r == 0)
-	save_settings( prefs );
+        save_settings( prefs );
 
     return r;
 }
@@ -269,10 +269,10 @@ void
 Advanced::fg_config_cb()
 {
     char* p = fl_file_chooser( _("Select a preferences file"),
-			       _("XML Files(*.xml)"),
-			       config->value(), 0 );
+                               _("XML Files(*.xml)"),
+                               config->value(), 0 );
     if (p != 0)
-	config->value( p );
+        config->value( p );
 }
 
 void
@@ -280,14 +280,14 @@ Advanced::random_wind_cb()
 {
     if (random_wind->value())
     {
-	wind_hdg->deactivate();
-	wind_dial->deactivate();
-	wind_speed->deactivate();
+        wind_hdg->deactivate();
+        wind_dial->deactivate();
+        wind_speed->deactivate();
     }
     else
     {
-	wind_hdg->activate();
-	wind_dial->activate();
-	wind_speed->activate();
+        wind_hdg->activate();
+        wind_dial->activate();
+        wind_speed->activate();
     }
 }
