@@ -19,8 +19,8 @@ using std::string;
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Box.H>
-#include <FL/Fl_Output.H>
 #include <FL/Fl_Spinner.H>
+#include <FL/Fl_Output.H>
 #include <FL/Fl_Tile.H>
 #include "Fl_OSG.h"
 #include "AirportBrowser.h"
@@ -87,10 +87,6 @@ private:
   Fl_Button *scenery_dir_down_;
   void cb_scenery_dir_down__i(Fl_Button*, void*);
   static void cb_scenery_dir_down_(Fl_Button*, void*);
-  Fl_Button *cache_delete_;
-  void cb_cache_delete__i(Fl_Button*, void*);
-  static void cb_cache_delete_(Fl_Button*, void*);
-  Fl_Output *cache_file_;
   void cb_Add1_i(Fl_Button*, void*);
   static void cb_Add1(Fl_Button*, void*);
   Fl_Button *scenery_dir_delete_;
@@ -101,6 +97,10 @@ public:
 private:
   void cb_ts_dir_i(Fl_Spinner*, void*);
   static void cb_ts_dir(Fl_Spinner*, void*);
+  Fl_Button *cache_delete_;
+  void cb_cache_delete__i(Fl_Button*, void*);
+  static void cb_cache_delete_(Fl_Button*, void*);
+  Fl_Output *cache_file_;
   Fl_Input *ts_exe_;
   void cb_ts_exe__i(Fl_Input*, void*);
   static void cb_ts_exe_(Fl_Input*, void*);
