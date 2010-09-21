@@ -502,7 +502,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             aircraft_dir_delete_->callback((Fl_Callback*)cb_aircraft_dir_delete_);
             aircraft_dir_delete_->deactivate();
           } // Fl_Button* aircraft_dir_delete_
-          { Fl_Box* o = new Fl_Box(260, 320, 365, 25);
+          { Fl_Box* o = new Fl_Box(340, 320, 285, 25);
             Fl_Group::current()->resizable(o);
           } // Fl_Box* o
           o->end();
@@ -560,7 +560,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             scenery_dir_delete_->callback((Fl_Callback*)cb_scenery_dir_delete_);
             scenery_dir_delete_->deactivate();
           } // Fl_Button* scenery_dir_delete_
-          { Fl_Box* o = new Fl_Box(260, 435, 50, 25);
+          { Fl_Box* o = new Fl_Box(355, 435, 50, 25);
             Fl_Group::current()->resizable(o);
           } // Fl_Box* o
           { ts_dir = new Fl_Spinner(580, 435, 45, 25, _("TerraSync directory"));

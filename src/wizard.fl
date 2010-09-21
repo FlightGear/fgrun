@@ -121,8 +121,8 @@ class Wizard {open
               callback {aircraft_dir_delete_cb();}
               private tooltip {Delete an aircraft directory} xywh {235 320 100 25} labelsize 12 deactivate
             }
-            Fl_Box {} {
-              xywh {260 320 365 25} resizable
+            Fl_Box {} {selected
+              xywh {340 320 285 25} resizable
             }
           }
           Fl_Browser scenery_dir_list_ {
@@ -168,7 +168,7 @@ class Wizard {open
           } {
             Fl_Button {} {
               label {Add...}
-              callback {scenery_dir_add_cb();} selected
+              callback {scenery_dir_add_cb();}
               private tooltip {Add a scenery directory} xywh {130 435 100 25} labelsize 12
             }
             Fl_Button scenery_dir_delete_ {
@@ -177,7 +177,7 @@ class Wizard {open
               private tooltip {Delete a scenery directory} xywh {235 435 100 25} labelsize 12 deactivate
             }
             Fl_Box {} {
-              xywh {260 435 50 25} resizable
+              xywh {355 435 50 25} resizable
             }
             Fl_Spinner ts_dir {
               label {TerraSync directory}
