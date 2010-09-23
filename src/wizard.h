@@ -81,12 +81,6 @@ private:
   Fl_Browser *scenery_dir_list_;
   void cb_scenery_dir_list__i(Fl_Browser*, void*);
   static void cb_scenery_dir_list_(Fl_Browser*, void*);
-  Fl_Button *scenery_dir_up_;
-  void cb_scenery_dir_up__i(Fl_Button*, void*);
-  static void cb_scenery_dir_up_(Fl_Button*, void*);
-  Fl_Button *scenery_dir_down_;
-  void cb_scenery_dir_down__i(Fl_Button*, void*);
-  static void cb_scenery_dir_down_(Fl_Button*, void*);
   void cb_Add1_i(Fl_Button*, void*);
   static void cb_Add1(Fl_Button*, void*);
   Fl_Button *scenery_dir_delete_;
@@ -97,6 +91,12 @@ public:
 private:
   void cb_ts_dir_i(Fl_Spinner*, void*);
   static void cb_ts_dir(Fl_Spinner*, void*);
+  Fl_Button *scenery_dir_up_;
+  void cb_scenery_dir_up__i(Fl_Button*, void*);
+  static void cb_scenery_dir_up_(Fl_Button*, void*);
+  Fl_Button *scenery_dir_down_;
+  void cb_scenery_dir_down__i(Fl_Button*, void*);
+  static void cb_scenery_dir_down_(Fl_Button*, void*);
   Fl_Button *cache_delete_;
   void cb_cache_delete__i(Fl_Button*, void*);
   static void cb_cache_delete_(Fl_Button*, void*);

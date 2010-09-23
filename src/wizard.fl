@@ -104,9 +104,9 @@ class Wizard {open
             code0 {o->image(folder_open_pixmap);}
           }
           Fl_Group {} {open
-            xywh {130 235 525 225} resizable
+            xywh {130 235 495 225} resizable
           } {
-            Fl_Group {} {open
+            Fl_Group {} {open selected
               xywh {130 235 495 115}
             } {
               Fl_Browser aircraft_dir_list_ {
@@ -133,36 +133,12 @@ class Wizard {open
               }
             }
             Fl_Group {} {open selected
-              xywh {130 350 525 110}
+              xywh {130 350 495 110}
             } {
               Fl_Browser scenery_dir_list_ {
                 label {FG_SCENERY:}
                 callback {scenery_dir_select_cb();}
                 private tooltip {Scenery directories} xywh {130 350 495 80} type Hold labelsize 12 align 4 textsize 12 resizable
-              }
-              Fl_Group {} {open
-                xywh {630 350 25 40}
-              } {
-                Fl_Button scenery_dir_up_ {
-                  label {@8>}
-                  callback {scenery_dir_up_cb();}
-                  private tooltip {Move scenery directory up} xywh {630 365 25 25} deactivate
-                }
-                Fl_Box {} {
-                  xywh {630 350 25 15} resizable
-                }
-              }
-              Fl_Group {} {open
-                xywh {630 390 25 40}
-              } {
-                Fl_Button scenery_dir_down_ {
-                  label {@2>}
-                  callback {scenery_dir_down_cb();}
-                  private tooltip {Move scenery directory down} xywh {630 395 25 25} deactivate
-                }
-                Fl_Box {} {
-                  xywh {630 420 25 10} resizable
-                }
               }
               Fl_Group {} {open
                 xywh {130 435 495 25}
@@ -186,6 +162,30 @@ class Wizard {open
                   tooltip {Select the line in the FG_SCENERY list that is the TerraSync directory. 0 means that TerraSync is not used.} xywh {580 435 45 25} labelsize 12 textsize 12
                 }
               }
+            }
+          }
+          Fl_Group {} {
+            xywh {630 350 25 40}
+          } {
+            Fl_Button scenery_dir_up_ {
+              label {@8>}
+              callback {scenery_dir_up_cb();}
+              private tooltip {Move scenery directory up} xywh {630 365 25 25} deactivate
+            }
+            Fl_Box {} {
+              xywh {630 350 25 15} resizable
+            }
+          }
+          Fl_Group {} {
+            xywh {630 390 25 40}
+          } {
+            Fl_Button scenery_dir_down_ {
+              label {@2>}
+              callback {scenery_dir_down_cb();}
+              private tooltip {Move scenery directory down} xywh {630 395 25 25} deactivate
+            }
+            Fl_Box {} {
+              xywh {630 420 25 10} resizable
             }
           }
           Fl_Button cache_delete_ {

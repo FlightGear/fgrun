@@ -63,20 +63,6 @@ void Wizard::cb_scenery_dir_list_(Fl_Browser* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_list__i(o,v);
 }
 
-void Wizard::cb_scenery_dir_up__i(Fl_Button*, void*) {
-  scenery_dir_up_cb();
-}
-void Wizard::cb_scenery_dir_up_(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_up__i(o,v);
-}
-
-void Wizard::cb_scenery_dir_down__i(Fl_Button*, void*) {
-  scenery_dir_down_cb();
-}
-void Wizard::cb_scenery_dir_down_(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_down__i(o,v);
-}
-
 void Wizard::cb_Add1_i(Fl_Button*, void*) {
   scenery_dir_add_cb();
 }
@@ -96,6 +82,20 @@ void Wizard::cb_ts_dir_i(Fl_Spinner*, void*) {
 }
 void Wizard::cb_ts_dir(Fl_Spinner* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_ts_dir_i(o,v);
+}
+
+void Wizard::cb_scenery_dir_up__i(Fl_Button*, void*) {
+  scenery_dir_up_cb();
+}
+void Wizard::cb_scenery_dir_up_(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_up__i(o,v);
+}
+
+void Wizard::cb_scenery_dir_down__i(Fl_Button*, void*) {
+  scenery_dir_down_cb();
+}
+void Wizard::cb_scenery_dir_down_(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_down__i(o,v);
 }
 
 void Wizard::cb_cache_delete__i(Fl_Button*, void*) {
@@ -481,7 +481,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->callback((Fl_Callback*)cb_1);
           o->image(folder_open_pixmap);
         } // Fl_Button* o
-        { Fl_Group* o = new Fl_Group(130, 235, 525, 225);
+        { Fl_Group* o = new Fl_Group(130, 235, 495, 225);
           { Fl_Group* o = new Fl_Group(130, 235, 495, 115);
             { aircraft_dir_list_ = new Fl_Browser(130, 235, 495, 80, _("FG_AIRCRAFT:"));
               aircraft_dir_list_->tooltip(_("Aircraft directories"));
@@ -511,7 +511,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             } // Fl_Group* o
             o->end();
           } // Fl_Group* o
-          { Fl_Group* o = new Fl_Group(130, 350, 525, 110);
+          { Fl_Group* o = new Fl_Group(130, 350, 495, 110);
             { scenery_dir_list_ = new Fl_Browser(130, 350, 495, 80, _("FG_SCENERY:"));
               scenery_dir_list_->tooltip(_("Scenery directories"));
               scenery_dir_list_->type(2);
@@ -521,28 +521,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
               scenery_dir_list_->align(Fl_Align(FL_ALIGN_LEFT));
               Fl_Group::current()->resizable(scenery_dir_list_);
             } // Fl_Browser* scenery_dir_list_
-            { Fl_Group* o = new Fl_Group(630, 350, 25, 40);
-              { scenery_dir_up_ = new Fl_Button(630, 365, 25, 25, _("@8>"));
-                scenery_dir_up_->tooltip(_("Move scenery directory up"));
-                scenery_dir_up_->callback((Fl_Callback*)cb_scenery_dir_up_);
-                scenery_dir_up_->deactivate();
-              } // Fl_Button* scenery_dir_up_
-              { Fl_Box* o = new Fl_Box(630, 350, 25, 15);
-                Fl_Group::current()->resizable(o);
-              } // Fl_Box* o
-              o->end();
-            } // Fl_Group* o
-            { Fl_Group* o = new Fl_Group(630, 390, 25, 40);
-              { scenery_dir_down_ = new Fl_Button(630, 395, 25, 25, _("@2>"));
-                scenery_dir_down_->tooltip(_("Move scenery directory down"));
-                scenery_dir_down_->callback((Fl_Callback*)cb_scenery_dir_down_);
-                scenery_dir_down_->deactivate();
-              } // Fl_Button* scenery_dir_down_
-              { Fl_Box* o = new Fl_Box(630, 420, 25, 10);
-                Fl_Group::current()->resizable(o);
-              } // Fl_Box* o
-              o->end();
-            } // Fl_Group* o
             { Fl_Group* o = new Fl_Group(130, 435, 495, 25);
               { Fl_Button* o = new Fl_Button(130, 435, 100, 25, _("Add..."));
                 o->tooltip(_("Add a scenery directory"));
@@ -571,6 +549,28 @@ ns that TerraSync is not used."));
           } // Fl_Group* o
           o->end();
           Fl_Group::current()->resizable(o);
+        } // Fl_Group* o
+        { Fl_Group* o = new Fl_Group(630, 350, 25, 40);
+          { scenery_dir_up_ = new Fl_Button(630, 365, 25, 25, _("@8>"));
+            scenery_dir_up_->tooltip(_("Move scenery directory up"));
+            scenery_dir_up_->callback((Fl_Callback*)cb_scenery_dir_up_);
+            scenery_dir_up_->deactivate();
+          } // Fl_Button* scenery_dir_up_
+          { Fl_Box* o = new Fl_Box(630, 350, 25, 15);
+            Fl_Group::current()->resizable(o);
+          } // Fl_Box* o
+          o->end();
+        } // Fl_Group* o
+        { Fl_Group* o = new Fl_Group(630, 390, 25, 40);
+          { scenery_dir_down_ = new Fl_Button(630, 395, 25, 25, _("@2>"));
+            scenery_dir_down_->tooltip(_("Move scenery directory down"));
+            scenery_dir_down_->callback((Fl_Callback*)cb_scenery_dir_down_);
+            scenery_dir_down_->deactivate();
+          } // Fl_Button* scenery_dir_down_
+          { Fl_Box* o = new Fl_Box(630, 420, 25, 10);
+            Fl_Group::current()->resizable(o);
+          } // Fl_Box* o
+          o->end();
         } // Fl_Group* o
         { cache_delete_ = new Fl_Button(630, 505, 60, 25, _("Delete"));
           cache_delete_->tooltip(_("Clear the content of the airport cache"));
