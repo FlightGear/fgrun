@@ -38,7 +38,7 @@ Advanced::io_list_select_cb( Fl_Browser* o )
 {
     int n = o->value();
     if (n <= 0)
-	return;
+        return;
 
     io_delete->activate();
     io_protocol->activate();
@@ -56,10 +56,10 @@ Advanced::io_list_select_cb( Fl_Browser* o )
 
     while ((np = buf.find_first_of( delims, op )) != buf.npos)
     {
-	tokens.push_back( buf.substr( op, np-op ) );
-	op = np + 1;
-// 	if ((op = buf.find_first_not_of( delims, np )) == buf.npos)
-// 	    break;
+        tokens.push_back( buf.substr( op, np-op ) );
+        op = np + 1;
+//         if ((op = buf.find_first_not_of( delims, np )) == buf.npos)
+//             break;
     }
     tokens.push_back( buf.substr( op, buf.npos ) );
 
@@ -78,36 +78,36 @@ Advanced::io_list_select_cb( Fl_Browser* o )
 
     if (tokens[1] == "file")
     {
-	io_file_name->value( tokens[4].c_str() );
-	g = file_group;
-	n = 5;
+        io_file_name->value( tokens[4].c_str() );
+        g = file_group;
+        n = 5;
     }
     else if (tokens[1] == "serial")
     {
-	serial_port->value( tokens[4].c_str() );
-	serial_baud_rate->value( tokens[5].c_str() );
-	g = serial_group;
-	n = 6;
+        serial_port->value( tokens[4].c_str() );
+        serial_baud_rate->value( tokens[5].c_str() );
+        g = serial_group;
+        n = 6;
     }
     else if (tokens[1] == "socket")
     {
-	socket_host->value( tokens[4].c_str() );
-	socket_port->value( atoi( tokens[5].c_str() ) );
-	if (tokens[6] == "tcp")
-	    socket_tcp->setonly();
-	else
-	    socket_udp->setonly();
+        socket_host->value( tokens[4].c_str() );
+        socket_port->value( atoi( tokens[5].c_str() ) );
+        if (tokens[6] == "tcp")
+            socket_tcp->setonly();
+        else
+            socket_udp->setonly();
 
-	g = socket_group;
-	n = 7;
+        g = socket_group;
+        n = 7;
     }
 
     if (tokens[0] == "--generic" && g != 0)
     {
-	io_generic_file->value( tokens[n].c_str() );
+        io_generic_file->value( tokens[n].c_str() );
 
-	generic_group->position( g->x(), g->y() + g->h() );
-	generic_group->show();
+        generic_group->position( g->x(), g->y() + g->h() );
+        generic_group->show();
     }
 }
 
@@ -135,40 +135,40 @@ Advanced::io_list_update_cb()
 
     if (strcmp(io_medium->text(), "file") == 0)
     {
-	oss << "--" << io_protocol->text()
-	    << "=file," << io_dir->text()
-	    << "," << int(io_hz->value())
-	    << "," << io_file_name->value();
+        oss << "--" << io_protocol->text()
+            << "=file," << io_dir->text()
+            << "," << int(io_hz->value())
+            << "," << io_file_name->value();
     }
     else if (strcmp(io_medium->text(), "serial") == 0)
     {
-	oss << "--" << io_protocol->text()
-	    << "=serial," << io_dir->text()
-	    << "," << int(io_hz->value())
-	    << "," << serial_port->value()
-	    << "," <<  serial_baud_rate->value();
+        oss << "--" << io_protocol->text()
+            << "=serial," << io_dir->text()
+            << "," << int(io_hz->value())
+            << "," << serial_port->value()
+            << "," <<  serial_baud_rate->value();
     }
     else if (strcmp(io_medium->text(), "socket") == 0)
     {
-	oss << "--" << io_protocol->text()
-	    << "=socket," << io_dir->text()
-	    << "," << int(io_hz->value())
-	    << "," << socket_host->value()
-	    << "," <<  int(socket_port->value())
-	    << (socket_tcp->value() ? ",tcp" : ",udp");
+        oss << "--" << io_protocol->text()
+            << "=socket," << io_dir->text()
+            << "," << int(io_hz->value())
+            << "," << socket_host->value()
+            << "," <<  int(socket_port->value())
+            << (socket_tcp->value() ? ",tcp" : ",udp");
     }
 
     if (strcmp( io_protocol->text(), "generic" ) == 0)
     {
-	oss << ",";
-	if (io_generic_file->size() > 0)
-	    oss << io_generic_file->value();
+        oss << ",";
+        if (io_generic_file->size() > 0)
+            oss << io_generic_file->value();
     }
 
     int n = io_list->value();
     if (n > 0)
     {
-	io_list->text(n, oss.str().c_str() );
+        io_list->text(n, oss.str().c_str() );
     }
 }
 
@@ -183,27 +183,27 @@ Advanced::io_medium_update_cb( Fl_Choice* o )
 
     if (strcmp(o->text(), "file") == 0)
     {
-	file_group->show();
-	g = file_group;
-	menu_io_dir[2].deactivate();
+        file_group->show();
+        g = file_group;
+        menu_io_dir[2].deactivate();
     }
     else if (strcmp(o->text(), "serial") == 0)
     {
-	serial_group->show();
-	g = serial_group;
-	menu_io_dir[2].activate();
+        serial_group->show();
+        g = serial_group;
+        menu_io_dir[2].activate();
     }
     else if (strcmp(o->text(), "socket") == 0)
     {
-	socket_group->show();
-	g = socket_group;
-	menu_io_dir[2].activate();
+        socket_group->show();
+        g = socket_group;
+        menu_io_dir[2].activate();
     }
 
     if (strcmp( io_protocol->text(), "generic" ) == 0)
     {
-	generic_group->position( g->x(), g->y() + g->h() );
-	generic_group->show();
+        generic_group->position( g->x(), g->y() + g->h() );
+        generic_group->show();
     }
 
     io_list_update_cb();
@@ -218,8 +218,8 @@ Advanced::io_protocol_update_cb()
 
     if (protocol != "generic")
     {
-	generic_group->hide();
-	return;
+        generic_group->hide();
+        return;
     }
 
     Fl_Group* g = 0;
@@ -228,15 +228,15 @@ Advanced::io_protocol_update_cb()
     // Position the "generic" file selection below the last control.
     if (medium == "file")
     {
-	g = file_group;
+        g = file_group;
     }
     else if (medium == "serial")
     {
-	g = serial_group;
+        g = serial_group;
     }
     else if (medium == "socket")
     {
-	g = socket_group;
+        g = socket_group;
     }
 
     generic_group->position( g->x(), g->y() + g->h() );
@@ -277,18 +277,18 @@ Advanced::io_generic_file_cb()
     fc.show();
 
     while ( fc.shown() )
-	Fl::wait();
+        Fl::wait();
 
     if (fc.value())
     {
-	const char* fname = fl_filename_name( fc.value() );
-	const char* ext = fl_filename_ext( fname );
-	if (ext != 0 && *ext != 0)
-	{
-	    string f( fname, ext );
-	    io_generic_file->value( f.c_str() );
-	    io_list_update_cb();
-	}
+        const char* fname = fl_filename_name( fc.value() );
+        const char* ext = fl_filename_ext( fname );
+        if (ext != 0 && *ext != 0)
+        {
+            string f( fname, ext );
+            io_generic_file->value( f.c_str() );
+            io_list_update_cb();
+        }
     }
 }
 
