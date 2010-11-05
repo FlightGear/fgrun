@@ -246,6 +246,22 @@ Advanced::io_protocol_update_cb()
 void
 Advanced::io_file_cb()
 {
+    //static Fl_File_Chooser* fc = 0;
+    string dir = fg_root_->value();
+    const char* message = _("Select file");
+
+    Fl_File_Chooser fc( dir.c_str(), "*", Fl_File_Chooser::SINGLE, message );
+    fc.show();
+
+    while ( fc.shown() )
+        Fl::wait();
+
+    if (fc.value())
+    {
+        const char* fname = fl_filename_name( fc.value() );
+        io_file_name->value( fname );
+        io_list_update_cb();
+    }
 }
 
 void
