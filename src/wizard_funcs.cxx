@@ -778,7 +778,7 @@ Wizard::defaults_cb()
         return;
     if (adv == 0)
     {
-        adv = new Advanced;
+        adv = new Advanced( prefs );
     }
     adv->reset_settings( prefs );
     reset_settings();
@@ -857,7 +857,7 @@ Wizard::advanced_cb()
 {
     if (adv == 0)
     {
-        adv = new Advanced;
+        adv = new Advanced( prefs );
     }
 
     prefs.set( "airport", airports_->get_selected_id().c_str() );
@@ -2296,7 +2296,7 @@ Wizard::load_preferences_cb()
         Fl_Preferences prefs_tmp( set1.dir().c_str(), "flightgear.org", set1.file().c_str() );
 
         if (adv == 0)
-            adv = new Advanced;
+            adv = new Advanced( prefs );
 
         adv->load_settings( prefs_tmp );
         update_basic_options( prefs_tmp );
@@ -2384,7 +2384,7 @@ Wizard::save_preferences_cb()
         Fl_Preferences prefs_tmp( settings.dir().c_str(), "flightgear.org", settings.file().c_str() );
 
         if (adv == 0)
-            adv = new Advanced;
+            adv = new Advanced( prefs );
 
         adv->save_settings( prefs_tmp );
         save_basic_options( prefs_tmp );

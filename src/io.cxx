@@ -73,6 +73,7 @@ Advanced::io_list_select_cb( Fl_Browser* o )
     io_hz->value( strtod( tokens[3].c_str(), 0 ) );
 
     generic_group->hide();
+    repeat_group->hide();
     Fl_Group* g = 0;
     n = -1;
 
@@ -104,11 +105,35 @@ Advanced::io_list_select_cb( Fl_Browser* o )
 
     if (tokens[0] == "--generic" && g != 0)
     {
-        io_generic_file->value( tokens[n].c_str() );
+        set_choice( io_generic_file, tokens[n].c_str() );
+        n += 1;
 
         generic_group->position( g->x(), g->y() + g->h() );
         generic_group->show();
+        g = generic_group;
     }
+    if (tokens[1] == "file")
+    {
+        if (tokens.size() > n && tokens[n] == "repeat")
+        {
+            repeat->value(1);
+            repeat_value->activate();
+            if (tokens.size() > n+1)
+                repeat_value->value(atoi(tokens[n+1].c_str()));
+            else
+                repeat_value->value(0);
+        }
+        else
+        {
+            repeat->value(0);
+            repeat_value->value(0);
+            repeat_value->deactivate();
+        }
+        repeat_group->position( g->x(), g->y() + g->h() );
+        repeat_group->show();
+    }
+
+    io_list_update_cb();
 }
 
 void
@@ -160,9 +185,15 @@ Advanced::io_list_update_cb()
 
     if (strcmp( io_protocol->text(), "generic" ) == 0)
     {
-        oss << ",";
         if (io_generic_file->size() > 0)
-            oss << io_generic_file->value();
+            oss << "," << io_generic_file->text();
+    }
+
+    if (strcmp( io_medium->text(), "file" ) == 0 && repeat->value())
+    {
+        oss << ",repeat";
+        if (repeat_value->value() > 0)
+            oss << "," << repeat_value->value();
     }
 
     int n = io_list->value();
@@ -179,6 +210,7 @@ Advanced::io_medium_update_cb( Fl_Choice* o )
     serial_group->hide();
     socket_group->hide();
     generic_group->hide();
+    repeat_group->hide();
     Fl_Group* g = 0;
 
     if (strcmp(o->text(), "file") == 0)
@@ -204,6 +236,12 @@ Advanced::io_medium_update_cb( Fl_Choice* o )
     {
         generic_group->position( g->x(), g->y() + g->h() );
         generic_group->show();
+        g = generic_group;
+    }
+    if (strcmp(o->text(), "file") == 0)
+    {
+        repeat_group->position( g->x(), g->y() + g->h() );
+        repeat_group->show();
     }
 
     io_list_update_cb();
@@ -215,12 +253,6 @@ Advanced::io_protocol_update_cb()
     io_list_update_cb();
 
     string protocol( io_protocol->text() );
-
-    if (protocol != "generic")
-    {
-        generic_group->hide();
-        return;
-    }
 
     Fl_Group* g = 0;
     string medium( io_medium->text() );
@@ -239,8 +271,26 @@ Advanced::io_protocol_update_cb()
         g = socket_group;
     }
 
-    generic_group->position( g->x(), g->y() + g->h() );
-    generic_group->show();
+    if (protocol == "generic")
+    {
+        generic_group->position( g->x(), g->y() + g->h() );
+        generic_group->show();
+        g = generic_group;
+    }
+    else
+    {
+        generic_group->hide();
+    }
+
+    if (medium == "file")
+    {
+        repeat_group->position( g->x(), g->y() + g->h() );
+        repeat_group->show();
+    }
+    else
+    {
+        repeat_group->hide();
+    }
 }
 
 void
@@ -258,8 +308,8 @@ Advanced::io_file_cb()
 
     if (fc.value())
     {
-        const char* fname = fl_filename_name( fc.value() );
-        io_file_name->value( fname );
+        //const char* fname = fl_filename_name( fc.value() );
+        io_file_name->value( fc.value() );
         io_list_update_cb();
     }
 }
@@ -267,28 +317,21 @@ Advanced::io_file_cb()
 void
 Advanced::io_generic_file_cb()
 {
-    //static Fl_File_Chooser* fc = 0;
-    string dir = fg_root_->value();
-    dir += "/Protocol";
-    const char* pat = "*.xml";
-    const char* message = _("Select protocol file");
-
-    Fl_File_Chooser fc( dir.c_str(), pat, Fl_File_Chooser::SINGLE, message );
-    fc.show();
-
-    while ( fc.shown() )
-        Fl::wait();
-
-    if (fc.value())
-    {
-        const char* fname = fl_filename_name( fc.value() );
-        const char* ext = fl_filename_ext( fname );
-        if (ext != 0 && *ext != 0)
-        {
-            string f( fname, ext );
-            io_generic_file->value( f.c_str() );
-            io_list_update_cb();
-        }
-    }
+    io_list_update_cb();
 }
 
+void
+Advanced::repeat_cb()
+{
+    if (repeat->value())
+        repeat_value->activate();
+    else
+        repeat_value->deactivate();
+    io_list_update_cb();
+}
+
+void
+Advanced::repeat_value_cb()
+{
+    io_list_update_cb();
+}

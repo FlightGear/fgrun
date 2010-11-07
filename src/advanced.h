@@ -22,7 +22,7 @@
 
 class Advanced {
 public:
-  Advanced();
+  Advanced(Fl_Preferences& p);
 private:
   Fl_Double_Window *main_window;
   Fl_Browser *page_list;
@@ -219,12 +219,23 @@ private:
   Fl_Round_Button *socket_udp;
   void cb_socket_udp_i(Fl_Round_Button*, void*);
   static void cb_socket_udp(Fl_Round_Button*, void*);
+public:
   Fl_Group *generic_group;
-  Fl_Input *io_generic_file;
-  void cb_io_generic_file_i(Fl_Input*, void*);
-  static void cb_io_generic_file(Fl_Input*, void*);
-  void cb_3_i(Fl_Button*, void*);
-  static void cb_3(Fl_Button*, void*);
+  Fl_Choice *io_generic_file;
+private:
+  void cb_io_generic_file_i(Fl_Choice*, void*);
+  static void cb_io_generic_file(Fl_Choice*, void*);
+public:
+  Fl_Group *repeat_group;
+  Fl_Check_Button *repeat;
+private:
+  void cb_repeat_i(Fl_Check_Button*, void*);
+  static void cb_repeat(Fl_Check_Button*, void*);
+public:
+  Fl_Value_Input *repeat_value;
+private:
+  void cb_repeat_value_i(Fl_Value_Input*, void*);
+  static void cb_repeat_value(Fl_Value_Input*, void*);
   Fl_Input *nav1;
   Fl_Input *nav2;
   Fl_Input *adf;
@@ -344,6 +355,8 @@ private:
   void list_update_cb(Fl_Browser*,Fl_Input*); 
   void io_file_cb(); 
   void io_generic_file_cb(); 
+  void repeat_cb(); 
+  void repeat_value_cb(); 
   void fg_browser_cb(); 
   void wind_dial_cb(); 
   void wind_hdg_cb(); 
@@ -361,5 +374,6 @@ private:
   static Fl_Menu_Item menu_cloud_coverage_[]; 
   static Fl_Menu_Item menu_control[]; 
   static Fl_Menu_Item menu_texture_filtering[]; 
+  Fl_Preferences& prefs; 
 };
 #endif

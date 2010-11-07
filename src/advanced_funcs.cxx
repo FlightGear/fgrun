@@ -27,6 +27,8 @@
 #include <FL/filename.H>
 #include <FL/Fl_File_Chooser.H>
 
+#include <simgear/misc/sg_dir.hxx>
+
 #include "advanced.h"
 #include "i18n.h"
 #include "util.h"
@@ -185,6 +187,23 @@ Advanced::init()
         menu_texture_filtering[i].text = _( menu_texture_filtering[i].text );
     }
     texture_filtering->menu(menu_texture_filtering);
+
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+    const char* not_set = "NOT SET";
+    prefs.get( "fg_root", buf, not_set, buflen-1);
+    fg_root_->value( buf );
+    SGPath path( fg_root_->value() );
+    path.append( "Protocol" );
+    simgear::Dir directory( path );
+    simgear::PathList files = directory.children( simgear::Dir::TYPE_FILE | simgear::Dir::NO_DOT_OR_DOTDOT, "*.xml" );
+    for ( simgear::PathList::iterator ii = files.begin(); ii != files.end(); ++ii )
+    {
+        SGPath p(ii->file());
+        io_generic_file->add(p.base().c_str());
+    }
+    if ( io_generic_file->size() )
+        io_generic_file->value(0);
 
     set_choice( fdm, "jsb" );
     set_choice( log_level, "alert" );

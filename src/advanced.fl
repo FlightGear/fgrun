@@ -8,25 +8,28 @@ header_name {.h}
 code_name {.cxx}
 declblock {\#ifdef HAVE_CONFIG_H} {open after {\#endif}
 } {
-  decl {\#include <config.h>} {}
+  decl {\#include <config.h>} {private local
+  }
 } 
 
-decl {\#include "advanced.h"} {} 
-
-decl {\#include <string.h>} {} 
-
-decl {\#include <FL/Fl_Preferences.H>} {public
+decl {\#include "advanced.h"} {private local
 } 
 
-decl {\#include <string>} {public
+decl {\#include <string.h>} {private local
 } 
 
-decl {\#define MAX_CLOUD_LAYERS 5} {public
+decl {\#include <FL/Fl_Preferences.H>} {public local
+} 
+
+decl {\#include <string>} {public local
+} 
+
+decl {\#define MAX_CLOUD_LAYERS 5} {public local
 } 
 
 class Advanced {open
 } {
-  Function {Advanced()} {open
+  Function {Advanced(Fl_Preferences& p):prefs(p)} {open
   } {
     Fl_Window main_window {
       label {Advanced Options} open
@@ -328,8 +331,8 @@ else
         }
       }
       Fl_Group {page[4]} {
-        label {Initial Position} open
-        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
+        label {Initial Position}
+        private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Input lon {
           label {Longitude:}
@@ -396,7 +399,7 @@ else
           private xywh {530 185 80 25} labelsize 12 textsize 12
         }
         Fl_Input roc {
-          label {Climb rate:} selected
+          label {Climb rate:}
           private xywh {530 215 80 25} labelsize 12 textsize 12 deactivate
         }
         Fl_Box {} {
@@ -684,14 +687,14 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output}
-        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21 hide
+        label {Input/Output} open
+        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
           private xywh {155 40 480 125} type Hold labeltype NO_LABEL labelsize 12 textsize 12 resizable
         }
-        Fl_Group {} {
+        Fl_Group {} {open
           xywh {150 170 485 265}
         } {
           Fl_Button io_new {
@@ -881,22 +884,30 @@ else
               private xywh {330 365 85 25} type Radio down_box ROUND_DOWN_BOX labelsize 12
             }
           }
-          Fl_Group generic_group {
-            private xywh {165 365 250 25} hide
+          Fl_Group generic_group {open
+            xywh {165 360 250 30} hide
           } {
-            Fl_Input io_generic_file {
+            Fl_Choice io_generic_file {
               label {Generic:}
-              callback {io_list_update_cb();}
-              private xywh {260 365 125 25} labelsize 12 textsize 12
+              callback {io_generic_file_cb();} open
+              xywh {260 365 125 25} down_box BORDER_BOX labelsize 12 textsize 12
+            } {}
+          }
+          Fl_Group repeat_group {open
+            xywh {165 390 250 30} hide
+          } {
+            Fl_Check_Button repeat {
+              label Repeat
+              callback {repeat_cb();}
+              xywh {260 395 70 25} down_box DOWN_BOX labelsize 12
             }
-            Fl_Button {} {
-              label {...}
-              callback {io_generic_file_cb();}
-              private xywh {390 365 25 25} labelsize 12
+            Fl_Value_Input repeat_value {
+              callback {repeat_value_cb();} selected
+              xywh {330 395 55 25} labelsize 12 textsize 12 deactivate
             }
           }
           Fl_Box {} {
-            xywh {460 410 25 25} resizable
+            xywh {460 420 25 15} resizable
           }
         }
       }
@@ -1243,44 +1254,80 @@ else
       }
     }
   }
-  decl {~Advanced();} {public
+  decl {~Advanced();} {public local
   }
-  decl {int exec(Fl_Preferences&);} {public
+  decl {int exec(Fl_Preferences&);} {public local
   }
-  decl {void load_settings(Fl_Preferences&);} {public
+  decl {void load_settings(Fl_Preferences&);} {public local
   }
-  decl {void save_settings(Fl_Preferences&);} {public
+  decl {void save_settings(Fl_Preferences&);} {public local
   }
-  decl {void reset_settings(Fl_Preferences&);} {public
+  decl {void reset_settings(Fl_Preferences&);} {public local
   }
-  decl {void init();} {}
-  decl {void io_list_select_cb( Fl_Browser* );} {}
-  decl {void io_list_new_cb();} {}
-  decl {void io_list_update_cb();} {}
-  decl {void io_medium_update_cb( Fl_Choice* );} {}
-  decl {void io_protocol_update_cb();} {}
-  decl {void show_page( unsigned int n );} {}
-  decl {void list_new_cb( Fl_Browser*, Fl_Input*, Fl_Button*);} {}
-  decl {void list_delete_cb(Fl_Browser*,Fl_Input*,Fl_Button*);} {}
-  decl {void list_select_cb(Fl_Browser*,Fl_Input*,Fl_Button*);} {}
-  decl {void list_update_cb(Fl_Browser*,Fl_Input*);} {}
-  decl {void io_file_cb();} {}
-  decl {void io_generic_file_cb();} {}
-  decl {void fg_browser_cb();} {}
-  decl {void wind_dial_cb();} {}
-  decl {void wind_hdg_cb();} {}
-  decl {void cloud_layer_cb();} {}
-  decl {double cloud_elevation[ MAX_CLOUD_LAYERS ];} {}
-  decl {double cloud_thickness[ MAX_CLOUD_LAYERS ];} {}
-  decl {int cloud_coverage[ MAX_CLOUD_LAYERS ];} {}
-  decl {double cloud_span[ MAX_CLOUD_LAYERS ];} {}
-  decl {double cloud_transition[ MAX_CLOUD_LAYERS ];} {}
-  decl {void fg_config_cb();} {}
-  decl {std::string airport_id_;} {}
-  decl {void random_wind_cb();} {}
-  decl {static Fl_Menu_Item menu_time_of_day_value[];} {}
-  decl {static Fl_Menu_Item menu_log_level[];} {}
-  decl {static Fl_Menu_Item menu_cloud_coverage_[];} {}
-  decl {static Fl_Menu_Item menu_control[];} {}
-  decl {static Fl_Menu_Item menu_texture_filtering[];} {}
+  decl {void init();} {private local
+  }
+  decl {void io_list_select_cb( Fl_Browser* );} {private local
+  }
+  decl {void io_list_new_cb();} {private local
+  }
+  decl {void io_list_update_cb();} {private local
+  }
+  decl {void io_medium_update_cb( Fl_Choice* );} {private local
+  }
+  decl {void io_protocol_update_cb();} {private local
+  }
+  decl {void show_page( unsigned int n );} {private local
+  }
+  decl {void list_new_cb( Fl_Browser*, Fl_Input*, Fl_Button*);} {private local
+  }
+  decl {void list_delete_cb(Fl_Browser*,Fl_Input*,Fl_Button*);} {private local
+  }
+  decl {void list_select_cb(Fl_Browser*,Fl_Input*,Fl_Button*);} {private local
+  }
+  decl {void list_update_cb(Fl_Browser*,Fl_Input*);} {private local
+  }
+  decl {void io_file_cb();} {private local
+  }
+  decl {void io_generic_file_cb();} {private local
+  }
+  decl {void repeat_cb();} {private local
+  }
+  decl {void repeat_value_cb();} {private local
+  }
+  decl {void fg_browser_cb();} {private local
+  }
+  decl {void wind_dial_cb();} {private local
+  }
+  decl {void wind_hdg_cb();} {private local
+  }
+  decl {void cloud_layer_cb();} {private local
+  }
+  decl {double cloud_elevation[ MAX_CLOUD_LAYERS ];} {private local
+  }
+  decl {double cloud_thickness[ MAX_CLOUD_LAYERS ];} {private local
+  }
+  decl {int cloud_coverage[ MAX_CLOUD_LAYERS ];} {private local
+  }
+  decl {double cloud_span[ MAX_CLOUD_LAYERS ];} {private local
+  }
+  decl {double cloud_transition[ MAX_CLOUD_LAYERS ];} {private local
+  }
+  decl {void fg_config_cb();} {private local
+  }
+  decl {std::string airport_id_;} {private local
+  }
+  decl {void random_wind_cb();} {private local
+  }
+  decl {static Fl_Menu_Item menu_time_of_day_value[];} {private local
+  }
+  decl {static Fl_Menu_Item menu_log_level[];} {private local
+  }
+  decl {static Fl_Menu_Item menu_cloud_coverage_[];} {private local
+  }
+  decl {static Fl_Menu_Item menu_control[];} {private local
+  }
+  decl {static Fl_Menu_Item menu_texture_filtering[];} {private local
+  }
+  decl {Fl_Preferences& prefs;} {private local
+  }
 } 

@@ -372,18 +372,25 @@ void Advanced::cb_socket_udp(Fl_Round_Button* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_socket_udp_i(o,v);
 }
 
-void Advanced::cb_io_generic_file_i(Fl_Input*, void*) {
-  io_list_update_cb();
+void Advanced::cb_io_generic_file_i(Fl_Choice*, void*) {
+  io_generic_file_cb();
 }
-void Advanced::cb_io_generic_file(Fl_Input* o, void* v) {
+void Advanced::cb_io_generic_file(Fl_Choice* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_io_generic_file_i(o,v);
 }
 
-void Advanced::cb_3_i(Fl_Button*, void*) {
-  io_generic_file_cb();
+void Advanced::cb_repeat_i(Fl_Check_Button*, void*) {
+  repeat_cb();
 }
-void Advanced::cb_3(Fl_Button* o, void* v) {
-  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_3_i(o,v);
+void Advanced::cb_repeat(Fl_Check_Button* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_repeat_i(o,v);
+}
+
+void Advanced::cb_repeat_value_i(Fl_Value_Input*, void*) {
+  repeat_value_cb();
+}
+void Advanced::cb_repeat_value(Fl_Value_Input* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_repeat_value_i(o,v);
 }
 
 void Advanced::cb_dme_nav1_i(Fl_Round_Button* o, void*) {
@@ -648,7 +655,7 @@ void Advanced::cb_cloud_transition_(Fl_Value_Input* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_cloud_transition__i(o,v);
 }
 
-Advanced::Advanced() {
+Advanced::Advanced(Fl_Preferences& p):prefs(p) {
   { main_window = new Fl_Double_Window(640, 480, _("Advanced Options"));
     main_window->labelsize(12);
     main_window->user_data((void*)(this));
@@ -944,6 +951,7 @@ Advanced::Advanced() {
       page[4]->labelfont(1);
       page[4]->labelsize(16);
       page[4]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+      page[4]->hide();
       { lon = new Fl_Input(245, 35, 150, 25, _("Longitude:"));
         lon->tooltip(_("Initial longitude, west is negative"));
         lon->labelsize(12);
@@ -1340,7 +1348,6 @@ Advanced::Advanced() {
       page[8]->labelfont(1);
       page[8]->labelsize(16);
       page[8]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
-      page[8]->hide();
       { io_list = new Fl_Browser(155, 40, 480, 125);
         io_list->type(2);
         io_list->labeltype(FL_NO_LABEL);
@@ -1455,20 +1462,32 @@ Advanced::Advanced() {
           } // Fl_Round_Button* socket_udp
           socket_group->end();
         } // Fl_Group* socket_group
-        { generic_group = new Fl_Group(165, 365, 250, 25);
+        { generic_group = new Fl_Group(165, 360, 250, 30);
           generic_group->hide();
-          { io_generic_file = new Fl_Input(260, 365, 125, 25, _("Generic:"));
+          { io_generic_file = new Fl_Choice(260, 365, 125, 25, _("Generic:"));
+            io_generic_file->down_box(FL_BORDER_BOX);
             io_generic_file->labelsize(12);
             io_generic_file->textsize(12);
             io_generic_file->callback((Fl_Callback*)cb_io_generic_file);
-          } // Fl_Input* io_generic_file
-          { Fl_Button* o = new Fl_Button(390, 365, 25, 25, _("..."));
-            o->labelsize(12);
-            o->callback((Fl_Callback*)cb_3);
-          } // Fl_Button* o
+          } // Fl_Choice* io_generic_file
           generic_group->end();
         } // Fl_Group* generic_group
-        { Fl_Box* o = new Fl_Box(460, 410, 25, 25);
+        { repeat_group = new Fl_Group(165, 390, 250, 30);
+          repeat_group->hide();
+          { repeat = new Fl_Check_Button(260, 395, 70, 25, _("Repeat"));
+            repeat->down_box(FL_DOWN_BOX);
+            repeat->labelsize(12);
+            repeat->callback((Fl_Callback*)cb_repeat);
+          } // Fl_Check_Button* repeat
+          { repeat_value = new Fl_Value_Input(330, 395, 55, 25);
+            repeat_value->labelsize(12);
+            repeat_value->textsize(12);
+            repeat_value->callback((Fl_Callback*)cb_repeat_value);
+            repeat_value->deactivate();
+          } // Fl_Value_Input* repeat_value
+          repeat_group->end();
+        } // Fl_Group* repeat_group
+        { Fl_Box* o = new Fl_Box(460, 420, 25, 15);
           Fl_Group::current()->resizable(o);
         } // Fl_Box* o
         o->end();
