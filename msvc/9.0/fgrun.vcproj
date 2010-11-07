@@ -76,7 +76,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib osgParticled.lib osgTextd.lib OpenThreadsd.lib dbghelp.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlibd.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib osgParticled.lib osgTextd.lib OpenThreadsd.lib dbghelp.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="..\..\..\install\msvc90\OpenSceneGraph\lib;..\..\..\3rdParty\lib;..\..\..\boost_1_44_0\lib"
@@ -164,7 +164,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlib.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib osgParticled.lib osgTextd.lib OpenThreadsd.lib dbghelp.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlibd.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib osgParticled.lib osgTextd.lib OpenThreadsd.lib dbghelp.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="..\..\..\install\msvc90-64\OpenSceneGraph\lib;..\..\..\3rdParty.x64\lib;..\..\..\boost_1_44_0\lib64"
