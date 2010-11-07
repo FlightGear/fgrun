@@ -77,11 +77,11 @@ void Wizard::cb_scenery_dir_delete_(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_scenery_dir_delete__i(o,v);
 }
 
-void Wizard::cb_ts_dir_i(Fl_Spinner*, void*) {
+void Wizard::cb_TerraSync_i(Fl_Button*, void*) {
   ts_dir_cb();
 }
-void Wizard::cb_ts_dir(Fl_Spinner* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_ts_dir_i(o,v);
+void Wizard::cb_TerraSync(Fl_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_TerraSync_i(o,v);
 }
 
 void Wizard::cb_scenery_dir_up__i(Fl_Button*, void*) {
@@ -536,13 +536,11 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
               { Fl_Box* o = new Fl_Box(355, 435, 50, 25);
                 Fl_Group::current()->resizable(o);
               } // Fl_Box* o
-              { ts_dir = new Fl_Spinner(580, 435, 45, 25, _("TerraSync directory"));
-                ts_dir->tooltip(_("Select the line in the FG_SCENERY list that is the TerraSync directory. 0 mea\
-ns that TerraSync is not used."));
-                ts_dir->labelsize(12);
-                ts_dir->textsize(12);
-                ts_dir->callback((Fl_Callback*)cb_ts_dir);
-              } // Fl_Spinner* ts_dir
+              { Fl_Button* o = new Fl_Button(485, 435, 140, 25, _("TerraSync directory"));
+                o->tooltip(_("Select the line in the FG_SCENERY list that is the TerraSync directory."));
+                o->labelsize(12);
+                o->callback((Fl_Callback*)cb_TerraSync);
+              } // Fl_Button* o
               o->end();
             } // Fl_Group* o
             o->end();

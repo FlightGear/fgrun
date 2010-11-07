@@ -120,6 +120,8 @@ struct AircraftData
     string author;
 };
 
+static int widths[] = { 465, 30, 0 };
+
 static bool
 is_valid_fg_root( const string& dir )
 {
@@ -170,12 +172,16 @@ Wizard::airports_cb()
         vector<string> v;
         for (int i = 1; i <= scenery_dir_list_->size(); ++i)
         {
-            SGPath dir( scenery_dir_list_->text(i) );
+            std::string path = scenery_dir_list_->text(i);
+            std::string::size_type p;
+            if ((p = path.find('\t')) != std::string::npos)
+                path.erase( p );
+            SGPath dir( path.c_str() );
             dir.append( "Terrain" );
             if (fl_filename_isdir( dir.c_str() ))
                 v.push_back( dir.str() );
             else
-                v.push_back( scenery_dir_list_->text(i) );
+                v.push_back( path.c_str() );
         }
 
         string cache( cache_file_->value() );
@@ -254,13 +260,16 @@ Wizard::reset()
 
     scenery_dir_list_->clear();
     vs_t vs( sgPathSplit( fg_scenery ) );
+
+    prefs.get("ts_dir", ts_dir, 0);
+
     for (vs_t::size_type i = 0; i < vs.size(); ++i)
-        scenery_dir_list_->add( vs[i].c_str() );
-    ts_dir->minimum( 0 );
-    ts_dir->maximum( scenery_dir_list_->size() );
-    int iVal;
-    prefs.get("ts_dir", iVal, 0);
-    ts_dir->value( iVal );
+    {
+        if (i == ts_dir-1)
+            scenery_dir_list_->add( (vs[i]+"\t@bT").c_str() );
+        else
+            scenery_dir_list_->add( vs[i].c_str() );
+    }
 
     prefs.get( "ts_exe", buf, def_ts_exe.c_str(), buflen-1);
     ts_exe_->value( buf );
@@ -288,6 +297,7 @@ Wizard::reset()
     }
     next->label( _("Next") );
 
+    int iVal;
     prefs.get("show_cmd_line", iVal, 0);
     show_cmd_line->value(iVal);
     if ( iVal )
@@ -299,6 +309,8 @@ Wizard::reset()
 void
 Wizard::init( bool fullscreen )
 {
+    ts_dir = 0;
+
     for ( int i = 0; menu_time_of_day_value[i].text != 0; ++i )
     {
         menu_time_of_day_value[i].text = _( menu_time_of_day_value[i].text );
@@ -310,6 +322,9 @@ Wizard::init( bool fullscreen )
         menu_season[i].text = _( menu_season[i].text );
     }
     season->menu( menu_season );
+
+    scenery_dir_list_->column_widths(widths);
+    scenery_dir_list_->column_char('\t');
 
     static const int npages = 5;
 
@@ -651,15 +666,17 @@ Wizard::next_cb()
         }
         prefs.set( "fg_aircraft", fg_aircraft.c_str() );
 
-        string fg_scenery = scenery_dir_list_->text(1);
-        for (int i = 2; i <= scenery_dir_list_->size(); ++i)
+        string fg_scenery;
+        for (int i = 1; i <= scenery_dir_list_->size(); ++i)
         {
-            fg_scenery += os::searchPathSep;
-            fg_scenery += scenery_dir_list_->text(i);
+            if (i != 1) fg_scenery += os::searchPathSep;
+            std::string path = scenery_dir_list_->text(i);
+            std::string::size_type p;
+            if ((p = path.find('\t')) != std::string::npos)
+                path.erase( p );
+            fg_scenery += path;
         }
         prefs.set( "fg_scenery", fg_scenery.c_str() );
-
-        ts_dir_cb();
 
         if ( strlen(ts_exe_->value()) != 0 )
         {
@@ -856,9 +873,7 @@ void
 Wizard::advanced_cb()
 {
     if (adv == 0)
-    {
         adv = new Advanced( prefs );
-    }
 
     prefs.set( "airport", airports_->get_selected_id().c_str() );
     prefs.set( "airport-name", airports_->get_selected_name().c_str() );
@@ -1158,7 +1173,6 @@ Wizard::scenery_dir_add_cb()
         scenery_dir_list_->add( p );
         scenery_dir_list_->value( scenery_dir_list_->size() );
         scenery_dir_list_->select( scenery_dir_list_->size() );
-        ts_dir->maximum( scenery_dir_list_->size() );
         update_scenery_up_down();
     }
 }
@@ -1166,21 +1180,9 @@ Wizard::scenery_dir_add_cb()
 void
 Wizard::scenery_dir_delete_cb()
 {
-    int ts = ts_dir->value();
-    int n = scenery_dir_list_->value();
-    if (n > 0)
-    {
-        scenery_dir_list_->remove( n );
-        if (n == ts)
-            ts_dir->value(0);
-        else if (ts > n )
-            ts_dir->value(ts-1);
-    }
-
     if (scenery_dir_list_->size() == 0)
         scenery_dir_delete_->deactivate();
 
-    ts_dir->maximum( scenery_dir_list_->size() );
     update_scenery_up_down();
 }
 
@@ -1190,7 +1192,6 @@ Wizard::scenery_dir_delete_cb()
 void
 Wizard::scenery_dir_up_cb()
 {
-    int ts = ts_dir->value();
     int from = scenery_dir_list_->value();
     int to = from - 1;
     scenery_dir_list_->move( to, from );
@@ -1198,11 +1199,10 @@ Wizard::scenery_dir_up_cb()
     scenery_dir_list_->deselect();
     scenery_dir_list_->select( to );
 
-    if (ts == from)
-        ts = to;
-    else if (ts == to)
-        ts = from;
-    ts_dir->value( ts );
+    if (ts_dir == from)
+        ts_dir = to;
+    else if (ts_dir == to)
+        ts_dir = from;
 
     scenery_dir_down_->activate();
     if (to == 1)
@@ -1215,7 +1215,6 @@ Wizard::scenery_dir_up_cb()
 void
 Wizard::scenery_dir_down_cb()
 {
-    int ts = ts_dir->value();
     int n = scenery_dir_list_->value();
     scenery_dir_list_->insert( n+2, scenery_dir_list_->text(n) );
     scenery_dir_list_->remove( n );
@@ -1223,11 +1222,10 @@ Wizard::scenery_dir_down_cb()
     scenery_dir_list_->deselect();
     scenery_dir_list_->select( n+1 );
 
-    if (ts == n)
-        ts = n+1;
-    else if (ts == n+1)
-        ts = n;
-    ts_dir->value( ts );
+    if (ts_dir == n)
+        ts_dir = n+1;
+    else if (ts_dir == n+1)
+        ts_dir = n;
 
     scenery_dir_up_->activate();
     if (n+1 == scenery_dir_list_->size())
@@ -1240,13 +1238,23 @@ Wizard::scenery_dir_down_cb()
 void
 Wizard::ts_dir_cb()
 {
-    if (ts_dir->value() == 0)
+    ts_dir = scenery_dir_list_->value();
+    for (int i = 1; i <= scenery_dir_list_->size(); ++i)
     {
-        terrasync->value(0);
-        terrasync_port->deactivate();
-        prefs.set("terrasync",0);
+        std::string path = scenery_dir_list_->text(i);
+        std::string::size_type p;
+        if ((p = path.find('\t')) != std::string::npos && i != ts_dir)
+        {
+            path.erase(p);
+            scenery_dir_list_->text(i, path.c_str());
+        }
+        else if (p == std::string::npos && i == ts_dir)
+        {
+            path += "\t@bT";
+            scenery_dir_list_->text(i, path.c_str());
+        }
     }
-    prefs.set("ts_dir",(int)ts_dir->value());
+    prefs.set("ts_dir", ts_dir);
 }
 
 void
@@ -1505,7 +1513,7 @@ Wizard::terrasync_cb()
         terrasync_port->deactivate();
         prefs.set("terrasync",0);
     }
-    else if (ts_dir->value() == 0)
+    else if (ts_dir == 0)
     {
         terrasync->value(0);
         fl_alert( _("TerraSync directory not set") );
@@ -1513,7 +1521,6 @@ Wizard::terrasync_cb()
         page[0]->show();
         next->label( _("Next") );
         prev->deactivate();
-        ts_dir->take_focus();
     }
     else if ( strlen(ts_exe_->value()) == 0 )
     {
@@ -2057,7 +2064,7 @@ Wizard::reset_settings()
     prefs.deleteEntry( "fg_scenery" );
     prefs.deleteEntry( "aircraft" );
  
-    prefs.set( "ts_dir", 0 );
+    prefs.set( "ts_dir", ts_dir = 0 );
     prefs.set( "time_of_day", 1 );
     prefs.set( "time_of_day_value", "noon" );
 
@@ -2098,7 +2105,8 @@ Wizard::reset_settings()
     prefs.get( "ts_dir_init", iVal, -1);
     if ( iVal != -1 )
     {
-        prefs.set( "ts_dir", buf );
+        ts_dir = iVal;
+        prefs.set( "ts_dir", ts_dir );
     }
 
     reset();
@@ -2114,11 +2122,15 @@ Wizard::save_basic_options( Fl_Preferences &p )
     fl_filename_absolute( abs_name, fg_root_->value() );
     p.set( "fg_root", abs_name );
 
-    string fg_scenery = scenery_dir_list_->text(1);
-    for (int i = 2; i <= scenery_dir_list_->size(); ++i)
+    string fg_scenery;
+    for (int i = 1; i <= scenery_dir_list_->size(); ++i)
     {
-        fg_scenery += os::searchPathSep;
-        fg_scenery += scenery_dir_list_->text(i);
+        if (i != 1) fg_scenery += os::searchPathSep;
+        std::string path = scenery_dir_list_->text(i);
+        std::string::size_type p;
+        if ((p = path.find('\t')) != std::string::npos)
+            path.erase( p );
+        fg_scenery += path;
     }
 
     p.set( "fg_scenery", fg_scenery.c_str() );
@@ -2314,10 +2326,16 @@ Wizard::load_preferences_cb()
             scenery_dir_list_->clear();
             typedef vector<string> vs_t;
             vs_t v( sgPathSplit( buf ) );
+
+            prefs.get( "ts_dir", ts_dir, 0 );
+
             for (vs_t::size_type i = 0; i < v.size(); ++i)
-                scenery_dir_list_->add( v[i].c_str() );
-            ts_dir->minimum( 0 );
-            ts_dir->maximum( scenery_dir_list_->size() );
+            {
+                if (i == ts_dir-1)
+                    scenery_dir_list_->add( (v[i]+"\t@bT").c_str() );
+                else
+                    scenery_dir_list_->add( v[i].c_str() );
+            }
         }
 
         prefs_tmp.get( "ts_exe", buf, def_ts_exe.c_str(), buflen-1);
@@ -2326,17 +2344,17 @@ Wizard::load_preferences_cb()
         prefs_tmp.get( "aircraft", buf, "", buflen-1);
         aircraft_update( buf );
 
-          if (prefs_tmp.get( "airport", buf, "", buflen-1) && buf[0] != 0)
+        if (prefs_tmp.get( "airport", buf, "", buflen-1) && buf[0] != 0)
             airports_->select_id( buf );
 
-          prefs_tmp.get( "carrier", buf, "", buflen-1);
+        prefs_tmp.get( "carrier", buf, "", buflen-1);
         carrier_->value( buf );
         prefs_tmp.get( "parkpos", buf, "", sizeof buf - 1 );
         if ( carrier_->value() != string() )
             parkpos_->value( buf );
         else
             airports_->select_parking( buf );
-          if (prefs_tmp.get( "runway", buf, "", buflen-1) && buf[0] != 0)
+        if (prefs_tmp.get( "runway", buf, "", buflen-1) && buf[0] != 0)
             airports_->select_rwy( buf );
 
         int iVal;

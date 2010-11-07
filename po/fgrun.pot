@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-11 11:35+0200\n"
+"POT-Creation-Date: 2010-11-07 17:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,7 +128,7 @@ msgstr ""
 msgid "pve"
 msgstr ""
 
-#: src/advanced.cxx:277 src/advanced.cxx:1282
+#: src/advanced.cxx:277 src/advanced.cxx:1283
 msgid "props"
 msgstr ""
 
@@ -168,859 +168,862 @@ msgstr ""
 msgid "bi"
 msgstr ""
 
-#: src/advanced.cxx:608
+#: src/advanced.cxx:615
 msgid "0"
 msgstr ""
 
-#: src/advanced.cxx:609
+#: src/advanced.cxx:616
 msgid "1"
 msgstr ""
 
-#: src/advanced.cxx:610
+#: src/advanced.cxx:617
 msgid "2"
 msgstr ""
 
-#: src/advanced.cxx:611
+#: src/advanced.cxx:618
 msgid "3"
 msgstr ""
 
-#: src/advanced.cxx:612
+#: src/advanced.cxx:619
 msgid "4"
 msgstr ""
 
-#: src/advanced.cxx:652
+#: src/advanced.cxx:659
 msgid "Advanced Options"
 msgstr ""
 
-#: src/advanced.cxx:665 src/wizard.cxx:990
+#: src/advanced.cxx:672 src/wizard.cxx:997
 msgid "Cancel"
 msgstr ""
 
-#: src/advanced.cxx:668 src/wizard.cxx:969 src/wizard.cxx:994
+#: src/advanced.cxx:675 src/wizard.cxx:976 src/wizard.cxx:1001
 msgid "OK"
 msgstr ""
 
-#: src/advanced.cxx:676 src/advanced_funcs.cxx:192
+#: src/advanced.cxx:683 src/advanced_funcs.cxx:211
 msgid "General"
 msgstr ""
 
-#: src/advanced.cxx:681
+#: src/advanced.cxx:688
 msgid "Control:"
 msgstr ""
 
-#: src/advanced.cxx:682
+#: src/advanced.cxx:689
 msgid "Primary control mode"
 msgstr ""
 
-#: src/advanced.cxx:687
+#: src/advanced.cxx:694
 msgid "Language:"
 msgstr ""
 
-#: src/advanced.cxx:691
+#: src/advanced.cxx:698
 msgid "Browser:"
 msgstr ""
 
-#: src/advanced.cxx:695 src/advanced.cxx:704 src/advanced.cxx:1409
-#: src/advanced.cxx:1471
+#: src/advanced.cxx:702 src/advanced.cxx:711 src/advanced.cxx:1410
 msgid "..."
 msgstr ""
 
-#: src/advanced.cxx:699
+#: src/advanced.cxx:706
 msgid "Config:"
 msgstr ""
 
-#: src/advanced.cxx:700
+#: src/advanced.cxx:707
 msgid "Path to additional XML properties file"
 msgstr ""
 
-#: src/advanced.cxx:708 src/wizard.cxx:458
+#: src/advanced.cxx:715 src/wizard.cxx:458
 msgid "Executable:"
 msgstr ""
 
-#: src/advanced.cxx:712 src/wizard.cxx:471
+#: src/advanced.cxx:719 src/wizard.cxx:471
 msgid "FG_ROOT:"
 msgstr ""
 
-#: src/advanced.cxx:716 src/wizard.cxx:510
+#: src/advanced.cxx:723 src/wizard.cxx:515
 msgid "FG_SCENERY:"
 msgstr ""
 
-#: src/advanced.cxx:720
+#: src/advanced.cxx:727
 msgid "Airport:"
 msgstr ""
 
-#: src/advanced.cxx:724
+#: src/advanced.cxx:731
 msgid "Runway:"
 msgstr ""
 
-#: src/advanced.cxx:728
+#: src/advanced.cxx:735
 msgid "Aircraft:"
 msgstr ""
 
-#: src/advanced.cxx:737 src/wizard.cxx:748 src/advanced_funcs.cxx:193
+#: src/advanced.cxx:744 src/wizard.cxx:757 src/advanced_funcs.cxx:212
 msgid "Features"
 msgstr ""
 
-#: src/advanced.cxx:742
+#: src/advanced.cxx:749
 msgid "Game Mode"
 msgstr ""
 
-#: src/advanced.cxx:743
+#: src/advanced.cxx:750
 msgid "Enable full screen game mode"
 msgstr ""
 
-#: src/advanced.cxx:747
+#: src/advanced.cxx:754
 msgid "Splash Screen"
 msgstr ""
 
-#: src/advanced.cxx:748
+#: src/advanced.cxx:755
 msgid "Display splash screen at startup"
 msgstr ""
 
-#: src/advanced.cxx:753
+#: src/advanced.cxx:760
 msgid "Intro Music"
 msgstr ""
 
-#: src/advanced.cxx:754
+#: src/advanced.cxx:761
 msgid "Enable introduction music during start up"
 msgstr ""
 
-#: src/advanced.cxx:759
+#: src/advanced.cxx:766
 msgid "Mouse Pointer"
 msgstr ""
 
-#: src/advanced.cxx:760
+#: src/advanced.cxx:767
 msgid "Enable extra mouse pointer"
 msgstr ""
 
-#: src/advanced.cxx:764
+#: src/advanced.cxx:771
 msgid "Random Objects"
 msgstr ""
 
-#: src/advanced.cxx:765
+#: src/advanced.cxx:772
 msgid "Enable random scenery objects"
 msgstr ""
 
-#: src/advanced.cxx:769
+#: src/advanced.cxx:776
 msgid "Panel"
 msgstr ""
 
-#: src/advanced.cxx:770
+#: src/advanced.cxx:777
 msgid "Enable the instrument panel"
 msgstr ""
 
-#: src/advanced.cxx:775
+#: src/advanced.cxx:782
 msgid "Sound"
 msgstr ""
 
-#: src/advanced.cxx:776
+#: src/advanced.cxx:783
 msgid "Enable sound effects"
 msgstr ""
 
-#: src/advanced.cxx:781
+#: src/advanced.cxx:788
 msgid "HUD"
 msgstr ""
 
-#: src/advanced.cxx:782
+#: src/advanced.cxx:789
 msgid "Enable Heads Up Display"
 msgstr ""
 
-#: src/advanced.cxx:787
+#: src/advanced.cxx:794
 msgid "Anti-alias HUD"
 msgstr ""
 
-#: src/advanced.cxx:788
+#: src/advanced.cxx:795
 msgid "Enable anti-aliased HUD"
 msgstr ""
 
-#: src/advanced.cxx:793 src/wizard.cxx:776
+#: src/advanced.cxx:800 src/wizard.cxx:785
 msgid "Auto-coordination"
 msgstr ""
 
-#: src/advanced.cxx:794
+#: src/advanced.cxx:801
 msgid "Enable auto-coordinated turns."
 msgstr ""
 
-#: src/advanced.cxx:798 src/wizard.cxx:708
+#: src/advanced.cxx:805 src/wizard.cxx:717
 msgid "Horizon effect"
 msgstr ""
 
-#: src/advanced.cxx:799
+#: src/advanced.cxx:806
 msgid "Enable celestial body growth illusion near the horizon"
 msgstr ""
 
-#: src/advanced.cxx:803
+#: src/advanced.cxx:810
 msgid "Enhanced lighting"
 msgstr ""
 
-#: src/advanced.cxx:804
+#: src/advanced.cxx:811
 msgid "Enable enhanced runway lighting"
 msgstr ""
 
-#: src/advanced.cxx:808
+#: src/advanced.cxx:815
 msgid "Distance attenuation"
 msgstr ""
 
-#: src/advanced.cxx:809
+#: src/advanced.cxx:816
 msgid "Enable runway light distance attenuation"
 msgstr ""
 
-#: src/advanced.cxx:813
+#: src/advanced.cxx:820
 msgid "Hud-3D"
 msgstr ""
 
-#: src/advanced.cxx:814
+#: src/advanced.cxx:821
 msgid "Enable 3D HUD"
 msgstr ""
 
-#: src/advanced.cxx:818 src/wizard.cxx:717
+#: src/advanced.cxx:825 src/wizard.cxx:726
 msgid "Specular highlight"
 msgstr ""
 
-#: src/advanced.cxx:819
+#: src/advanced.cxx:826
 msgid "Enable specular reflections on textured objects"
 msgstr ""
 
-#: src/advanced.cxx:823
+#: src/advanced.cxx:830
 msgid "Failures"
 msgstr ""
 
-#: src/advanced.cxx:828
+#: src/advanced.cxx:835
 msgid "pitot"
 msgstr ""
 
-#: src/advanced.cxx:833
+#: src/advanced.cxx:840
 msgid "static"
 msgstr ""
 
-#: src/advanced.cxx:838
+#: src/advanced.cxx:845
 msgid "system"
 msgstr ""
 
-#: src/advanced.cxx:843
+#: src/advanced.cxx:850
 msgid "vacuum"
 msgstr ""
 
-#: src/advanced.cxx:848
+#: src/advanced.cxx:855
 msgid "AI Traffic"
 msgstr ""
 
-#: src/advanced.cxx:849
+#: src/advanced.cxx:856
 msgid "Enable AI traffic"
 msgstr ""
 
-#: src/advanced.cxx:853
+#: src/advanced.cxx:860
 msgid "Random Trees"
 msgstr ""
 
-#: src/advanced.cxx:862 src/advanced_funcs.cxx:194
+#: src/advanced.cxx:869 src/advanced_funcs.cxx:213
 msgid "Flight Model"
 msgstr ""
 
-#: src/advanced.cxx:867
+#: src/advanced.cxx:874
 msgid "FDM:"
 msgstr ""
 
-#: src/advanced.cxx:868
+#: src/advanced.cxx:875
 msgid "Core Flight Dynamics Model"
 msgstr ""
 
-#: src/advanced.cxx:875
+#: src/advanced.cxx:882
 msgid "No Trim"
 msgstr ""
 
-#: src/advanced.cxx:876
+#: src/advanced.cxx:883
 msgid "Do not attempt to trim the model"
 msgstr ""
 
-#: src/advanced.cxx:881
+#: src/advanced.cxx:888
 msgid "Model Hz:"
 msgstr ""
 
-#: src/advanced.cxx:882
+#: src/advanced.cxx:889
 msgid "Run the FDM at this rate (iterations per second)"
 msgstr ""
 
-#: src/advanced.cxx:890
+#: src/advanced.cxx:897
 msgid "Speed:"
 msgstr ""
 
-#: src/advanced.cxx:891
+#: src/advanced.cxx:898
 msgid "Run FDM faster than real time"
 msgstr ""
 
-#: src/advanced.cxx:900
+#: src/advanced.cxx:907
 msgid "On Ground"
 msgstr ""
 
-#: src/advanced.cxx:901
+#: src/advanced.cxx:908
 msgid "Start at ground level"
 msgstr ""
 
-#: src/advanced.cxx:907
+#: src/advanced.cxx:914
 msgid "In Air"
 msgstr ""
 
-#: src/advanced.cxx:908
+#: src/advanced.cxx:915
 msgid "Start in the air"
 msgstr ""
 
-#: src/advanced.cxx:920 src/advanced.cxx:925 src/advanced_funcs.cxx:195
+#: src/advanced.cxx:927 src/advanced.cxx:932 src/advanced_funcs.cxx:214
 msgid "Freeze"
 msgstr ""
 
-#: src/advanced.cxx:926
+#: src/advanced.cxx:933
 msgid "Start paused"
 msgstr ""
 
-#: src/advanced.cxx:930
+#: src/advanced.cxx:937
 msgid "Fuel Freeze"
 msgstr ""
 
-#: src/advanced.cxx:934
+#: src/advanced.cxx:941
 msgid "Clock Freeze"
 msgstr ""
 
-#: src/advanced.cxx:943 src/advanced_funcs.cxx:196
+#: src/advanced.cxx:950 src/advanced_funcs.cxx:215
 msgid "Initial Position"
 msgstr ""
 
-#: src/advanced.cxx:948
+#: src/advanced.cxx:955
 msgid "Longitude:"
 msgstr ""
 
-#: src/advanced.cxx:949
+#: src/advanced.cxx:956
 msgid "Initial longitude, west is negative"
 msgstr ""
 
-#: src/advanced.cxx:953
+#: src/advanced.cxx:960
 msgid "Latitude:"
 msgstr ""
 
-#: src/advanced.cxx:954
+#: src/advanced.cxx:961
 msgid "Initial latitude, south is negative"
 msgstr ""
 
-#: src/advanced.cxx:958
+#: src/advanced.cxx:965
 msgid "Altitude:"
 msgstr ""
 
-#: src/advanced.cxx:959
+#: src/advanced.cxx:966
 msgid "Initial altitude in feet"
 msgstr ""
 
-#: src/advanced.cxx:964
+#: src/advanced.cxx:971
 msgid "Airspeed:"
 msgstr ""
 
-#: src/advanced.cxx:965
+#: src/advanced.cxx:972
 msgid "Initial airspeed in knots"
 msgstr ""
 
-#: src/advanced.cxx:970
+#: src/advanced.cxx:977
 msgid "uBody:"
 msgstr ""
 
-#: src/advanced.cxx:974
+#: src/advanced.cxx:981
 msgid "vBody:"
 msgstr ""
 
-#: src/advanced.cxx:978
+#: src/advanced.cxx:985
 msgid "wBody"
 msgstr ""
 
-#: src/advanced.cxx:982 src/advanced.cxx:1721
+#: src/advanced.cxx:989 src/advanced.cxx:1734
 msgid "Heading:"
 msgstr ""
 
-#: src/advanced.cxx:983
+#: src/advanced.cxx:990
 msgid "Initial aircraft heading (yaw) angle 0 to 360 degrees"
 msgstr ""
 
-#: src/advanced.cxx:989
+#: src/advanced.cxx:996
 msgid "Roll:"
 msgstr ""
 
-#: src/advanced.cxx:990
+#: src/advanced.cxx:997
 msgid "Initial roll angle, (Phi)"
 msgstr ""
 
-#: src/advanced.cxx:997
+#: src/advanced.cxx:1004
 msgid "Pitch:"
 msgstr ""
 
-#: src/advanced.cxx:998
+#: src/advanced.cxx:1005
 msgid "Initial pitch angle (Theta)"
 msgstr ""
 
-#: src/advanced.cxx:1005
+#: src/advanced.cxx:1012
 msgid "VOR:"
 msgstr ""
 
-#: src/advanced.cxx:1010
+#: src/advanced.cxx:1016
 msgid "NDB:"
 msgstr ""
 
-#: src/advanced.cxx:1015
+#: src/advanced.cxx:1020
 msgid "Fix:"
 msgstr ""
 
-#: src/advanced.cxx:1020
+#: src/advanced.cxx:1024
 msgid "offset distance:"
 msgstr ""
 
-#: src/advanced.cxx:1025
+#: src/advanced.cxx:1028
 msgid "offset azimuth:"
 msgstr ""
 
-#: src/advanced.cxx:1030
+#: src/advanced.cxx:1032
 msgid "Glide slope:"
 msgstr ""
 
-#: src/advanced.cxx:1035
+#: src/advanced.cxx:1036
 msgid "Climb rate:"
 msgstr ""
 
-#: src/advanced.cxx:1045 src/advanced_funcs.cxx:197
+#: src/advanced.cxx:1046 src/advanced_funcs.cxx:216
 msgid "Rendering"
 msgstr ""
 
-#: src/advanced.cxx:1050 src/advanced.cxx:1763 src/advanced_funcs.cxx:206
+#: src/advanced.cxx:1051 src/advanced.cxx:1776 src/advanced_funcs.cxx:225
 msgid "Clouds"
 msgstr ""
 
-#: src/advanced.cxx:1051
+#: src/advanced.cxx:1052
 msgid "Enable 2D (flat) cloud layers"
 msgstr ""
 
-#: src/advanced.cxx:1056 src/wizard.cxx:735
+#: src/advanced.cxx:1057 src/wizard.cxx:744
 msgid "3D Clouds"
 msgstr ""
 
-#: src/advanced.cxx:1057
+#: src/advanced.cxx:1058
 msgid "Enable 3D (volumetric) cloud layers"
 msgstr ""
 
-#: src/advanced.cxx:1061 src/wizard.cxx:704
+#: src/advanced.cxx:1062 src/wizard.cxx:713
 msgid "Full Screen"
 msgstr ""
 
-#: src/advanced.cxx:1062
+#: src/advanced.cxx:1063
 msgid "Enable full screen mode"
 msgstr ""
 
-#: src/advanced.cxx:1066
+#: src/advanced.cxx:1067
 msgid "Sky Blend"
 msgstr ""
 
-#: src/advanced.cxx:1067
+#: src/advanced.cxx:1068
 msgid "Enable sky blending"
 msgstr ""
 
-#: src/advanced.cxx:1072
+#: src/advanced.cxx:1073
 msgid "Textures"
 msgstr ""
 
-#: src/advanced.cxx:1073
+#: src/advanced.cxx:1074
 msgid "Enable textures"
 msgstr ""
 
-#: src/advanced.cxx:1078
+#: src/advanced.cxx:1079
 msgid "Wireframe"
 msgstr ""
 
-#: src/advanced.cxx:1079
+#: src/advanced.cxx:1080
 msgid "Enable wireframe drawing mode"
 msgstr ""
 
-#: src/advanced.cxx:1083
+#: src/advanced.cxx:1084
 msgid "Shading"
 msgstr ""
 
-#: src/advanced.cxx:1086
+#: src/advanced.cxx:1087
 msgid "Smooth"
 msgstr ""
 
-#: src/advanced.cxx:1092
+#: src/advanced.cxx:1093
 msgid "Flat"
 msgstr ""
 
-#: src/advanced.cxx:1099
+#: src/advanced.cxx:1100
 msgid "Fog"
 msgstr ""
 
-#: src/advanced.cxx:1102
+#: src/advanced.cxx:1103
 msgid "Disabled"
 msgstr ""
 
-#: src/advanced.cxx:1107
+#: src/advanced.cxx:1108
 msgid "Fastest"
 msgstr ""
 
-#: src/advanced.cxx:1112
+#: src/advanced.cxx:1113
 msgid "Nicest"
 msgstr ""
 
-#: src/advanced.cxx:1120
+#: src/advanced.cxx:1121
 msgid "Geometry:"
 msgstr ""
 
-#: src/advanced.cxx:1121 src/wizard.cxx:699
+#: src/advanced.cxx:1122 src/wizard.cxx:708
 msgid "Window geometry, WxH"
 msgstr ""
 
-#: src/advanced.cxx:1125
+#: src/advanced.cxx:1126
 msgid "Visibility:"
 msgstr ""
 
-#: src/advanced.cxx:1126
+#: src/advanced.cxx:1127
 msgid "Initial visibility distance"
 msgstr ""
 
-#: src/advanced.cxx:1132
+#: src/advanced.cxx:1133
 msgid "Meters"
 msgstr ""
 
-#: src/advanced.cxx:1133
+#: src/advanced.cxx:1134
 msgid "Specify visibilty in meters"
 msgstr ""
 
-#: src/advanced.cxx:1139
+#: src/advanced.cxx:1140
 msgid "Miles"
 msgstr ""
 
-#: src/advanced.cxx:1140
+#: src/advanced.cxx:1141
 msgid "Specify visiblity in miles"
 msgstr ""
 
-#: src/advanced.cxx:1147
+#: src/advanced.cxx:1148
 msgid "View Offset:"
 msgstr ""
 
-#: src/advanced.cxx:1151
+#: src/advanced.cxx:1152
 msgid "bpp:"
 msgstr ""
 
-#: src/advanced.cxx:1152 src/wizard.cxx:740
+#: src/advanced.cxx:1153 src/wizard.cxx:749
 msgid "Color depth (bits per pixel)"
 msgstr ""
 
-#: src/advanced.cxx:1158
+#: src/advanced.cxx:1159
 msgid "FOV:"
 msgstr ""
 
-#: src/advanced.cxx:1159
+#: src/advanced.cxx:1160
 msgid "Field of View angle"
 msgstr ""
 
-#: src/advanced.cxx:1166
+#: src/advanced.cxx:1167
 msgid "Texture filtering:"
 msgstr ""
 
-#: src/advanced.cxx:1167
+#: src/advanced.cxx:1168
 msgid "Set the maximum degree of anisotropy in texture filtering"
 msgstr ""
 
-#: src/advanced.cxx:1177 src/advanced_funcs.cxx:198
+#: src/advanced.cxx:1178 src/advanced_funcs.cxx:217
 msgid "Time"
 msgstr ""
 
-#: src/advanced.cxx:1182
+#: src/advanced.cxx:1183
 msgid "Time match real"
 msgstr ""
 
-#: src/advanced.cxx:1183
+#: src/advanced.cxx:1184
 msgid "Synchronize simulation time with real time"
 msgstr ""
 
-#: src/advanced.cxx:1190
+#: src/advanced.cxx:1191
 msgid "Time match local"
 msgstr ""
 
-#: src/advanced.cxx:1191
+#: src/advanced.cxx:1192
 msgid "Synchronize simulation time with local time"
 msgstr ""
 
-#: src/advanced.cxx:1197
+#: src/advanced.cxx:1198
 msgid "Start date sys"
 msgstr ""
 
-#: src/advanced.cxx:1203
+#: src/advanced.cxx:1204
 msgid "Start date gmt"
 msgstr ""
 
-#: src/advanced.cxx:1209
+#: src/advanced.cxx:1210
 msgid "Start date lat"
 msgstr ""
 
-#: src/advanced.cxx:1216
+#: src/advanced.cxx:1217
 msgid "Offset (+/-) from real time"
 msgstr ""
 
-#: src/advanced.cxx:1243
+#: src/advanced.cxx:1244
 msgid "Time of day"
 msgstr ""
 
-#: src/advanced.cxx:1249
+#: src/advanced.cxx:1250
 msgid "choice:"
 msgstr ""
 
-#: src/advanced.cxx:1260 src/advanced_funcs.cxx:199
+#: src/advanced.cxx:1261 src/advanced_funcs.cxx:218
 msgid "Network"
 msgstr ""
 
-#: src/advanced.cxx:1265
+#: src/advanced.cxx:1266
 msgid "httpd"
 msgstr ""
 
-#: src/advanced.cxx:1266
+#: src/advanced.cxx:1267
 msgid "Enable HTTP server"
 msgstr ""
 
-#: src/advanced.cxx:1272
+#: src/advanced.cxx:1273
 msgid "HTTP server port"
 msgstr ""
 
-#: src/advanced.cxx:1283
+#: src/advanced.cxx:1284
 msgid "Enable property server"
 msgstr ""
 
-#: src/advanced.cxx:1289
+#: src/advanced.cxx:1290
 msgid "Property server port"
 msgstr ""
 
-#: src/advanced.cxx:1298
+#: src/advanced.cxx:1299
 msgid "jpg-httpd"
 msgstr ""
 
-#: src/advanced.cxx:1299
+#: src/advanced.cxx:1300
 msgid "Enable screen shot HTTP server"
 msgstr ""
 
-#: src/advanced.cxx:1305
+#: src/advanced.cxx:1306
 msgid "Screen shot HTTP server port"
 msgstr ""
 
-#: src/advanced.cxx:1314
+#: src/advanced.cxx:1315
 msgid "Multiplayer Options"
 msgstr ""
 
-#: src/advanced.cxx:1319
+#: src/advanced.cxx:1320
 msgid "Callsign:"
 msgstr ""
 
-#: src/advanced.cxx:1323
+#: src/advanced.cxx:1324
 msgid "Multiplay 1:"
 msgstr ""
 
-#: src/advanced.cxx:1324
+#: src/advanced.cxx:1325
 msgid "in|out,hz,address,port"
 msgstr ""
 
-#: src/advanced.cxx:1328
+#: src/advanced.cxx:1329
 msgid "Multiplay 2:"
 msgstr ""
 
-#: src/advanced.cxx:1337
+#: src/advanced.cxx:1338
 msgid "Proxy:"
 msgstr ""
 
-#: src/advanced.cxx:1346 src/advanced_funcs.cxx:200
+#: src/advanced.cxx:1347 src/advanced_funcs.cxx:219
 msgid "Input/Output"
 msgstr ""
 
-#: src/advanced.cxx:1359 src/advanced.cxx:1572 src/advanced.cxx:1617
-#: src/advanced.cxx:1650 src/advanced.cxx:1682
+#: src/advanced.cxx:1360 src/advanced.cxx:1585 src/advanced.cxx:1630
+#: src/advanced.cxx:1663 src/advanced.cxx:1695
 msgid "New"
 msgstr ""
 
-#: src/advanced.cxx:1363 src/advanced.cxx:1558 src/advanced.cxx:1621
-#: src/advanced.cxx:1654 src/advanced.cxx:1686 src/wizard.cxx:499
-#: src/wizard.cxx:540 src/wizard.cxx:557
+#: src/advanced.cxx:1364 src/advanced.cxx:1571 src/advanced.cxx:1634
+#: src/advanced.cxx:1667 src/advanced.cxx:1699 src/wizard.cxx:501
+#: src/wizard.cxx:530 src/wizard.cxx:573
 msgid "Delete"
 msgstr ""
 
-#: src/advanced.cxx:1368
+#: src/advanced.cxx:1369
 msgid "Protocol:"
 msgstr ""
 
-#: src/advanced.cxx:1375
+#: src/advanced.cxx:1376
 msgid "Medium:"
 msgstr ""
 
-#: src/advanced.cxx:1384
+#: src/advanced.cxx:1385
 msgid "Direction:"
 msgstr ""
 
-#: src/advanced.cxx:1392
+#: src/advanced.cxx:1393
 msgid "Hz:"
 msgstr ""
 
-#: src/advanced.cxx:1403
+#: src/advanced.cxx:1404
 msgid "File:"
 msgstr ""
 
-#: src/advanced.cxx:1417 src/advanced.cxx:1440
+#: src/advanced.cxx:1418 src/advanced.cxx:1441
 msgid "Port:"
 msgstr ""
 
-#: src/advanced.cxx:1423
+#: src/advanced.cxx:1424
 msgid "Baud Rate:"
 msgstr ""
 
-#: src/advanced.cxx:1434
+#: src/advanced.cxx:1435
 msgid "Hostname:"
 msgstr ""
 
-#: src/advanced.cxx:1449
+#: src/advanced.cxx:1450
 msgid "TCP"
 msgstr ""
 
-#: src/advanced.cxx:1456
+#: src/advanced.cxx:1457
 msgid "UDP"
 msgstr ""
 
-#: src/advanced.cxx:1466
+#: src/advanced.cxx:1467
 msgid "Generic:"
 msgstr ""
 
-#: src/advanced.cxx:1484 src/advanced_funcs.cxx:201
+#: src/advanced.cxx:1477
+msgid "Repeat"
+msgstr ""
+
+#: src/advanced.cxx:1497 src/advanced_funcs.cxx:220
 msgid "Avionics"
 msgstr ""
 
-#: src/advanced.cxx:1489
+#: src/advanced.cxx:1502
 msgid "Nav1:"
 msgstr ""
 
-#: src/advanced.cxx:1490
+#: src/advanced.cxx:1503
 msgid "Set the NAV1 radio frequency, optionally preceded by a radial"
 msgstr ""
 
-#: src/advanced.cxx:1494
+#: src/advanced.cxx:1507
 msgid "Nav2:"
 msgstr ""
 
-#: src/advanced.cxx:1498
+#: src/advanced.cxx:1511
 msgid "ADF:"
 msgstr ""
 
-#: src/advanced.cxx:1506
+#: src/advanced.cxx:1519
 msgid "Nav1"
 msgstr ""
 
-#: src/advanced.cxx:1512
+#: src/advanced.cxx:1525
 msgid "Nav2"
 msgstr ""
 
-#: src/advanced.cxx:1518
+#: src/advanced.cxx:1531
 msgid "Internal"
 msgstr ""
 
-#: src/advanced.cxx:1531
+#: src/advanced.cxx:1544
 msgid "DME:"
 msgstr ""
 
-#: src/advanced.cxx:1542 src/advanced_funcs.cxx:202
+#: src/advanced.cxx:1555 src/advanced_funcs.cxx:221
 msgid "Properties"
 msgstr ""
 
-#: src/advanced.cxx:1563
+#: src/advanced.cxx:1576
 msgid "Property:"
 msgstr ""
 
-#: src/advanced.cxx:1564
+#: src/advanced.cxx:1577
 msgid "prop=value"
 msgstr ""
 
-#: src/advanced.cxx:1580 src/advanced_funcs.cxx:203
+#: src/advanced.cxx:1593 src/advanced_funcs.cxx:222
 msgid "Debugging"
 msgstr ""
 
-#: src/advanced.cxx:1586
+#: src/advanced.cxx:1599
 msgid "Log Level:"
 msgstr ""
 
-#: src/advanced.cxx:1601
+#: src/advanced.cxx:1614
 msgid "Trace Read Properties"
 msgstr ""
 
-#: src/advanced.cxx:1609 src/advanced.cxx:1642 src/advanced.cxx:1691
+#: src/advanced.cxx:1622 src/advanced.cxx:1655 src/advanced.cxx:1704
 msgid "Value:"
 msgstr ""
 
-#: src/advanced.cxx:1634
+#: src/advanced.cxx:1647
 msgid "Trace Write Properties"
 msgstr ""
 
-#: src/advanced.cxx:1668 src/advanced_funcs.cxx:204
+#: src/advanced.cxx:1681 src/advanced_funcs.cxx:223
 msgid "Environment"
 msgstr ""
 
-#: src/advanced.cxx:1700 src/advanced_funcs.cxx:205
+#: src/advanced.cxx:1713 src/advanced_funcs.cxx:224
 msgid "Weather"
 msgstr ""
 
-#: src/advanced.cxx:1708
+#: src/advanced.cxx:1721
 msgid "Wind Direction"
 msgstr ""
 
-#: src/advanced.cxx:1722
+#: src/advanced.cxx:1735
 msgid "Direction wind is coming from."
 msgstr ""
 
-#: src/advanced.cxx:1729
+#: src/advanced.cxx:1742
 msgid "Speed (kts):"
 msgstr ""
 
-#: src/advanced.cxx:1730
+#: src/advanced.cxx:1743
 msgid "Wind speed (kts)"
 msgstr ""
 
-#: src/advanced.cxx:1736
+#: src/advanced.cxx:1749
 msgid "Random Winds"
 msgstr ""
 
-#: src/advanced.cxx:1743
+#: src/advanced.cxx:1756
 msgid "Turbulence"
 msgstr ""
 
-#: src/advanced.cxx:1744
+#: src/advanced.cxx:1757
 msgid "calm (0.0) to severe (1.0)"
 msgstr ""
 
-#: src/advanced.cxx:1749
+#: src/advanced.cxx:1762
 msgid "Ceiling:"
 msgstr ""
 
-#: src/advanced.cxx:1750
+#: src/advanced.cxx:1763
 msgid "FT_ASL[:THICKNESS_FT]"
 msgstr ""
 
-#: src/advanced.cxx:1754
+#: src/advanced.cxx:1767
 msgid "Fetch real weather"
 msgstr ""
 
-#: src/advanced.cxx:1767
+#: src/advanced.cxx:1780
 msgid "Layer:"
 msgstr ""
 
-#: src/advanced.cxx:1774
+#: src/advanced.cxx:1787
 msgid "Elevation(ft):"
 msgstr ""
 
-#: src/advanced.cxx:1781
+#: src/advanced.cxx:1794
 msgid "Thickness (ft):"
 msgstr ""
 
-#: src/advanced.cxx:1788
+#: src/advanced.cxx:1801
 msgid "Coverage:"
 msgstr ""
 
-#: src/advanced.cxx:1794
+#: src/advanced.cxx:1807
 msgid "Span (m):"
 msgstr ""
 
-#: src/advanced.cxx:1802
+#: src/advanced.cxx:1815
 msgid "Transition (ft):"
 msgstr ""
 
@@ -1068,344 +1071,342 @@ msgstr ""
 msgid "root data path"
 msgstr ""
 
-#: src/wizard.cxx:484
+#: src/wizard.cxx:486
 msgid "FG_AIRCRAFT:"
 msgstr ""
 
-#: src/wizard.cxx:485
+#: src/wizard.cxx:487
 msgid "Aircraft directories"
 msgstr ""
 
-#: src/wizard.cxx:494 src/wizard.cxx:552
+#: src/wizard.cxx:496 src/wizard.cxx:525
 msgid "Add..."
 msgstr ""
 
-#: src/wizard.cxx:495
+#: src/wizard.cxx:497
 msgid "Add an aircraft directory"
 msgstr ""
 
-#: src/wizard.cxx:500
+#: src/wizard.cxx:502
 msgid "Delete an aircraft directory"
 msgstr ""
 
-#: src/wizard.cxx:511
+#: src/wizard.cxx:516
 msgid "Scenery directories"
 msgstr ""
 
-#: src/wizard.cxx:519
-msgid "@8>"
-msgstr ""
-
-#: src/wizard.cxx:520
-msgid "Move scenery directory up"
-msgstr ""
-
-#: src/wizard.cxx:530
-msgid "@2>"
-msgstr ""
-
-#: src/wizard.cxx:531
-msgid "Move scenery directory down"
-msgstr ""
-
-#: src/wizard.cxx:541
-msgid "Clear the content of the airport cache"
-msgstr ""
-
-#: src/wizard.cxx:546
-msgid "Airports Cache:"
-msgstr ""
-
-#: src/wizard.cxx:547
-msgid "Full path to the airport cache"
-msgstr ""
-
-#: src/wizard.cxx:553
+#: src/wizard.cxx:526
 msgid "Add a scenery directory"
 msgstr ""
 
-#: src/wizard.cxx:558
+#: src/wizard.cxx:531
 msgid "Delete a scenery directory"
 msgstr ""
 
-#: src/wizard.cxx:566
+#: src/wizard.cxx:539
 msgid "TerraSync directory"
 msgstr ""
 
-#: src/wizard.cxx:567
-msgid ""
-"Select the line in the FG_SCENERY list that is the TerraSync directory. 0 "
-"means that TerraSync is not used."
+#: src/wizard.cxx:540
+msgid "Select the line in the FG_SCENERY list that is the TerraSync directory."
 msgstr ""
 
-#: src/wizard.cxx:575
+#: src/wizard.cxx:552
+msgid "@8>"
+msgstr ""
+
+#: src/wizard.cxx:553
+msgid "Move scenery directory up"
+msgstr ""
+
+#: src/wizard.cxx:563
+msgid "@2>"
+msgstr ""
+
+#: src/wizard.cxx:564
+msgid "Move scenery directory down"
+msgstr ""
+
+#: src/wizard.cxx:574
+msgid "Clear the content of the airport cache"
+msgstr ""
+
+#: src/wizard.cxx:579
+msgid "Airports Cache:"
+msgstr ""
+
+#: src/wizard.cxx:580
+msgid "Full path to the airport cache"
+msgstr ""
+
+#: src/wizard.cxx:584
 msgid "Terrasync exe:"
 msgstr ""
 
-#: src/wizard.cxx:576 src/wizard.cxx:583
+#: src/wizard.cxx:585 src/wizard.cxx:592
 msgid "Full pathname to Terrasync executable"
 msgstr ""
 
-#: src/wizard.cxx:590
+#: src/wizard.cxx:599
 msgid "Select an aircraft"
 msgstr ""
 
-#: src/wizard.cxx:602
+#: src/wizard.cxx:611
 msgid "Preview"
 msgstr ""
 
-#: src/wizard.cxx:622
+#: src/wizard.cxx:631
 msgid "Status :"
 msgstr ""
 
-#: src/wizard.cxx:624
+#: src/wizard.cxx:633
 msgid "Author(s) :"
 msgstr ""
 
-#: src/wizard.cxx:627
+#: src/wizard.cxx:636
 msgid "Viewer"
 msgstr ""
 
-#: src/wizard.cxx:634
+#: src/wizard.cxx:643
 msgid "Select a location"
 msgstr ""
 
-#: src/wizard.cxx:651
+#: src/wizard.cxx:660
 msgid "Carrier Ops"
 msgstr ""
 
-#: src/wizard.cxx:655
+#: src/wizard.cxx:664
 msgid "Carrier : "
 msgstr ""
 
-#: src/wizard.cxx:657
+#: src/wizard.cxx:666
 msgid "Park pos :"
 msgstr ""
 
-#: src/wizard.cxx:658
+#: src/wizard.cxx:667
 msgid "Only valid if carrier is set. For airport parking, use the list above."
 msgstr ""
 
-#: src/wizard.cxx:666
+#: src/wizard.cxx:675
 msgid "Scenery Prefetch"
 msgstr ""
 
-#: src/wizard.cxx:677
+#: src/wizard.cxx:686
 msgid "Advanced..."
 msgstr ""
 
-#: src/wizard.cxx:683
+#: src/wizard.cxx:692
 msgid "Show command line"
 msgstr ""
 
-#: src/wizard.cxx:694
+#: src/wizard.cxx:703
 msgid "Display"
 msgstr ""
 
-#: src/wizard.cxx:698
+#: src/wizard.cxx:707
 msgid "Resolution :"
 msgstr ""
 
-#: src/wizard.cxx:712
+#: src/wizard.cxx:721
 msgid "Enhanced runway lighting"
 msgstr ""
 
-#: src/wizard.cxx:713
+#: src/wizard.cxx:722
 msgid "Use with caution. It may drop your framerate dramatically"
 msgstr ""
 
-#: src/wizard.cxx:721
+#: src/wizard.cxx:730
 msgid "Framerate limiter :"
 msgstr ""
 
-#: src/wizard.cxx:722
+#: src/wizard.cxx:731
 msgid "Too much framerate hurts the smoothness of the simulation"
 msgstr ""
 
-#: src/wizard.cxx:739
+#: src/wizard.cxx:748
 msgid "bpp :"
 msgstr ""
 
-#: src/wizard.cxx:752
+#: src/wizard.cxx:761
 msgid "Random objects"
 msgstr ""
 
-#: src/wizard.cxx:756
+#: src/wizard.cxx:765
 msgid "Random trees"
 msgstr ""
 
-#: src/wizard.cxx:760
+#: src/wizard.cxx:769
 msgid "AI models"
 msgstr ""
 
-#: src/wizard.cxx:764
+#: src/wizard.cxx:773
 msgid "Time of day :"
 msgstr ""
 
-#: src/wizard.cxx:772
+#: src/wizard.cxx:781
 msgid "Real weather fetch"
 msgstr ""
 
-#: src/wizard.cxx:780
+#: src/wizard.cxx:789
 msgid "Season :"
 msgstr ""
 
-#: src/wizard.cxx:787
+#: src/wizard.cxx:796
 msgid "Menu auto-visibility"
 msgstr ""
 
-#: src/wizard.cxx:793
+#: src/wizard.cxx:802
 msgid "Scenarios"
 msgstr ""
 
-#: src/wizard.cxx:803
+#: src/wizard.cxx:812
 msgid "Deselect all"
 msgstr ""
 
-#: src/wizard.cxx:813
+#: src/wizard.cxx:822
 msgid "TerraSync"
 msgstr ""
 
-#: src/wizard.cxx:834
+#: src/wizard.cxx:843
 msgid "Atlas"
 msgstr ""
 
-#: src/wizard.cxx:839 src/wizard.cxx:861
+#: src/wizard.cxx:848 src/wizard.cxx:870
 msgid "Hostname :"
 msgstr ""
 
-#: src/wizard.cxx:840
+#: src/wizard.cxx:849
 msgid "Hostname"
 msgstr ""
 
-#: src/wizard.cxx:845
+#: src/wizard.cxx:854
 msgid ":"
 msgstr ""
 
-#: src/wizard.cxx:852
+#: src/wizard.cxx:861
 msgid "Multiplayer"
 msgstr ""
 
-#: src/wizard.cxx:857
+#: src/wizard.cxx:866
 msgid "Callsign :"
 msgstr ""
 
-#: src/wizard.cxx:862
+#: src/wizard.cxx:871
 msgid "Peer hostname"
 msgstr ""
 
-#: src/wizard.cxx:866
+#: src/wizard.cxx:876
 msgid "in :"
 msgstr ""
 
-#: src/wizard.cxx:867
+#: src/wizard.cxx:877
 msgid "Input port number"
 msgstr ""
 
-#: src/wizard.cxx:870
+#: src/wizard.cxx:880
 msgid "out :"
 msgstr ""
 
-#: src/wizard.cxx:871
+#: src/wizard.cxx:881
 msgid "Output port number"
 msgstr ""
 
-#: src/wizard.cxx:896
+#: src/wizard.cxx:903
 msgid "Prev"
 msgstr ""
 
-#: src/wizard.cxx:900 src/wizard_funcs.cxx:289 src/wizard_funcs.cxx:759
-#: src/wizard_funcs.cxx:1512 src/wizard_funcs.cxx:1522
+#: src/wizard.cxx:907 src/wizard_funcs.cxx:298 src/wizard_funcs.cxx:780
+#: src/wizard_funcs.cxx:1516 src/wizard_funcs.cxx:1525
 msgid "Next"
 msgstr ""
 
-#: src/wizard.cxx:904
+#: src/wizard.cxx:911
 msgid "Quit"
 msgstr ""
 
-#: src/wizard.cxx:911
+#: src/wizard.cxx:918
 msgid "Defaults"
 msgstr ""
 
-#: src/wizard.cxx:912
+#: src/wizard.cxx:919
 msgid ""
 "Clear all selected options and return to the install situation. Useful if "
 "FGFS don't start anymore."
 msgstr ""
 
-#: src/wizard.cxx:917
+#: src/wizard.cxx:924
 msgid "Save As..."
 msgstr ""
 
-#: src/wizard.cxx:918
+#: src/wizard.cxx:925
 msgid "Save current configuration to a file"
 msgstr ""
 
-#: src/wizard.cxx:922
+#: src/wizard.cxx:929
 msgid "Load"
 msgstr ""
 
-#: src/wizard.cxx:923
+#: src/wizard.cxx:930
 msgid "Load a previously saved configuration"
 msgstr ""
 
-#: src/wizard.cxx:934
+#: src/wizard.cxx:941
 msgid "FlightGear running..."
 msgstr ""
 
-#: src/wizard.cxx:937
+#: src/wizard.cxx:944
 msgid "FlightGear has been started"
 msgstr ""
 
-#: src/wizard.cxx:942
+#: src/wizard.cxx:949
 msgid "Please wait..."
 msgstr ""
 
-#: src/wizard.cxx:945
+#: src/wizard.cxx:952
 msgid "To change aircraft, exit FlightGear and return to this launcher"
 msgstr ""
 
-#: src/wizard.cxx:957
+#: src/wizard.cxx:964
 msgid "Flightgear crashed..."
 msgstr ""
 
-#: src/wizard.cxx:959
+#: src/wizard.cxx:966
 msgid "Flightgear encountered an unexpected failure"
 msgstr ""
 
-#: src/wizard.cxx:963
+#: src/wizard.cxx:970
 msgid "We are sorry for this inconvenience."
 msgstr ""
 
-#: src/wizard.cxx:973
+#: src/wizard.cxx:980
 msgid "An error report has been generated in the file below :"
 msgstr ""
 
-#: src/wizard.cxx:977
+#: src/wizard.cxx:984
 msgid "Please send this error report to the Flightgear development team"
 msgstr ""
 
-#: src/wizard.cxx:987
+#: src/wizard.cxx:994
 msgid "Prefetch Scenery"
 msgstr ""
 
-#: src/wizard.cxx:1002
+#: src/wizard.cxx:1009
 msgid "Airport to fetch : "
 msgstr ""
 
-#: src/wizard_funcs.cxx:79 src/advanced_funcs.cxx:105
+#: src/wizard_funcs.cxx:79 src/advanced_funcs.cxx:107
 msgid "noon"
 msgstr ""
 
-#: src/wizard_funcs.cxx:80 src/advanced_funcs.cxx:106
+#: src/wizard_funcs.cxx:80 src/advanced_funcs.cxx:108
 msgid "dusk"
 msgstr ""
 
-#: src/wizard_funcs.cxx:81 src/advanced_funcs.cxx:107
+#: src/wizard_funcs.cxx:81 src/advanced_funcs.cxx:109
 msgid "midnight"
 msgstr ""
 
-#: src/wizard_funcs.cxx:82 src/advanced_funcs.cxx:108
+#: src/wizard_funcs.cxx:82 src/advanced_funcs.cxx:110
 msgid "dawn"
 msgstr ""
 
@@ -1469,7 +1470,7 @@ msgstr ""
 msgid "experimental"
 msgstr ""
 
-#: src/wizard_funcs.cxx:186
+#: src/wizard_funcs.cxx:192
 #, possible-c-format
 msgid ""
 "<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
@@ -1478,198 +1479,198 @@ msgid ""
 "<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
 msgstr ""
 
-#: src/wizard_funcs.cxx:341
+#: src/wizard_funcs.cxx:358
 msgid "Log Window"
 msgstr ""
 
-#: src/wizard_funcs.cxx:570
+#: src/wizard_funcs.cxx:587
 #, possible-c-format
 msgid "Model not found: '%s'"
 msgstr ""
 
-#: src/wizard_funcs.cxx:603
+#: src/wizard_funcs.cxx:620
 msgid "Property '/sim/model/path' not found"
 msgstr ""
 
-#: src/wizard_funcs.cxx:694 src/wizard_funcs.cxx:2141
+#: src/wizard_funcs.cxx:715 src/wizard_funcs.cxx:2144
 #: src/AirportBrowser.cxx:476 src/fgfsrc.cxx:99
 msgid "<default>"
 msgstr ""
 
-#: src/wizard_funcs.cxx:751
+#: src/wizard_funcs.cxx:772
 msgid "Run"
 msgstr ""
 
-#: src/wizard_funcs.cxx:774
+#: src/wizard_funcs.cxx:795
 msgid "About to reset current parameters"
 msgstr ""
 
-#: src/wizard_funcs.cxx:774 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:795 src/fgfsrc.cxx:61
 msgid "Abort"
 msgstr ""
 
-#: src/wizard_funcs.cxx:774
+#: src/wizard_funcs.cxx:795
 msgid "Reset"
 msgstr ""
 
-#: src/wizard_funcs.cxx:788
+#: src/wizard_funcs.cxx:809
 msgid "Select FlightGear executable"
 msgstr ""
 
-#: src/wizard_funcs.cxx:845
+#: src/wizard_funcs.cxx:866
 msgid "Select FG_ROOT directory"
 msgstr ""
 
-#: src/wizard_funcs.cxx:993 src/wizard_funcs.cxx:995
+#: src/wizard_funcs.cxx:1014 src/wizard_funcs.cxx:1016
 msgid "Unknown"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1062
+#: src/wizard_funcs.cxx:1083
 #, possible-c-format
 msgid ""
 "Unable to delete '%s':\n"
 "%s"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1086
+#: src/wizard_funcs.cxx:1107
 msgid "Select FG_AIRCRAFT directory"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1153
+#: src/wizard_funcs.cxx:1174
 msgid "Select FG_SCENERY directory"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1253
+#: src/wizard_funcs.cxx:1257
 msgid "Select Terrasync executable"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1462
+#: src/wizard_funcs.cxx:1466
 msgid "Description of "
 msgstr ""
 
-#: src/wizard_funcs.cxx:1509
+#: src/wizard_funcs.cxx:1513
 msgid "TerraSync directory not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1519
+#: src/wizard_funcs.cxx:1522
 msgid "TerraSync executable not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2284
+#: src/wizard_funcs.cxx:2287
 msgid "Load settings from..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2369
+#: src/wizard_funcs.cxx:2378
 msgid "Save settings as..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2373
+#: src/wizard_funcs.cxx:2382
 #, possible-c-format
 msgid "Filename \"%s\" already exists."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2373 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:2382 src/fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2373
+#: src/wizard_funcs.cxx:2382
 msgid "Don't overwrite"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2461
+#: src/wizard_funcs.cxx:2470
 #, possible-c-format
 msgid "Unknown airport : '%s'"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2467
+#: src/wizard_funcs.cxx:2476
 msgid "TerraSync must be configured"
 msgstr ""
 
-#: src/advanced_funcs.cxx:113
+#: src/advanced_funcs.cxx:115
 msgid "bulk"
 msgstr ""
 
-#: src/advanced_funcs.cxx:114
+#: src/advanced_funcs.cxx:116
 msgid "debug"
 msgstr ""
 
-#: src/advanced_funcs.cxx:115
+#: src/advanced_funcs.cxx:117
 msgid "info"
 msgstr ""
 
-#: src/advanced_funcs.cxx:116
+#: src/advanced_funcs.cxx:118
 msgid "warn"
 msgstr ""
 
-#: src/advanced_funcs.cxx:117
+#: src/advanced_funcs.cxx:119
 msgid "alert"
 msgstr ""
 
-#: src/advanced_funcs.cxx:122
+#: src/advanced_funcs.cxx:124
 msgid "overcast"
 msgstr ""
 
-#: src/advanced_funcs.cxx:123
+#: src/advanced_funcs.cxx:125
 msgid "broken"
 msgstr ""
 
-#: src/advanced_funcs.cxx:124
+#: src/advanced_funcs.cxx:126
 msgid "scattered"
 msgstr ""
 
-#: src/advanced_funcs.cxx:125
+#: src/advanced_funcs.cxx:127
 msgid "few"
 msgstr ""
 
-#: src/advanced_funcs.cxx:126
+#: src/advanced_funcs.cxx:128
 msgid "cirrus"
 msgstr ""
 
-#: src/advanced_funcs.cxx:127
+#: src/advanced_funcs.cxx:129
 msgid "clear"
 msgstr ""
 
-#: src/advanced_funcs.cxx:132
+#: src/advanced_funcs.cxx:134
 msgid "joystick"
 msgstr ""
 
-#: src/advanced_funcs.cxx:133
+#: src/advanced_funcs.cxx:135
 msgid "keyboard"
 msgstr ""
 
-#: src/advanced_funcs.cxx:134
+#: src/advanced_funcs.cxx:136
 msgid "mouse"
 msgstr ""
 
-#: src/advanced_funcs.cxx:139
+#: src/advanced_funcs.cxx:141
 msgid "no filtering"
 msgstr ""
 
-#: src/advanced_funcs.cxx:140
+#: src/advanced_funcs.cxx:142
 msgid "2.0"
 msgstr ""
 
-#: src/advanced_funcs.cxx:141
+#: src/advanced_funcs.cxx:143
 msgid "4.0"
 msgstr ""
 
-#: src/advanced_funcs.cxx:142
+#: src/advanced_funcs.cxx:144
 msgid "8.0"
 msgstr ""
 
-#: src/advanced_funcs.cxx:143
+#: src/advanced_funcs.cxx:145
 msgid "highest filtering"
 msgstr ""
 
-#: src/advanced_funcs.cxx:216
+#: src/advanced_funcs.cxx:235
 msgid "Select browser"
 msgstr ""
 
-#: src/advanced_funcs.cxx:271
+#: src/advanced_funcs.cxx:290
 msgid "Select a preferences file"
 msgstr ""
 
-#: src/advanced_funcs.cxx:272
+#: src/advanced_funcs.cxx:291
 msgid "XML Files(*.xml)"
 msgstr ""
 
@@ -1722,8 +1723,8 @@ msgstr ""
 msgid "Save file as?"
 msgstr ""
 
-#: src/io.cxx:258
-msgid "Select protocol file"
+#: src/io.cxx:301
+msgid "Select file"
 msgstr ""
 
 #: src/main.cxx:140

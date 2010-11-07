@@ -19,7 +19,6 @@ using std::string;
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Box.H>
-#include <FL/Fl_Spinner.H>
 #include <FL/Fl_Output.H>
 #include <FL/Fl_Tile.H>
 #include "Fl_OSG.h"
@@ -86,11 +85,8 @@ private:
   Fl_Button *scenery_dir_delete_;
   void cb_scenery_dir_delete__i(Fl_Button*, void*);
   static void cb_scenery_dir_delete_(Fl_Button*, void*);
-public:
-  Fl_Spinner *ts_dir;
-private:
-  void cb_ts_dir_i(Fl_Spinner*, void*);
-  static void cb_ts_dir(Fl_Spinner*, void*);
+  void cb_TerraSync_i(Fl_Button*, void*);
+  static void cb_TerraSync(Fl_Button*, void*);
   Fl_Button *scenery_dir_up_;
   void cb_scenery_dir_up__i(Fl_Button*, void*);
   static void cb_scenery_dir_up_(Fl_Button*, void*);
@@ -378,5 +374,6 @@ private:
   void start_viewer_cb(); 
   void auto_visibility_cb(); 
   string current_aircraft_model_path; 
+  int ts_dir; 
 };
 #endif

@@ -8,32 +8,35 @@ header_name {.h}
 code_name {.cxx}
 declblock {\#ifdef HAVE_CONFIG_H} {open after {\#endif}
 } {
-  decl {\#include <config.h>} {}
+  decl {\#include <config.h>} {private local
+  }
 } 
 
-decl {\#include "wizard.h"} {} 
-
-decl {\#include <string>} {public
+decl {\#include "wizard.h"} {private local
 } 
 
-decl {\#include <iostream>} {public
+decl {\#include <string>} {public local
 } 
 
-decl {\#include <FL/Fl_Preferences.H>} {public
+decl {\#include <iostream>} {public local
 } 
 
-decl {\#include <FL/Fl_Pixmap.H>} {public
+decl {\#include <FL/Fl_Preferences.H>} {public local
 } 
 
-decl {\#include <OpenThreads/Thread>} {public
+decl {\#include <FL/Fl_Pixmap.H>} {public local
 } 
 
-decl {\#include "folder_open.xpm"} {} 
-
-decl {class LogWindow;} {public
+decl {\#include <OpenThreads/Thread>} {public local
 } 
 
-decl {class Advanced;} {public
+decl {\#include "folder_open.xpm"} {private local
+} 
+
+decl {class LogWindow;} {public local
+} 
+
+decl {class Advanced;} {public local
 } 
 
 decl {using std::string;} {public global
@@ -43,28 +46,37 @@ class Wizard {open
 } {
   class FlightGearThread {open : {public OpenThreads::Thread}
   } {
-    decl {FlightGearThread( Wizard *w );} {public
+    decl {FlightGearThread( Wizard *w );} {public local
     }
-    decl {void setViewer(bool v);} {public
+    decl {void setViewer(bool v);} {public local
     }
-    decl {void run();} {public
+    decl {void run();} {public local
     }
-    decl {Wizard *wizard;} {}
-    decl {bool viewer;} {}
-    decl {FlightGearThread();} {}
-    decl {FlightGearThread( const FlightGearThread &);} {}
-    decl {FlightGearThread &operator=( const FlightGearThread &);} {}
+    decl {Wizard *wizard;} {private local
+    }
+    decl {bool viewer;} {private local
+    }
+    decl {FlightGearThread();} {private local
+    }
+    decl {FlightGearThread( const FlightGearThread &);} {private local
+    }
+    decl {FlightGearThread &operator=( const FlightGearThread &);} {private local
+    }
   }
   class TerraSyncThread {: {public OpenThreads::Thread}
   } {
-    decl {TerraSyncThread( Wizard *w );} {public
+    decl {TerraSyncThread( Wizard *w );} {public local
     }
-    decl {void run();} {public
+    decl {void run();} {public local
     }
-    decl {Wizard *wizard;} {}
-    decl {TerraSyncThread();} {}
-    decl {TerraSyncThread( const TerraSyncThread & );} {}
-    decl {TerraSyncThread &operator=( const TerraSyncThread & );} {}
+    decl {Wizard *wizard;} {private local
+    }
+    decl {TerraSyncThread();} {private local
+    }
+    decl {TerraSyncThread( const TerraSyncThread & );} {private local
+    }
+    decl {TerraSyncThread &operator=( const TerraSyncThread & );} {private local
+    }
   }
   Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0)} {open
   } {
@@ -106,7 +118,7 @@ class Wizard {open
           Fl_Group {} {open
             xywh {130 235 495 225} resizable
           } {
-            Fl_Group {} {open selected
+            Fl_Group {} {open
               xywh {130 235 495 115}
             } {
               Fl_Browser aircraft_dir_list_ {
@@ -132,7 +144,7 @@ class Wizard {open
                 }
               }
             }
-            Fl_Group {} {open selected
+            Fl_Group {} {open
               xywh {130 350 495 110}
             } {
               Fl_Browser scenery_dir_list_ {
@@ -154,12 +166,12 @@ class Wizard {open
                   private tooltip {Delete a scenery directory} xywh {235 435 100 25} labelsize 12 deactivate
                 }
                 Fl_Box {} {
-                  xywh {355 435 50 25} resizable
+                  private xywh {355 435 50 25} resizable
                 }
-                Fl_Spinner ts_dir {
+                Fl_Button {} {
                   label {TerraSync directory}
                   callback {ts_dir_cb()}
-                  tooltip {Select the line in the FG_SCENERY list that is the TerraSync directory. 0 means that TerraSync is not used.} xywh {580 435 45 25} labelsize 12 textsize 12
+                  private tooltip {Select the line in the FG_SCENERY list that is the TerraSync directory.} xywh {485 435 140 25} labelsize 12
                 }
               }
             }
@@ -584,94 +596,166 @@ class Wizard {open
       }
     }
   }
-  decl {~Wizard();} {public
+  decl {~Wizard();} {public local
   }
-  decl {void show();} {public
+  decl {void show();} {public local
   }
-  decl {void show( int argc, char* argv[] );} {public
+  decl {void show( int argc, char* argv[] );} {public local
   }
-  decl {void init( bool fullscreen );} {public
+  decl {void init( bool fullscreen );} {public local
   }
-  decl {void update_preview();} {public
+  decl {void update_preview();} {public local
   }
-  decl {void preview_aircraft();} {public
+  decl {void preview_aircraft();} {public local
   }
-  decl {void reset();} {}
-  decl {void aircraft_update();} {}
-  decl {void aircraft_update( const char *aft );} {}
-  decl {void next_cb();} {}
-  decl {void prev_cb();} {}
-  decl {void defaults_cb();} {}
-  decl {void advanced_options_cb();} {}
-  decl {void fg_exe_update_cb();} {}
-  decl {void fg_exe_select_cb();} {}
-  decl {void fg_root_update_cb();} {}
-  decl {void fg_root_select_cb();} {}
-  decl {void advanced_cb();} {}
-  decl {int write_fgfsrc();} {}
-  decl {static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\\n");} {}
-  decl {static int write_fgviewerrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx, const string &path );} {}
-  decl {int run_fgfs( const std::string & );} {}
-  decl {int run_ts();} {}
-  decl {static void stdout_cb( int, void* );} {}
-  decl {void stdout_cb( int );} {}
-  decl {void cancel_cb();} {}
-  decl {void delete_cache_file_cb();} {}
-  decl {static void airports_cb( Fl_Widget*, void* )} {}
-  decl {void airports_cb();} {}
-  decl {void update_scenery_up_down();} {}
-  decl {void aircraft_dir_select_cb();} {}
-  decl {void aircraft_dir_add_cb();} {}
-  decl {void aircraft_dir_delete_cb();} {}
-  decl {void scenery_dir_select_cb();} {}
-  decl {void scenery_dir_add_cb();} {}
-  decl {void scenery_dir_delete_cb();} {}
-  decl {void scenery_dir_up_cb();} {}
-  decl {void scenery_dir_down_cb();} {}
-  decl {void ts_dir_cb();} {}
-  decl {void ts_exe_update_cb();} {}
-  decl {void ts_exe_select_cb();} {}
-  decl {void refresh_airports();} {public
+  decl {void reset();} {private local
   }
-  decl {static void refresh_airports( Fl_Widget*, void* );} {public
+  decl {void aircraft_update();} {private local
   }
-  decl {Fl_Preferences prefs;} {}
-  decl {LogWindow* logwin;} {}
-  decl {Fl_Pixmap folder_open_pixmap} {}
-  decl {void update_options();} {}
-  decl {void resolution_cb();} {}
-  decl {void bpp_cb();} {}
-  decl {void game_mode_cb();} {}
-  decl {void horizon_effect_cb();} {}
-  decl {void enhanced_lighting_cb();} {}
-  decl {void specular_highlight_cb();} {}
-  decl {void frame_rate_limiter_cb();} {}
-  decl {void frame_rate_limiter_value_cb();} {}
-  decl {void clouds_3d_cb();} {}
-  decl {void random_objects_cb();} {}
-  decl {void random_trees_cb();} {}
-  decl {void ai_models_cb();} {}
-  decl {void time_of_day_cb();} {}
-  decl {void time_of_day_value_cb();} {}
-  decl {void season_cb();} {}
-  decl {void real_weather_fetch_cb();} {}
-  decl {void auto_coordination_cb();} {}
-  decl {void scenarii_cb();} {}
-  decl {void terrasync_cb();} {}
-  decl {void terrasync_port_cb();} {}
-  decl {void atlas_cb();} {}
-  decl {void atlas_host_cb();} {}
-  decl {void atlas_port_cb();} {}
-  decl {void multiplay_cb();} {}
-  decl {void multiplay_field_cb();} {}
-  decl {void update_basic_options( Fl_Preferences &p );} {}
-  decl {void save_basic_options( Fl_Preferences &p );} {}
-  decl {void display_scenarii();} {}
-  decl {void deselect_all_scenarii_cb();} {}
-  decl {void show_cmd_line_cb();} {}
-  decl {void reset_settings();} {}
-  decl {void load_preferences_cb();} {}
-  decl {void save_preferences_cb();} {}
+  decl {void aircraft_update( const char *aft );} {private local
+  }
+  decl {void next_cb();} {private local
+  }
+  decl {void prev_cb();} {private local
+  }
+  decl {void defaults_cb();} {private local
+  }
+  decl {void advanced_options_cb();} {private local
+  }
+  decl {void fg_exe_update_cb();} {private local
+  }
+  decl {void fg_exe_select_cb();} {private local
+  }
+  decl {void fg_root_update_cb();} {private local
+  }
+  decl {void fg_root_select_cb();} {private local
+  }
+  decl {void advanced_cb();} {private local
+  }
+  decl {int write_fgfsrc();} {private local
+  }
+  decl {static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\\n");} {private local
+  }
+  decl {static int write_fgviewerrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx, const string &path );} {private local
+  }
+  decl {int run_fgfs( const std::string & );} {private local
+  }
+  decl {int run_ts();} {private local
+  }
+  decl {static void stdout_cb( int, void* );} {private local
+  }
+  decl {void stdout_cb( int );} {private local
+  }
+  decl {void cancel_cb();} {private local
+  }
+  decl {void delete_cache_file_cb();} {private local
+  }
+  decl {static void airports_cb( Fl_Widget*, void* )} {private local
+  }
+  decl {void airports_cb();} {private local
+  }
+  decl {void update_scenery_up_down();} {private local
+  }
+  decl {void aircraft_dir_select_cb();} {private local
+  }
+  decl {void aircraft_dir_add_cb();} {private local
+  }
+  decl {void aircraft_dir_delete_cb();} {private local
+  }
+  decl {void scenery_dir_select_cb();} {private local
+  }
+  decl {void scenery_dir_add_cb();} {private local
+  }
+  decl {void scenery_dir_delete_cb();} {private local
+  }
+  decl {void scenery_dir_up_cb();} {private local
+  }
+  decl {void scenery_dir_down_cb();} {private local
+  }
+  decl {void ts_dir_cb();} {private local
+  }
+  decl {void ts_exe_update_cb();} {private local
+  }
+  decl {void ts_exe_select_cb();} {private local
+  }
+  decl {void refresh_airports();} {public local
+  }
+  decl {static void refresh_airports( Fl_Widget*, void* );} {public local
+  }
+  decl {Fl_Preferences prefs;} {private local
+  }
+  decl {LogWindow* logwin;} {private local
+  }
+  decl {Fl_Pixmap folder_open_pixmap} {private local
+  }
+  decl {void update_options();} {private local
+  }
+  decl {void resolution_cb();} {private local
+  }
+  decl {void bpp_cb();} {private local
+  }
+  decl {void game_mode_cb();} {private local
+  }
+  decl {void horizon_effect_cb();} {private local
+  }
+  decl {void enhanced_lighting_cb();} {private local
+  }
+  decl {void specular_highlight_cb();} {private local
+  }
+  decl {void frame_rate_limiter_cb();} {private local
+  }
+  decl {void frame_rate_limiter_value_cb();} {private local
+  }
+  decl {void clouds_3d_cb();} {private local
+  }
+  decl {void random_objects_cb();} {private local
+  }
+  decl {void random_trees_cb();} {private local
+  }
+  decl {void ai_models_cb();} {private local
+  }
+  decl {void time_of_day_cb();} {private local
+  }
+  decl {void time_of_day_value_cb();} {private local
+  }
+  decl {void season_cb();} {private local
+  }
+  decl {void real_weather_fetch_cb();} {private local
+  }
+  decl {void auto_coordination_cb();} {private local
+  }
+  decl {void scenarii_cb();} {private local
+  }
+  decl {void terrasync_cb();} {private local
+  }
+  decl {void terrasync_port_cb();} {private local
+  }
+  decl {void atlas_cb();} {private local
+  }
+  decl {void atlas_host_cb();} {private local
+  }
+  decl {void atlas_port_cb();} {private local
+  }
+  decl {void multiplay_cb();} {private local
+  }
+  decl {void multiplay_field_cb();} {private local
+  }
+  decl {void update_basic_options( Fl_Preferences &p );} {private local
+  }
+  decl {void save_basic_options( Fl_Preferences &p );} {private local
+  }
+  decl {void display_scenarii();} {private local
+  }
+  decl {void deselect_all_scenarii_cb();} {private local
+  }
+  decl {void show_cmd_line_cb();} {private local
+  }
+  decl {void reset_settings();} {private local
+  }
+  decl {void load_preferences_cb();} {private local
+  }
+  decl {void save_preferences_cb();} {private local
+  }
   Function {make_launch_window()} {open private
   } {
     Fl_Window launch_window {
@@ -696,11 +780,16 @@ class Wizard {open
       }
     }
   }
-  decl {int launch_result;} {}
-  decl {void exec_launch_window();} {}
-  decl {Advanced *adv;} {}
-  decl {static Fl_Menu_Item menu_time_of_day_value[];} {}
-  decl {static Fl_Menu_Item menu_season[];} {}
+  decl {int launch_result;} {private local
+  }
+  decl {void exec_launch_window();} {private local
+  }
+  decl {Advanced *adv;} {private local
+  }
+  decl {static Fl_Menu_Item menu_time_of_day_value[];} {private local
+  }
+  decl {static Fl_Menu_Item menu_season[];} {private local
+  }
   Function {make_crash_window()} {open private
   } {
     Fl_Window crash_window {
@@ -733,16 +822,26 @@ class Wizard {open
       }
     }
   }
-  decl {void crash_ok_cb();} {}
-  decl {void exec_crash_window( const char *fname );} {}
-  decl {string dump_file_name;} {}
-  decl {FlightGearThread *fgThread;} {}
-  decl {TerraSyncThread *tsThread;} {}
-  decl {friend class FlightGearThread;} {}
-  decl {friend class TerraGearThread;} {}
-  decl {long fgPid;} {}
-  decl {long tsPid;} {}
-  decl {void stopProcess( long pid );} {}
+  decl {void crash_ok_cb();} {private local
+  }
+  decl {void exec_crash_window( const char *fname );} {private local
+  }
+  decl {string dump_file_name;} {private local
+  }
+  decl {FlightGearThread *fgThread;} {private local
+  }
+  decl {TerraSyncThread *tsThread;} {private local
+  }
+  decl {friend class FlightGearThread;} {private local
+  }
+  decl {friend class TerraGearThread;} {private local
+  }
+  decl {long fgPid;} {private local
+  }
+  decl {long tsPid;} {private local
+  }
+  decl {void stopProcess( long pid );} {private local
+  }
   Function {make_prefetch_window()} {open private
   } {
     Fl_Window prefetch_window {
@@ -772,12 +871,22 @@ class Wizard {open
       }
     }
   }
-  decl {int prefetch_result;} {}
-  decl {void scenery_prefetch_cb();} {}
-  decl {bool exec_prefetch_window();} {}
-  decl {void prefetch_ok_cb();} {}
-  decl {void prefetch_cancel_cb();} {}
-  decl {void start_viewer_cb();} {}
-  decl {void auto_visibility_cb();} {}
-  decl {string current_aircraft_model_path;} {}
+  decl {int prefetch_result;} {private local
+  }
+  decl {void scenery_prefetch_cb();} {private local
+  }
+  decl {bool exec_prefetch_window();} {private local
+  }
+  decl {void prefetch_ok_cb();} {private local
+  }
+  decl {void prefetch_cancel_cb();} {private local
+  }
+  decl {void start_viewer_cb();} {private local
+  }
+  decl {void auto_visibility_cb();} {private local
+  }
+  decl {string current_aircraft_model_path;} {private local
+  }
+  decl {int ts_dir;} {selected private local
+  }
 } 
