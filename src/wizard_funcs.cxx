@@ -677,6 +677,7 @@ Wizard::next_cb()
             fg_scenery += path;
         }
         prefs.set( "fg_scenery", fg_scenery.c_str() );
+        prefs.set("ts_dir", ts_dir);
 
         if ( strlen(ts_exe_->value()) != 0 )
         {
@@ -1180,6 +1181,16 @@ Wizard::scenery_dir_add_cb()
 void
 Wizard::scenery_dir_delete_cb()
 {
+    int n = scenery_dir_list_->value();
+    if (n > 0)
+    {
+        scenery_dir_list_->remove( n );
+        if (n == ts_dir)
+            ts_dir = 0;
+        else if (ts_dir > n )
+            ts_dir -= 1;
+    }
+
     if (scenery_dir_list_->size() == 0)
         scenery_dir_delete_->deactivate();
 
@@ -1254,7 +1265,6 @@ Wizard::ts_dir_cb()
             scenery_dir_list_->text(i, path.c_str());
         }
     }
-    prefs.set("ts_dir", ts_dir);
 }
 
 void
