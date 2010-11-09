@@ -805,8 +805,8 @@ Wizard::defaults_cb()
 void
 Wizard::fg_exe_select_cb()
 {
-    char* p = fl_file_chooser( _("Select FlightGear executable"),
-                              fg_exe_->value(), 0);
+    SGPath exe(fg_exe_->value());
+    char* p = fl_file_chooser( _("Select FlightGear executable"), exe.file().c_str(), exe.dir().c_str());
     if (p != 0)
         fg_exe_->value( p );
 
@@ -1270,8 +1270,8 @@ Wizard::ts_dir_cb()
 void
 Wizard::ts_exe_select_cb()
 {
-    char* p = fl_file_chooser( _("Select Terrasync executable"),
-                              ts_exe_->value(), 0);
+    SGPath exe(ts_exe_->value());
+    char* p = fl_file_chooser( _("Select Terrasync executable"), exe.file().c_str(), exe.dir().c_str());
     if (p != 0)
         ts_exe_->value( p );
 
