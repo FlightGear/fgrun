@@ -392,11 +392,14 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         prefs.get( Fl_Preferences::Name("property-item-%d", i),
                    buf, "", buflen-1 );
         if ( strlen( buf ) > 0 )
+        {
 #if defined(WIN32)
-                        os << pfx << "\"--prop:" << buf << "\"";
-#else
-                        os << pfx << "--prop:" << buf;
+            if (strchr(buf,' ') != 0)
+                os << pfx << "\"--prop:" << buf << "\"";
+            else
 #endif
+                os << pfx << "--prop:" << buf;
+        }
     }
 
     // Debugging
