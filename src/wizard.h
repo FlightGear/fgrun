@@ -325,6 +325,7 @@ private:
   void atlas_port_cb(); 
   void multiplay_cb(); 
   void multiplay_field_cb(); 
+  void multiplay_callsign_cb(); 
   void update_basic_options( Fl_Preferences &p ); 
   void save_basic_options( Fl_Preferences &p ); 
   void display_scenarii(); 

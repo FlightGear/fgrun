@@ -355,7 +355,7 @@ void Wizard::cb_multiplay(Fl_Check_Button* o, void* v) {
 }
 
 void Wizard::cb_multiplay_callsign_i(Fl_Input*, void*) {
-  multiplay_field_cb();
+  multiplay_callsign_cb();
 }
 void Wizard::cb_multiplay_callsign(Fl_Input* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_multiplay_callsign_i(o,v);
@@ -452,6 +452,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
       { page[0] = new Fl_Group(0, 0, 800, 560, _("Select Paths"));
         page[0]->labelfont(1);
         page[0]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+        page[0]->hide();
         { about_ = new Fl_Help_View(5, 25, 790, 130);
           about_->labeltype(FL_NO_LABEL);
         } // Fl_Help_View* about_
@@ -681,7 +682,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         page[2]->end();
       } // Fl_Group* page[2]
       { page[3] = new Fl_Group(0, 0, 800, 560);
-        page[3]->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);

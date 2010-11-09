@@ -1754,6 +1754,20 @@ Wizard::multiplay_field_cb()
 }
 
 void
+Wizard::multiplay_callsign_cb()
+{
+    string callsign = multiplay_callsign->value();
+    string::size_type p;
+    if ((p = callsign.find(' ')) != string::npos)
+    {
+        callsign.erase(p,1);
+        multiplay_callsign->value(callsign.c_str());
+    }
+    else
+        multiplay_field_cb();
+}
+
+void
 Wizard::update_basic_options( Fl_Preferences &p )
 {
     const int buflen = 256;

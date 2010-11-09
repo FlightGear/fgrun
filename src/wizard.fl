@@ -89,8 +89,8 @@ class Wizard {open
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths} open
-          xywh {0 0 800 560} labelfont 1 align 21
+          label {Select Paths}
+          xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
           Fl_Help_View about_ {
             private xywh {5 25 790 130} labeltype NO_LABEL
@@ -294,8 +294,8 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {
-          private xywh {0 0 800 560} hide
+        Fl_Group {page[3]} {open
+          private xywh {0 0 800 560}
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -529,7 +529,7 @@ class Wizard {open
               }
               Fl_Input multiplay_callsign {
                 label {Callsign :}
-                callback {multiplay_field_cb();}
+                callback {multiplay_callsign_cb();}
                 private xywh {545 310 170 25} when 1
               }
               Fl_Input multiplay_host {
@@ -740,6 +740,8 @@ class Wizard {open
   }
   decl {void multiplay_field_cb();} {private local
   }
+  decl {void multiplay_callsign_cb();} {selected private local
+  }
   decl {void update_basic_options( Fl_Preferences &p );} {private local
   }
   decl {void save_basic_options( Fl_Preferences &p );} {private local
@@ -887,6 +889,6 @@ class Wizard {open
   }
   decl {string current_aircraft_model_path;} {private local
   }
-  decl {int ts_dir;} {selected private local
+  decl {int ts_dir;} {private local
   }
 } 
