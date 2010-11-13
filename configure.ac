@@ -216,13 +216,15 @@ dnl if the check is not done before the other checks, linking will fail
 dnl on platforms with Xft enabled fltk builds
 dnl ----------------------------------------------------------------------
 
+AC_CHECK_LIB(pthread,pthread_create)
+
+AC_CHECK_LIB(Xinerama,XineramaIsActive)
+
 AC_CHECK_LIB(fltk,XftFontOpen,LIBS=" -lfltk -lXft $LIBS", AC_CHECK_LIB(fltk, fl_snprintf) , -lXft)
 dnl save_LIBS="$LIBS"
 
 dnl the next line could be used instead of the following chunk of code
 dnl AC_CHECK_LIB(fltk_gl,gl_start)
-
-AC_CHECK_LIB(pthread,pthread_create)
 
 save_LIBS="$LIBS"
 LIBS="-lfltk_gl $LIBS"
