@@ -32,6 +32,9 @@ int
 set_choice( Fl_Choice* c, const char* s )
 {
     const Fl_Menu_Item* m = c->menu();
+    if ( m == 0 )
+        return 0;
+
     int i = 0;
     int nest = 0;
     for (i = 0; i < m->size(); ++i)
