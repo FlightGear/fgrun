@@ -39,22 +39,22 @@ set_choice( Fl_Choice* c, const char* s )
     int nest = 0;
     for (i = 0; i < m->size(); ++i)
     {
-	if (m[i].submenu())
-	{
-	    ++nest;
-	}
-	else if (m[i].label() != 0)
-	{
-	    if (strcmp(_(s), m[i].label()) == 0)
-	    {
-		c->value(i);
-		return 1;
-	    }
-	}
-	else
-	{
-	    --nest;
-	}
+        if (m[i].submenu())
+        {
+            ++nest;
+        }
+        else if (m[i].label() != 0)
+        {
+            if (strcmp(_(s), m[i].label()) == 0)
+            {
+                c->value(i);
+                return 1;
+            }
+        }
+        else
+        {
+            --nest;
+        }
     }
     return 0;
 }
@@ -70,22 +70,22 @@ set_choice_from_data( Fl_Choice* c, const char* s )
     int nest = 0;
     for (i = 0; i < m->size(); ++i)
     {
-	if (m[i].submenu())
-	{
-	    ++nest;
-	}
-	else if (m[i].user_data() != 0)
-	{
-	    if (strcmp(s, (const char *)m[i].user_data()) == 0)
-	    {
-		c->value(i);
-		return 1;
-	    }
-	}
-	else
-	{
-	    --nest;
-	}
+        if (m[i].submenu())
+        {
+            ++nest;
+        }
+        else if (m[i].user_data() != 0)
+        {
+            if (strcmp(s, (const char *)m[i].user_data()) == 0)
+            {
+                c->value(i);
+                return 1;
+            }
+        }
+        else
+        {
+            --nest;
+        }
     }
     return 0;
 }
