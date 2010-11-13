@@ -196,7 +196,7 @@ Advanced::init()
     SGPath path( fg_root_->value() );
     path.append( "Protocol" );
     simgear::Dir directory( path );
-    simgear::PathList files = directory.children( simgear::Dir::TYPE_FILE | simgear::Dir::NO_DOT_OR_DOTDOT, "*.xml" );
+    simgear::PathList files = directory.children( simgear::Dir::TYPE_FILE | simgear::Dir::NO_DOT_OR_DOTDOT, ".xml" );
     for ( simgear::PathList::iterator ii = files.begin(); ii != files.end(); ++ii )
     {
         SGPath p(ii->file());
