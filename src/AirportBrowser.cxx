@@ -266,8 +266,6 @@ AirportBrowser::runways_idle_proc( )
                 apt.name_ += " [S]";
             }
 
-            try_load_parking( apt );
-
             airports_.push_back( apt );
         }
         else if (type_num == 10)	// Now read in the runways and taxiways
@@ -801,12 +799,19 @@ void
 AirportBrowser::show_parking( const apt_dat_t* apt )
 {
     if (apt == 0 || apt->id_.empty())
-	return;
+        return;
+
+    if ( !apt->parkingRead )
+    {
+        apt_dat_t* apt_ = const_cast<apt_dat_t*>(apt);
+        try_load_parking( *apt_ );
+        apt_->parkingRead = true;
+    }
 
     parking_->clear();
     for ( std::set<std::string>::const_iterator ii = apt->parking_.begin(); ii != apt->parking_.end(); ++ii )
     {
-	parking_->add( ii->c_str() );
+        parking_->add( ii->c_str() );
     }
 }
 

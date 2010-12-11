@@ -157,10 +157,10 @@ Wizard::airports_cb()
         const int buflen = FL_PATH_MAX;
         char buf[ buflen ];
 
-          if (prefs.get( "airport", buf, "", buflen-1) && buf[0] != 0)
+        if (prefs.get( "airport", buf, "", buflen-1) && buf[0] != 0)
             airports_->select_id( buf );
-          if (prefs.get( "carrier", buf, "", buflen-1) && buf[0] == 0 &&
-              prefs.get( "parkpos", buf, "", buflen-1) && buf[0] != 0)
+        if (prefs.get( "carrier", buf, "", buflen-1) && buf[0] == 0 &&
+            prefs.get( "parkpos", buf, "", buflen-1) && buf[0] != 0)
         {
             airports_->select_parking( buf );
         }
