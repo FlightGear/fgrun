@@ -152,7 +152,8 @@ private:
 
     void show_runways( const apt_dat_t* apt );
 
-    void load_parking( const SGPath &path, apt_dat_t &data );
+    void try_load_parking( apt_dat_t &data );
+    bool load_parking( const SGPath &path, apt_dat_t &data );
     void show_parking( const apt_dat_t* apt );
 
     static void cb_runways_(Fl_Widget* o, void* v);

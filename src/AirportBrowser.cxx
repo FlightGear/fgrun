@@ -266,11 +266,7 @@ AirportBrowser::runways_idle_proc( )
                 apt.name_ += " [S]";
             }
 
-            SGPath path = fg_root_;
-            path.append( "AI/Airports" );
-            path.append( apt.id_ );
-            path.append( "parking.xml" );
-            load_parking( path, apt );
+            try_load_parking( apt );
 
             airports_.push_back( apt );
         }
@@ -776,6 +772,16 @@ AirportBrowser::loaded() const
 }
 
 void
+AirportBrowser::try_load_parking( apt_dat_t &apt )
+{
+    SGPath path = fg_root_;
+    path.append( "AI/Airports" );
+    path.append( apt.id_ );
+    path.append( "parking.xml" );
+    load_parking( path, apt );
+}
+
+bool
 AirportBrowser::load_parking( const SGPath &path, apt_dat_t &data )
 {
     ParkingLoader visitor( data );
@@ -783,10 +789,12 @@ AirportBrowser::load_parking( const SGPath &path, apt_dat_t &data )
     {
         try {
             readXML( path.str(), visitor );
+            return true;
         } catch (const sg_exception &) {
             //cerr << "unable to read " << parkpath.str() << endl;
         }
     }
+    return false;
 }
 
 void
