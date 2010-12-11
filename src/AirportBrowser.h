@@ -187,6 +187,11 @@ private:
     std::set< std::string > installed_dirs_;
 
     /**
+     * Names of all scenery trees.
+     */
+    std::vector< std::string > scenery_roots_;
+
+    /**
      * Names of airports and runways loaded from runways.dat.
      */
     std::vector< apt_dat_t > airports_;

@@ -602,6 +602,16 @@ AirportBrowser::load_airports( const vector<string>& dirs,
     airports_cache_ = cache;
     airports_loaded_ = false;
 
+    scenery_roots_.clear();
+    for ( vector<string>::const_iterator ii = dirs.begin(); ii != dirs.end(); ++ii )
+    {
+        SGPath p( *ii );
+        if ( p.file() == "Terrain" )
+            scenery_roots_.push_back( p.dir() );
+        else
+            scenery_roots_.push_back( p.str() );
+    }
+
     if (cache.exists())
     {
         bool airports = true;
@@ -772,6 +782,27 @@ AirportBrowser::loaded() const
 void
 AirportBrowser::try_load_parking( apt_dat_t &apt )
 {
+    if (apt.id_.length() >= 3)
+    {
+        SGPath pa( "Airports" );
+        pa.append( apt.id_.substr(0,1) );
+        pa.append( apt.id_.substr(1,1) );
+        pa.append( apt.id_.substr(2,1) );
+        pa.append( apt.id_ );
+
+        for ( vector<string>::const_iterator ii = scenery_roots_.begin(); ii != scenery_roots_.end(); ++ii )
+        {
+            SGPath p( *ii ), p2;
+            p.append( pa.str() );
+            p2 = p;
+            p.concat( ".groundnet.xml" );
+            if (load_parking( p, apt ))
+                return;
+            p2.concat( ".parking.xml" );
+            if (load_parking( p2, apt ))
+                return;
+        }
+    }
     SGPath path = fg_root_;
     path.append( "AI/Airports" );
     path.append( apt.id_ );
