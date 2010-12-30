@@ -124,6 +124,7 @@ main( int argc, char* argv[] )
     textdomain( PACKAGE );
 
     osgDB::Registry* registry = osgDB::Registry::instance();
+	registry->setExpiryDelay( 0. );
     osgDB::ReaderWriter::Options* options = new osgDB::ReaderWriter::Options;
     //int cacheOptions = osgDB::ReaderWriter::Options::CACHE_ALL;
     //options->setObjectCacheHint((osgDB::ReaderWriter::Options::CacheHintOptions)cacheOptions);
