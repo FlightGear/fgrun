@@ -113,11 +113,11 @@ static const char *aircraft_status_[] = {
  */
 struct AircraftData
 {
-    SGPropertyNode props;
     string name;
     string desc;
     string status;
     string author;
+	string modelPath;
 };
 
 static int widths[] = { 465, 30, 0 };
@@ -577,10 +577,10 @@ Wizard::preview_aircraft()
         reinterpret_cast<AircraftData*>( aircraft->data(n) );
     prefs.set( "aircraft", n > 0 ? data->name.c_str() : "" );
 
-    if (data->props.hasValue( "/sim/model/path" ))
+    if (!data->modelPath.empty())
     {
         SGPath path( fg_root_->value() ), tpath;
-        path.append( data->props.getStringValue( "/sim/model/path" ) );
+		path.append( data->modelPath );
 
         if (!path.exists())
         {
@@ -1003,11 +1003,10 @@ Wizard::aircraft_update( const char *aft )
                 string ss( s.substr( pos+1, epos-pos-1 ) );
 
                 AircraftData* data = new AircraftData;
-                copyProperties( &props, &data->props );
-                //data->props = props;
                 data->name = ss;
                 data->desc = desc;
                 data->status = props.getStringValue( "/sim/status" );
+				data->modelPath = props.getStringValue( "/sim/model/path" );
                 if ( data->status.empty() ) data->status = _( "Unknown" );
                 data->author = props.getStringValue( "/sim/author" );
                 if ( data->author.empty() ) data->author = _( "Unknown" );
@@ -1041,6 +1040,18 @@ Wizard::aircraft_update( const char *aft )
 
 Wizard::~Wizard()
 {
+    // Empty the aircraft browser list.
+    for (int i = 1; i <= aircraft->size(); ++i)
+    {
+        if ( aircraft->text(i)[0] != ' ' )
+        {
+            AircraftData* data =
+                reinterpret_cast<AircraftData*>( aircraft->data(i) );
+            delete data;
+        }
+    }
+    aircraft->clear();
+
     delete logwin;
     delete win;
     delete adv;
