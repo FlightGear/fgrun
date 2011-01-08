@@ -959,7 +959,7 @@ Wizard::aircraft_update( const char *aft )
     // Empty the aircraft browser list.
     for (int i = 1; i <= aircraft->size(); ++i)
     {
-        if ( aircraft->text(i)[0] != ' ' )
+        if ( aircraft->text(i)[0] == ' ' )
         {
             AircraftData* data =
                 reinterpret_cast<AircraftData*>( aircraft->data(i) );
@@ -1043,7 +1043,7 @@ Wizard::~Wizard()
     // Empty the aircraft browser list.
     for (int i = 1; i <= aircraft->size(); ++i)
     {
-        if ( aircraft->text(i)[0] != ' ' )
+        if ( aircraft->text(i)[0] == ' ' )
         {
             AircraftData* data =
                 reinterpret_cast<AircraftData*>( aircraft->data(i) );
