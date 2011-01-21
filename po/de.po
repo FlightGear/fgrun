@@ -143,9 +143,8 @@ msgid "rul"
 msgstr ""
 
 #: src/advanced.cxx:280
-#, fuzzy
 msgid "telnet"
-msgstr "Löschen"
+msgstr ""
 
 #: src/advanced.cxx:292
 msgid "file"
@@ -361,11 +360,11 @@ msgstr "Verfeinerte Startbahnbeleuchtung An"
 
 #: src/advanced.cxx:815
 msgid "Distance attenuation"
-msgstr "Lichttrübung"
+msgstr "Abschwächung durch weite Entfernung"
 
 #: src/advanced.cxx:816
 msgid "Enable runway light distance attenuation"
-msgstr "Trübung der Startbahnbeleuchtung auf weite Entfernung An"
+msgstr "Abschwächung der Startbahnbeleuchtung auf weite Entfernung An"
 
 #: src/advanced.cxx:820
 msgid "Hud-3D"
@@ -889,7 +888,6 @@ msgid "Generic:"
 msgstr ""
 
 #: src/advanced.cxx:1477
-#, fuzzy
 msgid "Repeat"
 msgstr "Neustart"
 
@@ -951,7 +949,7 @@ msgstr "Log-Level:"
 
 #: src/advanced.cxx:1614
 msgid "Trace Read Properties"
-msgstr "Lese-Properties zurückverfolgen"
+msgstr "Lese-Properties protokollieren"
 
 #: src/advanced.cxx:1622 src/advanced.cxx:1655 src/advanced.cxx:1704
 msgid "Value:"
@@ -1082,23 +1080,20 @@ msgid "FG_AIRCRAFT:"
 msgstr ""
 
 #: src/wizard.cxx:487
-#, fuzzy
 msgid "Aircraft directories"
-msgstr "Scenery-Verzeichnisse"
+msgstr "Flugzeug-Verzeichnisse"
 
 #: src/wizard.cxx:496 src/wizard.cxx:525
 msgid "Add..."
-msgstr "Hinzufügen"
+msgstr "Hinzufügen..."
 
 #: src/wizard.cxx:497
-#, fuzzy
 msgid "Add an aircraft directory"
-msgstr "Scenery-Verzeichnis hinzufügen"
+msgstr "Flugzeug-Verzeichnis hinzufügen"
 
 #: src/wizard.cxx:502
-#, fuzzy
 msgid "Delete an aircraft directory"
-msgstr "Scenery-Verzeichnis löschen"
+msgstr "Flugzeug-Verzeichnis löschen"
 
 #: src/wizard.cxx:516
 msgid "Scenery directories"
@@ -1113,9 +1108,8 @@ msgid "Delete a scenery directory"
 msgstr "Scenery-Verzeichnis löschen"
 
 #: src/wizard.cxx:539
-#, fuzzy
 msgid "TerraSync directory"
-msgstr "Scenery-Verzeichnisse"
+msgstr "TerraSync-Verzeichnisse"
 
 #: src/wizard.cxx:540
 msgid "Select the line in the FG_SCENERY list that is the TerraSync directory."
@@ -1141,26 +1135,23 @@ msgstr "Scenery-Verzeichnis hinzufügen"
 
 #: src/wizard.cxx:574
 msgid "Clear the content of the airport cache"
-msgstr ""
+msgstr "Flugplatz-Cache löschen"
 
 #: src/wizard.cxx:579
 msgid "Airports Cache:"
 msgstr "Flugplatz-Cache:"
 
 #: src/wizard.cxx:580
-#, fuzzy
 msgid "Full path to the airport cache"
-msgstr "Vollständiger Pfadname zum FlightGear-Programm"
+msgstr "Vollständiger Pfadname zum Flugplatz-Cache"
 
 #: src/wizard.cxx:584
-#, fuzzy
 msgid "Terrasync exe:"
-msgstr "Scenery-Verzeichnisse"
+msgstr "Terrasync Programm:"
 
 #: src/wizard.cxx:585 src/wizard.cxx:592
-#, fuzzy
 msgid "Full pathname to Terrasync executable"
-msgstr "Vollständiger Pfadname zum FlightGear-Programm"
+msgstr "Vollständiger Pfadname zum Terrasync-Programm"
 
 #: src/wizard.cxx:599
 msgid "Select an aircraft"
@@ -1227,7 +1218,7 @@ msgstr "Auflösung :"
 
 #: src/wizard.cxx:721
 msgid "Enhanced runway lighting"
-msgstr "Verfeinerte Startbahnbeleuchtung"
+msgstr "Aufwändige Startbahnbeleuchtung"
 
 #: src/wizard.cxx:722
 msgid "Use with caution. It may drop your framerate dramatically"
@@ -1498,7 +1489,7 @@ msgid ""
 "<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
 msgstr ""
 "<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
-"<h1>FlightGear Launch Control %s</h1>  <p>Diesess Programm wird unter der "
+"<h1>FlightGear Launch Control %s</h1>  <p>Dieses Programm wird unter der "
 "GNU General Public License (http://www.gnu.org/copyleft/gpl.html) "
 "veröffentlicht.</p>  <p>Bugs bitte an http://sourceforge.net/projects/fgrun "
 "melden</p> </body></html>"
