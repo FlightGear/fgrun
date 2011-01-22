@@ -114,10 +114,11 @@ static const char *aircraft_status_[] = {
 struct AircraftData
 {
     string name;
+    string root;
     string desc;
     string status;
     string author;
-	string modelPath;
+    string modelPath;
 };
 
 static int widths[] = { 465, 30, 0 };
@@ -429,7 +430,7 @@ find_named_node( osg::Node * node, const string &name )
 }
 
 osg::Node *
-loadModel( const string &fg_root, const string &path,
+loadModel( const string &fg_root, const string &fg_aircraft, const string &path,
                const SGPath& externalTexturePath )
 {
     osg::ref_ptr<osg::Node> model;
@@ -439,8 +440,18 @@ loadModel( const string &fg_root, const string &path,
     SGPath modelpath = path, texturepath = path;
     if ( modelpath.isRelative() )
     {
-        SGPath tmp = fg_root;
+        SGPath tmp = fg_aircraft;
         tmp.append(modelpath.str());
+        if (!tmp.exists() && modelpath.str().find( "Aircraft/" ) == 0)
+        {
+            tmp = fg_aircraft;
+            tmp.append(modelpath.str().substr(9));
+        }
+        if (!tmp.exists())
+        {
+            tmp = fg_root;
+            tmp.append(modelpath.str());
+        }
         modelpath = texturepath = tmp;
     }
 
@@ -510,7 +521,7 @@ loadModel( const string &fg_root, const string &path,
 
         osg::ref_ptr<osg::Node> kid;
         try {
-            kid = loadModel( fg_root, submodel, externalTexturePath );
+            kid = loadModel( fg_root, fg_aircraft, submodel, externalTexturePath );
         } catch (const sg_throwable &t) {
             SG_LOG(SG_INPUT, SG_ALERT, "Failed to load submodel: " << t.getFormattedMessage());
             throw;
@@ -579,10 +590,21 @@ Wizard::preview_aircraft()
 
     if (!data->modelPath.empty())
     {
-        SGPath path( fg_root_->value() ), tpath;
-		path.append( data->modelPath );
+        SGPath path( data->root ), tpath;
+        path.append( data->modelPath );
 
+        bool error = false;
         if (!path.exists())
+        {
+            error = true;
+            if ( data->modelPath.find( "Aircraft/" ) == 0 )
+            {
+                path = data->root;
+                path.append( data->modelPath.substr( 9 ) );
+                error = !path.exists();
+            }
+        }
+        if ( error )
         {
             fl_alert( _("Model not found: '%s'"), path.c_str() );
             return;
@@ -594,7 +616,7 @@ Wizard::preview_aircraft()
             win->cursor( FL_CURSOR_WAIT );
             Fl::flush();
 
-            osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), path.str(), SGPath() );
+            osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), data->root, path.str(), SGPath() );
             if (model != 0)
             {
                 current_aircraft_model_path = path.str();
@@ -951,10 +973,26 @@ Wizard::aircraft_update()
 void
 Wizard::aircraft_update( const char *aft )
 {
-    SGPath path( fg_root_->value() );
-    path.append( "Aircraft" );
-    vector< SGPath > ac;
-    search_aircraft_dir( path, true, ac );
+    SGPath rpath( fg_root_->value() );
+    rpath.append( "Aircraft" );
+    map<string, vector< SGPath > > ac;
+    search_aircraft_dir( rpath, true, ac[ rpath.str() ] );
+
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+    string fg_aircraft;
+    if (prefs.get( "fg_aircraft", buf, "", buflen-1))
+    {
+        fg_aircraft = buf;
+    }
+
+    typedef vector<string> vs_t;
+    vs_t va( sgPathSplit( fg_aircraft ) );
+    for (vs_t::size_type i = 0; i < va.size(); ++i)
+    {
+        SGPath path( va[ i ] );
+        search_aircraft_dir( path, true, ac[ path.str() ] );
+    }
 
     // Empty the aircraft browser list.
     for (int i = 1; i <= aircraft->size(); ++i)
@@ -968,49 +1006,54 @@ Wizard::aircraft_update( const char *aft )
     }
     aircraft->clear();
 
-    map<string,vector<AircraftData*>,ICompare> am;
     bool selected = false;
-    // Populate the aircraft browser list.
-    for (vector<SGPath>::size_type vi = 0; vi < ac.size(); ++vi)
+    map<string,vector<AircraftData*>,ICompare> am;
+    for ( map<string, vector< SGPath > >::iterator ii = ac.begin(); ii != ac.end(); ++ii )
     {
-        string s( ac[vi].str() ), name( s );
-        name.erase( 0, path.str().size() );
-        if ( name[0] == '/' )
-            name.erase( 0, 1 );
-        string::size_type p = name.find( '/' );
-        if ( p != string::npos )
-            name.erase( p );
-
-        SGPropertyNode props;
-        try
+        // Populate the aircraft browser list.
+        for (vector<SGPath>::size_type vi = 0; vi < ii->second.size(); ++vi)
         {
-            readProperties( s.c_str(), &props );
-        }
-        catch (const sg_exception&)
-        {
-            continue;
-        }
+            SGPath path = ii->first;
+            string s( ii->second[vi].str() ), name( s );
+            name.erase( 0, path.str().size() );
+            if ( name[0] == '/' )
+                name.erase( 0, 1 );
+            string::size_type p = name.find( '/' );
+            if ( p != string::npos )
+                name.erase( p );
 
-        if (props.hasValue( "/sim/description" ))
-        {
-            string desc = props.getStringValue( "/sim/description" );
-
-            if ( desc.find( "Alias " ) == string::npos )
+            SGPropertyNode props;
+            try
             {
-                // Extract aircraft name from filename.
-                string::size_type pos = s.rfind( "/" );
-                string::size_type epos = s.find( "-set.xml", pos );
-                string ss( s.substr( pos+1, epos-pos-1 ) );
+                readProperties( s.c_str(), &props );
+            }
+            catch (const sg_exception&)
+            {
+                continue;
+            }
 
-                AircraftData* data = new AircraftData;
-                data->name = ss;
-                data->desc = desc;
-                data->status = props.getStringValue( "/sim/status" );
-				data->modelPath = props.getStringValue( "/sim/model/path" );
-                if ( data->status.empty() ) data->status = _( "Unknown" );
-                data->author = props.getStringValue( "/sim/author" );
-                if ( data->author.empty() ) data->author = _( "Unknown" );
-                am[name].push_back( data );
+            if (props.hasValue( "/sim/description" ))
+            {
+                string desc = props.getStringValue( "/sim/description" );
+
+                if ( desc.find( "Alias " ) == string::npos )
+                {
+                    // Extract aircraft name from filename.
+                    string::size_type pos = s.rfind( "/" );
+                    string::size_type epos = s.find( "-set.xml", pos );
+                    string ss( s.substr( pos+1, epos-pos-1 ) );
+
+                    AircraftData* data = new AircraftData;
+                    data->name = ss;
+                    data->root = path.str();
+                    data->desc = desc;
+                    data->status = props.getStringValue( "/sim/status" );
+                    data->modelPath = props.getStringValue( "/sim/model/path" );
+                    if ( data->status.empty() ) data->status = _( "Unknown" );
+                    data->author = props.getStringValue( "/sim/author" );
+                    if ( data->author.empty() ) data->author = _( "Unknown" );
+                    am[name].push_back( data );
+                }
             }
         }
     }
