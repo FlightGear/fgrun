@@ -44,21 +44,25 @@ find_package(Gettext)
 
 if (GETTEXT_FOUND)
 
-    FIND_LIBRARY(INTL_LIBRARY
-      NAMES intl
-      HINTS
-      PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
-      PATHS
-      ~/Library/Frameworks
-      /Library/Frameworks
-      /usr/local
-      /usr
-      /opt
-    )
-    
-    if (INTL_LIBRARY)
-        set( ENABLE_NLS 1 )
-    endif (INTL_LIBRARY)
+    if (MSVC)
+	    FIND_LIBRARY(INTL_LIBRARY
+	      NAMES intl
+	      HINTS
+	      PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
+	      PATHS
+	      ~/Library/Frameworks
+	      /Library/Frameworks
+	      /usr/local
+	      /usr
+	      /opt
+	    )
+
+	    if (INTL_LIBRARY)
+		set( ENABLE_NLS 1 )
+	    endif (INTL_LIBRARY)
+    else (MSVC)
+	set( ENABLE_NLS 1 )
+    endif (MSVC)
     
 endif (GETTEXT_FOUND)
 

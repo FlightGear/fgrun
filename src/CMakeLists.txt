@@ -54,11 +54,13 @@ add_executable(fgrun ${SOURCES})
 
 target_link_libraries(fgrun 
     ${SOCKETS_LIBRARY}
-	${simgear_libs}
-	${OPENSCENEGRAPH_LIBRARIES} 
-	${FLTK_LIBRARIES}
-	${ZLIB_LIBRARIES}
+    ${simgear_libs}
+    ${OPENSCENEGRAPH_LIBRARIES} 
+    ${FLTK_LIBRARIES}
+    ${ZLIB_LIBRARIES}
     ${INTL_LIBRARY}
+    ${X11_Xinerama_LIB}
+    ${X11_Xft_LIB}
     )
 
 install(TARGETS fgrun RUNTIME DESTINATION bin)
