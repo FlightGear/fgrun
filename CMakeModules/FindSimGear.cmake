@@ -120,7 +120,8 @@ if(${SIMGEAR_LIBRARIES} STREQUAL "SIMGEAR_LIBRARIES-NOTFOUND")
         environment
         nasal
         sky
-        material tgdb
+        material
+        tgdb
         model    
         screen
         bucket
