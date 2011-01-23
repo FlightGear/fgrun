@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+include (CheckIncludeFile)
+
 project(fgrun)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
 
@@ -59,6 +61,11 @@ if (GETTEXT_FOUND)
     endif (INTL_LIBRARY)
     
 endif (GETTEXT_FOUND)
+
+check_include_file(unistd.h HAVE_UNISTD_H)
+check_include_file(stdlib.h HAVE_STDLIB_H)
+check_include_file(sys/wait.h HAVE_SYS_WAIT_H)
+check_include_file(termios.h HAVE_TERMIOS_H)
 
 add_definitions(-DHAVE_CONFIG_H)
 
