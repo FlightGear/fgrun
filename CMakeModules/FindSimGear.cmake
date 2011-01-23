@@ -116,7 +116,7 @@ if(${SIMGEAR_LIBRARIES} STREQUAL "SIMGEAR_LIBRARIES-NOTFOUND")
   # linked in, and hence ability to link when using a traditional
   # linker such as GNU ld on Linux
     set(comps 
-        ephemeris
+        ephem
         environment
         nasal
         sky
