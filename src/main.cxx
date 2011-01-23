@@ -104,25 +104,10 @@ parse_args( int, char** argv, int& i )
 string
 get_locale_directory( const char *argv0 )
 {
-#if _MSC_VER
+#if _MSC_VER && !defined(LOCALEDIR)
     SGPath path = argv0;
     path = path.dir();
     path.append( "locale" );
-    if (!path.exists())
-    {
-        path = argv0;
-        path = path.dir();
-        path = path.dir();
-        path.append( "share/locale" );
-        if (!path.exists())
-        {
-            path = argv0;
-            path = path.dir();
-            path = path.dir();
-            path = path.dir();
-            path.append( "share/locale" );
-        }
-    }
     return path.str();
 #else
     return LOCALEDIR;

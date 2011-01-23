@@ -1,4 +1,5 @@
 
 #cmakedefine ENABLE_NLS
-#define VERSION "@FGRUN_VERSION@"
-#define PACKAGE "@CMAKE_PROJECT_NAME@"
+#define VERSION     "@FGRUN_VERSION@"
+#define PACKAGE     "@CMAKE_PROJECT_NAME@"
+#define LOCALEDIR   "@CMAKE_INSTALL_PREFIX@/share/locale"
