@@ -108,6 +108,21 @@ get_locale_directory( const char *argv0 )
     SGPath path = argv0;
     path = path.dir();
     path.append( "locale" );
+    if (!path.exists())
+    {
+        path = argv0;
+        path = path.dir();
+        path = path.dir();
+        path.append( "share/locale" );
+        if (!path.exists())
+        {
+            path = argv0;
+            path = path.dir();
+            path = path.dir();
+            path = path.dir();
+            path.append( "share/locale" );
+        }
+    }
     return path.str();
 #else
     return LOCALEDIR;
@@ -117,7 +132,7 @@ get_locale_directory( const char *argv0 )
 int
 main( int argc, char* argv[] )
 {
-	//_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
+    //_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
     simgear::Socket::initSockets();
     setlocale( LC_ALL, "" );
     string localedir = get_locale_directory( argv[0] );

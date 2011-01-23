@@ -1,0 +1,4 @@
+
+#cmakedefine ENABLE_NLS
+#define VERSION "@FGRUN_VERSION@"
+#define PACKAGE "@CMAKE_PROJECT_NAME@"

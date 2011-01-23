@@ -30,14 +30,45 @@ if(WIN32)
     set( WINSOCK_LIBRARY "ws2_32.lib" )
 endif(WIN32)    
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT -DVERSION=\\\"${FGRUN_VERSION}\\\"")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT -DVERSION=\\\"${FGRUN_VERSION}\\\"")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT")
 
 find_package(Boost REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(FLTK REQUIRED)
 find_package(OpenSceneGraph 2.8.1 REQUIRED osgText osgDB osgParticle osgUtil osgViewer osgGA)
 find_package(SimGear 2.2.0 REQUIRED)
+find_package(Gettext)
+
+if (GETTEXT_FOUND)
+
+    FIND_LIBRARY(INTL_LIBRARY
+      NAMES intl
+      HINTS
+      PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
+      PATHS
+      ~/Library/Frameworks
+      /Library/Frameworks
+      /usr/local
+      /usr
+      /opt
+    )
+    
+    if (INTL_LIBRARY)
+        set( ENABLE_NLS 1 )
+    endif (INTL_LIBRARY)
+    
+endif (GETTEXT_FOUND)
+
+add_definitions(-DHAVE_CONFIG_H)
+
+include_directories(${PROJECT_BINARY_DIR}/src)
+
+configure_file (
+  "${PROJECT_SOURCE_DIR}/src/config_cmake.h.in"
+  "${PROJECT_BINARY_DIR}/src/config.h"
+  )
+
 
 include_directories(${OPENSCENEGRAPH_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
@@ -46,3 +77,4 @@ include_directories(${OPENSCENEGRAPH_INCLUDE_DIRS}
     ${FLTK_INCLUDE_DIR})
 
 add_subdirectory( src )
+add_subdirectory( po )

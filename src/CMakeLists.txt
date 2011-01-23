@@ -32,4 +32,7 @@ target_link_libraries(fgrun
 	${OPENSCENEGRAPH_LIBRARIES} 
 	${FLTK_LIBRARIES}
 	${ZLIB_LIBRARIES}
+    ${INTL_LIBRARY}
     )
+
+install(TARGETS fgrun RUNTIME DESTINATION bin)
