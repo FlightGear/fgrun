@@ -50,9 +50,6 @@ else (MSVC)
 		)
 endif (MSVC)
 
-message(STATUS "Simgear " ${SIMGEAR_LIBRARIES})
-message(STATUS "Simgear " ${simgear_libs})
-
 add_executable(fgrun ${SOURCES})
 
 target_link_libraries(fgrun 
