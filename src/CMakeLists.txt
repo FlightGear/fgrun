@@ -25,7 +25,7 @@ set(SOURCES
 	)
 
 if (MSVC)
-	set( simgear_libs ${SIMGEAR_LIBRAIRIES} )
+	set( simgear_libs ${SIMGEAR_LIBRARIES} )
 else (MSVC)
 	set( simgear_libs
 		${SIMGEAR_MODEL_LIBRARY}
@@ -49,6 +49,9 @@ else (MSVC)
 		${SIMGEAR_UTIL_LIBRARY}
 		)
 endif (MSVC)
+
+message(STATUS "Simgear " ${SIMGEAR_LIBRARIES})
+message(STATUS "Simgear " ${simgear_libs})
 
 add_executable(fgrun ${SOURCES})
 
