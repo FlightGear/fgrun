@@ -13,6 +13,7 @@ set(CMAKE_MINSIZEREL_POSTFIX "s" CACHE STRING "add a postfix, usually empty on w
 file(READ version versionFile)
 string(STRIP ${versionFile} FGRUN_VERSION) 
 
+option(ENABLE_NLS "Set to ON to build fgrun with NLS support" ON)
 set(MSVC_3RDPARTY_DIR NOT_FOUND CACHE PATH "Location where the third-party dependencies are extracted")
 
 if (MSVC_3RDPARTY_DIR)
@@ -40,7 +41,9 @@ find_package(ZLIB REQUIRED)
 find_package(FLTK REQUIRED)
 find_package(OpenSceneGraph 2.8.1 REQUIRED osgText osgDB osgParticle osgUtil osgViewer osgGA)
 find_package(SimGear 2.2.0 REQUIRED)
-find_package(Gettext)
+if (ENABLE_NLS)
+	find_package(Gettext)
+endif (ENABLE_NLS)
 
 if (GETTEXT_FOUND)
 
@@ -57,11 +60,9 @@ if (GETTEXT_FOUND)
 	      /opt
 	    )
 
-	    if (INTL_LIBRARY)
-		set( ENABLE_NLS 1 )
-	    endif (INTL_LIBRARY)
-    else (MSVC)
-	set( ENABLE_NLS 1 )
+	    if (NOT INTL_LIBRARY)
+			set( ENABLE_NLS 0 )
+	    endif (NOT INTL_LIBRARY)
     endif (MSVC)
     
 endif (GETTEXT_FOUND)
