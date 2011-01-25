@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 include (CheckIncludeFile)
+include (CheckFunctionExists)
 
 project(fgrun)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
