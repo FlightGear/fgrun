@@ -61,6 +61,7 @@ target_link_libraries(fgrun
     ${INTL_LIBRARY}
     ${X11_Xinerama_LIB}
     ${X11_Xft_LIB}
+    ${OPENPTY_LIBRARY}
     )
 
 install(TARGETS fgrun RUNTIME DESTINATION bin)
