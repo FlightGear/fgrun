@@ -98,7 +98,7 @@ check_cxx_source_runs(
 	#include <fcntl.h>
 	
 	int main() {
-		if (open(\"/dev/ptmx\", _O_RDWR ) < 0)
+		if (open(\"/dev/ptmx\", O_RDWR ) < 0)
 			return -1;
 		return 0;
 	}
@@ -110,7 +110,7 @@ check_cxx_source_runs(
 	#include <fcntl.h>
 	
 	int main() {
-		if (open(\"/dev/pts\", _O_RDWR ) < 0)
+		if (open(\"/dev/pts\", O_RDWR ) < 0)
 			return -1;
 		return 0;
 	}
