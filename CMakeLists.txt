@@ -32,6 +32,7 @@ if(WIN32)
 
     set(NOMINMAX 1)
     set( WINSOCK_LIBRARY "ws2_32.lib" )
+    
 endif(WIN32)    
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT")
@@ -83,10 +84,38 @@ if (NOT HAVE_OPENPTY)
     check_function_exists(openpty HAVE_OPENPTY)
     if (HAVE_OPENPTY)
         set( OPENPTY_LIBRARY util CACHE INTERNAL "" )
+    else (HAVE_OPENPTY)
+		set( CMAKE_REQUIRED_LIBRARIES )
     endif (HAVE_OPENPTY)
 endif (NOT HAVE_OPENPTY)
 check_function_exists(login_tty HAVE_LOGIN_TTY)
 check_function_exists(_getpty HAVE__GETPTY)
+
+include(CheckCXXSourceRuns)
+
+check_cxx_source_runs(
+	"#include <stdio.h>
+	#include <fcntl.h>
+	
+	int main() {
+		if (open(\"/dev/ptmx\", _O_RDWR ) < 0)
+			return -1;
+		return 0;
+	}
+	"
+	HAVE_DEV_PTMX)
+
+check_cxx_source_runs(
+	"#include <stdio.h>
+	#include <fcntl.h>
+	
+	int main() {
+		if (open(\"/dev/pts\", _O_RDWR ) < 0)
+			return -1;
+		return 0;
+	}
+	"
+	HAVE_DEV_PTS)
 
 add_definitions(-DHAVE_CONFIG_H)
 
