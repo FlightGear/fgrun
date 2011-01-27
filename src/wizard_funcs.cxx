@@ -430,8 +430,8 @@ find_named_node( osg::Node * node, const string &name )
 }
 
 osg::Node *
-loadModel( const string &fg_root, const string &fg_aircraft, const string &path,
-               const SGPath& externalTexturePath )
+loadModel( const string &fg_root, const string &fg_aircraft, const string &current,
+                const string &path, const SGPath& externalTexturePath )
 {
     osg::ref_ptr<osg::Node> model;
     SGPropertyNode props;
@@ -440,8 +440,13 @@ loadModel( const string &fg_root, const string &fg_aircraft, const string &path,
     SGPath modelpath = path, texturepath = path;
     if ( modelpath.isRelative() )
     {
-        SGPath tmp = fg_aircraft;
+        SGPath tmp = current;
         tmp.append(modelpath.str());
+        if (!tmp.exists())
+        {
+            tmp = fg_aircraft;
+            tmp.append(modelpath.str());
+        }
         if (!tmp.exists() && modelpath.str().find( "Aircraft/" ) == 0)
         {
             tmp = fg_aircraft;
@@ -460,10 +465,32 @@ loadModel( const string &fg_root, const string &fg_aircraft, const string &path,
         readProperties(modelpath.str(), &props);
         if (props.hasValue("/path")) {
             modelpath = modelpath.dir();
-            modelpath.append(props.getStringValue("/path"));
+            string submodelpath = props.getStringValue("/path");
+            modelpath.append(submodelpath);
+            if (!modelpath.exists() && submodelpath.find( "Aircraft/" ) == 0)
+            {
+                modelpath = fg_aircraft;
+                modelpath.append(submodelpath.substr(9));
+            }
+            if (!modelpath.exists())
+            {
+                modelpath = fg_root;
+                modelpath.append(submodelpath);
+            }
             if (props.hasValue("/texture-path")) {
                 texturepath = texturepath.dir();
-                texturepath.append(props.getStringValue("/texture-path"));
+                string tpath = props.getStringValue("/texture-path");
+                texturepath.append(tpath);
+                if (!texturepath.exists() && tpath.find( "Aircraft/" ) == 0)
+                {
+                    texturepath = fg_aircraft;
+                    texturepath.append(tpath.substr(9));
+                }
+                if (!texturepath.exists())
+                {
+                    texturepath = fg_root;
+                    texturepath.append(tpath);
+                }
             }
         } else if ( !model ) {
             model = new osg::Switch;
@@ -521,7 +548,7 @@ loadModel( const string &fg_root, const string &fg_aircraft, const string &path,
 
         osg::ref_ptr<osg::Node> kid;
         try {
-            kid = loadModel( fg_root, fg_aircraft, submodel, externalTexturePath );
+            kid = loadModel( fg_root, fg_aircraft, modelpath.dir(), submodel, externalTexturePath );
         } catch (const sg_throwable &t) {
             SG_LOG(SG_INPUT, SG_ALERT, "Failed to load submodel: " << t.getFormattedMessage());
             throw;
@@ -616,7 +643,7 @@ Wizard::preview_aircraft()
             win->cursor( FL_CURSOR_WAIT );
             Fl::flush();
 
-            osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), data->root, path.str(), SGPath() );
+            osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), data->root, "", path.str(), SGPath() );
             if (model != 0)
             {
                 current_aircraft_model_path = path.str();

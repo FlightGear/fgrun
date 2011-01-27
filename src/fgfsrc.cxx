@@ -482,6 +482,10 @@ Wizard::write_fgviewerrc( Fl_Preferences &prefs, std::ostream& os, const char* p
     prefs.get( "fg_root", buf, "", buflen-1 );
     os << "--fg-root=" << buf;
 
+    prefs.get( "fg_aircraft", buf, "", buflen-1 );
+    if ( buf[0] != 0 )
+        os << pfx << "--fg-aircraft=" << buf;
+
     os << pfx << "--fgviewer";
     os << pfx << path;
 
