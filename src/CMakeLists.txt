@@ -5,6 +5,14 @@ else (WIN32)
     set( platform_srcs run_posix.cxx fgrun_pty.cxx )
 endif (WIN32)
 
+if (MSVC)
+	if (CMAKE_CL_64)
+		set( RESOURCE_FILE fgrun64.rc )
+	else (CMAKE_CL_64)
+		set( RESOURCE_FILE fgrun.rc )
+	endif (CMAKE_CL_64)
+endif (MSVC)
+
 FLTK_WRAP_UI(Wizard wizard.fl)
 add_library(Wizard ${Wizard_FLTK_UI_SRCS})
 
@@ -28,6 +36,7 @@ set(SOURCES
 	settings.cxx
 	util.cxx
 	${platform_srcs}
+	${RESOURCE_FILE}
 	)
 
 if (MSVC)
