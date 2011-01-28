@@ -176,7 +176,7 @@ int run_program( char *cmd, long &pid, char *env = 0 )
                             char *pbuf = new char[ dump_file_name.size() * 2 + 1 ];
                             CharToOem( dump_file_name.c_str(), pbuf );
                             std::cout << "Dump file created (" << pbuf << ")" << std::endl;
-                            delete pbuf;
+                            delete[] pbuf;
                             dump = true;
                         }
                     }
