@@ -5,9 +5,15 @@ else (WIN32)
     set( platform_srcs run_posix.cxx fgrun_pty.cxx )
 endif (WIN32)
 
+FLTK_WRAP_UI(Wizard wizard.fl)
+add_library(Wizard ${Wizard_FLTK_UI_SRCS})
+
+FLTK_WRAP_UI(Advanced advanced.fl)
+add_library(Advanced ${Advanced_FLTK_UI_SRCS})
+
 set(SOURCES
-	wizard.cxx wizard_funcs.cxx
-	advanced.cxx advanced_funcs.cxx
+	wizard_funcs.cxx
+	advanced_funcs.cxx
 	AirportBrowser.cxx
 	AirportTable.cxx
 	Fl_Table.cxx
@@ -51,8 +57,10 @@ else (MSVC)
 endif (MSVC)
 
 add_executable(fgrun ${SOURCES})
+add_dependencies(fgrun Wizard)
+add_dependencies(fgrun Advanced)
 
-target_link_libraries(fgrun 
+target_link_libraries(fgrun Wizard Advanced
     ${SOCKETS_LIBRARY}
     ${simgear_libs}
     ${OPENSCENEGRAPH_LIBRARIES} 

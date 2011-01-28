@@ -137,6 +137,7 @@ check_cxx_source_runs(
 add_definitions(-DHAVE_CONFIG_H)
 
 include_directories(${PROJECT_BINARY_DIR}/src)
+include_directories(${CMAKE_HOME_DIRECTORY}/src)
 
 configure_file (
   "${PROJECT_SOURCE_DIR}/src/config_cmake.h.in"
