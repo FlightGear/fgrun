@@ -27,9 +27,9 @@ if (MSVC AND MSVC_3RDPARTY_ROOT)
   endif (${MSVC_VERSION} EQUAL 1600)
   if (CMAKE_CL_64)
       set( OSG_MSVC ${OSG_MSVC}-64 )
-	  set( MSVC_3RDPARTY_DIR 3rdParty.x64 )
+      set( MSVC_3RDPARTY_DIR 3rdParty.x64 )
   else (CMAKE_CL_64)
-	  set( MSVC_3RDPARTY_DIR 3rdParty )
+      set( MSVC_3RDPARTY_DIR 3rdParty )
   endif (CMAKE_CL_64)
 
   set (CMAKE_LIBRARY_PATH ${MSVC_3RDPARTY_ROOT}/${MSVC_3RDPARTY_DIR}/lib ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/OpenScenegraph/lib ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/SimGear/lib )
@@ -42,7 +42,7 @@ if(WIN32)
     if(MSVC)
         set(MSVC_FLAGS "-DNOMINMAX -D_USE_MATH_DEFINES -D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS -D__CRT_NONSTDC_NO_WARNINGS")
         if (${MSVC_VERSION} EQUAL 1600)
-		  set( MSVC_LD_FLAGS "/FORCE:MULTIPLE" )
+          set( MSVC_LD_FLAGS "/FORCE:MULTIPLE" )
         endif (${MSVC_VERSION} EQUAL 1600)
     endif(MSVC)
 
@@ -61,27 +61,27 @@ find_package(FLTK REQUIRED)
 find_package(OpenSceneGraph 2.8.1 REQUIRED osgText osgDB osgParticle osgUtil osgViewer osgGA)
 find_package(SimGear 2.2.0 REQUIRED)
 if (ENABLE_NLS)
-	find_package(Gettext)
+    find_package(Gettext)
 endif (ENABLE_NLS)
 
 if (GETTEXT_FOUND)
 
     if (MSVC)
-	    FIND_LIBRARY(INTL_LIBRARY
-	      NAMES intl
-	      HINTS
-	      PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
-	      PATHS
-	      ~/Library/Frameworks
-	      /Library/Frameworks
-	      /usr/local
-	      /usr
-	      /opt
-	    )
+        FIND_LIBRARY(INTL_LIBRARY
+          NAMES intl
+          HINTS
+          PATH_SUFFIXES lib64 lib libs64 libs libs/Win32 libs/Win64
+          PATHS
+          ~/Library/Frameworks
+          /Library/Frameworks
+          /usr/local
+          /usr
+          /opt
+        )
 
-	    if (NOT INTL_LIBRARY)
-			set( ENABLE_NLS 0 )
-	    endif (NOT INTL_LIBRARY)
+        if (NOT INTL_LIBRARY)
+            set( ENABLE_NLS 0 )
+        endif (NOT INTL_LIBRARY)
     endif (MSVC)
     
 endif (GETTEXT_FOUND)
@@ -102,37 +102,41 @@ if (NOT HAVE_OPENPTY)
     if (HAVE_OPENPTY)
         set( OPENPTY_LIBRARY util CACHE INTERNAL "" )
     else (HAVE_OPENPTY)
-		set( CMAKE_REQUIRED_LIBRARIES )
+        set( CMAKE_REQUIRED_LIBRARIES )
     endif (HAVE_OPENPTY)
 endif (NOT HAVE_OPENPTY)
 check_function_exists(login_tty HAVE_LOGIN_TTY)
 check_function_exists(_getpty HAVE__GETPTY)
 
-include(CheckCXXSourceRuns)
+if ( NOT ( HAVE_OPENPTY OR HAVE__GETPTY ) )
 
-check_cxx_source_runs(
-	"#include <stdio.h>
-	#include <fcntl.h>
-	
-	int main() {
-		if (open(\"/dev/ptmx\", O_RDWR ) < 0)
-			return -1;
-		return 0;
-	}
-	"
-	HAVE_DEV_PTMX)
+    include(CheckCXXSourceRuns)
 
-check_cxx_source_runs(
-	"#include <stdio.h>
-	#include <fcntl.h>
-	
-	int main() {
-		if (open(\"/dev/pts\", O_RDWR ) < 0)
-			return -1;
-		return 0;
-	}
-	"
-	HAVE_DEV_PTS)
+    check_cxx_source_runs(
+        "#include <stdio.h>
+        #include <fcntl.h>
+        
+        int main() {
+            if (open(\"/dev/ptmx\", O_RDWR ) < 0)
+                return -1;
+            return 0;
+        }
+        "
+        HAVE_DEV_PTMX)
+
+    check_cxx_source_runs(
+        "#include <stdio.h>
+        #include <fcntl.h>
+        
+        int main() {
+            if (open(\"/dev/pts\", O_RDWR ) < 0)
+                return -1;
+            return 0;
+        }
+        "
+        HAVE_DEV_PTS)
+        
+endif ( NOT ( HAVE_OPENPTY OR HAVE__GETPTY ) )
 
 add_definitions(-DHAVE_CONFIG_H)
 
@@ -147,8 +151,8 @@ configure_file (
 
 include_directories(${OPENSCENEGRAPH_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
-	${ZLIB_INCLUDE_DIR}
-	${SIMGEAR_INCLUDE_DIR}
+    ${ZLIB_INCLUDE_DIR}
+    ${SIMGEAR_INCLUDE_DIR}
     ${FLTK_INCLUDE_DIR})
 
 add_subdirectory( src )
