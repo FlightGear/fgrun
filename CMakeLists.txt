@@ -125,7 +125,7 @@ endif ( NOT ( HAVE_OPENPTY OR HAVE__GETPTY ) )
 if ( FLTK_FOUND )
 
     set( CMAKE_REQUIRED_INCLUDES ${FLTK_INCLUDE_DIR} )
-    set( CMAKE_REQUIRED_LIBRARIES ${FLTK_LIBRARIES} )
+    set( CMAKE_REQUIRED_LIBRARIES ${FLTK_LIBRARIES} ${X11_Xinerama_LIB} ${X11_Xft_LIB} )
     check_cxx_source_runs(
         "#include <Fl/Fl.H>
         int main() {
