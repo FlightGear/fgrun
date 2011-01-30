@@ -18,6 +18,7 @@ option(ENABLE_NLS "Set to ON to build fgrun with NLS support" ON)
 set(MSVC_3RDPARTY_ROOT NOT_FOUND CACHE PATH "Location where the third-party dependencies are extracted")
 
 if (MSVC AND MSVC_3RDPARTY_ROOT)
+
   message(STATUS "3rdparty files located in ${MSVC_3RDPARTY_ROOT}")
   set( OSG_MSVC "msvc" )
   if (${MSVC_VERSION} EQUAL 1600)
@@ -35,6 +36,7 @@ if (MSVC AND MSVC_3RDPARTY_ROOT)
   set (CMAKE_LIBRARY_PATH ${MSVC_3RDPARTY_ROOT}/${MSVC_3RDPARTY_DIR}/lib ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/OpenScenegraph/lib ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/SimGear/lib )
   set (CMAKE_INCLUDE_PATH ${MSVC_3RDPARTY_ROOT}/${MSVC_3RDPARTY_DIR}/include ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/OpenScenegraph/include ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/SimGear/include)
   set (BOOST_ROOT ${MSVC_3RDPARTY_ROOT}/boost_1_44_0)
+
 endif (MSVC AND MSVC_3RDPARTY_ROOT)
 
 if(WIN32)
@@ -137,6 +139,20 @@ if ( NOT ( HAVE_OPENPTY OR HAVE__GETPTY ) )
         HAVE_DEV_PTS)
         
 endif ( NOT ( HAVE_OPENPTY OR HAVE__GETPTY ) )
+
+if ( FLTK_FOUND )
+
+	set( CMAKE_REQUIRED_INCLUDES ${FLTK_INCLUDE_DIR} )
+	set( CMAKE_REQUIRED_LIBRARIES ${FLTK_LIBRARIES} )
+    check_cxx_source_runs(
+        "#include <Fl/Fl.H>
+        int main() {
+			return Fl::version() >= 1.03 ? 0 : -1;
+		}
+        "
+        HAVE_FLTK_1_3)
+
+endif ( FLTK_FOUND )
 
 add_definitions(-DHAVE_CONFIG_H)
 

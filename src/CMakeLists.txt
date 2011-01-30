@@ -13,11 +13,21 @@ if (MSVC)
     endif (CMAKE_CL_64)
 endif (MSVC)
 
-FLTK_WRAP_UI(Wizard wizard.fl)
-add_library(Wizard ${Wizard_FLTK_UI_SRCS})
+if (HAVE_FLTK_1_3)
 
-FLTK_WRAP_UI(Advanced advanced.fl)
-add_library(Advanced ${Advanced_FLTK_UI_SRCS})
+	FLTK_WRAP_UI(Wizard wizard.fl)
+	add_library(Wizard ${Wizard_FLTK_UI_SRCS})
+
+	FLTK_WRAP_UI(Advanced advanced.fl)
+	add_library(Advanced ${Advanced_FLTK_UI_SRCS})
+
+	set( ui_libs_1_3 Wizard Advanced )
+
+else (HAVE_FLTK_1_3)
+
+	set( ui_src_1_1 wizard.cxx advanced.cxx )
+
+endif (HAVE_FLTK_1_3)
 
 set(SOURCES
     wizard_funcs.cxx
@@ -36,6 +46,7 @@ set(SOURCES
     settings.cxx
     util.cxx
     ${platform_srcs}
+    ${ui_src_1_1}
     ${RESOURCE_FILE}
     )
 
@@ -66,10 +77,14 @@ else (MSVC)
 endif (MSVC)
 
 add_executable(fgrun ${SOURCES})
-add_dependencies(fgrun Wizard)
-add_dependencies(fgrun Advanced)
 
-target_link_libraries(fgrun Wizard Advanced
+if (HAVE_FLTK_1_3)
+	add_dependencies(fgrun Wizard)
+	add_dependencies(fgrun Advanced)
+endif (HAVE_FLTK_1_3)
+
+target_link_libraries(fgrun
+	${ui_libs_1_3}
     ${SOCKETS_LIBRARY}
     ${simgear_libs}
     ${OPENSCENEGRAPH_LIBRARIES} 
