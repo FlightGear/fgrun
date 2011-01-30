@@ -7,6 +7,7 @@
 #cmakedefine HAVE_PTY_H
 #cmakedefine HAVE_UTMP_H
 #cmakedefine HAVE_FCNTL_H
+#cmakedefine HAVE_STRING_H
 #cmakedefine HAVE_OPENPTY
 #cmakedefine HAVE__GETPTY
 #cmakedefine HAVE_DEV_PTMX

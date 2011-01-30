@@ -95,6 +95,7 @@ check_include_file(termios.h HAVE_TERMIOS_H)
 check_include_file(pty.h HAVE_PTY_H)
 check_include_file(utmp.h HAVE_UTMP_H)
 check_include_file(fcntl.h HAVE_FCNTL_H)
+check_include_file(string.h HAVE_STRING_H)
 
 check_function_exists(openpty HAVE_OPENPTY)
 if (NOT HAVE_OPENPTY)
