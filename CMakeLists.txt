@@ -112,43 +112,25 @@ check_function_exists(_getpty HAVE__GETPTY)
 
 if ( NOT ( HAVE_OPENPTY OR HAVE__GETPTY ) )
 
-    include(CheckCXXSourceRuns)
+    if (EXISTS /dev/ptmx)
+        set(HAVE_DEV_PTMX)
+    endif (EXISTS /dev/ptmx)
 
-    check_cxx_source_runs(
-        "#include <stdio.h>
-        #include <fcntl.h>
-        
-        int main() {
-            if (open(\"/dev/ptmx\", O_RDWR ) < 0)
-                return -1;
-            return 0;
-        }
-        "
-        HAVE_DEV_PTMX)
+    if (EXISTS /dev/pts)
+        set(HAVE_DEV_PTS)
+    endif (EXISTS /dev/pts)
 
-    check_cxx_source_runs(
-        "#include <stdio.h>
-        #include <fcntl.h>
-        
-        int main() {
-            if (open(\"/dev/pts\", O_RDWR ) < 0)
-                return -1;
-            return 0;
-        }
-        "
-        HAVE_DEV_PTS)
-        
 endif ( NOT ( HAVE_OPENPTY OR HAVE__GETPTY ) )
 
 if ( FLTK_FOUND )
 
-	set( CMAKE_REQUIRED_INCLUDES ${FLTK_INCLUDE_DIR} )
-	set( CMAKE_REQUIRED_LIBRARIES ${FLTK_LIBRARIES} )
+    set( CMAKE_REQUIRED_INCLUDES ${FLTK_INCLUDE_DIR} )
+    set( CMAKE_REQUIRED_LIBRARIES ${FLTK_LIBRARIES} )
     check_cxx_source_runs(
         "#include <Fl/Fl.H>
         int main() {
-			return Fl::version() >= 1.03 ? 0 : -1;
-		}
+            return Fl::version() >= 1.03 ? 0 : -1;
+        }
         "
         HAVE_FLTK_1_3)
 
