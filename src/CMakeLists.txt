@@ -15,17 +15,17 @@ endif (MSVC)
 
 if (HAVE_FLTK_1_3)
 
-	FLTK_WRAP_UI(Wizard wizard.fl)
-	add_library(Wizard ${Wizard_FLTK_UI_SRCS})
+    FLTK_WRAP_UI(Wizard wizard.fl)
+    add_library(Wizard ${Wizard_FLTK_UI_SRCS})
 
-	FLTK_WRAP_UI(Advanced advanced.fl)
-	add_library(Advanced ${Advanced_FLTK_UI_SRCS})
+    FLTK_WRAP_UI(Advanced advanced.fl)
+    add_library(Advanced ${Advanced_FLTK_UI_SRCS})
 
-	set( ui_libs_1_3 Wizard Advanced )
+    set( ui_libs_1_3 Wizard Advanced )
 
 else (HAVE_FLTK_1_3)
 
-	set( ui_src_1_1 wizard.cxx advanced.cxx )
+    set( ui_src_1_1 wizard.cxx advanced.cxx )
 
 endif (HAVE_FLTK_1_3)
 
@@ -79,12 +79,12 @@ endif (MSVC)
 add_executable(fgrun ${SOURCES})
 
 if (HAVE_FLTK_1_3)
-	add_dependencies(fgrun Wizard)
-	add_dependencies(fgrun Advanced)
+    add_dependencies(fgrun Wizard)
+    add_dependencies(fgrun Advanced)
 endif (HAVE_FLTK_1_3)
 
 target_link_libraries(fgrun
-	${ui_libs_1_3}
+    ${ui_libs_1_3}
     ${SOCKETS_LIBRARY}
     ${simgear_libs}
     ${OPENSCENEGRAPH_LIBRARIES} 
