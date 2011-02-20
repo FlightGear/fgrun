@@ -1,3 +1,16 @@
+* 1.5.3
+
+  * add Cmake build system
+  * --fg-aircraft option support for fgfs and to display models in the aircraft browser
+  * remove cache usage for aircraft models to lower memory requirements
+  * make fgrun aware of the use-custom-scenery file layout for parking positions
+  * fix network options in the advanced section
+  * limit length of callsign to 8 and don't allow spaces
+  * change terrasync directory selection in the wizard
+  * enable disabled options in the advanced section
+  * fix resizing of multiplayer options
+  * remove plib dependency
+
 * 1.5.2
 
   * compile under Win64
