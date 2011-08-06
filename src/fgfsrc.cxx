@@ -212,8 +212,10 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--turbulence=" << dVal;
     if (prefs.get( "ceiling", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--ceiling=" << buf;
-    if (prefs.get( "fetch_real_weather", dVal, 0. ) && dVal > 0.)
+    if (prefs.get( "fetch_real_weather", iVal, 0 ) && iVal)
         os << pfx << "--enable-real-weather-fetch";
+    else
+        os << pfx << "--disable-real-weather-fetch";
 
     // Freeze
     if (prefs.get( "freeze", iVal, 0 ) && iVal)
