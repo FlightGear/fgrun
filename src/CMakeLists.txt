@@ -85,7 +85,7 @@ endif (HAVE_FLTK_1_3)
 
 target_link_libraries(fgrun
     ${ui_libs_1_3}
-    ${SOCKETS_LIBRARY}
+    ${WINSOCK_LIBRARY}
     ${simgear_libs}
     ${OPENSCENEGRAPH_LIBRARIES} 
     ${FLTK_LIBRARIES}
