@@ -33,6 +33,7 @@
 #include <string.h>
 #include <cctype>
 #include <sys/stat.h>
+#include <errno.h>
 
 #include <FL/Fl.H>
 #include <FL/Fl_Preferences.H>

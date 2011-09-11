@@ -73,6 +73,7 @@ else (MSVC)
         ${SIMGEAR_BUCKET_LIBRARY}
         ${SIMGEAR_MODEL_LIBRARY}
         ${SIMGEAR_UTIL_LIBRARY}
+        ${SIMGEAR_THREADS_LIBRARY}
         )
 endif (MSVC)
 
