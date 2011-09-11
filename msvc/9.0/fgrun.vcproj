@@ -557,7 +557,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating german translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -601,7 +601,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating spanish translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -685,7 +685,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating french translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -705,7 +705,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating french translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -729,7 +729,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating italian translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -749,7 +749,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating italian translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -773,7 +773,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating dutch translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -793,7 +793,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating dutch translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -817,7 +817,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating polish translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -837,7 +837,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating polish translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
 				</FileConfiguration>
@@ -862,7 +862,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating portugese translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						AdditionalDependencies=""
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
@@ -884,7 +884,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Generating portugese translation"
-						CommandLine="..\..\..\3rdParty.x64\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
+						CommandLine="..\..\..\3rdParty\bin\msgfmt -o $(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo $(InputPath)&#x0D;&#x0A;"
 						AdditionalDependencies=""
 						Outputs="$(OutDir)\locale\$(InputName)\LC_MESSAGES\$(TargetName).mo"
 					/>
