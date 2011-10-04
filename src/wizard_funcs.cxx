@@ -41,7 +41,6 @@
 #include <FL/fl_ask.H>
 #include <FL/Fl_File_Chooser.H>
 #include <FL/fl_draw.H>
-#include <FL/Fl_File_Chooser.H>
 
 #include <simgear/math/SGMath.hxx>
 #include <simgear/props/props_io.hxx>
@@ -49,6 +48,7 @@
 #include <simgear/misc/sg_path.hxx>
 #include <simgear/misc/sg_dir.hxx>
 #include <simgear/io/raw_socket.hxx>
+#include <simgear/misc/ResourceManager.hxx>
 
 #include <osg/MatrixTransform>
 #include <osgDB/ReadFile>
@@ -214,6 +214,7 @@ Wizard::reset()
 
     prefs.get( "fg_root", buf, def_fg_root.c_str(), buflen-1);
     fg_root_->value( buf );
+    SGPath fgPath(buf);
     if ( fg_root_->size() == 0 )
     {
         char *e = getenv( "FG_ROOT" );
@@ -221,8 +222,11 @@ Wizard::reset()
         {
             prefs.set( "fg_root", e );
             fg_root_->value( e );
+            fgPath = e;
         }
     }
+
+    simgear::ResourceManager::instance()->addBasePath(fgPath);
 
     string fg_aircraft;
     if (prefs.get( "fg_aircraft", buf, "", buflen-1))
