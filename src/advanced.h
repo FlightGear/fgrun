@@ -124,6 +124,7 @@ private:
   static Fl_Menu_Item menu_bpp[];
   Fl_Value_Input *fov;
   Fl_Choice *texture_filtering;
+  Fl_Input *materials_file;
   Fl_Round_Button *time_match_real;
   void cb_time_match_real_i(Fl_Round_Button*, void*);
   static void cb_time_match_real(Fl_Round_Button*, void*);

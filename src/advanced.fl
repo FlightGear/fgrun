@@ -407,8 +407,8 @@ else
         }
       }
       Fl_Group {page[5]} {
-        label Rendering
-        private xywh {150 0 490 440} labelfont 1 labelsize 16 align 21 hide
+        label Rendering open
+        private xywh {150 0 490 440} labelfont 1 labelsize 16 align 21
       } {
         Fl_Check_Button clouds {
           label Clouds
@@ -515,6 +515,10 @@ else
         } {}
         Fl_Box {} {
           xywh {615 415 25 25} resizable
+        }
+        Fl_Input materials_file {
+          label {Materials file:} selected
+          private xywh {490 385 120 25} labelsize 12 textsize 12
         }
       }
       Fl_Group {page[6]} {
@@ -687,8 +691,8 @@ else
         }
       }
       Fl_Group {page[8]} {
-        label {Input/Output} open
-        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21
+        label {Input/Output}
+        private xywh {150 0 490 435} labelfont 1 labelsize 16 align 21 hide
       } {
         Fl_Browser io_list {
           callback {io_list_select_cb(o);}
@@ -902,7 +906,7 @@ else
               xywh {260 395 70 25} down_box DOWN_BOX labelsize 12
             }
             Fl_Value_Input repeat_value {
-              callback {repeat_value_cb();} selected
+              callback {repeat_value_cb();}
               xywh {330 395 55 25} labelsize 12 textsize 12 deactivate
             }
           }

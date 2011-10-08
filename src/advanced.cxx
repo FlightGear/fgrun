@@ -1047,7 +1047,6 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
       page[5]->labelfont(1);
       page[5]->labelsize(16);
       page[5]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
-      page[5]->hide();
       { clouds = new Fl_Check_Button(180, 40, 120, 25, _("Clouds"));
         clouds->tooltip(_("Enable 2D (flat) cloud layers"));
         clouds->down_box(FL_DOWN_BOX);
@@ -1173,6 +1172,10 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
       { Fl_Box* o = new Fl_Box(615, 415, 25, 25);
         Fl_Group::current()->resizable(o);
       } // Fl_Box* o
+      { materials_file = new Fl_Input(490, 385, 120, 25, _("Materials file:"));
+        materials_file->labelsize(12);
+        materials_file->textsize(12);
+      } // Fl_Input* materials_file
       page[5]->end();
     } // Fl_Group* page[5]
     { page[6] = new Fl_Group(150, 0, 490, 440, _("Time"));
@@ -1348,6 +1351,7 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
       page[8]->labelfont(1);
       page[8]->labelsize(16);
       page[8]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+      page[8]->hide();
       { io_list = new Fl_Browser(155, 40, 480, 125);
         io_list->type(2);
         io_list->labeltype(FL_NO_LABEL);

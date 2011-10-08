@@ -311,6 +311,8 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--fov=" << dVal;
     if (prefs.get( "texture-filtering", buf, "1", buflen-1 ) && strcmp(buf,"1")!=0)
         os << pfx << "--texture-filtering=" << buf;
+    if (prefs.get( "materials-file", buf, "", buflen-1 ) && buf[0] != 0)
+        os << pfx << "--materials-file=" << buf;
 
     // Time
     if (prefs.get( "time-match-real", iVal, 1 ) && iVal &&
