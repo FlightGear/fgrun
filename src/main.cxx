@@ -32,6 +32,7 @@
 #include <osgDB/Registry>
 #include <simgear/scene/model/ModelRegistry.hxx>
 #include <simgear/io/raw_socket.hxx>
+#include <simgear/structure/OSGVersion.hxx>
 
 #include "wizard.h"
 #include "i18n.h"
@@ -125,7 +126,9 @@ main( int argc, char* argv[] )
     textdomain( PACKAGE );
 
     osgDB::Registry* registry = osgDB::Registry::instance();
-	registry->setExpiryDelay( 0. );
+#if ( SG_OSG_VERSION >= 28003 && SG_OSG_VERSION < 29000 ) || SG_OSG_VERSION >= 29006
+    registry->setExpiryDelay( 0. );
+#endif
     osgDB::ReaderWriter::Options* options = new osgDB::ReaderWriter::Options;
     //int cacheOptions = osgDB::ReaderWriter::Options::CACHE_ALL;
     //options->setObjectCacheHint((osgDB::ReaderWriter::Options::CacheHintOptions)cacheOptions);
