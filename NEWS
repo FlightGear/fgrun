@@ -1,5 +1,8 @@
 * 1.6.0
 
+  * change to compile with old versions of OSG (needed to compile under freebsd)
+  * new --materials-file in advanced section
+  * fix white spaces in aircraft path
   * add Cmake build system
   * --fg-aircraft option support for fgfs and to display models in the aircraft browser
   * remove cache usage for aircraft models to lower memory requirements
