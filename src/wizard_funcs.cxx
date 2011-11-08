@@ -919,7 +919,11 @@ Wizard::fg_root_select_cb()
     char* p = fl_dir_chooser( _("Select FG_ROOT directory"),
                               fg_root_->value(), 0);
     if (p != 0)
+    {
+        if (*p != 0 && p[strlen(p)-1] == '/')
+            p[strlen(p)-1] = '\0';
         fg_root_->value( p );
+    }
 
     fg_root_update_cb();
 }
@@ -1190,6 +1194,8 @@ Wizard::aircraft_dir_add_cb()
     char* p = fl_dir_chooser( _("Select FG_AIRCRAFT directory"), 0, 0);
     if (p != 0)
     {
+        if (*p != 0 && p[strlen(p)-1] == '/')
+            p[strlen(p)-1] = '\0';
         aircraft_dir_list_->add( p );
         aircraft_dir_list_->value( aircraft_dir_list_->size() );
         aircraft_dir_list_->select( aircraft_dir_list_->size() );
@@ -1257,6 +1263,8 @@ Wizard::scenery_dir_add_cb()
     char* p = fl_dir_chooser( _("Select FG_SCENERY directory"), 0, 0);
     if (p != 0)
     {
+        if (*p != 0 && p[strlen(p)-1] == '/')
+            p[strlen(p)-1] = '\0';
         scenery_dir_list_->add( p );
         scenery_dir_list_->value( scenery_dir_list_->size() );
         scenery_dir_list_->select( scenery_dir_list_->size() );
