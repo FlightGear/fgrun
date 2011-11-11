@@ -120,6 +120,10 @@ struct AircraftData
     string status;
     string author;
     string modelPath;
+    int fdm;
+    int systems;
+    int cockpit;
+    int model;
 };
 
 static int widths[] = { 465, 30, 0 };
@@ -652,8 +656,8 @@ Wizard::preview_aircraft()
             if (model != 0)
             {
                 current_aircraft_model_path = path.str();
-                osg::ref_ptr<osg::Node> bounding_obj = find_named_node( model.get(), "Aircraft" );
-                preview->set_model( model.get(), bounding_obj.get() );
+                //osg::ref_ptr<osg::Node> bounding_obj = find_named_node( model.get(), "Aircraft" );
+                preview->set_model( model.get(), data->fdm, data->systems, data->cockpit, data->model );
 
                 Fl::add_timeout( update_period, timeout_handler, this );
             }
@@ -1084,10 +1088,12 @@ Wizard::aircraft_update( const char *aft )
                     data->root = path.str();
                     data->desc = desc;
                     data->status = props.getStringValue( "/sim/status" );
-                    data->modelPath = props.getStringValue( "/sim/model/path" );
-                    if ( data->status.empty() ) data->status = _( "Unknown" );
-                    data->author = props.getStringValue( "/sim/author" );
-                    if ( data->author.empty() ) data->author = _( "Unknown" );
+                    data->modelPath = props.getStringValue( "/sim/model/path", _( "Unknown" ) );
+                    data->author = props.getStringValue( "/sim/author", _( "Unknown" ) );
+                    data->fdm = props.getIntValue( "/sim/rating/FDM", -1 );
+                    data->systems = props.getIntValue( "/sim/rating/systems", -1 );
+                    data->cockpit = props.getIntValue( "/sim/rating/cockpit", -1 );
+                    data->model = props.getIntValue( "/sim/rating/model", -1 );
                     am[name].push_back( data );
                 }
             }

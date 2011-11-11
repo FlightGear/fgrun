@@ -27,11 +27,14 @@ protected:
 class Fl_OSG : public osgViewer::Viewer, public AdapterWidget {
 public:
     Fl_OSG(int x, int y, int w, int h, const char *label=0);
-    void set_model( osg::Node *model, osg::Node *bounding = 0 );
+    void set_model( osg::Node *m, int fdm, int systems, int cockpit, int model );
     void update();
+    virtual void resize(int x, int y, int w, int h);
 
 protected:
     virtual void draw();
+
+    osg::ref_ptr<osg::Camera> hud;
 };
 
 #endif

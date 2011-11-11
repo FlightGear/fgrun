@@ -50,7 +50,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.6.0\&quot; /DVERSION=\&quot;1.6.0\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.6.1\&quot; /DVERSION=\&quot;1.6.1\&quot;"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\SimGear;..\..\..\install\msvc90\OpenSceneGraph\include;..\..\..\boost_1_44_0;..\..\..\3rdParty\include"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS;_CRT_SECURE_NO_WARNINGS"
@@ -139,7 +139,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.6.0\&quot; /DVERSION=\&quot;1.6.0\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.6.1\&quot; /DVERSION=\&quot;1.6.1\&quot;"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\SimGear;..\..\..\install\msvc90-64\OpenSceneGraph\include;..\..\..\boost_1_44_0;..\..\..\3rdParty.x64\include"
 				PreprocessorDefinitions="WIN32,_DEBUG,_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS;_CRT_SECURE_NO_WARNINGS"
@@ -228,7 +228,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.6.0\&quot; /DVERSION=\&quot;1.6.0\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.6.1\&quot; /DVERSION=\&quot;1.6.1\&quot;"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="..\..\..\SimGear;..\..\..\install\msvc90\OpenSceneGraph\include;..\..\..\boost_1_44_0;..\..\..\3rdParty\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS;_CRT_SECURE_NO_WARNINGS"
@@ -318,7 +318,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.6.0\&quot; /DVERSION=\&quot;1.6.0\&quot;"
+				AdditionalOptions="/DPACKAGE_VERSION=\&quot;1.6.1\&quot; /DVERSION=\&quot;1.6.1\&quot;"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="..\..\..\SimGear;..\..\..\install\msvc90-64\OpenSceneGraph\include;..\..\..\boost_1_44_0;..\..\..\3rdParty.x64\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;NOMINMAX;_USE_MATH_DEFINES;PACKAGE=\&quot;fgrun\&quot;;ENABLE_NLS;_CRT_SECURE_NO_WARNINGS"

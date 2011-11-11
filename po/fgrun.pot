@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-08 15:58+0200\n"
+"POT-Creation-Date: 2011-11-11 20:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1319,8 +1319,8 @@ msgstr ""
 msgid "Prev"
 msgstr ""
 
-#: src/wizard.cxx:907 src/wizard_funcs.cxx:304 src/wizard_funcs.cxx:833
-#: src/wizard_funcs.cxx:1618 src/wizard_funcs.cxx:1627
+#: src/wizard.cxx:907 src/wizard_funcs.cxx:308 src/wizard_funcs.cxx:837
+#: src/wizard_funcs.cxx:1632 src/wizard_funcs.cxx:1641
 msgid "Next"
 msgstr ""
 
@@ -1474,7 +1474,7 @@ msgstr ""
 msgid "experimental"
 msgstr ""
 
-#: src/wizard_funcs.cxx:194
+#: src/wizard_funcs.cxx:198
 #, possible-c-format
 msgid ""
 "<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
@@ -1483,110 +1483,110 @@ msgid ""
 "<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
 msgstr ""
 
-#: src/wizard_funcs.cxx:364
+#: src/wizard_funcs.cxx:368
 msgid "Log Window"
 msgstr ""
 
-#: src/wizard_funcs.cxx:641
+#: src/wizard_funcs.cxx:645
 #, possible-c-format
 msgid "Model not found: '%s'"
 msgstr ""
 
-#: src/wizard_funcs.cxx:674
+#: src/wizard_funcs.cxx:678
 msgid "Property '/sim/model/path' not found"
 msgstr ""
 
-#: src/wizard_funcs.cxx:768 src/wizard_funcs.cxx:2265
-#: src/AirportBrowser.cxx:470 src/fgfsrc.cxx:99
+#: src/wizard_funcs.cxx:772 src/wizard_funcs.cxx:2279
+#: src/AirportBrowser.cxx:470 src/fgfsrc.cxx:101
 msgid "<default>"
 msgstr ""
 
-#: src/wizard_funcs.cxx:825
+#: src/wizard_funcs.cxx:829
 msgid "Run"
 msgstr ""
 
-#: src/wizard_funcs.cxx:848
+#: src/wizard_funcs.cxx:852
 msgid "About to reset current parameters"
 msgstr ""
 
-#: src/wizard_funcs.cxx:848 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:852 src/fgfsrc.cxx:61
 msgid "Abort"
 msgstr ""
 
-#: src/wizard_funcs.cxx:848
+#: src/wizard_funcs.cxx:852
 msgid "Reset"
 msgstr ""
 
-#: src/wizard_funcs.cxx:863
+#: src/wizard_funcs.cxx:867
 msgid "Select FlightGear executable"
 msgstr ""
 
-#: src/wizard_funcs.cxx:919
+#: src/wizard_funcs.cxx:923
 msgid "Select FG_ROOT directory"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1084 src/wizard_funcs.cxx:1086
+#: src/wizard_funcs.cxx:1091 src/wizard_funcs.cxx:1092
 msgid "Unknown"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1166
+#: src/wizard_funcs.cxx:1176
 #, possible-c-format
 msgid ""
 "Unable to delete '%s':\n"
 "%s"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1190
+#: src/wizard_funcs.cxx:1200
 msgid "Select FG_AIRCRAFT directory"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1257
+#: src/wizard_funcs.cxx:1269
 msgid "Select FG_SCENERY directory"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1360
+#: src/wizard_funcs.cxx:1374
 msgid "Select Terrasync executable"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1568
+#: src/wizard_funcs.cxx:1582
 msgid "Description of "
 msgstr ""
 
-#: src/wizard_funcs.cxx:1615
+#: src/wizard_funcs.cxx:1629
 msgid "TerraSync directory not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:1624
+#: src/wizard_funcs.cxx:1638
 msgid "TerraSync executable not set"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2408
+#: src/wizard_funcs.cxx:2422
 msgid "Load settings from..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2499
+#: src/wizard_funcs.cxx:2513
 msgid "Save settings as..."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2503
+#: src/wizard_funcs.cxx:2517
 #, possible-c-format
 msgid "Filename \"%s\" already exists."
 msgstr ""
 
-#: src/wizard_funcs.cxx:2503 src/fgfsrc.cxx:61
+#: src/wizard_funcs.cxx:2517 src/fgfsrc.cxx:61
 msgid "Overwrite"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2503
+#: src/wizard_funcs.cxx:2517
 msgid "Don't overwrite"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2591
+#: src/wizard_funcs.cxx:2605
 #, possible-c-format
 msgid "Unknown airport : '%s'"
 msgstr ""
 
-#: src/wizard_funcs.cxx:2597
+#: src/wizard_funcs.cxx:2611
 msgid "TerraSync must be configured"
 msgstr ""
 
@@ -1731,7 +1731,7 @@ msgstr ""
 msgid "Select file"
 msgstr ""
 
-#: src/main.cxx:142
+#: src/main.cxx:145
 #, possible-c-format
 msgid ""
 "Options are:\n"
@@ -1743,4 +1743,44 @@ msgid ""
 " --ts-dir=#\n"
 " -f, --fullscreen\n"
 "%s"
+msgstr ""
+
+#: src/Fl_OSG.cxx:100
+msgid "RatingPos"
+msgstr ""
+
+#: src/Fl_OSG.cxx:110
+msgid "Model : "
+msgstr ""
+
+#: src/Fl_OSG.cxx:114
+msgid "Model : unrated"
+msgstr ""
+
+#: src/Fl_OSG.cxx:126
+msgid "Cockpit : "
+msgstr ""
+
+#: src/Fl_OSG.cxx:132
+msgid "Cockpit : unrated"
+msgstr ""
+
+#: src/Fl_OSG.cxx:144
+msgid "Systems : "
+msgstr ""
+
+#: src/Fl_OSG.cxx:150
+msgid "Systems : unrated"
+msgstr ""
+
+#: src/Fl_OSG.cxx:162
+msgid "FDM : "
+msgstr ""
+
+#: src/Fl_OSG.cxx:168
+msgid "FDM : unrated"
+msgstr ""
+
+#: src/Fl_OSG.cxx:181
+msgid "Rating"
 msgstr ""
