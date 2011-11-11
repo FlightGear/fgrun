@@ -92,7 +92,9 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--fg-aircraft=" << buf;
 
     // General options.
-    if (prefs.get( "airport", buf, "", buflen-1 ) && buf[0] != 0)
+    if (prefs.get( "carrier", buf, "", buflen-1 ) && buf[0] != 0)
+        os << pfx << "--carrier=" << buf;
+    else if (prefs.get( "airport", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--airport=" << buf;
 
     if (prefs.get( "runway", buf, "", buflen-1 ) &&
@@ -102,8 +104,6 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     if (prefs.get( "aircraft", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--aircraft=" << buf;
 
-    if (prefs.get( "carrier", buf, "", buflen-1 ) && buf[0] != 0)
-        os << pfx << "--carrier=" << buf;
     if (prefs.get( "parkpos", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--parkpos=" << buf;
 
