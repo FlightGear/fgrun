@@ -1087,7 +1087,7 @@ Wizard::aircraft_update( const char *aft )
                     data->name = ss;
                     data->root = path.str();
                     data->desc = desc;
-                    data->status = props.getStringValue( "/sim/status" );
+                    data->status = props.getStringValue( "/sim/status", _( "Unknown" ) );
                     data->modelPath = props.getStringValue( "/sim/model/path", _( "Unknown" ) );
                     data->author = props.getStringValue( "/sim/author", _( "Unknown" ) );
                     data->fdm = props.getIntValue( "/sim/rating/FDM", -1 );
