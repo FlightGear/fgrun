@@ -31,56 +31,58 @@ void Fl_OSG::draw() {
 }
 
 static
+osg::Geometry *drawStar( osg::Vec3 position, int xincr, double size, double depth, osg::Vec4 color ) {
+    osg::Geometry* geom = new osg::Geometry;
+    osg::Vec3Array* vertices = new osg::Vec3Array;
+    osg::Vec3 delta( 110+xincr, 7, 0 );
+    vertices->push_back(position+delta+osg::Vec3( 0.951057,  0.309017, depth)*size);
+    vertices->push_back(position+delta+osg::Vec3(-0.587785, -0.809017, depth)*size);
+    vertices->push_back(position+delta+osg::Vec3(-0.000000, -0.381966, depth)*size);
+    vertices->push_back(position+delta+osg::Vec3( 0.000000,  1.000000, depth)*size);
+    vertices->push_back(position+delta+osg::Vec3(-0.224514,  0.309017, depth)*size);
+    vertices->push_back(position+delta+osg::Vec3(-0.363271, -0.118034, depth)*size);
+    vertices->push_back(position+delta+osg::Vec3( 0.587785, -0.809017, depth)*size);
+    vertices->push_back(position+delta+osg::Vec3( 0.224514,  0.309017, depth)*size);
+    vertices->push_back(position+delta+osg::Vec3( 0.363271, -0.118034, depth)*size);
+    vertices->push_back(position+delta+osg::Vec3(-0.951056,  0.309017, depth)*size);
+    geom->setVertexArray(vertices);
+
+    osg::DrawElementsUByte *de = new osg::DrawElementsUByte( GL_TRIANGLES );
+    de->push_back(3); de->push_back(4); de->push_back(7);
+    de->push_back(0); de->push_back(7); de->push_back(8);
+    de->push_back(2); de->push_back(6); de->push_back(8);
+    de->push_back(1); de->push_back(2); de->push_back(5);
+    de->push_back(4); de->push_back(9); de->push_back(5);
+    de->push_back(4); de->push_back(5); de->push_back(7);
+    de->push_back(5); de->push_back(8); de->push_back(7);
+    de->push_back(2); de->push_back(8); de->push_back(5);
+
+    osg::Vec3Array* normals = new osg::Vec3Array;
+    normals->push_back(osg::Vec3(0.0f,0.0f,1.0f));
+    geom->setNormalArray(normals);
+    geom->setNormalBinding(osg::Geometry::BIND_OVERALL);
+
+    osg::Vec4Array* colors = new osg::Vec4Array;
+    colors->push_back(color);
+    geom->setColorArray(colors);
+    geom->setColorBinding(osg::Geometry::BIND_OVERALL);
+
+    osg::StateSet* stateset = geom->getOrCreateStateSet();
+    stateset->setMode(GL_BLEND,osg::StateAttribute::ON);
+    stateset->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
+
+    geom->addPrimitiveSet(de);
+    return geom;
+}
+
+static
 void addBar( osg::Geode *geode, osg::Vec3 &position, int xincr, int val ) {
-    osg::ref_ptr<osg::Geometry> geom = new osg::Geometry;
-    {
-    osg::Vec3Array* vertices = new osg::Vec3Array;
-    vertices->push_back(osg::Vec3(position.x()+100+xincr,position.y()-2,-0.1));
-    vertices->push_back(osg::Vec3(position.x()+250+xincr,position.y()-2,-0.1));
-    vertices->push_back(osg::Vec3(position.x()+250+xincr,position.y()+14,-0.1));
-    vertices->push_back(osg::Vec3(position.x()+100+xincr,position.y()+14,-0.1));
-    geom->setVertexArray(vertices);
-    osg::Vec3Array* normals = new osg::Vec3Array;
-    normals->push_back(osg::Vec3(0.0f,0.0f,1.0f));
-    geom->setNormalArray(normals);
-    geom->setNormalBinding(osg::Geometry::BIND_OVERALL);
-    osg::Vec4Array* colors = new osg::Vec4Array;
-    colors->push_back(osg::Vec4(1.0f,1.0,0.8f,0.5f));
-    geom->setColorArray(colors);
-    geom->setColorBinding(osg::Geometry::BIND_OVERALL);
-    geom->addPrimitiveSet(new osg::DrawArrays(GL_QUADS,0,4));
-    osg::StateSet* stateset = geom->getOrCreateStateSet();
-    stateset->setMode(GL_BLEND,osg::StateAttribute::ON);
-    //stateset->setAttribute(new osg::PolygonOffset(1.0f,1.0f),osg::StateAttribute::ON);
-    stateset->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
-    geode->addDrawable(geom);
+    for ( int i = 0; i < 5; ++i ) {
+        geode->addDrawable( drawStar( position+osg::Vec3(25*i,0,0), xincr, 12, -0.1, osg::Vec4( 1., 1., .8, 0.2 ) ) );
     }
-    geom = new osg::Geometry;
-    {
-    val *= 30;
-    if (val <= 0) val = 3;
-    if (val >= 150 ) val -= 2;
-    val -= 2;
-    osg::Vec3Array* vertices = new osg::Vec3Array;
-    vertices->push_back(osg::Vec3(position.x()+102+xincr,position.y(),0.0));
-    vertices->push_back(osg::Vec3(position.x()+102+xincr+val,position.y(),0.0));
-    vertices->push_back(osg::Vec3(position.x()+102+xincr+val,position.y()+12,0.0));
-    vertices->push_back(osg::Vec3(position.x()+102+xincr,position.y()+12,0.0));
-    geom->setVertexArray(vertices);
-    osg::Vec3Array* normals = new osg::Vec3Array;
-    normals->push_back(osg::Vec3(0.0f,0.0f,1.0f));
-    geom->setNormalArray(normals);
-    geom->setNormalBinding(osg::Geometry::BIND_OVERALL);
-    osg::Vec4Array* colors = new osg::Vec4Array;
-    colors->push_back(osg::Vec4(1.0f,1.0,0.0f,0.5f));
-    geom->setColorArray(colors);
-    geom->setColorBinding(osg::Geometry::BIND_OVERALL);
-    geom->addPrimitiveSet(new osg::DrawArrays(GL_QUADS,0,4));
-    osg::StateSet* stateset = geom->getOrCreateStateSet();
-    stateset->setMode(GL_BLEND,osg::StateAttribute::ON);
-    //stateset->setAttribute(new osg::PolygonOffset(1.0f,1.0f),osg::StateAttribute::ON);
-    stateset->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
-    geode->addDrawable(geom);
+
+    for ( int i=0; i < val; ++i ) {
+        geode->addDrawable( drawStar( position+osg::Vec3(25*i,0,0), xincr, 9, 0, osg::Vec4( 1., 1., 0., 0.7 ) ) );
     }
 }
 
@@ -123,9 +125,9 @@ void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int mod
         text->setFont(font);
         text->setPosition(position);
         text->setCharacterSize( 20.0 );
-        text->setText(_("Cockpit : "));
 
         if ( cockpit >= 0 && cockpit <= 5 ) {
+            text->setText(_("Cockpit : "));
             addBar( geode, position, xincr, cockpit );
         }
         else {
@@ -141,9 +143,9 @@ void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int mod
         text->setFont(font);
         text->setPosition(position);
         text->setCharacterSize( 20.0 );
-        text->setText(_("Systems : "));
 
         if ( systems >= 0 && systems <= 5 ) {
+            text->setText(_("Systems : "));
             addBar( geode, position, xincr, systems );
         }
         else {
@@ -159,9 +161,9 @@ void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int mod
         text->setFont(font);
         text->setPosition(position);
         text->setCharacterSize( 20.0 );
-        text->setText(_("FDM : "));
 
         if ( fdm >= 0 && fdm <= 5 ) {
+            text->setText(_("FDM : "));
             addBar( geode, position, xincr, fdm );
         }
         else {
