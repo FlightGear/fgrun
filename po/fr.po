@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-11 20:26+0100\n"
+"POT-Creation-Date: 2011-11-12 13:46+0100\n"
 "PO-Revision-Date: 2008-01-05 19:05+0100\n"
 "Last-Translator: <fredb@users.sourceforge.net>\n"
 "Language-Team: French\n"
@@ -1784,42 +1784,27 @@ msgstr ""
 " -f, --fullscreen\n"
 "%s"
 
-#: src/Fl_OSG.cxx:100
+# Adjust horizontal position of stars
+#: src/Fl_OSG.cxx:150
 msgid "RatingPos"
 msgstr "35"
 
-#: src/Fl_OSG.cxx:110
+#: src/Fl_OSG.cxx:152
 msgid "Model : "
 msgstr "Modèle :"
 
-#: src/Fl_OSG.cxx:114
-msgid "Model : unrated"
-msgstr "Modèle : non noté"
-
-#: src/Fl_OSG.cxx:126
+#: src/Fl_OSG.cxx:154
 msgid "Cockpit : "
 msgstr "Cockpit : "
 
-#: src/Fl_OSG.cxx:132
-msgid "Cockpit : unrated"
-msgstr "Cockpit : non noté"
-
-#: src/Fl_OSG.cxx:144
+#: src/Fl_OSG.cxx:156
 msgid "Systems : "
 msgstr "Systèmes :"
 
-#: src/Fl_OSG.cxx:150
-msgid "Systems : unrated"
-msgstr "Systèmes : non notés"
-
-#: src/Fl_OSG.cxx:162
+#: src/Fl_OSG.cxx:158
 msgid "FDM : "
 msgstr "Modèle de vol :"
 
-#: src/Fl_OSG.cxx:168
-msgid "FDM : unrated"
-msgstr "Modèle de vol : non noté"
-
-#: src/Fl_OSG.cxx:181
+#: src/Fl_OSG.cxx:162
 msgid "Rating"
 msgstr "Notation"

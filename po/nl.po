@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-11 20:26+0100\n"
+"POT-Creation-Date: 2011-11-12 13:46+0100\n"
 "PO-Revision-Date: 2010-05-23 18:36+0200\n"
 "Last-Translator: Gijs de Rooy <gijsrooy@hotmail.com>\n"
 "Language-Team: Dutch\n"
@@ -1881,44 +1881,29 @@ msgstr ""
 " -f, --fullscreen\n"
 "%s"
 
-#: src/Fl_OSG.cxx:100
+# Adjust horizontal position of stars
+#: src/Fl_OSG.cxx:150
 msgid "RatingPos"
-msgstr ""
+msgstr "80"
 
-#: src/Fl_OSG.cxx:110
+#: src/Fl_OSG.cxx:152
 msgid "Model : "
 msgstr ""
 
-#: src/Fl_OSG.cxx:114
-msgid "Model : unrated"
-msgstr ""
-
-#: src/Fl_OSG.cxx:126
+#: src/Fl_OSG.cxx:154
 msgid "Cockpit : "
 msgstr ""
 
-#: src/Fl_OSG.cxx:132
-msgid "Cockpit : unrated"
-msgstr ""
-
-#: src/Fl_OSG.cxx:144
+#: src/Fl_OSG.cxx:156
 #, fuzzy
 msgid "Systems : "
 msgstr "systeem"
 
-#: src/Fl_OSG.cxx:150
-msgid "Systems : unrated"
-msgstr ""
-
-#: src/Fl_OSG.cxx:162
+#: src/Fl_OSG.cxx:158
 msgid "FDM : "
 msgstr ""
 
-#: src/Fl_OSG.cxx:168
-msgid "FDM : unrated"
-msgstr ""
-
-#: src/Fl_OSG.cxx:181
+#: src/Fl_OSG.cxx:162
 #, fuzzy
 msgid "Rating"
 msgstr "Schaduwen"

@@ -3,8 +3,11 @@
 #include "Fl_OSG.h"
 #include "i18n.h"
 
+#include <osg/LineWidth>
 #include <osgGA/TrackballManipulator>
 #include <osgViewer/ViewerEventHandlers>
+
+#define HUD_SCALE_FACTOR    1.5
 
 Fl_OSG::Fl_OSG( int x, int y, int w, int h, const char *label )
 : AdapterWidget(x,y,w,h,label) {
@@ -14,7 +17,7 @@ Fl_OSG::Fl_OSG( int x, int y, int w, int h, const char *label )
     setThreadingModel( osgViewer::Viewer::SingleThreaded );
 
     hud = new osg::Camera;
-    hud->setProjectionMatrix( osg::Matrix::ortho( 0, w, 0, h, 0, -1 ) );
+    hud->setProjectionMatrix( osg::Matrix::ortho( 0, w*HUD_SCALE_FACTOR, 0, h*HUD_SCALE_FACTOR, 0, -1 ) );
     hud->setReferenceFrame( osg::Transform::ABSOLUTE_RF );
     hud->setViewMatrix( osg::Matrix::identity() );
     hud->setClearMask( GL_DEPTH_BUFFER_BIT );
@@ -76,6 +79,34 @@ osg::Geometry *drawStar( osg::Vec3 position, int xincr, double size, double dept
 }
 
 static
+osg::Geometry *drawUnrated( osg::Vec3 position, int xincr ) {
+    osg::Geometry* geom = new osg::Geometry;
+    osg::Vec3Array* vertices = new osg::Vec3Array;
+    osg::Vec3 delta( 110+xincr, 7, 0 );
+    vertices->push_back(osg::Vec3(position.x()+100+xincr,position.y()-2,0));
+    vertices->push_back(osg::Vec3(position.x()+225+xincr,position.y()+14,0));
+    vertices->push_back(osg::Vec3(position.x()+225+xincr,position.y()-2,0));
+    vertices->push_back(osg::Vec3(position.x()+100+xincr,position.y()+14,0));
+    geom->setVertexArray(vertices);
+
+    osg::Vec3Array* normals = new osg::Vec3Array;
+    normals->push_back(osg::Vec3(0.0f,0.0f,1.0f));
+    geom->setNormalArray(normals);
+    geom->setNormalBinding(osg::Geometry::BIND_OVERALL);
+
+    osg::Vec4Array* colors = new osg::Vec4Array;
+    colors->push_back(osg::Vec4(1.,0.,0.,7.));
+    geom->setColorArray(colors);
+    geom->setColorBinding(osg::Geometry::BIND_OVERALL);
+
+    osg::StateSet* stateset = geom->getOrCreateStateSet();
+    stateset->setAttributeAndModes( new osg::LineWidth(1) );
+
+    geom->addPrimitiveSet(new osg::DrawArrays(GL_LINES,0,2));
+    return geom;
+}
+
+static
 void addBar( osg::Geode *geode, osg::Vec3 &position, int xincr, int val ) {
     for ( int i = 0; i < 5; ++i ) {
         geode->addDrawable( drawStar( position+osg::Vec3(25*i,0,0), xincr, 12, -0.1, osg::Vec4( 1., 1., .8, 0.2 ) ) );
@@ -84,6 +115,24 @@ void addBar( osg::Geode *geode, osg::Vec3 &position, int xincr, int val ) {
     for ( int i=0; i < val; ++i ) {
         geode->addDrawable( drawStar( position+osg::Vec3(25*i,0,0), xincr, 9, 0, osg::Vec4( 1., 1., 0., 0.7 ) ) );
     }
+    if (val < 0)
+        geode->addDrawable( drawUnrated( position, xincr ) );
+}
+
+static
+osgText::Text *drawText( const char *t, osg::Vec3 position ) {
+    osgText::Text* text = new osgText::Text;
+    text->setFont("fonts/arial.ttf");
+    text->setPosition(position);
+    text->setCharacterSize( 20.0 );
+    text->setText(t);
+    return text;
+}
+
+static
+void drawRating( osg::Geode *geode, osg::Vec3 position, const char *t, int rating, int xincr ) {
+    geode->addDrawable( drawText( t, position ) );
+    addBar( geode, position, xincr, ( rating >= 0 && rating <= 5 ) ? rating : -1 );
 }
 
 void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int model ) {
@@ -92,7 +141,6 @@ void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int mod
 
     hud->removeChildren( 0, hud->getNumChildren() );
     osg::Geode *geode = new osg::Geode;
-    std::string font("fonts/arial.ttf");
     osg::StateSet* stateset = geode->getOrCreateStateSet();
     stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
 
@@ -100,89 +148,20 @@ void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int mod
     osg::Vec3 deltaY(0.0f,22.0f,0.0f);
     osg::Vec3 deltaX(20.0f,0.0f,0.0f);
     int xincr = atoi( _("RatingPos") );
-    {
-        osgText::Text* text = new  osgText::Text;
-        geode->addDrawable( text );
 
-        text->setFont(font);
-        text->setPosition(position);
-        text->setCharacterSize( 20.0 );
+    drawRating( geode, position, _("Model : "), model, xincr );
+    position += deltaY;
+    drawRating( geode, position, _("Cockpit : "), cockpit, xincr );
+    position += deltaY;
+    drawRating( geode, position, _("Systems : "), systems, xincr );
+    position += deltaY;
+    drawRating( geode, position, _("FDM : "), fdm, xincr );
+    position += deltaY;
 
-        if ( model >= 0 && model <= 5 ) {
-            text->setText(_("Model : "));
-            addBar( geode, position, xincr, model );
-        }
-        else {
-            text->setText(_("Model : unrated"));
-        }
+    position -= deltaX;
+    geode->addDrawable( drawText( _("Rating"), position ) );
+    position += deltaY;
 
-        position += deltaY;
-    }
-    {
-        osgText::Text* text = new  osgText::Text;
-        geode->addDrawable( text );
-
-        text->setFont(font);
-        text->setPosition(position);
-        text->setCharacterSize( 20.0 );
-
-        if ( cockpit >= 0 && cockpit <= 5 ) {
-            text->setText(_("Cockpit : "));
-            addBar( geode, position, xincr, cockpit );
-        }
-        else {
-            text->setText(_("Cockpit : unrated"));
-        }
-
-        position += deltaY;
-    }
-    {
-        osgText::Text* text = new  osgText::Text;
-        geode->addDrawable( text );
-
-        text->setFont(font);
-        text->setPosition(position);
-        text->setCharacterSize( 20.0 );
-
-        if ( systems >= 0 && systems <= 5 ) {
-            text->setText(_("Systems : "));
-            addBar( geode, position, xincr, systems );
-        }
-        else {
-            text->setText(_("Systems : unrated"));
-        }
-
-        position += deltaY;
-    }
-    {
-        osgText::Text* text = new  osgText::Text;
-        geode->addDrawable( text );
-
-        text->setFont(font);
-        text->setPosition(position);
-        text->setCharacterSize( 20.0 );
-
-        if ( fdm >= 0 && fdm <= 5 ) {
-            text->setText(_("FDM : "));
-            addBar( geode, position, xincr, fdm );
-        }
-        else {
-            text->setText(_("FDM : unrated"));
-        }
-
-        position += deltaY;
-        position -= deltaX;
-    }
-    {
-        osgText::Text* text = new  osgText::Text;
-        geode->addDrawable( text );
-
-        text->setFont(font);
-        text->setPosition(position);
-        text->setCharacterSize( 20.0 );
-        text->setText(_("Rating"));
-        position += deltaY;
-    }
     hud->addChild( geode );
 
     root->addChild( hud );
@@ -190,7 +169,7 @@ void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int mod
 }
 
 void Fl_OSG::resize(int x, int y, int w, int h) {
-    hud->setProjectionMatrix( osg::Matrix::ortho( 0, w, 0, h, 0, -1 ) );
+    hud->setProjectionMatrix( osg::Matrix::ortho( 0, w*HUD_SCALE_FACTOR, 0, h*HUD_SCALE_FACTOR, 0, -1 ) );
     AdapterWidget::resize(x, y, w, h);
 }
 
