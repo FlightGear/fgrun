@@ -2,6 +2,7 @@
 
 #include "Fl_OSG.h"
 #include "i18n.h"
+#include <cmath>
 
 #include <osg/LineWidth>
 #include <osgGA/TrackballManipulator>
@@ -37,28 +38,23 @@ static
 osg::Geometry *drawStar( osg::Vec3 position, int xincr, double size, double depth, osg::Vec4 color ) {
     osg::Geometry* geom = new osg::Geometry;
     osg::Vec3Array* vertices = new osg::Vec3Array;
-    osg::Vec3 delta( 110+xincr, 7, 0 );
-    vertices->push_back(position+delta+osg::Vec3( 0.951057,  0.309017, depth)*size);
-    vertices->push_back(position+delta+osg::Vec3(-0.587785, -0.809017, depth)*size);
-    vertices->push_back(position+delta+osg::Vec3(-0.000000, -0.381966, depth)*size);
-    vertices->push_back(position+delta+osg::Vec3( 0.000000,  1.000000, depth)*size);
-    vertices->push_back(position+delta+osg::Vec3(-0.224514,  0.309017, depth)*size);
-    vertices->push_back(position+delta+osg::Vec3(-0.363271, -0.118034, depth)*size);
-    vertices->push_back(position+delta+osg::Vec3( 0.587785, -0.809017, depth)*size);
-    vertices->push_back(position+delta+osg::Vec3( 0.224514,  0.309017, depth)*size);
-    vertices->push_back(position+delta+osg::Vec3( 0.363271, -0.118034, depth)*size);
-    vertices->push_back(position+delta+osg::Vec3(-0.951056,  0.309017, depth)*size);
-    geom->setVertexArray(vertices);
-
     osg::DrawElementsUByte *de = new osg::DrawElementsUByte( GL_TRIANGLES );
-    de->push_back(3); de->push_back(4); de->push_back(7);
-    de->push_back(0); de->push_back(7); de->push_back(8);
-    de->push_back(2); de->push_back(6); de->push_back(8);
-    de->push_back(1); de->push_back(2); de->push_back(5);
-    de->push_back(4); de->push_back(9); de->push_back(5);
-    de->push_back(4); de->push_back(5); de->push_back(7);
-    de->push_back(5); de->push_back(8); de->push_back(7);
-    de->push_back(2); de->push_back(8); de->push_back(5);
+
+    osg::Vec3 delta( 110+xincr, 7, 0 );
+    double innerScale = cos( 2.*M_PI / 5. ) / cos( M_PI / 5. );
+    double dAngle = M_PI / 5.;
+    for ( int i = 0; i < 5; ++i ) {
+        double angle = (2. * i * M_PI / 5.) + (M_PI / 2.);
+        vertices->push_back( position+delta+osg::Vec3( cos( angle )*size, sin( angle )*size, depth ) );
+        vertices->push_back( position+delta+osg::Vec3( cos( angle+dAngle )*size*innerScale, sin( angle+dAngle )*size*innerScale, depth ) );
+        de->push_back( (2*i + 9) % 10 );
+        de->push_back( 2*i );
+        de->push_back( 2*i + 1 );
+    }
+    geom->setVertexArray(vertices);
+    de->push_back(1); de->push_back(3); de->push_back(5);
+    de->push_back(5); de->push_back(7); de->push_back(9);
+    de->push_back(1); de->push_back(5); de->push_back(9);
 
     osg::Vec3Array* normals = new osg::Vec3Array;
     normals->push_back(osg::Vec3(0.0f,0.0f,1.0f));
@@ -85,8 +81,6 @@ osg::Geometry *drawUnrated( osg::Vec3 position, int xincr ) {
     osg::Vec3 delta( 110+xincr, 7, 0 );
     vertices->push_back(osg::Vec3(position.x()+100+xincr,position.y()-2,0));
     vertices->push_back(osg::Vec3(position.x()+225+xincr,position.y()+14,0));
-    vertices->push_back(osg::Vec3(position.x()+225+xincr,position.y()-2,0));
-    vertices->push_back(osg::Vec3(position.x()+100+xincr,position.y()+14,0));
     geom->setVertexArray(vertices);
 
     osg::Vec3Array* normals = new osg::Vec3Array;
@@ -103,6 +97,7 @@ osg::Geometry *drawUnrated( osg::Vec3 position, int xincr ) {
     stateset->setAttributeAndModes( new osg::LineWidth(1) );
 
     geom->addPrimitiveSet(new osg::DrawArrays(GL_LINES,0,2));
+    //geom->setEventCallback( 
     return geom;
 }
 
