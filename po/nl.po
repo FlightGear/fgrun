@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 13:46+0100\n"
+"POT-Creation-Date: 2011-11-17 08:51+0100\n"
 "PO-Revision-Date: 2010-05-23 18:36+0200\n"
 "Last-Translator: Gijs de Rooy <gijsrooy@hotmail.com>\n"
 "Language-Team: Dutch\n"
@@ -1642,7 +1642,8 @@ msgstr "Stel FlightGear programma in"
 msgid "Select FG_ROOT directory"
 msgstr "Stel FG_ROOT map in"
 
-#: src/wizard_funcs.cxx:1091 src/wizard_funcs.cxx:1092
+#: src/wizard_funcs.cxx:1090 src/wizard_funcs.cxx:1091
+#: src/wizard_funcs.cxx:1092
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -1858,7 +1859,7 @@ msgstr "Bestand opslaan als?"
 msgid "Select file"
 msgstr "Selecter protocol-bestand"
 
-#: src/main.cxx:145
+#: src/main.cxx:155
 #, c-format
 msgid ""
 "Options are:\n"
@@ -1882,11 +1883,11 @@ msgstr ""
 "%s"
 
 # Adjust horizontal position of stars
-#: src/Fl_OSG.cxx:150
+#: src/Fl_OSG.cxx:145
 msgid "RatingPos"
 msgstr "80"
 
-#: src/Fl_OSG.cxx:152
+#: src/Fl_OSG.cxx:149
 msgid "Model : "
 msgstr ""
 
@@ -1894,16 +1895,21 @@ msgstr ""
 msgid "Cockpit : "
 msgstr ""
 
-#: src/Fl_OSG.cxx:156
+#: src/Fl_OSG.cxx:159
 #, fuzzy
 msgid "Systems : "
 msgstr "systeem"
 
-#: src/Fl_OSG.cxx:158
+#: src/Fl_OSG.cxx:164
 msgid "FDM : "
 msgstr ""
 
-#: src/Fl_OSG.cxx:162
+#: src/Fl_OSG.cxx:171
 #, fuzzy
 msgid "Rating"
+msgstr "Schaduwen"
+
+#: src/Fl_OSG.cxx:173
+#, fuzzy
+msgid "No Rating"
 msgstr "Schaduwen"

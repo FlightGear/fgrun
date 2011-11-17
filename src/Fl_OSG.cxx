@@ -144,17 +144,34 @@ void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int mod
     osg::Vec3 deltaX(20.0f,0.0f,0.0f);
     int xincr = atoi( _("RatingPos") );
 
-    drawRating( geode, position, _("Model : "), model, xincr );
-    position += deltaY;
-    drawRating( geode, position, _("Cockpit : "), cockpit, xincr );
-    position += deltaY;
-    drawRating( geode, position, _("Systems : "), systems, xincr );
-    position += deltaY;
-    drawRating( geode, position, _("FDM : "), fdm, xincr );
-    position += deltaY;
+    bool hasRating = false;
+    if (model >= 0 && model <= 5 ) {
+        drawRating( geode, position, _("Model : "), model, xincr );
+        position += deltaY;
+        hasRating = true;
+    }
+    if (cockpit >= 0 && cockpit <= 5 ) {
+        drawRating( geode, position, _("Cockpit : "), cockpit, xincr );
+        position += deltaY;
+        hasRating = true;
+    }
+    if (systems >= 0 && systems <= 5 ) {
+        drawRating( geode, position, _("Systems : "), systems, xincr );
+        position += deltaY;
+        hasRating = true;
+    }
+    if (fdm >= 0 && fdm <= 5 ) {
+        drawRating( geode, position, _("FDM : "), fdm, xincr );
+        position += deltaY;
+        hasRating = true;
+    }
 
     position -= deltaX;
-    geode->addDrawable( drawText( _("Rating"), position ) );
+    if (hasRating) {
+        geode->addDrawable( drawText( _("Rating"), position ) );
+    } else {
+        geode->addDrawable( drawText( _("No Rating"), position ) );
+    }
     position += deltaY;
 
     hud->addChild( geode );

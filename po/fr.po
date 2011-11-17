@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 13:46+0100\n"
+"POT-Creation-Date: 2011-11-17 08:51+0100\n"
 "PO-Revision-Date: 2008-01-05 19:05+0100\n"
 "Last-Translator: <fredb@users.sourceforge.net>\n"
 "Language-Team: French\n"
@@ -1553,7 +1553,8 @@ msgstr "Choisir le fichier exécutable de FlightGear"
 msgid "Select FG_ROOT directory"
 msgstr "Choisir le répertoire FG_ROOT"
 
-#: src/wizard_funcs.cxx:1091 src/wizard_funcs.cxx:1092
+#: src/wizard_funcs.cxx:1090 src/wizard_funcs.cxx:1091
+#: src/wizard_funcs.cxx:1092
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -1761,7 +1762,7 @@ msgstr "Sauver sous ?"
 msgid "Select file"
 msgstr "Choisir un fichier"
 
-#: src/main.cxx:145
+#: src/main.cxx:155
 #, c-format
 msgid ""
 "Options are:\n"
@@ -1785,11 +1786,11 @@ msgstr ""
 "%s"
 
 # Adjust horizontal position of stars
-#: src/Fl_OSG.cxx:150
+#: src/Fl_OSG.cxx:145
 msgid "RatingPos"
 msgstr "35"
 
-#: src/Fl_OSG.cxx:152
+#: src/Fl_OSG.cxx:149
 msgid "Model : "
 msgstr "Modèle :"
 
@@ -1797,14 +1798,18 @@ msgstr "Modèle :"
 msgid "Cockpit : "
 msgstr "Cockpit : "
 
-#: src/Fl_OSG.cxx:156
+#: src/Fl_OSG.cxx:159
 msgid "Systems : "
 msgstr "Systèmes :"
 
-#: src/Fl_OSG.cxx:158
+#: src/Fl_OSG.cxx:164
 msgid "FDM : "
 msgstr "Modèle de vol :"
 
-#: src/Fl_OSG.cxx:162
+#: src/Fl_OSG.cxx:171
 msgid "Rating"
 msgstr "Notation"
+
+#: src/Fl_OSG.cxx:173
+msgid "No Rating"
+msgstr "Pas de notation"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 13:46+0100\n"
+"POT-Creation-Date: 2011-11-17 08:51+0100\n"
 "PO-Revision-Date: 2008-12-15 22:12+0100\n"
 "Last-Translator:  <pl.flightgear@gmail.com>\n"
 "Language-Team: Polish\n"
@@ -1588,7 +1588,8 @@ msgstr "Wskaz plik wykonywalny FlightGear"
 msgid "Select FG_ROOT directory"
 msgstr "Wskaz katalog glowny FlightGear"
 
-#: src/wizard_funcs.cxx:1091 src/wizard_funcs.cxx:1092
+#: src/wizard_funcs.cxx:1090 src/wizard_funcs.cxx:1091
+#: src/wizard_funcs.cxx:1092
 msgid "Unknown"
 msgstr "Nieznany"
 
@@ -1816,7 +1817,7 @@ msgstr "Zapisz jako?"
 msgid "Select file"
 msgstr "Wskaz plik protokolu"
 
-#: src/main.cxx:145
+#: src/main.cxx:155
 #, c-format
 msgid ""
 "Options are:\n"
@@ -1840,11 +1841,11 @@ msgstr ""
 "%s"
 
 # Adjust horizontal position of stars
-#: src/Fl_OSG.cxx:150
+#: src/Fl_OSG.cxx:145
 msgid "RatingPos"
 msgstr "80"
 
-#: src/Fl_OSG.cxx:152
+#: src/Fl_OSG.cxx:149
 #, fuzzy
 msgid "Model : "
 msgstr "Czestotliwosc (Hz)"
@@ -1853,17 +1854,22 @@ msgstr "Czestotliwosc (Hz)"
 msgid "Cockpit : "
 msgstr ""
 
-#: src/Fl_OSG.cxx:156
+#: src/Fl_OSG.cxx:159
 #, fuzzy
 msgid "Systems : "
 msgstr "elektrycznosc"
 
-#: src/Fl_OSG.cxx:158
+#: src/Fl_OSG.cxx:164
 #, fuzzy
 msgid "FDM : "
 msgstr "MDL"
 
-#: src/Fl_OSG.cxx:162
+#: src/Fl_OSG.cxx:171
 #, fuzzy
 msgid "Rating"
+msgstr "Cieniowanie"
+
+#: src/Fl_OSG.cxx:173
+#, fuzzy
+msgid "No Rating"
 msgstr "Cieniowanie"

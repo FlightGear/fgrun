@@ -105,14 +105,24 @@ parse_args( int, char** argv, int& i )
 string
 get_locale_directory( const char *argv0 )
 {
-#if _MSC_VER && !defined(LOCALEDIR)
+#ifdef LOCALEDIR
+    SGPath localedir = LOCALEDIR;
+    if (localedir.exists())
+        return localedir.str();
+#endif
+
     SGPath path = argv0;
     path = path.dir();
+
+    if (path.file() == "bin")
+    {
+        SGPath path2 = path.dir();
+        path2.append( "share/locale" );
+        if (path2.exists() )
+            return path2.str();
+    }
     path.append( "locale" );
     return path.str();
-#else
-    return LOCALEDIR;
-#endif
 }
 
 int

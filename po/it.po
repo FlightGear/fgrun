@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fgrun 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-12 13:46+0100\n"
+"POT-Creation-Date: 2011-11-17 08:51+0100\n"
 "PO-Revision-Date: 2008-02-05 00:02+0100\n"
 "Last-Translator: Andrea Vezzali <vezza@inwind.it>\n"
 "Language-Team: Italian\n"
@@ -1565,7 +1565,8 @@ msgstr "Seleziona l'eseguibile di FlightGear"
 msgid "Select FG_ROOT directory"
 msgstr "Seleziona la directory FG_ROOT"
 
-#: src/wizard_funcs.cxx:1091 src/wizard_funcs.cxx:1092
+#: src/wizard_funcs.cxx:1090 src/wizard_funcs.cxx:1091
+#: src/wizard_funcs.cxx:1092
 msgid "Unknown"
 msgstr "Sconosciuto"
 
@@ -1778,7 +1779,7 @@ msgstr "Salva con nome..."
 msgid "Select file"
 msgstr "Seleziona file del protocollo"
 
-#: src/main.cxx:145
+#: src/main.cxx:155
 #, c-format
 msgid ""
 "Options are:\n"
@@ -1802,11 +1803,11 @@ msgstr ""
 "%s"
 
 # Adjust horizontal position of stars
-#: src/Fl_OSG.cxx:150
+#: src/Fl_OSG.cxx:145
 msgid "RatingPos"
 msgstr "65"
 
-#: src/Fl_OSG.cxx:152
+#: src/Fl_OSG.cxx:149
 #, fuzzy
 msgid "Model : "
 msgstr "Modello Hz:"
@@ -1815,17 +1816,22 @@ msgstr "Modello Hz:"
 msgid "Cockpit : "
 msgstr ""
 
-#: src/Fl_OSG.cxx:156
+#: src/Fl_OSG.cxx:159
 #, fuzzy
 msgid "Systems : "
 msgstr "Sistema"
 
-#: src/Fl_OSG.cxx:158
+#: src/Fl_OSG.cxx:164
 #, fuzzy
 msgid "FDM : "
 msgstr "FDM:"
 
-#: src/Fl_OSG.cxx:162
+#: src/Fl_OSG.cxx:171
 #, fuzzy
 msgid "Rating"
+msgstr "Shading"
+
+#: src/Fl_OSG.cxx:173
+#, fuzzy
+msgid "No Rating"
 msgstr "Shading"
