@@ -1,8 +1,10 @@
 
 if (WIN32)
     set( platform_srcs run_win32.cxx )
+	set( platform_incs os_win32.h )
 else (WIN32)
     set( platform_srcs run_posix.cxx fgrun_pty.cxx )
+	set( platform_incs os_posix.h )
 endif (WIN32)
 
 if (MSVC)
@@ -49,6 +51,19 @@ set(SOURCES
     ${ui_src_1_1}
     ${RESOURCE_FILE}
     )
+	
+set(HEADERS
+    AirportBrowser.h
+    AirportTable.h
+    Fl_Table.H
+    Fl_Table_Row.H
+    Fl_OSG.h
+    Fl_Heading_Dial.H
+    logwin.h
+    parkingloader.h
+    util.h
+    ${platform_incs}
+	)
 
 if (MSVC)
     set( simgear_libs ${SIMGEAR_LIBRARIES} )

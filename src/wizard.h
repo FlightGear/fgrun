@@ -17,8 +17,8 @@ using std::string;
 #include <FL/Fl_Help_View.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Button.H>
-#include <FL/Fl_Browser.H>
 #include <FL/Fl_Box.H>
+#include <FL/Fl_Browser.H>
 #include <FL/Fl_Output.H>
 #include <FL/Fl_Tile.H>
 #include "Fl_OSG.h"
@@ -64,11 +64,17 @@ private:
   static void cb_fg_exe_(Fl_Input*, void*);
   void cb__i(Fl_Button*, void*);
   static void cb_(Fl_Button*, void*);
+public:
+  Fl_Box *fg_exe_invalid;
+private:
   Fl_Input *fg_root_;
   void cb_fg_root__i(Fl_Input*, void*);
   static void cb_fg_root_(Fl_Input*, void*);
   void cb_1_i(Fl_Button*, void*);
   static void cb_1(Fl_Button*, void*);
+public:
+  Fl_Box *fg_root_invalid;
+private:
   Fl_Browser *aircraft_dir_list_;
   void cb_aircraft_dir_list__i(Fl_Browser*, void*);
   static void cb_aircraft_dir_list_(Fl_Browser*, void*);
@@ -93,6 +99,9 @@ private:
   Fl_Button *scenery_dir_down_;
   void cb_scenery_dir_down__i(Fl_Button*, void*);
   static void cb_scenery_dir_down_(Fl_Button*, void*);
+public:
+  Fl_Box *fg_scenery_invalid;
+private:
   Fl_Button *cache_delete_;
   void cb_cache_delete__i(Fl_Button*, void*);
   static void cb_cache_delete_(Fl_Button*, void*);
@@ -130,6 +139,7 @@ private:
   Fl_Choice *resolution;
   void cb_resolution_i(Fl_Choice*, void*);
   static void cb_resolution(Fl_Choice*, void*);
+  static unsigned char menu_resolution_i18n_done;
   static Fl_Menu_Item menu_resolution[];
   Fl_Check_Button *game_mode;
   void cb_game_mode_i(Fl_Check_Button*, void*);
@@ -157,6 +167,7 @@ public:
 private:
   void cb_bpp_i(Fl_Choice*, void*);
   static void cb_bpp(Fl_Choice*, void*);
+  static unsigned char menu_bpp_i18n_done;
   static Fl_Menu_Item menu_bpp[];
   Fl_Check_Button *random_objects;
   void cb_random_objects_i(Fl_Check_Button*, void*);
@@ -268,6 +279,7 @@ private:
   void fg_exe_select_cb(); 
   void fg_root_update_cb(); 
   void fg_root_select_cb(); 
+  void fg_path_updated(bool addScenery = true); 
   void advanced_cb(); 
   int write_fgfsrc(); 
   static int write_fgfsrc( Fl_Preferences &prefs, std::ostream&, const char* pfx = "\n"); 
@@ -299,6 +311,7 @@ private:
   Fl_Preferences prefs; 
   LogWindow* logwin; 
   Fl_Pixmap folder_open_pixmap; 
+  Fl_Pixmap warning_pixmap; 
   void update_options(); 
   void resolution_cb(); 
   void bpp_cb(); 

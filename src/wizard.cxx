@@ -6,6 +6,7 @@
 #endif
 #include "wizard.h"
 #include "folder_open.xpm"
+#include "warning.xpm"
 
 void Wizard::cb_fg_exe__i(Fl_Input*, void*) {
   fg_exe_update_cb();
@@ -161,14 +162,15 @@ void Wizard::cb_resolution(Fl_Choice* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_resolution_i(o,v);
 }
 
+unsigned char Wizard::menu_resolution_i18n_done = 0;
 Fl_Menu_Item Wizard::menu_resolution[] = {
- {_("800x600"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("1024x768"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("1280x1024"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("1600x1200"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("1280x800"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("1680x1050"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("1920x1200"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"800x600", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"1024x768", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"1280x1024", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"1600x1200", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"1280x800", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"1680x1050", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"1920x1200", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -228,10 +230,11 @@ void Wizard::cb_bpp(Fl_Choice* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_bpp_i(o,v);
 }
 
+unsigned char Wizard::menu_bpp_i18n_done = 0;
 Fl_Menu_Item Wizard::menu_bpp[] = {
- {_("32"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("24"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
- {_("16"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"32", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"24", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"16", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -445,14 +448,13 @@ void Wizard::cb_OK1(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->user_data()))->cb_OK1_i(o,v);
 }
 
-Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0) {
+Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0) {
   { win = new Fl_Double_Window(800, 600, _("FlightGear Wizard"));
     win->user_data((void*)(this));
     { wiz = new Fl_Wizard(0, 0, 800, 560);
       { page[0] = new Fl_Group(0, 0, 800, 560, _("Select Paths"));
         page[0]->labelfont(1);
         page[0]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
-        page[0]->hide();
         { about_ = new Fl_Help_View(5, 25, 790, 130);
           about_->labeltype(FL_NO_LABEL);
         } // Fl_Help_View* about_
@@ -461,7 +463,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           fg_exe_->labelsize(12);
           fg_exe_->textsize(12);
           fg_exe_->callback((Fl_Callback*)cb_fg_exe_);
-          fg_exe_->when(FL_WHEN_ENTER_KEY);
+          fg_exe_->when(FL_WHEN_CHANGED);
         } // Fl_Input* fg_exe_
         { Fl_Button* o = new Fl_Button(630, 175, 25, 25);
           o->tooltip(_("Full pathname to FlightGear executable"));
@@ -469,6 +471,11 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->callback((Fl_Callback*)cb_);
           o->image(folder_open_pixmap);
         } // Fl_Button* o
+        { Fl_Box* o = fg_exe_invalid = new Fl_Box(660, 175, 25, 25);
+          fg_exe_invalid->tooltip(_("Executable path not set or invalid"));
+          fg_exe_invalid->hide();
+          o->image(warning_pixmap);
+        } // Fl_Box* fg_exe_invalid
         { fg_root_ = new Fl_Input(130, 205, 495, 25, _("FG_ROOT:"));
           fg_root_->tooltip(_("root data path"));
           fg_root_->labelsize(12);
@@ -482,6 +489,11 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           o->callback((Fl_Callback*)cb_1);
           o->image(folder_open_pixmap);
         } // Fl_Button* o
+        { Fl_Box* o = fg_root_invalid = new Fl_Box(660, 205, 25, 25);
+          fg_root_invalid->tooltip(_("FG_ROOT path invalid or not set"));
+          fg_root_invalid->hide();
+          o->image(warning_pixmap);
+        } // Fl_Box* fg_root_invalid
         { Fl_Group* o = new Fl_Group(130, 235, 495, 225);
           { Fl_Group* o = new Fl_Group(130, 235, 495, 115);
             { aircraft_dir_list_ = new Fl_Browser(130, 235, 495, 80, _("FG_AIRCRAFT:"));
@@ -571,6 +583,11 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
           } // Fl_Box* o
           o->end();
         } // Fl_Group* o
+        { Fl_Box* o = fg_scenery_invalid = new Fl_Box(660, 350, 25, 25);
+          fg_scenery_invalid->tooltip(_("FG_SCENERY empty"));
+          fg_scenery_invalid->hide();
+          o->image(warning_pixmap);
+        } // Fl_Box* fg_scenery_invalid
         { cache_delete_ = new Fl_Button(630, 505, 60, 25, _("Delete"));
           cache_delete_->tooltip(_("Clear the content of the airport cache"));
           cache_delete_->labelsize(12);
@@ -682,6 +699,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         page[2]->end();
       } // Fl_Group* page[2]
       { page[3] = new Fl_Group(0, 0, 800, 560);
+        page[3]->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
@@ -708,6 +726,13 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             resolution->tooltip(_("Window geometry, WxH"));
             resolution->down_box(FL_BORDER_BOX);
             resolution->callback((Fl_Callback*)cb_resolution);
+            if (!menu_resolution_i18n_done) {
+              int i=0;
+              for ( ; i<7; i++)
+                if (menu_resolution[i].label())
+                  menu_resolution[i].label(_(menu_resolution[i].label()));
+              menu_resolution_i18n_done = 1;
+            }
             resolution->menu(menu_resolution);
           } // Fl_Choice* resolution
           { game_mode = new Fl_Check_Button(25, 85, 210, 25, _("Full Screen"));
@@ -749,6 +774,13 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             bpp->tooltip(_("Color depth (bits per pixel)"));
             bpp->down_box(FL_BORDER_BOX);
             bpp->callback((Fl_Callback*)cb_bpp);
+            if (!menu_bpp_i18n_done) {
+              int i=0;
+              for ( ; i<3; i++)
+                if (menu_bpp[i].label())
+                  menu_bpp[i].label(_(menu_bpp[i].label()));
+              menu_bpp_i18n_done = 1;
+            }
             bpp->menu(menu_bpp);
           } // Fl_Choice* bpp
           o->end();

@@ -129,6 +129,26 @@ struct AircraftData
 static int widths[] = { 465, 30, 0 };
 
 static bool
+is_valid_fg_exe( string exe )
+{
+    if (exe.size() == 0)
+        return false;
+
+    SGPath path( exe );
+    while (exe.size() != 0 && ( !path.exists() || path.isDir() ))
+    {
+        size_t pos = exe.rfind(' ');
+        if (pos == std::string::npos)
+            return false;
+        else
+            exe.erase( pos );
+        path = SGPath( exe );
+    }
+
+    return true;
+}
+
+static bool
 is_valid_fg_root( const string& dir )
 {
     if (!fl_filename_isdir( dir.c_str() ))
@@ -284,9 +304,22 @@ Wizard::reset()
     prefs.get( "ts_exe", buf, def_ts_exe.c_str(), buflen-1);
     ts_exe_->value( buf );
 
-    if (fg_exe_->size() == 0 ||
-        fg_root_->size() == 0 ||
-        !is_valid_fg_root( fg_root_->value() ) ||
+    bool fg_exe_ok = fg_exe_->size() != 0 && is_valid_fg_exe( fg_exe_->value() ),
+         fg_root_ok = fg_root_->size() != 0 && is_valid_fg_root( fg_root_->value() );
+    if ( !fg_exe_ok )
+    {
+        fg_exe_invalid->show();
+    }
+    if ( !fg_root_ok )
+    {
+        fg_root_invalid->show();
+    }
+    if (fg_scenery.empty())
+    {
+        fg_scenery_invalid->show();
+    }
+    if (!fg_exe_ok ||
+        !fg_root_ok ||
         fg_scenery.empty() )
     {
         // First time through or FG_ROOT is not valid.
@@ -301,6 +334,8 @@ Wizard::reset()
         refresh_airports();
         aircraft_update();
 
+        fg_exe_invalid->hide();
+        fg_root_invalid->hide();
         prev->activate();
         next->activate();
         page[1]->show();
@@ -874,47 +909,71 @@ Wizard::fg_exe_select_cb()
 void
 Wizard::fg_exe_update_cb()
 {
-//     if (fg_exe_->size() == 0)
-//         return;
+    fg_path_updated();
 }
 
 void
 Wizard::fg_root_update_cb()
 {
+    fg_path_updated();
+}
+
+void
+Wizard::fg_path_updated(bool addScenery)
+{
     next->deactivate();
 
-    if (fg_root_->size() == 0)
-        return;
+    bool error = false;
 
+    fg_exe_invalid->show();
+    if (fg_exe_->size() == 0 || !is_valid_fg_exe(fg_exe_->value()))
+        error = true;
+    else
+        fg_exe_invalid->hide();
+
+    fg_root_invalid->show();
     string dir( fg_root_->value() );
 
-    // Remove trailing separator.
-    if (os::isdirsep( dir[ dir.length() - 1 ] ))
+    if (fg_root_->size() == 0)
+        error = true;
+    else
     {
-        dir.erase( dir.length() - 1 );
-    }
+        // Remove trailing separator.
+        if (os::isdirsep( dir[ dir.length() - 1 ] ))
+            dir.erase( dir.length() - 1 );
 
-    if (!is_valid_fg_root( dir ))
-    {
-        dir.append( "/data" );
         if (!is_valid_fg_root( dir ))
-            return;
+        {
+            dir.append( "/data" );
+            if (!is_valid_fg_root( dir ))
+                error = true;
+            else
+            {
+                fg_root_->value( dir.c_str() );
+                fg_root_invalid->hide();
+            }
+        }
+        else
+            fg_root_invalid->hide();
     }
 
-    fg_root_->value( dir.c_str() );
-
-    if (scenery_dir_list_->size() == 0)
+    if (addScenery && scenery_dir_list_->size() == 0)
     {
         // Derive FG_SCENERY from FG_ROOT. 
         string d( dir );
         d.append( "/Scenery" );
-        if (!fl_filename_isdir( d.c_str() ))
-            return;
-
-        scenery_dir_list_->add( d.c_str() );
+        if (fl_filename_isdir( d.c_str() ))
+            scenery_dir_list_->add( d.c_str() );
     }
 
-    next->activate();
+    fg_scenery_invalid->show();
+    if (scenery_dir_list_->size() == 0)
+        error = true;
+    else
+        fg_scenery_invalid->hide();
+
+    if (!error)
+        next->activate();
 }
 
 void
@@ -924,7 +983,8 @@ Wizard::fg_root_select_cb()
                               fg_root_->value(), 0);
     if (p != 0)
     {
-        if (*p != 0 && p[strlen(p)-1] == '/')
+        // Remove trailing separator.
+        if (*p != 0 && os::isdirsep( p[strlen(p)-1] ))
             p[strlen(p)-1] = '\0';
         fg_root_->value( p );
     }
@@ -1200,7 +1260,8 @@ Wizard::aircraft_dir_add_cb()
     char* p = fl_dir_chooser( _("Select FG_AIRCRAFT directory"), 0, 0);
     if (p != 0)
     {
-        if (*p != 0 && p[strlen(p)-1] == '/')
+        // Remove trailing separator.
+        if (*p != 0 && os::isdirsep( p[strlen(p)-1] ))
             p[strlen(p)-1] = '\0';
         aircraft_dir_list_->add( p );
         aircraft_dir_list_->value( aircraft_dir_list_->size() );
@@ -1269,12 +1330,15 @@ Wizard::scenery_dir_add_cb()
     char* p = fl_dir_chooser( _("Select FG_SCENERY directory"), 0, 0);
     if (p != 0)
     {
-        if (*p != 0 && p[strlen(p)-1] == '/')
+        // Remove trailing separator.
+        if (*p != 0 && os::isdirsep( p[strlen(p)-1] ))
             p[strlen(p)-1] = '\0';
         scenery_dir_list_->add( p );
         scenery_dir_list_->value( scenery_dir_list_->size() );
         scenery_dir_list_->select( scenery_dir_list_->size() );
         update_scenery_up_down();
+
+        fg_path_updated();
     }
 }
 
@@ -1295,6 +1359,8 @@ Wizard::scenery_dir_delete_cb()
         scenery_dir_delete_->deactivate();
 
     update_scenery_up_down();
+
+    fg_path_updated( false );
 }
 
 /**

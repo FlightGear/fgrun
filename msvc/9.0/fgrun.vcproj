@@ -76,7 +76,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="fltkd.lib fltkgld.lib wsock32.lib comctl32.lib odbc32.lib odbccp32.lib zlibd.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib osgParticled.lib osgTextd.lib OpenThreadsd.lib dbghelp.lib"
+				AdditionalDependencies="fltkd.lib fltkgld.lib ws2_32.lib comctl32.lib odbc32.lib odbccp32.lib zlibd.lib opengl32.lib winmm.lib intl.lib osgd.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgUtild.lib osgParticled.lib osgTextd.lib OpenThreadsd.lib dbghelp.lib"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="..\..\..\install\msvc90\OpenSceneGraph\lib;..\..\..\3rdParty\lib"
@@ -478,11 +478,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\fgrun_pty.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\Fl_Heading_Dial.H"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\Fl_OSG.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\Fl_Table.H"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\Fl_Table_Row.H"
 				>
 			</File>
 			<File
