@@ -126,6 +126,7 @@ Wizard::run_fgfs( const std::string &args )
 		       buf, "", buflen-1 );
 	    char* s = strdup( buf );
 	    putenv( s );
+            free( s );
 	}
 	vector<string> argv;
 	argv.push_back( arg0 );

@@ -37,28 +37,34 @@ private:
     class CharVector 
     {
         char *arr;
-	int _size;
-	void init() 
-	    { arr = NULL; _size = 0; }
-	void copy(char *newarr, int newsize) 
-	    { size(newsize); memcpy(arr, newarr, newsize * sizeof(char)); }
+        int _size;
+        void init() 
+            { arr = NULL; _size = 0; }
+        void copy(char *newarr, int newsize) 
+            { size(newsize); memcpy(arr, newarr, newsize * sizeof(char)); }
     public:
         CharVector() { init(); }					// CTOR
-	~CharVector() { if ( arr ) free(arr); arr = NULL; }		// DTOR
-	CharVector(CharVector&o) { init(); copy(o.arr, o._size); }	// COPY CTOR
-	CharVector& operator=(CharVector&o) 				// ASSIGN
-	    { init(); copy(o.arr, o._size); return(*this); }
-	char operator[](int x) const { return(arr[x]); }
-	char& operator[](int x) { return(arr[x]); }
-	int size() { return(_size); }
-	void size(int count)
-	{
-	    if ( count != _size )
-		{ arr = (char*)realloc(arr, count * sizeof(char)); _size = count; }
-	}
-	char pop_back() { char tmp = arr[_size-1]; _size--; return(tmp); }
-	void push_back(char val) { int x = _size; size(_size+1); arr[x] = val; }
-	char back() { return(arr[_size-1]); }
+        ~CharVector() { if ( arr ) free(arr); arr = NULL; }		// DTOR
+        CharVector(CharVector&o) { init(); copy(o.arr, o._size); }	// COPY CTOR
+        CharVector& operator=(CharVector&o) 				// ASSIGN
+            { init(); copy(o.arr, o._size); return(*this); }
+        char operator[](int x) const { return(arr[x]); }
+        char& operator[](int x) { return(arr[x]); }
+        int size() { return(_size); }
+        void size(int count)
+        {
+            if ( count != _size )
+            {
+                char *p = (char*)realloc(arr, count * sizeof(char));
+                if (p == 0)
+                    free(arr);
+                arr = p;
+                _size = count;
+            }
+        }
+        char pop_back() { char tmp = arr[_size-1]; _size--; return(tmp); }
+        void push_back(char val) { int x = _size; size(_size+1); arr[x] = val; }
+        char back() { return(arr[_size-1]); }
     };
     CharVector _rowselect;		// selection flag for each row
 
@@ -67,27 +73,27 @@ private:
     //    than one instance can exist without crosstalk between.
     //
     int _dragging_select,		// dragging out a selection?
-	_last_row,
-	_last_y,			// last event's Y position
-	_last_push_x,			// last PUSH event's X position
-	_last_push_y;			// last PUSH event's Y position
+        _last_row,
+        _last_y,			// last event's Y position
+        _last_push_x,			// last PUSH event's X position
+        _last_push_y;			// last PUSH event's Y position
 
 protected:
     int handle(int event);
     int find_cell(TableContext context,		// find cell's x/y/w/h given r/c
     		 int R, int C, int &X, int &Y, int &W, int &H)
     {
-	return(Fl_Table::find_cell(context, R, C, X, Y, W, H));
+        return(Fl_Table::find_cell(context, R, C, X, Y, W, H));
     }
 
 public:
     Fl_Table_Row(int X, int Y, int W, int H, const char *l=0) : Fl_Table(X,Y,W,H,l)
     {
         _dragging_select = 0;
-	_last_row        = -1;
-	_last_y          = -1;
-	_last_push_x     = -1;
-	_last_push_y     = -1;
+        _last_row        = -1;
+        _last_y          = -1;
+        _last_push_x     = -1;
+        _last_push_y     = -1;
     }
     ~Fl_Table_Row() { }
     
@@ -100,8 +106,8 @@ public:
     void clear()
     {
         rows(0);		// implies clearing selection
-	cols(0);
-	Fl_Table::clear();	// clear the table
+        cols(0);
+        Fl_Table::clear();	// clear the table
     }
 };
 

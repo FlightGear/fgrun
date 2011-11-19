@@ -30,6 +30,7 @@
 #include <FL/filename.h>
 #include <sstream>
 #include <time.h>
+#include <boost/scoped_array.hpp>
 
 using std::string;
 
@@ -244,7 +245,7 @@ Wizard::run_fgfs(const string &args)
     strcat( cmd, " " );
     strcat( cmd, line.c_str() );
 
-    std::auto_ptr<char> childenv;
+    boost::scoped_array<char> childenv;
     int iVal;
     prefs.get( "env-count", iVal, 0 );
     if ( iVal > 0 )
