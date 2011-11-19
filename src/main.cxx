@@ -106,12 +106,12 @@ string
 get_locale_directory( const char *argv0 )
 {
 #ifdef LOCALEDIR
-    SGPath localedir = LOCALEDIR;
+    SGPath localedir( LOCALEDIR );
     if (localedir.exists())
         return localedir.str();
 #endif
 
-    SGPath path = argv0;
+    SGPath path( argv0 );
     path = path.dir();
 
     if (path.file() == "bin")
