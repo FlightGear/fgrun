@@ -1648,7 +1648,7 @@ Wizard::scenarii_cb()
             tooltip = _("Description of ");
             tooltip += scenarii->text( scenarii->value() );
             tooltip += "\n";
-            tooltip += scenario.getStringValue( "scenario/description" );
+            tooltip += scenario.getStringValue( "scenario/description", _("Not set") );
 
             size_t p = 0;
             while ( ( p = tooltip.find( '@', p ) ) != string::npos )
@@ -1659,13 +1659,13 @@ Wizard::scenarii_cb()
         }
         catch ( const sg_exception& )
         {
-            tooltip = "";
+            tooltip = _("Select a scenario to display its description");
         }
     }
     else
-        tooltip = "";
+        tooltip = _("Select a scenario to display its description");
 
-    scenarii->tooltip( tooltip.c_str() );
+    scenarii_help->tooltip( tooltip.c_str() );
 
     int nb = 0;
     for (int i = 1; i <= scenarii->size(); ++i)
@@ -2167,12 +2167,16 @@ Wizard::display_scenarii()
             i += 1;
         }
     }
+
+    scenarii_cb();
 }
 
 void
 Wizard::deselect_all_scenarii_cb()
 {
     scenarii->deselect();
+    scenarii_help->tooltip( _("Select a scenario to display its description") );
+
     prefs.set("scenario-count", 0);
     update_options();
 }

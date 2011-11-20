@@ -36,6 +36,9 @@ decl {\#include "folder_open.xpm"} {private local
 decl {\#include "warning.xpm"} {private local
 } 
 
+decl {\#include "question.xpm"} {private local
+} 
+
 decl {class LogWindow;} {public local
 } 
 
@@ -81,7 +84,7 @@ class Wizard {open
     decl {TerraSyncThread &operator=( const TerraSyncThread & );} {private local
     }
   }
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0)} {open
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0)} {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
@@ -92,8 +95,8 @@ class Wizard {open
         code0 {win->resizable( wiz );}
       } {
         Fl_Group {page[0]} {
-          label {Select Paths} open
-          xywh {0 0 800 560} labelfont 1 align 21
+          label {Select Paths}
+          xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
           Fl_Help_View about_ {
             private xywh {5 25 790 130} labeltype NO_LABEL
@@ -309,8 +312,8 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {
-          private xywh {0 0 800 560} hide
+        Fl_Group {page[3]} {open
+          private xywh {0 0 800 560}
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -487,12 +490,20 @@ class Wizard {open
             } {
               Fl_Browser scenarii {
                 callback {scenarii_cb();}
-                private xywh {495 136 295 88} type Multi align 5 resizable
+                private tooltip {Ctrl-click to select or deselect a single item} xywh {495 136 295 88} type Multi align 5 resizable
               }
-              Fl_Button {} {
-                label {Deselect all}
-                callback {deselect_all_scenarii_cb();}
+              Fl_Group {} {open
                 xywh {495 230 295 25}
+              } {
+                Fl_Button {} {
+                  label {Deselect all}
+                  callback {deselect_all_scenarii_cb();} selected
+                  tooltip {Ctrl-click to deselect a single item} xywh {495 230 265 25} resizable
+                }
+                Fl_Box scenarii_help {
+                  xywh {765 230 25 25}
+                  code0 {o->image(question_pixmap);}
+                }
               }
             }
             Fl_Group {} {open
@@ -645,7 +656,7 @@ class Wizard {open
   }
   decl {void fg_root_select_cb();} {private local
   }
-  decl {void fg_path_updated(bool addScenery = true);} {selected private local
+  decl {void fg_path_updated(bool addScenery = true);} {private local
   }
   decl {void advanced_cb();} {private local
   }
@@ -703,9 +714,11 @@ class Wizard {open
   }
   decl {LogWindow* logwin;} {private local
   }
-  decl {Fl_Pixmap folder_open_pixmap} {private local
+  decl {Fl_Pixmap folder_open_pixmap;} {private local
   }
-  decl {Fl_Pixmap warning_pixmap} {private local
+  decl {Fl_Pixmap warning_pixmap;} {private local
+  }
+  decl {Fl_Pixmap question_pixmap;} {private local
   }
   decl {void update_options();} {private local
   }

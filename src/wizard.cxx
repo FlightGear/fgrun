@@ -7,6 +7,7 @@
 #include "wizard.h"
 #include "folder_open.xpm"
 #include "warning.xpm"
+#include "question.xpm"
 
 void Wizard::cb_fg_exe__i(Fl_Input*, void*) {
   fg_exe_update_cb();
@@ -312,7 +313,7 @@ void Wizard::cb_Deselect_i(Fl_Button*, void*) {
   deselect_all_scenarii_cb();
 }
 void Wizard::cb_Deselect(Fl_Button* o, void* v) {
-  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_Deselect_i(o,v);
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_Deselect_i(o,v);
 }
 
 void Wizard::cb_terrasync_i(Fl_Check_Button*, void*) {
@@ -448,13 +449,14 @@ void Wizard::cb_OK1(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->user_data()))->cb_OK1_i(o,v);
 }
 
-Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0) {
+Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0) {
   { win = new Fl_Double_Window(800, 600, _("FlightGear Wizard"));
     win->user_data((void*)(this));
     { wiz = new Fl_Wizard(0, 0, 800, 560);
       { page[0] = new Fl_Group(0, 0, 800, 560, _("Select Paths"));
         page[0]->labelfont(1);
         page[0]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+        page[0]->hide();
         { about_ = new Fl_Help_View(5, 25, 790, 130);
           about_->labeltype(FL_NO_LABEL);
         } // Fl_Help_View* about_
@@ -699,7 +701,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
         page[2]->end();
       } // Fl_Group* page[2]
       { page[3] = new Fl_Group(0, 0, 800, 560);
-        page[3]->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
@@ -836,14 +837,23 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), log
             o->labelfont(1);
             o->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
             { scenarii = new Fl_Browser(495, 136, 295, 88);
+              scenarii->tooltip(_("Ctrl-click to select or deselect a single item"));
               scenarii->type(3);
               scenarii->callback((Fl_Callback*)cb_scenarii);
               scenarii->align(Fl_Align(FL_ALIGN_TOP_LEFT));
               Fl_Group::current()->resizable(scenarii);
             } // Fl_Browser* scenarii
-            { Fl_Button* o = new Fl_Button(495, 230, 295, 25, _("Deselect all"));
-              o->callback((Fl_Callback*)cb_Deselect);
-            } // Fl_Button* o
+            { Fl_Group* o = new Fl_Group(495, 230, 295, 25);
+              { Fl_Button* o = new Fl_Button(495, 230, 265, 25, _("Deselect all"));
+                o->tooltip(_("Ctrl-click to deselect a single item"));
+                o->callback((Fl_Callback*)cb_Deselect);
+                Fl_Group::current()->resizable(o);
+              } // Fl_Button* o
+              { Fl_Box* o = scenarii_help = new Fl_Box(765, 230, 25, 25);
+                o->image(question_pixmap);
+              } // Fl_Box* scenarii_help
+              o->end();
+            } // Fl_Group* o
             o->end();
             Fl_Group::current()->resizable(o);
           } // Fl_Group* o

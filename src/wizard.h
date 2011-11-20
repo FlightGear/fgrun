@@ -204,6 +204,7 @@ private:
   void cb_Deselect_i(Fl_Button*, void*);
   static void cb_Deselect(Fl_Button*, void*);
 public:
+  Fl_Box *scenarii_help;
   Fl_Check_Button *terrasync;
 private:
   void cb_terrasync_i(Fl_Check_Button*, void*);
@@ -312,6 +313,7 @@ private:
   LogWindow* logwin; 
   Fl_Pixmap folder_open_pixmap; 
   Fl_Pixmap warning_pixmap; 
+  Fl_Pixmap question_pixmap; 
   void update_options(); 
   void resolution_cb(); 
   void bpp_cb(); 
