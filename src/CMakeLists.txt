@@ -68,28 +68,36 @@ set(HEADERS
 if (MSVC)
     set( simgear_libs ${SIMGEAR_LIBRARIES} )
 else (MSVC)
-    set( simgear_libs
-        ${SIMGEAR_MODEL_LIBRARY}
-        ${SIMGEAR_SCREEN_LIBRARY}
-        ${SIMGEAR_PROPS_LIBRARY}
-        ${SIMGEAR_XML_LIBRARY}
-        ${SIMGEAR_DEBUG_LIBRARY}
-        ${SIMGEAR_BVH_LIBRARY}
-        ${SIMGEAR_MATERIAL_LIBRARY}
-        ${SIMGEAR_MODEL_LIBRARY}
-        ${SIMGEAR_UTIL_LIBRARY}
-        ${SIMGEAR_STRUCTURE_LIBRARY}
-        ${SIMGEAR_PROPS_LIBRARY}
-        ${SIMGEAR_TGDB_LIBRARY}
-        ${SIMGEAR_MATH_LIBRARY}
-        ${SIMGEAR_MISC_LIBRARY}
-        ${SIMGEAR_BVH_LIBRARY}
-        ${SIMGEAR_IO_LIBRARY}
-        ${SIMGEAR_BUCKET_LIBRARY}
-        ${SIMGEAR_MODEL_LIBRARY}
-        ${SIMGEAR_UTIL_LIBRARY}
-        ${SIMGEAR_THREADS_LIBRARY}
-        )
+    if (SIMGEAR_SHARED)
+    message(STATUS "Using shared Simgear libraries")
+        set( simgear_libs
+            ${SIMGEAR_LIBRARIES}
+            ${SIMGEAR_CORE_LIBRARY_DEPENDENCIES}
+            ${SIMGEAR_SCENE_LIBRARY_DEPENDENCIES})
+    else (SIMGEAR_SHARED)
+        set( simgear_libs
+            ${SIMGEAR_MODEL_LIBRARY}
+            ${SIMGEAR_SCREEN_LIBRARY}
+            ${SIMGEAR_PROPS_LIBRARY}
+            ${SIMGEAR_XML_LIBRARY}
+            ${SIMGEAR_DEBUG_LIBRARY}
+            ${SIMGEAR_BVH_LIBRARY}
+            ${SIMGEAR_MATERIAL_LIBRARY}
+            ${SIMGEAR_MODEL_LIBRARY}
+            ${SIMGEAR_UTIL_LIBRARY}
+            ${SIMGEAR_STRUCTURE_LIBRARY}
+            ${SIMGEAR_PROPS_LIBRARY}
+            ${SIMGEAR_TGDB_LIBRARY}
+            ${SIMGEAR_MATH_LIBRARY}
+            ${SIMGEAR_MISC_LIBRARY}
+            ${SIMGEAR_BVH_LIBRARY}
+            ${SIMGEAR_IO_LIBRARY}
+            ${SIMGEAR_BUCKET_LIBRARY}
+            ${SIMGEAR_MODEL_LIBRARY}
+            ${SIMGEAR_UTIL_LIBRARY}
+            ${SIMGEAR_THREADS_LIBRARY}
+            )
+    endif (SIMGEAR_SHARED)
 endif (MSVC)
 
 add_executable(fgrun ${SOURCES})
