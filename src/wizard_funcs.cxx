@@ -75,6 +75,7 @@ extern string def_fg_exe;
 extern string def_fg_root;
 extern string def_fg_scenery;
 extern string def_ts_exe;
+extern int def_ts_dir;
 
 Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
  {N_("noon"), 0,  0, (void*)"noon", 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -291,7 +292,7 @@ Wizard::reset()
     scenery_dir_list_->clear();
     vs_t vs( sgPathSplit( fg_scenery ) );
 
-    prefs.get("ts_dir", ts_dir, 0);
+    prefs.get("ts_dir", ts_dir, (def_ts_dir>=0) ? def_ts_dir : 0);
 
     for (vs_t::size_type i = 0; i < vs.size(); ++i)
     {
