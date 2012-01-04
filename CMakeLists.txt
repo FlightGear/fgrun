@@ -124,9 +124,20 @@ if ( NOT ( HAVE_OPENPTY OR HAVE__GETPTY ) )
 endif ( NOT ( HAVE_OPENPTY OR HAVE__GETPTY ) )
 
 if ( FLTK_FOUND )
+    if ( X11_Xinerama_FOUND )
+        message(STATUS "Found X11_Xinerama...")
+        list(APPEND FLTK_LIBRARIES ${X11_Xinerama_LIB})
+    endif()
+
+    if ( X11_Xft_FOUND )
+        message(STATUS "Found X11_Xft...")
+        list(APPEND FLTK_LIBRARIES ${X11_Xft_LIB})
+    endif()
 
     set( CMAKE_REQUIRED_INCLUDES ${FLTK_INCLUDE_DIR} )
-    set( CMAKE_REQUIRED_LIBRARIES ${FLTK_LIBRARIES} ${X11_Xinerama_LIB} ${X11_Xft_LIB} )
+    set( CMAKE_REQUIRED_LIBRARIES ${FLTK_LIBRARIES} )
+    message(STATUS "Using FLTK_LIBRARIES for fgadmin: ${FLTK_LIBRARIES}")
+
     check_cxx_source_runs(
         "#include <Fl/Fl.H>
         int main() {

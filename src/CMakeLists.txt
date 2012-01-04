@@ -115,8 +115,6 @@ target_link_libraries(fgrun
     ${FLTK_LIBRARIES}
     ${ZLIB_LIBRARIES}
     ${INTL_LIBRARY}
-    ${X11_Xinerama_LIB}
-    ${X11_Xft_LIB}
     ${OPENPTY_LIBRARY}
     )
 
