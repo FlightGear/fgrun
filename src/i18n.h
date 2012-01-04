@@ -23,10 +23,6 @@
 #ifndef i18n_h_included
 #define i18n_h_included
 
-#if defined( HAVE_CONFIG_H )
-#  include "config.h"
-#endif
-
 #if !defined( ENABLE_NLS )
 
 #define _(String) (String)
