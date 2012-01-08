@@ -647,6 +647,7 @@ Wizard::preview_aircraft()
 
     current_aircraft_model_path = "";
 
+    preview->set_fg_root(fg_root_->value());
     preview->make_current();
 
     preview->clear();

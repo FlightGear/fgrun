@@ -114,18 +114,22 @@ void addBar( osg::Geode *geode, osg::Vec3 &position, int xincr, int val ) {
         geode->addDrawable( drawUnrated( position, xincr ) );
 }
 
-static
-osgText::Text *drawText( const char *t, osg::Vec3 position ) {
+void Fl_OSG::set_fg_root( const char *fgr ) {
+    font = SGPath( fgr );
+    font.append("Fonts/LiberationFonts/LiberationSans-Regular.ttf");
+}
+
+
+osgText::Text *Fl_OSG::drawText( const char *t, osg::Vec3 position ) {
     osgText::Text* text = new osgText::Text;
-    text->setFont("fonts/arial.ttf");
+    text->setFont(font.str());
     text->setPosition(position);
     text->setCharacterSize( 20.0 );
     text->setText(t);
     return text;
 }
 
-static
-void drawRating( osg::Geode *geode, osg::Vec3 position, const char *t, int rating, int xincr ) {
+void Fl_OSG::drawRating( osg::Geode *geode, osg::Vec3 position, const char *t, int rating, int xincr ) {
     geode->addDrawable( drawText( t, position ) );
     addBar( geode, position, xincr, ( rating >= 0 && rating <= 5 ) ? rating : -1 );
 }
