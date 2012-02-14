@@ -86,7 +86,9 @@ if (GETTEXT_FOUND)
         endif (NOT INTL_LIBRARY)
     endif (MSVC)
 
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_NLS")
+	if (ENABLE_NLS)
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_NLS")
+	endif (ENABLE_NLS)
     
 endif (GETTEXT_FOUND)
 
