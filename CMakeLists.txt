@@ -85,6 +85,8 @@ if (GETTEXT_FOUND)
             set( ENABLE_NLS 0 )
         endif (NOT INTL_LIBRARY)
     endif (MSVC)
+
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_NLS")
     
 endif (GETTEXT_FOUND)
 
@@ -136,7 +138,7 @@ if ( FLTK_FOUND )
 
     set( CMAKE_REQUIRED_INCLUDES ${FLTK_INCLUDE_DIR} )
     set( CMAKE_REQUIRED_LIBRARIES ${FLTK_LIBRARIES} )
-    message(STATUS "Using FLTK_LIBRARIES for fgadmin: ${FLTK_LIBRARIES}")
+    message(STATUS "Using FLTK_LIBRARIES for fgrun: ${FLTK_LIBRARIES}")
 
     check_cxx_source_runs(
         "#include <Fl/Fl.H>
