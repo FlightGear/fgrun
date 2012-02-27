@@ -34,7 +34,7 @@ message(STATUS "version is ${CPACK_PACKAGE_VERSION_MAJOR} dot ${CPACK_PACKAGE_VE
 set(CPACK_SOURCE_GENERATOR TBZ2)
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "fgrun-${FGRUN_VERSION}" CACHE INTERNAL "tarball basename")
 set(CPACK_SOURCE_IGNORE_FILES
-  "^${PROJECT_SOURCE_DIR}/.git;\\\\.gitignore;Makefile.am;~$;${CPACK_SOURCE_IGNORE_FILES}")
+  "^${PROJECT_SOURCE_DIR}/.svn;\\\\.gitignore;Makefile.am;~$;${CPACK_SOURCE_IGNORE_FILES}")
 
 message(STATUS "ignoring: ${CPACK_SOURCE_IGNORE_FILES}")
 
