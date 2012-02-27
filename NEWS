@@ -1,3 +1,11 @@
+* 1.6.1
+
+  * show aircraft rating
+  * don't emit a --airport option if --carrier is specified
+  * remove trailing slash on directories after selection in the dir browser
+  * add an help icon to scenarii that displays description of scenario as tooltip
+  * warning icons added in the directory page of the wizard
+
 * 1.6.0
 
   * change to compile with old versions of OSG (needed to compile under freebsd)
