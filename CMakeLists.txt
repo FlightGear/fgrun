@@ -14,6 +14,32 @@ set(CMAKE_MINSIZEREL_POSTFIX "" CACHE STRING "add a postfix, usually empty on wi
 file(READ version versionFile)
 string(STRIP ${versionFile} FGRUN_VERSION) 
 
+#packaging
+SET(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/COPYING")
+SET(CPACK_RESOURCE_FILE_README "${PROJECT_SOURCE_DIR}/README")
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "FlightGear Launcher")
+SET(CPACK_PACKAGE_VENDOR "The FlightGear project")
+SET(CPACK_GENERATOR "TBZ2")
+SET(CPACK_INSTALL_CMAKE_PROJECTS  ${CMAKE_CURRENT_BINARY_DIR};FGRun;ALL;/)
+
+
+# split version string into components, note CMAKE_MATCH_0 is the entire regexp match
+string(REGEX MATCH "([0-9]+)\\.([0-9]+)\\.([0-9]+)" CPACK_PACKAGE_VERSION ${FGRUN_VERSION} )
+set(CPACK_PACKAGE_VERSION_MAJOR ${CMAKE_MATCH_1}) 
+set(CPACK_PACKAGE_VERSION_MINOR ${CMAKE_MATCH_2})
+set(CPACK_PACKAGE_VERSION_PATCH ${CMAKE_MATCH_3})
+
+message(STATUS "version is ${CPACK_PACKAGE_VERSION_MAJOR} dot ${CPACK_PACKAGE_VERSION_MINOR} dot ${CPACK_PACKAGE_VERSION_PATCH}")
+
+set(CPACK_SOURCE_GENERATOR TBZ2)
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "fgrun-${FGRUN_VERSION}" CACHE INTERNAL "tarball basename")
+set(CPACK_SOURCE_IGNORE_FILES
+  "^${PROJECT_SOURCE_DIR}/.git;\\\\.gitignore;Makefile.am;~$;${CPACK_SOURCE_IGNORE_FILES}")
+
+message(STATUS "ignoring: ${CPACK_SOURCE_IGNORE_FILES}")
+
+include (CPack)
+
 option(ENABLE_NLS "Set to ON to build fgrun with NLS support" ON)
 set(MSVC_3RDPARTY_ROOT NOT_FOUND CACHE PATH "Location where the third-party dependencies are extracted")
 
