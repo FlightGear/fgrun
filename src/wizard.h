@@ -310,6 +310,7 @@ public:
   static void refresh_airports( Fl_Widget*, void* ); 
 private:
   Fl_Preferences prefs; 
+  Fl_Preferences systemPrefs; 
   LogWindow* logwin; 
   Fl_Pixmap folder_open_pixmap; 
   Fl_Pixmap warning_pixmap; 

@@ -84,13 +84,13 @@ class Wizard {open
     decl {TerraSyncThread &operator=( const TerraSyncThread & );} {private local
     }
   }
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0)} {open
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), systemPrefs( Fl_Preferences::SYSTEM, "flightgear.org", "fgrun" ),logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0)} {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
       private xywh {579 307 800 600} type Double visible
     } {
-      Fl_Wizard wiz {open
+      Fl_Wizard wiz {
         private xywh {0 0 800 560}
         code0 {win->resizable( wiz );}
       } {
@@ -312,7 +312,7 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {open
+        Fl_Group {page[3]} {
           private xywh {0 0 800 560}
         } {
           Fl_Group {} {
@@ -497,7 +497,7 @@ class Wizard {open
               } {
                 Fl_Button {} {
                   label {Deselect all}
-                  callback {deselect_all_scenarii_cb();} selected
+                  callback {deselect_all_scenarii_cb();}
                   tooltip {Ctrl-click to deselect a single item} xywh {495 230 265 25} resizable
                 }
                 Fl_Box scenarii_help {
@@ -711,6 +711,8 @@ class Wizard {open
   decl {static void refresh_airports( Fl_Widget*, void* );} {public local
   }
   decl {Fl_Preferences prefs;} {private local
+  }
+  decl {Fl_Preferences systemPrefs;} {selected private local
   }
   decl {LogWindow* logwin;} {private local
   }

@@ -235,9 +235,23 @@ Wizard::reset()
     char buf[ buflen ];
 
     prefs.get( "fg_exe", buf, def_fg_exe.c_str(), buflen-1);
+    if (buf[0] == '\0')
+    {
+        systemPrefs.get( "fg_exe_init", buf, def_fg_exe.c_str(), buflen-1);
+        prefs.set("fg_exe_init", buf);
+        systemPrefs.get( "fg_exe", buf, def_fg_exe.c_str(), buflen-1);
+        prefs.set("fg_exe", buf);
+    }
     fg_exe_->value( buf );
 
     prefs.get( "fg_root", buf, def_fg_root.c_str(), buflen-1);
+    if (buf[0] == '\0')
+    {
+        systemPrefs.get( "fg_root_init", buf, def_fg_exe.c_str(), buflen-1);
+        prefs.set("fg_root_init", buf);
+        systemPrefs.get( "fg_root", buf, def_fg_exe.c_str(), buflen-1);
+        prefs.set("fg_root", buf);
+    }
     fg_root_->value( buf );
     SGPath fgPath(buf);
     if ( fg_root_->size() == 0 )
@@ -266,13 +280,20 @@ Wizard::reset()
         aircraft_dir_list_->add( va[i].c_str() );
 
     string fg_scenery;
-    if (!def_fg_scenery.empty())
-    {
-        fg_scenery = def_fg_scenery;
-    }
-    else if (prefs.get( "fg_scenery", buf, "", buflen-1))
+    if (prefs.get( "fg_scenery", buf, "", buflen-1))
     {
         fg_scenery = buf;
+    }
+    else if (systemPrefs.get( "fg_scenery", buf, "", buflen-1))
+    {
+        fg_scenery = buf;
+        prefs.set("fg_scenery", buf);
+        systemPrefs.get( "fg_scenery_init", buf, def_fg_exe.c_str(), buflen-1);
+        prefs.set("fg_scenery_init", buf);
+    }
+    else if (!def_fg_scenery.empty())
+    {
+        fg_scenery = def_fg_scenery;
     }
     else if (fg_root_->size() > 0)
     {
@@ -292,7 +313,13 @@ Wizard::reset()
     scenery_dir_list_->clear();
     vs_t vs( sgPathSplit( fg_scenery ) );
 
-    prefs.get("ts_dir", ts_dir, (def_ts_dir>=0) ? def_ts_dir : 0);
+    if (!prefs.get("ts_dir", ts_dir, 0) && systemPrefs.get("ts_dir", ts_dir, (def_ts_dir>=0) ? def_ts_dir : 0))
+    {
+        prefs.set("ts_dir", ts_dir);
+        int iVal;
+        systemPrefs.get("ts_dir_init", iVal, 0);
+        prefs.set("ts_dir_init", iVal);
+    }
 
     for (vs_t::size_type i = 0; i < vs.size(); ++i)
     {
@@ -302,7 +329,13 @@ Wizard::reset()
             scenery_dir_list_->add( vs[i].c_str() );
     }
 
-    prefs.get( "ts_exe", buf, def_ts_exe.c_str(), buflen-1);
+    if (!prefs.get( "ts_exe", buf, "", buflen-1) && systemPrefs.get( "ts_exe", buf, def_ts_exe.c_str(), buflen-1))
+    {
+        prefs.set("ts_exe", buf);
+        systemPrefs.get("ts_exe_init", buf, "", buflen-1);
+        prefs.set("ts_exe_init", buf);
+        prefs.get( "ts_exe", buf, "", buflen-1);
+    }
     ts_exe_->value( buf );
 
     bool fg_exe_ok = fg_exe_->size() != 0 && is_valid_fg_exe( fg_exe_->value() ),
@@ -2271,35 +2304,29 @@ Wizard::reset_settings()
 
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];
-    const char* not_set = "NOT SET";
 
-    prefs.get( "fg_exe_init", buf, not_set, buflen-1);
-    if ( strcmp( buf, not_set ) != 0 )
+    if ( prefs.get( "fg_exe_init", buf, "", buflen-1) != 0 )
     {
         prefs.set( "fg_exe", buf );
     }
 
-    prefs.get( "fg_root_init", buf, not_set, buflen-1);
-    if ( strcmp( buf, not_set ) != 0 )
+    if ( prefs.get( "fg_root_init", buf, "", buflen-1) != 0 )
     {
         prefs.set( "fg_root", buf );
     }
 
-    prefs.get( "fg_scenery_init", buf, not_set, buflen-1 );
-    if ( strcmp( buf, not_set ) != 0 )
+    if ( prefs.get( "fg_scenery_init", buf, "", buflen-1 ) != 0 )
     {
         prefs.set( "fg_scenery", buf );
     }
 
-    prefs.get( "ts_exe_init", buf, not_set, buflen-1);
-    if ( strcmp( buf, not_set ) != 0 )
+    if ( prefs.get( "ts_exe_init", buf, "", buflen-1) != 0 )
     {
         prefs.set( "ts_exe", buf );
     }
 
     int iVal = -1;
-    prefs.get( "ts_dir_init", iVal, -1);
-    if ( iVal != -1 )
+    if ( prefs.get( "ts_dir_init", iVal, -1) != 0 )
     {
         ts_dir = iVal;
         prefs.set( "ts_dir", ts_dir );

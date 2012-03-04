@@ -449,7 +449,7 @@ void Wizard::cb_OK1(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->user_data()))->cb_OK1_i(o,v);
 }
 
-Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0) {
+Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), systemPrefs( Fl_Preferences::SYSTEM, "flightgear.org", "fgrun" ),logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0) {
   { win = new Fl_Double_Window(800, 600, _("FlightGear Wizard"));
     win->user_data((void*)(this));
     { wiz = new Fl_Wizard(0, 0, 800, 560);

@@ -157,7 +157,7 @@ main( int argc, char* argv[] )
 
     if ( silent )
     {
-        Fl_Preferences prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" );
+        Fl_Preferences prefs( Fl_Preferences::SYSTEM, "flightgear.org", "fgrun" );
         char abs_name[ FL_PATH_MAX ];
 
         if ( !def_fg_exe.empty() )
