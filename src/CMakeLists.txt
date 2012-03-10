@@ -100,7 +100,7 @@ else (MSVC)
     endif (SIMGEAR_SHARED)
 endif (MSVC)
 
-add_executable(fgrun ${SOURCES})
+add_executable(fgrun ${SOURCES} ${HEADERS})
 
 if (HAVE_FLTK_1_3)
     add_dependencies(fgrun Wizard)
