@@ -1929,9 +1929,7 @@ Wizard::multiplay_cb()
         str << "out,10," << host << "," << out;
         prefs.set("multiplay1",str.str().c_str());
         str.str("");
-        char hostname[256];
-        gethostname( hostname, 256 );
-        str << "in,10," << hostname << "," << in;
+        str << "in,10,," << in;
         prefs.set("multiplay2",str.str().c_str());
 
         ai_models->value(1);
@@ -1953,9 +1951,7 @@ Wizard::multiplay_field_cb()
     str << "out,10," << host << "," << out;
     prefs.set("multiplay1",str.str().c_str());
     str.str("");
-    char hostname[256];
-    gethostname( hostname, 256 );
-    str << "in,10," << hostname << "," << in;
+    str << "in,10,," << in;
     prefs.set("multiplay2",str.str().c_str());
     update_options();
 }
@@ -2512,9 +2508,7 @@ Wizard::save_basic_options( Fl_Preferences &p )
         str << "out,10," << host << "," << out;
         p.set("multiplay1",str.str().c_str());
         str.str("");
-        char hostname[256];
-        gethostname( hostname, 256 );
-        str << "in,10," << hostname << "," << in;
+        str << "in,10,," << in;
         p.set("multiplay2",str.str().c_str());
     }
 
