@@ -121,6 +121,7 @@ struct AircraftData
     string status;
     string author;
     string modelPath;
+    string thumbnailPath;
     int fdm;
     int systems;
     int cockpit;
@@ -383,6 +384,9 @@ Wizard::reset()
         text->show();
     else
         text->hide();
+
+    prefs.get("show_3d_preview", iVal, 0);
+    show_3d_preview->value(iVal);
 }
 
 void
@@ -473,7 +477,6 @@ static const double update_period = 0.05;
 static void
 timeout_handler( void* v )
 {
-    ((Wizard*)v)->update_preview();
     Fl::redraw();
     Fl::repeat_timeout( update_period, timeout_handler, v );
 }
@@ -722,14 +725,22 @@ Wizard::preview_aircraft()
             win->cursor( FL_CURSOR_WAIT );
             Fl::flush();
 
-            osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), data->root, "", path.str(), SGPath() );
-            if (model != 0)
+            if (show_3d_preview->value())
             {
-                current_aircraft_model_path = path.str();
-                //osg::ref_ptr<osg::Node> bounding_obj = find_named_node( model.get(), "Aircraft" );
-                preview->set_model( model.get(), data->fdm, data->systems, data->cockpit, data->model );
+                osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), data->root, "", path.str(), SGPath() );
+                if (model != 0)
+                {
+                    current_aircraft_model_path = path.str();
+                    //osg::ref_ptr<osg::Node> bounding_obj = find_named_node( model.get(), "Aircraft" );
+                    preview->set_model( model.get(), data->fdm, data->systems, data->cockpit, data->model );
 
-                Fl::add_timeout( update_period, timeout_handler, this );
+                    Fl::add_timeout( update_period, timeout_handler, this );
+                }
+            }
+            else
+            {
+                string thumbnail = data->thumbnailPath;
+                preview->set_thumbnail(thumbnail.c_str(), data->fdm, data->systems, data->cockpit, data->model );
             }
             win->cursor( FL_CURSOR_DEFAULT );
             preview->redraw();
@@ -1050,12 +1061,6 @@ Wizard::advanced_cb()
     text->buffer()->text( ostr.str().c_str() );
 }
 
-void
-Wizard::update_preview()
-{
-    preview->update();
-}
-
 static void
 search_aircraft_dir( const SGPath& dir,
                      bool recursive,
@@ -1184,6 +1189,7 @@ Wizard::aircraft_update( const char *aft )
                     data->desc = desc;
                     data->status = props.getStringValue( "/sim/status", _( "Unknown" ) );
                     data->modelPath = props.getStringValue( "/sim/model/path", _( "Unknown" ) );
+                    data->thumbnailPath = SGPath(s).dir() + "/thumbnail.jpg";
                     data->author = props.getStringValue( "/sim/author", _( "Unknown" ) );
                     data->fdm = props.getIntValue( "/sim/rating/FDM", -1 );
                     data->systems = props.getIntValue( "/sim/rating/systems", -1 );
@@ -2760,4 +2766,11 @@ Wizard::auto_visibility_cb()
 {
     prefs.set("autovisibility", auto_visibility->value());
     update_options();
+}
+
+void
+Wizard::show_3d_preview_cb()
+{
+    prefs.set("show_3d_preview", show_3d_preview->value());
+    preview_aircraft();
 }

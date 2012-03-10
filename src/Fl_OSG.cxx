@@ -7,6 +7,7 @@
 #include <osg/LineWidth>
 #include <osgGA/TrackballManipulator>
 #include <osgViewer/ViewerEventHandlers>
+#include <osgDB/Registry>
 
 #define HUD_SCALE_FACTOR    1.5
 
@@ -138,6 +139,35 @@ void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int mod
     osg::ref_ptr<osg::Group> root = new osg::Group;
     root->addChild( m );
 
+    drawRatings( root, fdm, systems, cockpit, model );
+}
+
+void Fl_OSG::set_thumbnail( const char *path, int fdm, int systems, int cockpit, int model ) {
+    osg::ref_ptr<osg::Group> root = new osg::Group;
+#if 0
+    osgDB::ReaderWriter::ReadResult rr = osgDB::Registry::instance()->readImage( path, 0 );
+    if (rr.validImage()) {
+        osg::ref_ptr<osg::Texture2D> tex = new osg::Texture2D;
+        tex->setImage( rr.getImage() );
+        tex->setResizeNonPowerOfTwoHint( false );
+        tex->setFilter( osg::Texture2D::MIN_FILTER,osg::Texture2D::LINEAR );
+        tex->setFilter( osg::Texture2D::MAG_FILTER,osg::Texture2D::LINEAR );
+        tex->setWrap( osg::Texture::WRAP_S, osg::Texture::CLAMP_TO_EDGE );
+        tex->setWrap( osg::Texture::WRAP_T, osg::Texture::CLAMP_TO_EDGE );
+
+        osg::Geometry *geom = osg::createTexturedQuadGeometry( osg::Vec3(0, 0, 0), osg::Vec3(rr.getImage()->s(), 0, 0), osg::Vec3(0, rr.getImage()->t(), 0) );
+        osg::Geode *g = new osg::Geode;
+        g->addDrawable(geom);
+        osg::StateSet *ss = g->getOrCreateStateSet();
+        ss->setTextureAttributeAndModes( 0, tex, osg::StateAttribute::ON );
+    }
+#endif
+
+    drawRatings( root, fdm, systems, cockpit, model, path );
+}
+
+void Fl_OSG::drawRatings( osg::Group *root, int fdm, int systems, int cockpit, int model, const char *path ) {
+
     hud->removeChildren( 0, hud->getNumChildren() );
     osg::Geode *geode = new osg::Geode;
     osg::StateSet* stateset = geode->getOrCreateStateSet();
@@ -187,9 +217,6 @@ void Fl_OSG::set_model( osg::Node *m, int fdm, int systems, int cockpit, int mod
 void Fl_OSG::resize(int x, int y, int w, int h) {
     hud->setProjectionMatrix( osg::Matrix::ortho( 0, w*HUD_SCALE_FACTOR, 0, h*HUD_SCALE_FACTOR, 0, -1 ) );
     AdapterWidget::resize(x, y, w, h);
-}
-
-void Fl_OSG::update() {
 }
 
 void idle_cb()

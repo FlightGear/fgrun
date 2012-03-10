@@ -121,6 +121,13 @@ void Wizard::cb_2(Fl_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_2_i(o,v);
 }
 
+void Wizard::cb_show_3d_preview_i(Fl_Check_Button*, void*) {
+  show_3d_preview_cb();
+}
+void Wizard::cb_show_3d_preview(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->user_data()))->cb_show_3d_preview_i(o,v);
+}
+
 void Wizard::cb_aircraft_i(Fl_Browser*, void*) {
   preview_aircraft();
 }
@@ -619,16 +626,21 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), sys
       { page[1] = new Fl_Group(0, 0, 800, 560, _("Select an aircraft"));
         page[1]->labelfont(1);
         page[1]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
-        page[1]->hide();
-        { Fl_Tile* o = new Fl_Tile(0, 20, 795, 500);
-          { aircraft = new Fl_Browser(5, 20, 200, 500);
+        { show_3d_preview = new Fl_Check_Button(780, 0, 17, 25, _("3D Preview"));
+          show_3d_preview->down_box(FL_DOWN_BOX);
+          show_3d_preview->labelsize(12);
+          show_3d_preview->callback((Fl_Callback*)cb_show_3d_preview);
+          show_3d_preview->align(Fl_Align(FL_ALIGN_LEFT));
+        } // Fl_Check_Button* show_3d_preview
+        { Fl_Tile* o = new Fl_Tile(0, 25, 795, 495);
+          { aircraft = new Fl_Browser(5, 25, 200, 495);
             aircraft->type(2);
             aircraft->labelsize(12);
             aircraft->textsize(12);
             aircraft->callback((Fl_Callback*)cb_aircraft);
             aircraft->align(Fl_Align(FL_ALIGN_TOP));
           } // Fl_Browser* aircraft
-          { preview = new Fl_OSG(205, 20, 590, 500, _("Preview"));
+          { preview = new Fl_OSG(205, 25, 590, 495, _("Preview"));
             preview->box(FL_THIN_DOWN_BOX);
             preview->color(FL_BACKGROUND_COLOR);
             preview->selection_color(FL_BACKGROUND_COLOR);
@@ -701,6 +713,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), sys
         page[2]->end();
       } // Fl_Group* page[2]
       { page[3] = new Fl_Group(0, 0, 800, 560);
+        page[3]->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);

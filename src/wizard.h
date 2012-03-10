@@ -20,10 +20,10 @@ using std::string;
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Output.H>
+#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Tile.H>
 #include "Fl_OSG.h"
 #include "AirportBrowser.h"
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Value_Input.H>
@@ -111,6 +111,9 @@ private:
   static void cb_ts_exe_(Fl_Input*, void*);
   void cb_2_i(Fl_Button*, void*);
   static void cb_2(Fl_Button*, void*);
+  Fl_Check_Button *show_3d_preview;
+  void cb_show_3d_preview_i(Fl_Check_Button*, void*);
+  static void cb_show_3d_preview(Fl_Check_Button*, void*);
   Fl_Browser *aircraft;
   void cb_aircraft_i(Fl_Browser*, void*);
   static void cb_aircraft(Fl_Browser*, void*);
@@ -266,7 +269,6 @@ public:
   void show(); 
   void show( int argc, char* argv[] ); 
   void init( bool fullscreen ); 
-  void update_preview(); 
   void preview_aircraft(); 
 private:
   void reset(); 
@@ -347,6 +349,7 @@ private:
   void display_scenarii(); 
   void deselect_all_scenarii_cb(); 
   void show_cmd_line_cb(); 
+  void show_3d_preview_cb(); 
   void reset_settings(); 
   void load_preferences_cb(); 
   void save_preferences_cb(); 

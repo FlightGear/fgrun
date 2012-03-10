@@ -33,14 +33,15 @@ class Fl_OSG : public osgViewer::Viewer, public AdapterWidget {
 public:
     Fl_OSG(int x, int y, int w, int h, const char *label=0);
     void set_model( osg::Node *m, int fdm, int systems, int cockpit, int model );
+    void set_thumbnail( const char *path, int fdm, int systems, int cockpit, int model );
     void set_fg_root( const char *fgr );
-    void update();
     virtual void resize(int x, int y, int w, int h);
 
 protected:
     virtual void draw();
     osgText::Text *drawText( const char *t, osg::Vec3 position );
     void drawRating( osg::Geode *geode, osg::Vec3 position, const char *t, int rating, int xincr );
+    void drawRatings( osg::Group *root, int fdm, int systems, int cockpit, int model, const char *path = 0 );
 
     osg::ref_ptr<osg::Camera> hud;
     SGPath font;
