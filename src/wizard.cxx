@@ -267,6 +267,13 @@ void Wizard::cb_ai_models(Fl_Check_Button* o, void* v) {
   ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_ai_models_i(o,v);
 }
 
+void Wizard::cb_ai_traffic_i(Fl_Check_Button*, void*) {
+  ai_traffic_cb();
+}
+void Wizard::cb_ai_traffic(Fl_Check_Button* o, void* v) {
+  ((Wizard*)(o->parent()->parent()->parent()->parent()->parent()->user_data()))->cb_ai_traffic_i(o,v);
+}
+
 void Wizard::cb_time_of_day_i(Fl_Check_Button*, void*) {
   time_of_day_cb();
 }
@@ -626,6 +633,7 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), sys
       { page[1] = new Fl_Group(0, 0, 800, 560, _("Select an aircraft"));
         page[1]->labelfont(1);
         page[1]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+        page[1]->hide();
         { show_3d_preview = new Fl_Check_Button(780, 0, 17, 25, _("3D Preview"));
           show_3d_preview->down_box(FL_DOWN_BOX);
           show_3d_preview->labelsize(12);
@@ -713,7 +721,6 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), sys
         page[2]->end();
       } // Fl_Group* page[2]
       { page[3] = new Fl_Group(0, 0, 800, 560);
-        page[3]->hide();
         { Fl_Group* o = new Fl_Group(0, 525, 800, 25);
           { Fl_Button* o = new Fl_Button(685, 525, 110, 25, _("Advanced..."));
             o->callback((Fl_Callback*)cb_Advanced);
@@ -816,6 +823,10 @@ Wizard::Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), sys
               ai_models->down_box(FL_DOWN_BOX);
               ai_models->callback((Fl_Callback*)cb_ai_models);
             } // Fl_Check_Button* ai_models
+            { ai_traffic = new Fl_Check_Button(35, 210, 140, 25, _("AI Traffic"));
+              ai_traffic->down_box(FL_DOWN_BOX);
+              ai_traffic->callback((Fl_Callback*)cb_ai_traffic);
+            } // Fl_Check_Button* ai_traffic
             { time_of_day = new Fl_Check_Button(180, 135, 160, 25, _("Time of day :"));
               time_of_day->down_box(FL_DOWN_BOX);
               time_of_day->callback((Fl_Callback*)cb_time_of_day);

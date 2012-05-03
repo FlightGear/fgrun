@@ -310,3 +310,17 @@ Advanced::random_wind_cb()
         wind_speed->activate();
     }
 }
+
+void
+Advanced::ai_models_cb()
+{
+    if ( ai_models->value() == 0 )
+    {
+        ai_traffic->value(0);
+        ai_traffic->deactivate();
+    }
+    else
+    {
+        ai_traffic->activate();
+    }
+}

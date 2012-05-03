@@ -56,6 +56,13 @@ void Advanced::cb_failure(Fl_Check_Button* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_failure_i(o,v);
 }
 
+void Advanced::cb_ai_models_i(Fl_Check_Button*, void*) {
+  ai_models_cb();
+}
+void Advanced::cb_ai_models(Fl_Check_Button* o, void* v) {
+  ((Advanced*)(o->parent()->parent()->user_data()))->cb_ai_models_i(o,v);
+}
+
 void Advanced::cb_fdm_i(Fl_Choice* o, void*) {
   if (strcmp(o->text(), "jsb") == 0){
   notrim->activate();
@@ -67,24 +74,26 @@ void Advanced::cb_fdm(Fl_Choice* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_fdm_i(o,v);
 }
 
+unsigned char Advanced::menu_fdm_i18n_done = 0;
 Fl_Menu_Item Advanced::menu_fdm[] = {
- {_("ada"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("balloon"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("external"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("jsb"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("larcsim"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("magic"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("network"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("null"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("ufo"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("yasim"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"ada", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"balloon", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"external", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"jsb", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"larcsim", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"magic", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"network", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"null", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"ufo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"yasim", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
+unsigned char Advanced::menu_bpp_i18n_done = 0;
 Fl_Menu_Item Advanced::menu_bpp[] = {
- {_("16"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("24"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("32"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"16", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"24", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"32", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -258,26 +267,27 @@ void Advanced::cb_io_protocol(Fl_Choice* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_protocol_i(o,v);
 }
 
+unsigned char Advanced::menu_io_protocol_i18n_done = 0;
 Fl_Menu_Item Advanced::menu_io_protocol[] = {
- {_("atcsim"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("atlas"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("garmin"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("AV400"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("AV400Sim"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("generic"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("joyclient"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("jsclient"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("native"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("native-ctrls"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("native-fdm"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("native-gui"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("nmea"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("opengc"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("pve"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("props"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("ray"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("rul"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("telnet"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"atcsim", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"atlas", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"garmin", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"AV400", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"AV400Sim", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"generic", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"joyclient", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"jsclient", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"native", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"native-ctrls", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"native-fdm", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"native-gui", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"nmea", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"opengc", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"pve", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"props", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"ray", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"rul", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"telnet", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -288,10 +298,11 @@ void Advanced::cb_io_medium(Fl_Choice* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_medium_i(o,v);
 }
 
+unsigned char Advanced::menu_io_medium_i18n_done = 0;
 Fl_Menu_Item Advanced::menu_io_medium[] = {
- {_("file"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("serial"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("socket"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"file", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"serial", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"socket", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -302,10 +313,11 @@ void Advanced::cb_io_dir(Fl_Choice* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->user_data()))->cb_io_dir_i(o,v);
 }
 
+unsigned char Advanced::menu_io_dir_i18n_done = 0;
 Fl_Menu_Item Advanced::menu_io_dir[] = {
- {_("in"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("out"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("bi"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"in", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"out", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"bi", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -337,10 +349,10 @@ void Advanced::cb_serial_port(Fl_Input* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_serial_port_i(o,v);
 }
 
-void Advanced::cb_serial_baud_rate_i(Fl_Input*, void*) {
+void Advanced::cb_serial_baud_rate_i(Fl_Int_Input*, void*) {
   io_list_update_cb();
 }
-void Advanced::cb_serial_baud_rate(Fl_Input* o, void* v) {
+void Advanced::cb_serial_baud_rate(Fl_Int_Input* o, void* v) {
   ((Advanced*)(o->parent()->parent()->parent()->parent()->user_data()))->cb_serial_baud_rate_i(o,v);
 }
 
@@ -611,12 +623,13 @@ void Advanced::cb_cloud_layer_(Fl_Choice* o, void* v) {
   ((Advanced*)(o->parent()->parent()->user_data()))->cb_cloud_layer__i(o,v);
 }
 
+unsigned char Advanced::menu_cloud_layer__i18n_done = 0;
 Fl_Menu_Item Advanced::menu_cloud_layer_[] = {
- {_("0"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("1"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("2"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("3"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {_("4"), 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"0", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -745,7 +758,6 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
       page[1]->labelfont(1);
       page[1]->labelsize(16);
       page[1]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
-      page[1]->hide();
       { game_mode = new Fl_Check_Button(175, 50, 160, 25, _("Game Mode"));
         game_mode->tooltip(_("Enable full screen game mode"));
         game_mode->down_box(FL_DOWN_BOX);
@@ -852,11 +864,16 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
         failure_vacuum->labelsize(12);
         failure_vacuum->deactivate();
       } // Fl_Check_Button* failure_vacuum
-      { ai_models = new Fl_Check_Button(345, 230, 140, 25, _("AI Traffic"));
+      { ai_models = new Fl_Check_Button(345, 230, 140, 25, _("AI Models"));
         ai_models->tooltip(_("Enable AI traffic"));
         ai_models->down_box(FL_DOWN_BOX);
         ai_models->labelsize(12);
+        ai_models->callback((Fl_Callback*)cb_ai_models);
       } // Fl_Check_Button* ai_models
+      { ai_traffic = new Fl_Check_Button(345, 260, 140, 25, _("AI Traffic"));
+        ai_traffic->down_box(FL_DOWN_BOX);
+        ai_traffic->labelsize(12);
+      } // Fl_Check_Button* ai_traffic
       { random_trees = new Fl_Check_Button(175, 200, 160, 25, _("Random Trees"));
         random_trees->down_box(FL_DOWN_BOX);
         random_trees->labelsize(12);
@@ -877,6 +894,13 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
         fdm->labelsize(12);
         fdm->textsize(12);
         fdm->callback((Fl_Callback*)cb_fdm);
+        if (!menu_fdm_i18n_done) {
+          int i=0;
+          for ( ; i<10; i++)
+            if (menu_fdm[i].label())
+              menu_fdm[i].label(_(menu_fdm[i].label()));
+          menu_fdm_i18n_done = 1;
+        }
         fdm->menu(menu_fdm);
       } // Fl_Choice* fdm
       { notrim = new Fl_Check_Button(290, 75, 85, 25, _("No Trim"));
@@ -962,18 +986,18 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
         lat->labelsize(12);
         lat->textsize(12);
       } // Fl_Input* lat
-      { altitude = new Fl_Input(245, 95, 150, 25, _("Altitude:"));
+      { altitude = new Fl_Float_Input(245, 95, 150, 25, _("Altitude:"));
         altitude->tooltip(_("Initial altitude in feet"));
         altitude->type(1);
         altitude->labelsize(12);
         altitude->textsize(12);
-      } // Fl_Input* altitude
-      { vc = new Fl_Input(245, 215, 150, 25, _("Airspeed:"));
+      } // Fl_Float_Input* altitude
+      { vc = new Fl_Float_Input(245, 215, 150, 25, _("Airspeed:"));
         vc->tooltip(_("Initial airspeed in knots"));
         vc->type(1);
         vc->labelsize(12);
         vc->textsize(12);
-      } // Fl_Input* vc
+      } // Fl_Float_Input* vc
       { uBody = new Fl_Input(245, 265, 150, 25, _("uBody:"));
         uBody->labelsize(12);
         uBody->textsize(12);
@@ -1047,6 +1071,7 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
       page[5]->labelfont(1);
       page[5]->labelsize(16);
       page[5]->align(Fl_Align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE));
+      page[5]->hide();
       { clouds = new Fl_Check_Button(180, 40, 120, 25, _("Clouds"));
         clouds->tooltip(_("Enable 2D (flat) cloud layers"));
         clouds->down_box(FL_DOWN_BOX);
@@ -1122,12 +1147,12 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
         geometry->labelsize(12);
         geometry->textsize(12);
       } // Fl_Input* geometry
-      { visibility = new Fl_Input(235, 295, 120, 25, _("Visibility:"));
+      { visibility = new Fl_Float_Input(235, 295, 120, 25, _("Visibility:"));
         visibility->tooltip(_("Initial visibility distance"));
         visibility->type(1);
         visibility->labelsize(12);
         visibility->textsize(12);
-      } // Fl_Input* visibility
+      } // Fl_Float_Input* visibility
       { Fl_Group* o = new Fl_Group(225, 320, 120, 50);
         { vis_meters = new Fl_Round_Button(235, 320, 60, 25, _("Meters"));
           vis_meters->tooltip(_("Specify visibilty in meters"));
@@ -1153,6 +1178,13 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
         bpp->down_box(FL_BORDER_BOX);
         bpp->labelsize(12);
         bpp->textsize(12);
+        if (!menu_bpp_i18n_done) {
+          int i=0;
+          for ( ; i<3; i++)
+            if (menu_bpp[i].label())
+              menu_bpp[i].label(_(menu_bpp[i].label()));
+          menu_bpp_i18n_done = 1;
+        }
         bpp->menu(menu_bpp);
       } // Fl_Choice* bpp
       { fov = new Fl_Value_Input(490, 325, 120, 25, _("FOV:"));
@@ -1375,6 +1407,13 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
           io_protocol->labelsize(12);
           io_protocol->textsize(12);
           io_protocol->callback((Fl_Callback*)cb_io_protocol);
+          if (!menu_io_protocol_i18n_done) {
+            int i=0;
+            for ( ; i<19; i++)
+              if (menu_io_protocol[i].label())
+                menu_io_protocol[i].label(_(menu_io_protocol[i].label()));
+            menu_io_protocol_i18n_done = 1;
+          }
           io_protocol->menu(menu_io_protocol);
         } // Fl_Choice* io_protocol
         { io_medium = new Fl_Choice(260, 215, 125, 25, _("Medium:"));
@@ -1384,6 +1423,13 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
           io_medium->callback((Fl_Callback*)cb_io_medium);
           io_medium->when(FL_WHEN_RELEASE_ALWAYS);
           io_medium->deactivate();
+          if (!menu_io_medium_i18n_done) {
+            int i=0;
+            for ( ; i<3; i++)
+              if (menu_io_medium[i].label())
+                menu_io_medium[i].label(_(menu_io_medium[i].label()));
+            menu_io_medium_i18n_done = 1;
+          }
           io_medium->menu(menu_io_medium);
         } // Fl_Choice* io_medium
         { io_dir = new Fl_Choice(260, 245, 125, 25, _("Direction:"));
@@ -1392,6 +1438,13 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
           io_dir->textsize(12);
           io_dir->callback((Fl_Callback*)cb_io_dir);
           io_dir->deactivate();
+          if (!menu_io_dir_i18n_done) {
+            int i=0;
+            for ( ; i<3; i++)
+              if (menu_io_dir[i].label())
+                menu_io_dir[i].label(_(menu_io_dir[i].label()));
+            menu_io_dir_i18n_done = 1;
+          }
           io_dir->menu(menu_io_dir);
         } // Fl_Choice* io_dir
         { io_hz = new Fl_Value_Input(260, 275, 125, 25, _("Hz:"));
@@ -1425,13 +1478,13 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
             serial_port->callback((Fl_Callback*)cb_serial_port);
             serial_port->when(FL_WHEN_CHANGED);
           } // Fl_Input* serial_port
-          { serial_baud_rate = new Fl_Input(260, 335, 125, 25, _("Baud Rate:"));
+          { serial_baud_rate = new Fl_Int_Input(260, 335, 125, 25, _("Baud Rate:"));
             serial_baud_rate->type(2);
             serial_baud_rate->labelsize(12);
             serial_baud_rate->textsize(12);
             serial_baud_rate->callback((Fl_Callback*)cb_serial_baud_rate);
             serial_baud_rate->when(FL_WHEN_CHANGED);
-          } // Fl_Input* serial_baud_rate
+          } // Fl_Int_Input* serial_baud_rate
           serial_group->end();
         } // Fl_Group* serial_group
         { socket_group = new Fl_Group(165, 305, 250, 85);
@@ -1786,6 +1839,13 @@ Advanced::Advanced(Fl_Preferences& p):prefs(p) {
         cloud_layer_->labelsize(12);
         cloud_layer_->textsize(12);
         cloud_layer_->callback((Fl_Callback*)cb_cloud_layer_);
+        if (!menu_cloud_layer__i18n_done) {
+          int i=0;
+          for ( ; i<5; i++)
+            if (menu_cloud_layer_[i].label())
+              menu_cloud_layer_[i].label(_(menu_cloud_layer_[i].label()));
+          menu_cloud_layer__i18n_done = 1;
+        }
         cloud_layer_->menu(menu_cloud_layer_);
       } // Fl_Choice* cloud_layer_
       { cloud_elevation_ = new Fl_Value_Input(255, 110, 120, 25, _("Elevation(ft):"));

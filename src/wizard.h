@@ -181,6 +181,11 @@ private:
   Fl_Check_Button *ai_models;
   void cb_ai_models_i(Fl_Check_Button*, void*);
   static void cb_ai_models(Fl_Check_Button*, void*);
+public:
+  Fl_Check_Button *ai_traffic;
+private:
+  void cb_ai_traffic_i(Fl_Check_Button*, void*);
+  static void cb_ai_traffic(Fl_Check_Button*, void*);
   Fl_Check_Button *time_of_day;
   void cb_time_of_day_i(Fl_Check_Button*, void*);
   static void cb_time_of_day(Fl_Check_Button*, void*);
@@ -330,6 +335,7 @@ private:
   void random_objects_cb(); 
   void random_trees_cb(); 
   void ai_models_cb(); 
+  void ai_traffic_cb(); 
   void time_of_day_cb(); 
   void time_of_day_value_cb(); 
   void season_cb(); 

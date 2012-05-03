@@ -240,11 +240,11 @@ class Wizard {open
         }
         Fl_Group {page[1]} {
           label {Select an aircraft} open
-          private xywh {0 0 800 560} labelfont 1 align 21
+          private xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
           Fl_Check_Button show_3d_preview {
             label {3D Preview}
-            callback {show_3d_preview_cb()} selected
+            callback {show_3d_preview_cb()}
             private xywh {780 0 17 25} down_box DOWN_BOX labelsize 12 align 4
           }
           Fl_Tile {} {open
@@ -317,8 +317,8 @@ class Wizard {open
             }
           }
         }
-        Fl_Group {page[3]} {
-          private xywh {0 0 800 560} hide
+        Fl_Group {page[3]} {open
+          private xywh {0 0 800 560}
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -438,7 +438,7 @@ class Wizard {open
             xywh {5 120 790 180}
           } {
             Fl_Group {} {
-              label Features
+              label Features open
               private xywh {5 120 480 180} box ENGRAVED_FRAME labelfont 1 align 21
             } {
               Fl_Check_Button random_objects {
@@ -455,6 +455,11 @@ class Wizard {open
                 label {AI models}
                 callback {ai_models_cb();}
                 private xywh {25 185 150 25} down_box DOWN_BOX
+              }
+              Fl_Check_Button ai_traffic {
+                label {AI Traffic}
+                callback {ai_traffic_cb();}
+                xywh {35 210 140 25} down_box DOWN_BOX
               }
               Fl_Check_Button time_of_day {
                 label {Time of day :}
@@ -751,6 +756,8 @@ class Wizard {open
   }
   decl {void ai_models_cb();} {private local
   }
+  decl {void ai_traffic_cb();} {selected private local
+  }
   decl {void time_of_day_cb();} {private local
   }
   decl {void time_of_day_value_cb();} {private local
@@ -797,7 +804,7 @@ class Wizard {open
   }
   decl {void save_preferences_cb();} {private local
   }
-  Function {make_launch_window()} {private
+  Function {make_launch_window()} {open private
   } {
     Fl_Window launch_window {
       label {FlightGear running...} open

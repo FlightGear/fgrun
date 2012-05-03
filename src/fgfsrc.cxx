@@ -179,6 +179,12 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     else
         os << pfx << "--disable-ai-models";
 
+    prefs.get( "ai_traffic", iVal, 0 );
+    if (iVal)
+        os << pfx << "--enable-ai-traffic";
+    else
+        os << pfx << "--disable-ai-traffic";
+
     // Flight model
     prefs.get( "fdm", buf, "", buflen-1 );
     if (buf[0] != 0)

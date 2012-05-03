@@ -1612,11 +1612,24 @@ Wizard::ai_models_cb()
     prefs.set("ai_models", ai_models->value());
     if ( ai_models->value() == 0 )
     {
+        ai_traffic->value(0);
+        prefs.set("ai_traffic", ai_traffic->value());
+        ai_traffic->deactivate();
         multiplay->value(0);
         multiplay_cb();
     }
     else
+    {
+        ai_traffic->activate();
         update_options();
+    }
+}
+
+void
+Wizard::ai_traffic_cb()
+{
+    prefs.set("ai_traffic", ai_traffic->value());
+    update_options();
 }
 
 void
@@ -2032,6 +2045,12 @@ Wizard::update_basic_options( Fl_Preferences &p )
     random_trees->value(iVal);
     p.get("ai_models", iVal, 0);
     ai_models->value(iVal);
+    p.get("ai_traffic", iVal, 0);
+    ai_traffic->value(iVal);
+    if (ai_models->value() == 0)
+        ai_traffic->deactivate();
+    else
+        ai_traffic->activate();
     p.get("time_of_day", iVal, 0);
     time_of_day->value(iVal);
     p.get("time_of_day_value", buf, "noon", buflen-1);

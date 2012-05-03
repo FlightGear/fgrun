@@ -17,6 +17,8 @@
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Round_Button.H>
+#include <FL/Fl_Float_Input.H>
+#include <FL/Fl_Int_Input.H>
 #include "Fl_Heading_Dial.H"
 #include <FL/Fl_Value_Slider.H>
 
@@ -70,12 +72,14 @@ private:
   Fl_Check_Button *failure_system;
   Fl_Check_Button *failure_vacuum;
   Fl_Check_Button *ai_models;
-public:
+  void cb_ai_models_i(Fl_Check_Button*, void*);
+  static void cb_ai_models(Fl_Check_Button*, void*);
+  Fl_Check_Button *ai_traffic;
   Fl_Check_Button *random_trees;
-private:
   Fl_Choice *fdm;
   void cb_fdm_i(Fl_Choice*, void*);
   static void cb_fdm(Fl_Choice*, void*);
+  static unsigned char menu_fdm_i18n_done;
   static Fl_Menu_Item menu_fdm[];
   Fl_Check_Button *notrim;
   Fl_Value_Input *model_hz;
@@ -87,8 +91,8 @@ private:
   Fl_Check_Button *clock_freeze;
   Fl_Input *lon;
   Fl_Input *lat;
-  Fl_Input *altitude;
-  Fl_Input *vc;
+  Fl_Float_Input *altitude;
+  Fl_Float_Input *vc;
   Fl_Input *uBody;
   Fl_Input *vBody;
   Fl_Input *wBody;
@@ -116,11 +120,12 @@ private:
   Fl_Round_Button *fog_fastest;
   Fl_Round_Button *fog_nicest;
   Fl_Input *geometry;
-  Fl_Input *visibility;
+  Fl_Float_Input *visibility;
   Fl_Round_Button *vis_meters;
   Fl_Round_Button *vis_miles;
   Fl_Input *view_offset;
   Fl_Choice *bpp;
+  static unsigned char menu_bpp_i18n_done;
   static Fl_Menu_Item menu_bpp[];
   Fl_Value_Input *fov;
   Fl_Choice *texture_filtering;
@@ -182,14 +187,17 @@ private:
   Fl_Choice *io_protocol;
   void cb_io_protocol_i(Fl_Choice*, void*);
   static void cb_io_protocol(Fl_Choice*, void*);
+  static unsigned char menu_io_protocol_i18n_done;
   static Fl_Menu_Item menu_io_protocol[];
   Fl_Choice *io_medium;
   void cb_io_medium_i(Fl_Choice*, void*);
   static void cb_io_medium(Fl_Choice*, void*);
+  static unsigned char menu_io_medium_i18n_done;
   static Fl_Menu_Item menu_io_medium[];
   Fl_Choice *io_dir;
   void cb_io_dir_i(Fl_Choice*, void*);
   static void cb_io_dir(Fl_Choice*, void*);
+  static unsigned char menu_io_dir_i18n_done;
   static Fl_Menu_Item menu_io_dir[];
   Fl_Value_Input *io_hz;
   void cb_io_hz_i(Fl_Value_Input*, void*);
@@ -204,9 +212,9 @@ private:
   Fl_Input *serial_port;
   void cb_serial_port_i(Fl_Input*, void*);
   static void cb_serial_port(Fl_Input*, void*);
-  Fl_Input *serial_baud_rate;
-  void cb_serial_baud_rate_i(Fl_Input*, void*);
-  static void cb_serial_baud_rate(Fl_Input*, void*);
+  Fl_Int_Input *serial_baud_rate;
+  void cb_serial_baud_rate_i(Fl_Int_Input*, void*);
+  static void cb_serial_baud_rate(Fl_Int_Input*, void*);
   Fl_Group *socket_group;
   Fl_Input *socket_host;
   void cb_socket_host_i(Fl_Input*, void*);
@@ -320,6 +328,7 @@ private:
   Fl_Choice *cloud_layer_;
   void cb_cloud_layer__i(Fl_Choice*, void*);
   static void cb_cloud_layer_(Fl_Choice*, void*);
+  static unsigned char menu_cloud_layer__i18n_done;
   static Fl_Menu_Item menu_cloud_layer_[];
   Fl_Value_Input *cloud_elevation_;
   void cb_cloud_elevation__i(Fl_Value_Input*, void*);
@@ -359,6 +368,7 @@ private:
   void repeat_cb(); 
   void repeat_value_cb(); 
   void fg_browser_cb(); 
+  void ai_models_cb(); 
   void wind_dial_cb(); 
   void wind_hdg_cb(); 
   void cloud_layer_cb(); 

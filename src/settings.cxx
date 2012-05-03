@@ -98,6 +98,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("failure_system", failure_system->value());
     prefs.set("failure_vacuum", failure_vacuum->value());
     prefs.set("ai_models", ai_models->value());
+    prefs.set("ai_traffic", ai_traffic->value());
 
     prefs.set("fdm", fdm->text());
     prefs.set("no_trim", notrim->value());
@@ -344,6 +345,12 @@ Advanced::load_settings( Fl_Preferences& prefs )
     failure_vacuum->value( iVal );
     prefs.get("ai_models", iVal, 0);
     ai_models->value( iVal );
+    prefs.get("ai_traffic", iVal, 0);
+    ai_traffic->value( iVal );
+    if (ai_models->value() == 0)
+        ai_traffic->deactivate();
+    else
+        ai_traffic->activate();
 
     prefs.get("fdm", buf, "jsb", buflen-1);
     set_choice(fdm, buf);
@@ -641,6 +648,7 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("failure_system" );
     prefs.deleteEntry("failure_vacuum" );
     prefs.deleteEntry("ai_models" );
+    prefs.deleteEntry("ai_traffic" );
 
     prefs.deleteEntry("fdm" );
     prefs.deleteEntry("no_trim" );
