@@ -78,10 +78,13 @@ extern string def_ts_exe;
 extern int def_ts_dir;
 
 Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
- {N_("noon"), 0,  0, (void*)"noon", 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("dusk"), 0,  0, (void*)"dusk", 0, FL_NORMAL_LABEL, 0, 14, 0},
- {N_("midnight"), 0,  0, (void*)"midnight", 0, FL_NORMAL_LABEL, 0, 14, 0},
  {N_("dawn"), 0,  0, (void*)"dawn", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("morning"), 0,  0, (void*)"morning", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("noon"), 0,  0, (void*)"noon", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("afternoon"), 0,  0, (void*)"afternoon", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("dusk"), 0,  0, (void*)"dusk", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("evening"), 0,  0, (void*)"evening", 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {N_("midnight"), 0,  0, (void*)"midnight", 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

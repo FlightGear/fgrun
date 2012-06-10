@@ -104,10 +104,13 @@ Advanced::list_update_cb( Fl_Browser* browser,
 }
 
 Fl_Menu_Item Advanced::menu_time_of_day_value[] = {
- {N_("noon"), 0,  0, (void*)"noon", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("dusk"), 0,  0, (void*)"dusk", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("midnight"), 0,  0, (void*)"midnight", 0, FL_NORMAL_LABEL, 0, 12, 0},
  {N_("dawn"), 0,  0, (void*)"dawn", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("morning"), 0,  0, (void*)"morning", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("noon"), 0,  0, (void*)"noon", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("afternoon"), 0,  0, (void*)"afternoon", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("dusk"), 0,  0, (void*)"dusk", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("evening"), 0,  0, (void*)"evening", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {N_("midnight"), 0,  0, (void*)"midnight", 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
