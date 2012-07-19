@@ -84,7 +84,7 @@ class Wizard {open
     decl {TerraSyncThread &operator=( const TerraSyncThread & );} {private local
     }
   }
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), systemPrefs( Fl_Preferences::SYSTEM, "flightgear.org", "fgrun" ),logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0)} {open
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), systemPrefs( Fl_Preferences::SYSTEM, "flightgear.org", "fgrun" ),logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0), refreshAircraft(false)} {selected
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
@@ -756,7 +756,7 @@ class Wizard {open
   }
   decl {void ai_models_cb();} {private local
   }
-  decl {void ai_traffic_cb();} {selected private local
+  decl {void ai_traffic_cb();} {private local
   }
   decl {void time_of_day_cb();} {private local
   }
@@ -936,5 +936,7 @@ class Wizard {open
   decl {string current_aircraft_model_path;} {private local
   }
   decl {int ts_dir;} {private local
+  }
+  decl {bool refreshAircraft;} {private local
   }
 } 

@@ -401,5 +401,6 @@ private:
   void auto_visibility_cb(); 
   string current_aircraft_model_path; 
   int ts_dir; 
+  bool refreshAircraft; 
 };
 #endif

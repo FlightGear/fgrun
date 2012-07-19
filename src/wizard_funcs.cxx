@@ -238,8 +238,17 @@ Wizard::reset()
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];
 
-    prefs.get( "fg_exe", buf, def_fg_exe.c_str(), buflen-1);
-    if (buf[0] == '\0')
+    bool reloadPath = false;
+    int version, systemVersion;
+    prefs.get("version", version, 0);
+    systemPrefs.get("version", systemVersion, 0);
+    if (systemVersion != 0 && version < systemVersion)
+    {
+        prefs.set("version", systemVersion);
+        reloadPath = true;
+    }
+
+    if (reloadPath || !prefs.get( "fg_exe", buf, def_fg_exe.c_str(), buflen-1))
     {
         systemPrefs.get( "fg_exe_init", buf, def_fg_exe.c_str(), buflen-1);
         prefs.set("fg_exe_init", buf);
@@ -248,8 +257,7 @@ Wizard::reset()
     }
     fg_exe_->value( buf );
 
-    prefs.get( "fg_root", buf, def_fg_root.c_str(), buflen-1);
-    if (buf[0] == '\0')
+    if (reloadPath || !prefs.get( "fg_root", buf, def_fg_root.c_str(), buflen-1))
     {
         systemPrefs.get( "fg_root_init", buf, def_fg_exe.c_str(), buflen-1);
         prefs.set("fg_root_init", buf);
@@ -284,11 +292,11 @@ Wizard::reset()
         aircraft_dir_list_->add( va[i].c_str() );
 
     string fg_scenery;
-    if (prefs.get( "fg_scenery", buf, "", buflen-1))
+    if (!reloadPath && prefs.get( "fg_scenery", buf, "", buflen-1))
     {
         fg_scenery = buf;
     }
-    else if (systemPrefs.get( "fg_scenery", buf, "", buflen-1))
+    else if (reloadPath && systemPrefs.get( "fg_scenery", buf, "", buflen-1))
     {
         fg_scenery = buf;
         prefs.set("fg_scenery", buf);
@@ -317,14 +325,6 @@ Wizard::reset()
     scenery_dir_list_->clear();
     vs_t vs( sgPathSplit( fg_scenery ) );
 
-    if (!prefs.get("ts_dir", ts_dir, 0) && systemPrefs.get("ts_dir", ts_dir, (def_ts_dir>=0) ? def_ts_dir : 0))
-    {
-        prefs.set("ts_dir", ts_dir);
-        int iVal;
-        systemPrefs.get("ts_dir_init", iVal, 0);
-        prefs.set("ts_dir_init", iVal);
-    }
-
     for (vs_t::size_type i = 0; i < vs.size(); ++i)
     {
         if (i == ts_dir-1)
@@ -333,14 +333,37 @@ Wizard::reset()
             scenery_dir_list_->add( vs[i].c_str() );
     }
 
-    if (!prefs.get( "ts_exe", buf, "", buflen-1) && systemPrefs.get( "ts_exe", buf, def_ts_exe.c_str(), buflen-1))
+    int iVal;
+    if (!reloadPath && prefs.get("ts_dir", iVal, 0))
     {
+        ts_dir = iVal;
+    }
+    else if (reloadPath && systemPrefs.get("ts_dir", iVal, 0))
+    {
+        prefs.set("ts_dir", ts_dir);
+        systemPrefs.get("ts_dir_init", iVal, 0);
+        prefs.set("ts_dir_init", iVal);
+    }
+    else
+    {
+        ts_dir = def_ts_dir;
+    }
+
+    if (!reloadPath && prefs.get( "ts_exe", buf, "", buflen-1))
+    {
+        ts_exe_->value(buf);
+    }
+    else if (reloadPath && systemPrefs.get( "ts_exe", buf, "", buflen-1))
+    {
+        ts_exe_->value( buf );
         prefs.set("ts_exe", buf);
         systemPrefs.get("ts_exe_init", buf, "", buflen-1);
         prefs.set("ts_exe_init", buf);
-        prefs.get( "ts_exe", buf, "", buflen-1);
     }
-    ts_exe_->value( buf );
+    else
+    {
+        ts_exe_->value( def_ts_exe.c_str() );
+    }
 
     bool fg_exe_ok = fg_exe_->size() != 0 && is_valid_fg_exe( fg_exe_->value() ),
          fg_root_ok = fg_root_->size() != 0 && is_valid_fg_root( fg_root_->value() );
@@ -380,7 +403,6 @@ Wizard::reset()
     }
     next->label( _("Next") );
 
-    int iVal;
     prefs.get("show_cmd_line", iVal, 0);
     show_cmd_line->value(iVal);
     if ( iVal )
@@ -388,7 +410,7 @@ Wizard::reset()
     else
         text->hide();
 
-    prefs.get("show_3d_preview", iVal, 0);
+    prefs.get("show_3d_preview", iVal, 1);
     show_3d_preview->value(iVal);
 }
 
@@ -827,6 +849,9 @@ Wizard::next_cb()
             prefs.set( "ts_exe", abs_name );
         }
 
+        if (refreshAircraft)
+            aircraft_update();
+
         refresh_airports();
     }
     else if (wiz->value() == page[1])
@@ -1223,6 +1248,8 @@ Wizard::aircraft_update( const char *aft )
         }
     }
 
+    refreshAircraft = false;
+
     if ( selected )
         Fl::add_timeout( 0.1, delayed_preview, this );
 }
@@ -1311,6 +1338,8 @@ Wizard::aircraft_dir_add_cb()
         aircraft_dir_list_->value( aircraft_dir_list_->size() );
         aircraft_dir_list_->select( aircraft_dir_list_->size() );
         aircraft_dir_delete_->activate();
+
+        refreshAircraft = true;
     }
 }
 
@@ -1325,6 +1354,8 @@ Wizard::aircraft_dir_delete_cb()
 
     if (aircraft_dir_list_->value() == 0)
         aircraft_dir_delete_->deactivate();
+
+    refreshAircraft = true;
 }
 
 void
