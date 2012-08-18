@@ -325,14 +325,6 @@ Wizard::reset()
     scenery_dir_list_->clear();
     vs_t vs( sgPathSplit( fg_scenery ) );
 
-    for (vs_t::size_type i = 0; i < vs.size(); ++i)
-    {
-        if (i == ts_dir-1)
-            scenery_dir_list_->add( (vs[i]+"\t@bT").c_str() );
-        else
-            scenery_dir_list_->add( vs[i].c_str() );
-    }
-
     int iVal;
     if (!reloadPath && prefs.get("ts_dir", iVal, 0))
     {
@@ -347,6 +339,14 @@ Wizard::reset()
     else
     {
         ts_dir = def_ts_dir;
+    }
+
+    for (vs_t::size_type i = 0; i < vs.size(); ++i)
+    {
+        if (i == ts_dir-1)
+            scenery_dir_list_->add( (vs[i]+"\t@bT").c_str() );
+        else
+            scenery_dir_list_->add( vs[i].c_str() );
     }
 
     if (!reloadPath && prefs.get( "ts_exe", buf, "", buflen-1))
