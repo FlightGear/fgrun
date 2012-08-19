@@ -46,7 +46,7 @@ msgstr "3D wolken"
 #: src/wizard.cxx:637
 #, fuzzy
 msgid "3D Preview"
-msgstr "Voorbeeld"
+msgstr "3D voorbeeld"
 
 #: src/advanced_funcs.cxx:146
 msgid "4.0"
@@ -106,7 +106,7 @@ msgstr ""
 msgid "AI Traffic"
 msgstr ""
 "Computergestuurd\n"
-"Verkeer"
+"verkeer"
 
 #: src/wizard.cxx:822
 msgid "AI models"
@@ -149,7 +149,7 @@ msgstr "Geavanceerd..."
 
 #: src/wizard.cxx:516
 msgid "Aircraft directories"
-msgstr "Scenery mappen"
+msgstr "Vliegtuig mappen"
 
 #: src/advanced.cxx:748
 msgid "Aircraft:"
@@ -283,11 +283,11 @@ msgstr "Bedekking:"
 
 #: src/wizard.cxx:872
 msgid "Ctrl-click to deselect a single item"
-msgstr ""
+msgstr "Ctrl-click om een enkel item te deselecteren"
 
 #: src/wizard.cxx:864
 msgid "Ctrl-click to select or deselect a single item"
-msgstr ""
+msgstr "Ctrl-click om een enkel item te (de)selecteren"
 
 # geen vertaling nodig -- niet goed te vertalen
 #: src/advanced.cxx:1601
@@ -315,7 +315,7 @@ msgstr "Scenery map verwijderen"
 #: src/wizard.cxx:531
 #, fuzzy
 msgid "Delete an aircraft directory"
-msgstr "Scenery map verwijderen"
+msgstr "Vliegtuig map verwijderen"
 
 #: src/wizard_funcs.cxx:1707
 msgid "Description of "
@@ -414,11 +414,11 @@ msgstr "Schakel de hemellichaam vergrotende illusie dichtbij de horizon in"
 
 #: src/advanced.cxx:823
 msgid "Enable enhanced runway lighting"
-msgstr "Schakel geavanceerde startbaan verlichting in"
+msgstr "Schakel geavanceerde baanverlichting in"
 
 #: src/advanced.cxx:779
 msgid "Enable extra mouse pointer"
-msgstr "Schakel extra muis aanwijzer aan"
+msgstr "Schakel extra muis aanwijzer in"
 
 #: src/advanced.cxx:762
 msgid "Enable full screen game mode"
@@ -430,7 +430,7 @@ msgstr "Schakel volledig scherm mode in"
 
 #: src/advanced.cxx:773
 msgid "Enable introduction music during start up"
-msgstr "Schakel introductie muziek aan tijdens het opstarten"
+msgstr "Schakel introductie muziek in tijdens het opstarten"
 
 #: src/advanced.cxx:1319
 msgid "Enable property server"
@@ -438,7 +438,7 @@ msgstr "Schakel property server in"
 
 #: src/advanced.cxx:784
 msgid "Enable random scenery objects"
-msgstr "Schakel willekeurige objecten aan"
+msgstr "Schakel willekeurige objecten in"
 
 # Betere suggesties welkom
 #: src/advanced.cxx:828
@@ -479,7 +479,7 @@ msgstr "Verbeterde verlichting"
 
 #: src/wizard.cxx:767
 msgid "Enhanced runway lighting"
-msgstr "Geavanceerde startbaan verlichting"
+msgstr "Geavanceerde baanverlichting"
 
 #: src/advanced.cxx:1738 src/advanced_funcs.cxx:226
 msgid "Environment"
@@ -487,7 +487,7 @@ msgstr "Omgeving"
 
 #: src/wizard.cxx:491
 msgid "Executable path not set or invalid"
-msgstr ""
+msgstr "Programma locatie leeg of ongeldig"
 
 #: src/advanced.cxx:728 src/wizard.cxx:477
 msgid "Executable:"
@@ -507,7 +507,7 @@ msgstr ""
 
 #: src/wizard.cxx:509
 msgid "FG_ROOT path invalid or not set"
-msgstr ""
+msgstr "FG_ROOT locatie ongeldig of leeg"
 
 #: src/advanced.cxx:732 src/wizard.cxx:495
 msgid "FG_ROOT:"
@@ -600,7 +600,7 @@ msgstr "Mist"
 
 #: src/wizard.cxx:776
 msgid "Framerate limiter :"
-msgstr ""
+msgstr "Framerate begrenzer :"
 
 #: src/advanced.cxx:951 src/advanced.cxx:956 src/advanced_funcs.cxx:217
 msgid "Freeze"
@@ -786,7 +786,7 @@ msgstr "Lengtegraad:"
 
 #: src/advanced.cxx:1207
 msgid "Materials file:"
-msgstr ""
+msgstr "Materialen bestand"
 
 # geen vertaling nodig -- zelfde in NL
 #: src/advanced.cxx:1419
@@ -907,11 +907,11 @@ msgstr "Geen trim"
 
 #: src/Fl_OSG.cxx:186
 msgid "Not ready for Rembrandt"
-msgstr ""
+msgstr "Niet gereed voor Rembrandt"
 
 #: src/wizard_funcs.cxx:1710
 msgid "Not set"
-msgstr ""
+msgstr "Niet ingesteld"
 
 #: src/advanced.cxx:688 src/wizard.cxx:1042 src/wizard.cxx:1067
 msgid "OK"
@@ -950,7 +950,7 @@ msgstr ""
 " --fg-exe=<PAD>\n"
 " --fg-root=<MAP>\n"
 " --fg-scenery=<MAP>\n"
-" --ts-exe=<PATH>\n"
+" --ts-exe=<PAD>\n"
 " --ts-dir=#\n"
 " -f, --fullscreen\n"
 "%s"
@@ -969,7 +969,7 @@ msgstr "Paneel"
 
 #: src/wizard.cxx:706
 msgid "Park pos :"
-msgstr "Parkeerplek"
+msgstr "Parkeerplek :"
 
 #: src/AirportBrowser.cxx:89
 msgid "Parking"
@@ -981,7 +981,7 @@ msgstr "Pad naar extra XML properties bestanden"
 
 #: src/wizard.cxx:937
 msgid "Peer hostname"
-msgstr ""
+msgstr "Peer hostnaam"
 
 # betere suggesties welkom
 #: src/advanced.cxx:1028
@@ -1082,7 +1082,7 @@ msgstr "80"
 
 #: src/Fl_OSG.cxx:183
 msgid "Ready for Rembrandt"
-msgstr ""
+msgstr "Gereed voor Rembrandt"
 
 #: src/wizard.cxx:838
 msgid "Real weather fetch"
@@ -1208,7 +1208,7 @@ msgstr "Selecteer een voorkeuren-bestand"
 #: src/wizard_funcs.cxx:1721 src/wizard_funcs.cxx:1725
 #: src/wizard_funcs.cxx:2239
 msgid "Select a scenario to display its description"
-msgstr ""
+msgstr "Selecteer een scenario om een beschrijving te tonen"
 
 #: src/wizard.cxx:633
 msgid "Select an aircraft"
@@ -1449,7 +1449,6 @@ msgstr "Let op: deze functie kan uw framerates dramatisch beïnvloeden"
 msgid "VOR:"
 msgstr ""
 
-# suggesties welkom
 #: src/advanced.cxx:1679 src/advanced.cxx:1712 src/advanced.cxx:1761
 msgid "Value:"
 msgstr "Waarde:"
@@ -1589,7 +1588,7 @@ msgstr "vroege-productie"
 #: src/wizard_funcs.cxx:86 src/advanced_funcs.cxx:112
 #, fuzzy
 msgid "evening"
-msgstr "Weergave"
+msgstr "avond"
 
 #: src/wizard_funcs.cxx:112
 msgid "experimental"
@@ -1645,7 +1644,7 @@ msgstr "middernacht"
 
 #: src/wizard_funcs.cxx:82 src/advanced_funcs.cxx:108
 msgid "morning"
-msgstr ""
+msgstr "ochtend"
 
 #: src/advanced_funcs.cxx:139
 msgid "mouse"
@@ -1662,12 +1661,12 @@ msgstr "middag"
 # suggesties welkom
 #: src/advanced.cxx:1052
 msgid "offset azimuth:"
-msgstr "Azimut"
+msgstr "Azimut :"
 
 # geen vertaling nodig -- afkorting
 #: src/advanced.cxx:1048
 msgid "offset distance:"
-msgstr "Afstand"
+msgstr "Afstand:"
 
 #: src/wizard.cxx:946
 msgid "out :"
