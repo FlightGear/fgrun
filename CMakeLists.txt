@@ -41,7 +41,23 @@ message(STATUS "ignoring: ${CPACK_SOURCE_IGNORE_FILES}")
 include (CPack)
 
 option(ENABLE_NLS "Set to ON to build fgrun with NLS support" ON)
-set(MSVC_3RDPARTY_ROOT NOT_FOUND CACHE PATH "Location where the third-party dependencies are extracted")
+
+if (MSVC)
+    GET_FILENAME_COMPONENT(PARENT_DIR ${PROJECT_SOURCE_DIR} PATH)
+    if (CMAKE_CL_64)
+        SET(TEST_3RDPARTY_DIR "${PARENT_DIR}/3rdparty.x64")
+    else (CMAKE_CL_64)
+        SET(TEST_3RDPARTY_DIR "${PARENT_DIR}/3rdparty")
+    endif (CMAKE_CL_64)
+    if (EXISTS ${TEST_3RDPARTY_DIR})
+        set(MSVC_3RDPARTY_ROOT ${PARENT_DIR} CACHE PATH "Location where the third-party dependencies are extracted")
+    else (EXISTS ${TEST_3RDPARTY_DIR})
+        set(MSVC_3RDPARTY_ROOT NOT_FOUND CACHE PATH "Location where the third-party dependencies are extracted")
+    endif (EXISTS ${TEST_3RDPARTY_DIR})
+        list(APPEND PLATFORM_LIBS "winmm.lib")
+else (MSVC)
+    set(MSVC_3RDPARTY_ROOT NOT_FOUND CACHE PATH "Location where the third-party dependencies are extracted")
+endif (MSVC)
 
 if (MSVC AND MSVC_3RDPARTY_ROOT)
 
@@ -61,7 +77,19 @@ if (MSVC AND MSVC_3RDPARTY_ROOT)
 
   set (CMAKE_LIBRARY_PATH ${MSVC_3RDPARTY_ROOT}/${MSVC_3RDPARTY_DIR}/lib ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/OpenScenegraph/lib ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/SimGear/lib )
   set (CMAKE_INCLUDE_PATH ${MSVC_3RDPARTY_ROOT}/${MSVC_3RDPARTY_DIR}/include ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/OpenScenegraph/include ${MSVC_3RDPARTY_ROOT}/install/${OSG_MSVC}/SimGear/include)
-  set (BOOST_ROOT ${MSVC_3RDPARTY_ROOT}/boost_1_44_0)
+  find_path(BOOST_ROOT boost/version.hpp
+			${MSVC_3RDPARTY_ROOT}/boost
+			${MSVC_3RDPARTY_ROOT}/boost_1_51_0
+			${MSVC_3RDPARTY_ROOT}/boost_1_50_0
+			${MSVC_3RDPARTY_ROOT}/boost_1_49_0
+			${MSVC_3RDPARTY_ROOT}/boost_1_48_0
+			${MSVC_3RDPARTY_ROOT}/boost_1_47_0
+			${MSVC_3RDPARTY_ROOT}/boost_1_46_1
+			${MSVC_3RDPARTY_ROOT}/boost_1_46_0
+			${MSVC_3RDPARTY_ROOT}/boost_1_45_0
+			${MSVC_3RDPARTY_ROOT}/boost_1_44_0
+			)
+  message(STATUS "BOOST_ROOT is ${BOOST_ROOT}")
 
 endif (MSVC AND MSVC_3RDPARTY_ROOT)
 
