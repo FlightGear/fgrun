@@ -1,3 +1,14 @@
+* 1.6.2
+
+  * Updated portugese translation
+  * Improve initial configuration triggered by fgsetup by allowing multiple users
+  * Add versioning to the initial configuration to cope with previous installations
+  * Aircraft 3D preview made optional and controlled by a check box
+  * Local multiplay option without a hostname
+  * Add a checkbox to enable AI traffic (conditionned by AI models)
+  * Updated german translation
+  * Refresh aircraft list when fg_aircraft path list is changed
+
 * 1.6.1
 
   * show aircraft rating
