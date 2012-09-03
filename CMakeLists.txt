@@ -204,6 +204,10 @@ if ( FLTK_FOUND )
         "
         HAVE_FLTK_1_3)
 
+	if ( NOT HAVE_FLTK_1_3 )
+		message( SEND_ERROR "FLTK 1.3 is required" ) 
+	endif ( NOT HAVE_FLTK_1_3 )
+
 endif ( FLTK_FOUND )
 
 add_definitions(-DHAVE_CONFIG_H)
