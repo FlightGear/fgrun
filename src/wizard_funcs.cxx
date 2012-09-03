@@ -27,6 +27,7 @@
 #include <string>
 #include <cstdio>
 #include <vector>
+#include <deque>
 #include <set>
 #include <map>
 #include <sstream>
@@ -68,6 +69,7 @@
 
 using std::string;
 using std::vector;
+using std::deque;
 using std::set;
 using std::map;
 
@@ -393,6 +395,7 @@ Wizard::reset()
     {
         airports_->set_refresh_callback( refresh_airports, this );
         refresh_airports();
+        aircraft_mru_update();
         aircraft_update();
 
         fg_exe_invalid->hide();
@@ -702,7 +705,7 @@ loadModel( const string &fg_root, const string &fg_aircraft, const string &curre
 }
 
 void
-Wizard::preview_aircraft()
+Wizard::preview_aircraft(bool desel_mru)
 {
     Fl::remove_timeout( timeout_handler, this );
 
@@ -721,6 +724,9 @@ Wizard::preview_aircraft()
     AircraftData* data =
         reinterpret_cast<AircraftData*>( aircraft->data(n) );
     prefs.set( "aircraft", n > 0 ? data->name.c_str() : "" );
+    prefs.set( "aircraft_name", n > 0 ? data->desc.c_str() : "" );
+    if (desel_mru)
+        aircraft_mru->deselect();
 
     if (!data->modelPath.empty())
     {
@@ -787,6 +793,7 @@ Wizard::preview_aircraft()
 
     aircraft_status->value( _( data->status.c_str() ) );
     aircraft_author->value( data->author.c_str() );
+    aircraft_location->value( data->root.c_str() );
 
     next->activate();
 }
@@ -814,8 +821,9 @@ Wizard::next_cb()
             prefs.set( "fg_root", abs_name );
              win->cursor( FL_CURSOR_WAIT );
             Fl::flush();
+            aircraft_mru_update();
             aircraft_update();
-             win->cursor( FL_CURSOR_DEFAULT );
+            win->cursor( FL_CURSOR_DEFAULT );
         }
 
         string fg_aircraft;
@@ -886,6 +894,8 @@ Wizard::next_cb()
     }
     else if (wiz->value() == page[3])
     {
+        update_aircraft_mru();
+
         if (terrasync->value())
         {
             if (tsThread == 0)
@@ -907,6 +917,8 @@ Wizard::next_cb()
 
     if (wiz->value() == page[1])
     {
+        aircraft_mru_update();
+
         // "Select aircraft" page
         if (aircraft->size() == 0)
             aircraft_update();
@@ -944,6 +956,10 @@ Wizard::prev_cb()
 {
     next->activate();
     next->label( _("Next") );
+    if (wiz->value() == page[2])
+    {
+        aircraft_mru_update();
+    }
     wiz->prev();
     if (wiz->value() == page[0])
     {
@@ -2820,4 +2836,96 @@ Wizard::show_3d_preview_cb()
 {
     prefs.set("show_3d_preview", show_3d_preview->value());
     preview_aircraft();
+}
+
+void
+Wizard::aircraft_mru_update()
+{
+    aircraft_mru->clear();
+
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+    int nb = 0;
+    prefs.get("aircraft-mru-count", nb, 0);
+    for (int i = 1; i <= nb; ++i)
+    {
+        if (prefs.get( Fl_Preferences::Name("aircraft-mru-item-%d", i), buf, "", buflen-1))
+        {
+            string name(buf);
+            size_t p = name.find(';');
+            if (p != string::npos)
+                name.erase(0, p+1);
+            aircraft_mru->add(name.c_str());
+        }
+    }
+}
+
+void
+Wizard::update_aircraft_mru()
+{
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+    char buf1[ buflen ];
+    int pos = 0;
+    if (prefs.get( "aircraft", buf, "", buflen-1 ) && buf[0] != 0 &&
+        prefs.get( "aircraft_name", buf1, "", buflen-1 ) && buf1[0] != 0)
+    {
+        deque<string> aircraft_mru;
+
+        int nb = 0;
+        prefs.get("aircraft-mru-count", nb, 0);
+        for (int i = 1; i <= nb; ++i)
+        {
+            char buf2[ buflen ];
+            if (prefs.get( Fl_Preferences::Name("aircraft-mru-item-%d", i), buf2, "", buflen))
+            {
+                aircraft_mru.push_back(buf2);
+                if (aircraft_mru.back().find(buf) == 0 && aircraft_mru.back().size() > strlen(buf) && aircraft_mru.back()[strlen(buf)] == ';')
+                    pos = i;
+            }
+        }
+        if (pos != 0)
+        {
+            aircraft_mru.erase(aircraft_mru.begin() + (pos - 1));
+        }
+        aircraft_mru.push_front(string(buf)+";"+buf1);
+        while (aircraft_mru.size() > 5)
+            aircraft_mru.pop_back();
+
+        for (int i = 1; i <= aircraft_mru.size(); ++i)
+        {
+            prefs.set( Fl_Preferences::Name("aircraft-mru-item-%d", i), aircraft_mru[i-1].c_str());
+        }
+        prefs.set("aircraft-mru-count", (int)aircraft_mru.size());
+    }
+}
+
+void
+Wizard::aircraft_from_mru()
+{
+    int n = aircraft_mru->value();
+    if (n == 0)
+        return;
+
+    const int buflen = FL_PATH_MAX;
+    char buf[ buflen ];
+    if (prefs.get( Fl_Preferences::Name("aircraft-mru-item-%d", n), buf, "", buflen))
+    {
+        string name(buf);
+        size_t p = name.find(';');
+        if (p != string::npos)
+            name.erase(0, p+1);
+
+        string search = string("    ") + name;
+        for (int i=1; i <= aircraft->size(); ++i)
+        {
+            string line = aircraft->text(i);
+            if (line == search)
+            {
+                aircraft->value(i);
+                preview_aircraft(false);
+                return;
+            }
+        }
+    }
 }

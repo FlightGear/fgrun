@@ -84,11 +84,11 @@ class Wizard {open
     decl {TerraSyncThread &operator=( const TerraSyncThread & );} {private local
     }
   }
-  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), systemPrefs( Fl_Preferences::SYSTEM, "flightgear.org", "fgrun" ),logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0), refreshAircraft(false)} {selected
+  Function {Wizard() : prefs( Fl_Preferences::USER, "flightgear.org", "fgrun" ), systemPrefs( Fl_Preferences::SYSTEM, "flightgear.org", "fgrun" ),logwin(0), folder_open_pixmap(folder_open_xpm), warning_pixmap(warning_xpm), question_pixmap(question_xpm), adv(0), fgThread(0), tsThread(0), fgPid(0), tsPid(0), refreshAircraft(false)} {open
   } {
     Fl_Window win {
       label {FlightGear Wizard} open
-      private xywh {639 284 800 600} type Double visible
+      private xywh {694 241 800 600} type Double visible
     } {
       Fl_Wizard wiz {open
         private xywh {0 0 800 560}
@@ -240,7 +240,7 @@ class Wizard {open
         }
         Fl_Group {page[1]} {
           label {Select an aircraft} open
-          private xywh {0 0 800 560} labelfont 1 align 21 hide
+          private xywh {0 0 800 560} labelfont 1 align 21
         } {
           Fl_Check_Button show_3d_preview {
             label {3D Preview}
@@ -248,42 +248,56 @@ class Wizard {open
             private xywh {780 0 17 25} down_box DOWN_BOX labelsize 12 align 4
           }
           Fl_Tile {} {open
-            xywh {0 25 795 495} resizable
+            private xywh {0 25 795 465} resizable
           } {
-            Fl_Browser aircraft {
-              callback {preview_aircraft();}
-              private xywh {5 25 200 495} type Hold labelsize 12 align 1 textsize 12
+            Fl_Group {} {open
+              private xywh {5 25 200 465}
+            } {
+              Fl_Browser aircraft_mru {
+                label {Recently used aircraft :}
+                callback {aircraft_from_mru();} selected
+                private xywh {5 35 200 105} type Hold labelfont 1 labelsize 12 align 5 textsize 12
+              }
+              Fl_Browser aircraft {
+                label {Available aircraft :}
+                callback {preview_aircraft();}
+                private xywh {5 160 200 330} type Hold labelfont 1 labelsize 12 align 5 textsize 12 resizable
+              }
             }
             Fl_Box preview {
               label Preview
-              private xywh {205 25 590 495} box THIN_DOWN_BOX labelsize 12
+              private xywh {205 25 590 465} box THIN_DOWN_BOX labelsize 12
               code0 {\#include "Fl_OSG.h"}
               class Fl_OSG
             }
             Fl_Box {} {
-              xywh {80 190 265 65} hide resizable
+              private xywh {80 190 265 65} hide resizable
             }
           }
           Fl_Group {} {open
-            xywh {5 520 790 35} box DOWN_BOX
+            private xywh {5 490 790 65} box DOWN_BOX
           } {
             Fl_Output aircraft_status {
               label {Status :}
-              xywh {115 525 135 25}
+              private xywh {115 495 135 25}
             }
             Fl_Output aircraft_author {
               label {Author(s) :}
-              xywh {385 525 305 25} resizable
+              private xywh {385 495 305 25} resizable
             }
             Fl_Button start_viewer {
               label Viewer
               callback {start_viewer_cb();}
-              xywh {695 525 95 25}
+              private xywh {695 495 95 25}
+            }
+            Fl_Output aircraft_location {
+              label {Location :}
+              private xywh {115 525 575 25}
             }
           }
         }
         Fl_Group {page[2]} {
-          label {Select a location}
+          label {Select a location} open
           private xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
           Fl_Box airports_ {
@@ -291,34 +305,34 @@ class Wizard {open
             code0 {\#include "AirportBrowser.h"}
             class AirportBrowser
           }
-          Fl_Group {} {
-            xywh {5 505 790 50}
+          Fl_Group {} {open
+            private xywh {5 505 790 50}
           } {
             Fl_Group carrier_group {
               label {Carrier Ops} open
-              xywh {5 505 635 50} box ENGRAVED_FRAME labelfont 1 align 21 resizable
+              private xywh {5 505 635 50} box ENGRAVED_FRAME labelfont 1 align 21 resizable
             } {
               Fl_Input carrier_ {
                 label {Carrier : }
-                xywh {145 520 175 25}
+                private xywh {145 520 175 25}
               }
               Fl_Input parkpos_ {
                 label {Park pos :}
-                tooltip {Only valid if carrier is set. For airport parking, use the list above.} xywh {460 520 175 25}
+                private tooltip {Only valid if carrier is set. For airport parking, use the list above.} xywh {460 520 175 25}
               }
               Fl_Box {} {
-                xywh {640 505 0 5} resizable
+                private xywh {640 505 0 5} resizable
               }
             }
             Fl_Button {} {
               label {Scenery Prefetch}
               callback {scenery_prefetch_cb();}
-              xywh {645 505 150 50} labelsize 12
+              private xywh {645 505 150 50} labelsize 12
             }
           }
         }
         Fl_Group {page[3]} {open
-          private xywh {0 0 800 560}
+          private xywh {0 0 800 560} hide
         } {
           Fl_Group {} {
             private xywh {0 525 800 25}
@@ -418,7 +432,7 @@ class Wizard {open
             Fl_Choice bpp {
               label {bpp :}
               callback {bpp_cb();} open
-              tooltip {Color depth (bits per pixel)} xywh {100 55 125 25} down_box BORDER_BOX
+              private tooltip {Color depth (bits per pixel)} xywh {100 55 125 25} down_box BORDER_BOX
             } {
               MenuItem {} {
                 label 32
@@ -459,7 +473,7 @@ class Wizard {open
               Fl_Check_Button ai_traffic {
                 label {AI Traffic}
                 callback {ai_traffic_cb();}
-                xywh {35 210 140 25} down_box DOWN_BOX
+                private xywh {35 210 140 25} down_box DOWN_BOX
               }
               Fl_Check_Button time_of_day {
                 label {Time of day :}
@@ -491,7 +505,7 @@ class Wizard {open
               Fl_Check_Button auto_visibility {
                 label {Menu auto-visibility}
                 callback {auto_visibility_cb();}
-                xywh {180 235 170 25} down_box DOWN_BOX
+                private xywh {180 235 170 25} down_box DOWN_BOX
               }
             }
             Fl_Group {} {
@@ -511,7 +525,7 @@ class Wizard {open
                   tooltip {Ctrl-click to deselect a single item} xywh {495 230 265 25} resizable
                 }
                 Fl_Box scenarii_help {
-                  xywh {765 230 25 25}
+                  private xywh {765 230 25 25}
                   code0 {o->image(question_pixmap);}
                 }
               }
@@ -522,11 +536,11 @@ class Wizard {open
               Fl_Check_Button terrasync {
                 label TerraSync
                 callback {terrasync_cb();}
-                xywh {495 270 100 25} down_box DOWN_BOX labelfont 1
+                private xywh {495 270 100 25} down_box DOWN_BOX labelfont 1
               }
               Fl_Value_Input terrasync_port {
                 callback {terrasync_port_cb();}
-                xywh {595 270 50 25}
+                private xywh {595 270 50 25}
               }
               Fl_Box {} {
                 xywh {680 270 45 25} resizable
@@ -640,7 +654,7 @@ class Wizard {open
   }
   decl {void init( bool fullscreen );} {public local
   }
-  decl {void preview_aircraft();} {public local
+  decl {void preview_aircraft(bool desel_mru = true);} {public local
   }
   decl {void reset();} {private local
   }
@@ -842,7 +856,7 @@ class Wizard {open
   } {
     Fl_Window crash_window {
       label {Flightgear crashed...} open
-      private xywh {826 351 455 240} type Double visible
+      private xywh {-32000 -32000 455 240} type Double hide
     } {
       Fl_Box {} {
         label {Flightgear encountered an unexpected failure}
@@ -894,7 +908,7 @@ class Wizard {open
   } {
     Fl_Window prefetch_window {
       label {Prefetch Scenery} open
-      xywh {668 245 350 130} type Double visible
+      xywh {-32000 -32000 350 130} type Double hide
     } {
       Fl_Group {} {open
         xywh {0 90 350 35}
@@ -938,5 +952,11 @@ class Wizard {open
   decl {int ts_dir;} {private local
   }
   decl {bool refreshAircraft;} {private local
+  }
+  decl {void update_aircraft_mru()} {private local
+  }
+  decl {void aircraft_mru_update();} {private local
+  }
+  decl {void aircraft_from_mru();} {private local
   }
 } 
