@@ -1,10 +1,18 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.6.4)
 
 include (CheckIncludeFile)
 include (CheckFunctionExists)
 
 project(fgrun)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
+
+if(${CMAKE_VERSION} VERSION_GREATER 2.8.4)
+    # use official include provided by latest CMake
+    include(GNUInstallDirs)
+else(${CMAKE_VERSION} VERSION_GREATER 2.8.4)
+    # backward compatibility: use our own module for older cmake versions
+    include(OldGNUInstallDirs)
+endif(${CMAKE_VERSION} VERSION_GREATER 2.8.4)
 
 set(CMAKE_DEBUG_POSTFIX "d" CACHE STRING "add a postfix, usually d on windows")
 set(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windows")
