@@ -207,7 +207,7 @@ if ( FLTK_FOUND )
     message(STATUS "Using FLTK_LIBRARIES for fgrun: ${FLTK_LIBRARIES}")
 
     check_cxx_source_runs(
-        "#include <Fl/Fl.H>
+        "#include <FL/Fl.H>
         int main() {
             return Fl::version() >= 1.03 ? 0 : -1;
         }
