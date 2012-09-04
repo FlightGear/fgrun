@@ -130,7 +130,7 @@ if (ENABLE_NLS)
     find_package(Gettext)
 endif (ENABLE_NLS)
 
-if (GETTEXT_FOUND)
+if (ENABLE_NLS AND GETTEXT_FOUND)
 
     if (MSVC)
         FIND_LIBRARY(INTL_LIBRARY
@@ -154,7 +154,11 @@ if (GETTEXT_FOUND)
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_NLS")
 	endif (ENABLE_NLS)
     
-endif (GETTEXT_FOUND)
+else (ENABLE_NLS AND GETTEXT_FOUND)
+
+    set( INTL_LIBRARY "" )
+
+endif (ENABLE_NLS AND GETTEXT_FOUND)
 
 check_include_file(unistd.h HAVE_UNISTD_H)
 check_include_file(stdlib.h HAVE_STDLIB_H)
