@@ -42,8 +42,11 @@ protected:
     osgText::Text *drawText( const char *t, osg::Vec3 position );
     void drawRating( osg::Geode *geode, osg::Vec3 position, const char *t, int rating, int xincr );
     void drawRatings( osg::Group *root, int fdm, int systems, int cockpit, int model, const char *path = 0 );
+    void setThumbnailTransform(int w, int h);
 
     osg::ref_ptr<osg::Camera> hud;
+    osg::ref_ptr<osg::MatrixTransform> thumbnailTransform;
+    float imgAspect;
     SGPath font;
 };
 
