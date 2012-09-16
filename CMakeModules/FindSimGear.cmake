@@ -75,13 +75,6 @@ macro(find_sg_library libName varName libs)
     endif()
 endmacro()
 
-macro(find_sg_component comp libs)
-    set(compLib "sg${comp}")
-    string(TOUPPER "SIMGEAR_${comp}" libVar)
-    
-    find_sg_library(${compLib} ${libVar} ${libs})
-endmacro()
-
 FIND_PATH(SIMGEAR_INCLUDE_DIR simgear/math/SGMath.hxx
   HINTS $ENV{SIMGEAR_DIR}
   PATH_SUFFIXES include
@@ -102,19 +95,28 @@ endif()
 
 message(STATUS "SimGear include directory: ${SIMGEAR_INCLUDE_DIR}")
 
+# read the simgear version header file, get the version
+file(READ ${SIMGEAR_INCLUDE_DIR}/simgear/version.h SG_VERSION_FILE)
+
 # make sure the simgear/version.h header exists
-if (NOT EXISTS ${SIMGEAR_INCLUDE_DIR}/simgear/version.h)
+if (NOT SG_VERSION_FILE)
     message(FATAL_ERROR "Found SimGear, but it does not contain a simgear/version.h include! "
-            "SimGear installation is incomplete.")
+            "SimGear installation is incomplete or mismatching.")
 endif()
 
-# read the simgear version header file, get the version
-file(READ ${SIMGEAR_INCLUDE_DIR}/simgear/version.h sgVersionFile)
-string(STRIP ${sgVersionFile} SIMGEAR_DEFINE)
-string(REPLACE "#define SIMGEAR_VERSION " "" SIMGEAR_VERSION ${SIMGEAR_DEFINE})
+string(STRIP "${SG_VERSION_FILE}" SIMGEAR_DEFINE)
+string(REPLACE "#define SIMGEAR_VERSION " "" SIMGEAR_VERSION "${SIMGEAR_DEFINE}")
+
+if(NOT SIMGEAR_VERSION)
+    message(FATAL_ERROR "Unable to find SimGear or simgear/version.h does not exist/is invalid. "
+            "Make sure you have installed the SimGear ${SimGear_FIND_VERSION} includes. "
+            "When using non-standard locations, please use 'SIMGEAR_DIR' "
+            "to select the SimGear library location to be used.")
+endif()
+
 message(STATUS "found SimGear version: ${SIMGEAR_VERSION} (needed ${SimGear_FIND_VERSION})")
 
-if(NOT ${SIMGEAR_VERSION} EQUAL ${SimGear_FIND_VERSION})
+if(NOT "${SIMGEAR_VERSION}" EQUAL "${SimGear_FIND_VERSION}")
     message(FATAL_ERROR "You have installed a mismatching SimGear version ${SIMGEAR_VERSION} "
             "instead of ${SimGear_FIND_VERSION} as required by FlightGear. "
             "When using multiple SimGear installations, please use 'SIMGEAR_DIR' "
@@ -144,50 +146,11 @@ else(SIMGEAR_SHARED)
     set(SIMGEAR_CORE_LIBRARIES "") # clear value
     message(STATUS "looking for static SimGear libraries")
     
-  # note the order here affects the order Simgear libraries are
-  # linked in, and hence ability to link when using a traditional
-  # linker such as GNU ld on Linux
-    set(comps
-        environment
-        nasal
-        tsync
-        bucket
-        io
-        serial
-        math
-        props
-        structure
-        timing
-        xml
-        misc
-        threads
-        debug
-        magvar
-    )
-
-    set(scene_comps
-        ephem
-        sky
-        material
-        tgdb
-        model
-        screen
-        bvh
-        util
-        sound)
-            
-    foreach(component ${comps})
-        find_sg_component(${component} SIMGEAR_CORE_LIBRARIES)
-    endforeach()
-
-    foreach(component ${scene_comps})
-        find_sg_component(${component} SIMGEAR_LIBRARIES)
-    endforeach()
+    find_sg_library(SimGearCore SIMGEAR_CORE SIMGEAR_CORE_LIBRARIES)
+    find_sg_library(SimGearScene SIMGEAR_SCENE SIMGEAR_LIBRARIES)
 
     # again link order matters - scene libraries depend on core ones
     list(APPEND SIMGEAR_LIBRARIES ${SIMGEAR_CORE_LIBRARIES})
-
-    #message(STATUS "all libs ${SIMGEAR_LIBRARIES}")
     
     set(SIMGEAR_CORE_LIBRARY_DEPENDENCIES
         ${CMAKE_THREAD_LIBS_INIT}
@@ -196,7 +159,6 @@ else(SIMGEAR_SHARED)
         ${WINMM_LIBRARY})
 
     set(SIMGEAR_SCENE_LIBRARY_DEPENDENCIES 
-        ${ALUT_LIBRARY} 
         ${OPENAL_LIBRARY})
 
     if(WIN32)
