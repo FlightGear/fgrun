@@ -2835,7 +2835,7 @@ void
 Wizard::show_3d_preview_cb()
 {
     prefs.set("show_3d_preview", show_3d_preview->value());
-    preview_aircraft();
+    preview_aircraft(false);
 }
 
 void
