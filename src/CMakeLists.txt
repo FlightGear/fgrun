@@ -56,21 +56,10 @@ set(HEADERS
     ${platform_incs}
 	)
 
-if (MSVC)
-    set( simgear_libs ${SIMGEAR_LIBRARIES} )
-else (MSVC)
-    if (SIMGEAR_SHARED)
-		message(STATUS "Using shared Simgear libraries")
-        set( simgear_libs
-            ${SIMGEAR_LIBRARIES}
-            ${SIMGEAR_CORE_LIBRARY_DEPENDENCIES}
-            ${SIMGEAR_SCENE_LIBRARY_DEPENDENCIES})
-    else (SIMGEAR_SHARED)
-        set( simgear_libs
-            ${SIMGEAR_LIBRARIES}
-            )
-    endif (SIMGEAR_SHARED)
-endif (MSVC)
+set( simgear_libs
+     ${SIMGEAR_LIBRARIES}
+     ${SIMGEAR_CORE_LIBRARY_DEPENDENCIES}
+     ${SIMGEAR_SCENE_LIBRARY_DEPENDENCIES})
 
 add_executable(fgrun ${SOURCES} ${HEADERS})
 
