@@ -116,7 +116,8 @@ endif()
 
 message(STATUS "found SimGear version: ${SIMGEAR_VERSION} (needed ${SimGear_FIND_VERSION})")
 
-if(NOT "${SIMGEAR_VERSION}" EQUAL "${SimGear_FIND_VERSION}")
+if(NOT ${SIMGEAR_VERSION} VERSION_EQUAL ${SimGear_FIND_VERSION} AND
+		NOT ${SIMGEAR_VERSION} VERSION_GREATER ${SimGear_FIND_VERSION} )
     message(FATAL_ERROR "You have installed a mismatching SimGear version ${SIMGEAR_VERSION} "
             "instead of ${SimGear_FIND_VERSION} as required by FlightGear. "
             "When using multiple SimGear installations, please use 'SIMGEAR_DIR' "
@@ -203,9 +204,9 @@ check_cxx_source_runs(
 
         sscanf( xstr(SIMGEAR_VERSION), \"%d.%d.%d\", &major, &minor, &micro );
 
-        if ( (major != MIN_MAJOR) ||
-             (minor != MIN_MINOR) ||
-             (micro != MIN_MICRO) ) {
+        if ( (major < MIN_MAJOR) ||
+             ((major == MIN_MAJOR) && (minor < MIN_MINOR)) ||
+             ((major == MIN_MAJOR) && (minor == MIN_MINOR) && (micro < MIN_MICRO)) ) {
          return -1;
         }
 
