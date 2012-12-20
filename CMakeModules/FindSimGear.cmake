@@ -2,7 +2,7 @@
 # This module defines
 
 # SIMGEAR_CORE_LIBRARIES, a list of the core static libraries
-# SIMGEAR_LIBRARIES, a list of all the libraries (SimGearCore + SimGearScene)
+# SIMGEAR_LIBRARIES, a list of all the static libraries (core + scene)
 # SIMGEAR_FOUND, if false, do not try to link to SimGear
 # SIMGEAR_INCLUDE_DIR, where to find the headers
 #
@@ -38,18 +38,14 @@ macro(find_sg_library libName varName libs)
       HINTS $ENV{SIMGEAR_DIR}
       PATH_SUFFIXES ${CMAKE_INSTALL_LIBDIR} libs64 libs libs/Win32 libs/Win64
       PATHS
-      /usr/local
-      /usr
-      /opt
+      ${ADDITIONAL_LIBRARY_PATHS}
     )
     FIND_LIBRARY(${libVarName}_RELEASE
       NAMES ${libName}${CMAKE_RELEASE_POSTFIX}
       HINTS $ENV{SIMGEAR_DIR}
       PATH_SUFFIXES ${CMAKE_INSTALL_LIBDIR} libs64 libs libs/Win32 libs/Win64
       PATHS
-      /usr/local
-      /usr
-      /opt
+      ${ADDITIONAL_LIBRARY_PATHS}
     )
     
    # message(STATUS "before: Simgear ${${libVarName}_RELEASE} ")
@@ -79,11 +75,7 @@ FIND_PATH(SIMGEAR_INCLUDE_DIR simgear/math/SGMath.hxx
   HINTS $ENV{SIMGEAR_DIR}
   PATH_SUFFIXES include
   PATHS
-  ~/Library/Frameworks
-  /Library/Frameworks
-  /usr/local
-  /usr
-  /opt
+  ${ADDITIONAL_LIBRARY_PATHS}
 )
 
 # make sure the simgear include directory exists
@@ -128,22 +120,30 @@ endif()
 find_package(ZLIB REQUIRED)
 find_package(Threads REQUIRED)
 
-message(STATUS "looking for Simgear libraries")
-set(SIMGEAR_LIBRARIES "") # clear value
-set(SIMGEAR_CORE_LIBRARIES "") # clear value
-set(SIMGEAR_CORE_LIBRARY_DEPENDENCIES "") # clear value
-set(SIMGEAR_SCENE_LIBRARY_DEPENDENCIES "") # clear value
+if(SIMGEAR_SHARED)
+    message(STATUS "looking for shared Simgear libraries")
 
-find_sg_library(SimGearCore SIMGEAR_CORE SIMGEAR_CORE_LIBRARIES)
-find_sg_library(SimGearScene SIMGEAR_SCENE SIMGEAR_LIBRARIES)
+    find_sg_library(SimGearCore SIMGEAR_CORE SIMGEAR_CORE_LIBRARIES)
+    find_sg_library(SimGearScene SIMGEAR_SCENE SIMGEAR_LIBRARIES)
+ 
+    list(APPEND SIMGEAR_LIBRARIES ${SIMGEAR_CORE_LIBRARIES})
+    set(SIMGEAR_CORE_LIBRARY_DEPENDENCIES "")
+    set(SIMGEAR_SCENE_LIBRARY_DEPENDENCIES "")
+    
+   # message(STATUS "core lib ${SIMGEAR_CORE_LIBRARIES}")
+  #  message(STATUS "all libs ${SIMGEAR_LIBRARIES}")
+else(SIMGEAR_SHARED)
 
-# again link order matters - scene libraries depend on core ones
-list(APPEND SIMGEAR_LIBRARIES ${SIMGEAR_CORE_LIBRARIES})
+    set(SIMGEAR_LIBRARIES "") # clear value
+    set(SIMGEAR_CORE_LIBRARIES "") # clear value
+    message(STATUS "looking for static SimGear libraries")
+    
+    find_sg_library(SimGearCore SIMGEAR_CORE SIMGEAR_CORE_LIBRARIES)
+    find_sg_library(SimGearScene SIMGEAR_SCENE SIMGEAR_LIBRARIES)
 
-if(NOT SIMGEAR_SHARED)
-    # static libraries require additional dependencies, which we need to supply manually
-    # (shared libraries bring their own dependencies automatically)
-    message(STATUS "Adding dependencies for static SimGear libraries")
+    # again link order matters - scene libraries depend on core ones
+    list(APPEND SIMGEAR_LIBRARIES ${SIMGEAR_CORE_LIBRARIES})
+    
     set(SIMGEAR_CORE_LIBRARY_DEPENDENCIES
         ${CMAKE_THREAD_LIBS_INIT}
         ${ZLIB_LIBRARY}
@@ -164,7 +164,7 @@ if(NOT SIMGEAR_SHARED)
             list(APPEND SIMGEAR_CORE_LIBRARY_DEPENDENCIES rt)
         endif(have_rt)
     endif(NOT MSVC)
-endif(NOT SIMGEAR_SHARED)
+endif(SIMGEAR_SHARED)
 
 if((NOT SIMGEAR_CORE_LIBRARIES)OR(NOT SIMGEAR_LIBRARIES))
     message(FATAL_ERROR "Cannot find SimGear libraries! (Forgot 'make install' for SimGear?) "
