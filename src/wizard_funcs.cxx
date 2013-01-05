@@ -121,6 +121,7 @@ static const char *aircraft_status_[] = {
 struct AircraftData
 {
     string name;
+    string dir;
     string root;
     string desc;
     string status;
@@ -539,7 +540,7 @@ find_named_node( osg::Node * node, const string &name )
 }
 
 osg::Node *
-loadModel( const string &fg_root, const string &fg_aircraft, const string &current,
+loadModel( const string &fg_root, const string &fg_aircraft, const string &dir, const string &current,
                 const string &path, const SGPath& externalTexturePath )
 {
     osg::ref_ptr<osg::Node> model;
@@ -554,6 +555,12 @@ loadModel( const string &fg_root, const string &fg_aircraft, const string &curre
         if (!tmp.exists())
         {
             tmp = fg_aircraft;
+            tmp.append(modelpath.str());
+        }
+        if (!tmp.exists())
+        {
+            tmp = fg_aircraft;
+            tmp.append(dir);
             tmp.append(modelpath.str());
         }
         if (!tmp.exists() && modelpath.str().find( "Aircraft/" ) == 0)
@@ -657,7 +664,7 @@ loadModel( const string &fg_root, const string &fg_aircraft, const string &curre
 
         osg::ref_ptr<osg::Node> kid;
         try {
-            kid = loadModel( fg_root, fg_aircraft, modelpath.dir(), submodel, externalTexturePath );
+            kid = loadModel( fg_root, fg_aircraft, dir, modelpath.dir(), submodel, externalTexturePath );
         } catch (const sg_throwable &t) {
             SG_LOG(SG_INPUT, SG_ALERT, "Failed to load submodel: " << t.getFormattedMessage());
             throw;
@@ -737,7 +744,13 @@ Wizard::preview_aircraft(bool desel_mru)
         if (!path.exists())
         {
             error = true;
-            if ( data->modelPath.find( "Aircraft/" ) == 0 )
+            path = data->root;
+            path.append( data->dir );
+            path.append( data->modelPath );
+
+            if ( path.exists() )
+                error = false;
+            else if ( data->modelPath.find( "Aircraft/" ) == 0 )
             {
                 path = data->root;
                 path.append( data->modelPath.substr( 9 ) );
@@ -758,7 +771,7 @@ Wizard::preview_aircraft(bool desel_mru)
 
             if (show_3d_preview->value())
             {
-                osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), data->root, "", path.str(), SGPath() );
+                osg::ref_ptr<osg::Node> model = loadModel( fg_root_->value(), data->root, data->dir, "", path.str(), SGPath() );
                 if (model != 0)
                 {
                     current_aircraft_model_path = path.str();
@@ -1229,6 +1242,7 @@ Wizard::aircraft_update( const char *aft )
 
                     AircraftData* data = new AircraftData;
                     data->name = ss;
+                    data->dir = name;
                     data->root = path.str();
                     data->desc = desc;
                     data->status = props.getStringValue( "/sim/status", _( "Unknown" ) );
