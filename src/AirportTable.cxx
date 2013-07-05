@@ -24,6 +24,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <boost\algorithm\string\case_conv.hpp>
 
 #include <FL/fl_draw.H>
 
@@ -53,8 +54,8 @@ public:
             return reverse_ ? (b->id_ < a->id_) : (a->id_ < b->id_);
         else
             return reverse_ ?
-		(b->name_ < a->name_) :
-		(a->name_ < b->name_);
+		(boost::algorithm::to_lower_copy(b->name_) < boost::algorithm::to_lower_copy(a->name_)) :
+		(boost::algorithm::to_lower_copy(a->name_) < boost::algorithm::to_lower_copy(b->name_));
     }
 };
 
