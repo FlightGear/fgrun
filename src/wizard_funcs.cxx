@@ -35,6 +35,7 @@
 #include <cctype>
 #include <sys/stat.h>
 #include <errno.h>
+#include <boost/algorithm/string/predicate.hpp>
 
 #include <FL/Fl.H>
 #include <FL/Fl_Preferences.H>
@@ -143,7 +144,7 @@ is_valid_fg_exe( string exe )
         return false;
 
     SGPath path( exe );
-    while (exe.size() != 0 && ( !path.exists() || path.isDir() ))
+    while (exe.size() != 0 && ( !path.exists() || path.isDir() || boost::algorithm::ends_with(exe,"fgrun.exe") || boost::algorithm::ends_with(exe,"fgjs.exe")))
     {
         size_t pos = exe.rfind(' ');
         if (pos == std::string::npos)
