@@ -212,6 +212,10 @@ if ( FLTK_FOUND )
         list(APPEND FLTK_LIBRARIES ${X11_Xft_LIB})
     endif()
 
+    if ( CMAKE_DL_LIBS )
+       list(APPEND FLTK_LIBRARIES ${CMAKE_DL_LIBS}) 
+    endif()
+
     set( CMAKE_REQUIRED_INCLUDES ${FLTK_INCLUDE_DIR} )
     set( CMAKE_REQUIRED_LIBRARIES ${FLTK_LIBRARIES} )
     message(STATUS "Using FLTK_LIBRARIES for fgrun: ${FLTK_LIBRARIES}")
