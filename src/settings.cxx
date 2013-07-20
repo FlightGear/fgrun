@@ -93,9 +93,9 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("distance_attenuation", distance_attenuation->value());
     prefs.set("specular_highlight", specular_highlight->value());
     prefs.set("failure", failure->value());
+    prefs.set("failure_electrical", failure_electrical->value());
     prefs.set("failure_pitot", failure_pitot->value());
     prefs.set("failure_static", failure_static->value());
-    prefs.set("failure_system", failure_system->value());
     prefs.set("failure_vacuum", failure_vacuum->value());
     prefs.set("ai_models", ai_models->value());
     prefs.set("ai_traffic", ai_traffic->value());
@@ -335,12 +335,12 @@ Advanced::load_settings( Fl_Preferences& prefs )
     prefs.get("failure", iVal, 0);
     failure->value( iVal );
     failure->do_callback();
+    prefs.get("failure_electrical", iVal, 0);
+    failure_electrical->value( iVal );
     prefs.get("failure_pitot", iVal, 0);
     failure_pitot->value( iVal );
     prefs.get("failure_static", iVal, 0);
     failure_static->value( iVal );
-    prefs.get("failure_system", iVal, 0);
-    failure_system->value( iVal );
     prefs.get("failure_vacuum", iVal, 0);
     failure_vacuum->value( iVal );
     prefs.get("ai_models", iVal, 0);
@@ -643,9 +643,9 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("distance_attenuation" );
     prefs.deleteEntry("specular_highlight" );
     prefs.deleteEntry("failure" );
+    prefs.deleteEntry("failure_electrical" );
     prefs.deleteEntry("failure_pitot" );
     prefs.deleteEntry("failure_static" );
-    prefs.deleteEntry("failure_system" );
     prefs.deleteEntry("failure_vacuum" );
     prefs.deleteEntry("ai_models" );
     prefs.deleteEntry("ai_traffic" );

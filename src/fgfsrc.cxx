@@ -167,8 +167,8 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
             os << pfx << "--failure=pitot";
         if (prefs.get( "failure_static", iVal, 0 ) && iVal)
             os << pfx << "--failure=static";
-        if (prefs.get( "failure_system", iVal, 0 ) && iVal)
-            os << pfx << "--failure=system";
+        if (prefs.get( "failure_electrical", iVal, 0 ) && iVal)
+            os << pfx << "--failure=electrical";
         if (prefs.get( "failure_vacuum", iVal, 0 ) && iVal)
             os << pfx << "--failure=vacuum";
     }

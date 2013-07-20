@@ -188,28 +188,28 @@ else
         Fl_Check_Button failure {
           label Failures
           callback {if (o->value()) {
+  failure_electrical->activate();
   failure_pitot->activate();
   failure_static->activate();
-  failure_system->activate();
   failure_vacuum->activate();
 } else {
+  failure_electrical->deactivate();
   failure_pitot->deactivate();
   failure_static->deactivate();
-  failure_system->deactivate();
   failure_vacuum->deactivate();
 }}
           private xywh {485 50 150 25} down_box DOWN_BOX labelsize 12
         }
+        Fl_Check_Button failure_electrical {
+          label electrical
+          private xywh {505 75 130 25} down_box DOWN_BOX labelsize 12 deactivate
+        }
         Fl_Check_Button failure_pitot {
           label pitot
-          private xywh {505 75 130 25} down_box DOWN_BOX labelsize 12 deactivate
+          private xywh {505 100 130 25} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button failure_static {
           label static
-          private xywh {505 100 130 25} down_box DOWN_BOX labelsize 12 deactivate
-        }
-        Fl_Check_Button failure_system {
-          label system
           private xywh {505 125 130 25} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button failure_vacuum {
