@@ -231,8 +231,8 @@ static const char* about_text = N_("\
  </head>\
  <body>\
   <h1>FlightGear Launch Control %s</h1>\
-  <p>This program is released under the GNU General Public License (<a href=\"http://www.gnu.org/copyleft/gpl.html\">http://www.gnu.org/copyleft/gpl.html</a>).</p>\
-  <p>Report bugs to <a href=\"http://sourceforge.net/projects/fgrun\">http://sourceforge.net/projects/fgrun</a></p>\
+  <p>This program is released under the <a href=\"http://www.gnu.org/copyleft/gpl.html\">GNU General Public License</a>.</p>\
+  <p>Report bugs to <a href=\"http://flightgear-bugs.googlecode.com\">http://flightgear-bugs.googlecode.com</a></p>\
  </body>\
 </html>");
 
