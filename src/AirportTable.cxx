@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <boost\algorithm\string\case_conv.hpp>
+#include <boost/algorithm/string/case_conv.hpp>
 
 #include <FL/fl_draw.H>
 
