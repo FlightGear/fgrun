@@ -311,49 +311,6 @@ Wizard::run_fgfs(const string &args)
     return run_program( cmd, fgPid, childenv.get() );
 }
 
-int
-Wizard::run_ts()
-{
-    if ( tsPid != 0 )
-	return -1;
-
-    const int buflen = FL_PATH_MAX;
-    char exe[ buflen ];
-    char buf[ buflen ];
-
-    prefs.get( "ts_exe", buf, "", buflen-1 );
-    fl_filename_absolute( exe, buf );
-    // Convert cygwin path ( if any ) into real windows path
-    if ( strncmp( exe, "/cygdrive", 9 ) == 0 ) {
-        memmove( exe, exe+9, strlen(exe)-8 );
-        exe[0] = exe[1];
-        exe[1] = ':';
-    }
-
-    int iVal;
-    prefs.get( "ts_dir", iVal, 0 );
-    if ( iVal == 0 )
-	return 1;
-
-    prefs.get( "fg_scenery", buf, "", buflen-1 );
-    string_list dirlist = sgPathSplit( buf );
-    if ( dirlist.empty() )
-        return 1;
-
-    std::cout << iVal << " - '" << dirlist[iVal-1] << "'" << std::endl;
-
-    int port;
-    prefs.get( "terrasync_port", port, 5505 );
-    std::ostringstream oss;
-    oss << exe << " -S -d \"" << dirlist[iVal-1] << "\" -p " << port;
-
-    char* cmd = new char[ oss.str().length() + 1 ];
-    strcpy( cmd, oss.str().c_str() );
-    std::cout << cmd << std::endl;
-
-    return run_program( cmd, tsPid );
-}
-
 void
 Wizard::stopProcess( long pid )
 {

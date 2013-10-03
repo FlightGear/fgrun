@@ -436,6 +436,7 @@ Advanced::load_settings( Fl_Preferences& prefs )
     wireframe->value(iVal);
     prefs.get("rembrandt", iVal, 0);
     rembrandt->value(iVal);
+    rembrandt->do_callback();
     prefs.get("shading", buf, "smooth", buflen-1);
     if (strcmp(buf, "smooth") == 0)
 	shading_smooth->setonly();

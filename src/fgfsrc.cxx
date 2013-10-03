@@ -278,8 +278,6 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--disable-textures";
     if (prefs.get( "wireframe", iVal, 0 ) && iVal)
         os << pfx << "--enable-wireframe";
-    if (prefs.get( "rembrandt", iVal, 0 ) && iVal)
-        os << pfx << "--enable-rembrandt";
     if (prefs.get( "shading", buf, "", buflen-1 ) &&
         strcmp( "flat", buf ) == 0)
         os << pfx << "--shading-flat";
@@ -321,7 +319,9 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--texture-filtering=" << buf;
     if (prefs.get( "materials-file", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--materials-file=" << buf;
-    if (prefs.get( "anti-aliasing", buf, "1", buflen-1 ) && strcmp(buf,"1")!=0) {
+    if (prefs.get( "rembrandt", iVal, 0 ) && iVal)
+        os << pfx << "--enable-rembrandt";
+    else if (prefs.get( "anti-aliasing", buf, "1", buflen-1 ) && strcmp(buf,"1")!=0) {
         os << pfx << "--prop:/sim/rendering/multi-sample-buffers=1";
         os << pfx << "--prop:/sim/rendering/multi-samples=" << buf;
     }
@@ -352,11 +352,10 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     if ( prefs.get( "season", buf, "", buflen-1 ) && strcmp(buf,"summer")!=0 )
         os << pfx << "--season=" << buf;
 
-    if ( prefs.get( "terrasync", iVal, 0 ) && iVal )
-    {
-        prefs.get( "terrasync_port", iVal, 5505 );
-        os << pfx << "--atlas=socket,out,5,localhost," << iVal << ",udp";
-    }
+    if ( prefs.get( "terrasync", iVal, 1 ) && iVal )
+        os << pfx << "--enable-terrasync";
+    else
+        os << pfx << "--disable-terrasync";
 
     // Network.
     if (prefs.get( "httpd", iVal, 0 ) && iVal)

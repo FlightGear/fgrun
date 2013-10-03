@@ -441,6 +441,11 @@ else
         }
         Fl_Check_Button rembrandt {
           label Rembrandt
+          callback {if (o->value()) {
+            anti_aliasing->deactivate();
+          } else {
+            anti_aliasing->activate();
+          }}
           private tooltip {Enable project Rembrandt (deferred rendering)} xywh {180 220 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Group {} {
@@ -531,7 +536,7 @@ else
         }
         Fl_Choice anti_aliasing {
           label {Anti-aliasing:} open
-          private tooltip {Set the maximum degree of anti-aliasing} xywh {490 415 120 25} down_box BORDER_BOX labelsize 12 textsize 12
+          private tooltip {Set the maximum degree of anti-aliasing. With Rembrandt enabled, the FXAA option of the graphics drivers should be used instead.} xywh {490 415 120 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {}
         Fl_Box {} {
           xywh {615 475 25 25} resizable
