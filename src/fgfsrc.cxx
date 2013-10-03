@@ -319,6 +319,10 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--texture-filtering=" << buf;
     if (prefs.get( "materials-file", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--materials-file=" << buf;
+    if (prefs.get( "anti-aliasing", buf, "1", buflen-1 ) && strcmp(buf,"1")!=0) {
+        os << pfx << "--prop:/sim/rendering/multi-sample-buffers=1";
+        os << pfx << "--prop:/sim/rendering/multi-samples=" << buf;
+    }
 
     // Time
     if (prefs.get( "time-match-real", iVal, 1 ) && iVal &&

@@ -525,6 +525,13 @@ else
           label {Materials file:}
           private xywh {490 385 120 25} labelsize 12 textsize 12
         }
+        Fl_Choice anti_aliasing {
+          label {Anti-aliasing:} open
+          private tooltip {Set the maximum degree of anti-aliasing} xywh {490 415 120 25} down_box BORDER_BOX labelsize 12 textsize 12
+        } {}
+        Fl_Box {} {
+          xywh {615 475 25 25} resizable
+        }
       }
       Fl_Group {page[6]} {
         label Time
@@ -1338,6 +1345,8 @@ else
   decl {static Fl_Menu_Item menu_control[];} {private local
   }
   decl {static Fl_Menu_Item menu_texture_filtering[];} {private local
+  }
+  decl {static Fl_Menu_Item menu_anti_aliasing[];} {private local
   }
   decl {Fl_Preferences& prefs;} {private local
   }

@@ -149,6 +149,13 @@ Fl_Menu_Item Advanced::menu_texture_filtering[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
+Fl_Menu_Item Advanced::menu_anti_aliasing[] = {
+ {_("no anti-aliasing"), 0,  0, (void*)"1", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("2"), 0,  0, (void*)"2", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {_("4"), 0,  0, (void*)"4", 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
 void
 Advanced::init()
 {
@@ -190,6 +197,12 @@ Advanced::init()
         menu_texture_filtering[i].text = _( menu_texture_filtering[i].text );
     }
     texture_filtering->menu(menu_texture_filtering);
+	
+    for ( int i = 0; menu_anti_aliasing[i].text != 0; ++i )
+    {
+        menu_anti_aliasing[i].text = _( menu_anti_aliasing[i].text );
+    }
+    anti_aliasing->menu(menu_anti_aliasing);
 
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];

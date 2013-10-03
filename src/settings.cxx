@@ -161,6 +161,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("fov", fov->value());
     prefs.set("texture-filtering", (const char *)texture_filtering->mvalue()->user_data());
     prefs.set("materials-file", materials_file->value());
+    prefs.set("anti-aliasing", (const char *)anti_aliasing->mvalue()->user_data());
 
     prefs.set("time-match-real", time_match_real->value());
     prefs.set("time-offset", time_offset_value->value());
@@ -463,6 +464,8 @@ Advanced::load_settings( Fl_Preferences& prefs )
     set_choice_from_data( texture_filtering, buf );
     prefs.get("materials-file", buf, "", buflen-1);
     materials_file->value(buf);
+    prefs.get( "anti-aliasing", buf, "1", buflen-1 );
+    set_choice_from_data( anti_aliasing, buf );
 
     prefs.get( "time-match-real", iVal, 1 );
     if (iVal) time_match_real->setonly();
@@ -700,6 +703,7 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("fov" );
     prefs.deleteEntry("texture-filtering" );
     prefs.deleteEntry("materials-file" );
+    prefs.deleteEntry("anti-aliasing" );
 
     prefs.deleteEntry("time-match-real" );
     prefs.deleteEntry("time-offset" );
