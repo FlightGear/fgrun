@@ -140,6 +140,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("skyblend", skyblend->value());
     prefs.set("textures", textures->value());
     prefs.set("wireframe", wireframe->value());
+    prefs.set("rembrandt", rembrandt->value());
     if (fog_disabled->value())
 	prefs.set("fog", "disabled");
     else if (fog_fastest->value())
@@ -433,6 +434,8 @@ Advanced::load_settings( Fl_Preferences& prefs )
     textures->value(iVal);
     prefs.get("wireframe", iVal, 0);
     wireframe->value(iVal);
+    prefs.get("rembrandt", iVal, 0);
+    rembrandt->value(iVal);
     prefs.get("shading", buf, "smooth", buflen-1);
     if (strcmp(buf, "smooth") == 0)
 	shading_smooth->setonly();
@@ -693,6 +696,7 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("skyblend" );
     prefs.deleteEntry("textures" );
     prefs.deleteEntry("wireframe" );
+    prefs.deleteEntry("rembrandt" );
     prefs.deleteEntry("fog" );
     prefs.deleteEntry("shading" );
     prefs.deleteEntry("geometry" );

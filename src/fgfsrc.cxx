@@ -278,6 +278,8 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--disable-textures";
     if (prefs.get( "wireframe", iVal, 0 ) && iVal)
         os << pfx << "--enable-wireframe";
+    if (prefs.get( "rembrandt", iVal, 0 ) && iVal)
+        os << pfx << "--enable-rembrandt";
     if (prefs.get( "shading", buf, "", buflen-1 ) &&
         strcmp( "flat", buf ) == 0)
         os << pfx << "--shading-flat";

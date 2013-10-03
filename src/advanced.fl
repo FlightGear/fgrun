@@ -439,6 +439,10 @@ else
           label Wireframe
           private tooltip {Enable wireframe drawing mode} xywh {180 190 120 25} down_box DOWN_BOX labelsize 12
         }
+        Fl_Check_Button rembrandt {
+          label Rembrandt
+          private tooltip {Enable project Rembrandt (deferred rendering)} xywh {180 220 120 25} down_box DOWN_BOX labelsize 12
+        }
         Fl_Group {} {
           label Shading
           private xywh {315 45 120 100} labelfont 1 align 21
