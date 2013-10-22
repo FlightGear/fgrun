@@ -71,6 +71,7 @@ string_to_coverage( const char* s )
 void
 Advanced::save_settings( Fl_Preferences& prefs )
 {
+    prefs.set( "ts_dir", ts_dir->value());
     prefs.set( "browser", browser->value() );
     prefs.set( "control", (const char *)control->mvalue()->user_data() );
     prefs.set( "lang", lang->value());
@@ -264,6 +265,9 @@ Advanced::load_settings( Fl_Preferences& prefs )
 
     prefs.get( "fg_scenery", buf, not_set, buflen-1 );
     fg_scenery_->value( buf );
+
+    prefs.get( "ts_dir", buf, not_set, buflen-1 );
+    ts_dir->value( buf );
 
     prefs.get( "aircraft", buf, not_set, buflen-1 );
     aircraft_->value( buf );
@@ -628,6 +632,7 @@ Advanced::load_settings( Fl_Preferences& prefs )
 void
 Advanced::reset_settings( Fl_Preferences& prefs )
 {
+    prefs.deleteEntry( "ts_dir" );
     prefs.deleteEntry( "browser" );
     prefs.deleteEntry( "control" );
     prefs.deleteEntry( "lang" );

@@ -235,6 +235,7 @@ Wizard::run_fgfs(const string &args)
     string line = args;
     encase_arg( line, "fg-root" );
     encase_arg( line, "fg-scenery" );
+    encase_arg( line, "terrasync-dir" );
     encase_arg( line, "fg-aircraft" );
     encase_arg( line, "config" );
     encase_arg( line, "browser-app" );

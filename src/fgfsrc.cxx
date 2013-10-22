@@ -87,6 +87,9 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     prefs.get( "fg_scenery", buf, "", buflen-1 );
     os << pfx << "--fg-scenery=" << buf;
 
+    if (prefs.get( "ts_dir", buf, "", buflen-1 ) && buf[0] != 0)
+        os << pfx << "--terrasync-dir=" << buf;
+
     prefs.get( "fg_aircraft", buf, "", buflen-1 );
     if ( buf[0] != 0 )
         os << pfx << "--fg-aircraft=" << buf;

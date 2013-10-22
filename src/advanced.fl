@@ -39,7 +39,7 @@ class Advanced {open
       Fl_Browser page_list {
         callback {if (o->value() > 0)
   show_page(o->value()-1);}
-        private xywh {0 0 150 430} type Hold labelsize 12 textsize 12
+        private xywh {0 0 120 430} type Hold labelsize 12 textsize 12
       }
       Fl_Box {} {
         xywh {150 0 485 430} resizable
@@ -65,29 +65,29 @@ class Advanced {open
       } {
         Fl_Choice control {
           label {Control:} open
-          private tooltip {Primary control mode} xywh {250 175 150 25} down_box BORDER_BOX labelsize 12 textsize 12
+          private tooltip {Primary control mode} xywh {250 205 150 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {}
         Fl_Input lang {
           label {Language:}
-          private xywh {250 220 80 25} labelsize 12 textsize 12
+          private xywh {250 250 80 25} labelsize 12 textsize 12
         }
         Fl_Input browser {
           label {Browser:}
-          private xywh {250 250 355 25} labelsize 12 textsize 12
+          private xywh {250 280 355 25} labelsize 12 textsize 12
         }
         Fl_Button {} {
           label {...}
           callback {fg_browser_cb();}
-          private xywh {610 250 25 25} labelsize 12
+          private xywh {610 280 25 25} labelsize 12
         }
         Fl_Input config {
           label {Config:}
-          private tooltip {Path to additional XML properties file} xywh {250 280 355 25} labelsize 12 textsize 12
+          private tooltip {Path to additional XML properties file} xywh {250 310 355 25} labelsize 12 textsize 12
         }
         Fl_Button {} {
           label {...}
           callback {fg_config_cb();}
-          private xywh {610 280 25 25} labelsize 12
+          private xywh {610 310 25 25} labelsize 12
         }
         Fl_Output fg_exe_ {
           label {Executable:}
@@ -101,17 +101,21 @@ class Advanced {open
           label {FG_SCENERY:}
           xywh {250 85 385 25} labelsize 12 textsize 12
         }
+        Fl_Input ts_dir {
+          label {TerraSync directory:}
+          xywh {250 115 385 25} labelsize 12 textsize 12
+        }
         Fl_Output airport_ {
           label {Airport:}
-          xywh {250 115 240 25} labelsize 12 textsize 12
+          xywh {250 145 240 25} labelsize 12 textsize 12
         }
         Fl_Output runway_ {
           label {Runway:}
-          xywh {555 115 80 25} labelsize 12 textsize 12
+          xywh {555 145 80 25} labelsize 12 textsize 12
         }
         Fl_Output aircraft_ {
           label {Aircraft:}
-          xywh {250 145 240 25} labelsize 12 textsize 12
+          xywh {250 175 240 25} labelsize 12 textsize 12
         }
         Fl_Box {} {
           xywh {255 405 25 25} resizable
