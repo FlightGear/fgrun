@@ -228,7 +228,7 @@ static const char* about_text = N_("\
   <title>FlightGear Launch Control %s</title>\
  </head>\
  <body>\
-  <h1>FlightGear Launch Control %s</h1>\
+  <h1>FlightGear Launch Control for FlightGear v%s</h1>\
   <p>This program is released under the <a href=\"http://www.gnu.org/copyleft/gpl.html\">GNU General Public License</a>.</p>\
   <p>Report bugs to <a href=\"http://flightgear-bugs.googlecode.com\">http://flightgear-bugs.googlecode.com</a></p>\
  </body>\
