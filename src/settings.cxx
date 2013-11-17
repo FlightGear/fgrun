@@ -186,6 +186,12 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set( "callsign", callsign->value() );
     prefs.set( "multiplay1", multiplay1->value() );
     prefs.set( "multiplay2", multiplay2->value() );
+    // FGCom options
+    prefs.set( "fgcom-disabled", fgcom_disabled->value() );
+    prefs.set( "fgcom-builtin", fgcom_builtin->value() );
+    prefs.set( "fgcom-standalone", fgcom_standalone->value() );
+    prefs.set( "fgcom-hostname", fgcom_hostname->value() );
+    prefs.set( "fgcom-port", fgcom_port->value() );
 
     prefs.set( "proxy", proxy->value() );
 
@@ -528,6 +534,26 @@ Advanced::load_settings( Fl_Preferences& prefs )
     prefs.get( "multiplay2", buf, "", buflen-1 );
     multiplay2->value( buf );
 
+    // FGCom options
+    prefs.get( "fgcom-disabled", iVal, 1 );
+    if (iVal) fgcom_disabled->setonly();
+    prefs.get( "fgcom-builtin", iVal, 0 );
+    if (iVal) fgcom_builtin->setonly();
+    prefs.get( "fgcom-standalone", iVal, 0 );
+    if (iVal)
+    {
+        fgcom_standalone->setonly();
+        fgcom_hostname->activate();
+        fgcom_port->activate();
+    }
+    prefs.get( "fgcom-hostname", buf, "", buflen-1 );
+    if (buf[0] == 0 )
+        fgcom_hostname->value( "127.0.0.1" );
+    else
+        fgcom_hostname->value( buf );
+    prefs.get( "fgcom-port", iVal, 16661 );
+    fgcom_port->value( double(iVal) );
+
     prefs.get( "proxy", buf, "", buflen-1 );
     proxy->value( buf );
 
@@ -736,6 +762,12 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry( "callsign" );
     prefs.deleteEntry( "multiplay1" );
     prefs.deleteEntry( "multiplay2" );
+    // FGCom options
+    prefs.deleteEntry( "fgcom-disabled" );
+    prefs.deleteEntry( "fgcom-builtin" );
+    prefs.deleteEntry( "fgcom-standalone" );
+    prefs.deleteEntry( "fgcom-hostname" );
+    prefs.deleteEntry( "fgcom-port" );
 
     prefs.deleteEntry( "proxy" );
 

@@ -328,7 +328,7 @@ msgstr "Direction:"
 
 #: src/advanced.cxx:1127
 msgid "Disabled"
-msgstr "débrayé"
+msgstr "Désactivé"
 
 #: src/wizard.cxx:764
 msgid "Display"
@@ -486,6 +486,14 @@ msgstr "Modèle de vol :"
 #: src/advanced.cxx:891
 msgid "FDM:"
 msgstr "Modèle de vol:"
+
+#: src/advanced.cxx:1466
+msgid "FGCom built-in"
+msgstr "FGCom intégré"
+
+#: src/advanced.cxx:1472
+msgid "FGCom standalone"
+msgstr "FGCom autonome"
 
 #: src/wizard.cxx:522
 msgid "FG_AIRCRAFT:"

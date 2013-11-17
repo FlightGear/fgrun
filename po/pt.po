@@ -494,6 +494,14 @@ msgstr "MDV :"
 msgid "FDM:"
 msgstr "MDV:"
 
+#: src/advanced.cxx:1466
+msgid "FGCom built-in"
+msgstr "FGCom built-in"
+
+#: src/advanced.cxx:1472
+msgid "FGCom standalone"
+msgstr "FGCom standalone"
+
 #: src/wizard.cxx:522
 msgid "FG_AIRCRAFT:"
 msgstr "FG_AERONAVES:"

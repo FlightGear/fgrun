@@ -867,6 +867,14 @@ msgstr ""
 msgid "Transition (ft):"
 msgstr ""
 
+#: src/advanced.cxx:1466
+msgid "FGCom built-in"
+msgstr ""
+
+#: src/advanced.cxx:1472
+msgid "FGCom standalone"
+msgstr ""
+
 #: src/wizard.cxx:474
 msgid "FlightGear Wizard"
 msgstr ""

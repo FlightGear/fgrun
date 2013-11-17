@@ -375,6 +375,18 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--multiplay=" << buf;
     if (prefs.get( "multiplay2", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--multiplay=" << buf;
+    // FGCom options.
+    if ( prefs.get( "fgcom-disabled", iVal, 1 ) && iVal )
+        os << pfx << "--disable-fgcom";
+    if ( prefs.get( "fgcom-builtin", iVal, 1 ) && iVal )
+        os << pfx << "--enable-fgcom";
+    if ( prefs.get( "fgcom-standalone", iVal, 1 ) && iVal ) {
+         char buf1[ buflen ];
+         if ( prefs.get( "fgcom-hostname", buf, "", buflen-1 ) &&
+              prefs.get( "fgcom-port", buf1, "", buflen-1 ) &&
+              buf[0] != 0 && buf1[0] != 0)
+              os << pfx << "--generic=socket,out,2," << buf << "," << buf1 << ",udp,fgcom";
+    }
 
     if (prefs.get( "proxy", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--proxy=" << buf;

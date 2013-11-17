@@ -709,10 +709,47 @@ else
         }
         Fl_Input proxy {
           label {Proxy:}
-          private xywh {240 275 230 25} labelsize 12 textsize 12
+          private xywh {240 400 230 25} labelsize 12 textsize 12
         }
         Fl_Box {} {
           xywh {610 415 25 25} resizable
+        }
+        Fl_Group {} {
+          label {FGCom Options} open
+          xywh {155 266 480 120} box ENGRAVED_FRAME labelfont 1 labelsize 12 align 21
+        } {
+          Fl_Input fgcom_hostname {
+            label {Hostname:}
+            private tooltip {FGCom standalone hostname} xywh {333 349 135 25} labelsize 12 textsize 12 deactivate
+          }
+          Fl_Value_Input fgcom_port {
+            label {Port:}
+            private tooltip {FGCom standalone port} xywh {520 349 85 25} minimum 1025 maximum 65535 value 16661 deactivate
+          }
+          Fl_Box {} {
+            xywh {590 372 40 10} resizable
+          }
+          Fl_Round_Button fgcom_disabled {
+            label Disabled
+            callback {if (o->value()){
+  fgcom_hostname->deactivate();
+  fgcom_port->deactivate();}}
+            private tooltip {Disable FGCom} xywh {241 286 228 15} type Radio down_box ROUND_DOWN_BOX value 1
+          }
+          Fl_Round_Button fgcom_builtin {
+            label {FGCom built-in}
+            callback {if (o->value()){
+  fgcom_hostname->deactivate();
+  fgcom_port->deactivate();}}
+            private tooltip {Enable FGCom built-in} xywh {241 305 224 15} type Radio down_box ROUND_DOWN_BOX
+          }
+          Fl_Round_Button fgcom_standalone {
+            label {FGCom standalone}
+            callback {if (o->value()){
+  fgcom_hostname->activate();
+  fgcom_port->activate();}}
+            private tooltip {Enable FGCom standalone} xywh {241 325 224 15} type Radio down_box ROUND_DOWN_BOX
+          }
         }
       }
       Fl_Group {page[8]} {
