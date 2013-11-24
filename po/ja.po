@@ -1,39 +1,37 @@
-# German translations for fgrun package
-# German messages for fgrun.
-# Copyright (C) 2008 Frederic Bouvier
-# This file is distributed under the same license as the fgrun package.
-# Adrian <adrian.sprick@arcor.de>, 2008.
-# HHS <Heiko.H.Schulz@gmx.net>, 2008
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Frederic Bouvier
+# This file is distributed under the same license as the PACKAGE package.
+# AOKI kiyohito <sambar.fgfs@gmail.com>, 2013.
 msgid ""
 msgstr ""
-"Project-Id-Version: fgrun 1.1.0\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-03 02:20+0200\n"
-"PO-Revision-Date: 2008-01-30 16:00+0100\n"
-"Last-Translator: Adrian <adrian.sprick@arcor.de>\n"
-"Language-Team: German\n"
-"Language: \n"
+"PO-Revision-Date: 2013-05-27 22:25+0900\n"
+"Last-Translator: AOKI kiyohito <sambar.fgfs@gmail.com>\n"
+"Language-Team: FlightGear.jpn.org\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CP1252\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Virtaal 0.7.1\n"
 
 #: src/logwin.cxx:34
 msgid "&Close"
-msgstr "S&chliessen"
+msgstr "&閉じる"
 
 #: src/logwin.cxx:32
 msgid "&File"
-msgstr "&Datei"
+msgstr "&ファイル"
 
 #: src/logwin.cxx:33
 msgid "&Save"
-msgstr "&Speichern"
+msgstr "&保存"
 
 #: src/advanced.cxx:715 src/advanced.cxx:724 src/advanced.cxx:1467
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: src/advanced_funcs.cxx:145
 msgid "2.0"
@@ -41,11 +39,11 @@ msgstr ""
 
 #: src/advanced.cxx:1081 src/wizard.cxx:812
 msgid "3D Clouds"
-msgstr "3D Wolken"
+msgstr "立体的な雲"
 
 #: src/wizard.cxx:643
 msgid "3D Preview"
-msgstr "3D Vorschau"
+msgstr "3Dプレビュー"
 
 #: src/advanced_funcs.cxx:146
 msgid "4.0"
@@ -57,12 +55,12 @@ msgstr ""
 
 #: src/wizard.cxx:942
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: src/wizard_funcs.cxx:889 src/wizard_funcs.cxx:2449
 #: src/AirportBrowser.cxx:470 src/fgfsrc.cxx:101
 msgid "<default>"
-msgstr "<Standard>"
+msgstr "<デフォルト>"
 
 #: src/wizard_funcs.cxx:225
 #, c-format
@@ -73,10 +71,10 @@ msgid ""
 "<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
 msgstr ""
 "<html> <head>  <title>FlightGear Launch Control %s</title> </head> <body>  "
-"<h1>FlightGear Launch Control %s</h1>  <p>Dieses Programm wird unter der GNU "
-"General Public License (http://www.gnu.org/copyleft/gpl.html) ver�ffentlicht."
-"</p>  <p>Bugs bitte an http://sourceforge.net/projects/fgrun melden</p> </"
-"body></html>"
+"<h1>FlightGear Launch Control %s</h1>  <p>このプログラムは GNU General "
+"Public License (http://www.gnu.org/copyleft/gpl.html) の下でリリースされてい"
+"ます。</p>  <p>バグ報告は http://sourceforge.net/projects/fgrun</p> へお願い"
+"します。 </body></html>"
 
 #: src/wizard.cxx:599
 msgid "@2>"
@@ -92,84 +90,84 @@ msgstr ""
 
 #: src/advanced.cxx:867
 msgid "AI Models"
-msgstr "AI Modelle"
+msgstr "AI モデル"
 
 #: src/advanced.cxx:873 src/wizard.cxx:848
 msgid "AI Traffic"
-msgstr "AI Flugverkehr"
+msgstr "AI トラフィック"
 
 #: src/wizard.cxx:844
 msgid "AI models"
-msgstr "AI Modelle"
+msgstr "AI モデル"
 
 #: src/wizard_funcs.cxx:977 src/fgfsrc.cxx:61
 msgid "Abort"
-msgstr "Abbrechen"
+msgstr "中止"
 
 #: src/fgfsrc.cxx:61
 #, c-format
 msgid "About to overwrite %s."
-msgstr "�berschreibe %s."
+msgstr ""
 
 #: src/wizard_funcs.cxx:977
 msgid "About to reset current parameters"
-msgstr "Setze den aktuellen Parameter zur�ck"
+msgstr ""
 
 #: src/wizard.cxx:562
 msgid "Add a scenery directory"
-msgstr "Scenery-Verzeichnis hinzuf�gen"
+msgstr "シーナリーのディレクトリを追加"
 
 #: src/wizard.cxx:533
 msgid "Add an aircraft directory"
-msgstr "Flugzeug-Verzeichnis hinzuf�gen"
+msgstr "航空機のディレクトリを追加"
 
 #: src/wizard.cxx:532 src/wizard.cxx:561
 msgid "Add..."
-msgstr "Hinzuf�gen..."
+msgstr "追加..."
 
 #: src/advanced.cxx:672
 msgid "Advanced Options"
-msgstr "Erweiterte Optionen"
+msgstr "更なるオプション"
 
 #: src/wizard.cxx:747
 msgid "Advanced..."
-msgstr "Erweitert..."
+msgstr "詳細設定"
 
 #: src/wizard.cxx:523
 msgid "Aircraft directories"
-msgstr "Flugzeug-Verzeichnisse"
+msgstr "航空機のディレクトリ"
 
 #: src/advanced.cxx:748
 msgid "Aircraft:"
-msgstr "Flugzeug:"
+msgstr "航空機:"
 
 #: src/wizard.cxx:1097
 msgid "Airport to fetch : "
-msgstr "Abzurufender Flugplatz:"
+msgstr ""
 
 #: src/advanced.cxx:740
 msgid "Airport:"
-msgstr "Flughafen:"
+msgstr "空港"
 
 #: src/wizard.cxx:620
 msgid "Airports Cache:"
-msgstr "Flugplatz-Cache:"
+msgstr "空港情報のキャッシュ"
 
 #: src/advanced.cxx:995
 msgid "Airspeed:"
-msgstr "Geschwindigkeit:"
+msgstr "対気速度"
 
 #: src/advanced.cxx:989
 msgid "Altitude:"
-msgstr "H�he:"
+msgstr "高度"
 
 #: src/wizard.cxx:1068
 msgid "An error report has been generated in the file below :"
-msgstr "Ein Fehlerbericht wurde in folgende Datei geschrieben:"
+msgstr ""
 
 #: src/advanced.cxx:806
 msgid "Anti-alias HUD"
-msgstr "HUD Kantengl�ttung"
+msgstr "HUDのアンチエイリアス"
 
 #: src/wizard.cxx:931
 msgid "Atlas"
@@ -177,76 +175,74 @@ msgstr ""
 
 #: src/wizard.cxx:692
 msgid "Author(s) :"
-msgstr "Autor(en) :"
+msgstr ""
 
 #: src/advanced.cxx:812 src/wizard.cxx:864
 msgid "Auto-coordination"
-msgstr "Auto-Koordination"
+msgstr "ラダーの自動同調"
 
 #: src/wizard.cxx:659
-#, fuzzy
 msgid "Available aircraft :"
-msgstr "Flugzeug:"
+msgstr "利用可能な航空機"
 
 #: src/advanced.cxx:1554 src/advanced_funcs.cxx:223
 msgid "Avionics"
-msgstr "Avionik"
+msgstr "アビオニクス"
 
 #: src/advanced.cxx:1481
 msgid "Baud Rate:"
-msgstr "Baudrate:"
+msgstr ""
 
 #: src/advanced.cxx:711
 msgid "Browser:"
-msgstr ""
+msgstr "ブラウザー"
 
 #: src/wizard.cxx:954
 msgid "Callsign :"
-msgstr "Kennung:"
+msgstr "コールサイン"
 
 #: src/advanced.cxx:1355
 msgid "Callsign:"
-msgstr "Kennung:"
+msgstr "コールサイン"
 
 #: src/advanced.cxx:685 src/wizard.cxx:1085
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "キャンセル"
 
 #: src/wizard.cxx:725
+#, fuzzy
 msgid "Carrier : "
-msgstr "Flugzeugtr�ger :"
+msgstr "空母 : "
 
 #: src/wizard.cxx:721
 msgid "Carrier Ops"
-msgstr "Flugzeugtr�ger-Operationen"
+msgstr "空母からスタート"
 
 #: src/advanced.cxx:1819
 msgid "Ceiling:"
-msgstr "Wolkendecke:"
+msgstr ""
 
 #: src/wizard.cxx:1007
 msgid ""
 "Clear all selected options and return to the install situation. Useful if "
 "FGFS don't start anymore."
 msgstr ""
-"Alle Einstellungen zur�cksetzen. Hilfreich, wenn FlightGear nicht mehr "
-"richtig startet."
 
 #: src/wizard.cxx:615
 msgid "Clear the content of the airport cache"
-msgstr "Flugplatz-Cache l�schen"
+msgstr ""
 
 #: src/advanced.cxx:1060
 msgid "Climb rate:"
-msgstr "Steigrate:"
+msgstr ""
 
 #: src/advanced.cxx:965
 msgid "Clock Freeze"
-msgstr "Uhr einfrieren"
+msgstr ""
 
 #: src/advanced.cxx:1075 src/advanced.cxx:1833 src/advanced_funcs.cxx:228
 msgid "Clouds"
-msgstr "Wolken"
+msgstr "雲"
 
 #: src/Fl_OSG.cxx:188
 msgid "Cockpit : "
@@ -254,31 +250,31 @@ msgstr ""
 
 #: src/advanced.cxx:1177 src/wizard.cxx:817
 msgid "Color depth (bits per pixel)"
-msgstr "Farbtiefe (Bits per pixel)"
+msgstr ""
 
 #: src/advanced.cxx:719
 msgid "Config:"
-msgstr "Konfiguration:"
+msgstr "設定"
 
 #: src/advanced.cxx:701
 msgid "Control:"
-msgstr "Steuerung:"
+msgstr "コントロール"
 
 #: src/advanced.cxx:892
 msgid "Core Flight Dynamics Model"
-msgstr "Flugdynamikmodell"
+msgstr ""
 
 #: src/advanced.cxx:1865
 msgid "Coverage:"
-msgstr "Bew�lkung:"
+msgstr "雲量"
 
 #: src/wizard.cxx:894
 msgid "Ctrl-click to deselect a single item"
-msgstr "Ctrl-click um ein einzelnes Element abzuw�hlen"
+msgstr "Ctrlを押しながらクリックでそのアイテムだけを解除"
 
 #: src/wizard.cxx:886
 msgid "Ctrl-click to select or deselect a single item"
-msgstr "Ctrl-click um ein einzelnes Element an- oder abzuw�hlen"
+msgstr "Ctrlを押しながらクリックでそのアイテムだけを選択or解除"
 
 #: src/advanced.cxx:1601
 msgid "DME:"
@@ -286,197 +282,197 @@ msgstr ""
 
 #: src/advanced.cxx:1650 src/advanced_funcs.cxx:225
 msgid "Debugging"
-msgstr ""
+msgstr "デバッグ"
 
 #: src/wizard.cxx:1006
 msgid "Defaults"
-msgstr "Zur�cksetzen"
+msgstr "デフォルト"
 
 #: src/advanced.cxx:1400 src/advanced.cxx:1628 src/advanced.cxx:1691
 #: src/advanced.cxx:1724 src/advanced.cxx:1756 src/wizard.cxx:537
 #: src/wizard.cxx:566 src/wizard.cxx:614
 msgid "Delete"
-msgstr "L�schen"
+msgstr "削除"
 
 #: src/wizard.cxx:567
 msgid "Delete a scenery directory"
-msgstr "Scenery-Verzeichnis l�schen"
+msgstr ""
 
 #: src/wizard.cxx:538
 msgid "Delete an aircraft directory"
-msgstr "Flugzeug-Verzeichnis l�schen"
+msgstr ""
 
 #: src/wizard_funcs.cxx:1752
 msgid "Description of "
-msgstr "Beschreibung von "
+msgstr ""
 
 #: src/wizard.cxx:893
 msgid "Deselect all"
-msgstr "Alles abw�hlen"
+msgstr "すべて選択解除"
 
 #: src/wizard_funcs.cxx:109
 msgid "Development"
-msgstr "Entwicklung"
+msgstr ""
 
 #: src/advanced.cxx:1792
 msgid "Direction wind is coming from."
-msgstr "Richtung, aus der der Wind kommt"
+msgstr "風がどの方向から吹いてくるか指定してください。"
 
 #: src/advanced.cxx:1435
 msgid "Direction:"
-msgstr "Richtung:"
+msgstr "方向"
 
 #: src/advanced.cxx:1127
 msgid "Disabled"
-msgstr "Keiner"
+msgstr "無効"
 
 #: src/wizard.cxx:764
 msgid "Display"
-msgstr "Bildschirm"
+msgstr "ディスプレイ"
 
 #: src/advanced.cxx:767
 msgid "Display splash screen at startup"
-msgstr "Startbild bei Programmstart anzeigen"
+msgstr ""
 
 #: src/advanced.cxx:827
 msgid "Distance attenuation"
-msgstr "Abschw�chung durch weite Entfernung"
+msgstr "距離による減衰"
 
 #: src/advanced.cxx:907
 msgid "Do not attempt to trim the model"
-msgstr "Keine Trimmung des Modells versuchen"
+msgstr ""
 
 #: src/wizard_funcs.cxx:2685
 msgid "Don't overwrite"
-msgstr "Nicht �berschreiben"
+msgstr ""
 
 #: src/wizard_funcs.cxx:113
 msgid "Early development"
-msgstr "Fr�he Entwicklung"
+msgstr ""
 
 #: src/wizard_funcs.cxx:105
 msgid "Early production"
-msgstr "Fr�he Fertigstellung"
+msgstr ""
 
 #: src/advanced.cxx:1851
 msgid "Elevation(ft):"
-msgstr "H�he (ft):"
+msgstr ""
 
 #: src/advanced.cxx:1076
 msgid "Enable 2D (flat) cloud layers"
-msgstr "2D-Wolkenschichten (flach) An"
+msgstr "2Dの(平たい)雲を有効にします"
 
 #: src/advanced.cxx:1082
 msgid "Enable 3D (volumetric) cloud layers"
-msgstr "3D-Wolken (volumetrisch) An"
+msgstr "3Dの(立体的な)雲を有効にします。"
 
 #: src/advanced.cxx:833
 msgid "Enable 3D HUD"
-msgstr "3D-HUD An"
+msgstr "3d HUDを有効にします"
 
 #: src/advanced.cxx:868
 msgid "Enable AI traffic"
-msgstr "Computergesteuerter Flugverkehr An"
+msgstr "AIトラフィックを有効にします"
 
 #: src/advanced.cxx:1302
 msgid "Enable HTTP server"
-msgstr "HTTP-Server An"
+msgstr ""
 
 #: src/advanced.cxx:801
 msgid "Enable Heads Up Display"
-msgstr "Heads-Up-Display An"
+msgstr "HUDを有効にします"
 
 #: src/advanced.cxx:807
 msgid "Enable anti-aliased HUD"
-msgstr "Anti-aliased (kantengegl�ttetes) HUD An"
+msgstr "HUDのアンチエイリアスを有効にします"
 
 #: src/advanced.cxx:813
 msgid "Enable auto-coordinated turns."
-msgstr "Quer- und Seitenruderkoordination An"
+msgstr "旋回時にラダーを自動で同調します"
 
 #: src/advanced.cxx:818
 msgid "Enable celestial body growth illusion near the horizon"
-msgstr "Illusion gr�sserwerdender Himmelsk�rper in Horizontn�he An"
+msgstr ""
 
 #: src/advanced.cxx:823
 msgid "Enable enhanced runway lighting"
-msgstr "Verfeinerte Startbahnbeleuchtung An"
+msgstr ""
 
 #: src/advanced.cxx:779
 msgid "Enable extra mouse pointer"
-msgstr "Extra-Mauszeiger An"
+msgstr ""
 
 #: src/advanced.cxx:762
 msgid "Enable full screen game mode"
-msgstr "Vollbildmodus An"
+msgstr "フルスクリーン(ゲームモード)を有効"
 
 #: src/advanced.cxx:1087
 msgid "Enable full screen mode"
-msgstr "Vollbildmodus An"
+msgstr "フルスクリーンを有効"
 
 #: src/advanced.cxx:773
 msgid "Enable introduction music during start up"
-msgstr "Intro-Musik bei Programmstart An"
+msgstr ""
 
 #: src/advanced.cxx:1319
 msgid "Enable property server"
-msgstr "Property-Server An"
+msgstr ""
 
 #: src/advanced.cxx:784
 msgid "Enable random scenery objects"
-msgstr "Automatisch generierte Scenery-Objekte An"
+msgstr "シーナリー上にランダムに建物を配置します"
 
 #: src/advanced.cxx:828
 msgid "Enable runway light distance attenuation"
-msgstr "Abschw�chung der Startbahnbeleuchtung auf weite Entfernung An"
+msgstr "滑走路の燈火の減衰を有効にします"
 
 #: src/advanced.cxx:1335
 msgid "Enable screen shot HTTP server"
-msgstr "HTTP-Server f�r Screenshots An"
+msgstr ""
 
 #: src/advanced.cxx:1092
 msgid "Enable sky blending"
-msgstr "Farb�berg�nge in Himmelszeichnung An"
+msgstr ""
 
 #: src/advanced.cxx:795
 msgid "Enable sound effects"
-msgstr "Soundeffekte An"
+msgstr "音響効果を有効にします"
 
 #: src/advanced.cxx:838
 msgid "Enable specular reflections on textured objects"
-msgstr "Glanz auf texturierten Objekten An"
+msgstr ""
 
 #: src/advanced.cxx:1098
 msgid "Enable textures"
-msgstr "Texturen An"
+msgstr "テクスチャを有効にします"
 
 #: src/advanced.cxx:789
 msgid "Enable the instrument panel"
-msgstr "Instrumentenpanel anzeigen"
+msgstr ""
 
 #: src/advanced.cxx:1104
 msgid "Enable wireframe drawing mode"
-msgstr "Drahtgitterdarstellung An"
+msgstr "ワイヤーフレームで描画します"
 
 #: src/advanced.cxx:822
 msgid "Enhanced lighting"
-msgstr "Verfeinerte Beleuchtung"
+msgstr ""
 
 #: src/wizard.cxx:789
 msgid "Enhanced runway lighting"
-msgstr "Aufw�ndige Startbahnbeleuchtung"
+msgstr ""
 
 #: src/advanced.cxx:1738 src/advanced_funcs.cxx:226
 msgid "Environment"
-msgstr "Umgebung"
+msgstr ""
 
 #: src/wizard.cxx:498
 msgid "Executable path not set or invalid"
-msgstr "Programmpfad nicht gesetzt oder ung�ltig"
+msgstr ""
 
 #: src/advanced.cxx:728 src/wizard.cxx:484
 msgid "Executable:"
-msgstr "Programm:"
+msgstr "実行ファイル:"
 
 #: src/Fl_OSG.cxx:198
 msgid "FDM : "
@@ -488,11 +484,11 @@ msgstr ""
 
 #: src/advanced.cxx:1466
 msgid "FGCom built-in"
-msgstr "FGCom built-in"
+msgstr ""
 
 #: src/advanced.cxx:1472
 msgid "FGCom standalone"
-msgstr "FGCom standalone"
+msgstr ""
 
 #: src/wizard.cxx:522
 msgid "FG_AIRCRAFT:"
@@ -500,7 +496,7 @@ msgstr ""
 
 #: src/wizard.cxx:516
 msgid "FG_ROOT path invalid or not set"
-msgstr "FG_ROOT Pfad ung�ltig oder nicht gesetzt"
+msgstr "FG_ROOT へのパスが無効か、設定されていません。"
 
 #: src/advanced.cxx:732 src/wizard.cxx:502
 msgid "FG_ROOT:"
@@ -508,7 +504,7 @@ msgstr ""
 
 #: src/wizard.cxx:610
 msgid "FG_SCENERY empty"
-msgstr "FG_SCENERY ist leer"
+msgstr ""
 
 #: src/advanced.cxx:736 src/wizard.cxx:551
 msgid "FG_SCENERY:"
@@ -516,40 +512,40 @@ msgstr ""
 
 #: src/advanced.cxx:1190
 msgid "FOV:"
-msgstr "Gesichtsfeld:"
+msgstr ""
 
 #: src/advanced.cxx:1820
 msgid "FT_ASL[:THICKNESS_FT]"
-msgstr "Fu� �ber Meeresh�he"
+msgstr ""
 
 #: src/advanced.cxx:842
 msgid "Failures"
-msgstr "Ausf�lle"
+msgstr "故障"
 
 #: src/advanced.cxx:1132
 msgid "Fastest"
-msgstr "Schnellster"
+msgstr "高速"
 
 #: src/advanced.cxx:757 src/wizard.cxx:832 src/advanced_funcs.cxx:215
 msgid "Features"
-msgstr "Funktionen"
+msgstr ""
 
 #: src/advanced.cxx:1824
 msgid "Fetch real weather"
-msgstr "Echtes Wetter abrufen"
+msgstr "現実の天候を使用"
 
 #: src/advanced.cxx:1191
 msgid "Field of View angle"
-msgstr "Winkel des Gesichtsfeldes"
+msgstr ""
 
 #: src/advanced.cxx:1461
 msgid "File:"
-msgstr "Datei:"
+msgstr ""
 
 #: src/wizard_funcs.cxx:2685
 #, c-format
 msgid "Filename \"%s\" already exists."
-msgstr "Dateiname \"%s\" existiert bereits"
+msgstr ""
 
 #: src/advanced.cxx:1044
 msgid "Fix:"
@@ -557,11 +553,11 @@ msgstr ""
 
 #: src/advanced.cxx:1117
 msgid "Flat"
-msgstr "Hart"
+msgstr ""
 
 #: src/advanced.cxx:886 src/advanced_funcs.cxx:216
 msgid "Flight Model"
-msgstr "Flugmodell"
+msgstr "フライトモデル"
 
 #: src/wizard.cxx:474
 msgid "FlightGear Wizard"
@@ -569,75 +565,75 @@ msgstr ""
 
 #: src/wizard.cxx:1032
 msgid "FlightGear has been started"
-msgstr "FlightGear ist gestarted"
+msgstr "FlightGearをスタートしています"
 
 #: src/wizard.cxx:1029
 msgid "FlightGear running..."
-msgstr "FlightGear l�uft..."
+msgstr ""
 
 #: src/wizard.cxx:1052
 msgid "Flightgear crashed..."
-msgstr "FlightGear ist abgest�rzt..."
+msgstr ""
 
 #: src/wizard.cxx:1054
 msgid "Flightgear encountered an unexpected failure"
-msgstr "FlightGear ist auf eine unerwartete Fehlfunktion gesto�en"
+msgstr ""
 
 #: src/advanced.cxx:1124
 msgid "Fog"
-msgstr "Nebel"
+msgstr "霧"
 
 #: src/wizard.cxx:798
 msgid "Framerate limiter :"
-msgstr "Bildfrequenzbegrenzer"
+msgstr "フレームレートの制限"
 
 #: src/advanced.cxx:951 src/advanced.cxx:956 src/advanced_funcs.cxx:217
 msgid "Freeze"
-msgstr "Einfrieren"
+msgstr ""
 
 #: src/advanced.cxx:961
 msgid "Fuel Freeze"
-msgstr "Kein Treibstoffverbrauch"
+msgstr ""
 
 #: src/advanced.cxx:1086 src/wizard.cxx:781
 msgid "Full Screen"
-msgstr "Vollbild"
+msgstr "フルスクリーン"
 
 #: src/wizard.cxx:621
 msgid "Full path to the airport cache"
-msgstr "Vollst�ndiger Pfadname zum Flugplatz-Cache"
+msgstr ""
 
 #: src/wizard.cxx:485 src/wizard.cxx:492
 msgid "Full pathname to FlightGear executable"
-msgstr "Vollst�ndiger Pfadname zum FlightGear-Programm"
+msgstr ""
 
 #: src/wizard.cxx:626 src/wizard.cxx:633
 msgid "Full pathname to Terrasync executable"
-msgstr "Vollst�ndiger Pfadname zum Terrasync-Programm"
+msgstr ""
 
 #: src/advanced.cxx:761
 msgid "Game Mode"
-msgstr "Vollbildmodus"
+msgstr "フルスクリーン"
 
 #: src/advanced.cxx:696 src/advanced_funcs.cxx:214
 msgid "General"
-msgstr "Allgemein"
+msgstr "一般的な設定"
 
 #: src/advanced.cxx:1524
 msgid "Generic:"
-msgstr "Generisch:"
+msgstr ""
 
 #: src/advanced.cxx:1145
 msgid "Geometry:"
-msgstr "Abmessungen:"
+msgstr "画面サイズ"
 
 #: src/advanced.cxx:1056
 msgid "Glide slope:"
-msgstr "Gleitpfad:"
+msgstr ""
 
 #: src/advanced.cxx:1308
 msgid "HTTP server port"
-msgstr "HTTP-Server-Port"
+msgstr ""
 
 #: src/advanced.cxx:800
 msgid "HUD"
@@ -645,27 +641,27 @@ msgstr ""
 
 #: src/advanced.cxx:1013 src/advanced.cxx:1791
 msgid "Heading:"
-msgstr "Richtung:"
+msgstr "方向"
 
 #: src/advanced.cxx:817 src/wizard.cxx:785
 msgid "Horizon effect"
-msgstr "Horizonteffekt"
+msgstr "水平線のエフェクト"
 
 #: src/wizard.cxx:937
 msgid "Hostname"
-msgstr ""
+msgstr "ホスト名"
 
 #: src/wizard.cxx:936 src/wizard.cxx:958
 msgid "Hostname :"
-msgstr ""
+msgstr "ホスト名 :"
 
 #: src/advanced.cxx:1492
 msgid "Hostname:"
-msgstr ""
+msgstr "ホスト名:"
 
 #: src/advanced.cxx:832
 msgid "Hud-3D"
-msgstr "HUD 3D"
+msgstr "3D HUD"
 
 #: src/advanced.cxx:1450
 msgid "Hz:"
@@ -673,108 +669,107 @@ msgstr ""
 
 #: src/AirportTable.cxx:121
 msgid "ICAO Id"
-msgstr "ICAO ID"
+msgstr "ICAOコード"
 
 #: src/advanced.cxx:938
 msgid "In Air"
-msgstr "In der Luft"
+msgstr "空中"
 
 #: src/advanced.cxx:974 src/advanced_funcs.cxx:218
 msgid "Initial Position"
-msgstr "Anfangsposition"
+msgstr "初期位置"
 
 #: src/advanced.cxx:1014
 msgid "Initial aircraft heading (yaw) angle 0 to 360 degrees"
-msgstr "Richtung des Flugzeugs (Gieren) von 0 bis 360 Grad"
+msgstr "スタート時の機首の角度(ヨー)を 0度から360度で指定"
 
 #: src/advanced.cxx:996
 msgid "Initial airspeed in knots"
-msgstr "Luftgeschwindigkeit in Knoten"
+msgstr "スタート時の速度をノットで指定"
 
 #: src/advanced.cxx:990
 msgid "Initial altitude in feet"
-msgstr "Anfangsh�he in Fuss"
+msgstr "スタート時の高度をフィートで指定"
 
 #: src/advanced.cxx:985
 msgid "Initial latitude, south is negative"
-msgstr "Breitengrad, Negativwert f�r S�d"
+msgstr "スタート時の緯度を指定(南半球はマイナス)"
 
 #: src/advanced.cxx:980
 msgid "Initial longitude, west is negative"
-msgstr "L�ngengrad, Negativwert f�r West"
+msgstr "スタート時の経度を指定(西半球はマイナス)"
 
 #: src/advanced.cxx:1029
 msgid "Initial pitch angle (Theta)"
-msgstr "Steigwinkel (Theta)"
+msgstr "スタート時のピッチ角(θ)を指定"
 
 #: src/advanced.cxx:1021
 msgid "Initial roll angle, (Phi)"
-msgstr "Rollwinkel (Phi)"
+msgstr "スタート時のロール角(Φ)を指定"
 
 #: src/advanced.cxx:1151
 msgid "Initial visibility distance"
-msgstr "Sichtweite zu Beginn"
+msgstr "スタート時の視程を視程"
 
 #: src/wizard.cxx:965
 msgid "Input port number"
-msgstr "Input-Portnummer"
+msgstr ""
 
 #: src/advanced.cxx:1382 src/advanced_funcs.cxx:222
 msgid "Input/Output"
-msgstr "Ein-/Ausgabe"
+msgstr "入出力"
 
 #: src/advanced.cxx:1588
 msgid "Internal"
-msgstr "Intern"
+msgstr ""
 
 #: src/advanced.cxx:772
 msgid "Intro Music"
-msgstr "Intro-Musik"
+msgstr ""
 
 #: src/advanced.cxx:707
 msgid "Language:"
-msgstr "Sprache:"
+msgstr "言語:"
 
 #: src/advanced.cxx:984
 msgid "Latitude:"
-msgstr "Breitengrad"
+msgstr "緯度"
 
 #: src/advanced.cxx:1837
 msgid "Layer:"
-msgstr "Schicht:"
+msgstr ""
 
 #: src/wizard.cxx:1017
 msgid "Load"
-msgstr "Laden"
+msgstr "読み込み"
 
 #: src/wizard.cxx:1018
 msgid "Load a previously saved configuration"
-msgstr "Laden einer gespeicherten Konfiguration"
+msgstr ""
 
 #: src/wizard_funcs.cxx:2590
 msgid "Load settings from..."
-msgstr "Lade Einstellungen von..."
+msgstr "読み込む設定を選択してください"
 
 #: src/wizard.cxx:698
-#, fuzzy
 msgid "Location :"
-msgstr "Aufl�sung :"
+msgstr "場所 :"
 
 #: src/advanced.cxx:1656
 msgid "Log Level:"
-msgstr "Log-Level:"
+msgstr ""
 
 #: src/wizard_funcs.cxx:469
 msgid "Log Window"
-msgstr "Log-Fenster"
+msgstr ""
 
 #: src/advanced.cxx:979
 msgid "Longitude:"
-msgstr "L�ngengrad:"
+msgstr "経度"
 
 #: src/advanced.cxx:1207
 msgid "Materials file:"
-msgstr "Szenerie Materialien-Datei:"
+msgstr ""
 
 #: src/advanced.cxx:1419
 msgid "Medium:"
@@ -782,40 +777,40 @@ msgstr ""
 
 #: src/wizard.cxx:875
 msgid "Menu auto-visibility"
-msgstr "Auto-Sichtweite"
+msgstr "メニューを自動で隠す"
 
 #: src/advanced.cxx:1157
 msgid "Meters"
-msgstr "Meter"
+msgstr "メートル"
 
 #: src/advanced.cxx:1164
 msgid "Miles"
-msgstr "Meilen"
+msgstr ""
 
 #: src/Fl_OSG.cxx:183
 msgid "Model : "
-msgstr "Modell : "
+msgstr ""
 
 #: src/advanced.cxx:912
 msgid "Model Hz:"
-msgstr "Hz-Rate:"
+msgstr ""
 
 #: src/wizard_funcs.cxx:749
 #, c-format
 msgid "Model not found: '%s'"
-msgstr "Modell nicht gefunden: '%s'"
+msgstr ""
 
 #: src/advanced.cxx:778
 msgid "Mouse Pointer"
-msgstr "Mauszeiger"
+msgstr ""
 
 #: src/wizard.cxx:600
 msgid "Move scenery directory down"
-msgstr "Scenery-Verzeichnis nach unten schieben"
+msgstr ""
 
 #: src/wizard.cxx:589
 msgid "Move scenery directory up"
-msgstr "Scenery-Verzeichnis nach oben schieben"
+msgstr ""
 
 #: src/advanced.cxx:1359
 msgid "Multiplay 1:"
@@ -826,12 +821,13 @@ msgid "Multiplay 2:"
 msgstr ""
 
 #: src/wizard.cxx:949
+#, fuzzy
 msgid "Multiplayer"
-msgstr ""
+msgstr "マルチプレイのオプション"
 
 #: src/advanced.cxx:1350
 msgid "Multiplayer Options"
-msgstr "Multiplayer-Optionen"
+msgstr "マルチプレイのオプション"
 
 #: src/advanced.cxx:1040
 msgid "NDB:"
@@ -839,7 +835,7 @@ msgstr ""
 
 #: src/AirportTable.cxx:121
 msgid "Name"
-msgstr ""
+msgstr "空港名"
 
 #: src/advanced.cxx:1576
 msgid "Nav1"
@@ -859,54 +855,52 @@ msgstr ""
 
 #: src/advanced.cxx:1296 src/advanced_funcs.cxx:221
 msgid "Network"
-msgstr "Netzwerk"
+msgstr "ネットワーク"
 
 #: src/advanced.cxx:1396 src/advanced.cxx:1642 src/advanced.cxx:1687
 #: src/advanced.cxx:1720 src/advanced.cxx:1752
 msgid "New"
-msgstr "Neu"
+msgstr "新規"
 
 #: src/wizard.cxx:995 src/wizard_funcs.cxx:407 src/wizard_funcs.cxx:958
 #: src/wizard_funcs.cxx:1802 src/wizard_funcs.cxx:1811
 msgid "Next"
-msgstr "Weiter"
+msgstr "次へ"
 
 #: src/advanced.cxx:1137
 msgid "Nicest"
-msgstr "Sch�nster"
+msgstr ""
 
 #: src/Fl_OSG.cxx:207
 msgid "No Rating"
-msgstr "Ohne Bewertung"
+msgstr ""
 
 #: src/advanced.cxx:906
 msgid "No Trim"
-msgstr "Keine Trimmung"
+msgstr ""
 
 #: src/wizard_funcs.cxx:1755
 msgid "Not set"
-msgstr "Nicht gesetzt"
+msgstr ""
 
 #: src/advanced.cxx:688 src/wizard.cxx:1064 src/wizard.cxx:1089
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/advanced.cxx:1252
 msgid "Offset (+/-) from real time"
-msgstr "Unterschied (+/-) von Realzeit"
+msgstr ""
 
 #: src/advanced.cxx:931
 msgid "On Ground"
-msgstr "Am Boden"
+msgstr "地上"
 
 #: src/wizard.cxx:728
 msgid "Only valid if carrier is set. For airport parking, use the list above."
 msgstr ""
-"Funktioniert nur, wenn der Flugzeugtr�ger gew�hlt ist. F�r Flughafen-"
-"Parkpositionen benutze die Liste dar�ber"
 
 #: src/main.cxx:162
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options are:\n"
 " --silent\n"
@@ -919,360 +913,347 @@ msgid ""
 " -f, --fullscreen\n"
 "%s"
 msgstr ""
-"Optionen sind:\n"
-" --silent\n"
-" --fg-exe=<PATH>\n"
-" --fg-root=<DIR>\n"
-" --fg-scenery=<DIR>\n"
-" --ts-exe=<PATH>\n"
-" --ts-dir=#\n"
-" -f, --fullscreen\n"
-"%s"
 
 #: src/wizard.cxx:969
 msgid "Output port number"
-msgstr "Output-Portnummer"
+msgstr ""
 
 #: src/wizard_funcs.cxx:2685 src/fgfsrc.cxx:61
 msgid "Overwrite"
-msgstr "�berschreiben"
+msgstr "上書き"
 
 #: src/advanced.cxx:788
 msgid "Panel"
-msgstr "Instrumentenbrett"
+msgstr "パネル"
 
 #: src/wizard.cxx:727
 msgid "Park pos :"
-msgstr "Parkposition :"
+msgstr "駐機場所 :"
 
 #: src/AirportBrowser.cxx:89
 msgid "Parking"
-msgstr "Parkpositionen"
+msgstr "駐機場"
 
 #: src/advanced.cxx:720
 msgid "Path to additional XML properties file"
-msgstr "Pfad zu zus�tzlicher XML-Property-Datei"
+msgstr "追加の XML プロパティファイルへのパス"
 
 #: src/wizard.cxx:959
 msgid "Peer hostname"
-msgstr "Peer-Hostname"
+msgstr ""
 
 #: src/advanced.cxx:1028
 msgid "Pitch:"
-msgstr "Steigwinkel:"
+msgstr "ピッチ"
 
 #: src/wizard.cxx:1072
 msgid "Please send this error report to the Flightgear development team"
-msgstr "Bitte sende diesen Fehlerbericht an das FlightGear-Entwicklerteam"
+msgstr "FlightGear development team へこのエラーの報告を送ってください。"
 
 #: src/wizard.cxx:1037
 msgid "Please wait..."
-msgstr "Bitte warten..."
+msgstr "お待ちください..."
 
 #: src/advanced.cxx:1475 src/advanced.cxx:1498
 msgid "Port:"
-msgstr ""
+msgstr "ポート:"
 
 #: src/wizard.cxx:1082
 msgid "Prefetch Scenery"
-msgstr "Szenerie vorladen"
+msgstr ""
 
 #: src/wizard.cxx:991
 msgid "Prev"
-msgstr "Zur�ck"
+msgstr "戻る"
 
 #: src/wizard.cxx:670
 msgid "Preview"
-msgstr "Vorschau"
+msgstr "プレビュー"
 
 #: src/advanced.cxx:702
 msgid "Primary control mode"
-msgstr "Hauptsteuermethode"
+msgstr ""
 
 #: src/advanced.cxx:1612 src/advanced_funcs.cxx:224
 msgid "Properties"
-msgstr "Einstellungen"
+msgstr "プロパティ"
 
 #: src/wizard_funcs.cxx:790
 msgid "Property '/sim/model/path' not found"
-msgstr "Property '/sim/model/path' nicht gefunden"
+msgstr ""
 
 #: src/advanced.cxx:1325
 msgid "Property server port"
-msgstr "Property-Server-Port"
+msgstr ""
 
 #: src/advanced.cxx:1633
 msgid "Property:"
-msgstr ""
+msgstr "プロパティ:"
 
 #: src/advanced.cxx:1405
 msgid "Protocol:"
-msgstr "Protokoll:"
+msgstr "プロトコル:"
 
 #: src/advanced.cxx:1373
 msgid "Proxy:"
-msgstr ""
+msgstr "プロクシ:"
 
 #: src/wizard.cxx:999
 msgid "Quit"
-msgstr "Beenden"
+msgstr "終了"
 
 #: src/advanced.cxx:783
 msgid "Random Objects"
-msgstr "Zuf�llige Objekte"
+msgstr "ランダムな建物"
 
 #: src/advanced.cxx:877
 msgid "Random Trees"
-msgstr "3D-W�lder darstellen"
+msgstr "ランダムな木"
 
 #: src/advanced.cxx:1806
 msgid "Random Winds"
-msgstr "Zuf�llige Winde"
+msgstr "ランダムな風"
 
 #: src/wizard.cxx:836
 msgid "Random objects"
-msgstr "Zuf�llige Objekte"
+msgstr "ランダムな建物"
 
 #: src/wizard.cxx:840
 msgid "Random trees"
-msgstr "Zuf�llige B�ume"
+msgstr "ランダムな木"
 
 #: src/Fl_OSG.cxx:205
 msgid "Rating"
-msgstr "Bewertung"
+msgstr ""
 
-# Adjust horizontal position of stars
 #: src/Fl_OSG.cxx:179
 msgid "RatingPos"
-msgstr "65"
+msgstr ""
 
 #: src/wizard.cxx:860
 msgid "Real weather fetch"
-msgstr "Echtes Wetter"
+msgstr "現実の天候を利用"
 
 #: src/wizard.cxx:651
-#, fuzzy
 msgid "Recently used aircraft :"
-msgstr "Flugzeug ausw�hlen"
+msgstr "最近使った航空機"
 
 #: src/AirportBrowser.cxx:96
 msgid "Refresh"
-msgstr "Neu laden"
+msgstr "再読み込み"
 
 #: src/AirportBrowser.cxx:99
 msgid "Reload airports"
-msgstr "Landepl�tze neu laden"
+msgstr "空港を再読み込みします"
 
 #: src/advanced.cxx:1070 src/advanced_funcs.cxx:219
 msgid "Rendering"
-msgstr "Rendering"
+msgstr "レンダリング"
 
 #: src/advanced.cxx:1534
 msgid "Repeat"
-msgstr "Neustart"
+msgstr ""
 
 #: src/wizard_funcs.cxx:977
 msgid "Reset"
-msgstr "Neustart"
+msgstr "リセット"
 
 #: src/wizard.cxx:768
 msgid "Resolution :"
-msgstr "Aufl�sung :"
+msgstr "解像度 :"
 
 #: src/advanced.cxx:1020
 msgid "Roll:"
-msgstr "Rollen:"
+msgstr "ロール:"
 
 #: src/wizard_funcs.cxx:950
 msgid "Run"
-msgstr "Starten"
+msgstr "実行"
 
 #: src/advanced.cxx:922
 msgid "Run FDM faster than real time"
-msgstr "Betreibe FDM schneller als Echtzeit"
+msgstr ""
 
 #: src/advanced.cxx:913
 msgid "Run the FDM at this rate (iterations per second)"
-msgstr "FDM in dieser Hertz-Rate betreiben (Iterationen pro Sekunde)"
+msgstr ""
 
 #: src/advanced.cxx:744
 msgid "Runway:"
-msgstr "Startbahn:"
+msgstr "滑走路:"
 
 #: src/AirportBrowser.cxx:84
 msgid "Runways"
-msgstr "Rollbahn"
+msgstr "滑走路"
 
 #: src/wizard.cxx:1012
 msgid "Save As..."
-msgstr "Speichern als"
+msgstr "設定の保存"
 
 #: src/wizard.cxx:1013
 msgid "Save current configuration to a file"
-msgstr "Aktuelle Konfiguration als Datei speichern"
+msgstr "現在の設定をファイルに保存します"
 
 #: src/logwin.cxx:99
 msgid "Save file as?"
-msgstr "Speichern unter"
+msgstr "ファイルに保存しますか?"
 
 #: src/wizard_funcs.cxx:2681
 msgid "Save settings as..."
-msgstr "Speichere Einstellungen als..."
+msgstr "設定を保存する場所を選択してください"
 
 #: src/wizard.cxx:881
 msgid "Scenarios"
-msgstr "Szenario"
+msgstr "シナリオ"
 
 #: src/wizard.cxx:736
 msgid "Scenery Prefetch"
-msgstr "Szenerie vorladen"
+msgstr ""
 
 #: src/wizard.cxx:552
 msgid "Scenery directories"
-msgstr "Scenery-Verzeichnisse"
+msgstr "シーナリーのディレクトリ"
 
 #: src/advanced.cxx:1341
 msgid "Screen shot HTTP server port"
-msgstr "HTTP-Server-Port f�r Screenshots"
+msgstr ""
 
 #: src/wizard.cxx:868
 msgid "Season :"
-msgstr "Jahreszeit"
+msgstr "季節 :"
 
 #: src/wizard_funcs.cxx:1347
 msgid "Select FG_AIRCRAFT directory"
-msgstr "FG_ROOT-Verzeichnis ausw�hlen"
+msgstr "航空機データのディレクトリを指定"
 
 #: src/wizard_funcs.cxx:1072
 msgid "Select FG_ROOT directory"
-msgstr "FG_ROOT-Verzeichnis ausw�hlen"
+msgstr ""
 
 #: src/wizard_funcs.cxx:1421
 msgid "Select FG_SCENERY directory"
-msgstr "FG_SCENERY-Verzeichnis ausw�hlen"
+msgstr "シーナリーのディレクトリを指定"
 
 #: src/wizard_funcs.cxx:992
 msgid "Select FlightGear executable"
-msgstr "FightGear-Programm ausw�hlen"
+msgstr "FlightGearの実行ファイルを指定"
 
 #: src/wizard.cxx:477
 msgid "Select Paths"
-msgstr "Pfade ausw�hlen"
+msgstr ""
 
 #: src/wizard_funcs.cxx:1531
 msgid "Select Terrasync executable"
-msgstr "Terrasync-Programmpfad ausw�hlen"
+msgstr "Terrasyncの実行ファイルを指定"
 
 #: src/wizard.cxx:704
 msgid "Select a location"
-msgstr "Startplatz ausw�hlen"
+msgstr "空港を選択してください"
 
 #: src/advanced_funcs.cxx:293
 msgid "Select a preferences file"
-msgstr "Preferences-Datei ausw�hlen"
+msgstr "ファイルを選択"
 
 #: src/wizard_funcs.cxx:1766 src/wizard_funcs.cxx:1770
 #: src/wizard_funcs.cxx:2284
 msgid "Select a scenario to display its description"
-msgstr "Szenario ausw�hlen, um Beschreibung zu sehen"
+msgstr ""
 
 #: src/wizard.cxx:640
 msgid "Select an aircraft"
-msgstr "Flugzeug ausw�hlen"
+msgstr "航空機を選択してください"
 
 #: src/advanced_funcs.cxx:238
 msgid "Select browser"
-msgstr "Browser ausw�hlen"
+msgstr "ブラウザーを選択"
 
 #: src/io.cxx:301
 msgid "Select file"
-msgstr "Datei ausw�hlen"
+msgstr ""
 
 #: src/wizard.cxx:576
 msgid "Select the line in the FG_SCENERY list that is the TerraSync directory."
 msgstr ""
-"Zeile in der FG_SCENERY Liste ausw�hlen, die als TerraSync Verzeichnis "
-"genutzt wird."
 
 #: src/advanced.cxx:1560
 msgid "Set the NAV1 radio frequency, optionally preceded by a radial"
-msgstr "Funkfrequenz von NAV1, voreingestelltes Radial ist optional"
+msgstr ""
 
 #: src/advanced.cxx:1199
 msgid "Set the maximum degree of anisotropy in texture filtering"
-msgstr "Maximaler Grad der Anisotropie der Textur-Filterung"
+msgstr ""
 
 #: src/advanced.cxx:1108
 msgid "Shading"
-msgstr "Schattierungen"
+msgstr ""
 
 #: src/wizard.cxx:753
 msgid "Show command line"
-msgstr "Kommandozeile anzeigen"
+msgstr "コマンドラインを表示"
 
 #: src/advanced.cxx:1091
 msgid "Sky Blend"
-msgstr "Farb�berg�nge"
+msgstr ""
 
 #: src/advanced.cxx:1111
 msgid "Smooth"
-msgstr "Weich"
+msgstr ""
 
 #: src/advanced.cxx:794
 msgid "Sound"
-msgstr ""
+msgstr "音"
 
 #: src/advanced.cxx:1871
 msgid "Span (m):"
-msgstr "Spannweite (m):"
+msgstr "幅"
 
 #: src/advanced.cxx:1158
 msgid "Specify visibilty in meters"
-msgstr "Sichtweite in Metern angeben"
+msgstr "視程をメートルで視程"
 
 #: src/advanced.cxx:1165
 msgid "Specify visiblity in miles"
-msgstr "Sichtweite in Meilen angeben"
+msgstr ""
 
 #: src/advanced.cxx:837 src/wizard.cxx:794
 msgid "Specular highlight"
-msgstr "Glanz"
+msgstr ""
 
 #: src/advanced.cxx:1799
 msgid "Speed (kts):"
-msgstr "Knoten:"
+msgstr "速度 (kts)"
 
 #: src/advanced.cxx:921
 msgid "Speed:"
-msgstr "Geschwindigkeit:"
+msgstr ""
 
 #: src/advanced.cxx:766
 msgid "Splash Screen"
-msgstr "Startbild"
+msgstr "スプラッシュスクリーン"
 
 #: src/advanced.cxx:932
 msgid "Start at ground level"
-msgstr "Am Boden starten"
+msgstr ""
 
 #: src/advanced.cxx:1239
 msgid "Start date gmt"
-msgstr "Startzeit in GMT"
+msgstr ""
 
 #: src/advanced.cxx:1245
 msgid "Start date lat"
-msgstr "Startzeit Breitengrad"
+msgstr ""
 
 #: src/advanced.cxx:1233
 msgid "Start date sys"
-msgstr "Systemstartzeit"
+msgstr ""
 
 #: src/advanced.cxx:939
 msgid "Start in the air"
-msgstr "In der Luft starten"
+msgstr ""
 
 #: src/advanced.cxx:957
 msgid "Start paused"
-msgstr "Im Pause-Modus starten"
+msgstr ""
 
 #: src/wizard.cxx:690
 msgid "Status :"
@@ -1280,15 +1261,15 @@ msgstr ""
 
 #: src/advanced.cxx:1227
 msgid "Synchronize simulation time with local time"
-msgstr "Simulationszeit an Ortszeit anpassen"
+msgstr ""
 
 #: src/advanced.cxx:1219
 msgid "Synchronize simulation time with real time"
-msgstr "Simulationszeit an Realzeit anpassen"
+msgstr ""
 
 #: src/Fl_OSG.cxx:193
 msgid "Systems : "
-msgstr "Systeme : "
+msgstr ""
 
 #: src/advanced.cxx:1507
 msgid "TCP"
@@ -1300,79 +1281,81 @@ msgstr ""
 
 #: src/wizard.cxx:575
 msgid "TerraSync directory"
-msgstr "TerraSync-Verzeichnisse"
+msgstr ""
 
 #: src/wizard_funcs.cxx:1799
 msgid "TerraSync directory not set"
-msgstr "TerraSync Verzeichnis ist nicht gesetzt"
+msgstr ""
 
 #: src/wizard_funcs.cxx:1808
 msgid "TerraSync executable not set"
-msgstr "TerraSync-Programmpfad ist nicht gesetzt"
+msgstr ""
 
 #: src/wizard_funcs.cxx:2779
 msgid "TerraSync must be configured"
-msgstr "TerraSync muss konfiguriert werden"
+msgstr ""
 
 #: src/wizard.cxx:625
 msgid "Terrasync exe:"
-msgstr "Terrasync Programmpfad:"
+msgstr ""
 
 #: src/advanced.cxx:1198
 msgid "Texture filtering:"
-msgstr "Textur-Filterung"
+msgstr "テクスチャのフィルタリング"
 
 #: src/advanced.cxx:1097
 msgid "Textures"
-msgstr "Texturen"
+msgstr "テクスチャ"
 
 #: src/advanced.cxx:1858
 msgid "Thickness (ft):"
-msgstr "Schichtdicke (ft):"
+msgstr ""
 
 #: src/advanced.cxx:1213 src/advanced_funcs.cxx:220
 msgid "Time"
-msgstr "Zeit"
+msgstr ""
 
 #: src/advanced.cxx:1226
 msgid "Time match local"
-msgstr "Ortszeitanpassung"
+msgstr ""
 
 #: src/advanced.cxx:1218
 msgid "Time match real"
-msgstr "Realzeitanpassung"
+msgstr ""
 
 #: src/advanced.cxx:1279
 msgid "Time of day"
-msgstr "Tageszeit"
+msgstr "時間帯"
 
 #: src/wizard.cxx:852
 msgid "Time of day :"
-msgstr "Tageszeit :"
+msgstr "時間帯 :"
 
 #: src/wizard.cxx:1040
 msgid "To change aircraft, exit FlightGear and return to this launcher"
-msgstr "Um das Flugzeug zu wechseln, FG beenden und hierhin zur�ckkehren"
+msgstr ""
+"航空機を変更するには、\n"
+"FlightGearを終了してランチャーに戻ってください。"
 
 #: src/wizard.cxx:799
 msgid "Too much framerate hurts the smoothness of the simulation"
-msgstr "Zu hohe Bildfrequenz beeintr�chtigt eine ruhige Simulation"
+msgstr "過大なフレームレートはシミュレーションのスムースさを損ないます。"
 
 #: src/advanced.cxx:1671
 msgid "Trace Read Properties"
-msgstr "Lese-Properties protokollieren"
+msgstr ""
 
 #: src/advanced.cxx:1704
 msgid "Trace Write Properties"
-msgstr "Schreib-Properties zur�ckverfolgen"
+msgstr ""
 
 #: src/advanced.cxx:1879
 msgid "Transition (ft):"
-msgstr "�bergang (ft):"
+msgstr ""
 
 #: src/advanced.cxx:1813
 msgid "Turbulence"
-msgstr "Turbulenzen"
+msgstr "乱気流"
 
 #: src/advanced.cxx:1514
 msgid "UDP"
@@ -1384,22 +1367,20 @@ msgid ""
 "Unable to delete '%s':\n"
 "%s"
 msgstr ""
-"Kann '%s' nicht l�schen:\n"
-"%s"
 
 #: src/wizard_funcs.cxx:1234 src/wizard_funcs.cxx:1235
 #: src/wizard_funcs.cxx:1237
 msgid "Unknown"
-msgstr "Unbekannt"
+msgstr "不明"
 
 #: src/wizard_funcs.cxx:2773
 #, c-format
 msgid "Unknown airport : '%s'"
-msgstr "Unbekannter Flugplatz: '%s'"
+msgstr ""
 
 #: src/wizard.cxx:790
 msgid "Use with caution. It may drop your framerate dramatically"
-msgstr "Vorsicht, kann die Bildrate stark verschlechtern"
+msgstr ""
 
 #: src/advanced.cxx:1036
 msgid "VOR:"
@@ -1407,152 +1388,151 @@ msgstr ""
 
 #: src/advanced.cxx:1679 src/advanced.cxx:1712 src/advanced.cxx:1761
 msgid "Value:"
-msgstr "Wert:"
+msgstr ""
 
 #: src/advanced.cxx:1172
 msgid "View Offset:"
-msgstr "Sehrichtung:"
+msgstr "視点のオフセット"
 
 #: src/wizard.cxx:695
 msgid "Viewer"
-msgstr "Betrachter"
+msgstr "ビューワ"
 
 #: src/advanced.cxx:1150
 msgid "Visibility:"
-msgstr "Sichtweite:"
+msgstr ""
 
 #: src/wizard.cxx:1058
 msgid "We are sorry for this inconvenience."
-msgstr "Wir entschuldigen uns f�r die Unanehmlichkeit."
+msgstr ""
 
 #: src/advanced.cxx:1770 src/advanced_funcs.cxx:227
 msgid "Weather"
-msgstr "Wetter"
+msgstr "天候"
 
 #: src/advanced.cxx:1778
 msgid "Wind Direction"
-msgstr "Windrichtung"
+msgstr "風向"
 
 #: src/advanced.cxx:1800
 msgid "Wind speed (kts)"
-msgstr "Windgeschwindigkeit (Knoten)"
+msgstr "風速(kts)"
 
 #: src/advanced.cxx:1146 src/wizard.cxx:769
 msgid "Window geometry, WxH"
-msgstr "Fensterabmessung BxH"
+msgstr "ウインドウのサイズ(WxH)"
 
 #: src/advanced.cxx:1103
 msgid "Wireframe"
-msgstr "Drahtgitter"
+msgstr "ワイヤーフレーム"
 
 #: src/advanced_funcs.cxx:294
 msgid "XML Files(*.xml)"
-msgstr "XML-Dateien(*.xml)"
+msgstr "XMLファイル(*.xml)"
 
 #: src/wizard_funcs.cxx:86 src/advanced_funcs.cxx:110
 msgid "afternoon"
-msgstr "Nachmittag"
+msgstr "午後"
 
 #: src/advanced_funcs.cxx:122
 msgid "alert"
-msgstr "Alarm"
+msgstr ""
 
 #: src/wizard_funcs.cxx:107
 msgid "alpha"
-msgstr "Alpha-Stadium"
+msgstr ""
 
 #: src/wizard_funcs.cxx:106
 msgid "beta"
-msgstr "Beta-Stadium"
+msgstr ""
 
 #: src/wizard.cxx:816
 msgid "bpp :"
-msgstr "Bit/Pixel:"
+msgstr "色深度"
 
-#
 #: src/advanced.cxx:1176
 msgid "bpp:"
-msgstr "Bit/Pixel:"
+msgstr "色深度"
 
 #: src/advanced_funcs.cxx:128
 msgid "broken"
-msgstr "Durchbrochen"
+msgstr ""
 
 #: src/advanced_funcs.cxx:118
 msgid "bulk"
-msgstr "Ausf�hrlich"
+msgstr ""
 
 #: src/advanced.cxx:1814
 msgid "calm (0.0) to severe (1.0)"
-msgstr "Ruhig (0.0) bis schwer (1.0)"
+msgstr ""
 
 #: src/advanced.cxx:1285
 msgid "choice:"
-msgstr "Auswahl:"
+msgstr ""
 
 #: src/advanced_funcs.cxx:131
 msgid "cirrus"
-msgstr "Cirrus"
+msgstr ""
 
 #: src/advanced_funcs.cxx:132
 msgid "clear"
-msgstr "Wolkenlos"
+msgstr ""
 
 #: src/wizard_funcs.cxx:83 src/advanced_funcs.cxx:107
 msgid "dawn"
-msgstr "Tagesanbruch"
+msgstr "夜明け"
 
 #: src/advanced_funcs.cxx:119
 msgid "debug"
-msgstr "Debug"
+msgstr ""
 
 #: src/wizard_funcs.cxx:112
 msgid "devel"
-msgstr "Entwicklung"
+msgstr ""
 
 #: src/wizard_funcs.cxx:110
 msgid "developement"
-msgstr "Entwicklung"
+msgstr ""
 
 #: src/wizard_funcs.cxx:111
 msgid "development"
-msgstr "Entwicklung"
+msgstr ""
 
 #: src/wizard_funcs.cxx:87 src/advanced_funcs.cxx:111
 msgid "dusk"
-msgstr "Abendd�mmerung"
+msgstr ""
 
 #: src/wizard_funcs.cxx:108
 msgid "early alpha"
-msgstr "Fr�hes Alpha-Stadium"
+msgstr ""
 
 #: src/wizard_funcs.cxx:104
 msgid "early production"
-msgstr "Fr�he Fertigstellung"
+msgstr ""
 
 #: src/wizard_funcs.cxx:103
 msgid "early-production"
-msgstr "Fr�he Fertigstellung"
+msgstr ""
 
 #: src/wizard_funcs.cxx:88 src/advanced_funcs.cxx:112
 msgid "evening"
-msgstr "Abend"
+msgstr ""
 
 #: src/wizard_funcs.cxx:114
 msgid "experimental"
-msgstr "Experimentell"
+msgstr ""
 
 #: src/advanced_funcs.cxx:130
 msgid "few"
-msgstr "Vereinzelt"
+msgstr ""
 
 #: src/AirportBrowser.cxx:571
 msgid "gzopen error"
-msgstr "gzopen Fehler"
+msgstr ""
 
 #: src/advanced_funcs.cxx:148
 msgid "highest filtering"
-msgstr "H�chste Filterung"
+msgstr ""
 
 #: src/advanced.cxx:1301
 msgid "httpd"
@@ -1564,7 +1544,7 @@ msgstr ""
 
 #: src/advanced_funcs.cxx:120
 msgid "info"
-msgstr "Info"
+msgstr ""
 
 #: src/advanced.cxx:1360
 msgid "in|out,hz,address,port"
@@ -1572,7 +1552,7 @@ msgstr ""
 
 #: src/advanced_funcs.cxx:137
 msgid "joystick"
-msgstr "Joystick"
+msgstr "ジョイスティック"
 
 #: src/advanced.cxx:1334
 msgid "jpg-httpd"
@@ -1580,35 +1560,35 @@ msgstr ""
 
 #: src/advanced_funcs.cxx:138
 msgid "keyboard"
-msgstr "Tastatur"
+msgstr "キーボード"
 
 #: src/wizard_funcs.cxx:89 src/advanced_funcs.cxx:113
 msgid "midnight"
-msgstr "Mitternacht"
+msgstr "深夜"
 
 #: src/wizard_funcs.cxx:84 src/advanced_funcs.cxx:108
 msgid "morning"
-msgstr "Morgen"
+msgstr "朝"
 
 #: src/advanced_funcs.cxx:139
 msgid "mouse"
-msgstr "Maus"
+msgstr "マウス"
 
 #: src/advanced_funcs.cxx:144
 msgid "no filtering"
-msgstr "Keine Filterung"
+msgstr "フィルタリング無し"
 
 #: src/wizard_funcs.cxx:85 src/advanced_funcs.cxx:109
 msgid "noon"
-msgstr "Mittag"
+msgstr "真昼"
 
 #: src/advanced.cxx:1052
 msgid "offset azimuth:"
-msgstr "Azimuth dazu:"
+msgstr ""
 
 #: src/advanced.cxx:1048
 msgid "offset distance:"
-msgstr "Abstand dazu:"
+msgstr ""
 
 #: src/wizard.cxx:968
 msgid "out :"
@@ -1616,19 +1596,19 @@ msgstr ""
 
 #: src/advanced_funcs.cxx:127
 msgid "overcast"
-msgstr "Bedeckt"
+msgstr ""
 
 #: src/advanced.cxx:847
 msgid "pitot"
-msgstr "Staurohre"
+msgstr ""
 
 #: src/wizard_funcs.cxx:102
 msgid "production"
-msgstr "Fertigstellung"
+msgstr ""
 
 #: src/advanced.cxx:1634
 msgid "prop=value"
-msgstr "prop=wert"
+msgstr ""
 
 #: src/advanced.cxx:1318
 msgid "props"
@@ -1636,24 +1616,23 @@ msgstr ""
 
 #: src/wizard.cxx:503 src/wizard.cxx:510
 msgid "root data path"
-msgstr "Wurzelverzeichnis von \"data\" "
+msgstr ""
 
 #: src/advanced_funcs.cxx:129
 msgid "scattered"
-msgstr "Aufgelockert"
+msgstr ""
 
-# soll das pilot oder pivot heissen?
 #: src/advanced.cxx:852
 msgid "static"
-msgstr "Atmosph�risch"
+msgstr ""
 
 #: src/wizard_funcs.cxx:94
 msgid "summer"
-msgstr "Sommer"
+msgstr "夏"
 
 #: src/advanced.cxx:857
 msgid "system"
-msgstr "System"
+msgstr ""
 
 #: src/advanced.cxx:1001
 msgid "uBody:"
@@ -1665,7 +1644,7 @@ msgstr ""
 
 #: src/advanced.cxx:862
 msgid "vacuum"
-msgstr "Vakuum"
+msgstr ""
 
 #: src/advanced.cxx:1009
 msgid "wBody"
@@ -1673,14 +1652,8 @@ msgstr ""
 
 #: src/advanced_funcs.cxx:121
 msgid "warn"
-msgstr "Warnung"
+msgstr ""
 
 #: src/wizard_funcs.cxx:95
 msgid "winter"
-msgstr "Winter"
-
-#~ msgid "Not ready for Rembrandt"
-#~ msgstr "Keine Rembrandt Unterst�tzung"
-
-#~ msgid "Ready for Rembrandt"
-#~ msgstr "Rembrandt Unterst�tzung"
+msgstr "冬"
