@@ -754,7 +754,7 @@ Wizard::preview_aircraft(bool desel_mru)
         }
         catch (const sg_exception& exc )
         {
-            fl_alert( exc.getFormattedMessage().c_str() );
+            fl_alert( "%s",exc.getFormattedMessage().c_str() );
             return;
         }
         catch (...)
