@@ -14,6 +14,7 @@
 //
 
 #include <cstdlib>
+#include <string>
 
 #include "parkingloader.h"
 

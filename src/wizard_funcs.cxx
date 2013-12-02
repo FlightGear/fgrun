@@ -2650,7 +2650,7 @@ Wizard::update_aircraft_mru()
         while (aircraft_mru.size() > 5)
             aircraft_mru.pop_back();
 
-        for (int i = 1; i <= aircraft_mru.size(); ++i)
+        for (unsigned int i = 1; i <= aircraft_mru.size(); ++i)
         {
             prefs.set( Fl_Preferences::Name("aircraft-mru-item-%d", i), aircraft_mru[i-1].c_str());
         }
