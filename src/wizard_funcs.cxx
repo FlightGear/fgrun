@@ -1996,6 +1996,10 @@ Wizard::update_basic_options( Fl_Preferences &p )
     real_weather_fetch->value(iVal);
     p.get("auto_coordination", iVal, 0);
     auto_coordination->value(iVal);
+    p.get("terrasync", iVal, 0);
+    terrasync->value(iVal);
+    p.get("autovisibility", iVal, 0);
+    auto_visibility->value(iVal);
 
     atlas->value(0);
     atlas_host->value("");
