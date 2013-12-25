@@ -47,20 +47,20 @@ macro(find_sg_library libName varName libs)
       PATHS
       ${ADDITIONAL_LIBRARY_PATHS}
     )
-    
-   # message(STATUS "before: Simgear ${${libVarName}_RELEASE} ")
-  #  message(STATUS "before: Simgear ${${libVarName}_DEBUG} ")
-    
+
+    # message(STATUS "before: Simgear ${${libVarName}_RELEASE} ")
+    # message(STATUS "before: Simgear ${${libVarName}_DEBUG} ")
+
     select_library_configurations( ${varName} )
 
-  #  message(STATUS "after:Simgear ${${libVarName}_RELEASE} ")
-  #  message(STATUS "after:Simgear ${${libVarName}_DEBUG} ")
+    # message(STATUS "after:Simgear ${${libVarName}_RELEASE} ")
+    # message(STATUS "after:Simgear ${${libVarName}_DEBUG} ")
 
     set(componentLibRelease ${${libVarName}_RELEASE})
-  #  message(STATUS "Simgear ${libVarName}_RELEASE ${componentLibRelease}")
+    # message(STATUS "Simgear ${libVarName}_RELEASE ${componentLibRelease}")
     set(componentLibDebug ${${libVarName}_DEBUG})
-   # message(STATUS "Simgear ${libVarName}_DEBUG ${componentLibDebug}")
-    
+    # message(STATUS "Simgear ${libVarName}_DEBUG ${componentLibDebug}")
+
     if (NOT ${libVarName}_DEBUG)
         if (NOT ${libVarName}_RELEASE)
             #message(STATUS "found ${componentLib}")
@@ -125,32 +125,32 @@ if(SIMGEAR_SHARED)
 
     find_sg_library(SimGearCore SIMGEAR_CORE SIMGEAR_CORE_LIBRARIES)
     find_sg_library(SimGearScene SIMGEAR_SCENE SIMGEAR_LIBRARIES)
- 
+
     list(APPEND SIMGEAR_LIBRARIES ${SIMGEAR_CORE_LIBRARIES})
     set(SIMGEAR_CORE_LIBRARY_DEPENDENCIES "")
     set(SIMGEAR_SCENE_LIBRARY_DEPENDENCIES "")
-    
+
    # message(STATUS "core lib ${SIMGEAR_CORE_LIBRARIES}")
-  #  message(STATUS "all libs ${SIMGEAR_LIBRARIES}")
+   # message(STATUS "all libs ${SIMGEAR_LIBRARIES}")
 else(SIMGEAR_SHARED)
 
     set(SIMGEAR_LIBRARIES "") # clear value
     set(SIMGEAR_CORE_LIBRARIES "") # clear value
     message(STATUS "looking for static SimGear libraries")
-    
+
     find_sg_library(SimGearCore SIMGEAR_CORE SIMGEAR_CORE_LIBRARIES)
     find_sg_library(SimGearScene SIMGEAR_SCENE SIMGEAR_LIBRARIES)
 
     # again link order matters - scene libraries depend on core ones
     list(APPEND SIMGEAR_LIBRARIES ${SIMGEAR_CORE_LIBRARIES})
-    
+
     set(SIMGEAR_CORE_LIBRARY_DEPENDENCIES
         ${CMAKE_THREAD_LIBS_INIT}
         ${ZLIB_LIBRARY}
         ${LIBSVN_LIBRARIES}
         ${WINMM_LIBRARY})
 
-    set(SIMGEAR_SCENE_LIBRARY_DEPENDENCIES 
+    set(SIMGEAR_SCENE_LIBRARY_DEPENDENCIES
         ${OPENAL_LIBRARY})
 
     if(WIN32)
@@ -166,7 +166,7 @@ else(SIMGEAR_SHARED)
     endif(NOT MSVC)
 endif(SIMGEAR_SHARED)
 
-if((NOT SIMGEAR_CORE_LIBRARIES)OR(NOT SIMGEAR_LIBRARIES))
+if((NOT SIMGEAR_CORE_LIBRARIES) OR (NOT SIMGEAR_LIBRARIES))
     message(FATAL_ERROR "Cannot find SimGear libraries! (Forgot 'make install' for SimGear?) "
             "Compile & INSTALL SimGear before configuring FlightGear. "
             "When using non-standard locations, use 'SIMGEAR_DIR' to configure the SimGear location.")
