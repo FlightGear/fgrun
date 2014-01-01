@@ -391,6 +391,9 @@ Wizard::reset()
 
     prefs.get("show_3d_preview", iVal, 1);
     show_3d_preview->value(iVal);
+
+    prefs.get("terrasync", iVal, 1);
+    terrasync->value(iVal);
 }
 
 void
@@ -2005,7 +2008,7 @@ Wizard::update_basic_options( Fl_Preferences &p )
     real_weather_fetch->value(iVal);
     p.get("auto_coordination", iVal, 0);
     auto_coordination->value(iVal);
-    p.get("terrasync", iVal, 0);
+    p.get("terrasync", iVal, 1);
     terrasync->value(iVal);
     p.get("autovisibility", iVal, 0);
     auto_visibility->value(iVal);
@@ -2266,6 +2269,8 @@ Wizard::reset_settings()
     {
         prefs.set( "fg_scenery", buf );
     }
+
+    prefs.set( "terrasync", 1 );
 
     reset();
 }
