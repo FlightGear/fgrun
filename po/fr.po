@@ -160,6 +160,10 @@ msgstr ""
 msgid "Airspeed:"
 msgstr "Vitesse:"
 
+#: src/wizard.fl
+msgid "All airports"
+msgstr "Tous les aéroports"
+
 #: src/advanced.cxx:989
 msgid "Altitude:"
 msgstr "Altitude:"
@@ -333,6 +337,14 @@ msgstr "Désactivé"
 #: src/wizard.cxx:764
 msgid "Display"
 msgstr "Affichage"
+
+#: src/wizard.fl
+msgid "Display all aiports"
+msgstr "Afficher tous les aéroports"
+
+#: src/wizard.fl
+msgid "Display only installed airports"
+msgstr "Afficher uniquement les aéroports installés"
 
 #: src/advanced.cxx:767
 msgid "Display splash screen at startup"
@@ -723,6 +735,10 @@ msgstr "Numéro de port IP en entrée"
 #: src/advanced.cxx:1382 src/advanced_funcs.cxx:222
 msgid "Input/Output"
 msgstr "Entrée/Sortie"
+
+#: src/wizard.fl
+msgid "Installed airports"
+msgstr "Aéroports installés"
 
 #: src/advanced.cxx:1588
 msgid "Internal"

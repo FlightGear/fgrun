@@ -1250,6 +1250,22 @@ msgstr ""
 msgid "Airport to fetch : "
 msgstr ""
 
+#: src/wizard.fl
+msgid "All airports"
+msgstr ""
+
+#: src/wizard.fl
+msgid "Display all aiports"
+msgstr ""
+
+#: src/wizard.fl
+msgid "Installed airports"
+msgstr ""
+
+#: src/wizard.fl
+msgid "Display only installed airports"
+msgstr ""
+
 #: src/wizard_funcs.cxx:83 src/advanced_funcs.cxx:107
 msgid "dawn"
 msgstr ""

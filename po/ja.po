@@ -157,6 +157,10 @@ msgstr "空港情報キャッシュ:"
 msgid "Airspeed:"
 msgstr "対気速度:"
 
+#: src/wizard.fl
+msgid "All airports"
+msgstr ""
+
 #: src/advanced.cxx:989
 msgid "Altitude:"
 msgstr "高度:"
@@ -330,6 +334,14 @@ msgstr "無効"
 #: src/wizard.cxx:764
 msgid "Display"
 msgstr "ディスプレイ"
+
+#: src/wizard.fl
+msgid "Display all aiports"
+msgstr ""
+
+#: src/wizard.fl
+msgid "Display only installed airports"
+msgstr ""
 
 #: src/advanced.cxx:767
 msgid "Display splash screen at startup"
@@ -723,6 +735,10 @@ msgstr "入力ポート番号"
 #: src/advanced.cxx:1382 src/advanced_funcs.cxx:222
 msgid "Input/Output"
 msgstr "入出力"
+
+#: src/wizard.fl
+msgid "Installed airports"
+msgstr ""
 
 #: src/advanced.cxx:1588
 msgid "Internal"

@@ -419,26 +419,29 @@ AirportBrowser::find( const string& id ) const
 }
 
 void
-AirportBrowser::show_installed( bool refresh )
+AirportBrowser::show_installed( bool state )
 {
     static vector<const apt_dat_t*> apts;
     typedef vector<string>::size_type size_type;
 
-    if (refresh)
-	apts.clear();
+    apts.clear();
 
-    if (apts.empty())
-    {
-	size_type count = installed_airports_.size();
-	apts.reserve( count );
+    if(state){
+        size_type count = installed_airports_.size();
+        apts.reserve( count );
         for (std::set<std::string>::iterator i = installed_airports_.begin(); i != installed_airports_.end(); ++i)
-	{
-	    const apt_dat_t* apt = find( *i );
-	    if (apt != 0)
-	    {
-		apts.push_back( apt );
-	    }
-	}
+        {
+            const apt_dat_t* apt = find( *i );
+            if (apt != 0)
+                apts.push_back( apt );
+        }
+    }else{
+        size_type count = airports_.size();
+        apts.reserve( count );
+        for (unsigned int i = 0; i < airports_.size(); ++i)
+        {
+            apts.push_back( &airports_[i] );
+        }
     }
 
     table_->set_airports( apts );

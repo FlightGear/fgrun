@@ -174,6 +174,15 @@ is_valid_fg_root( const string& dir )
 }
 
 void
+Wizard::show_installed( bool state )
+{
+  if( state )
+    airports_->show_installed(true);
+  else
+    airports_->show_installed(false);
+}
+
+void
 Wizard::airports_cb( Fl_Widget*, void* v )
 {
     ((Wizard*)v)->airports_cb();

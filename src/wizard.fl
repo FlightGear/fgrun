@@ -270,8 +270,18 @@ class Wizard {open
           label {Select a location} open
           private xywh {0 0 800 560} labelfont 1 align 21 hide
         } {
+          Fl_Round_Button show_all_apt {
+            label {All airports}
+            callback { show_installed(false); }
+            private tooltip {Display all aiports} xywh {5 20 100 15} type Radio down_box ROUND_DOWN_BOX value 0
+          }
+          Fl_Round_Button show_installed_apt {
+            label {Installed airports}
+            callback { show_installed(true); }
+            private tooltip {Display only installed airports} xywh {5 40 100 15} type Radio down_box ROUND_DOWN_BOX value 1
+          }
           Fl_Box airports_ {
-            private xywh {5 25 790 475} resizable
+            private xywh {5 55 790 415} resizable
             code0 {\#include "AirportBrowser.h"}
             class AirportBrowser
           }
@@ -655,6 +665,8 @@ class Wizard {open
   decl {static void airports_cb( Fl_Widget*, void* )} {private local
   }
   decl {void airports_cb();} {private local
+  }
+  decl {void show_installed( bool )} {private local
   }
   decl {void update_scenery_up_down();} {private local
   }
