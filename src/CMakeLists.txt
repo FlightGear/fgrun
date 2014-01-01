@@ -8,11 +8,7 @@ else (WIN32)
 endif (WIN32)
 
 if (MSVC)
-    if (CMAKE_CL_64)
-        set( RESOURCE_FILE fgrun64.rc )
-    else (CMAKE_CL_64)
-        set( RESOURCE_FILE fgrun.rc )
-    endif (CMAKE_CL_64)
+    set( RESOURCE_FILE fgrun.rc )
 endif (MSVC)
 
 FLTK_WRAP_UI(Wizard wizard.fl)
