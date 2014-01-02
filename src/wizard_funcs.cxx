@@ -270,9 +270,9 @@ Wizard::reset()
 
     if (reloadPath || !prefs.get( "fg_root", buf, def_fg_root.c_str(), buflen-1))
     {
-        systemPrefs.get( "fg_root_init", buf, def_fg_exe.c_str(), buflen-1);
+        systemPrefs.get( "fg_root_init", buf, def_fg_root.c_str(), buflen-1);
         prefs.set("fg_root_init", buf);
-        systemPrefs.get( "fg_root", buf, def_fg_exe.c_str(), buflen-1);
+        systemPrefs.get( "fg_root", buf, def_fg_root.c_str(), buflen-1);
         prefs.set("fg_root", buf);
     }
     fg_root_->value( buf );
