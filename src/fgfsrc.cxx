@@ -355,10 +355,10 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     if ( prefs.get( "season", buf, "", buflen-1 ) && strcmp(buf,"summer")!=0 )
         os << pfx << "--season=" << buf;
 
-    if ( prefs.get( "terrasync", iVal, 0 ) && !iVal )
-        os << pfx << "--disable-terrasync";
-    else
+    if ( prefs.get( "terrasync", iVal, 1 ) && iVal )
         os << pfx << "--enable-terrasync";
+    else
+        os << pfx << "--disable-terrasync";
 
     // Network.
     if (prefs.get( "httpd", iVal, 0 ) && iVal)
