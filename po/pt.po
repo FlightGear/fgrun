@@ -347,7 +347,7 @@ msgid "Display"
 msgstr "Visualização"
 
 #: src/wizard.fl
-msgid "Display all aiports"
+msgid "Display all airports"
 msgstr ""
 
 #: src/wizard.fl

@@ -273,7 +273,7 @@ class Wizard {open
           Fl_Round_Button show_all_apt {
             label {All airports}
             callback { show_installed(false); }
-            private tooltip {Display all aiports} xywh {5 20 100 15} type Radio down_box ROUND_DOWN_BOX value 0
+            private tooltip {Display all airports} xywh {5 20 100 15} type Radio down_box ROUND_DOWN_BOX value 0
           }
           Fl_Round_Button show_installed_apt {
             label {Installed airports}

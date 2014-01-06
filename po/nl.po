@@ -355,7 +355,7 @@ msgid "Display"
 msgstr "Scherm"
 
 #: src/wizard.fl
-msgid "Display all aiports"
+msgid "Display all airports"
 msgstr "Toon alle vliegvelden"
 
 #: src/wizard.fl

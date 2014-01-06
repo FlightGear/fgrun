@@ -1255,7 +1255,7 @@ msgid "All airports"
 msgstr ""
 
 #: src/wizard.fl
-msgid "Display all aiports"
+msgid "Display all airports"
 msgstr ""
 
 #: src/wizard.fl
