@@ -159,7 +159,7 @@ msgstr "対気速度:"
 
 #: src/wizard.fl
 msgid "All airports"
-msgstr ""
+msgstr "全ての空港"
 
 #: src/advanced.cxx:989
 msgid "Altitude:"
@@ -337,11 +337,11 @@ msgstr "ディスプレイ"
 
 #: src/wizard.fl
 msgid "Display all airports"
-msgstr ""
+msgstr "全ての空港を表示"
 
 #: src/wizard.fl
 msgid "Display only installed airports"
-msgstr ""
+msgstr "インストール済みの空港のみ表示"
 
 #: src/advanced.cxx:767
 msgid "Display splash screen at startup"
@@ -738,7 +738,7 @@ msgstr "入出力"
 
 #: src/wizard.fl
 msgid "Installed airports"
-msgstr ""
+msgstr "インストール済みの空港"
 
 #: src/advanced.cxx:1588
 msgid "Internal"
