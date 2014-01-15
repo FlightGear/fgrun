@@ -243,14 +243,19 @@ else
       } {
         Fl_Choice fdm {
           label {FDM:}
-          callback {if (strcmp(o->text(), "jsb") == 0){
-  notrim->activate();
-} else {
-  notrim->deactivate();
-}}
-          private tooltip {Core Flight Dynamics Model} xywh {270 45 105 25} down_box BORDER_BOX labelsize 12 textsize 12
+          callback {if (strcmp(o->text(), "automatic selection") == 0){
+              notrim->activate();
+            } else {
+              notrim->deactivate();
+            }
+          }
+          private tooltip {Core Flight Dynamics Model} xywh {270 45 140 25} down_box BORDER_BOX labelsize 12 textsize 12
         } {
           MenuItem {} {
+            label {automatic selection}
+            private xywh {0 0 100 20} labelsize 12
+          }
+		  MenuItem {} {
             label ada
             private xywh {0 0 100 20} labelsize 12
           }
@@ -260,10 +265,6 @@ else
           }
           MenuItem {} {
             label external
-            private xywh {0 0 100 20} labelsize 12
-          }
-          MenuItem {} {
-            label jsb
             private xywh {0 0 100 20} labelsize 12
           }
           MenuItem {} {

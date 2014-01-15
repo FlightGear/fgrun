@@ -221,7 +221,7 @@ Advanced::init()
     if ( io_generic_file->size() )
         io_generic_file->value(0);
 
-    set_choice( fdm, "jsb" );
+    set_choice( fdm, "automatic selection" );
     set_choice( log_level, "alert" );
 
     page_list->add(_("General"));

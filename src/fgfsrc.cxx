@@ -192,7 +192,7 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     prefs.get( "fdm", buf, "", buflen-1 );
     if (buf[0] != 0)
     {
-        if (strcmp( "jsb", buf ) != 0)
+        if (strcmp( "automatic selection", buf ) != 0)
             os << pfx << "--fdm=" << buf;
         else if (prefs.get( "no_trim", iVal, 0 ) && iVal)
             os << pfx << "--notrim"; // Only "jsb" understands --notrim

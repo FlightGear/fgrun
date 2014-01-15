@@ -364,7 +364,7 @@ Advanced::load_settings( Fl_Preferences& prefs )
     else
         ai_traffic->activate();
 
-    prefs.get("fdm", buf, "jsb", buflen-1);
+    prefs.get("fdm", buf, "automatic selection", buflen-1);
     set_choice(fdm, buf);
     fdm->do_callback();
     prefs.get("notrim", iVal, 0);
