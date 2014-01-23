@@ -272,7 +272,7 @@ Advanced::load_settings( Fl_Preferences& prefs )
     prefs.get( "fg_scenery", buf, not_set, buflen-1 );
     fg_scenery_->value( buf );
 
-    prefs.get( "ts_dir", buf, not_set, buflen-1 );
+    prefs.get( "ts_dir", buf, "", buflen-1 );
     ts_dir->value( buf );
 
     prefs.get( "aircraft", buf, not_set, buflen-1 );
