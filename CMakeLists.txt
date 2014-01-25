@@ -48,6 +48,8 @@ message(STATUS "ignoring: ${CPACK_SOURCE_IGNORE_FILES}")
 include (CPack)
 
 option(ENABLE_NLS "Set to ON to build fgrun with NLS support" ON)
+option(SHARED_FLTK "Set to ON to dynamically link FLTK (requires that SimGear also be dynamically linked)" OFF)
+
 
 if (MSVC)
     GET_FILENAME_COMPONENT(PARENT_DIR ${PROJECT_SOURCE_DIR} PATH)
@@ -128,7 +130,14 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${MSVC_LD_FLAGS}")
 
 find_package(Boost REQUIRED)
 find_package(ZLIB REQUIRED)
-find_package(FLTK REQUIRED)
+if (SHARED_FLTK)
+    #see http://sources.debian.net/src/fltk1.3/1.3.2-4/README.CMake.txt lines 200-240
+    find_package(FLTK REQUIRED NO_MODULE)
+    include(${FLTK_USE_FILE})
+    set(FLTK_LIBRARIES "fltk_forms_SHARED;fltk_gl_SHARED;fltk_images_SHARED;fltk_SHARED")
+else (SHARED_FLTK)
+    find_package(FLTK REQUIRED)
+endif (SHARED_FLTK)
 find_package(OpenSceneGraph 2.8.1 REQUIRED osgText osgDB osgParticle osgUtil osgViewer osgGA)
 find_package(SimGear ${FGRUN_VERSION} REQUIRED)
 if (ENABLE_NLS)
