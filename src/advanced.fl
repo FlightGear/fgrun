@@ -125,25 +125,21 @@ class Advanced {open
         label Features open
         private xywh {150 0 490 430} labelfont 1 labelsize 16 align 21
       } {
-        Fl_Check_Button game_mode {
-          label {Game Mode}
-          private tooltip {Enable full screen game mode} xywh {175 50 160 25} down_box DOWN_BOX labelsize 12
+        Fl_Check_Button specular_highlight {
+          label {Specular highlight}
+          private tooltip {Enable specular reflections on textured objects} xywh {175 50 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button splash_screen {
           label {Splash Screen}
           private tooltip {Display splash screen at startup} xywh {175 80 160 25} down_box DOWN_BOX value 1 labelsize 12
         }
-        Fl_Check_Button intro_music {
-          label {Intro Music}
-          private tooltip {Enable introduction music during start up} xywh {175 110 160 25} down_box DOWN_BOX value 1 labelsize 12
-        }
         Fl_Check_Button mouse_pointer {
           label {Mouse Pointer}
-          private tooltip {Enable extra mouse pointer} xywh {175 140 160 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable extra mouse pointer} xywh {175 110 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button random_objects {
           label {Random Objects}
-          private tooltip {Enable random scenery objects} xywh {175 170 160 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable random scenery objects} xywh {175 140 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button panel {
           label Panel
@@ -169,25 +165,25 @@ else
           label {Auto-coordination}
           private tooltip {Enable auto-coordinated turns.} xywh {345 200 140 25} down_box DOWN_BOX labelsize 12
         }
+        Fl_Check_Button random_trees {
+          label {Random Trees}
+          private xywh {175 170 160 25} down_box DOWN_BOX labelsize 12
+        }
         Fl_Check_Button horizon_effect {
           label {Horizon effect}
-          private tooltip {Enable celestial body growth illusion near the horizon} xywh {175 230 160 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable celestial body growth illusion near the horizon} xywh {175 200 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button enhanced_lighting {
           label {Enhanced lighting}
-          private tooltip {Enable enhanced runway lighting} xywh {175 260 160 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable enhanced runway lighting} xywh {175 230 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button distance_attenuation {
           label {Distance attenuation}
-          private tooltip {Enable runway light distance attenuation} xywh {175 290 160 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable runway light distance attenuation} xywh {175 260 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button hud_3d {
           label {Hud-3D}
           private tooltip {Enable 3D HUD} xywh {345 170 140 25} down_box DOWN_BOX labelsize 12
-        }
-        Fl_Check_Button specular_highlight {
-          label {Specular highlight}
-          private tooltip {Enable specular reflections on textured objects} xywh {175 320 160 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button failure {
           label Failures
@@ -227,11 +223,7 @@ else
         }
         Fl_Check_Button ai_traffic {
           label {AI Traffic}
-          private xywh {345 260 140 25} down_box DOWN_BOX labelsize 12
-        }
-        Fl_Check_Button random_trees {
-          label {Random Trees}
-          private xywh {175 200 160 25} down_box DOWN_BOX labelsize 12
+          private xywh {360 260 140 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Box {} {
           xywh {615 405 25 25} resizable

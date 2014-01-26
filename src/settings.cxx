@@ -77,9 +77,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set( "lang", lang->value());
     prefs.set( "config", config->value() );
 
-    prefs.set("game_mode", game_mode->value());
     prefs.set("splash_screen", splash_screen->value());
-    prefs.set("intro_music", intro_music->value());
     prefs.set("mouse_pointer", mouse_pointer->value());
     prefs.set("random_objects", random_objects->value());
     prefs.set("random_trees", random_trees->value());
@@ -311,12 +309,8 @@ Advanced::load_settings( Fl_Preferences& prefs )
     int iVal;
     double dVal;
 
-    prefs.get("game_mode", iVal, 0);
-    game_mode->value(iVal);
     prefs.get("splash_screen", iVal, 1);
     splash_screen->value(iVal);
-    prefs.get("intro_music", iVal, 1);
-    intro_music->value(iVal);
     prefs.get("mouse_pointer", iVal, 0);
     mouse_pointer->value(iVal);
     prefs.get("random_objects", iVal, 0);
@@ -664,9 +658,7 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry( "lang" );
     prefs.deleteEntry( "config" );
 
-    prefs.deleteEntry("game_mode" );
     prefs.deleteEntry("splash_screen" );
-    prefs.deleteEntry("intro_music" );
     prefs.deleteEntry("mouse_pointer" );
     prefs.deleteEntry("random_objects" );
     prefs.deleteEntry("random_trees" );
