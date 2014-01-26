@@ -103,7 +103,7 @@ class Advanced {open
         }
         Fl_Input ts_dir {
           label {TerraSync directory:}
-          xywh {250 115 385 25} labelsize 12 textsize 12
+          private tooltip {Leave this field empty in order to use the default path.} xywh {250 115 385 25} labelsize 12 textsize 12
         }
         Fl_Output airport_ {
           label {Airport:}
