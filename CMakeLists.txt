@@ -48,8 +48,11 @@ message(STATUS "ignoring: ${CPACK_SOURCE_IGNORE_FILES}")
 include (CPack)
 
 option(ENABLE_NLS "Set to ON to build fgrun with NLS support" ON)
+option(SIMGEAR_SHARED "Set to ON to dynamically link SimGear" OFF)
 option(SHARED_FLTK "Set to ON to dynamically link FLTK (requires that SimGear also be dynamically linked)" OFF)
-
+if (SHARED_FLTK AND NOT SIMGEAR_SHARED)
+   message(FATAL_ERROR "Please do not use SHARED_FLTK without SIMGEAR_SHARED, as it will probably fail to compile")
+endif (SHARED_FLTK AND NOT SIMGEAR_SHARED)
 
 if (MSVC)
     GET_FILENAME_COMPONENT(PARENT_DIR ${PROJECT_SOURCE_DIR} PATH)
