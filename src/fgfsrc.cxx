@@ -123,12 +123,8 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     double dVal;
 
     // Features - only set non-default values.
-    if (prefs.get( "game_mode", iVal, 0 ) && iVal)
-        os << pfx << "--enable-game-mode";
     if (prefs.get( "splash_screen", iVal, 1 ) && !iVal)
         os << pfx << "--disable-splash-screen";
-    if (prefs.get( "intro_music", iVal, 1 ) && !iVal)
-        os << pfx << "--disable-intro-music";
     if (prefs.get( "mouse_pointer", iVal, 0 ) && iVal)
         os << pfx << "--enable-mouse-pointer";
     if (prefs.get( "random_objects", iVal, 0 ) && iVal)
