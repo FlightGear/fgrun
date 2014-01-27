@@ -406,6 +406,8 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         buf[0] = 0;
         prefs.get( Fl_Preferences::Name("io-item-%d", i),
                    buf, "", buflen-1 );
+        // skip fgcom because he is managed by "fgcom-standalone"
+        if ( std::string(buf).find("fgcom") != std::string::npos ) continue;
         if ( strlen( buf ) > 0 )
             os << pfx << buf;
     }
