@@ -303,10 +303,6 @@ msgstr "DME"
 msgid "Debugging"
 msgstr "Odpluskwianie"
 
-#: src/wizard.cxx:1006
-msgid "Defaults"
-msgstr "Domyslne"
-
 # czy nowy?
 #: src/advanced.cxx:1400 src/advanced.cxx:1628 src/advanced.cxx:1691
 #: src/advanced.cxx:1724 src/advanced.cxx:1756 src/wizard.cxx:537
@@ -1136,6 +1132,10 @@ msgstr "Resetuj"
 #: src/wizard.cxx:768
 msgid "Resolution :"
 msgstr "Rozdzielczosc:"
+
+#: src/wizard.cxx:1006
+msgid "Restore default settings"
+msgstr "Domyslne"
 
 #: src/advanced.cxx:1020
 msgid "Roll:"
