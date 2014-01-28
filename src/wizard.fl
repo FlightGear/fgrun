@@ -593,19 +593,19 @@ class Wizard {open
           xywh {380 570 195 25} resizable
         }
         Fl_Button defaults {
-          label Defaults
+          label {Restore default settings}
           callback {defaults_cb();}
-          tooltip {Clear all selected options and return to the install situation. Useful if FGFS don't start anymore.} xywh {5 570 125 25} labelsize 12
+          tooltip {Clear all selected options and return to the install situation. Useful if FGFS don't start anymore.} xywh {5 570 165 25} labelsize 12
         }
         Fl_Button {} {
           label {Save As...}
           callback {save_preferences_cb();}
-          tooltip {Save current configuration to a file} xywh {260 570 120 25} labelsize 12
+          tooltip {Save current configuration to a file} xywh {300 570 120 25} labelsize 12
         }
         Fl_Button {} {
           label Load
           callback {load_preferences_cb();}
-          tooltip {Load a previously saved configuration} xywh {135 570 120 25} labelsize 12
+          tooltip {Load a previously saved configuration} xywh {175 570 120 25} labelsize 12
         }
       }
     }

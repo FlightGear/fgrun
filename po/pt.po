@@ -300,10 +300,6 @@ msgstr ""
 msgid "Debugging"
 msgstr "Depuração"
 
-#: src/wizard.cxx:1006
-msgid "Defaults"
-msgstr "Padrões"
-
 #: src/advanced.cxx:1400 src/advanced.cxx:1628 src/advanced.cxx:1691
 #: src/advanced.cxx:1724 src/advanced.cxx:1756 src/wizard.cxx:537
 #: src/wizard.cxx:566 src/wizard.cxx:614
@@ -1108,6 +1104,10 @@ msgstr "Redefinir"
 #: src/wizard.cxx:768
 msgid "Resolution :"
 msgstr "Resolução :"
+
+#: src/wizard.cxx:1006
+msgid "Restore default settings"
+msgstr "Padrões"
 
 #: src/advanced.cxx:1020
 msgid "Roll:"
