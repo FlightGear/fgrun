@@ -325,6 +325,11 @@ class Wizard {open
               callback {show_cmd_line_cb();}
               private xywh {10 525 240 25} down_box DOWN_BOX
             }
+            Fl_Check_Button show_console {
+              label {Show console}
+              callback {show_console_cb();}
+              private xywh {280 525 240 25} down_box DOWN_BOX
+            }
           }
           Fl_Text_Display text {
             private xywh {5 370 790 145} box THIN_DOWN_BOX align 4 hide
@@ -765,6 +770,8 @@ class Wizard {open
   decl {void deselect_all_scenarii_cb();} {private local
   }
   decl {void show_cmd_line_cb();} {private local
+  }
+  decl {void show_console_cb();} {private local
   }
   decl {void show_3d_preview_cb();} {private local
   }

@@ -2027,6 +2027,9 @@ Wizard::update_basic_options( Fl_Preferences &p )
     terrasync->value(iVal);
     p.get("autovisibility", iVal, 0);
     auto_visibility->value(iVal);
+	
+    p.get("show_console", iVal, 0);
+    show_console->value(iVal);
 
     atlas->value(0);
     atlas_host->value("");
@@ -2202,6 +2205,13 @@ Wizard::show_cmd_line_cb()
     else
         text->hide();
     prefs.set("show_cmd_line", show_cmd_line->value());
+}
+
+void
+Wizard::show_console_cb()
+{
+    prefs.set("show_console", show_console->value());
+    update_options();
 }
 
 Wizard::FlightGearThread::FlightGearThread( Wizard *w )
