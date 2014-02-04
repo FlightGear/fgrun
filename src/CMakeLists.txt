@@ -57,7 +57,7 @@ set( simgear_libs
      ${SIMGEAR_CORE_LIBRARY_DEPENDENCIES}
      ${SIMGEAR_SCENE_LIBRARY_DEPENDENCIES})
 
-add_executable(fgrun ${SOURCES} ${HEADERS})
+add_executable(fgrun WIN32 ${SOURCES} ${HEADERS})
 
 add_dependencies(fgrun Wizard)
 add_dependencies(fgrun Advanced)
