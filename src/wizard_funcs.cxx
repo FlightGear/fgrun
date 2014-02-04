@@ -77,6 +77,8 @@ using std::map;
 extern string def_fg_exe;
 extern string def_fg_root;
 extern string def_fg_scenery;
+extern string def_acft_dir;
+extern string def_ts_dir;
 
 Fl_Menu_Item Wizard::menu_time_of_day_value[] = {
  {N_("dawn"), 0,  0, (void*)"dawn", 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -268,6 +270,23 @@ Wizard::reset()
     }
     fg_exe_->value( buf );
 
+	string fg_aircraft;
+	if (reloadPath || !prefs.get( "fg_aircraft", buf, def_acft_dir.c_str(), buflen-1))
+    {
+        systemPrefs.get( "fg_aircraft_init", buf, def_acft_dir.c_str(), buflen-1);
+        prefs.set("fg_aircraft_init", buf);
+        systemPrefs.get( "fg_aircraft", buf, def_acft_dir.c_str(), buflen-1);
+        prefs.set("fg_aircraft", buf);
+    }
+	
+	if (reloadPath || !prefs.get( "ts_dir", buf, def_ts_dir.c_str(), buflen-1))
+    {
+        systemPrefs.get( "ts_dir_init", buf, def_ts_dir.c_str(), buflen-1);
+        prefs.set("ts_dir_init", buf);
+        systemPrefs.get( "ts_dir", buf, def_ts_dir.c_str(), buflen-1);
+        prefs.set("ts_dir", buf);
+    }
+	
     if (reloadPath || !prefs.get( "fg_root", buf, def_fg_root.c_str(), buflen-1))
     {
         systemPrefs.get( "fg_root_init", buf, def_fg_root.c_str(), buflen-1);
@@ -290,7 +309,6 @@ Wizard::reset()
 
     simgear::ResourceManager::instance()->addBasePath(fgPath);
 
-    string fg_aircraft;
     if (prefs.get( "fg_aircraft", buf, "", buflen-1))
     {
         fg_aircraft = buf;

@@ -42,7 +42,8 @@ std::string def_fg_root = "";
 std::string def_fg_scenery = "";
 std::string def_ts_exe = "";
 std::string version = "";
-int def_ts_dir = -1;
+std::string def_ts_dir = "";
+std::string def_acft_dir = "";
 static bool silent = false;
 static bool fullscreen = false;
 
@@ -88,18 +89,18 @@ parse_args( int, char** argv, int& i )
         ++i;
         return 1;
     }
-    else if (strncmp( argv[i], "--ts-exe=", 9 ) == 0)
+    else if (strncmp( argv[i], "--terrasync-dir=", 16 ) == 0)
     {
-        def_ts_exe.assign( &argv[i][9] );
+        def_ts_dir.assign( &argv[i][16] );
         ++i;
         return 1;
     }
-    else if (strncmp( argv[i], "--ts-dir=", 9 ) == 0)
+    else if (strncmp( argv[i], "--fg-aircraft=", 14 ) == 0)
     {
-        def_ts_dir = atoi( &argv[i][9] );
+        def_acft_dir.assign( &argv[i][14] );
         ++i;
         return 1;
-    }
+    }	
     else if (strncmp( argv[i], "--version=", 10 ) == 0)
     {
         version.assign( &argv[i][10] );
@@ -159,7 +160,7 @@ main( int argc, char* argv[] )
     int i = 0;
     if (Fl::args( argc, argv, i, parse_args ) < argc)
     {
-        Fl::fatal(_("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n --ts-exe=<PATH>\n --ts-dir=#\n --version=<VERSION>\n -f, --fullscreen\n%s"), Fl::help );
+        Fl::fatal(_("Options are:\n --silent\n --fg-exe=<PATH>\n --fg-root=<DIR>\n --fg-scenery=<DIR>\n --terrasync-dir=<DIR>\n --fg-aircraft=<DIR>\n --version=<VERSION>\n -f, --fullscreen\n%s"), Fl::help );
     }
 
     if ( silent )
@@ -186,20 +187,20 @@ main( int argc, char* argv[] )
             fl_filename_absolute( abs_name, def_fg_scenery.c_str() );
             prefs.set( "fg_scenery_init", abs_name );
             prefs.set( "fg_scenery", abs_name );
-            prefs.set( "ts_dir", 0 );
         }
 
-        if ( !def_ts_exe.empty() )
+        if ( !def_ts_dir.empty() )
         {
-            fl_filename_absolute( abs_name, def_ts_exe.c_str() );
-            prefs.set( "ts_exe_init", abs_name );
-            prefs.set( "ts_exe", abs_name );
+            fl_filename_absolute( abs_name, def_ts_dir.c_str() );
+            prefs.set( "ts_dir_init", abs_name );
+            prefs.set( "ts_dir", abs_name );
         }
-
-        if ( def_ts_dir != -1 )
+		
+        if ( !def_acft_dir.empty() )
         {
-            prefs.set( "ts_dir_init", def_ts_dir );
-            prefs.set( "ts_dir", def_ts_dir );
+            fl_filename_absolute( abs_name, def_acft_dir.c_str() );
+            prefs.set( "fg_aircraft_init", abs_name );
+            prefs.set( "fg_aircraft", abs_name );
         }
 
         if ( !version.empty() )
@@ -212,7 +213,6 @@ main( int argc, char* argv[] )
                 prefs.set("version", major * 10000 + minor * 100 + patch);
             }
         }
-
         return 0;
     }
 
