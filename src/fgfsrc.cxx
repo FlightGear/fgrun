@@ -123,6 +123,8 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     double dVal;
 
     // Features - only set non-default values.
+    if (prefs.get( "show_console", iVal, 0 ) && iVal)
+        os << pfx << "--console";
     if (prefs.get( "splash_screen", iVal, 1 ) && !iVal)
         os << pfx << "--disable-splash-screen";
     if (prefs.get( "mouse_pointer", iVal, 0 ) && iVal)
