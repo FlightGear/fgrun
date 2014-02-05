@@ -424,9 +424,9 @@ else
           label {Full Screen}
           private tooltip {Enable full screen mode} xywh {180 100 120 25} down_box DOWN_BOX labelsize 12
         }
-        Fl_Check_Button skyblend {
-          label {Sky Blend}
-          private tooltip {Enable sky blending} xywh {180 130 120 25} down_box DOWN_BOX value 1 labelsize 12
+        Fl_Check_Button texture_compression {
+          label {Texture compression}
+          private tooltip {Disabling texture compression can solve the bug where terrain is black} xywh {180 130 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
         Fl_Check_Button textures {
           label Textures
