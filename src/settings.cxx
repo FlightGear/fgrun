@@ -136,7 +136,7 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("clouds", clouds->value());
     prefs.set("clouds3d", clouds3d->value());
     prefs.set("fullscreen", fullscreen->value());
-    prefs.set("skyblend", skyblend->value());
+    prefs.set("texture_compression", texture_compression->value());
     prefs.set("textures", textures->value());
     prefs.set("wireframe", wireframe->value());
     prefs.set("rembrandt", rembrandt->value());
@@ -432,8 +432,8 @@ Advanced::load_settings( Fl_Preferences& prefs )
     clouds3d->value(iVal);
     prefs.get("fullscreen", iVal, 0);
     fullscreen->value(iVal);
-    prefs.get("skyblend", iVal, 1);
-    skyblend->value(iVal);
+    prefs.get("texture_compression", iVal, 1);
+    texture_compression->value(iVal);
     prefs.get("textures", iVal, 1);
     textures->value(iVal);
     prefs.get("wireframe", iVal, 0);
@@ -717,7 +717,7 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("clouds" );
     prefs.deleteEntry("clouds3d" );
     prefs.deleteEntry("fullscreen" );
-    prefs.deleteEntry("skyblend" );
+    prefs.deleteEntry("texture_compression" );
     prefs.deleteEntry("textures" );
     prefs.deleteEntry("wireframe" );
     prefs.deleteEntry("rembrandt" );
