@@ -72,6 +72,7 @@ target_link_libraries(fgrun
     ${INTL_LIBRARY}
     ${OPENPTY_LIBRARY}
     ${PLATFORM_LIBS}
+    ${OPENGL_LIBRARIES}
     )
 
 install(TARGETS fgrun RUNTIME DESTINATION bin)
