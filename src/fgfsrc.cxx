@@ -110,8 +110,6 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
     if (prefs.get( "parkpos", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--parkpos=" << buf;
 
-    if (prefs.get( "control", buf, "", buflen-1 ))
-        os << pfx << "--control=" << buf;
     if (prefs.get( "lang", buf, "", buflen-1 ) && buf[0] != 0)
         os << pfx << "--language=" << buf;
     if (prefs.get( "browser", buf, "", buflen-1 ) && buf[0] != 0)

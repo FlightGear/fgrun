@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CP1252\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #: src/logwin.cxx:34
 msgid "&Close"
@@ -265,10 +265,6 @@ msgstr "Profundidad del color (bits por píxel)"
 #: src/advanced.cxx:719
 msgid "Config:"
 msgstr "Configuración:"
-
-#: src/advanced.cxx:701
-msgid "Control:"
-msgstr "Controles:"
 
 #: src/advanced.cxx:892
 msgid "Core Flight Dynamics Model"
@@ -1008,10 +1004,6 @@ msgstr "Anterior"
 #: src/wizard.cxx:670
 msgid "Preview"
 msgstr "Vista previa"
-
-#: src/advanced.cxx:702
-msgid "Primary control mode"
-msgstr "Modo de control primario"
 
 #: src/advanced.cxx:1612 src/advanced_funcs.cxx:224
 msgid "Properties"

@@ -32,14 +32,6 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: src/advanced.cxx:701
-msgid "Control:"
-msgstr ""
-
-#: src/advanced.cxx:702
-msgid "Primary control mode"
-msgstr ""
-
 #: src/advanced.cxx:707
 msgid "Language:"
 msgstr ""

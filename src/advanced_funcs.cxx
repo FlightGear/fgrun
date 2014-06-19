@@ -133,13 +133,6 @@ Fl_Menu_Item Advanced::menu_cloud_coverage_[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-Fl_Menu_Item Advanced::menu_control[] = {
- {N_("joystick"), 0,  0, (void*)"joystick", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("keyboard"), 0,  0, (void*)"keyboard", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {N_("mouse"), 0,  0, (void*)"mouse", 0, FL_NORMAL_LABEL, 0, 12, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 Fl_Menu_Item Advanced::menu_texture_filtering[] = {
  {_("no filtering"), 0,  0, (void*)"1", 0, FL_NORMAL_LABEL, 0, 12, 0},
  {_("2.0"), 0,  0, (void*)"2", 0, FL_NORMAL_LABEL, 0, 12, 0},
@@ -185,12 +178,6 @@ Advanced::init()
         menu_cloud_coverage_[i].text = _( menu_cloud_coverage_[i].text );
     }
     cloud_coverage_->menu(menu_cloud_coverage_);
-
-    for ( int i = 0; menu_control[i].text != 0; ++i )
-    {
-        menu_control[i].text = _( menu_control[i].text );
-    }
-    control->menu(menu_control);
 
     for ( int i = 0; menu_texture_filtering[i].text != 0; ++i )
     {

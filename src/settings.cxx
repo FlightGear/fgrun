@@ -73,7 +73,6 @@ Advanced::save_settings( Fl_Preferences& prefs )
 {
     prefs.set( "ts_dir", ts_dir->value());
     prefs.set( "browser", browser->value() );
-    prefs.set( "control", (const char *)control->mvalue()->user_data() );
     prefs.set( "lang", lang->value());
     prefs.set( "config", config->value() );
 
@@ -292,9 +291,6 @@ Advanced::load_settings( Fl_Preferences& prefs )
 
     prefs.get( "lang", buf, "", buflen-1 );
     lang->value( buf );
-
-    prefs.get( "control", buf, "joystick", buflen-1 );
-    set_choice( control, buf );
 
 // #if defined(WIN32)
 //     prefs.get("browser", buf, "webrun.bat", buflen-1);
@@ -654,7 +650,6 @@ Advanced::reset_settings( Fl_Preferences& prefs )
 {
     prefs.deleteEntry( "ts_dir" );
     prefs.deleteEntry( "browser" );
-    prefs.deleteEntry( "control" );
     prefs.deleteEntry( "lang" );
     prefs.deleteEntry( "config" );
 
