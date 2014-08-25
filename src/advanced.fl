@@ -424,13 +424,9 @@ else
           label {Texture compression}
           private tooltip {Disabling texture compression can solve the bug where terrain is black} xywh {180 130 120 25} down_box DOWN_BOX value 1 labelsize 12
         }
-        Fl_Check_Button textures {
-          label Textures
-          private tooltip {Enable textures} xywh {180 160 120 25} down_box DOWN_BOX value 1 labelsize 12
-        }
         Fl_Check_Button wireframe {
           label Wireframe
-          private tooltip {Enable wireframe drawing mode} xywh {180 190 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable wireframe drawing mode} xywh {180 160 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Check_Button rembrandt {
           label Rembrandt
@@ -439,7 +435,7 @@ else
           } else {
             anti_aliasing->activate();
           }}
-          private tooltip {Enable project Rembrandt (deferred rendering)} xywh {180 220 120 25} down_box DOWN_BOX labelsize 12
+          private tooltip {Enable project Rembrandt (deferred rendering)} xywh {180 190 120 25} down_box DOWN_BOX labelsize 12
         }
         Fl_Group {} {
           label Shading

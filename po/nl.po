@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2010-05-23 18:36+0200\n"
 "Last-Translator: Gijs de Rooy <gijsrooy@hotmail.com>\n"
 "Language-Team: Dutch\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CP1252\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/logwin.cxx:34
@@ -468,10 +468,6 @@ msgstr "Schakel geluidseffecten in"
 #: src/advanced.cxx:838
 msgid "Enable specular reflections on textured objects"
 msgstr "Schakel glimmende weerkaatsingen in op getextureerde objecten"
-
-#: src/advanced.cxx:1098
-msgid "Enable textures"
-msgstr "Schakel textures in"
 
 #: src/advanced.cxx:789
 msgid "Enable the instrument panel"

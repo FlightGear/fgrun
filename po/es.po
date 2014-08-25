@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CP1252\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 #: src/logwin.cxx:34
 msgid "&Close"
@@ -453,10 +453,6 @@ msgstr "Activar efectos de sonidos"
 #: src/advanced.cxx:838
 msgid "Enable specular reflections on textured objects"
 msgstr "Activa un brillo especular sobre el suelo y otros objetos"
-
-#: src/advanced.cxx:1098
-msgid "Enable textures"
-msgstr "Activar texturas"
 
 #: src/advanced.cxx:789
 msgid "Enable the instrument panel"
