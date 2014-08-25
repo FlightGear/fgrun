@@ -273,8 +273,6 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--enable-fullscreen";
     if (prefs.get( "texture_compression", iVal, 1 ) && !iVal)
         os << pfx << "--prop:/sim/rendering/texture-compression=off";
-    if (prefs.get( "textures", iVal, 1 ) && !iVal)
-        os << pfx << "--disable-textures";
     if (prefs.get( "wireframe", iVal, 0 ) && iVal)
         os << pfx << "--enable-wireframe";
     if (prefs.get( "shading", buf, "", buflen-1 ) &&

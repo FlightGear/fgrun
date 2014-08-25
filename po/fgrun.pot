@@ -444,10 +444,6 @@ msgstr ""
 msgid "Textures"
 msgstr ""
 
-#: src/advanced.cxx:1098
-msgid "Enable textures"
-msgstr ""
-
 #: src/advanced.cxx:1103
 msgid "Wireframe"
 msgstr ""
