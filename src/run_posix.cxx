@@ -124,9 +124,20 @@ Wizard::run_fgfs( const std::string &args )
 	    buf[0] = 0;
 	    prefs.get( Fl_Preferences::Name("env-var-%d", i),
 		       buf, "", buflen-1 );
-	    char* s = strdup( buf );
-	    putenv( s );
-            free( s );
+	    char *equals = strchr(buf, '=');
+	    if (equals == NULL) {
+	      /* environment variable name without a value; the value
+		 follows */
+	      unsetenv(buf);
+	    }
+	    else { /* value exists */
+	      /* replace '=' with a new terminator; the value
+		 follows */
+	      *equals = '\0';
+	      setenv(/* name: */ buf,
+		     /* value: */ equals + 1,
+		     /* overwrite: */ 1);
+	    }
 	}
 	vector<string> argv;
 	argv.push_back( arg0 );
