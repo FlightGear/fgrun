@@ -335,6 +335,7 @@ Wizard::reset()
     else if (!def_fg_scenery.empty())
     {
         fg_scenery = def_fg_scenery;
+        prefs.set("fg_scenery", def_fg_scenery.c_str());
     }
     else if (fg_root_->size() > 0)
     {
