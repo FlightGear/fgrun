@@ -47,8 +47,8 @@ Wizard::write_fgfsrc()
     char buf[ buflen ];
 
 #if defined(WIN32)
-    prefs.get( "fg_root", buf, "", buflen-1 );
-    strcat( buf, "/system.fgfsrc" );
+    prefs.get( "fg_home", buf, "", buflen-1 );
+    strcat( buf, "/fgfsrc" );
     fl_filename_absolute( buf, buf );
 #else
     fl_filename_expand( buf, "~/.fgfsrc" );
