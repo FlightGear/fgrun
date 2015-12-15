@@ -2,14 +2,15 @@
 # Copyright (C) YEAR Frederic Bouvier
 # This file is distributed under the same license as the PACKAGE package.
 # 李振华 <leechenhwa@aim.com>, 2015.
+# Tong Hui <tonghuix@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-03 02:20+0200\n"
-"PO-Revision-Date: 2015-07-06 21:39+0800\n"
-"Last-Translator: 李振华 <leechenhwa@aim.com>\n"
+"PO-Revision-Date: 2015-12-15 23:38+0800\n"
+"Last-Translator: Tong Hui <tonghuix@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +62,7 @@ msgstr ":"
 #: src/wizard_funcs.cxx:889 src/wizard_funcs.cxx:2449
 #: src/AirportBrowser.cxx:470 src/fgfsrc.cxx:101
 msgid "<default>"
-msgstr "默认"
+msgstr "<默认>"
 
 #: src/wizard_funcs.cxx:225
 #, c-format
@@ -70,11 +71,7 @@ msgid ""
 "<h1>FlightGear Launch Control %s</h1>  <p>This program is released under the "
 "GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>  "
 "<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
-msgstr ""
-"<html> <head>  <title>FlightGear 启动工具 %s</title> </head> <body>  "
-"<h1>FlightGear 启动工具 %s</h1>  <p>本软件之发布依据 GNU General Public "
-"License (http://www.gnu.org/copyleft/gpl.html).</p>  <p>请汇报问题至 http://"
-"sourceforge.net/projects/fgrun</p> </body></html>"
+msgstr "<html> <head>  <title>FlightGear 启动器 %s</title> </head> <body>  <h1>FlightGear 启动器 %s</h1>  <p>本软件之发布依据 GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>  <p>请汇报问题至 http://sourceforge.net/projects/fgrun</p> </body></html>"
 
 #: src/wizard.cxx:599
 msgid "@2>"
@@ -94,7 +91,7 @@ msgstr "人工智能模型"
 
 #: src/advanced.cxx:873 src/wizard.cxx:848
 msgid "AI Traffic"
-msgstr "模拟交通"
+msgstr "人工智能航路交通"
 
 #: src/wizard.cxx:844
 msgid "AI models"
@@ -115,11 +112,11 @@ msgstr "将要重置当前参数"
 
 #: src/wizard.cxx:562
 msgid "Add a scenery directory"
-msgstr "添加场景"
+msgstr "添加地景目录"
 
 #: src/wizard.cxx:533
 msgid "Add an aircraft directory"
-msgstr "添加飞行器路径"
+msgstr "添加飞行器目录"
 
 #: src/wizard.cxx:532 src/wizard.cxx:561
 msgid "Add..."
@@ -135,7 +132,7 @@ msgstr "高级..."
 
 #: src/wizard.cxx:523
 msgid "Aircraft directories"
-msgstr "飞行器文件夹"
+msgstr "飞行器目录"
 
 #: src/advanced.cxx:748
 msgid "Aircraft:"
@@ -171,11 +168,11 @@ msgstr "已生成错误报告文件:"
 
 #: src/advanced.cxx:806
 msgid "Anti-alias HUD"
-msgstr "抗锯齿HUD"
+msgstr "HUD 抗锯齿"
 
 #: src/wizard.cxx:931
 msgid "Atlas"
-msgstr "地图"
+msgstr "Atlas"
 
 #: src/wizard.cxx:692
 msgid "Author(s) :"
@@ -183,7 +180,7 @@ msgstr "作者:"
 
 #: src/advanced.cxx:812 src/wizard.cxx:864
 msgid "Auto-coordination"
-msgstr "自动配准"
+msgstr "自动协调"
 
 #: src/wizard.cxx:659
 msgid "Available aircraft :"
@@ -191,7 +188,7 @@ msgstr "可用飞行器:"
 
 #: src/advanced.cxx:1554 src/advanced_funcs.cxx:223
 msgid "Avionics"
-msgstr "航空电子学"
+msgstr "航电系统"
 
 #: src/advanced.cxx:1481
 msgid "Baud Rate:"
@@ -203,11 +200,11 @@ msgstr "浏览:"
 
 #: src/wizard.cxx:954
 msgid "Callsign :"
-msgstr "呼叫信号:"
+msgstr "呼号:"
 
 #: src/advanced.cxx:1355
 msgid "Callsign:"
-msgstr "呼叫信号:"
+msgstr "呼号:"
 
 #: src/advanced.cxx:685 src/wizard.cxx:1085
 msgid "Cancel"
@@ -223,7 +220,7 @@ msgstr "航母选项"
 
 #: src/advanced.cxx:1819
 msgid "Ceiling:"
-msgstr "限度:"
+msgstr "云顶高度:"
 
 #: src/wizard.cxx:1007
 msgid ""
@@ -241,7 +238,7 @@ msgstr "爬升率:"
 
 #: src/advanced.cxx:965
 msgid "Clock Freeze"
-msgstr "时钟停止不动"
+msgstr "时钟冻结"
 
 #: src/advanced.cxx:1075 src/advanced.cxx:1833 src/advanced_funcs.cxx:228
 msgid "Clouds"
@@ -261,7 +258,7 @@ msgstr "配置:"
 
 #: src/advanced.cxx:892
 msgid "Core Flight Dynamics Model"
-msgstr "核心飞行模型"
+msgstr "核心飞行动态模型"
 
 #: src/advanced.cxx:1865
 msgid "Coverage:"
@@ -291,11 +288,11 @@ msgstr "删除"
 
 #: src/wizard.cxx:567
 msgid "Delete a scenery directory"
-msgstr "删除场景"
+msgstr "删除地景目录"
 
 #: src/wizard.cxx:538
 msgid "Delete an aircraft directory"
-msgstr "删除飞行器路径"
+msgstr "删除飞行器目录"
 
 #: src/wizard_funcs.cxx:1752
 msgid "Description of "
@@ -339,11 +336,11 @@ msgstr "启动时显示欢迎页"
 
 #: src/advanced.cxx:827
 msgid "Distance attenuation"
-msgstr "距离弱化"
+msgstr "距离衰减"
 
 #: src/advanced.cxx:907
 msgid "Do not attempt to trim the model"
-msgstr "不剪裁模型"
+msgstr "不调整模型"
 
 #: src/wizard_funcs.cxx:2685
 msgid "Don't overwrite"
@@ -359,7 +356,7 @@ msgstr "早期产品"
 
 #: src/advanced.cxx:1851
 msgid "Elevation(ft):"
-msgstr "高度(ft):"
+msgstr "海拔高度(ft):"
 
 #: src/advanced.cxx:1076
 msgid "Enable 2D (flat) cloud layers"
@@ -375,7 +372,7 @@ msgstr "启用三维 HUD 平视显示器"
 
 #: src/advanced.cxx:868
 msgid "Enable AI traffic"
-msgstr "启用模拟交通"
+msgstr "启用人工智能交通"
 
 #: src/advanced.cxx:1302
 msgid "Enable HTTP server"
@@ -383,19 +380,19 @@ msgstr "启用 HTTP 服务器"
 
 #: src/advanced.cxx:801
 msgid "Enable Heads Up Display"
-msgstr "启用HUD平视显示器"
+msgstr "启用 HUD 平视显示器"
 
 #: src/advanced.cxx:807
 msgid "Enable anti-aliased HUD"
-msgstr "启用抗锯齿HUD平视显示器"
+msgstr "启用抗锯齿 HUD 平视显示器"
 
 #: src/advanced.cxx:813
 msgid "Enable auto-coordinated turns."
-msgstr "启用自动方位转向"
+msgstr "启用自动协调转向"
 
 #: src/advanced.cxx:818
 msgid "Enable celestial body growth illusion near the horizon"
-msgstr "启用地平线附近天体增长错觉"
+msgstr "启用地平线附近天体拉长错觉"
 
 #: src/advanced.cxx:823
 msgid "Enable enhanced runway lighting"
@@ -423,11 +420,11 @@ msgstr "启用属性服务器"
 
 #: src/advanced.cxx:784
 msgid "Enable random scenery objects"
-msgstr "启用随机场景物体"
+msgstr "启用随机地景物体"
 
 #: src/advanced.cxx:828
 msgid "Enable runway light distance attenuation"
-msgstr "跑道光照按距离弱化"
+msgstr "跑道光照按距离衰减"
 
 #: src/advanced.cxx:1335
 msgid "Enable screen shot HTTP server"
@@ -435,7 +432,7 @@ msgstr "启用截图 HTTP 服务器"
 
 #: src/advanced.cxx:1092
 msgid "Enable sky blending"
-msgstr "启用天空混合"
+msgstr "启用天空混成"
 
 #: src/advanced.cxx:795
 msgid "Enable sound effects"
@@ -447,7 +444,7 @@ msgstr "对纹理物体启用镜面反射"
 
 #: src/advanced.cxx:789
 msgid "Enable the instrument panel"
-msgstr "启用仪表面板"
+msgstr "启用仪表板"
 
 #: src/advanced.cxx:1104
 msgid "Enable wireframe drawing mode"
@@ -495,11 +492,11 @@ msgstr "FG_AIRCRAFT:"
 
 #: src/wizard.cxx:516
 msgid "FG_ROOT path invalid or not set"
-msgstr "FlightGear根路径无效或未设置"
+msgstr "FG_ROOT 无效或未设置"
 
 #: src/advanced.cxx:732 src/wizard.cxx:502
 msgid "FG_ROOT:"
-msgstr "FG根目录:"
+msgstr "FG_ROOT:"
 
 #: src/wizard.cxx:610
 msgid "FG_SCENERY empty"
@@ -507,11 +504,11 @@ msgstr "FG_SCENERY 为空"
 
 #: src/advanced.cxx:736 src/wizard.cxx:551
 msgid "FG_SCENERY:"
-msgstr "FG场景:"
+msgstr "FG_SCENERY:"
 
 #: src/advanced.cxx:1190
 msgid "FOV:"
-msgstr "视场:"
+msgstr "视角:"
 
 #: src/advanced.cxx:1820
 msgid "FT_ASL[:THICKNESS_FT]"
@@ -584,15 +581,15 @@ msgstr "雾"
 
 #: src/wizard.cxx:798
 msgid "Framerate limiter :"
-msgstr "帧率限值:"
+msgstr "帧率阈值:"
 
 #: src/advanced.cxx:951 src/advanced.cxx:956 src/advanced_funcs.cxx:217
 msgid "Freeze"
-msgstr "停止"
+msgstr "冻结"
 
 #: src/advanced.cxx:961
 msgid "Fuel Freeze"
-msgstr "燃油停止不变"
+msgstr "燃油冻结不变"
 
 #: src/advanced.cxx:1086 src/wizard.cxx:781
 msgid "Full Screen"
@@ -604,11 +601,11 @@ msgstr "机场缓存的完整路径"
 
 #: src/wizard.cxx:485 src/wizard.cxx:492
 msgid "Full pathname to FlightGear executable"
-msgstr "FlightGear 可执行文件的全路径"
+msgstr "FlightGear 可执行文件的完整路径名"
 
 #: src/wizard.cxx:626 src/wizard.cxx:633
 msgid "Full pathname to Terrasync executable"
-msgstr "TerraSync 可执行文件的全路径"
+msgstr "TerraSync 可执行文件的完整路径名"
 
 #: src/advanced.cxx:761
 msgid "Game Mode"
@@ -628,19 +625,19 @@ msgstr "尺寸:"
 
 #: src/advanced.cxx:1056
 msgid "Glide slope:"
-msgstr "滑翔斜率:"
+msgstr "滑行道指示器:"
 
 #: src/advanced.cxx:1308
 msgid "HTTP server port"
-msgstr "网站服务器端口"
+msgstr "HTTP 服务器端口"
 
 #: src/advanced.cxx:800
 msgid "HUD"
-msgstr "HUD平视显示器"
+msgstr "HUD 平视显示器"
 
 #: src/advanced.cxx:1013 src/advanced.cxx:1791
 msgid "Heading:"
-msgstr "偏航角:"
+msgstr "航向:"
 
 #: src/advanced.cxx:817 src/wizard.cxx:785
 msgid "Horizon effect"
@@ -660,7 +657,7 @@ msgstr "主机名:"
 
 #: src/advanced.cxx:832
 msgid "Hud-3D"
-msgstr "三维Hud平视显示器"
+msgstr "三维 HUD 平视显示器"
 
 #: src/advanced.cxx:1450
 msgid "Hz:"
@@ -716,7 +713,7 @@ msgstr "输入端口"
 
 #: src/advanced.cxx:1382 src/advanced_funcs.cxx:222
 msgid "Input/Output"
-msgstr "输入输出"
+msgstr "输入/输出"
 
 #: src/wizard.fl
 msgid "Installed airports"
@@ -744,7 +741,7 @@ msgstr "层:"
 
 #: src/wizard.cxx:1017
 msgid "Load"
-msgstr "打开"
+msgstr "载入"
 
 #: src/wizard.cxx:1018
 msgid "Load a previously saved configuration"
@@ -796,7 +793,7 @@ msgstr "模型:"
 
 #: src/advanced.cxx:912
 msgid "Model Hz:"
-msgstr "模型Hz:"
+msgstr "模型 Hz:"
 
 #: src/wizard_funcs.cxx:749
 #, c-format
@@ -809,11 +806,11 @@ msgstr "鼠标指针"
 
 #: src/wizard.cxx:600
 msgid "Move scenery directory down"
-msgstr "下移场景文件夹"
+msgstr "下移地景文件夹"
 
 #: src/wizard.cxx:589
 msgid "Move scenery directory up"
-msgstr "上移场景文件夹"
+msgstr "上移地景文件夹"
 
 #: src/advanced.cxx:1359
 msgid "Multiplay 1:"
@@ -879,7 +876,7 @@ msgstr "无评级"
 
 #: src/advanced.cxx:906
 msgid "No Trim"
-msgstr "不剪裁"
+msgstr "不调整"
 
 #: src/wizard_funcs.cxx:1755
 msgid "Not set"
@@ -899,7 +896,7 @@ msgstr "在地面"
 
 #: src/wizard.cxx:728
 msgid "Only valid if carrier is set. For airport parking, use the list above."
-msgstr "仅当设置了载具时有效. 对于机场停机, 用上表."
+msgstr "仅当设置航母时有效. 对于机场停机, 用上表."
 
 #: src/main.cxx:162
 #, c-format
@@ -948,7 +945,7 @@ msgstr "停机坪"
 
 #: src/advanced.cxx:720
 msgid "Path to additional XML properties file"
-msgstr "其它XML配置文件的路径"
+msgstr "其它 XML 配置文件的路径"
 
 #: src/wizard.cxx:959
 msgid "Peer hostname"
@@ -960,7 +957,7 @@ msgstr "俯仰角:"
 
 #: src/wizard.cxx:1072
 msgid "Please send this error report to the Flightgear development team"
-msgstr "请将此错误报告发送至Flightgear开发团队"
+msgstr "请将此错误报告发送至 Flightgear 开发团队"
 
 #: src/wizard.cxx:1037
 msgid "Please wait..."
@@ -972,7 +969,7 @@ msgstr "端口:"
 
 #: src/wizard.cxx:1082
 msgid "Prefetch Scenery"
-msgstr "预先获取场景"
+msgstr "预先获取地景"
 
 #: src/wizard.cxx:991
 msgid "Prev"
@@ -1084,11 +1081,11 @@ msgstr "运行"
 
 #: src/advanced.cxx:922
 msgid "Run FDM faster than real time"
-msgstr "比真实时间加快运行FDM"
+msgstr "比真实时间更快的运行 FDM"
 
 #: src/advanced.cxx:913
 msgid "Run the FDM at this rate (iterations per second)"
-msgstr "按此速率运行FDM, 往复每秒"
+msgstr "按此速率运行 FDM, 每秒往复次数"
 
 #: src/advanced.cxx:744
 msgid "Runway:"
@@ -1120,11 +1117,11 @@ msgstr "场景"
 
 #: src/wizard.cxx:736
 msgid "Scenery Prefetch"
-msgstr "场景预先获取"
+msgstr "地景预先获取"
 
 #: src/wizard.cxx:552
 msgid "Scenery directories"
-msgstr "场景文件夹"
+msgstr "地景文件夹"
 
 #: src/advanced.cxx:1341
 msgid "Screen shot HTTP server port"
@@ -1136,15 +1133,15 @@ msgstr "季节 :"
 
 #: src/wizard_funcs.cxx:1347
 msgid "Select FG_AIRCRAFT directory"
-msgstr "选择飞行器文件夹"
+msgstr "选择 FG_AIRCRAFT 的目录"
 
 #: src/wizard_funcs.cxx:1072
 msgid "Select FG_ROOT directory"
-msgstr "选择FlightGear根文件夹"
+msgstr "选择 FG_ROOT 目录"
 
 #: src/wizard_funcs.cxx:1421
 msgid "Select FG_SCENERY directory"
-msgstr "选择场景文件夹"
+msgstr "选择 FG_SCENERY 目录"
 
 #: src/wizard_funcs.cxx:992
 msgid "Select FlightGear executable"
@@ -1156,7 +1153,7 @@ msgstr "选择路径"
 
 #: src/wizard_funcs.cxx:1531
 msgid "Select Terrasync executable"
-msgstr "选择 Terrasync 执行文件"
+msgstr "选择 Terrasync 可执行文件"
 
 #: src/wizard.cxx:704
 msgid "Select a location"
@@ -1185,11 +1182,11 @@ msgstr "选择文件"
 
 #: src/wizard.cxx:576
 msgid "Select the line in the FG_SCENERY list that is the TerraSync directory."
-msgstr "从场景列表中选择 TerraSync 文件夹."
+msgstr "从 FG_SCENERY 目录列表中选择 TerraSync 目录."
 
 #: src/advanced.cxx:1560
 msgid "Set the NAV1 radio frequency, optionally preceded by a radial"
-msgstr "设置 NAV1 无线电频率"
+msgstr "设置 NAV1 无线电频率，可以选择一个径向"
 
 #: src/advanced.cxx:1199
 msgid "Set the maximum degree of anisotropy in texture filtering"
@@ -1205,7 +1202,7 @@ msgstr "显示命令行"
 
 #: src/advanced.cxx:1091
 msgid "Sky Blend"
-msgstr "天空混合"
+msgstr "天空混成"
 
 #: src/advanced.cxx:1111
 msgid "Smooth"
@@ -1241,7 +1238,7 @@ msgstr "速度:"
 
 #: src/advanced.cxx:766
 msgid "Splash Screen"
-msgstr "欢迎页"
+msgstr "欢迎画面"
 
 #: src/advanced.cxx:932
 msgid "Start at ground level"
@@ -1265,7 +1262,7 @@ msgstr "从空中开始"
 
 #: src/advanced.cxx:957
 msgid "Start paused"
-msgstr "启动已暂停"
+msgstr "启动时暂停"
 
 #: src/wizard.cxx:690
 msgid "Status :"
@@ -1293,11 +1290,11 @@ msgstr "TerraSync"
 
 #: src/wizard.cxx:575
 msgid "TerraSync directory"
-msgstr "TerraSync 文件夹"
+msgstr "TerraSync 目录"
 
 #: src/wizard_funcs.cxx:1799
 msgid "TerraSync directory not set"
-msgstr "TerraSync 文件夹未设置"
+msgstr "TerraSync 目录未设置"
 
 #: src/wizard_funcs.cxx:1808
 msgid "TerraSync executable not set"
@@ -1428,7 +1425,7 @@ msgstr "风向"
 
 #: src/advanced.cxx:1800
 msgid "Wind speed (kts)"
-msgstr "风速(kts)::"
+msgstr "风速(kts)"
 
 #: src/advanced.cxx:1146 src/wizard.cxx:769
 msgid "Window geometry, WxH"
@@ -1448,7 +1445,7 @@ msgstr "下午"
 
 #: src/advanced_funcs.cxx:122
 msgid "alert"
-msgstr "alert"
+msgstr "警报"
 
 #: src/wizard_funcs.cxx:107
 msgid "alpha"
@@ -1472,7 +1469,7 @@ msgstr "损坏"
 
 #: src/advanced_funcs.cxx:118
 msgid "bulk"
-msgstr "bulk"
+msgstr "块"
 
 #: src/advanced.cxx:1814
 msgid "calm (0.0) to severe (1.0)"
@@ -1488,7 +1485,7 @@ msgstr "卷云"
 
 #: src/advanced_funcs.cxx:132
 msgid "clear"
-msgstr "清除"
+msgstr "无云"
 
 #: src/wizard_funcs.cxx:83 src/advanced_funcs.cxx:107
 msgid "dawn"
@@ -1632,7 +1629,7 @@ msgstr "根数据路径:"
 
 #: src/advanced_funcs.cxx:129
 msgid "scattered"
-msgstr "零星"
+msgstr "疏云"
 
 #: src/advanced.cxx:852
 msgid "static"
@@ -1648,11 +1645,11 @@ msgstr "系统"
 
 #: src/advanced.cxx:1001
 msgid "uBody:"
-msgstr "u体:"
+msgstr "uBody:"
 
 #: src/advanced.cxx:1005
 msgid "vBody:"
-msgstr "v体:"
+msgstr "vBody:"
 
 #: src/advanced.cxx:862
 msgid "vacuum"
@@ -1660,11 +1657,11 @@ msgstr "真空"
 
 #: src/advanced.cxx:1009
 msgid "wBody"
-msgstr "w体"
+msgstr "wBody"
 
 #: src/advanced_funcs.cxx:121
 msgid "warn"
-msgstr "warn"
+msgstr "警告"
 
 #: src/wizard_funcs.cxx:95
 msgid "winter"
