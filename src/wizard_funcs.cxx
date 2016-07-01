@@ -1100,19 +1100,12 @@ search_aircraft_dir( const SGPath& dir,
                      bool recursive,
                      vector<SGPath>& ac )
 {
-    string s( dir.str() );
-
-#ifdef WIN32
-    // Ensure there is a trailing slash.
-    if (*s.rbegin() != '/')
-        s.append( "/" );
-#endif
-
     simgear::Dir directory( dir );
     simgear::PathList files = directory.children();
     for ( simgear::PathList::iterator ii = files.begin(); ii != files.end(); ++ii )
     {
-        if (fl_filename_match(ii->c_str(), "*-set.xml"))
+		const std::string childName = ii->utf8Str();
+        if (fl_filename_match(childName.c_str(), "*-set.xml"))
         {
             ac.push_back( *ii );
         }
@@ -1149,8 +1142,9 @@ Wizard::aircraft_update( const char *aft )
 {
     SGPath rpath( fg_root_->value() );
     rpath.append( "Aircraft" );
-    map<string, vector< SGPath > > ac;
-    search_aircraft_dir( rpath, true, ac[ rpath.str() ] );
+	typedef std::map<std::string, simgear::PathList> AircraftDirSetMap;
+	AircraftDirSetMap ac;
+    search_aircraft_dir( rpath, true, ac[ rpath.utf8Str() ] );
 
     const int buflen = FL_PATH_MAX;
     char buf[ buflen ];
@@ -1160,12 +1154,11 @@ Wizard::aircraft_update( const char *aft )
         fg_aircraft = buf;
     }
 
-    typedef vector<string> vs_t;
-    vs_t va( sgPathSplit( fg_aircraft ) );
-    for (vs_t::size_type i = 0; i < va.size(); ++i)
+    
+    simgear::PathList va( SGPath::pathsFromUtf8( fg_aircraft ) );
+    for (size_t i = 0; i < va.size(); ++i)
     {
-        SGPath path( va[ i ] );
-        search_aircraft_dir( path, true, ac[ path.str() ] );
+        search_aircraft_dir( va[i], true, ac[ va[i].utf8Str() ] );
     }
 
     // Empty the aircraft browser list.
@@ -1182,24 +1175,16 @@ Wizard::aircraft_update( const char *aft )
 
     bool selected = false;
     map<string,vector<AircraftData*>,ICompare> am;
-    for ( map<string, vector< SGPath > >::iterator ii = ac.begin(); ii != ac.end(); ++ii )
+    for (AircraftDirSetMap::iterator ii = ac.begin(); ii != ac.end(); ++ii )
     {
         // Populate the aircraft browser list.
-        for (vector<SGPath>::size_type vi = 0; vi < ii->second.size(); ++vi)
+        for (simgear::PathList::size_type vi = 0; vi < ii->second.size(); ++vi)
         {
-            SGPath path = ii->first;
-            string s( ii->second[vi].str() ), name( s );
-            name.erase( 0, path.str().size() );
-            if ( name[0] == '/' )
-                name.erase( 0, 1 );
-            string::size_type p = name.find( '/' );
-            if ( p != string::npos )
-                name.erase( p );
-
+			SGPath setPath = ii->second[vi];
             SGPropertyNode props;
             try
             {
-                readProperties( s.c_str(), &props );
+                readProperties( setPath, &props );
             }
             catch (const sg_exception&)
             {
@@ -1213,32 +1198,32 @@ Wizard::aircraft_update( const char *aft )
                 if ( desc.find( "Alias " ) == string::npos )
                 {
                     // Extract aircraft name from filename.
-                    string::size_type pos = s.rfind( "/" );
-                    string::size_type epos = s.find( "-set.xml", pos );
-                    string ss( s.substr( pos+1, epos-pos-1 ) );
+					std::string name = setPath.file();
+                    string::size_type epos = name.find( "-set.xml" );
+                    string ss( name.substr( 0, epos ) );
 
                     AircraftData* data = new AircraftData;
                     data->name = ss;
-                    data->dir = name;
-                    data->root = path.str();
+					data->dir = setPath.dirPath().file();
+					data->root = ii->first;
                     data->desc = desc;
                     data->status = props.getStringValue( "/sim/status", _( "Unknown" ) );
                     data->modelPath = props.getStringValue( "/sim/model/path", _( "Unknown" ) );
                     string splash = props.getStringValue( "/sim/startup/splash-texture", _( "" ) );
                     if (splash.empty())
                     {
-                        data->thumbnailPath = SGPath(s).dir() + "/thumbnail.jpg";
+                        data->thumbnailPath = setPath.dir() + "/thumbnail.jpg";
                     }
                     else
                     {
-                        data->thumbnailPath = path.str().substr(0, path.str().size()-8) + splash;
+                        data->thumbnailPath = setPath.dir() + splash;
                     }
                     data->author = props.getStringValue( "/sim/author", _( "Unknown" ) );
                     data->fdm = props.getIntValue( "/sim/rating/FDM", -1 );
                     data->systems = props.getIntValue( "/sim/rating/systems", -1 );
                     data->cockpit = props.getIntValue( "/sim/rating/cockpit", -1 );
                     data->model = props.getIntValue( "/sim/rating/model", -1 );
-                    am[name].push_back( data );
+                    am[data->dir].push_back( data );
                 }
             }
         }
