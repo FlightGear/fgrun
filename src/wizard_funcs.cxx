@@ -296,14 +296,13 @@ Wizard::reset()
     }
     fg_root_->value( buf );
     SGPath fgPath(buf);
-    if ( fg_root_->size() == 0 )
+    if  ( fgPath.isNull() )
     {
-        char *e = getenv( "FG_ROOT" );
-        if ( e )
+        if (const char* e = getenv("FG_ROOT"))
         {
+			fgPath = SGPath::fromEnv("FG_ROOT");
             prefs.set( "fg_root", e );
             fg_root_->value( e );
-            fgPath = e;
         }
     }
 
