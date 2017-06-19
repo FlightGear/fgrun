@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2015-12-15 23:38+0800\n"
 "Last-Translator: Tong Hui <tonghuix@gmail.com>\n"
 "Language-Team: \n"
-"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
 "X-Generator: Poedit 1.8.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -71,7 +71,11 @@ msgid ""
 "<h1>FlightGear Launch Control %s</h1>  <p>This program is released under the "
 "GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>  "
 "<p>Report bugs to http://sourceforge.net/projects/fgrun</p> </body></html>"
-msgstr "<html> <head>  <title>FlightGear 启动器 %s</title> </head> <body>  <h1>FlightGear 启动器 %s</h1>  <p>本软件之发布依据 GNU General Public License (http://www.gnu.org/copyleft/gpl.html).</p>  <p>请汇报问题至 http://sourceforge.net/projects/fgrun</p> </body></html>"
+msgstr ""
+"<html> <head>  <title>FlightGear 启动器 %s</title> </head> <body>  "
+"<h1>FlightGear 启动器 %s</h1>  <p>本软件之发布依据 GNU General Public "
+"License (http://www.gnu.org/copyleft/gpl.html).</p>  <p>请汇报问题至 http://"
+"sourceforge.net/projects/fgrun</p> </body></html>"
 
 #: src/wizard.cxx:599
 msgid "@2>"
@@ -396,7 +400,7 @@ msgstr "启用地平线附近天体拉长错觉"
 
 #: src/advanced.cxx:823
 msgid "Enable enhanced runway lighting"
-msgstr "启用增强跑道光照"
+msgstr ""
 
 #: src/advanced.cxx:779
 msgid "Enable extra mouse pointer"
@@ -452,11 +456,11 @@ msgstr "启用线框绘制模式"
 
 #: src/advanced.cxx:822
 msgid "Enhanced lighting"
-msgstr "增强光照"
+msgstr ""
 
 #: src/wizard.cxx:789
 msgid "Enhanced runway lighting"
-msgstr "增强跑道光照"
+msgstr ""
 
 #: src/advanced.cxx:1738 src/advanced_funcs.cxx:226
 msgid "Environment"

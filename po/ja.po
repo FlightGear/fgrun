@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2013-05-27 22:25+0900\n"
 "Last-Translator: AOKI kiyohito <sambar.fgfs@gmail.com>\n"
 "Language-Team: FlightGear.jpn.org\n"
-"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Virtaal 0.7.1\n"
 
@@ -403,7 +403,7 @@ msgstr "水平線近くの効果を有効にします"
 
 #: src/advanced.cxx:823
 msgid "Enable enhanced runway lighting"
-msgstr "滑走路の燈火をより現実的にします"
+msgstr ""
 
 #: src/advanced.cxx:779
 msgid "Enable extra mouse pointer"
@@ -461,11 +461,11 @@ msgstr "ワイヤーフレームで描画します"
 
 #: src/advanced.cxx:822
 msgid "Enhanced lighting"
-msgstr "現実的な燈火"
+msgstr ""
 
 #: src/wizard.cxx:789
 msgid "Enhanced runway lighting"
-msgstr "現実的な滑走路の燈火"
+msgstr ""
 
 #: src/advanced.cxx:1738 src/advanced_funcs.cxx:226
 msgid "Environment"

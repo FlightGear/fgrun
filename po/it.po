@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2008-02-05 00:02+0100\n"
 "Last-Translator: Andrea Vezzali <vezza@inwind.it>\n"
 "Language-Team: Italian\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/logwin.cxx:34
@@ -408,7 +408,7 @@ msgstr ""
 
 #: src/advanced.cxx:823
 msgid "Enable enhanced runway lighting"
-msgstr "Abilita luci pista aumentate"
+msgstr ""
 
 #: src/advanced.cxx:779
 msgid "Enable extra mouse pointer"
@@ -464,11 +464,11 @@ msgstr "Abilita modalità di disegno wireframe"
 
 #: src/advanced.cxx:822
 msgid "Enhanced lighting"
-msgstr "Luci aumentate"
+msgstr ""
 
 #: src/wizard.cxx:789
 msgid "Enhanced runway lighting"
-msgstr "Luci Pista aumentate"
+msgstr ""
 
 #: src/advanced.cxx:1738 src/advanced_funcs.cxx:226
 msgid "Environment"

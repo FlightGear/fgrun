@@ -153,8 +153,6 @@ Wizard::write_fgfsrc( Fl_Preferences &prefs, std::ostream& os, const char* pfx )
         os << pfx << "--enable-auto-coordination";
     if (prefs.get( "horizon_effect", iVal, 0 ) && iVal)
         os << pfx << "--enable-horizon-effect";
-    if (prefs.get( "enhanced_lighting", iVal, 0 ) && iVal)
-        os << pfx << "--enable-enhanced-lighting";
     if (prefs.get( "distance_attenuation", iVal, 0 ) && iVal)
         os << pfx << "--enable-distance-attenuation";
     if (prefs.get( "specular_highlight", iVal, 1 ) && !iVal)

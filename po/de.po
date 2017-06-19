@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2008-01-30 16:00+0100\n"
 "Last-Translator: Adrian <adrian.sprick@arcor.de>\n"
 "Language-Team: German\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CP1252\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/logwin.cxx:34
@@ -404,7 +404,7 @@ msgstr "Illusion grösserwerdender Himmelskörper in Horizontnähe An"
 
 #: src/advanced.cxx:823
 msgid "Enable enhanced runway lighting"
-msgstr "Verfeinerte Startbahnbeleuchtung An"
+msgstr ""
 
 #: src/advanced.cxx:779
 msgid "Enable extra mouse pointer"
@@ -460,11 +460,11 @@ msgstr "Drahtgitterdarstellung An"
 
 #: src/advanced.cxx:822
 msgid "Enhanced lighting"
-msgstr "Verfeinerte Beleuchtung"
+msgstr ""
 
 #: src/wizard.cxx:789
 msgid "Enhanced runway lighting"
-msgstr "Aufwändige Startbahnbeleuchtung"
+msgstr ""
 
 #: src/advanced.cxx:1738 src/advanced_funcs.cxx:226
 msgid "Environment"

@@ -1528,13 +1528,6 @@ Wizard::horizon_effect_cb()
 }
 
 void
-Wizard::enhanced_lighting_cb()
-{
-    prefs.set("enhanced_lighting", enhanced_lighting->value());
-    update_options();
-}
-
-void
 Wizard::specular_highlight_cb()
 {
     prefs.set("specular_highlight", specular_highlight->value());
@@ -1971,8 +1964,6 @@ Wizard::update_basic_options( Fl_Preferences &p )
     game_mode->value(iVal);
     p.get("horizon_effect", iVal, 0);
     horizon_effect->value(iVal);
-    p.get("enhanced_lighting", iVal, 0);
-    enhanced_lighting->value(iVal);
     p.get("specular_highlight", iVal, 0);
     specular_highlight->value(iVal);
     p.get("clouds3d", iVal, 0);
@@ -2330,7 +2321,6 @@ Wizard::save_basic_options( Fl_Preferences &p )
     p.set("bpp", bpp->text());
     p.set("fullscreen", game_mode->value());
     p.set("horizon_effect", horizon_effect->value());
-    p.set("enhanced_lighting", enhanced_lighting->value());
     p.set("specular_highlight", specular_highlight->value());
     p.set("clouds3d", clouds_3d->value());
     int v = frame_rate_limiter->value();

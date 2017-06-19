@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2010-05-23 18:36+0200\n"
 "Last-Translator: Gijs de Rooy <gijsrooy@hotmail.com>\n"
 "Language-Team: Dutch\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CP1252\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/logwin.cxx:34
@@ -422,7 +422,7 @@ msgstr "Schakel de hemellichaam vergrotende illusie dichtbij de horizon in"
 
 #: src/advanced.cxx:823
 msgid "Enable enhanced runway lighting"
-msgstr "Schakel geavanceerde baanverlichting in"
+msgstr ""
 
 #: src/advanced.cxx:779
 msgid "Enable extra mouse pointer"
@@ -479,11 +479,11 @@ msgstr "Schakel draadframe tekenmethode in"
 
 #: src/advanced.cxx:822
 msgid "Enhanced lighting"
-msgstr "Verbeterde verlichting"
+msgstr ""
 
 #: src/wizard.cxx:789
 msgid "Enhanced runway lighting"
-msgstr "Geavanceerde baanverlichting"
+msgstr ""
 
 #: src/advanced.cxx:1738 src/advanced_funcs.cxx:226
 msgid "Environment"

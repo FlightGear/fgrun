@@ -382,11 +382,6 @@ class Wizard {open
               callback {horizon_effect_cb();}
               private xywh {250 10 205 25} down_box DOWN_BOX
             }
-            Fl_Check_Button enhanced_lighting {
-              label {Enhanced runway lighting}
-              callback {enhanced_lighting_cb();}
-              private tooltip {Use with caution. It may drop your framerate dramatically} xywh {250 35 205 25} down_box DOWN_BOX
-            }
             Fl_Check_Button specular_highlight {
               label {Specular highlight}
               callback {specular_highlight_cb();}
@@ -716,8 +711,6 @@ class Wizard {open
   decl {void game_mode_cb();} {private local
   }
   decl {void horizon_effect_cb();} {private local
-  }
-  decl {void enhanced_lighting_cb();} {private local
   }
   decl {void specular_highlight_cb();} {private local
   }

@@ -169,10 +169,6 @@ else
           label {Horizon effect}
           private tooltip {Enable celestial body growth illusion near the horizon} xywh {175 200 160 25} down_box DOWN_BOX labelsize 12
         }
-        Fl_Check_Button enhanced_lighting {
-          label {Enhanced lighting}
-          private tooltip {Enable enhanced runway lighting} xywh {175 230 160 25} down_box DOWN_BOX labelsize 12
-        }
         Fl_Check_Button distance_attenuation {
           label {Distance attenuation}
           private tooltip {Enable runway light distance attenuation} xywh {175 260 160 25} down_box DOWN_BOX labelsize 12

@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2012-02-27 14:27-0300\n"
 "Last-Translator: Lizandro <lizandrof@gmail.com>\n"
 "Language-Team: Portuguese <www.br.flightgear.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
@@ -412,7 +412,7 @@ msgstr "Ativar ilusão de crescimento do corpo celeste perto do horizonte"
 
 #: src/advanced.cxx:823
 msgid "Enable enhanced runway lighting"
-msgstr "Ativar melhoria da iluminação da pista"
+msgstr ""
 
 #: src/advanced.cxx:779
 msgid "Enable extra mouse pointer"
@@ -468,11 +468,11 @@ msgstr "Habilitar o modo de desenho malha 3D"
 
 #: src/advanced.cxx:822
 msgid "Enhanced lighting"
-msgstr "Iluminação aprimorada"
+msgstr ""
 
 #: src/wizard.cxx:789
 msgid "Enhanced runway lighting"
-msgstr "Reforço da iluminação da pista"
+msgstr ""
 
 #: src/advanced.cxx:1738 src/advanced_funcs.cxx:226
 msgid "Environment"

@@ -87,7 +87,6 @@ Advanced::save_settings( Fl_Preferences& prefs )
     prefs.set("hud_3d", hud_3d->value());
     prefs.set("auto_coordination", auto_coordination->value());
     prefs.set("horizon_effect", horizon_effect->value());
-    prefs.set("enhanced_lighting", enhanced_lighting->value());
     prefs.set("distance_attenuation", distance_attenuation->value());
     prefs.set("specular_highlight", specular_highlight->value());
     prefs.set("failure", failure->value());
@@ -327,8 +326,6 @@ Advanced::load_settings( Fl_Preferences& prefs )
     auto_coordination->value(iVal);
     prefs.get("horizon_effect", iVal, 0);
     horizon_effect->value( iVal );
-    prefs.get("enhanced_lighting", iVal, 0);
-    enhanced_lighting->value( iVal );
     prefs.get("distance_attenuation", iVal, 0);
     distance_attenuation->value( iVal );
     prefs.get("specular_highlight", iVal, 1);
@@ -661,7 +658,6 @@ Advanced::reset_settings( Fl_Preferences& prefs )
     prefs.deleteEntry("hud_3d" );
     prefs.deleteEntry("auto_coordination" );
     prefs.deleteEntry("horizon_effect" );
-    prefs.deleteEntry("enhanced_lighting" );
     prefs.deleteEntry("distance_attenuation" );
     prefs.deleteEntry("specular_highlight" );
     prefs.deleteEntry("failure" );
