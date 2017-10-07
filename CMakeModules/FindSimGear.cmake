@@ -182,6 +182,10 @@ SET(CMAKE_REQUIRED_INCLUDES ${SIMGEAR_INCLUDE_DIR})
 # clear cache, run a fresh compile test every time
 unset(SIMGEAR_COMPILE_TEST CACHE)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
 # disable OSG dependencies for test-compiling
 set(CMAKE_REQUIRED_DEFINITIONS "-DNO_OPENSCENEGRAPH_INTERFACE")
 check_cxx_source_runs(
